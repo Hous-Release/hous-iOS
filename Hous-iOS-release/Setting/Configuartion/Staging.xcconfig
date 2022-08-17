@@ -1,0 +1,13 @@
+//
+//  Staging.xcconfig
+//  Hous-iOS-release
+//
+//  Created by 김호세 on 2022/08/17.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+PRODUCT_NAME = $(inherited)(Staging)
+APP_BUNDLE_ID = com.hous.Hous-iOS-release.staging
+APP_NAME = Hous(Staging)
