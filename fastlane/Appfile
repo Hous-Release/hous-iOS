@@ -1,0 +1,40 @@
+# app_identifier("[[APP_IDENTIFIER]]") # The bundle identifier of your app
+# apple_id("[[APPLE_ID]]") # Your Apple email address
+
+
+
+# 디폴트 값 정의 (밑의 for_lane과 일치하지 않는 fastfile의 함수 lane들은 해당 값 적용)
+
+# default 번들 ID
+app_identifier("com.hous.Hous-iOS-release.development")
+
+# Your Apple email address
+apple_id("stupidchoco@naver.com")
+
+# Developer Portal Team ID
+team_id("83LNUYN53Q") 
+
+for_platform :ios do
+
+    for_lane :renew_codesign_staging do
+      app_identifier 'com.hous.Hous-iOS-release.staging'
+    end
+  
+    for_lane :sync_codesign_staging do
+      app_identifier 'com.hous.Hous-iOS-release.staging'
+    end
+  
+    # release
+
+    for_lane :renew_codesign_release do
+        app_identifier 'com.hous.Hous-iOS-release'
+    end
+
+    for_lane :sync_codesign_release do
+      app_identifier 'com.hous.Hous-iOS-release'
+    end
+
+  end
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
