@@ -5,17 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000256">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000395">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to ios sync_codesign lane" time="0.000127">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios sync_codesign lane" time="0.000101">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: match" time="2.226979">
+      <testcase classname="fastlane.lanes" name="2: match" time="1.887309">
         
       </testcase>
     
