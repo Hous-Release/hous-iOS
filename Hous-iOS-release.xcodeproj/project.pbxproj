@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7702A0F128BD0C4900DA7712 /* Analytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7702A0F028BD0C4900DA7712 /* Analytics */; };
+		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
 		777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666228A74A62000BECEA /* SceneDelegate.swift */; };
 		777C666A28A74A63000BECEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C666928A74A63000BECEA /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7702A0F228BD245E00DA7712 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
+		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777C666228A74A62000BECEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,17 +38,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
+				7702A0F128BD0C4900DA7712 /* Analytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7705A45328BBB388000237BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
+				7702A0F228BD245E00DA7712 /* Network */,
+				7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */,
 				777C665F28A74A62000BECEA /* Hous-iOS-release */,
 				777C665E28A74A62000BECEA /* Products */,
+				7705A45328BBB388000237BA /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +163,10 @@
 			dependencies = (
 			);
 			name = "Hous-iOS-release";
+			packageProductDependencies = (
+				7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */,
+				7702A0F028BD0C4900DA7712 /* Analytics */,
+			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
 			productType = "com.apple.product-type.application";
@@ -792,6 +812,17 @@
 			defaultConfigurationName = "Release(Production)";
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7702A0F028BD0C4900DA7712 /* Analytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Analytics;
+		};
+		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThirdPartyLibraryManager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 777C665528A74A62000BECEA /* Project object */;
 }
