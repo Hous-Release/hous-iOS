@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import Analytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+    AppLogService.Firebase.configure()
+    AppLogService.Firebase.logEvent(
+      event: .appStart,
+      parameter: [:]
+    )
+
     return true
   }
 
