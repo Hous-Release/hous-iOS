@@ -14,7 +14,10 @@ let package = Package(
         .library(
             name: "ThirdPartyLibraryManager",
             targets: ["ThirdPartyLibraryManager"]),
-        .library(name: "Analytics", targets: ["Analytics"]),
+        .library(
+            name: "FirebaseWrapper",
+            targets: ["FirebaseWrapper"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", exact: "5.6.1"),
@@ -41,9 +44,10 @@ let package = Package(
         .binaryTarget(name: "GoogleDataTransport", path: "./Vender/FirebaseAnalytics/GoogleDataTransport.xcframework"),
         .binaryTarget(name: "GoogleUtilities", path: "./Vender/FirebaseAnalytics/GoogleUtilities.xcframework"),
         .binaryTarget(name: "nanopb", path: "./Vender/FirebaseAnalytics/nanopb.xcframework"),
+        .binaryTarget(name: "FirebaseMessaging", path: "./Vender/FirebaseMessaging/FirebaseMessaging.xcframework"),
 
         .target(
-            name: "Analytics",
+            name: "FirebaseWrapper",
             dependencies: [
                 .target(name: "FBLPromises"),
                 .target(name: "FirebaseAnalytics"),
@@ -56,11 +60,12 @@ let package = Package(
                 .target(name: "GoogleAppMeasurementIdentitySupport"),
                 .target(name: "GoogleDataTransport"),
                 .target(name: "GoogleUtilities"),
-                .target(name: "nanopb")
+                .target(name: "nanopb"),
+                .target(name: "FirebaseMessaging"),
             ],
             resources: [
                 .process("Resource")
             ]
-        )
+        ),
     ]
 )

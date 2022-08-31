@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7702A0F128BD0C4900DA7712 /* Analytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7702A0F028BD0C4900DA7712 /* Analytics */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
+		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
 		777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666228A74A62000BECEA /* SceneDelegate.swift */; };
 		777C666A28A74A63000BECEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C666928A74A63000BECEA /* Assets.xcassets */; };
@@ -39,7 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
-				7702A0F128BD0C4900DA7712 /* Analytics in Frameworks */,
+				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +165,7 @@
 			name = "Hous-iOS-release";
 			packageProductDependencies = (
 				7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */,
-				7702A0F028BD0C4900DA7712 /* Analytics */,
+				77393DE028BFBD2D00D78C94 /* FirebaseWrapper */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -814,13 +814,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7702A0F028BD0C4900DA7712 /* Analytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Analytics;
-		};
 		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThirdPartyLibraryManager;
+		};
+		77393DE028BFBD2D00D78C94 /* FirebaseWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
