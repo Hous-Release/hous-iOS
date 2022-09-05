@@ -66,9 +66,13 @@ xcassets:
   outputs:
     - templateName: swift5
       output: Assets.swift
+      params:
+        enumName: Assets
 xcassets:
   inputs:
-    - Color.xcassets
+    - Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Color.swift
+      output: Colors.swift
+      params:
+        enumName: Colors
