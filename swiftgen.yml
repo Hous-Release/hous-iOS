@@ -62,8 +62,13 @@ output_dir: hous-iOS/Hous-iOS-release/Resources
 
 xcassets:
   inputs:
-    - Color.xcassets
     - Assets.xcassets
   outputs:
     - templateName: swift5
       output: Assets.swift
+xcassets:
+  inputs:
+    - Color.xcassets
+  outputs:
+    - templateName: swift5
+      output: Color.swift
