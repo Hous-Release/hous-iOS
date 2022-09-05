@@ -57,22 +57,13 @@
 ## For more info, use `swiftgen config doc` to open the full documentation on GitHub.
 ## https://github.com/SwiftGen/SwiftGen/tree/6.6.2/Documentation/
 
-input_dir: hous-iOS/Hous-iOS-release/Resources
-output_dir: hous-iOS/Hous-iOS-release/Resources
+input_dir: Hous-iOS-release/Resources
+output_dir: Hous-iOS-release/Resources
 
 xcassets:
   inputs:
-    - Assets.xcassets
-  outputs:
-    - templateName: swift5
-      output: Assets.swift
-      params:
-        enumName: Assets
-xcassets:
-  inputs:
+    - Images.xcassets
     - Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Colors.swift
-      params:
-        enumName: Colors
+      output: Assets-Constants.swift
