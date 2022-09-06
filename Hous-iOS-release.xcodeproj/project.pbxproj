@@ -148,6 +148,10 @@
 			isa = PBXGroup;
 			children = (
 				77B1681D28ABC7EA00E1E512 /* Splash */,
+				B8B0824828C1DE1A00570A1E /* TabBar */,
+				B8B0825128C1F9C300570A1E /* Hous */,
+				B8B0825228C1F9C700570A1E /* Todo */,
+				B8B0825328C1F9CB00570A1E /* Profile */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -194,6 +198,39 @@
 				B8566FFA28C86E2400B49984 /* Images+Generated.swift */,
 			);
 			path = Generated;
+		B8B0824828C1DE1A00570A1E /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0824928C1EBBF00570A1E /* HousTabBarViewController.swift */,
+				B8B0824B28C1F8A900570A1E /* HousTabBar.swift */,
+				B8B0824D28C1F8E400570A1E /* HousTabBarItemView.swift */,
+				B8B0824F28C1F98D00570A1E /* HousTabBarItem.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		B8B0825128C1F9C300570A1E /* Hous */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0825428C1F9E200570A1E /* HousViewController.swift */,
+			);
+			path = Hous;
+			sourceTree = "<group>";
+		};
+		B8B0825228C1F9C700570A1E /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0825628C1FA0700570A1E /* TodoViewController.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		B8B0825328C1F9CB00570A1E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0825828C1FA1700570A1E /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,9 +340,18 @@
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
+				B8B0825728C1FA0700570A1E /* TodoViewController.swift in Sources */,
+				B8B0824E28C1F8E400570A1E /* HousTabBarItemView.swift in Sources */,
+				B8B0825528C1F9E200570A1E /* HousViewController.swift in Sources */,
+				B8B0825028C1F98D00570A1E /* HousTabBarItem.swift in Sources */,
+				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
+				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				B8B0825928C1FA1700570A1E /* ProfileViewController.swift in Sources */,
+				B8B0824C28C1F8A900570A1E /* HousTabBar.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
+				B8B0824A28C1EBBF00570A1E /* HousTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

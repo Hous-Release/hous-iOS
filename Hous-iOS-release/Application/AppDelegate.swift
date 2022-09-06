@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 
-    FirebaseConfigureService.Firebase.configure()
-    MessagingService.Firebase.configure()
-
-    AppLogService.Firebase.logEvent(
-      event: .appStart,
-      parameter: [:]
-    )
+//    FirebaseConfigureService.Firebase.configure()
+//    MessagingService.Firebase.configure()
+//
+//    AppLogService.Firebase.logEvent(
+//      event: .appStart,
+//      parameter: [:]
+//    )
 
     return true
   }
