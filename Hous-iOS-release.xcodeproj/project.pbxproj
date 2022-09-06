@@ -15,6 +15,9 @@
 		777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777C666B28A74A63000BECEA /* LaunchScreen.storyboard */; };
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
+		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
+		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
+		B852C9B928C64D9D00DFF23C /* Assets-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		777C667828A74E50000BECEA /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		777C667C28A75039000BECEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets-Constants.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +148,10 @@
 		77B1681E28ABE40400E1E512 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */,
 				777C666928A74A63000BECEA /* Assets.xcassets */,
+				B852C9B428C6461200DFF23C /* Colors.xcassets */,
+				B852C9B628C64D2600DFF23C /* Images.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -157,6 +166,7 @@
 				777C665928A74A62000BECEA /* Sources */,
 				777C665A28A74A62000BECEA /* Frameworks */,
 				777C665B28A74A62000BECEA /* Resources */,
+				B852C9BA28C6668600DFF23C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -209,12 +219,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */,
+				B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B852C9BA28C6668600DFF23C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\npwd\nls\nswiftgen config run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		777C665928A74A62000BECEA /* Sources */ = {
@@ -225,6 +257,7 @@
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
+				B852C9B928C64D9D00DFF23C /* Assets-Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
