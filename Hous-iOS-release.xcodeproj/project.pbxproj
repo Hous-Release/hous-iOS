@@ -166,6 +166,7 @@
 				777C665928A74A62000BECEA /* Sources */,
 				777C665A28A74A62000BECEA /* Frameworks */,
 				777C665B28A74A62000BECEA /* Resources */,
+				B852C9BA28C6668600DFF23C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -226,6 +227,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B852C9BA28C6668600DFF23C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\npwd\nls\nswiftgen config run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		777C665928A74A62000BECEA /* Sources */ = {
