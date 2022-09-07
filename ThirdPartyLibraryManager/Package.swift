@@ -22,6 +22,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", exact: "5.6.1"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", exact: "6.5.0"),
+        .package(url: "https://github.com/RxSwiftCommunity/RxGesture.git", exact: "4.0.4"),
+        .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
     ],
     targets: [
         .target(
@@ -30,6 +32,8 @@ let package = Package(
                 "Alamofire",
                 .product(name: "RxSwift", package: "Rxswift"),
                 .product(name: "RxCocoa", package: "Rxswift"),
+                .product(name: "RxGesture", package: "RxGesture"),
+                .product(name: "SnapKit", package: "SnapKit"),
             ]
         ),
         .binaryTarget(name: "FBLPromises", path: "./Vender/FirebaseAnalytics/FBLPromises.xcframework"),
