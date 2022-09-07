@@ -23,6 +23,9 @@
 		B8566FF428C8661400B49984 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */; };
 		B8566FF528C8661400B49984 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */; };
 		B8566FF628C8661400B49984 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FF028C8661400B49984 /* Montserrat-Medium.otf */; };
+		B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566FF828C86E2400B49984 /* Colors+Generated.swift */; };
+		B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566FF928C86E2400B49984 /* Fonts+Generated.swift */; };
+		B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566FFA28C86E2400B49984 /* Images+Generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		B8566FF028C8661400B49984 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		B8566FF828C86E2400B49984 /* Colors+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Colors+Generated.swift"; sourceTree = "<group>"; };
+		B8566FF928C86E2400B49984 /* Fonts+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fonts+Generated.swift"; sourceTree = "<group>"; };
+		B8566FFA28C86E2400B49984 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,9 @@
 		B8566FF728C86B6300B49984 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				B8566FF828C86E2400B49984 /* Colors+Generated.swift */,
+				B8566FF928C86E2400B49984 /* Fonts+Generated.swift */,
+				B8566FFA28C86E2400B49984 /* Images+Generated.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -290,9 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
+				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
