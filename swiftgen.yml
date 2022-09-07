@@ -67,3 +67,9 @@ xcassets:
   outputs:
     - templateName: swift5
       output: Assets-Constants.swift
+
+fonts:
+    inputs: Fonts
+    outputs:
+        templateName: swift5
+        output: Fonts-Constants.swift

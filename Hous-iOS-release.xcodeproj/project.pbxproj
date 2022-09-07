@@ -18,6 +18,12 @@
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B852C9B928C64D9D00DFF23C /* Assets-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */; };
+		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
+		B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEC28C8661300B49984 /* SpoqaHanSansNeo-Medium.otf */; };
+		B8566FF328C8661400B49984 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */; };
+		B8566FF428C8661400B49984 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */; };
+		B8566FF528C8661400B49984 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */; };
+		B8566FF628C8661400B49984 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FF028C8661400B49984 /* Montserrat-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +43,12 @@
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets-Constants.swift"; sourceTree = "<group>"; };
+		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		B8566FEC28C8661300B49984 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
+		B8566FF028C8661400B49984 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,12 +160,26 @@
 		77B1681E28ABE40400E1E512 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8566FEA28C865DF00B49984 /* Fonts */,
 				B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */,
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 				B852C9B428C6461200DFF23C /* Colors.xcassets */,
 				B852C9B628C64D2600DFF23C /* Images.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B8566FEA28C865DF00B49984 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B8566FF028C8661400B49984 /* Montserrat-Medium.otf */,
+				B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */,
+				B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */,
+				B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */,
+				B8566FEC28C8661300B49984 /* SpoqaHanSansNeo-Medium.otf */,
+				B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,9 +246,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */,
+				B8566FF628C8661400B49984 /* Montserrat-Medium.otf in Resources */,
+				B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */,
+				B8566FF528C8661400B49984 /* Montserrat-SemiBold.otf in Resources */,
+				B8566FF428C8661400B49984 /* Montserrat-Regular.otf in Resources */,
+				B8566FF328C8661400B49984 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
+				B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
