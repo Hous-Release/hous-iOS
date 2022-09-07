@@ -17,7 +17,6 @@
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
-		B852C9B928C64D9D00DFF23C /* Assets-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
 		B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEC28C8661300B49984 /* SpoqaHanSansNeo-Medium.otf */; };
 		B8566FF328C8661400B49984 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */; };
@@ -42,7 +41,6 @@
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets-Constants.swift"; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
 		B8566FEC28C8661300B49984 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
@@ -160,8 +158,8 @@
 		77B1681E28ABE40400E1E512 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8566FF728C86B6300B49984 /* Generated */,
 				B8566FEA28C865DF00B49984 /* Fonts */,
-				B852C9B828C64D9D00DFF23C /* Assets-Constants.swift */,
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 				B852C9B428C6461200DFF23C /* Colors.xcassets */,
 				B852C9B628C64D2600DFF23C /* Images.xcassets */,
@@ -180,6 +178,13 @@
 				B8566FED28C8661400B49984 /* SpoqaHanSansNeo-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		B8566FF728C86B6300B49984 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +294,6 @@
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
-				B852C9B928C64D9D00DFF23C /* Assets-Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
