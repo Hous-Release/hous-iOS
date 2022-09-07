@@ -31,6 +31,9 @@
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
 		B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700A28C88D7800B49984 /* HousTabBarItem.swift */; };
+		B856700D28C893B000B49984 /* HousTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700C28C893B000B49984 /* HousTabBar.swift */; };
+		B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700F28C894D300B49984 /* UIStackView+Extension.swift */; };
+		B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701128C895E600B49984 /* HousTabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,9 @@
 		B856700628C88C6F00B49984 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B856700828C88CAF00B49984 /* HousTabBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItemView.swift; sourceTree = "<group>"; };
 		B856700A28C88D7800B49984 /* HousTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItem.swift; sourceTree = "<group>"; };
+		B856700C28C893B000B49984 /* HousTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBar.swift; sourceTree = "<group>"; };
+		B856700F28C894D300B49984 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		B856701128C895E600B49984 /* HousTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,7 @@
 		777C665F28A74A62000BECEA /* Hous-iOS-release */ = {
 			isa = PBXGroup;
 			children = (
+				B856700E28C894C900B49984 /* Extension */,
 				77B1681E28ABE40400E1E512 /* Resources */,
 				77B1681C28ABC7DE00E1E512 /* Scene */,
 				777C667B28A7502E000BECEA /* Base */,
@@ -215,6 +222,8 @@
 			children = (
 				B856700828C88CAF00B49984 /* HousTabBarItemView.swift */,
 				B856700A28C88D7800B49984 /* HousTabBarItem.swift */,
+				B856700C28C893B000B49984 /* HousTabBar.swift */,
+				B856701128C895E600B49984 /* HousTabBarViewController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -241,6 +250,14 @@
 				B856700428C88C6900B49984 /* TodoViewController.swift */,
 			);
 			path = Todo;
+			sourceTree = "<group>";
+		};
+		B856700E28C894C900B49984 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B856700F28C894D300B49984 /* UIStackView+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,8 +364,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
+				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B856700528C88C6900B49984 /* TodoViewController.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
+				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
+				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B856700328C88C6100B49984 /* HousViewController.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
