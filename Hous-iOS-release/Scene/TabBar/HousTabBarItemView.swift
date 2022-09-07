@@ -70,8 +70,18 @@ final class HousTabBarItemView: UIView {
   private func animateItems() {
     UIView.animate(withDuration: 0.4) { [weak self] in
       guard let self = self else { return }
+
       self.titleLabel.textColor = self.isSelected ? Colors.blue.color : Colors.blueL1.color
     }
+
+    UIView.transition(
+      with: iconImageView,
+      duration: 0.4,
+      options: .transitionCrossDissolve) { [weak self] in
+
+        guard let self = self else { return }
+        self.iconImageView.image = self.isSelected ? self.item.selectedIcon : self.item.unselectedIcon
+      }
   }
 
   func animateClick(completion: @escaping () -> Void) {
