@@ -22,110 +22,74 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
-  internal enum _00BottomNavi {
-    internal static let icHousCheck = ImageAsset(name: "ic_hous_check")
-    internal static let icHousNocheck = ImageAsset(name: "ic_hous_nocheck")
-    internal static let icProfileCheck = ImageAsset(name: "ic_profile_check")
-    internal static let icProfileNocheck = ImageAsset(name: "ic_profile_nocheck")
-    internal static let icTodoCheck = ImageAsset(name: "ic_todo_check")
-    internal static let icTodoNocheck = ImageAsset(name: "ic_todo_nocheck")
-  }
-  internal enum _011Inputpersonal {
-    internal static let icCheckNo = ImageAsset(name: "ic_check_no")
-    internal static let icCheckYes = ImageAsset(name: "ic_check_yes")
-  }
-  internal enum _014BeforeRoom {
-    internal static let icClose = ImageAsset(name: "ic_close")
-  }
-  internal enum _01Login {
-    internal static let bg = ImageAsset(name: "bg")
-  }
-  internal enum _021HousMain {
-    internal static let icCopy = ImageAsset(name: "ic_copy")
-    internal static let icEditHous = ImageAsset(name: "ic_edit_hous")
-    internal static let icMoreOurRules = ImageAsset(name: "ic_more_our_rules")
-  }
-  internal enum _021HousmainProfile {
-    internal static let profileBlue = ImageAsset(name: "profile_blue")
-    internal static let profileBlueWtag = ImageAsset(name: "profile_blue_wtag")
-    internal static let profileGreen = ImageAsset(name: "profile_green")
-    internal static let profileGreenWtag = ImageAsset(name: "profile_green_wtag")
-    internal static let profilePurple = ImageAsset(name: "profile_purple")
-    internal static let profilePurpleWtag = ImageAsset(name: "profile_purple_wtag")
-    internal static let profileRed = ImageAsset(name: "profile_red")
-    internal static let profileRedWtag = ImageAsset(name: "profile_red_wtag")
-    internal static let profileYellow = ImageAsset(name: "profile_yellow")
-    internal static let profileYellowWtag = ImageAsset(name: "profile_yellow_wtag")
-  }
-  internal enum _022ChangeHousName {
-    internal static let icBack = ImageAsset(name: "ic_back")
-  }
-  internal enum _0231RulesAdd {
-    internal static let icAdd = ImageAsset(name: "ic_add")
-  }
-  internal enum _0232RulesEdit {
-    internal static let icMove1 = ImageAsset(name: "ic_move_1")
-  }
-  internal enum _023RulesMain {
-    internal static let frame1 = ImageAsset(name: "Frame 1")
-    internal static let icBack1 = ImageAsset(name: "ic_back1")
-  }
-  internal enum _024HomieProfile {
-    internal static let icMoreProfile = ImageAsset(name: "ic_more_profile")
-    internal static let illCir = ImageAsset(name: "ill_cir")
-    internal static let illHex = ImageAsset(name: "ill_hex")
-    internal static let illPen = ImageAsset(name: "ill_pen")
-    internal static let illSqu = ImageAsset(name: "ill_squ")
-    internal static let illTri = ImageAsset(name: "ill_tri")
-  }
-  internal enum _031TodoMain {
-    internal static let icDoneInfo = ImageAsset(name: "ic_done_info")
-    internal static let icDoneMy = ImageAsset(name: "ic_done_my")
-    internal static let icDoneOur = ImageAsset(name: "ic_done_our")
-    internal static let icHalfDoneInfo = ImageAsset(name: "ic_half_done_info")
-    internal static let icHalfDoneOur = ImageAsset(name: "ic_half_done_our")
-    internal static let icHelp = ImageAsset(name: "ic_help")
-    internal static let icNoInfo = ImageAsset(name: "ic_no_info")
-    internal static let icNoMy = ImageAsset(name: "ic_no_my")
-    internal static let icNoOur = ImageAsset(name: "ic_no_our")
-  }
-  internal enum _032TodoFilterDaily {
-    internal static let btnAddFloating = ImageAsset(name: "btn_add_floating")
-    internal static let icChange = ImageAsset(name: "ic_change")
-    internal static let icChosen = ImageAsset(name: "ic_chosen")
-  }
-  internal enum _033TodoFilterMember {
-    internal static let icBlueChosen = ImageAsset(name: "ic_blue_chosen")
-    internal static let icDown = ImageAsset(name: "ic_down")
-  }
-  internal enum _035AddnewEdit {
-    internal static let icAlarmoff = ImageAsset(name: "ic_alarmoff")
-    internal static let icAlarmon = ImageAsset(name: "ic_alarmon")
-    internal static let icBlueNo = ImageAsset(name: "ic_blue_no")
-    internal static let icBlueYes = ImageAsset(name: "ic_blue_yes")
-    internal static let icGreenNo = ImageAsset(name: "ic_green_no")
-    internal static let icGreenYes = ImageAsset(name: "ic_green_yes")
-    internal static let icPurpleNo = ImageAsset(name: "ic_purple_no")
-    internal static let icPurpleYes = ImageAsset(name: "ic_purple_yes")
-    internal static let icRedNo = ImageAsset(name: "ic_red_no")
-    internal static let icRedYes = ImageAsset(name: "ic_red_yes")
-    internal static let icYellowNo = ImageAsset(name: "ic_yellow_no")
-    internal static let icYellowYes = ImageAsset(name: "ic_yellow_yes")
-  }
-  internal enum _041Profile {
-    internal static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
-    internal static let icEditProfile = ImageAsset(name: "ic_edit_profile")
-    internal static let icSetting = ImageAsset(name: "ic_setting")
-  }
-  internal enum _042Badge {
-    internal static let badgeLock = ImageAsset(name: "badge_lock")
-    internal static let icBackWhite = ImageAsset(name: "ic_back_white")
-    internal static let icCheckBadge = ImageAsset(name: "ic_check_badge")
-  }
-  internal enum _043Test {
-    internal static let icBackTest = ImageAsset(name: "ic_back_test")
-    internal static let icForTest = ImageAsset(name: "ic_for_test")
-  }
+  internal static let icHousCheck = ImageAsset(name: "ic_hous_check")
+  internal static let icHousNocheck = ImageAsset(name: "ic_hous_nocheck")
+  internal static let icProfileCheck = ImageAsset(name: "ic_profile_check")
+  internal static let icProfileNocheck = ImageAsset(name: "ic_profile_nocheck")
+  internal static let icTodoCheck = ImageAsset(name: "ic_todo_check")
+  internal static let icTodoNocheck = ImageAsset(name: "ic_todo_nocheck")
+  internal static let icCheckNo = ImageAsset(name: "ic_check_no")
+  internal static let icCheckYes = ImageAsset(name: "ic_check_yes")
+  internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let bg = ImageAsset(name: "bg")
+  internal static let icCopy = ImageAsset(name: "ic_copy")
+  internal static let icEditHous = ImageAsset(name: "ic_edit_hous")
+  internal static let icMoreOurRules = ImageAsset(name: "ic_more_our_rules")
+  internal static let profileBlue = ImageAsset(name: "profile_blue")
+  internal static let profileBlueWtag = ImageAsset(name: "profile_blue_wtag")
+  internal static let profileGreen = ImageAsset(name: "profile_green")
+  internal static let profileGreenWtag = ImageAsset(name: "profile_green_wtag")
+  internal static let profilePurple = ImageAsset(name: "profile_purple")
+  internal static let profilePurpleWtag = ImageAsset(name: "profile_purple_wtag")
+  internal static let profileRed = ImageAsset(name: "profile_red")
+  internal static let profileRedWtag = ImageAsset(name: "profile_red_wtag")
+  internal static let profileYellow = ImageAsset(name: "profile_yellow")
+  internal static let profileYellowWtag = ImageAsset(name: "profile_yellow_wtag")
+  internal static let icBack = ImageAsset(name: "ic_back")
+  internal static let icAdd = ImageAsset(name: "ic_add")
+  internal static let icMove1 = ImageAsset(name: "ic_move_1")
+  internal static let frame1 = ImageAsset(name: "Frame 1")
+  internal static let icBack1 = ImageAsset(name: "ic_back1")
+  internal static let icMoreProfile = ImageAsset(name: "ic_more_profile")
+  internal static let illCir = ImageAsset(name: "ill_cir")
+  internal static let illHex = ImageAsset(name: "ill_hex")
+  internal static let illPen = ImageAsset(name: "ill_pen")
+  internal static let illSqu = ImageAsset(name: "ill_squ")
+  internal static let illTri = ImageAsset(name: "ill_tri")
+  internal static let icDoneInfo = ImageAsset(name: "ic_done_info")
+  internal static let icDoneMy = ImageAsset(name: "ic_done_my")
+  internal static let icDoneOur = ImageAsset(name: "ic_done_our")
+  internal static let icHalfDoneInfo = ImageAsset(name: "ic_half_done_info")
+  internal static let icHalfDoneOur = ImageAsset(name: "ic_half_done_our")
+  internal static let icHelp = ImageAsset(name: "ic_help")
+  internal static let icNoInfo = ImageAsset(name: "ic_no_info")
+  internal static let icNoMy = ImageAsset(name: "ic_no_my")
+  internal static let icNoOur = ImageAsset(name: "ic_no_our")
+  internal static let btnAddFloating = ImageAsset(name: "btn_add_floating")
+  internal static let icChange = ImageAsset(name: "ic_change")
+  internal static let icChosen = ImageAsset(name: "ic_chosen")
+  internal static let icDown = ImageAsset(name: "ic_down")
+  internal static let icCheckMember = ImageAsset(name: "ic_check_member")
+  internal static let icAlarmoff = ImageAsset(name: "ic_alarmoff")
+  internal static let icAlarmon = ImageAsset(name: "ic_alarmon")
+  internal static let icBlueNo = ImageAsset(name: "ic_blue_no")
+  internal static let icBlueYes = ImageAsset(name: "ic_blue_yes")
+  internal static let icGreenNo = ImageAsset(name: "ic_green_no")
+  internal static let icGreenYes = ImageAsset(name: "ic_green_yes")
+  internal static let icPurpleNo = ImageAsset(name: "ic_purple_no")
+  internal static let icPurpleYes = ImageAsset(name: "ic_purple_yes")
+  internal static let icRedNo = ImageAsset(name: "ic_red_no")
+  internal static let icRedYes = ImageAsset(name: "ic_red_yes")
+  internal static let icYellowNo = ImageAsset(name: "ic_yellow_no")
+  internal static let icYellowYes = ImageAsset(name: "ic_yellow_yes")
+  internal static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
+  internal static let icEditProfile = ImageAsset(name: "ic_edit_profile")
+  internal static let icSetting = ImageAsset(name: "ic_setting")
+  internal static let badgeLock = ImageAsset(name: "badge_lock")
+  internal static let icBackWhite = ImageAsset(name: "ic_back_white")
+  internal static let icCheckBadge = ImageAsset(name: "ic_check_badge")
+  internal static let icBackTest = ImageAsset(name: "ic_back_test")
+  internal static let icForTest = ImageAsset(name: "ic_for_test")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

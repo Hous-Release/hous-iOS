@@ -66,14 +66,12 @@ xcassets:
     templateName: swift5
     output: Generated/Colors+Generated.swift
     params:
-      forceProvidesNamespaces: true
       enumName: Colors
   inputs: Images.xcassets
   outputs:
     templateName: swift5
     output: Generated/Images+Generated.swift
     params:
-      forceProvidesNamespaces: true
       enumName: Images
 
 fonts:
@@ -82,6 +80,5 @@ fonts:
     templateName: swift5
     output: Generated/Fonts+Generated.swift
     params:
-      forceProvidesNamespaces: true
       enumName: Fonts
 
