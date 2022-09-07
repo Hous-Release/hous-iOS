@@ -40,14 +40,14 @@ final class HousTabBarItemView: UIView {
     titleLabel.text = item.name
     iconImageView.image = isSelected ? item.selectedIcon : item.unselectedIcon
 
-    setupViews()
+    render()
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setupViews() {
+  private func render() {
     addSubview(containerView)
     containerView.addSubview(titleLabel)
     containerView.addSubview(iconImageView)
