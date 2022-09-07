@@ -17,6 +17,13 @@ class HousTabbarViewController: UITabBarController {
     return tabbar
   }()
 
+  private let backgroundView: UIView = {
+    let view = UIView()
+    view.layer.applySketchShadow(color: Colors.black.color, alpha: 0.05, x: 0, y: -4, blur: 10, spread: 0)
+    view.layer.cornerRadius = 20
+    return view
+  }()
+
   // MARK: - Properties
 
   private let disposeBag = DisposeBag()
@@ -33,10 +40,14 @@ class HousTabbarViewController: UITabBarController {
   }
 
   private func render() {
-    view.addSubview(housTabBar)
-    housTabBar.snp.makeConstraints {
+    view.addSubview(backgroundView)
+    backgroundView.addSubview(housTabBar)
+    backgroundView.snp.makeConstraints {
       $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(80)
+    }
+    housTabBar.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
     }
   }
 
