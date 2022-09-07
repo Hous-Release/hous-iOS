@@ -13,8 +13,6 @@
 #endif
 
 // Deprecated typealiases
-@available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
 internal typealias AssetImageTypeAlias = ImageAsset.Image
 
@@ -23,39 +21,31 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum Asset {
-  internal enum Colors {
-    internal static let black = ColorAsset(name: "Black")
-    internal static let blue = ColorAsset(name: "Blue")
-    internal static let blueL1 = ColorAsset(name: "Blue_l1")
-    internal static let blueL2 = ColorAsset(name: "Blue_l2")
-    internal static let g1 = ColorAsset(name: "G1")
-    internal static let g2 = ColorAsset(name: "G2")
-    internal static let g3 = ColorAsset(name: "G3")
-    internal static let g4 = ColorAsset(name: "G4")
-    internal static let g5 = ColorAsset(name: "G5")
-    internal static let g6 = ColorAsset(name: "G6")
-    internal static let g7 = ColorAsset(name: "G7")
-    internal static let green = ColorAsset(name: "Green")
-    internal static let purple = ColorAsset(name: "Purple")
-    internal static let red = ColorAsset(name: "Red")
-    internal static let white = ColorAsset(name: "White")
-    internal static let yellow = ColorAsset(name: "Yellow")
-  }
-  internal enum Images {
+internal enum Images {
+  internal enum _00BottomNavi {
     internal static let icHousCheck = ImageAsset(name: "ic_hous_check")
     internal static let icHousNocheck = ImageAsset(name: "ic_hous_nocheck")
     internal static let icProfileCheck = ImageAsset(name: "ic_profile_check")
     internal static let icProfileNocheck = ImageAsset(name: "ic_profile_nocheck")
     internal static let icTodoCheck = ImageAsset(name: "ic_todo_check")
     internal static let icTodoNocheck = ImageAsset(name: "ic_todo_nocheck")
+  }
+  internal enum _011Inputpersonal {
     internal static let icCheckNo = ImageAsset(name: "ic_check_no")
     internal static let icCheckYes = ImageAsset(name: "ic_check_yes")
+  }
+  internal enum _014BeforeRoom {
     internal static let icClose = ImageAsset(name: "ic_close")
+  }
+  internal enum _01Login {
     internal static let bg = ImageAsset(name: "bg")
+  }
+  internal enum _021HousMain {
     internal static let icCopy = ImageAsset(name: "ic_copy")
     internal static let icEditHous = ImageAsset(name: "ic_edit_hous")
     internal static let icMoreOurRules = ImageAsset(name: "ic_more_our_rules")
+  }
+  internal enum _021HousmainProfile {
     internal static let profileBlue = ImageAsset(name: "profile_blue")
     internal static let profileBlueWtag = ImageAsset(name: "profile_blue_wtag")
     internal static let profileGreen = ImageAsset(name: "profile_green")
@@ -66,17 +56,29 @@ internal enum Asset {
     internal static let profileRedWtag = ImageAsset(name: "profile_red_wtag")
     internal static let profileYellow = ImageAsset(name: "profile_yellow")
     internal static let profileYellowWtag = ImageAsset(name: "profile_yellow_wtag")
+  }
+  internal enum _022ChangeHousName {
     internal static let icBack = ImageAsset(name: "ic_back")
+  }
+  internal enum _0231RulesAdd {
     internal static let icAdd = ImageAsset(name: "ic_add")
+  }
+  internal enum _0232RulesEdit {
     internal static let icMove1 = ImageAsset(name: "ic_move_1")
+  }
+  internal enum _023RulesMain {
     internal static let frame1 = ImageAsset(name: "Frame 1")
     internal static let icBack1 = ImageAsset(name: "ic_back1")
+  }
+  internal enum _024HomieProfile {
     internal static let icMoreProfile = ImageAsset(name: "ic_more_profile")
     internal static let illCir = ImageAsset(name: "ill_cir")
     internal static let illHex = ImageAsset(name: "ill_hex")
     internal static let illPen = ImageAsset(name: "ill_pen")
     internal static let illSqu = ImageAsset(name: "ill_squ")
     internal static let illTri = ImageAsset(name: "ill_tri")
+  }
+  internal enum _031TodoMain {
     internal static let icDoneInfo = ImageAsset(name: "ic_done_info")
     internal static let icDoneMy = ImageAsset(name: "ic_done_my")
     internal static let icDoneOur = ImageAsset(name: "ic_done_our")
@@ -86,11 +88,17 @@ internal enum Asset {
     internal static let icNoInfo = ImageAsset(name: "ic_no_info")
     internal static let icNoMy = ImageAsset(name: "ic_no_my")
     internal static let icNoOur = ImageAsset(name: "ic_no_our")
+  }
+  internal enum _032TodoFilterDaily {
     internal static let btnAddFloating = ImageAsset(name: "btn_add_floating")
     internal static let icChange = ImageAsset(name: "ic_change")
     internal static let icChosen = ImageAsset(name: "ic_chosen")
+  }
+  internal enum _033TodoFilterMember {
     internal static let icBlueChosen = ImageAsset(name: "ic_blue_chosen")
     internal static let icDown = ImageAsset(name: "ic_down")
+  }
+  internal enum _035AddnewEdit {
     internal static let icAlarmoff = ImageAsset(name: "ic_alarmoff")
     internal static let icAlarmon = ImageAsset(name: "ic_alarmon")
     internal static let icBlueNo = ImageAsset(name: "ic_blue_no")
@@ -103,12 +111,18 @@ internal enum Asset {
     internal static let icRedYes = ImageAsset(name: "ic_red_yes")
     internal static let icYellowNo = ImageAsset(name: "ic_yellow_no")
     internal static let icYellowYes = ImageAsset(name: "ic_yellow_yes")
+  }
+  internal enum _041Profile {
     internal static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
     internal static let icEditProfile = ImageAsset(name: "ic_edit_profile")
     internal static let icSetting = ImageAsset(name: "ic_setting")
+  }
+  internal enum _042Badge {
     internal static let badgeLock = ImageAsset(name: "badge_lock")
     internal static let icBackWhite = ImageAsset(name: "ic_back_white")
     internal static let icCheckBadge = ImageAsset(name: "ic_check_badge")
+  }
+  internal enum _043Test {
     internal static let icBackTest = ImageAsset(name: "ic_back_test")
     internal static let icForTest = ImageAsset(name: "ic_for_test")
   }
@@ -116,70 +130,6 @@ internal enum Asset {
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
-
-internal final class ColorAsset {
-  internal fileprivate(set) var name: String
-
-  #if os(macOS)
-  internal typealias Color = NSColor
-  #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Color = UIColor
-  #endif
-
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  internal private(set) lazy var color: Color = {
-    guard let color = Color(asset: self) else {
-      fatalError("Unable to load color asset named \(name).")
-    }
-    return color
-  }()
-
-  #if os(iOS) || os(tvOS)
-  @available(iOS 11.0, tvOS 11.0, *)
-  internal func color(compatibleWith traitCollection: UITraitCollection) -> Color {
-    let bundle = BundleToken.bundle
-    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
-      fatalError("Unable to load color asset named \(name).")
-    }
-    return color
-  }
-  #endif
-
-  #if canImport(SwiftUI)
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  internal private(set) lazy var swiftUIColor: SwiftUI.Color = {
-    SwiftUI.Color(asset: self)
-  }()
-  #endif
-
-  fileprivate init(name: String) {
-    self.name = name
-  }
-}
-
-internal extension ColorAsset.Color {
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  convenience init?(asset: ColorAsset) {
-    let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(macOS)
-    self.init(named: NSColor.Name(asset.name), bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-#if canImport(SwiftUI)
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-internal extension SwiftUI.Color {
-  init(asset: ColorAsset) {
-    let bundle = BundleToken.bundle
-    self.init(asset.name, bundle: bundle)
-  }
-}
-#endif
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
