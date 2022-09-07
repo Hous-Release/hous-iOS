@@ -57,6 +57,7 @@ final class HousTabBar: UIStackView {
     alignment = .center
 
     layer.cornerRadius = 20
+    backgroundColor = .white
 
     addArrangedSubviews(housItemView, todoItemView, profileItemView)
 

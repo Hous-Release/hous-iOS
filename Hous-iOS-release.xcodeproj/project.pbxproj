@@ -34,6 +34,7 @@
 		B856700D28C893B000B49984 /* HousTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700C28C893B000B49984 /* HousTabBar.swift */; };
 		B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700F28C894D300B49984 /* UIStackView+Extension.swift */; };
 		B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701128C895E600B49984 /* HousTabBarViewController.swift */; };
+		B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701328C8E56600B49984 /* CALayer+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		B856700C28C893B000B49984 /* HousTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBar.swift; sourceTree = "<group>"; };
 		B856700F28C894D300B49984 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		B856701128C895E600B49984 /* HousTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarViewController.swift; sourceTree = "<group>"; };
+		B856701328C8E56600B49984 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				B856700F28C894D300B49984 /* UIStackView+Extension.swift */,
+				B856701328C8E56600B49984 /* CALayer+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
