@@ -15,6 +15,7 @@
 		777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777C666B28A74A63000BECEA /* LaunchScreen.storyboard */; };
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
+		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -79,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
+				B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */,
 				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +285,7 @@
 			packageProductDependencies = (
 				7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */,
 				77393DE028BFBD2D00D78C94 /* FirebaseWrapper */,
+				B595FFBD28C9F48900F6B2E4 /* Then */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -312,6 +315,9 @@
 				Base,
 			);
 			mainGroup = 777C665428A74A62000BECEA;
+			packageReferences = (
+				B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 777C665E28A74A62000BECEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -970,6 +976,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -978,6 +995,11 @@
 		77393DE028BFBD2D00D78C94 /* FirebaseWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseWrapper;
+		};
+		B595FFBD28C9F48900F6B2E4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
