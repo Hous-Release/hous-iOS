@@ -31,8 +31,6 @@ class EnterInfoView: UIView {
     textfield.placeholder = "Hous-에서 사용할 이름을 입력해주세요."
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     textfield.textColor = Colors.black.color
-    textfield.backgroundColor = .white
-    textfield.borderStyle = .none
     return textfield
   }()
 
@@ -49,9 +47,11 @@ class EnterInfoView: UIView {
     textfield.placeholder = "YYYY/MM/DD"
     textfield.font = Fonts.Montserrat.regular.font(size: 14)
     textfield.textColor = Colors.black.color
-    textfield.backgroundColor = .white
-    textfield.borderStyle = .none
     return textfield
+  }()
+
+  let datePicker: UIDatePicker = {
+    return UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 216))
   }()
 
   var checkBirthDayButton: UIButton = {
@@ -75,19 +75,32 @@ class EnterInfoView: UIView {
     button.setTitle("다음으로", for: .normal)
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
     button.titleLabel?.textColor = Colors.white.color
-    button.setBackgroundColor(Colors.g4.color, for: .normal)
-    button.setBackgroundColor(Colors.blue.color, for: .selected)
-    button.isSelected = false
+    button.setBackgroundColor(Colors.g4.color, for: .disabled)
+    button.setBackgroundColor(Colors.blue.color, for: .normal)
+    button.isEnabled = false
     return button
   }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()
+    setUp()
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setUp() {
+    birthdayTextfield.setDatePicker(target: self, selector: #selector(setDate), datePicker: datePicker)
+    datePicker.addTarget(self, action: #selector(handleDatePickerTap), for: .editingDidBegin)
+  }
+
+  @objc func setDate() {
+      self.endEditing(true)
+  }
+  @objc func handleDatePickerTap() {
+    datePicker.resignFirstResponder()
   }
 
   private func render() {
