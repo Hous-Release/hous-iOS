@@ -17,7 +17,7 @@ extension HousTabBarItem {
   var viewController: UIViewController {
     switch self {
     case .hous:
-      return UINavigationController(rootViewController: HousViewController())
+      return UINavigationController(rootViewController: MainHomeViewController())
     case .todo:
       return UINavigationController(rootViewController: TodoViewController())
     case .profile:
