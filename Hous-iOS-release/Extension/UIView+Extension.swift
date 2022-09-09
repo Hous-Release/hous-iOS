@@ -40,6 +40,7 @@ extension UIView {
         closure?(subview)
     }
 
+
     func addSubViews<T: UIView>(_ subviews: [T], completionHandler closure: (([T]) -> Void)? = nil) {
         subviews.forEach { addSubview($0) }
         closure?(subviews)
