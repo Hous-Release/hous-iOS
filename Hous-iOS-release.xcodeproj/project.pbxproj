@@ -44,6 +44,9 @@
 		B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702428C9CA2800B49984 /* UIButton+Extension.swift */; };
 		B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */; };
 		B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702828CA087E00B49984 /* UITextField+Extension.swift */; };
+		B856702B28CA831000B49984 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702A28CA831000B49984 /* TodoView.swift */; };
+		B856702D28CA912C00B49984 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B856702C28CA912C00B49984 /* Montserrat-Bold.otf */; };
+		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +91,9 @@
 		B856702428C9CA2800B49984 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewReactor.swift; sourceTree = "<group>"; };
 		B856702828CA087E00B49984 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		B856702A28CA831000B49984 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		B856702C28CA912C00B49984 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +225,7 @@
 		B8566FEA28C865DF00B49984 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B856702C28CA912C00B49984 /* Montserrat-Bold.otf */,
 				B8566FF028C8661400B49984 /* Montserrat-Medium.otf */,
 				B8566FEE28C8661400B49984 /* Montserrat-Regular.otf */,
 				B8566FEF28C8661400B49984 /* Montserrat-SemiBold.otf */,
@@ -270,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				B856700428C88C6900B49984 /* TodoViewController.swift */,
+				B856702A28CA831000B49984 /* TodoView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				B856701E28C9A74E00B49984 /* UIView+Extension.swift */,
 				B856702428C9CA2800B49984 /* UIButton+Extension.swift */,
 				B856702828CA087E00B49984 /* UITextField+Extension.swift */,
+				B856702E28CA93F600B49984 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -390,6 +399,7 @@
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
 				B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				B856702D28CA912C00B49984 /* Montserrat-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +443,7 @@
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
+				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				B856701F28C9A74E00B49984 /* UIView+Extension.swift in Sources */,
@@ -442,6 +453,7 @@
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
+				B856702B28CA831000B49984 /* TodoView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 			);
