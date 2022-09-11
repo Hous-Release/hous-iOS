@@ -21,10 +21,11 @@ internal typealias Font = FontConvertible.Font
 // swiftlint:disable identifier_name line_length type_body_length
 internal enum Fonts {
   internal enum Montserrat {
+    internal static let bold = FontConvertible(name: "Montserrat-Bold", family: "Montserrat", path: "Montserrat-Bold.otf")
     internal static let medium = FontConvertible(name: "Montserrat-Medium", family: "Montserrat", path: "Montserrat-Medium.otf")
     internal static let regular = FontConvertible(name: "Montserrat-Regular", family: "Montserrat", path: "Montserrat-Regular.otf")
     internal static let semiBold = FontConvertible(name: "Montserrat-SemiBold", family: "Montserrat", path: "Montserrat-SemiBold.otf")
-    internal static let all: [FontConvertible] = [medium, regular, semiBold]
+    internal static let all: [FontConvertible] = [bold, medium, regular, semiBold]
   }
   internal enum SpoqaHanSansNeo {
     internal static let bold = FontConvertible(name: "SpoqaHanSansNeo-Bold", family: "Spoqa Han Sans Neo", path: "SpoqaHanSansNeo-Bold.otf")
