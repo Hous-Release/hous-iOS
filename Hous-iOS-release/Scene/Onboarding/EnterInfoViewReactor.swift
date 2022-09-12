@@ -25,7 +25,6 @@ final class EnterInfoViewReactor: Reactor {
     case setBirthday(String)
     case setIsNextButtonEnable(Bool)
     case setIsBirthdayPublic(Bool)
-    //(서버통신 결과 - 닉네입 중복 팝업 혹은 온보딩 뷰 진입) 추후 수정
     case setNextResult(Bool)
   }
 
@@ -46,16 +45,12 @@ final class EnterInfoViewReactor: Reactor {
       return .concat([
         .just(Mutation.setNickname(nickname)),
         self.validateNextButton(nickname, currentState.birthday)
-          .map { Mutation.setIsNextButtonEnable($0)}
       ])
 
     case let .enterBirthday(birthday):
       return Observable.concat([
-        self.formatToString(of: birthday)
-          .map { Mutation.setBirthday($0)}
-        ,
+        self.formatToString(of: birthday),
         self.validateNextButton(currentState.nickname, currentState.birthday)
-          .map { Mutation.setIsNextButtonEnable($0)}
       ])
 
     case let .checkBirthdayPublic(flag):
@@ -71,45 +66,41 @@ final class EnterInfoViewReactor: Reactor {
   }
 
   func reduce(state: State, mutation: Mutation) -> State {
+
+    var newState = state
+
     switch mutation {
 
     case let .setNickname(nickname):
-      var newState = state
       newState.nickname = nickname
-      return newState
 
     case let .setBirthday(birthday):
-      var newState = state
       newState.birthday = birthday
-      return newState
 
     case let .setIsNextButtonEnable(flag):
-      var newState = state
       newState.isNextButtonEnable = flag
-      return newState
 
     case let .setIsBirthdayPublic(flag):
-      var newState = state
       newState.isBirthdayPublic = flag
-      return newState
 
     case let .setNextResult(flag):
-      var newState = state
       newState.serverResult = flag
-      return newState
     }
+
+    return newState
   }
 
-  private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Bool> {
-    return nickname.count > 2 && birthday != "" ? .just(true) : .just(false)
+  private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Mutation> {
+    let validation = nickname.count > 2 && birthday != ""
+    return .just(Mutation.setIsNextButtonEnable(validation))
   }
 
-  private func formatToString(of birthday: Date?) -> Observable<String> {
+  private func formatToString(of birthday: Date?) -> Observable<Mutation> {
     guard let birthday = birthday else { return .empty() }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY/MM/dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
 
-    return .just(dateFormatter.string(from: birthday))
+    return .just(Mutation.setBirthday(dateFormatter.string(from: birthday)))
   }
 }
