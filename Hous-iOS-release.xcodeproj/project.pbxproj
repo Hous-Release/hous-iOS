@@ -26,6 +26,8 @@
 		B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B228D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift */; };
 		B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B428D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift */; };
 		B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */; };
+		B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */; };
+		B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -82,6 +84,8 @@
 		B84EA6B228D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		B84EA6B428D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoCollectionViewCellReactor.swift; sourceTree = "<group>"; };
 		B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewReactor.swift; sourceTree = "<group>"; };
+		B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMainDTO.swift; sourceTree = "<group>"; };
+		B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TodoMainDTO.json; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 		B84EA69E28D619E400C92FCD /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B84EA6B928D61BDA00C92FCD /* Model */,
 				B84EA6B628D61BA900C92FCD /* ViewModel */,
 				B84EA6AB28D61ACE00C92FCD /* Cell */,
 				B84EA6A428D61A3A00C92FCD /* View */,
@@ -287,6 +292,15 @@
 				B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B84EA6B928D61BDA00C92FCD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */,
+				B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B8566FEA28C865DF00B49984 /* Fonts */ = {
@@ -457,6 +471,7 @@
 			files = (
 				B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */,
 				B8566FF628C8661400B49984 /* Montserrat-Medium.otf in Resources */,
+				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */,
 				B8566FF528C8661400B49984 /* Montserrat-SemiBold.otf in Resources */,
@@ -518,6 +533,7 @@
 				B856701F28C9A74E00B49984 /* UIView+Extension.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
+				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
