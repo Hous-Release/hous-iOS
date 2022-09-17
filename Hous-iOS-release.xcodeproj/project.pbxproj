@@ -30,6 +30,11 @@
 		B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */; };
 		B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */; };
 		B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */; };
+		B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C028D61DEA00C92FCD /* NSObject+Extension.swift */; };
+		B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */; };
+		B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */; };
+		B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C928D61E4400C92FCD /* MockParser.swift */; };
+		B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -51,13 +56,11 @@
 		B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701328C8E56600B49984 /* CALayer+Extension.swift */; };
 		B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701828C9A03500B49984 /* EnterInfoViewController.swift */; };
 		B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701C28C9A28A00B49984 /* NavigationBarView.swift */; };
-		B856701F28C9A74E00B49984 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856701E28C9A74E00B49984 /* UIView+Extension.swift */; };
 		B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702028C9AA3600B49984 /* EnterInfoView.swift */; };
 		B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702228C9C76300B49984 /* UnderlinedTextField.swift */; };
 		B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702428C9CA2800B49984 /* UIButton+Extension.swift */; };
 		B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */; };
 		B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702828CA087E00B49984 /* UITextField+Extension.swift */; };
-		B856702B28CA831000B49984 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702A28CA831000B49984 /* TodoView.swift */; };
 		B856702D28CA912C00B49984 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B856702C28CA912C00B49984 /* Montserrat-Bold.otf */; };
 		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +92,11 @@
 		B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMainDTO.swift; sourceTree = "<group>"; };
 		B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TodoMainDTO.json; sourceTree = "<group>"; };
 		B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMainSection.swift; sourceTree = "<group>"; };
+		B84EA6C028D61DEA00C92FCD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionVIew+Extension.swift"; sourceTree = "<group>"; };
+		B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
+		B84EA6C928D61E4400C92FCD /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
+		B84EA6D228D621B300C92FCD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -110,7 +118,6 @@
 		B856701328C8E56600B49984 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		B856701828C9A03500B49984 /* EnterInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewController.swift; sourceTree = "<group>"; };
 		B856701C28C9A28A00B49984 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		B856701E28C9A74E00B49984 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B856702028C9AA3600B49984 /* EnterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoView.swift; sourceTree = "<group>"; };
 		B856702228C9C76300B49984 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		B856702428C9CA2800B49984 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -151,6 +158,7 @@
 				777C665F28A74A62000BECEA /* Hous-iOS-release */,
 				777C665E28A74A62000BECEA /* Products */,
 				7705A45328BBB388000237BA /* Frameworks */,
+				B84EA6D028D620BF00C92FCD /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				B856701A28C9A25300B49984 /* Global */,
+				B84EA6C828D61E3B00C92FCD /* Util */,
 				B856700E28C894C900B49984 /* Extension */,
 				77B1681E28ABE40400E1E512 /* Resources */,
 				77B1681C28ABC7DE00E1E512 /* Scene */,
@@ -308,6 +317,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B84EA6C828D61E3B00C92FCD /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6C928D61E4400C92FCD /* MockParser.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		B84EA6D028D620BF00C92FCD /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B856702A28CA831000B49984 /* TodoView.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		B8566FEA28C865DF00B49984 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,10 +397,13 @@
 			children = (
 				B856700F28C894D300B49984 /* UIStackView+Extension.swift */,
 				B856701328C8E56600B49984 /* CALayer+Extension.swift */,
-				B856701E28C9A74E00B49984 /* UIView+Extension.swift */,
 				B856702428C9CA2800B49984 /* UIButton+Extension.swift */,
 				B856702828CA087E00B49984 /* UITextField+Extension.swift */,
 				B856702E28CA93F600B49984 /* UILabel+Extension.swift */,
+				B84EA6C028D61DEA00C92FCD /* NSObject+Extension.swift */,
+				B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */,
+				B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */,
+				B84EA6D228D621B300C92FCD /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -517,10 +545,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
-				B856700528C88C6900B49984 /* TodoViewController.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
@@ -529,6 +557,7 @@
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B856700328C88C6100B49984 /* HousViewController.swift in Sources */,
+				B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
@@ -536,12 +565,13 @@
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
+				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
-				B856701F28C9A74E00B49984 /* UIView+Extension.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
+				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
@@ -550,9 +580,9 @@
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
-				B856702B28CA831000B49984 /* TodoView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
+				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 			);
