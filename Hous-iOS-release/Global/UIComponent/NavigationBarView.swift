@@ -8,13 +8,20 @@
 import UIKit
 import SnapKit
 
+protocol NavBarWithBackButtonViewDelegate: AnyObject {
+  func backButtonDidTapped()
+}
+
 class NavBarWithBackButtonView: UIView {
 
-  var backButton: UIButton = {
+  lazy var backButton: UIButton = {
     var button = UIButton()
     button.setImage(Images.icBack.image, for: .normal)
+    button.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
     return button
   }()
+  
+  weak var delegate: NavBarWithBackButtonViewDelegate?
 
   private var titleLabel: UILabel = {
     var label = UILabel()
@@ -24,9 +31,10 @@ class NavBarWithBackButtonView: UIView {
     return label
   }()
 
-  var rightButton: UIButton = {
+  lazy var rightButton: UIButton = {
     var button = UIButton()
-    button.titleLabel?.textColor = Colors.blue.color
+    button.setTitleColor(Colors.blue.color, for: .normal)
+    //button.titleLabel?.textColor = Colors.blue.color
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     button.titleLabel?.textAlignment = .center
     return button
@@ -42,9 +50,8 @@ class NavBarWithBackButtonView: UIView {
     super.init(frame: .zero)
     
     titleLabel.text = title
-    rightButtonText == "" ? self.rightButton.isHidden = true : nil
-    rightButton.titleLabel?.text = rightButtonText
-
+    rightButtonText == "" ? (self.rightButton.isHidden = true) : (self.rightButton.isHidden = false)
+    rightButton.setTitle(rightButtonText, for: .normal)
     render()
   }
 
@@ -75,3 +82,10 @@ class NavBarWithBackButtonView: UIView {
     }
   }
 }
+
+extension NavBarWithBackButtonView {
+  @objc private func backButtonDidTapped() {
+    self.delegate?.backButtonDidTapped()
+  }
+}
+
