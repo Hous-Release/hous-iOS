@@ -23,7 +23,9 @@ let package = Package(
         .package(url: "https://github.com/Alamofire/Alamofire.git", exact: "5.6.1"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", exact: "6.5.0"),
         .package(url: "https://github.com/RxSwiftCommunity/RxGesture.git", exact: "4.0.4"),
+        .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", exact: "5.0.2"),
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
+        .package(url: "https://github.com/devxoul/Then.git", exact: "3.0.0"),
         .package(url: "https://github.com/ReactorKit/ReactorKit.git", exact: "3.2.0"),
     ],
     targets: [
@@ -34,7 +36,9 @@ let package = Package(
                 .product(name: "RxSwift", package: "Rxswift"),
                 .product(name: "RxCocoa", package: "Rxswift"),
                 .product(name: "RxGesture", package: "RxGesture"),
+                .product(name: "RxDataSources", package: "RxDataSources"),
                 .product(name: "SnapKit", package: "SnapKit"),
+                .product(name: "Then", package: "Then"),
                 .product(name: "ReactorKit", package: "ReactorKit")
             ]
         ),
