@@ -28,6 +28,7 @@
 		B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */; };
 		B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */; };
 		B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */; };
+		B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -86,6 +87,7 @@
 		B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewReactor.swift; sourceTree = "<group>"; };
 		B84EA6BA28D61BE400C92FCD /* TodoMainDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMainDTO.swift; sourceTree = "<group>"; };
 		B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TodoMainDTO.json; sourceTree = "<group>"; };
+		B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMainSection.swift; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */,
+				B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B856700528C88C6900B49984 /* TodoViewController.swift in Sources */,
