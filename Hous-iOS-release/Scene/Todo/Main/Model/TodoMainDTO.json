@@ -1,0 +1,78 @@
+{
+    "date": "09.14",
+    "dayOfWeek": "WEDNESDAY",
+    "progress": 0,
+    "myTodosCnt": 5,
+    "ourTodosCnt": 6,
+    "myTodos": [
+      {
+        "todoId": 1,
+        "todoName": "나의투두1",
+        "isChecked": false
+      },
+      {
+        "todoId": 2,
+        "todoName": "나의투두2",
+        "isChecked": true
+      },
+      {
+        "todoId": 3,
+        "todoName": "나의투두3",
+        "isChecked": false
+      },
+      {
+        "todoId": 4,
+        "todoName": "나의투두4",
+        "isChecked": true
+      },
+      {
+        "todoId": 5,
+        "todoName": "나의투두5",
+        "isChecked": false
+      }
+    ],
+    "ourTodos": [
+      {
+        "todoName": "우리의투두1",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "EMPTY"
+      },
+      {
+        "todoName": "우리의투두2",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "FULL"
+      },
+      {
+        "todoName": "우리의투두3",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "FULLCHECK"
+      },
+      {
+        "todoName": "우리의투두4",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "EMPTY"
+      },
+      {
+        "todoName": "우리의투두5",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "EMPTY"
+      },
+      {
+        "todoName": "우리의투두6",
+        "nicknames": [
+          "혁돌몬"
+        ],
+        "status": "FULL"
+      }
+    ]
+  }
