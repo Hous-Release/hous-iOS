@@ -121,6 +121,23 @@ class EditHousNameViewController: UIViewController {
 
 extension EditHousNameViewController: NavBarWithBackButtonViewDelegate {
   func backButtonDidTapped() {
+    let popUp = QuitPopViewController()
+    popUp.configPopupTexts(
+      titleLabelText: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
+      subtitleLabelText: "정말 취소하려면 나가기 버튼을 눌러주세요",
+      continueButtonText: "돌아가기",
+      cancelButtonText: "나가기"
+    )
+    popUp.delegate = self
+    popUp.modalTransitionStyle = .crossDissolve
+    popUp.modalPresentationStyle = .overFullScreen
+    
+    present(popUp, animated: true)
+  }
+}
+
+extension EditHousNameViewController: QuitPopViewControllerDelegate {
+  func cancelButtonDidTapped() {
     self.navigationController?.popViewController(animated: true)
   }
 }
