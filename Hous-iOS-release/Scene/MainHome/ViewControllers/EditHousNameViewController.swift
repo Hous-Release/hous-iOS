@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 class EditHousNameViewController: UIViewController {
+  
+  private let saveButtonDidTapped = PublishSubject<String?>()
+  private let viewModel = EditHousNameViewModel()
+  private let disposeBag = DisposeBag()
+  
+  
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "우리 집 별명 바꾸기", rightButtonText: "저장")
@@ -36,11 +44,14 @@ class EditHousNameViewController: UIViewController {
     $0.backgroundColor = Colors.blue.color
   }
   
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .systemBackground
     navigationBar.delegate = self
     configUI()
+    bindUI()
   }
   
   private func configUI() {
@@ -82,7 +93,27 @@ class EditHousNameViewController: UIViewController {
     }
   }
   
-  
+  private func bindUI() {
+    let input = EditHousNameViewModel.Input(
+      roomName: textField.rx.text.orEmpty
+        .asObservable(),
+      saveButtonDidTapped: saveButtonDidTapped
+    )
+    
+    let output = self.viewModel.transform(input: input)
+    
+    output.textCountLabelText
+      .asDriver(onErrorJustReturn: "0/8")
+      .drive(textcountLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    output.text
+      .map { $0 }
+      .asDriver(onErrorJustReturn: "")
+      .drive(textField.rx.text)
+      .disposed(by: disposeBag)
+    
+  }
   
   
   
@@ -92,6 +123,4 @@ extension EditHousNameViewController: NavBarWithBackButtonViewDelegate {
   func backButtonDidTapped() {
     self.navigationController?.popViewController(animated: true)
   }
-  
-  
 }
