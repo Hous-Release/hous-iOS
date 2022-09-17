@@ -40,6 +40,17 @@
 		B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C928D61E4400C92FCD /* MockParser.swift */; };
 		B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */; };
+		B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */; };
+		B595FFCE28CC7CF800F6B2E4 /* MainHomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCD28CC7CF800F6B2E4 /* MainHomeUseCase.swift */; };
+		B595FFD028CC7D0800F6B2E4 /* MainHomeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCF28CC7D0800F6B2E4 /* MainHomeDTO.swift */; };
+		B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFD128CC7D0F00F6B2E4 /* MainHomeModel.swift */; };
+		B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFD528CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift */; };
+		B595FFD828CDAA1600F6B2E4 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFD728CDAA1600F6B2E4 /* UILabel+Extension.swift */; };
+		B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFD928CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift */; };
+		B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */; };
+		B595FFDE28CDCFD900F6B2E4 /* MainHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFDD28CDCFD900F6B2E4 /* MainHomeRepository.swift */; };
+		B595FFE028CDCFE300F6B2E4 /* MainHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFDF28CDCFE300F6B2E4 /* MainHomeService.swift */; };
+		B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -109,6 +120,17 @@
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
 		B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeTodoCollectionViewCell.swift; sourceTree = "<group>"; };
 		B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		B595FFCD28CC7CF800F6B2E4 /* MainHomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeUseCase.swift; sourceTree = "<group>"; };
+		B595FFCF28CC7D0800F6B2E4 /* MainHomeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeDTO.swift; sourceTree = "<group>"; };
+		B595FFD128CC7D0F00F6B2E4 /* MainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeModel.swift; sourceTree = "<group>"; };
+		B595FFD528CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		B595FFD728CDAA1600F6B2E4 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B595FFD928CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperatorLineCollectionReusableView.swift; sourceTree = "<group>"; };
+		B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeRulesCollectionViewCell.swift; sourceTree = "<group>"; };
+		B595FFDD28CDCFD900F6B2E4 /* MainHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeRepository.swift; sourceTree = "<group>"; };
+		B595FFDF28CDCFE300F6B2E4 /* MainHomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeService.swift; sourceTree = "<group>"; };
+		B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewController.swift; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -222,6 +244,7 @@
 				777C667B28A7502E000BECEA /* Base */,
 				777C667928A74EEF000BECEA /* Application */,
 				777C667628A74E31000BECEA /* Setting */,
+				B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */,
 			);
 			path = "Hous-iOS-release";
 			sourceTree = "<group>";
@@ -413,6 +436,11 @@
 				B595FFB228C9B1FD00F6B2E4 /* Views */,
 				B595FFB128C9B1F700F6B2E4 /* ViewModels */,
 				B595FFB028C9B1E800F6B2E4 /* ViewControllers */,
+				B595FFCD28CC7CF800F6B2E4 /* MainHomeUseCase.swift */,
+				B595FFCF28CC7D0800F6B2E4 /* MainHomeDTO.swift */,
+				B595FFD128CC7D0F00F6B2E4 /* MainHomeModel.swift */,
+				B595FFDD28CDCFD900F6B2E4 /* MainHomeRepository.swift */,
+				B595FFDF28CDCFE300F6B2E4 /* MainHomeService.swift */,
 			);
 			path = MainHome;
 			sourceTree = "<group>";
@@ -420,6 +448,8 @@
 		B595FFB228C9B1FD00F6B2E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B595FFD928CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift */,
+				B595FFD528CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift */,
 				B595FFC728CB582A00F6B2E4 /* Cells */,
 			);
 			path = Views;
@@ -430,6 +460,7 @@
 			children = (
 				B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */,
 				B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */,
+				B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */,
 			);
 			path = Cells;
 		};
@@ -445,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				B856700228C88C6100B49984 /* MainHomeViewController.swift */,
+				B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -626,6 +658,7 @@
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
+				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
@@ -644,6 +677,8 @@
 				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
 				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
+				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
+				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
@@ -655,14 +690,22 @@
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
+				B595FFE028CDCFE300F6B2E4 /* MainHomeService.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
+				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
+				B595FFD028CC7D0800F6B2E4 /* MainHomeDTO.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				77067FFB28DDDAFD0082A7E7 /* Keychain.swift in Sources */,
+				B595FFDE28CDCFD900F6B2E4 /* MainHomeRepository.swift in Sources */,
+				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
+				B595FFD828CDAA1600F6B2E4 /* UILabel+Extension.swift in Sources */,
+				B595FFCE28CC7CF800F6B2E4 /* MainHomeUseCase.swift in Sources */,
+				B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
