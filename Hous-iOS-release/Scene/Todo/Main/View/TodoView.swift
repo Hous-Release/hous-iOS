@@ -69,11 +69,11 @@ class TodoView: UIView {
       $0.register(cell: MyTodoCollectionViewCell.self)
       $0.register(cell: OurTodoCollectionViewCell.self)
       $0.register(TodoHeaderCollectionReusableView.self,
-                                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                      withReuseIdentifier: TodoHeaderCollectionReusableView.className)
+                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                  withReuseIdentifier: TodoHeaderCollectionReusableView.className)
       $0.register(TodoFooterCollectionReusableView.self,
-                                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                      withReuseIdentifier: TodoFooterCollectionReusableView.className)
+                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                  withReuseIdentifier: TodoFooterCollectionReusableView.className)
     }
 
   override init(frame: CGRect) {
