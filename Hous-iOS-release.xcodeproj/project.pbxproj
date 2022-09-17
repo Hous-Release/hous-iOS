@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
+		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
 		777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666228A74A62000BECEA /* SceneDelegate.swift */; };
 		777C666A28A74A63000BECEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C666928A74A63000BECEA /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
+				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
 				B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */,
 				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
 			);
@@ -334,6 +336,7 @@
 				7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */,
 				77393DE028BFBD2D00D78C94 /* FirebaseWrapper */,
 				B595FFBD28C9F48900F6B2E4 /* Then */,
+				773F1E8E28D5944800AE7521 /* Network */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -1051,6 +1054,10 @@
 		77393DE028BFBD2D00D78C94 /* FirebaseWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseWrapper;
+		};
+		773F1E8E28D5944800AE7521 /* Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Network;
 		};
 		B595FFBD28C9F48900F6B2E4 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
