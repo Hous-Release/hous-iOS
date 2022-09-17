@@ -17,6 +17,10 @@
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
+		B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A028D619FD00C92FCD /* TodoViewController.swift */; };
+		B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */; };
+		B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A528D61A5400C92FCD /* TodoView.swift */; };
+		B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A728D61A6D00C92FCD /* TodoPopupView.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -63,6 +67,10 @@
 		777C667828A74E50000BECEA /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		777C667C28A75039000BECEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		B84EA6A028D619FD00C92FCD /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPopupViewController.swift; sourceTree = "<group>"; };
+		B84EA6A528D61A5400C92FCD /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		B84EA6A728D61A6D00C92FCD /* TodoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPopupView.swift; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -222,6 +230,33 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		B84EA69E28D619E400C92FCD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6A428D61A3A00C92FCD /* View */,
+				B84EA69F28D619F300C92FCD /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B84EA69F28D619F300C92FCD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6A028D619FD00C92FCD /* TodoViewController.swift */,
+				B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B84EA6A428D61A3A00C92FCD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6A528D61A5400C92FCD /* TodoView.swift */,
+				B84EA6A728D61A6D00C92FCD /* TodoPopupView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B8566FEA28C865DF00B49984 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +311,7 @@
 		B856700128C88C4500B49984 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				B84EA69E28D619E400C92FCD /* Main */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -436,6 +472,7 @@
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
+				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B856700328C88C6100B49984 /* HousViewController.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
@@ -447,14 +484,17 @@
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				B856701F28C9A74E00B49984 /* UIView+Extension.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
+				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B856702B28CA831000B49984 /* TodoView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
+				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
