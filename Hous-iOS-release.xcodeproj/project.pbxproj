@@ -28,7 +28,6 @@
 		B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566FF928C86E2400B49984 /* Fonts+Generated.swift */; };
 		B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566FFA28C86E2400B49984 /* Images+Generated.swift */; };
 		B856700328C88C6100B49984 /* HousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700228C88C6100B49984 /* HousViewController.swift */; };
-		B856700528C88C6900B49984 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700428C88C6900B49984 /* TodoViewController.swift */; };
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
 		B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700A28C88D7800B49984 /* HousTabBarItem.swift */; };
@@ -75,7 +74,6 @@
 		B8566FF928C86E2400B49984 /* Fonts+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fonts+Generated.swift"; sourceTree = "<group>"; };
 		B8566FFA28C86E2400B49984 /* Images+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated.swift"; sourceTree = "<group>"; };
 		B856700228C88C6100B49984 /* HousViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousViewController.swift; sourceTree = "<group>"; };
-		B856700428C88C6900B49984 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		B856700628C88C6F00B49984 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B856700828C88CAF00B49984 /* HousTabBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItemView.swift; sourceTree = "<group>"; };
 		B856700A28C88D7800B49984 /* HousTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItem.swift; sourceTree = "<group>"; };
@@ -276,8 +274,6 @@
 		B856700128C88C4500B49984 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				B856700428C88C6900B49984 /* TodoViewController.swift */,
-				B856702A28CA831000B49984 /* TodoView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
