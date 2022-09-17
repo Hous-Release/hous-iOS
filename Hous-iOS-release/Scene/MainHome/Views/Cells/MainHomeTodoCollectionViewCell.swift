@@ -6,11 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+
+protocol MainHomeTodoProtocol: AnyObject {
+  func editButtonDidTapped()
+  func copyButtonDidTapped()
+}
 
 class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   //MARK: - Vars & Lets
   static let identifier = "MainHomeTodoCollectionViewCell"
+  
+  private let disposeBag = DisposeBag()
+  
+  weak var delegate: MainHomeTodoProtocol?
   
   //MARK: - UI Components
   private let titleLabel = UILabel().then {
@@ -92,63 +102,17 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.alignment = .center
   }
   
-  private let seperatorLineView = UIView().then {
-    $0.backgroundColor = Colors.g2.color
-  }
-  
-  private let ourRulesTitleLabel = UILabel().then {
-    $0.text = "Our Rules"
-    $0.font = Fonts.Montserrat.semiBold.font(size: 18)
-    $0.textAlignment = .left
-    $0.textColor = Colors.black.color
-  }
-  
-  private let ourRulesArrowButton = UIButton().then {
-    $0.setImage(Images.icMoreOurRules.image, for: .normal)
-  }
-  
-  private let ourRulesBackgroundView = UIView().then {
-    $0.backgroundColor = Colors.blueL2.color
-    $0.layer.cornerRadius = 8
-  }
-  
-  private let serperatorLineView2 = UIView().then {
-    $0.backgroundColor = Colors.g2.color
-  }
-  
-  private let profileTitleLabel = UILabel().then {
-    $0.text = "Homies"
-    $0.font = Fonts.Montserrat.semiBold.font(size: 18)
-    $0.textColor = Colors.black.color
-  }
-  
   //MARK: - Life Cycles
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
+    bindUI()
   }
   
   override func draw(_ rect: CGRect) {
     super.draw(rect)
     dotView.layer.cornerRadius = dotView.layer.frame.height / 2
     dotView.layer.masksToBounds = true
-  }
-  
-  override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-    super.preferredLayoutAttributesFitting(layoutAttributes)
-    
-    layoutIfNeeded()
-    
-    let titleHeight = titleLabel.bounds.height
-    let progressHeight = progressView.bounds.height
-    let todoViewHeight = myTodoBackgroundView.bounds.height
-    let ourRuleHeight = ourRulesBackgroundView.bounds.height
-    
-    var frame = layoutAttributes.frame
-    frame.size.height = ceil(titleHeight + progressHeight + todoViewHeight + ourRuleHeight)
-    layoutAttributes.frame = frame
-    
-    return layoutAttributes
   }
   
   required init?(coder: NSCoder) {
@@ -163,13 +127,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
       progressLabel,
       progressView,
       myTodoBackgroundView,
-      dailyLottie,
-      seperatorLineView,
-      ourRulesTitleLabel,
-      ourRulesArrowButton,
-      ourRulesBackgroundView,
-      serperatorLineView2,
-      profileTitleLabel
+      dailyLottie
     ])
     
     myTodoBackgroundView.addSubViews([
@@ -233,42 +191,21 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
       make.width.equalTo(5)
       make.height.equalTo(dotView.snp.width)
     }
+  }
+  
+  private func bindUI() {
+    self.editButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.delegate?.editButtonDidTapped()
+      }
+      .disposed(by: disposeBag)
     
-    
-    seperatorLineView.snp.makeConstraints { make in
-      make.top.equalTo(myTodoBackgroundView.snp.bottom).offset(24)
-      make.leading.equalTo(titleLabel)
-      make.trailing.equalTo(dailyLottie)
-      make.height.equalTo(1)
-    }
-    
-    ourRulesTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(seperatorLineView.snp.bottom).offset(24)
-      make.leading.equalTo(progressLabel)
-    }
-    
-    ourRulesArrowButton.snp.makeConstraints { make in
-      make.centerY.equalTo(ourRulesTitleLabel)
-      make.leading.equalTo(ourRulesTitleLabel.snp.trailing).offset(2)
-    }
-    
-    ourRulesBackgroundView.snp.makeConstraints { make in
-      make.top.equalTo(ourRulesTitleLabel.snp.bottom).offset(16)
-      make.leading.equalTo(titleLabel)
-      make.trailing.equalTo(dailyLottie)
-      make.width.equalTo(UIScreen.main.bounds.width * (327/375))
-      make.height.equalTo(ourRulesBackgroundView.snp.width).multipliedBy(0.4770642202)
-    }
-    
-    serperatorLineView2.snp.makeConstraints { make in
-      make.top.equalTo(ourRulesBackgroundView.snp.bottom).offset(24)
-      make.leading.trailing.equalTo(ourRulesBackgroundView)
-      make.height.equalTo(1)
-    }
-    
-    profileTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(serperatorLineView2.snp.bottom).offset(24)
-      make.leading.equalTo(ourRulesTitleLabel)
-    }
+    self.copyButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.delegate?.copyButtonDidTapped()
+      }
+      .disposed(by: disposeBag)
   }
 }

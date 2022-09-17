@@ -13,12 +13,6 @@ import RxSwift
 
 
 
-protocol ViewModelType {
-  associatedtype Input
-  associatedtype Output
-  func transform(input: Input) -> Output
-}
-
 struct TestViewModel: ViewModelType {
   struct Input {
     let viewWillAppear: Observable<Void>
