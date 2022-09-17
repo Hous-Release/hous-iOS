@@ -17,6 +17,7 @@
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
+		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
 		B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */; };
 		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
@@ -112,6 +113,7 @@
 		B84EA6C928D61E4400C92FCD /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
 		B84EA6D228D621B300C92FCD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
+		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
 		B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeTodoCollectionViewCell.swift; sourceTree = "<group>"; };
 		B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeProfileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			children = (
 				B856701C28C9A28A00B49984 /* NavigationBarView.swift */,
 				B856702228C9C76300B49984 /* UnderlinedTextField.swift */,
+				B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
+				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
