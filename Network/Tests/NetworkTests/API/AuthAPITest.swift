@@ -10,48 +10,51 @@ import XCTest
 @testable import Network
 @testable import NetworkExtension
 
-class UserAPITest: XCTestCase {
-  var userAPI: UserAPI!
+class AuthAPITest: XCTestCase {
+  var authAPI: AuthAPI!
 
   override func setUp() {
     super.setUp()
     let configuration = URLSessionConfiguration.ephemeral
-//    configuration.protocolClasses = [MockURLProtocol.self]
-    userAPI = UserAPI(configuration: configuration, isLogging: true)
+    configuration.protocolClasses = [MockURLProtocol.self]
+
+    let configuration2 = URLSessionConfiguration.ephemeral
+    authAPI = AuthAPI(configuration: configuration2, isLogging: true)
   }
+
   override func tearDown() {
-    userAPI = nil
+    authAPI = nil
     super.tearDown()
   }
-  func testCheckExistingUser() {
+
+  // Hammer, OHTTPS,
+
+  func testAuthAPI() {
+
     let expectation = XCTestExpectation(description: "response")
-    userAPI.checkExistingUser(
-      checkExistingUserRequestDTO: .init(
-        userID: "Devhose1",
-        userCI: "134314143434234324",
-        phoneNumber: "01077941932"
-      )) { (res, err) in
-        if let res = res {
-          print(res)
-        }
-        if let err = err {
-          print(err)
-        }
-        expectation.fulfill()
-      }
-    wait(for: [expectation], timeout: 1)
-  }
-  func testCheckDuplicateIDAPI() {
-    let expectation = XCTestExpectation(description: "response")
-    userAPI.checkDuplicateID(checkDuplicateIDRequestDTO: .init(userID: "UserID")) { (res, err) in
-      if let res = res {
-        print(res)
-      }
+
+    NetworkService.shared.authRepository.login(
+      .init(
+        fcmToken: "111",
+        socialType: "KAKAO",
+        token: "ddd"
+      )) { res, err in
+
       if let err = err {
         print(err)
       }
-      expectation.fulfill()
+
+      if let res = res {
+          dump(res)
+      }
     }
+
     wait(for: [expectation], timeout: 1)
+
   }
+
+
 }
+
+
+
