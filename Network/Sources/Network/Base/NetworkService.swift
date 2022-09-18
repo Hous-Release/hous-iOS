@@ -12,4 +12,6 @@ final public class NetworkService {
   public static var shared = NetworkService()
 
   private init() { }
+
+  public let authRepository = AuthAPI(isLogging: true)
 }
