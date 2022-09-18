@@ -29,7 +29,7 @@ public class APIRequestLoader<T: TargetType> {
 
   }
 
-  func fetchData<M: Decodable>(target: T, responseData: M.Type, isWithInterceptor: Bool = true, completionHandler: @escaping (M?, Error?) -> Void) {
+   internal func fetchData<M: Decodable>(target: T, responseData: M.Type, isWithInterceptor: Bool = true, completionHandler: @escaping (M?, Error?) -> Void) {
 
     let session = isWithInterceptor ? self.sessionWithInterceptor : self.session
 
@@ -42,8 +42,10 @@ public class APIRequestLoader<T: TargetType> {
           // response.response?.statusCode 를 이용해 Error 처리
 
         switch response.result {
+
         case .success(let data):
           completionHandler(data, nil)
+
         case .failure(let error):
           completionHandler(nil, error)
         }
