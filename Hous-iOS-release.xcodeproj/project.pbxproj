@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FF728DDD9200082A7E7 /* AuthRepository.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		7702A0F228BD245E00DA7712 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
+		77067FF728DDD9200082A7E7 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		77067FF528DDD9010082A7E7 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				77067FF628DDD9140082A7E7 /* Auth */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		77067FF628DDD9140082A7E7 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				77067FF728DDD9200082A7E7 /* AuthRepository.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +193,7 @@
 		777C665F28A74A62000BECEA /* Hous-iOS-release */ = {
 			isa = PBXGroup;
 			children = (
+				77067FF528DDD9010082A7E7 /* Repository */,
 				B856701A28C9A25300B49984 /* Global */,
 				B84EA6C828D61E3B00C92FCD /* Util */,
 				B856700E28C894C900B49984 /* Extension */,
@@ -565,6 +584,7 @@
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
+				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
 				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
