@@ -15,7 +15,7 @@ import RxDataSources
 import ReactorKit
 
 //MARK: - Controller
-class TodoViewController: UIViewController, View {
+final class TodoViewController: UIViewController, View {
 
   var disposeBag = DisposeBag()
   var mainView = TodoView()
