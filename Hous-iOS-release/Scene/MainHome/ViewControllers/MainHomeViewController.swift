@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import Network
 
 class MainHomeViewController: UIViewController {
   
@@ -40,6 +41,10 @@ class MainHomeViewController: UIViewController {
     super.viewDidLoad()
     configUI()
     configCollectionView()
+    NetworkService.shared.mainHomeRepository.getHomeData { res, err in
+      print(res?.message)
+      print(res?.success)
+    }
   }
   
   init(viewModel: MainHomeViewModel) {
