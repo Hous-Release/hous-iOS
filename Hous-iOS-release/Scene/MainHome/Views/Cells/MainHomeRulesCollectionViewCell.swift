@@ -37,7 +37,8 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
   }
   
   private func configUI() {
-    self.addSubViews([
+    
+    self.contentView.addSubViews([
       ourRulesTitleLabel,
       ourRulesArrowButton,
       ourRulesBackgroundView
