@@ -8,19 +8,27 @@
 import Foundation
 import FirebaseMessaging
 
+
+public typealias ResultFCMToken = ((String?,Error?) -> Void)
 protocol FirebaseMessagingServicable {
+
     func configure()
     func registerDeviceToken(deviceToken: Data)
     func setAPNSToken(deviceToken: Data)
     func deleteToken()
-    func printFCMToken()
+    func getFCMToken(completion: @escaping ResultFCMToken)
 }
 
-public class MessagingService: NSObject { }
+public class MessagingService: NSObject {
+
+    public var tokenHandler: ((String) -> Void)?
+}
 
 final class FirebaseMessagingService: NSObject { }
 
 extension FirebaseMessagingService: FirebaseMessagingServicable {
+
+
 
     func configure() {
         Messaging.messaging().delegate = self
@@ -37,15 +45,23 @@ extension FirebaseMessagingService: FirebaseMessagingServicable {
             print(err!)
         }
     }
-    func printFCMToken() {
+    func getFCMToken(completion: @escaping ResultFCMToken) {
         Messaging.messaging().token { token, err in
-            print(token!)
+
+            guard let token = token else {
+                completion(nil, err)
+                return
+            }
+
+            completion(token, err)
         }
+
     }
 }
 public extension MessagingService {
     class Firebase {
         static var service: FirebaseMessagingServicable = FirebaseMessagingService()
+
         public static func configure() {
             service.configure()
         }
@@ -58,8 +74,8 @@ public extension MessagingService {
         public static func deleteToken() {
             service.deleteToken()
         }
-        public static func printFCMToken() {
-            service.printFCMToken()
+        public static func getFCMToken(completion: @escaping ResultFCMToken) {
+            service.getFCMToken(completion: completion)
         }
     }
 }
@@ -68,6 +84,5 @@ extension FirebaseMessagingService: MessagingDelegate {
         guard let fcmToken = fcmToken else {
             return
         }
-        print("fcmToken in a module: ", fcmToken)
     }
 }
