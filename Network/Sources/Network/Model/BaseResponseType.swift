@@ -10,7 +10,7 @@ import Foundation
 public struct BaseResponseType<T: Decodable>: Decodable {
 
   public let status: Int
-  public let success: String
+  public let success: Bool
   public let message: String
   public let data: T?
 }
