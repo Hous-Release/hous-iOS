@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class MyTodoCollectionViewCell: UICollectionViewCell, View {
+final class MyTodoCollectionViewCell: UICollectionViewCell, View {
 
   var disposeBag = DisposeBag()
 
