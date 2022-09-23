@@ -13,7 +13,7 @@ enum OurTodoStatus: String {
   case fullCheck = "FULLCHECK"
 }
 
-class OurTodoCollectionViewCell: UICollectionViewCell {
+final class OurTodoCollectionViewCell: UICollectionViewCell {
 
   var status: OurTodoStatus = .empty {
     didSet {

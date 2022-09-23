@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 
-class TriangleView: UIView {
+final class TriangleView: UIView {
 
   override func draw(_ rect: CGRect) {
     let path = UIBezierPath()
@@ -24,7 +24,7 @@ class TriangleView: UIView {
   }
 }
 
-class TodoPopupView: UIView {
+final class TodoPopupView: UIView {
 
   enum Size {
     static let bubbleWidth: CGFloat = 144

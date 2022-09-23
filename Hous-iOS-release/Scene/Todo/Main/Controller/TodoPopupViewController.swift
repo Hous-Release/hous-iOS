@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoPopupViewController: UIViewController {
+final class TodoPopupViewController: UIViewController {
 
   let mainView = TodoPopupView()
 
