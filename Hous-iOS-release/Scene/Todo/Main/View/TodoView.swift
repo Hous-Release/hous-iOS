@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-private class TodoView: UIView {
+final class TodoView: UIView {
 
   enum Size {
     static let itemSize = CGSize(width: UIScreen.main.bounds.width, height: 30)
