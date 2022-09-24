@@ -17,8 +17,8 @@ class MainHomeProfileCollectionViewCell: UICollectionViewCell {
   }
   
   private let homieNameLabel = UILabel().then {
-    $0.text = "최인영"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+    $0.textAlignment = .left
     $0.textColor = .black
   }
   
@@ -44,6 +44,10 @@ class MainHomeProfileCollectionViewCell: UICollectionViewCell {
       make.leading.greaterThanOrEqualToSuperview().offset(13)
       make.top.greaterThanOrEqualToSuperview().offset(8)
     }
+  }
+  
+  func setProfileCell(userNickname: String) {
+    homieNameLabel.text = userNickname
   }
   
 }

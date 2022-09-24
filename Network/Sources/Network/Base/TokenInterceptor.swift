@@ -12,7 +12,7 @@ import Alamofire
 internal final class TokenInterceptor: RequestInterceptor, RequestRetrier {
   func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
     var urlRequest = urlRequest
-    urlRequest.setValue("Bearer eyJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoyLCJleHAiOjE2OTQ3NjY3NjJ9.uiIUSb6-F_BO5HQYxNOEb5zo8W7rorg7YUXjmgu-zKc0slYUu54jjQo-K6bnskKkRwXkeyIE2CieXfCk0W5SuQ", forHTTPHeaderField: "Authorization")
+    urlRequest.setValue("Bearer eyJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE2OTQ2NzYxNjh9.qkYdHxX4MIWJmhGzyyeWctsaJTq6s9Wj0MDvgJ2XzX1Empm6mo2o8TrcuLV_tg84vCEquR8FWV_GKfPWmnfFxw", forHTTPHeaderField: "Authorization")
     completion(.success(urlRequest))
   }
 

@@ -23,7 +23,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   weak var delegate: MainHomeTodoProtocol?
   
   //MARK: - UI Components
-  private let titleLabel = UILabel().then {
+  let titleLabel = UILabel().then {
     $0.numberOfLines = 2
     $0.text = "최인영님의,\n러블리더블리 하우스"
     $0.textColor = Colors.black.color
@@ -84,20 +84,10 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
   
-  private let dotView = UIView().then {
-    $0.backgroundColor = Colors.blue.color
-  }
+  private let todoView = MyTodoView()
   
-  private let todoLabel = UILabel().then {
-    $0.text = "최코코 밥 주기"
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    $0.textColor = Colors.g7.color
-    $0.textAlignment = .left
-    $0.numberOfLines = 1
-  }
-  
-  private lazy var todoLabelStackView = UIStackView(arrangedSubviews: [dotView, todoLabel]).then {
-    $0.axis = .horizontal
+  private lazy var todoLabelStackView = UIStackView(arrangedSubviews: [todoView]).then {
+    $0.axis = .vertical
     $0.spacing = 10
     $0.alignment = .center
   }
@@ -111,14 +101,28 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    dotView.layer.cornerRadius = dotView.layer.frame.height / 2
-    dotView.layer.masksToBounds = true
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
+  //MARK: Helpers
+  func setHomeTodoCell(titleText: String, progress: Float, myTodos: [String]) {
+    emptyViewLabel.isHidden = !myTodos.isEmpty
+    self.titleLabel.text = titleText
+    self.progressView.progress = progress
+    self.todoTitleLabel.text = "MY to-do • \(myTodos.count)"
+    
+    todoLabelStackView.subviews.forEach { $0.removeFromSuperview() }
+    myTodos.forEach { todoString in
+      let label = MyTodoView()
+      label.setTodoLabels(todo: todoString)
+      todoLabelStackView.addArrangedSubview(label)
+    }
+  }
+  
+  //MARK: Configures
   private func configUI() {
     backgroundColor = .systemBackground
     addSubViews([
@@ -185,11 +189,6 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     todoLabelStackView.snp.makeConstraints { make in
       make.top.equalTo(todoTitleLabel.snp.bottom).offset(8)
       make.leading.equalTo(todoTitleLabel)
-    }
-
-    dotView.snp.makeConstraints { make in
-      make.width.equalTo(5)
-      make.height.equalTo(dotView.snp.width)
     }
   }
   
