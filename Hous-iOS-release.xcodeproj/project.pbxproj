@@ -33,6 +33,9 @@
 		B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */; };
 		B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */; };
 		B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
+		B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */; };
+		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
+		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A028D619FD00C92FCD /* TodoViewController.swift */; };
 		B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */; };
 		B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A528D61A5400C92FCD /* TodoView.swift */; };
@@ -111,6 +114,9 @@
 		B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeRulesCollectionViewCell.swift; sourceTree = "<group>"; };
 		B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewController.swift; sourceTree = "<group>"; };
 		B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewModel.swift; sourceTree = "<group>"; };
+		B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeSection.swift; sourceTree = "<group>"; };
+		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
+		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
 		B84EA6A028D619FD00C92FCD /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPopupViewController.swift; sourceTree = "<group>"; };
 		B84EA6A528D61A5400C92FCD /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -339,6 +345,8 @@
 				B595FFD928CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift */,
 				B595FFD528CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift */,
 				B595FFC728CB582A00F6B2E4 /* Cells */,
+				B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */,
+				B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -482,6 +490,7 @@
 				B595FFB228C9B1FD00F6B2E4 /* Views */,
 				B595FFB128C9B1F700F6B2E4 /* ViewModels */,
 				B595FFB028C9B1E800F6B2E4 /* ViewControllers */,
+				B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */,
 			);
 			path = MainHome;
 			sourceTree = "<group>";
@@ -700,10 +709,13 @@
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
+				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
+				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B595FFD028CC7D0800F6B2E4 /* MainHomeDTO.swift in Sources */,
+				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
