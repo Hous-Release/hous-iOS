@@ -8,6 +8,5 @@
 import Foundation
 
 public enum MainHomeDTO {
-  public enum Request { }
   public enum Response { }
 }
