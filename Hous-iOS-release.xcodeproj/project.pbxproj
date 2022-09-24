@@ -58,6 +58,12 @@
 		B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */; };
 		B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */; };
 		B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C928D61E4400C92FCD /* MockParser.swift */; };
+		B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
+		B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DA28DD815E00C92FCD /* PagingViewController.swift */; };
+		B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DC28DD817300C92FCD /* PagingCell.swift */; };
+		B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DE28DD81D400C92FCD /* PagingView.swift */; };
+		B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */; };
+		B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */; };
 		B852C9B528C6461200DFF23C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B428C6461200DFF23C /* Colors.xcassets */; };
 		B852C9B728C64D2600DFF23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C9B628C64D2600DFF23C /* Images.xcassets */; };
 		B8566FF128C8661400B49984 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */; };
@@ -145,6 +151,11 @@
 		B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		B84EA6C928D61E4400C92FCD /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
 		B84EA6D228D621B300C92FCD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		B84EA6DA28DD815E00C92FCD /* PagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
+		B84EA6DC28DD817300C92FCD /* PagingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCell.swift; sourceTree = "<group>"; };
+		B84EA6DE28DD81D400C92FCD /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
+		B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewReactor.swift; sourceTree = "<group>"; };
+		B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewContents.swift; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -486,6 +497,28 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		B84EA6D828DD7F1200C92FCD /* EnterInfo */ = {
+			isa = PBXGroup;
+			children = (
+				B856701828C9A03500B49984 /* EnterInfoViewController.swift */,
+				B856702028C9AA3600B49984 /* EnterInfoView.swift */,
+				B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */,
+			);
+			path = EnterInfo;
+			sourceTree = "<group>";
+		};
+		B84EA6D928DD7F1B00C92FCD /* Paging */ = {
+			isa = PBXGroup;
+			children = (
+				B84EA6DA28DD815E00C92FCD /* PagingViewController.swift */,
+				B84EA6DC28DD817300C92FCD /* PagingCell.swift */,
+				B84EA6DE28DD81D400C92FCD /* PagingView.swift */,
+				B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */,
+				B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */,
+			);
+			path = Paging;
+			sourceTree = "<group>";
+		};
 		B8566FEA28C865DF00B49984 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,9 +602,8 @@
 		B856701528C99FEC00B49984 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				B856701828C9A03500B49984 /* EnterInfoViewController.swift */,
-				B856702028C9AA3600B49984 /* EnterInfoView.swift */,
-				B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */,
+				B84EA6D928DD7F1B00C92FCD /* Paging */,
+				B84EA6D828DD7F1200C92FCD /* EnterInfo */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -712,6 +744,7 @@
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
+				B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
@@ -733,6 +766,8 @@
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
+				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
+				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
@@ -746,6 +781,7 @@
 				B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */,
 				7706801528E045120082A7E7 /* SignInReactor.swift in Sources */,
 				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
+				B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
@@ -761,6 +797,7 @@
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
+				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,

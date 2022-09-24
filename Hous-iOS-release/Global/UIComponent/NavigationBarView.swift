@@ -45,7 +45,6 @@ class NavBarWithBackButtonView: UIView {
   init(title: String, rightButtonText: String = "") {
     self.title = title
     self.rightButtonText = rightButtonText
-
     super.init(frame: .zero)
     
     titleLabel.text = title
@@ -75,9 +74,9 @@ class NavBarWithBackButtonView: UIView {
     }
 
     rightButton.snp.makeConstraints { make in
-      make.size.equalTo(44)
+      make.size.greaterThanOrEqualTo(44)
       make.centerY.equalToSuperview()
-      make.trailing.equalToSuperview().inset(12)
+      make.trailing.equalToSuperview().inset(32)
     }
   }
 }
