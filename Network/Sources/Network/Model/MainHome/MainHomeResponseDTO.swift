@@ -7,19 +7,19 @@
 
 public extension MainHomeDTO.Response {
   struct MainHomeResponseDTO: Decodable {
-    let homies: [HomieDTO]
-    let myTodos: [String]
-    let myTodosCnt: Int
-    let ourRules: [String]
-    let progress: Int
-    let roomName: String
-    let userNickname: String
+    public let homies: [HomieDTO]
+    public let myTodos: [String]
+    public let myTodosCnt: Int
+    public let ourRules: [String]
+    public let progress: Int
+    public let roomName: String
+    public let userNickname: String
   }
   
   struct HomieDTO: Decodable {
-    let color: String
-    let homieID: Int
-    let userNickname: String
+    public let color: String
+    public let homieID: Int
+    public let userNickname: String
     
     enum CodingKeys: String, CodingKey {
       case color
