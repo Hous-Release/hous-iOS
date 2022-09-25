@@ -100,6 +100,7 @@ extension SignInViewController {
   func bindAction(_ reactor: Reactor) {
     bindDidTapKakaoAction(reactor)
     bindDidTapAppleAction(reactor)
+    bindOAuthAction(reactor)
   }
 
   private func bindDidTapKakaoAction(_ reactor: Reactor) {
@@ -114,6 +115,12 @@ extension SignInViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
+  private func bindOAuthAction(_ reactor: Reactor) {
+    signInRelay
+      .map { Reactor.Action.login(accessToken: $0.0, error: $0.1) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
 
 }
 
@@ -121,6 +128,74 @@ extension SignInViewController {
 
 extension SignInViewController {
   func bindState(_ reactor: Reactor) {
+    bindSignInTypeState(reactor)
+    bindErrorState(reactor)
+    bindIsSuccessState(reactor)
+
+  }
+
+  func bindSignInTypeState(_ reactor: Reactor) {
+    reactor.state.map(\.signinType)
+      .filter { $0 != nil }
+      .distinctUntilChanged()
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: login)
+      .disposed(by: disposeBag)
+  }
+  func bindErrorState(_ reactor: Reactor) {
+    reactor.state.map(\.error)
+      .filter { $0 != nil }
+      .distinctUntilChanged()
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.handlingError)
+      .disposed(by: disposeBag)
+  }
+  func bindIsSuccessState(_ reactor: Reactor) {
+    reactor.state.map(\.isSuccessLogin)
+      .filter { $0 }
+      .distinctUntilChanged()
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: self.transferToHomeOrOnboarding)
+      .disposed(by: disposeBag)
+  }
+}
+
+// MARK: Method Helper
+extension SignInViewController {
+  private func login(_ signInType: SignInType?) {
+
+    guard let signInType = signInType else {
+      return
+    }
+
+    switch signInType {
+
+    case .Apple:
+      appleLoginManager.login()
+
+    case .Kakao:
+      kakaoLoginManager.login()
+
+    }
+  }
+
+  // TODO: Error PopupView로 추후 체인지
+  private func handlingError(_ errorMessage: String?) {
+    guard let errorMessage = errorMessage else {
+      return
+    }
+    debugPrint(errorMessage)
+  }
+
+  // TODO: - 뷰 전환
+  /**
+   - 분기처리가 필요하다면 UserDefault 구현 필요.
+   **/
+  private func transferToHomeOrOnboarding(_ isSuccess: Bool) {
+    if isSuccess {
+      print("Success")
+    }
+
   }
 }
 
@@ -142,7 +217,6 @@ extension SignInViewController {
   }
 
   private func configureKakaoSignIn() {
-
 
     kakaoLoginManager.configure(appKey: "23a6d7ad94f44f0e474ee41b4e6d9fab")
 
