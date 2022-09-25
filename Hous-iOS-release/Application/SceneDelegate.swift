@@ -5,7 +5,9 @@
 //  Created by 김호세 on 2022/08/13.
 //
 
+import KakaoSDKAuth
 import UIKit
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
@@ -14,10 +16,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     window.backgroundColor = .white
-    window.rootViewController = HousTabbarViewController()
+//    window.rootViewController = HousTabbarViewController()
+    window.rootViewController = SignInViewController()
     window.makeKeyAndVisible()
 
     self.window = window
+  }
+
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    if let url = URLContexts.first?.url {
+      if (AuthApi.isKakaoTalkLoginUrl(url)) {
+        _ = AuthController.handleOpenUrl(url: url)
+      }
+    }
   }
 
   func sceneDidDisconnect(_ scene: UIScene) { }
