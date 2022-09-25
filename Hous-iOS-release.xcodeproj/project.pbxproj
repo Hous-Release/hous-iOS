@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FF728DDD9200082A7E7 /* AuthRepository.swift */; };
 		77067FFB28DDDAFD0082A7E7 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FFA28DDDAFD0082A7E7 /* Keychain.swift */; };
-		7706800C28E0439F0082A7E7 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706800B28E0439F0082A7E7 /* SignInViewModel.swift */; };
 		7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706800D28E043A40082A7E7 /* SignInViewController.swift */; };
 		7706801228E043C80082A7E7 /* OAuthable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801028E043C80082A7E7 /* OAuthable.swift */; };
 		7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801128E043C80082A7E7 /* AppleSignIn.swift */; };
+		7706801528E045120082A7E7 /* SignInReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801428E045120082A7E7 /* SignInReactor.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -91,10 +91,10 @@
 		77067FF728DDD9200082A7E7 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		77067FFA28DDDAFD0082A7E7 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-release.entitlements"; sourceTree = "<group>"; };
-		7706800B28E0439F0082A7E7 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7706800D28E043A40082A7E7 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7706801028E043C80082A7E7 /* OAuthable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthable.swift; sourceTree = "<group>"; };
 		7706801128E043C80082A7E7 /* AppleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
+		7706801428E045120082A7E7 /* SignInReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInReactor.swift; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 			children = (
 				7706800F28E043C80082A7E7 /* Manager */,
 				7706800D28E043A40082A7E7 /* SignInViewController.swift */,
-				7706800B28E0439F0082A7E7 /* SignInViewModel.swift */,
+				7706801428E045120082A7E7 /* SignInReactor.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -730,6 +730,7 @@
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */,
+				7706801528E045120082A7E7 /* SignInReactor.swift in Sources */,
 				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
@@ -741,7 +742,6 @@
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
-				7706800C28E0439F0082A7E7 /* SignInViewModel.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,

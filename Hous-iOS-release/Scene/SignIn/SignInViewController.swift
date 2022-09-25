@@ -11,20 +11,27 @@ import RxRelay
 
 final class SignInViewController: UIViewController {
 
-  private var applegsdg = PublishRelay<String>()
+  private struct Constant {
+    static let horizontalMargin: CGFloat = 24
+    static let buttonHegiht: CGFloat = 44
+  }
+
+  private var signInRelay = PublishRelay<(String?, Error?)>()
+
   private var appleLoginManager = AppleOAuthManager()
+
+  private let kakaoLoginButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("카카오톡으로 계속하기", for: .normal)
+    button.setTitleColor(Colors.yellow.color, for: .normal)
+
+    return button
+  }()
 
   private let appleLoginButton: UIButton = {
     let button = UIButton()
     button.setTitle("애플로그인", for: .normal)
-    button.setTitleColor(UIColor.blue, for: .normal)
-    return button
-  }()
-
-  private let kakaoLoginButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("카카오로그인", for: .normal)
-    button.setTitleColor(UIColor.blue, for: .normal)
+    button.setTitleColor(UIColor.white, for: .normal)
     return button
   }()
 
@@ -32,7 +39,8 @@ final class SignInViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    appleLoginManager.configure(in: self)
+    configureAppleSignIn()
+
   }
 
   private func setupViews() {
@@ -59,16 +67,16 @@ final class SignInViewController: UIViewController {
 
 extension SignInViewController {
 
-  private func didTapApple() {
+  private func configureAppleSignIn() {
+
+    appleLoginManager.configure(in: self)
 
     appleLoginManager.onSuccess = { [weak self] identifyToken, accessToken in
-
-      self?.applegsdg.accept(identifyToken)
-
+      self?.signInRelay.accept((identifyToken, nil))
     }
 
     appleLoginManager.onFailure = { [weak self] error in
-
+      self?.signInRelay.accept((nil, error))
     }
   }
 }
