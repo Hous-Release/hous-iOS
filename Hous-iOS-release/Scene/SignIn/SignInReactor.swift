@@ -12,15 +12,19 @@ final class SignInReactor: Reactor {
 
   enum Action {
     case didTapSignIn(SignInType)
-    case login
+    case login(accessToken: String?, error: Error?)
   }
-  enum Mutation {
 
+  enum Mutation {
+    case setSignInType(SignInType)
+    case setError(String)
+    case setIsSuccess(Bool)
   }
 
   struct State {
     var signinType: SignInType? = nil
-
+    var error: String? = nil
+    var isSuccessLogin: Bool = false
   }
 
   let initialState: State = State()
@@ -30,12 +34,26 @@ final class SignInReactor: Reactor {
     switch action {
 
     case .didTapSignIn(let signType):
-      return .empty()
-    case .login:
-      return .empty()
+
+      return .just(.setSignInType(signType))
+
+    case .login(let accessToken, let error):
+
+      if let error = error {
+        return .just(.setError(error.localizedDescription))
+      }
+
+      if let accessToken = accessToken {
+
+      }
+
+      // TODO: - Network 연결
+
+
+
+      return .just(.setIsSuccess(true))
+
     }
-
-
 
   }
 
@@ -44,11 +62,17 @@ final class SignInReactor: Reactor {
 
     switch mutation {
 
+    case .setSignInType(let signInType):
+      newState.signinType = signInType
+
+    case .setError(let error):
+      newState.error = error
+
+    case .setIsSuccess(let isSuccess):
+      newState.isSuccessLogin = isSuccess
+
     }
 
     return newState
   }
-
-
-
 }
