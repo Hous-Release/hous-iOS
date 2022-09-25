@@ -37,7 +37,7 @@ public final class AuthRepositoryImp: AuthRepository {
       }
 
       self.event.onNext(.updateAccessToken(data.token.accessToken))
-      self.event.onNext(.updateAccessToken(data.token.refreshToken))
+      self.event.onNext(.updateRefreshToken(data.token.refreshToken))
       self.event.onNext(.isSuccess(true))
 
     }
