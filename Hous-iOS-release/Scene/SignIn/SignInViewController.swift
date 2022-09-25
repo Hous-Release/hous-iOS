@@ -110,7 +110,7 @@ extension SignInViewController {
       .disposed(by: disposeBag)
   }
   private func bindDidTapAppleAction(_ reactor: Reactor) {
-    kakaoLoginButton.rx.tap
+    appleLoginButton.rx.tap
       .map { _ in Reactor.Action.didTapSignIn(.Apple)}
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
