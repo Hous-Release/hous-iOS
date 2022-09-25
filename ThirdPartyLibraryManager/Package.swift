@@ -27,7 +27,8 @@ let package = Package(
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
         .package(url: "https://github.com/devxoul/Then.git", exact: "3.0.0"),
         .package(url: "https://github.com/ReactorKit/ReactorKit.git", exact: "3.2.0"),
-        .package(url: "https://github.com/jrendel/SwiftKeychainWrapper", revision: "185a3165346a03767101c4f62e9a545a0fe0530f")
+        .package(url: "https://github.com/jrendel/SwiftKeychainWrapper", revision: "185a3165346a03767101c4f62e9a545a0fe0530f"),
+        .package(url: "https://github.com/kakao/kakao-ios-sdk", branch: "master")
     ],
     targets: [
         .target(
@@ -41,7 +42,10 @@ let package = Package(
                 .product(name: "SnapKit", package: "SnapKit"),
                 .product(name: "Then", package: "Then"),
                 .product(name: "ReactorKit", package: "ReactorKit"),
-                .product(name: "SwiftKeychainWrapper", package: "SwiftKeychainWrapper")
+                .product(name: "SwiftKeychainWrapper", package: "SwiftKeychainWrapper"),
+                .product(name: "KakaoSDKCommon", package: "kakao-ios-sdk"),
+                .product(name: "KakaoSDKAuth", package: "kakao-ios-sdk"),
+                .product(name: "KakaoSDKUser", package: "kakao-ios-sdk")
             ]
         ),
         .binaryTarget(name: "FBLPromises", path: "./Vender/FirebaseAnalytics/FBLPromises.xcframework"),
