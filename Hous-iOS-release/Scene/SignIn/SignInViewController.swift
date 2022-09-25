@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 
+import ReactorKit
 import RxCocoa
 import RxSwift
 
-final class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController, ReactorKit.View {
+  typealias Reactor = SignInReactor
 
   private struct Constant {
     static let horizontalMargin: CGFloat = 24
@@ -23,7 +25,7 @@ final class SignInViewController: UIViewController {
   private let appleLoginManager = AppleOAuthManager()
   private let kakaoLoginManager = KakaoOAuthManager()
 
-  private let kakaoLoginButton: UIButton = {
+  private lazy var kakaoLoginButton: UIButton = {
     let button = UIButton()
     button.setTitle("카카오톡으로 계속하기", for: .normal)
     button.setTitleColor(Colors.yellow.color, for: .normal)
@@ -42,19 +44,24 @@ final class SignInViewController: UIViewController {
     return button
   }()
 
-  private let disposeBag = DisposeBag()
+  internal var disposeBag = DisposeBag()
 
+  init(_ reactor: Reactor) {
+    super.init(nibName: nil, bundle: nil)
+    self.reactor = reactor
 
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
     configureAppleSignIn()
     configureKakaoSignIn()
 
     setupViews()
+  }
 
-    bind()
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
   }
 
   private func setupViews() {
@@ -62,35 +69,63 @@ final class SignInViewController: UIViewController {
     view.addSubView(kakaoLoginButton)
 
     appleLoginButton.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview().inset(20)
-      make.height.equalTo(50)
+      make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
+      make.height.equalTo(Constant.buttonHegiht)
       make.centerY.equalToSuperview()
     }
 
     kakaoLoginButton.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview().inset(20)
-      make.height.equalTo(50)
+      make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
+      make.height.equalTo(Constant.buttonHegiht)
       make.top.equalTo(appleLoginButton.snp.bottom).offset(20)
     }
   }
 
-  private func bind() {
-    kakaoLoginButton.rx.tap.map { _ in }
-      .map { self.kakaoLoginManager.login() }
-      .subscribe(onNext: {
-      })
-      .disposed(by: disposeBag)
 
-    signInRelay
-      .subscribe(onNext: {
-        print($0)
-    })
-      .disposed(by: disposeBag)
+}
 
+  // MARK: - Bind Reactor
+extension SignInViewController {
+
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
+}
+
+
+// MARK: - Bind Action
+extension SignInViewController {
+
+  func bindAction(_ reactor: Reactor) {
+    bindDidTapKakaoAction(reactor)
+    bindDidTapAppleAction(reactor)
+  }
+
+  private func bindDidTapKakaoAction(_ reactor: Reactor) {
+    kakaoLoginButton.rx.tap
+      .map { _ in Reactor.Action.didTapSignIn(.Kakao)}
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  private func bindDidTapAppleAction(_ reactor: Reactor) {
+    kakaoLoginButton.rx.tap
+      .map { _ in Reactor.Action.didTapSignIn(.Apple)}
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
 
 }
 
+// MARK: - Bind State
+
+extension SignInViewController {
+  func bindState(_ reactor: Reactor) {
+  }
+}
+
+
+  // MARK: - OAuth Method
 extension SignInViewController {
 
   private func configureAppleSignIn() {
