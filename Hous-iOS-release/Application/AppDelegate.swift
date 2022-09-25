@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       parameter: [:]
     )
 
+    print("AccessToken === ", Keychain.shared.getAccessToken() ?? "")
+    print("RefreshToken === ", Keychain.shared.getRefreshToken() ?? "")
+
     return true
   }
 
