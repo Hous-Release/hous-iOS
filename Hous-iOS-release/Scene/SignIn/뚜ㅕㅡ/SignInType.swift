@@ -7,7 +7,15 @@
 
 import Foundation
 
-enum SignInType {
+enum SignInType: CustomStringConvertible {
   case Apple
   case Kakao
+
+  var description: String {
+
+    switch self {
+    case .Apple: return "APPLE"
+    case .Kakao: return "KAKAO"
+    }
+  }
 }
