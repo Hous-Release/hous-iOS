@@ -9,13 +9,14 @@ import UIKit
 import RxCocoa
 import ReactorKit
 
-class EnterRoomViewController: UIViewController, View {
+class EnterRoomViewController: UIViewController {
 
+  var mainView = EnterRoomView()
   var disposeBag = DisposeBag()
 
   override func loadView() {
     super.loadView()
-
+    view = mainView
   }
 
   override func viewDidLoad() {

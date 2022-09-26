@@ -42,7 +42,7 @@ enum EnterRoomType {
   }
 }
 
-class EnterRoomButton: UIView {
+class EnterRoomButtonView: UIView {
 
   var titleLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
@@ -86,8 +86,14 @@ class EnterRoomButton: UIView {
 
     imageView.snp.makeConstraints { make in
       make.trailing.equalToSuperview().inset(24)
-      make.leading.equalTo(subTitleLabel.snp.trailing).offset(16)
+      make.leading.greaterThanOrEqualTo(subTitleLabel.snp.trailing).offset(16)
+      make.width.equalTo(110)
       make.width.equalTo(imageView.snp.height)
+      make.bottom.equalToSuperview().inset(20)
+    }
+
+    self.snp.makeConstraints { make in
+      make.height.equalTo(200)
     }
   }
 
@@ -95,5 +101,7 @@ class EnterRoomButton: UIView {
     backgroundColor = roomType.color
     titleLabel.text = roomType.titleText
     subTitleLabel.text = roomType.subTitleText
+    makeRounded(cornerRadius: 10)
+    imageView.image = Images.profileGreen.image
   }
 }
