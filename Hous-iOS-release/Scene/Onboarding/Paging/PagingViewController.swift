@@ -32,9 +32,21 @@ final class PagingViewController: UIViewController, View {
   }
 
   func bind(reactor: PagingViewReactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
+}
 
+extension PagingViewController {
+
+  private func bindAction(_ reactor: PagingViewReactor) {
     rx.viewWillAppear
       .map { _ in Reactor.Action.viewWillAppear }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    mainView.pagingCollectionView.rx.didEndDecelerating
+      .map { _ in Reactor.Action.didEndScroll(self.currentPage) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
@@ -50,7 +62,9 @@ final class PagingViewController: UIViewController, View {
 
     mainView.pagingCollectionView.rx.setDelegate(self)
       .disposed(by: disposeBag)
+  }
 
+  private func bindState(_ reactor: PagingViewReactor) {
     reactor.state.map { $0.pagingContents }
       .distinctUntilChanged()
       .bind(to: mainView.pagingCollectionView.rx.items) { (collectionView, row, element) -> UICollectionViewCell in
@@ -78,6 +92,11 @@ final class PagingViewController: UIViewController, View {
         }
       })
       .disposed(by: disposeBag)
+
+    reactor.state.map { $0.isNextButtonHidden }
+      .distinctUntilChanged()
+      .bind(to: mainView.nextButton.rx.isHidden)
+      .disposed(by: disposeBag)
   }
 }
 
@@ -91,8 +110,6 @@ extension PagingViewController: UICollectionViewDelegate, UICollectionViewDelega
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let width = scrollView.frame.width
     currentPage = Int(scrollView.contentOffset.x / width)
-    currentPage == 3 ? (mainView.nextButton.isHidden = false) : (mainView.nextButton.isHidden = true)
-    mainView.pageControl.currentPage = currentPage
   }
 }
 
