@@ -9,8 +9,6 @@ import UIKit
 
 class SeperatorLineCollectionReusableView: UICollectionReusableView {
   
-  static let identifier = "SeperatorLineCollectionReusableView"
-  
   private let seperatorLineView = UIView().then {
     $0.backgroundColor = Colors.g2.color
   }

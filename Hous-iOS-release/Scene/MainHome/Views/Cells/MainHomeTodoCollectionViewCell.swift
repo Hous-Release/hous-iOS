@@ -16,7 +16,6 @@ protocol MainHomeTodoProtocol: AnyObject {
 class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   //MARK: - Vars & Lets
-  static let identifier = "MainHomeTodoCollectionViewCell"
   
   private let disposeBag = DisposeBag()
   
@@ -64,7 +63,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.backgroundColor = Colors.blueL2.color
     $0.layer.cornerRadius = 8
   }
-  // TODO: - Todo, Our Rules 이거 어떻게 rx로 넣지????
+  
   private let emptyViewLabel = UILabel().then {
     $0.isHidden = true
     $0.text = "아직 내 to-do가 없어요!"
