@@ -11,8 +11,6 @@ import SnapKit
 
 class HomeHeaderCollectionReusableView: UICollectionReusableView {
   
-  static let identifier = "HomeHeaderCollectionReusableView"
-  
   let subtitleLabel = UILabel().then {
     $0.font = Fonts.Montserrat.semiBold.font(size: 18)
     $0.textColor = Colors.black.color
