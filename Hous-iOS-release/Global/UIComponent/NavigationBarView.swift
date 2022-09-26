@@ -34,7 +34,6 @@ class NavBarWithBackButtonView: UIView {
   lazy var rightButton: UIButton = {
     var button = UIButton()
     button.setTitleColor(Colors.blue.color, for: .normal)
-    //button.titleLabel?.textColor = Colors.blue.color
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     button.titleLabel?.textAlignment = .center
     return button

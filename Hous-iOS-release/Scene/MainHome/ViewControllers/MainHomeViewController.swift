@@ -16,7 +16,7 @@ import Network
 class MainHomeViewController: UIViewController {
   
   private enum MainHomeSection: Int {
-    case todos = 0
+    case todos
     case ourRules
     case homiesProfiles
   }
@@ -66,13 +66,13 @@ class MainHomeViewController: UIViewController {
   private func configCollectionView() {
     collectionView.delegate = self
     // Cells
-    collectionView.register(MainHomeTodoCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeTodoCollectionViewCell.identifier)
-    collectionView.register(MainHomeRulesCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeRulesCollectionViewCell.identifier)
-    collectionView.register(MainHomeProfileCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeProfileCollectionViewCell.identifier)
+    collectionView.register(MainHomeTodoCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeTodoCollectionViewCell.className)
+    collectionView.register(MainHomeRulesCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeRulesCollectionViewCell.className)
+    collectionView.register(MainHomeProfileCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeProfileCollectionViewCell.className)
 
     // Header & Footer
-    collectionView.register(HomeHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderCollectionReusableView.identifier)
-    collectionView.register(SeperatorLineCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: SeperatorLineCollectionReusableView.identifier)
+    collectionView.register(HomeHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderCollectionReusableView.className)
+    collectionView.register(SeperatorLineCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: SeperatorLineCollectionReusableView.className)
   }
   
   private static func configureCollectionViewCell(
@@ -83,19 +83,19 @@ class MainHomeViewController: UIViewController {
     switch item {
       
     case .homieProfiles(profiles: let profiles):
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeProfileCollectionViewCell.identifier, for: indexPath) as? MainHomeProfileCollectionViewCell else {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeProfileCollectionViewCell.className, for: indexPath) as? MainHomeProfileCollectionViewCell else {
         return UICollectionViewCell()
       }
       cell.setProfileCell(userNickname: profiles[indexPath.item].userNickname)
       return cell
     case .ourTodos(todos: let todos):
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeRulesCollectionViewCell.identifier, for: indexPath) as? MainHomeRulesCollectionViewCell else { return UICollectionViewCell()
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeRulesCollectionViewCell.className, for: indexPath) as? MainHomeRulesCollectionViewCell else { return UICollectionViewCell()
       }
       cell.setHomeRulesCell(ourRules: todos.ourRules)
 
       return cell
     case .myTodos(todos: let todos):
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeTodoCollectionViewCell.identifier, for: indexPath) as? MainHomeTodoCollectionViewCell else { return UICollectionViewCell()
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeTodoCollectionViewCell.className, for: indexPath) as? MainHomeTodoCollectionViewCell else { return UICollectionViewCell()
       }
       
       cell.setHomeTodoCell(
@@ -126,7 +126,7 @@ class MainHomeViewController: UIViewController {
     dataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
       switch kind {
       case UICollectionView.elementKindSectionHeader:
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeHeaderCollectionReusableView.identifier, for: indexPath) as? HomeHeaderCollectionReusableView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeHeaderCollectionReusableView.className, for: indexPath) as? HomeHeaderCollectionReusableView else { return UICollectionReusableView() }
 
         if indexPath.section == MainHomeSection.homiesProfiles.rawValue {
           header.setSubTitleLabel(string: "Homies")
@@ -134,7 +134,7 @@ class MainHomeViewController: UIViewController {
 
         return header
       case UICollectionView.elementKindSectionFooter:
-        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SeperatorLineCollectionReusableView.identifier, for: indexPath) as? SeperatorLineCollectionReusableView else { return UICollectionReusableView() }
+        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SeperatorLineCollectionReusableView.className, for: indexPath) as? SeperatorLineCollectionReusableView else { return UICollectionReusableView() }
 
         return footer
       default:
