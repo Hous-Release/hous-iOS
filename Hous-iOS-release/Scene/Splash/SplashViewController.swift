@@ -10,8 +10,7 @@ import UIKit
 import RxCocoa
 import Alamofire
 import RxSwift
-
-
+import Lottie
 
 final class SplashViewController: UIViewController {
 

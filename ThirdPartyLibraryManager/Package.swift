@@ -3,7 +3,6 @@
 
 import PackageDescription
 
-import PackageDescription
 
 let package = Package(
     name: "ThirdPartyLibraryManager",
@@ -28,7 +27,8 @@ let package = Package(
         .package(url: "https://github.com/devxoul/Then.git", exact: "3.0.0"),
         .package(url: "https://github.com/ReactorKit/ReactorKit.git", exact: "3.2.0"),
         .package(url: "https://github.com/jrendel/SwiftKeychainWrapper", revision: "185a3165346a03767101c4f62e9a545a0fe0530f"),
-        .package(url: "https://github.com/kakao/kakao-ios-sdk", branch: "master")
+        .package(url: "https://github.com/kakao/kakao-ios-sdk", branch: "master"),
+        .package(url: "https://github.com/airbnb/lottie-ios", revision: "3cf8ade4f14cb67fd06ee760e9b579eeb9ea31fb")
     ],
     targets: [
         .target(
@@ -45,7 +45,8 @@ let package = Package(
                 .product(name: "SwiftKeychainWrapper", package: "SwiftKeychainWrapper"),
                 .product(name: "KakaoSDKCommon", package: "kakao-ios-sdk"),
                 .product(name: "KakaoSDKAuth", package: "kakao-ios-sdk"),
-                .product(name: "KakaoSDKUser", package: "kakao-ios-sdk")
+                .product(name: "KakaoSDKUser", package: "kakao-ios-sdk"),
+                .product(name: "Lottie", package: "lottie-ios")
             ]
         ),
         .binaryTarget(name: "FBLPromises", path: "./Vender/FirebaseAnalytics/FBLPromises.xcframework"),
