@@ -9,8 +9,6 @@ import UIKit
 
 class MainHomeRulesCollectionViewCell: UICollectionViewCell {
   
-  static let identifier = "MainHomeRulesCollectionViewCell"
-  
   private let ourRulesTitleLabel = UILabel().then {
     $0.text = "Our Rules"
     $0.font = Fonts.Montserrat.semiBold.font(size: 18)

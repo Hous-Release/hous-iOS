@@ -9,8 +9,6 @@ import UIKit
 
 class MainHomeProfileCollectionViewCell: UICollectionViewCell {
   //MARK: - Vars & Lets
-  static let identifier = "MainHomeProfileCollectionViewCell"
-  
   //MARK: - UI Components
   private let profileBackgroundImageView = UIImageView().then {
     $0.image = Images.profileRed.image
