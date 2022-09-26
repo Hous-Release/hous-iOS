@@ -23,11 +23,11 @@
 		777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777C666B28A74A63000BECEA /* LaunchScreen.storyboard */; };
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
+		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
 		B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */; };
-		77AEF33C28E1FB9F002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33B28E1FB9F002A102B /* SignInType.swift */; };
 		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
 		B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */; };
 		B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */; };
@@ -109,7 +109,7 @@
 		777C667728A74E41000BECEA /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		777C667828A74E50000BECEA /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		777C667C28A75039000BECEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		77AEF33B28E1FB9F002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInType.swift; path = "Hous-iOS-release/Scene/SignIn/Enum/SignInType.swift"; sourceTree = SOURCE_ROOT; };
+		77AEF33E28E1FE9C002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInType.swift; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		7706800A28E0438D0082A7E7 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				7706801828E053140082A7E7 /* Enum */,
+				77AEF33D28E1FE9C002A102B /* Enum */,
 				7706800F28E043C80082A7E7 /* Manager */,
 				7706800D28E043A40082A7E7 /* SignInViewController.swift */,
 				7706801428E045120082A7E7 /* SignInReactor.swift */,
@@ -241,15 +241,6 @@
 				7706801628E047DE0082A7E7 /* KakaoSignIn.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		7706801828E053140082A7E7 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				77AEF33B28E1FB9F002A102B /* SignInType.swift */,
-			);
-			name = Enum;
-			path = "뚜ㅕㅡ";
 			sourceTree = "<group>";
 		};
 		777C665428A74A62000BECEA = {
@@ -325,6 +316,14 @@
 				777C667C28A75039000BECEA /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		77AEF33D28E1FE9C002A102B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				77AEF33E28E1FE9C002A102B /* SignInType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		77B1681C28ABC7DE00E1E512 /* Scene */ = {
@@ -712,7 +711,6 @@
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
-				77AEF33C28E1FB9F002A102B /* SignInType.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
@@ -723,9 +721,9 @@
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
-				B856700328C88C6100B49984 /* HousViewController.swift in Sources */,
+				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
+				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
-				B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
@@ -770,7 +768,6 @@
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				77067FFB28DDDAFD0082A7E7 /* Keychain.swift in Sources */,
-				B595FFDE28CDCFD900F6B2E4 /* MainHomeRepository.swift in Sources */,
 				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
 				B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */,
 			);
