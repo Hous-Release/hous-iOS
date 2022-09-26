@@ -15,18 +15,21 @@ final class PagingViewReactor: Reactor {
     case viewWillAppear
     case skipDidTap
     case nextDidTap
+    case didEndScroll(Int)
   }
 
   enum Mutation {
     case setPagingContents([PagingContent])
     case setSkip
     case setNext
+    case setNextHidden(Int)
   }
 
   struct State {
     var pagingContents: [PagingContent] = []
     var skip: Bool = false
     var next: Bool = false
+    var isNextButtonHidden: Bool = true
   }
 
   let initialState = State()
@@ -39,6 +42,8 @@ final class PagingViewReactor: Reactor {
       return .just(Mutation.setSkip)
     case .nextDidTap:
       return .just(Mutation.setNext)
+    case let .didEndScroll(currentPage):
+      return .just(Mutation.setNextHidden(currentPage))
     }
   }
 
@@ -51,8 +56,12 @@ final class PagingViewReactor: Reactor {
       newState.pagingContents = content
     case .setSkip:
       newState.skip = !currentState.skip
+      newState.isNextButtonHidden = false
     case .setNext:
       newState.next = !currentState.next
+    case let .setNextHidden(currentPage):
+      let state = currentPage == 3 ? false : true
+      newState.isNextButtonHidden = state
     }
     return newState
   }
