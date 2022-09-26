@@ -23,7 +23,7 @@ enum EnterRoomType {
     }
   }
 
-  var titleLabel: String {
+  var titleText: String {
     switch self {
     case .new:
       return "방 만들기"
@@ -32,7 +32,7 @@ enum EnterRoomType {
     }
   }
 
-  var subTitleLabel: String {
+  var subTitleText: String {
     switch self {
     case .new:
       return "가장 먼저 방을 만들어\n호미들을 초대해보세요!"
@@ -44,34 +44,26 @@ enum EnterRoomType {
 
 class EnterRoomButton: UIView {
 
-  // 1. 밑에 두 변수 공통으로 묶기
-
   var titleLabel = UILabel().then {
-    $0.text = "메롱"
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
     $0.textColor = Colors.white.color
-    $0.numberOfLines = 2
-    $0.lineBreakMode = .byWordWrapping
-    $0.lineBreakStrategy = .hangulWordPriority
     $0.textAlignment = .left
   }
 
   var subTitleLabel = UILabel().then {
-    $0.text = "메롱"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    $0.textColor = Colors.white.color
     $0.numberOfLines = 2
+    $0.textColor = Colors.white.color
     $0.lineBreakMode = .byWordWrapping
     $0.lineBreakStrategy = .hangulWordPriority
     $0.textAlignment = .left
   }
 
+  var imageView = UIImageView()
 
-  // 2. ui요소들 레이아웃 잡기
-  
   init(roomType: EnterRoomType) {
     super.init(frame: .zero)
-    setup()
+    setup(roomType)
     render()
   }
 
@@ -80,11 +72,28 @@ class EnterRoomButton: UIView {
   }
 
   private func render() {
+    addSubViews([titleLabel, subTitleLabel, imageView])
 
+    titleLabel.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(20)
+      make.leading.equalToSuperview().offset(24)
+    }
 
+    subTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(titleLabel.snp.bottom).offset(8)
+      make.leading.equalTo(titleLabel.snp.leading)
+    }
+
+    imageView.snp.makeConstraints { make in
+      make.trailing.equalToSuperview().inset(24)
+      make.leading.equalTo(subTitleLabel.snp.trailing).offset(16)
+      make.width.equalTo(imageView.snp.height)
+    }
   }
 
-  private func setup() {
-
+  private func setup(_ roomType: EnterRoomType) {
+    backgroundColor = roomType.color
+    titleLabel.text = roomType.titleText
+    subTitleLabel.text = roomType.subTitleText
   }
 }
