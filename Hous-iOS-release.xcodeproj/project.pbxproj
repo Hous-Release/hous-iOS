@@ -24,6 +24,7 @@
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
+		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -125,6 +126,7 @@
 		777C667828A74E50000BECEA /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		777C667C28A75039000BECEA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		77AEF33E28E1FE9C002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInType.swift; sourceTree = "<group>"; };
+		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +358,14 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		77AEF34028E2009E002A102B /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				77AEF34128E200D2002A102B /* splashlottie.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		77B1681C28ABC7DE00E1E512 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +392,7 @@
 		77B1681E28ABE40400E1E512 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77AEF34028E2009E002A102B /* Lottie */,
 				B8566FF728C86B6300B49984 /* Generated */,
 				B8566FEA28C865DF00B49984 /* Fonts */,
 				777C666928A74A63000BECEA /* Assets.xcassets */,
@@ -749,6 +760,7 @@
 				B8566FF528C8661400B49984 /* Montserrat-SemiBold.otf in Resources */,
 				B8566FF428C8661400B49984 /* Montserrat-Regular.otf in Resources */,
 				B8566FF328C8661400B49984 /* SpoqaHanSansNeo-Regular.otf in Resources */,
+				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
 				B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */,
