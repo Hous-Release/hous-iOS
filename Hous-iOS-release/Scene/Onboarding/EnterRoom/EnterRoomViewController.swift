@@ -11,6 +11,8 @@ import ReactorKit
 
 class EnterRoomViewController: UIViewController {
 
+  // 영역 터치 시 뷰 넘김
+
   var mainView = EnterRoomView()
   var disposeBag = DisposeBag()
 
