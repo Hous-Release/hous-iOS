@@ -103,13 +103,11 @@ class EditHousNameViewController: UIViewController {
     let output = self.viewModel.transform(input: input)
     
     output.textCountLabelText
-      .asDriver(onErrorJustReturn: "0/8")
       .drive(textcountLabel.rx.text)
       .disposed(by: disposeBag)
     
     output.text
       .map { $0 }
-      .asDriver(onErrorJustReturn: "")
       .drive(textField.rx.text)
       .disposed(by: disposeBag)
     
