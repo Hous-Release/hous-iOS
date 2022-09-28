@@ -31,6 +31,7 @@ class EnterRoomView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()
+    backgroundColor = Colors.white.color
   }
 
   required init?(coder: NSCoder) {

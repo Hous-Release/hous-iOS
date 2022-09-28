@@ -23,6 +23,7 @@ class EnterRoomViewController: UIViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     reactor = EnterRoomViewReactor()
+    navigationController?.navigationBar.isHidden = true
   }
 
   func bind(reactor: EnterRoomViewReactor) {
@@ -54,7 +55,7 @@ extension EnterRoomViewController {
         if isTapped {
           let vc = CreateNewRoomViewController()
           self?.mainView.newRoomView.animateClick {
-            self?.presentViewController(vc)
+            self?.navigationController?.pushViewController(vc, animated: true)
           }
         }
       })
@@ -65,18 +66,10 @@ extension EnterRoomViewController {
         if isTapped {
           let vc = EnterRoomCodeViewController()
           self?.mainView.existRoomView.animateClick {
-            self?.presentViewController(vc)
+            self?.navigationController?.pushViewController(vc, animated: true)
           }
         }
       })
       .disposed(by: disposeBag)
-  }
-}
-
-extension EnterRoomViewController {
-  private func presentViewController(_ viewController: UIViewController) {
-    viewController.modalTransitionStyle = .crossDissolve
-    viewController.modalPresentationStyle = .fullScreen
-    self.present(viewController, animated: true, completion: nil)
   }
 }

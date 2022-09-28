@@ -25,7 +25,7 @@ final class EnterInfoViewReactor: Reactor {
     case setBirthday(String)
     case setIsNextButtonEnable(Bool)
     case setIsBirthdayPublic(Bool)
-    case setNextResult(Bool)
+    case setNextResult
   }
 
   struct State {
@@ -33,7 +33,7 @@ final class EnterInfoViewReactor: Reactor {
     var birthday: String = ""
     var isBirthdayPublic: Bool = false
     var isNextButtonEnable: Bool = false
-    var serverResult: Bool = false
+    var next: Bool = false
   }
 
   let initialState = State()
@@ -57,18 +57,15 @@ final class EnterInfoViewReactor: Reactor {
       return Observable.just(Mutation.setIsBirthdayPublic(!flag))
 
     case .tapNext:
-      return Observable.just(Mutation.setNextResult(true))
+      return Observable.just(Mutation.setNextResult)
     }
-  }
-
-  func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    return mutation.debug("mutation")
   }
 
   func reduce(state: State, mutation: Mutation) -> State {
 
     var newState = state
-
+    newState.next = false
+    
     switch mutation {
 
     case let .setNickname(nickname):
@@ -83,8 +80,8 @@ final class EnterInfoViewReactor: Reactor {
     case let .setIsBirthdayPublic(flag):
       newState.isBirthdayPublic = flag
 
-    case let .setNextResult(flag):
-      newState.serverResult = flag
+    case .setNextResult:
+      newState.next = !currentState.next
     }
 
     return newState
@@ -104,3 +101,6 @@ final class EnterInfoViewReactor: Reactor {
     return .just(Mutation.setBirthday(dateFormatter.string(from: birthday)))
   }
 }
+
+// 닉네임 글자 수 제한
+// 뷰 연결

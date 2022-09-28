@@ -7,7 +7,6 @@
 
 import UIKit
 
-import RxSwift
 import RxCocoa
 import ReactorKit
 
@@ -27,6 +26,13 @@ class EnterInfoViewController: UIViewController, View {
   }
 
   func bind(reactor: EnterInfoViewReactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
+}
+
+extension EnterInfoViewController {
+  private func bindAction(_ reactor: EnterInfoViewReactor) {
     mainView.nicknameTextfield.rx.text
       .orEmpty
       .distinctUntilChanged()
@@ -49,7 +55,9 @@ class EnterInfoViewController: UIViewController, View {
       .map { Reactor.Action.tapNext }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+  }
 
+  private func bindState(_ reactor: EnterInfoViewReactor) {
     reactor.state.map { $0.isBirthdayPublic }
       .bind(to: mainView.checkBirthDayButton.rx.isSelected)
       .disposed(by: disposeBag)
@@ -60,6 +68,18 @@ class EnterInfoViewController: UIViewController, View {
 
     reactor.state.map { $0.isNextButtonEnable }
       .bind(to: mainView.nextButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+
+    reactor.state.map { $0.next }
+      .subscribe(onNext: { [weak self] isTapped in
+        // 서버통신
+        if isTapped {
+          let vc = PagingViewController()
+          vc.modalTransitionStyle = .crossDissolve
+          vc.modalPresentationStyle = .fullScreen
+          self?.present(vc, animated: true, completion: nil)
+        }
+      })
       .disposed(by: disposeBag)
   }
 }
