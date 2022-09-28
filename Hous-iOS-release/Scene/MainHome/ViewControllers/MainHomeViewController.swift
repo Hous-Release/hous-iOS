@@ -24,7 +24,7 @@ class MainHomeViewController: UIViewController {
   //MARK: - Vars & Lets
   private let viewModel: MainHomeViewModel
   private let disposeBag = DisposeBag()
-  
+    
   //MARK: - UI Components
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
     let layout = UICollectionViewFlowLayout()
@@ -75,7 +75,7 @@ class MainHomeViewController: UIViewController {
     collectionView.register(SeperatorLineCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: SeperatorLineCollectionReusableView.className)
   }
   
-  private static func configureCollectionViewCell(
+  private func configureCollectionViewCell(
     collectionView: UICollectionView,
     indexPath: IndexPath,
     item: MainHomeSectionModel.Item
@@ -98,6 +98,16 @@ class MainHomeViewController: UIViewController {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeTodoCollectionViewCell.className, for: indexPath) as? MainHomeTodoCollectionViewCell else { return UICollectionViewCell()
       }
       
+      cell.editButton.rx.tap.asDriver()
+        .drive(onNext: { [weak self] in
+          self?.navigationController?.pushViewController(EditHousNameViewController(), animated: true)
+        }).disposed(by: cell.disposeBag)
+      
+      cell.editButton.rx.tap.asDriver()
+        .drive(onNext: {
+          print("CODE Copied !!!!!!")
+        }).disposed(by: cell.disposeBag)
+      
       cell.setHomeTodoCell(
         titleText: "\(todos.userNickname)님의\n\(todos.roomName) 하우스",
         progress: Float(todos.progress / 100),
@@ -117,7 +127,7 @@ class MainHomeViewController: UIViewController {
     
     let dataSource =
     RxCollectionViewSectionedReloadDataSource<MainHomeSectionModel.Model> { dataSource, collectionView, indexPath, item in
-      Self.configureCollectionViewCell(
+      self.configureCollectionViewCell(
         collectionView: collectionView,
         indexPath: indexPath, item: item
       )
