@@ -94,6 +94,8 @@
 		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
 		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
 		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
+		B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA628E3FFA100FC99DA /* EnterRoomTextFieldView.swift */; };
+		B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BAA28E4155F00FC99DA /* EnterRoomType.swift */; };
 		B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */; };
 		B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89928DF919D009FD784 /* EnterRoomView.swift */; };
 		B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */; };
@@ -193,6 +195,8 @@
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
 		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
+		B8B56BA628E3FFA100FC99DA /* EnterRoomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomTextFieldView.swift; sourceTree = "<group>"; };
+		B8B56BAA28E4155F00FC99DA /* EnterRoomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomType.swift; sourceTree = "<group>"; };
 		B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewController.swift; sourceTree = "<group>"; };
 		B8B8A89928DF919D009FD784 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
 		B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomButton.swift; sourceTree = "<group>"; };
@@ -616,8 +620,8 @@
 				B84EA6D828DD7F1200C92FCD /* EnterInfo */,
 				B84EA6D928DD7F1B00C92FCD /* Paging */,
 				B8B8A89628DF9163009FD784 /* EnterRoom */,
-				B8B56BA128E2E74C00FC99DA /* EnterRoomCode */,
-				B8B56BA028E2E73900FC99DA /* CreateNewRoom */,
+				B8B56BA128E2E74C00FC99DA /* EnterRoomTextField */,
+				B8B56BAA28E4155F00FC99DA /* EnterRoomType.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -642,20 +646,14 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
-		B8B56BA028E2E73900FC99DA /* CreateNewRoom */ = {
-			isa = PBXGroup;
-			children = (
-				B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */,
-			);
-			path = CreateNewRoom;
-			sourceTree = "<group>";
-		};
-		B8B56BA128E2E74C00FC99DA /* EnterRoomCode */ = {
+		B8B56BA128E2E74C00FC99DA /* EnterRoomTextField */ = {
 			isa = PBXGroup;
 			children = (
 				B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */,
+				B8B56BA628E3FFA100FC99DA /* EnterRoomTextFieldView.swift */,
+				B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */,
 			);
-			path = EnterRoomCode;
+			path = EnterRoomTextField;
 			sourceTree = "<group>";
 		};
 		B8B8A89628DF9163009FD784 /* EnterRoom */ = {
@@ -806,6 +804,7 @@
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
+				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
@@ -842,6 +841,7 @@
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
+				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
