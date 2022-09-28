@@ -44,6 +44,15 @@ enum EnterRoomType {
 
 class EnterRoomButtonView: UIView {
 
+  var buttonType: EnterRoomType = .new {
+    didSet {
+      backgroundColor = buttonType.color
+      titleLabel.text = buttonType.titleText
+      subTitleLabel.text = buttonType.subTitleText
+      imageView.image = Images.profileGreen.image
+    }
+  }
+
   var titleLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
     $0.textColor = Colors.white.color
@@ -98,10 +107,23 @@ class EnterRoomButtonView: UIView {
   }
 
   private func setup(_ roomType: EnterRoomType) {
-    backgroundColor = roomType.color
-    titleLabel.text = roomType.titleText
-    subTitleLabel.text = roomType.subTitleText
+    buttonType = roomType
     makeRounded(cornerRadius: 10)
-    imageView.image = Images.profileGreen.image
+  }
+}
+
+extension EnterRoomButtonView {
+
+  func animateClick(completion: @escaping () -> Void) {
+
+    DispatchQueue.main.async {
+      UIView.animate(withDuration: 0.15) {
+        self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+      } completion: { _ in
+        UIView.animate(withDuration: 0.15) {
+          self.transform = CGAffineTransform.identity
+        } completion: { _ in completion() }
+      }
+    }
   }
 }
