@@ -31,12 +31,14 @@
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
+		9B091DFC28E35D2800C144BA /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFB28E35D2800C144BA /* Protocols.swift */; };
+		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
+		9B98853728E3E9700013CCB9 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98853628E3E9700013CCB9 /* ProfileDTO.swift */; };
+		9B98853E28E3FF810013CCB9 /* ProfileMainImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98853D28E3FF810013CCB9 /* ProfileMainImageCell.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
 		B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */; };
-		9B091DFC28E35D2800C144BA /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFB28E35D2800C144BA /* Protocols.swift */; };
-		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
 		B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */; };
 		B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */; };
@@ -146,6 +148,10 @@
 		77AEF33E28E1FE9C002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInType.swift; sourceTree = "<group>"; };
 		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		9B091DFB28E35D2800C144BA /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		9B98853628E3E9700013CCB9 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
+		9B98853D28E3FF810013CCB9 /* ProfileMainImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainImageCell.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -433,6 +439,38 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9B98853828E3FF370013CCB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B856700628C88C6F00B49984 /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9B98853928E3FF4D0013CCB9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B091DFD28E363A900C144BA /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B98853B28E3FF570013CCB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B98853628E3E9700013CCB9 /* ProfileDTO.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9B98853C28E3FF6B0013CCB9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9B98853D28E3FF810013CCB9 /* ProfileMainImageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		B595FFB028C9B1E800F6B2E4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,8 +671,10 @@
 		B856700028C88C3F00B49984 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				B856700628C88C6F00B49984 /* ProfileViewController.swift */,
-				9B091DFD28E363A900C144BA /* ProfileViewModel.swift */,
+				9B98853C28E3FF6B0013CCB9 /* Cell */,
+				9B98853B28E3FF570013CCB9 /* Model */,
+				9B98853928E3FF4D0013CCB9 /* ViewModel */,
+				9B98853828E3FF370013CCB9 /* View */,
 				9B091DFB28E35D2800C144BA /* Protocols.swift */,
 			);
 			path = Profile;
@@ -865,6 +905,7 @@
 				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
+				9B98853728E3E9700013CCB9 /* ProfileDTO.swift in Sources */,
 				9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
@@ -902,6 +943,7 @@
 				B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
+				9B98853E28E3FF810013CCB9 /* ProfileMainImageCell.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				B8D066CC28F7DF5300A99907 /* TodoRepository.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
