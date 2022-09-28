@@ -16,7 +16,7 @@ final class ProfileViewController: UIViewController {
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
-  var viewModel: <#MyViewModel#> = <#MyViewModel#>()
+  var viewModel: ProfileViewModel = ProfileViewModel()
   
   //MARK: UI Templetes
   
