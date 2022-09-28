@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 
 
 
@@ -23,14 +24,13 @@ final class EditHousNameViewModel: ViewModelType {
   }
   //MARK: - Outputs
   struct Output {
-    var textCountLabelText = PublishRelay<String>()
-    var text = BehaviorRelay<String>(value: "")
+    var textCountLabelText: Driver<String>
+    var text: Driver<String>
   }
   
   func transform(input: Input) -> Output {
-    let output = Output()
     
-    input.roomName
+    let roomName = input.roomName
       .scan("") { [weak self] prev, next in
         
         if next.count > self!.maxCount {
@@ -39,23 +39,15 @@ final class EditHousNameViewModel: ViewModelType {
           return next
         }
       }
-      .subscribe(onNext: { [weak self] roomName in
-        guard let self = self else { return }
-        output.textCountLabelText.accept("\(roomName.count)/\(self.maxCount)")
-        output.text.accept(roomName)
-      })
-      .disposed(by: disposeBag)
     
+    let textCount = roomName.map({ [weak self] str -> String in
+      guard let self = self else { return "" }
+      return "\(str.count)/\(self.maxCount)"
+    })
+      .asDriver(onErrorJustReturn: "0/8")
     
-//    input.saveButtonDidTapped
-//      .subscribe(onNext: { [weak self] _ in
-//        guard let self = self else { return }
-//
-//
-//      })
-//      .disposed(by: disposeBag)
-    
-    return output
+
+    return Output(textCountLabelText: textCount, text: roomName.asDriver(onErrorJustReturn: ""))
   }
   
 }
