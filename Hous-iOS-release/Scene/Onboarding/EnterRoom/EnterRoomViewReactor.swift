@@ -40,7 +40,8 @@ final class EnterRoomViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
 
     var newState = state
-
+    newState.newRoomTransition = false
+    newState.existRoomTransition = false
     switch mutation {
     case .setNewRoomTransition:
       newState.newRoomTransition = !currentState.newRoomTransition

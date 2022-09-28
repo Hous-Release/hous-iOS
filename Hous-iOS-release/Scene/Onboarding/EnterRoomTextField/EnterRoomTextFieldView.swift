@@ -34,6 +34,7 @@ class EnterRoomTextFieldView: UIView {
     $0.text = "* 참여할 수 없는 코드예요."
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textColor = Colors.red.color
+    $0.isHidden = true
   }
 
   var enterRoomButton = UIButton().then {
@@ -93,6 +94,7 @@ class EnterRoomTextFieldView: UIView {
   }
 
   private func setup(_ roomType: EnterRoomType) {
+    backgroundColor = Colors.white.color
     titleLabel.text = roomType.textFieldTitleText
     subTitleLabel.text = roomType.textFieldSubTitleText
     textField.placeholder = roomType.textFieldPlaceholderText

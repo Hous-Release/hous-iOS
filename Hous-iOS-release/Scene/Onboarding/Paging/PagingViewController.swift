@@ -89,9 +89,10 @@ extension PagingViewController {
       .subscribe(onNext: { [weak self] isTapped in
         if isTapped {
           let vc = EnterRoomViewController()
-          vc.modalPresentationStyle = .fullScreen
-          vc.modalTransitionStyle = .crossDissolve
-          self?.present(vc, animated: true, completion: nil)
+          let nvc = UINavigationController(rootViewController: EnterRoomViewController())
+          nvc.modalPresentationStyle = .fullScreen
+          nvc.modalTransitionStyle = .crossDissolve
+          self?.present(nvc, animated: true, completion: nil)
         }
       })
       .disposed(by: disposeBag)

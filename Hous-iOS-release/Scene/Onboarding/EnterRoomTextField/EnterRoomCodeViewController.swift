@@ -18,6 +18,17 @@ class EnterRoomCodeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setup()
+  }
+
+  private func setup() {
     navigationController?.navigationBar.isHidden = true
+    mainView.navigationBar.delegate = self
+  }
+}
+
+extension EnterRoomCodeViewController: NavBarWithBackButtonViewDelegate {
+  func backButtonDidTapped() {
+    navigationController?.popViewController(animated: true)
   }
 }
