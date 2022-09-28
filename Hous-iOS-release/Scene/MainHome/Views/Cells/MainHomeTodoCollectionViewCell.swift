@@ -17,12 +17,12 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   //MARK: - Vars & Lets
   
-  private let disposeBag = DisposeBag()
+  var disposeBag = DisposeBag()
   
   weak var delegate: MainHomeTodoProtocol?
   
   //MARK: - UI Components
-  let titleLabel = UILabel().then {
+  private let titleLabel = UILabel().then {
     $0.numberOfLines = 2
     $0.text = "최인영님의,\n러블리더블리 하우스"
     $0.textColor = Colors.black.color
@@ -30,11 +30,11 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
   
-  private let editButton = UIButton().then {
+  let editButton = UIButton().then {
     $0.setImage(Images.icEditHous.image, for: .normal)
   }
   
-  private let copyButton = UIButton().then {
+  let copyButton = UIButton().then {
     $0.setImage(Images.icCopy.image, for: .normal)
   }
   
@@ -96,6 +96,11 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     configUI()
     bindUI()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
   }
   
   override func draw(_ rect: CGRect) {
