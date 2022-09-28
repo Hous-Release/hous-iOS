@@ -58,7 +58,6 @@
 		B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */; };
 		B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */; };
 		B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C928D61E4400C92FCD /* MockParser.swift */; };
-		B84EA6D328D621B300C92FCD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DA28DD815E00C92FCD /* PagingViewController.swift */; };
 		B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DC28DD817300C92FCD /* PagingCell.swift */; };
 		B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DE28DD81D400C92FCD /* PagingView.swift */; };
@@ -92,9 +91,11 @@
 		B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702828CA087E00B49984 /* UITextField+Extension.swift */; };
 		B856702D28CA912C00B49984 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B856702C28CA912C00B49984 /* Montserrat-Bold.otf */; };
 		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
+		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
+		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
+		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
 		B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */; };
 		B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89928DF919D009FD784 /* EnterRoomView.swift */; };
-		B8B8A89C28DF91A9009FD784 /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89B28DF91A9009FD784 /* EnterRoomViewReactor.swift */; };
 		B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -189,9 +190,11 @@
 		B856702A28CA831000B49984 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		B856702C28CA912C00B49984 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
+		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
+		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
 		B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewController.swift; sourceTree = "<group>"; };
 		B8B8A89928DF919D009FD784 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
-		B8B8A89B28DF91A9009FD784 /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -613,6 +616,8 @@
 				B84EA6D828DD7F1200C92FCD /* EnterInfo */,
 				B84EA6D928DD7F1B00C92FCD /* Paging */,
 				B8B8A89628DF9163009FD784 /* EnterRoom */,
+				B8B56BA128E2E74C00FC99DA /* EnterRoomCode */,
+				B8B56BA028E2E73900FC99DA /* CreateNewRoom */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -637,12 +642,28 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
+		B8B56BA028E2E73900FC99DA /* CreateNewRoom */ = {
+			isa = PBXGroup;
+			children = (
+				B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */,
+			);
+			path = CreateNewRoom;
+			sourceTree = "<group>";
+		};
+		B8B56BA128E2E74C00FC99DA /* EnterRoomCode */ = {
+			isa = PBXGroup;
+			children = (
+				B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */,
+			);
+			path = EnterRoomCode;
+			sourceTree = "<group>";
+		};
 		B8B8A89628DF9163009FD784 /* EnterRoom */ = {
 			isa = PBXGroup;
 			children = (
 				B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */,
+				B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */,
 				B8B8A89928DF919D009FD784 /* EnterRoomView.swift */,
-				B8B8A89B28DF91A9009FD784 /* EnterRoomViewReactor.swift */,
 				B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */,
 			);
 			path = EnterRoom;
@@ -758,11 +779,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
+				B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
 				B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
@@ -772,7 +795,6 @@
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
-				B8B8A89C28DF91A9009FD784 /* EnterRoomViewReactor.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
@@ -811,6 +833,7 @@
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
+				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
