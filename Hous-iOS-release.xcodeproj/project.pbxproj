@@ -35,6 +35,8 @@
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
 		B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */; };
+		9B091DFC28E35D2800C144BA /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFB28E35D2800C144BA /* Protocols.swift */; };
+		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
 		B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */; };
 		B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */; };
@@ -184,6 +186,8 @@
 		B84EA6DE28DD81D400C92FCD /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewReactor.swift; sourceTree = "<group>"; };
 		B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewContents.swift; sourceTree = "<group>"; };
+		9B091DFB28E35D2800C144BA /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B852C9B428C6461200DFF23C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B852C9B628C64D2600DFF23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8566FEB28C8661300B49984 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -630,6 +634,8 @@
 			isa = PBXGroup;
 			children = (
 				B856700628C88C6F00B49984 /* ProfileViewController.swift */,
+				9B091DFD28E363A900C144BA /* ProfileViewModel.swift */,
+				9B091DFB28E35D2800C144BA /* Protocols.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -813,7 +819,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		B852C9BA28C6668600DFF23C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -824,7 +830,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "PATH=/opt/homebrew/bin:$PATH\npwd\nls\nswiftgen config run\n";
 		};
@@ -859,6 +865,7 @@
 				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
+				9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
@@ -876,6 +883,7 @@
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
+				9B091DFC28E35D2800C144BA /* Protocols.swift in Sources */,
 				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
 				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,

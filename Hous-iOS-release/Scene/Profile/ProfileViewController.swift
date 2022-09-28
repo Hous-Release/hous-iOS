@@ -6,24 +6,63 @@
 //
 
 import UIKit
+import Then
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-class ProfileViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+final class ProfileViewController: UIViewController {
+  
+  //MARK: RX Components
+  
+  let disposeBag = DisposeBag()
+  var viewModel: <#MyViewModel#> = <#MyViewModel#>()
+  
+  //MARK: UI Templetes
+  
+  private enum Size {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  }
+  
+  //MARK: UI Components
+  
+  private let profileCollectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.minimumLineSpacing = 0
+    layout.scrollDirection = .vertical
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
+    let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
+    return collectionView
+  }()
+  
+  //MARK: Life Cycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    render()
+    bind()
+  }
+  
+  //MARK: Setup UI
+  
+  private func setup() {
+    
+  }
+  
+  //MARK: Bind
+  
+  private func bind() {
+    //input
+    //output
+  }
+  
+  //MARK: Render
+  
+  private func render() {
+    //    view.snp.makeConstraints { make in
+    //    make.height.equalTo(60)
+    //    make.leading.trailing.equalToSuperview()
+  }
+  
 }
