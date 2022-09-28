@@ -9,8 +9,15 @@ import UIKit
 
 class CreateNewRoomViewController: UIViewController {
 
+  var mainView = EnterRoomTextFieldView(roomType: .new)
+
+  override func loadView() {
+    super.loadView()
+    view = mainView
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    navigationController?.navigationBar.isHidden = true
   }
 }
