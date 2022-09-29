@@ -23,6 +23,12 @@ class EnterInfoViewController: UIViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     reactor = EnterInfoViewReactor()
+    setup()
+  }
+
+  private func setup() {
+    navigationController?.navigationBar.isHidden = true
+    mainView.navigationBar.delegate = self
   }
 
   func bind(reactor: EnterInfoViewReactor) {
@@ -35,12 +41,20 @@ extension EnterInfoViewController {
   private func bindAction(_ reactor: EnterInfoViewReactor) {
     mainView.nicknameTextfield.rx.text
       .orEmpty
-      .distinctUntilChanged()
+      .scan("") { prev, next in
+        /// - Question : 리액터로 넘기고 싶음, 그렇다면 text를 Observable로 넘겨야하나 ?
+        if next.count > 3 {
+          return prev
+        } else {
+          return next.replacingOccurrences(of: " ", with: "")
+        }
+      }
       .map { Reactor.Action.enterNickname($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
     mainView.datePicker.rx.date
+      .skip(1)
       .map { Reactor.Action.enterBirthday($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -58,6 +72,12 @@ extension EnterInfoViewController {
   }
 
   private func bindState(_ reactor: EnterInfoViewReactor) {
+
+    reactor.state.map { $0.nickname }
+      .asDriver(onErrorJustReturn: "")
+      .drive(mainView.nicknameTextfield.rx.text)
+      .disposed(by: disposeBag)
+
     reactor.state.map { $0.isBirthdayPublic }
       .bind(to: mainView.checkBirthDayButton.rx.isSelected)
       .disposed(by: disposeBag)
@@ -81,5 +101,11 @@ extension EnterInfoViewController {
         }
       })
       .disposed(by: disposeBag)
+  }
+}
+
+extension EnterInfoViewController: NavBarWithBackButtonViewDelegate {
+  func backButtonDidTapped() {
+    navigationController?.popViewController(animated: true)
   }
 }

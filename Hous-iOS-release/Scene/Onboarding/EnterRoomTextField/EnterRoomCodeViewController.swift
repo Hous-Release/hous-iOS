@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EnterRoomCodeViewController: UIViewController {
+final class EnterRoomCodeViewController: UIViewController {
 
   var mainView = EnterRoomTextFieldView(roomType: .exist)
 
@@ -24,6 +24,7 @@ class EnterRoomCodeViewController: UIViewController {
   private func setup() {
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBar.delegate = self
+    mainView.textField.rightView?.isHidden = true
   }
 }
 
