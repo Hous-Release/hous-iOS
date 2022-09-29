@@ -11,17 +11,6 @@ import ReactorKit
 
 final class CreateNewRoomViewReactor: Reactor {
 
-  /*
-   Action
-   1. textfield text
-   2. createButton Tap
-
-   State
-   1. textfield text max length
-   2. textfield text count
-   3. createButton tap view transition + server
-   */
-
   enum Action {
     case enterRoomName(String)
     case tapCreateRoom

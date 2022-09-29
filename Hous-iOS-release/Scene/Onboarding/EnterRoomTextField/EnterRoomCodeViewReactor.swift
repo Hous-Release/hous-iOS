@@ -43,10 +43,12 @@ final class EnterRoomCodeViewReactor: Reactor {
     switch action {
     case let .enterRoomCode(code):
       return .concat([
-        .just(Mutation.setIsButtonEnable(true)),
+        .just(Mutation.setIsButtonEnable(code.count > 0)),
+        // 서버통신 이후 결과
         .just(Mutation.setIsValidCode(true))
       ])
     case .tapEnterRoom:
+      // 서버통신
       return .just(Mutation.setViewTransition(true))
     }
   }
@@ -64,4 +66,8 @@ final class EnterRoomCodeViewReactor: Reactor {
     }
     return newState
   }
+}
+
+extension EnterRoomCodeViewReactor {
+
 }
