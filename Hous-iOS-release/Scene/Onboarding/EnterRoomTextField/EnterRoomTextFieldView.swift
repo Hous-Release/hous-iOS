@@ -67,7 +67,7 @@ class EnterRoomTextFieldView: UIView {
 
     contentView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(24)
-      make.centerY.equalToSuperview().multipliedBy(0.65)
+      make.centerY.equalToSuperview().multipliedBy(0.8)
     }
 
     titleLabel.snp.makeConstraints { make in
@@ -85,6 +85,7 @@ class EnterRoomTextFieldView: UIView {
     errorLabel.snp.makeConstraints { make in
       make.top.equalTo(textField.snp.bottom).offset(12)
       make.leading.equalToSuperview()
+      make.bottom.equalToSuperview()
     }
 
     enterRoomButton.snp.makeConstraints { make in
