@@ -39,8 +39,8 @@ final class EnterInfoViewReactor: Reactor {
   let initialState = State()
 
   func mutate(action: Action) -> Observable<Mutation> {
-    switch action {
 
+    switch action {
     case let .enterNickname(nickname):
       return .concat([
         .just(Mutation.setNickname(nickname)),
@@ -48,9 +48,9 @@ final class EnterInfoViewReactor: Reactor {
       ])
 
     case let .enterBirthday(birthday):
-      return Observable.concat([
+      return .concat([
         self.formatToString(of: birthday),
-        self.validateNextButton(currentState.nickname, currentState.birthday)
+        self.validateNextButton(currentState.nickname, toString(birthday))
       ])
 
     case let .checkBirthdayPublic(flag):
@@ -65,7 +65,7 @@ final class EnterInfoViewReactor: Reactor {
 
     var newState = state
     newState.next = false
-    
+
     switch mutation {
 
     case let .setNickname(nickname):
@@ -86,21 +86,24 @@ final class EnterInfoViewReactor: Reactor {
 
     return newState
   }
+}
+
+extension EnterInfoViewReactor {
 
   private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Mutation> {
-    let validation = nickname.count > 2 && birthday != ""
+    let validation = nickname.count > 0 && birthday != ""
     return .just(Mutation.setIsNextButtonEnable(validation))
   }
 
   private func formatToString(of birthday: Date?) -> Observable<Mutation> {
-    guard let birthday = birthday else { return .empty() }
+    return .just(Mutation.setBirthday(toString(birthday)))
+  }
+
+  private func toString(_ birthday: Date?) -> String {
+    guard let birthday = birthday else { return "" }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY/MM/dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
-
-    return .just(Mutation.setBirthday(dateFormatter.string(from: birthday)))
+    return dateFormatter.string(from: birthday)
   }
 }
-
-// 닉네임 글자 수 제한
-// 뷰 연결

@@ -99,6 +99,8 @@
 		B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */; };
 		B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89928DF919D009FD784 /* EnterRoomView.swift */; };
 		B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */; };
+		B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */; };
+		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -200,6 +202,8 @@
 		B8B8A89728DF9196009FD784 /* EnterRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewController.swift; sourceTree = "<group>"; };
 		B8B8A89928DF919D009FD784 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
 		B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomButton.swift; sourceTree = "<group>"; };
+		B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewReactor.swift; sourceTree = "<group>"; };
+		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -650,8 +654,10 @@
 			isa = PBXGroup;
 			children = (
 				B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */,
-				B8B56BA628E3FFA100FC99DA /* EnterRoomTextFieldView.swift */,
+				B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */,
 				B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */,
+				B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */,
+				B8B56BA628E3FFA100FC99DA /* EnterRoomTextFieldView.swift */,
 			);
 			path = EnterRoomTextField;
 			sourceTree = "<group>";
@@ -819,6 +825,7 @@
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
+				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
@@ -835,6 +842,7 @@
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
+				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,

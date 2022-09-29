@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import RxCocoa
+import ReactorKit
 
-class CreateNewRoomViewController: UIViewController {
+final class CreateNewRoomViewController: UIViewController, View {
 
+  var disposeBag = DisposeBag()
   var mainView = EnterRoomTextFieldView(roomType: .new)
 
   override func loadView() {
@@ -18,12 +21,28 @@ class CreateNewRoomViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    reactor = CreateNewRoomViewReactor()
     setup()
   }
 
   private func setup() {
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBar.delegate = self
+  }
+
+  func bind(reactor: CreateNewRoomViewReactor) {
+    bindAction(reactor)
+    bindStatus(reactor)
+  }
+}
+
+extension CreateNewRoomViewController {
+  private func bindAction(_ reactor: CreateNewRoomViewReactor) {
+
+  }
+
+  private func bindStatus(_ reactor: CreateNewRoomViewReactor) {
+
   }
 }
 

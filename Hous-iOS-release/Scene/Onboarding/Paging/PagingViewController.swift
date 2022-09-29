@@ -88,7 +88,6 @@ extension PagingViewController {
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isTapped in
         if isTapped {
-          let vc = EnterRoomViewController()
           let nvc = UINavigationController(rootViewController: EnterRoomViewController())
           nvc.modalPresentationStyle = .fullScreen
           nvc.modalTransitionStyle = .crossDissolve
