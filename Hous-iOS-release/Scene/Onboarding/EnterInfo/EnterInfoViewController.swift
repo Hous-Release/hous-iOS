@@ -42,6 +42,7 @@ extension EnterInfoViewController {
     mainView.nicknameTextfield.rx.text
       .orEmpty
       .scan("") { prev, next in
+        print("prev : \(prev), next : \(next)")
         /// - Question : 리액터로 넘기고 싶음, 그렇다면 text를 Observable로 넘겨야하나 ?
         if next.count > 3 {
           return prev

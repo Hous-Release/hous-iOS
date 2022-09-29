@@ -29,14 +29,14 @@ final class CreateNewRoomViewReactor: Reactor {
 
   enum Mutation {
     case setRoomName(String)
-    case setRoomNameCount(Int)
+    case setRoomNameCount(String)
     case setIsButtonEnable(Bool)
     case setViewTransition(Bool)
   }
 
   struct State {
     var roomName: String = ""
-    var roomNameCount: Int = 0
+    var roomNameCount: String = ""
     var isButtonEnable: Bool = false
     var viewTransition: Bool = false
   }
@@ -48,9 +48,9 @@ final class CreateNewRoomViewReactor: Reactor {
 
     case let .enterRoomName(roomName):
       return .concat([
-        .just(Mutation.setRoomName(roomName)),
-        .just(Mutation.setRoomNameCount(roomName.count)),
-        .just(Mutation.setIsButtonEnable(true))
+        self.limitMaxLength(of: roomName),
+        self.countToString(of: roomName),
+        .just(Mutation.setIsButtonEnable(roomName.count > 0))
       ])
     case .tapCreateRoom:
       return .just(Mutation.setViewTransition(true))
@@ -71,5 +71,25 @@ final class CreateNewRoomViewReactor: Reactor {
       newState.viewTransition = status
     }
     return newState
+  }
+}
+
+extension CreateNewRoomViewReactor {
+
+  private func limitMaxLength(of roomName: String) -> Observable<Mutation> {
+    /// Question : 이렇게 하면.. prev이 업뎃이 안되네
+    Observable.of(roomName)
+      .scan("") { prev, next in
+        print("prev : \(prev), next : \(next)")
+        return next.count > 8 ? prev : next
+      }
+      .map { Mutation.setRoomName($0) }
+  }
+
+  private func countToString(of roomName: String) -> Observable<Mutation> {
+    var count = roomName.count
+    count > 8 ? count = 8 : nil
+    let labelText = "\(String(count)) / 8"
+    return .just(Mutation.setRoomNameCount(labelText))
   }
 }
