@@ -94,6 +94,8 @@ class EnterInfoView: UIView {
   private func setUp() {
     birthdayTextfield.setDatePicker(target: self, selector: #selector(setDate), datePicker: datePicker)
     datePicker.addTarget(self, action: #selector(handleDatePickerTap), for: .editingDidBegin)
+    nicknameTextfield.rightView?.isHidden = true
+    birthdayTextfield.rightView?.isHidden = true
   }
 
   @objc func setDate() {
