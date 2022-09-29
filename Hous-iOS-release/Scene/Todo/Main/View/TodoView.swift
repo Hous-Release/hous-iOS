@@ -54,7 +54,7 @@ final class TodoView: UIView {
     $0.configuration = config
   }
 
-  private let progressView = UIView()
+  var progressView = ProgressBarView()
 
   var todoCollectionView = UICollectionView(
     frame: .zero,
