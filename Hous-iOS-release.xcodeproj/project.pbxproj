@@ -108,6 +108,8 @@
 		B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */; };
 		B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */; };
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
+		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
+		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +220,8 @@
 		B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomButton.swift; sourceTree = "<group>"; };
 		B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
+		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -495,6 +499,8 @@
 			children = (
 				B84EA6A528D61A5400C92FCD /* TodoView.swift */,
 				B84EA6A728D61A6D00C92FCD /* TodoPopupView.swift */,
+				B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */,
+				B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -844,6 +850,7 @@
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
+				B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
@@ -874,6 +881,7 @@
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				770B959B28F15E5200C8C945 /* AlertService.swift in Sources */,
+				B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,

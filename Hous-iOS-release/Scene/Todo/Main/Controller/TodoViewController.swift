@@ -45,6 +45,15 @@ final class TodoViewController: UIViewController, View {
       .bind(to: mainView.dayOfWeekLabel.rx.text)
       .disposed(by: disposeBag)
 
+    reactor.state.map { $0.progressType }
+      .bind(to: mainView.progressView.rx.progressType)
+      .disposed(by: disposeBag)
+
+    // 여기 프로그래스 Int 연결하는 방법 알아보기
+//    reactor.state.map { Float($0.progress) }
+//      .bind(to: mainView.progressView.progressView.rx.progress)
+//      .disposed(by: disposeBag)
+
     let dataSource = RxCollectionViewSectionedReloadDataSource<TodoMainSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
       switch item {
       case .myTodo(let todos):

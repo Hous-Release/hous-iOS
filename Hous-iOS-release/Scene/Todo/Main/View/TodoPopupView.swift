@@ -13,13 +13,22 @@ import Then
 
 final class TriangleView: UIView {
 
+  var color: UIColor = Colors.blue.color
+  var rotated: Bool = false
+
   override func draw(_ rect: CGRect) {
     let path = UIBezierPath()
-    path.move(to: CGPoint(x: self.frame.width / 2, y: 0))
-    path.addLine(to: CGPoint(x: 0, y: self.frame.height))
-    path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
+    if rotated {
+      path.move(to: CGPoint(x: 0, y: 0))
+      path.addLine(to: CGPoint(x: 0, y: self.frame.height))
+      path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height / 2))
+    } else {
+      path.move(to: CGPoint(x: self.frame.width / 2, y: 0))
+      path.addLine(to: CGPoint(x: 0, y: self.frame.height))
+      path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
+    }
     path.close()
-    Colors.blue.color.set()
+    color.set()
     path.fill()
   }
 }

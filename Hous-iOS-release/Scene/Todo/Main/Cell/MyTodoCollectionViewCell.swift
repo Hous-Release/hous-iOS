@@ -36,6 +36,12 @@ final class MyTodoCollectionViewCell: UICollectionViewCell, View {
     $0.text = "블라블라블라"
   }
 
+  private var assigneeLabel = UILabel().then {
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.g3.color
+    $0.text = "최인영, 최소현"
+  }
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     reactor = MyTodoCollectionViewCellReactor()
