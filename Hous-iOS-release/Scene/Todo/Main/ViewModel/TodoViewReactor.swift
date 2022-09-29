@@ -24,6 +24,7 @@ final class TodoViewReactor: Reactor {
   struct State {
     var date: String = ""
     var dayOfWeek: String = ""
+    var progressType: ProgressType = .none
     var myTodosSection = TodoMainSection.Model(
       model: .myTodo(num: 0),
       items: []
@@ -53,13 +54,13 @@ final class TodoViewReactor: Reactor {
     case let .setTodoMain(data):
       newState.date = data.date
       newState.dayOfWeek = parseDayOfWeek(of: data.dayOfWeek)
+      newState.progressType = getProgressType(of: data.progress)
 
       let myTodoItems = data.myTodos.map { TodoMainSection.Item.myTodo(todos: $0)}
       newState.myTodosSection = TodoMainSection.Model(model: .myTodo(num: data.myTodosCnt), items: myTodoItems)
       let ourTodoItems = data.ourTodos.map { TodoMainSection.Item.ourTodo(todos: $0)}
       newState.ourTodosSection = TodoMainSection.Model(model: .ourTodo(num: data.ourTodosCnt), items: ourTodoItems)
-
-
+      print(data.progress)
       newState.progress = data.progress
     }
     return newState
@@ -67,7 +68,19 @@ final class TodoViewReactor: Reactor {
 }
 
 extension TodoViewReactor {
-  func parseDayOfWeek(of dayOfWeek: String) -> String {
+  private func parseDayOfWeek(of dayOfWeek: String) -> String {
     return dayOfWeek.prefix(1) + dayOfWeek.dropFirst().lowercased()
+  }
+
+  private func getProgressType(of progress: Int) -> ProgressType {
+    if progress == 0 {
+      return .none
+    } else if progress > 0 && progress < 50 {
+      return .underHalf
+    } else if progress >= 50 && progress < 100 {
+      return .overHalf
+    } else {
+      return .done
+    }
   }
 }
