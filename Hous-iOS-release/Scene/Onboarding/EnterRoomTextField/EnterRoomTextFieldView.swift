@@ -27,7 +27,7 @@ class EnterRoomTextFieldView: UIView {
 
   var textField = UnderlinedTextField().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.textColor = Colors.g4.color
+    $0.textColor = Colors.black.color
   }
 
   var errorLabel = UILabel().then {
