@@ -10,6 +10,7 @@ import Alamofire
 
 public enum AuthService {
   case login(_ dto: AuthDTO.Request.LoginRequestDTO)
+  case refresh(_ dto: Token)
 }
 
 extension AuthService: TargetType {
@@ -21,6 +22,8 @@ extension AuthService: TargetType {
     switch self {
     case .login:
       return "auth/login"
+    case .refresh:
+      return "auth/refresh"
     }
   }
 
@@ -28,12 +31,16 @@ extension AuthService: TargetType {
     switch self {
     case .login:
       return .post
+    case .refresh:
+      return .post
     }
   }
 
   public var parameters: RequestParams {
     switch self {
     case let .login(dto):
+      return .body(dto)
+    case let .refresh(dto):
       return .body(dto)
     }
   }
