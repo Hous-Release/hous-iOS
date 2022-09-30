@@ -46,13 +46,23 @@ final class TodoViewController: UIViewController, View {
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.progressType }
-      .bind(to: mainView.progressView.rx.progressType)
+      .skip(1)
+      .bind(to: mainView.progressBarView.rx.progressType)
       .disposed(by: disposeBag)
 
-    // 여기 프로그래스 Int 연결하는 방법 알아보기
-//    reactor.state.map { Float($0.progress) }
-//      .bind(to: mainView.progressView.progressView.rx.progress)
-//      .disposed(by: disposeBag)
+    reactor.state.map {$0.progress}
+      .subscribe(onNext: { progress in
+        self.mainView.progressBarView.progressView.progress = progress
+        self.mainView.progressBarView.progress = progress
+      })
+      .disposed(by: disposeBag)
+
+    bindCollectionView(reactor)
+  }
+}
+
+extension TodoViewController {
+  private func bindCollectionView(_ reactor: TodoViewReactor) {
 
     let dataSource = RxCollectionViewSectionedReloadDataSource<TodoMainSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
       switch item {
