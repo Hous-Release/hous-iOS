@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
+enum BubbleViewType {
+  case left, right
+}
+
 final class ProgressBubbleView: UIView {
 
   enum Size {
@@ -17,65 +21,71 @@ final class ProgressBubbleView: UIView {
     static let bubbleHeight: CGFloat = 29
   }
 
-  var buttonPoint: CGPoint = CGPoint(x: 0, y: 0) {
-    didSet {
-//      bubbleView.snp.remakeConstraints { make in
-//        make.centerX.equalTo(buttonPoint.x - Size.quarterWidthOfBubble)
-//        make.centerY.equalTo(buttonPoint.y + 30)
-//      }
-    }
-  }
-
   let bubbleView = UIView()
   let triangleView = TriangleView()
   private let rectangleView = UIView()
 
-  private let guideLabel = UILabel().then {
+  var guideLabel = UILabel().then {
     $0.textAlignment = .center
-    $0.text = "아직 하나도 못했어요!"
     $0.font = Fonts.SpoqaHanSansNeo.regular.font(size: 11)
     $0.textColor = Colors.g6.color
   }
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    render()
-    setUp()
+  init(bubbleViewType: BubbleViewType) {
+    super.init(frame: .zero)
+    render(bubbleViewType)
+    setUp(bubbleViewType)
   }
 
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setUp() {
+  private func setUp(_ bubbleViewType: BubbleViewType) {
     backgroundColor = .clear
     triangleView.color = Colors.g2.color
     triangleView.rotated = true
     triangleView.backgroundColor = .clear
     rectangleView.layer.backgroundColor = Colors.g2.color.cgColor
     rectangleView.makeRounded(cornerRadius: Size.bubbleHeight / 2)
+    if bubbleViewType == .right {
+      triangleView.transform = CGAffineTransform(rotationAngle: .pi)
+    }
   }
 
-  private func render() {
+  private func render(_ bubbleViewType: BubbleViewType) {
 
     addSubview(bubbleView)
     [triangleView, rectangleView].forEach { bubbleView.addSubview($0) }
     rectangleView.addSubView(guideLabel)
 
     bubbleView.snp.makeConstraints { make in
-      make.height.equalTo(Size.bubbleHeight)
-      make.width.equalTo(Size.bubbleWidth)
+      make.edges.equalToSuperview()
     }
 
-    triangleView.snp.makeConstraints { make in
-      make.trailing.equalToSuperview()
-      make.size.equalTo(14)
-      make.centerY.equalTo(rectangleView.snp.centerY)
-    }
+    switch bubbleViewType {
+    case .left:
+      triangleView.snp.makeConstraints { make in
+        make.trailing.equalToSuperview()
+        make.size.equalTo(14)
+        make.centerY.equalTo(rectangleView.snp.centerY)
+      }
 
-    rectangleView.snp.makeConstraints { make in
-      make.leading.top.bottom.equalToSuperview()
-      make.trailing.equalToSuperview().inset(7)
+      rectangleView.snp.makeConstraints { make in
+        make.leading.top.bottom.equalToSuperview()
+        make.trailing.equalToSuperview().inset(7)
+      }
+    case .right:
+      triangleView.snp.makeConstraints { make in
+        make.leading.equalToSuperview()
+        make.size.equalTo(14)
+        make.centerY.equalTo(rectangleView.snp.centerY)
+      }
+
+      rectangleView.snp.makeConstraints { make in
+        make.trailing.top.bottom.equalToSuperview()
+        make.leading.equalToSuperview().inset(7)
+      }
     }
 
     guideLabel.snp.makeConstraints { make in

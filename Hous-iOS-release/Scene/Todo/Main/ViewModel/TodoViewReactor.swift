@@ -33,7 +33,7 @@ final class TodoViewReactor: Reactor {
       model: .ourTodo(num: 0),
       items: []
     )
-    var progress: Int = 0
+    var progress: Float = 0
   }
 
   let initialState = State()
@@ -60,8 +60,7 @@ final class TodoViewReactor: Reactor {
       newState.myTodosSection = TodoMainSection.Model(model: .myTodo(num: data.myTodosCnt), items: myTodoItems)
       let ourTodoItems = data.ourTodos.map { TodoMainSection.Item.ourTodo(todos: $0)}
       newState.ourTodosSection = TodoMainSection.Model(model: .ourTodo(num: data.ourTodosCnt), items: ourTodoItems)
-      print(data.progress)
-      newState.progress = data.progress
+      newState.progress = Float(data.progress) / 100.0
     }
     return newState
   }
