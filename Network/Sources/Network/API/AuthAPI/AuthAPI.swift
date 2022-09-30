@@ -13,9 +13,25 @@ protocol AuthAPIProtocol {
     _ loginRequestDTO: AuthDTO.Request.LoginRequestDTO,
     completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void
   )
+  func refresh(
+    _ refreshRequestDTO: Token,
+    completion: @escaping (BaseResponseType<Token>?, Error?) -> Void
+  )
 }
 
 public final class AuthAPI: APIRequestLoader<AuthService>, AuthAPIProtocol {
+  public func refresh(
+    _ refreshRequestDTO: Token,
+    completion: @escaping (BaseResponseType<Token>?, Error?) -> Void) {
+    fetchData(
+      target: .refresh(refreshRequestDTO),
+      responseData: BaseResponseType<Token>.self,
+      isWithInterceptor: true
+    ) { res, err in
+        completion(res, err)
+      }
+  }
+
   public func login(
     _ loginRequestDTO: AuthDTO.Request.LoginRequestDTO,
     completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void) {
