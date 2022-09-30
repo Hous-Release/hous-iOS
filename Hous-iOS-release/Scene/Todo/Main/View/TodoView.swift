@@ -54,7 +54,7 @@ final class TodoView: UIView {
     $0.configuration = config
   }
 
-  var progressView = ProgressBarView()
+  var progressBarView = ProgressBarView()
 
   var todoCollectionView = UICollectionView(
     frame: .zero,
@@ -88,7 +88,7 @@ final class TodoView: UIView {
 
   private func render() {
 
-    [navigationBarView, progressView, todoCollectionView].forEach { addSubview($0) }
+    [navigationBarView, progressBarView, todoCollectionView].forEach { addSubview($0) }
     [dateStackView, viewAllButton].forEach { navigationBarView.addSubview($0) }
     dateStackView.addArrangedSubviews(dateLabel, dayOfWeekLabel)
 
@@ -108,14 +108,14 @@ final class TodoView: UIView {
       make.bottom.equalToSuperview()
     }
 
-    progressView.snp.makeConstraints { make in
+    progressBarView.snp.makeConstraints { make in
       make.top.equalTo(navigationBarView.snp.bottom)
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(92)
     }
 
     todoCollectionView.snp.makeConstraints { make in
-      make.top.equalTo(progressView.snp.bottom)
+      make.top.equalTo(progressBarView.snp.bottom)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalToSuperview().inset(80)
     }

@@ -38,13 +38,40 @@ enum ProgressType {
 
 final class ProgressBarView: UIView {
 
+  enum Size {
+    static let screenWidth: CGFloat = UIScreen.main.bounds.width
+    static let progressBarPadding: CGFloat = 24
+  }
+
   var progressType: ProgressType = .none {
     didSet {
-      // int도 받아와야지 멍청아
+      progressImageView.image = progressType.image
+      switch progressType {
+      case .none, .underHalf:
+        leftBubbleView.isHidden = true
+        rightBubbleView.isHidden = false
+        rightBubbleView.guideLabel.text = progressType.text
+      case .overHalf, .done:
+        rightBubbleView.isHidden = true
+        leftBubbleView.isHidden = false
+        leftBubbleView.guideLabel.text = progressType.text
+      }
     }
   }
 
-  var progressBubbleView = ProgressBubbleView()
+  var progress: Float = 0 {
+    didSet {
+      progressImageView.snp.remakeConstraints { make in
+        make.leading.equalTo(leftBubbleView.snp.trailing).offset(6)
+        make.trailing.equalTo(rightBubbleView.snp.leading).offset(-6)
+        make.size.equalTo(40)
+        make.centerX.equalTo(locateImage(with: progress))
+      }
+    }
+  }
+
+  var leftBubbleView = ProgressBubbleView(bubbleViewType: .left)
+  var rightBubbleView = ProgressBubbleView(bubbleViewType: .right)
 
   private var progressImageView = UIImageView().then {
     $0.image = Images.profilePurple.image
@@ -61,7 +88,6 @@ final class ProgressBarView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()
-    setup()
   }
 
   required init(coder: NSCoder) {
@@ -69,19 +95,18 @@ final class ProgressBarView: UIView {
   }
 
   private func render() {
-    addSubViews([progressBubbleView, progressImageView, progressView])
+    addSubViews([leftBubbleView, rightBubbleView, progressImageView, progressView])
 
-    progressBubbleView.snp.makeConstraints { make in
+    leftBubbleView.snp.makeConstraints { make in
       make.centerY.equalTo(progressImageView.snp.centerY)
       make.height.equalTo(29)
-      make.width.equalTo(138)
-      make.leading.greaterThanOrEqualTo(self.snp.leading).offset(24)
+      make.width.lessThanOrEqualTo(138)
     }
 
-    progressImageView.snp.makeConstraints { make in
-      make.leading.equalTo(progressBubbleView.snp.trailing).offset(6)
-      make.size.equalTo(40)
-      make.centerX.equalToSuperview()
+    rightBubbleView.snp.makeConstraints { make in
+      make.centerY.equalTo(progressImageView.snp.centerY)
+      make.height.equalTo(29)
+      make.width.lessThanOrEqualTo(138)
     }
 
     progressView.snp.makeConstraints { make in
@@ -91,8 +116,12 @@ final class ProgressBarView: UIView {
       make.bottom.equalToSuperview().inset(12)
     }
   }
+}
 
-  private func setup() {
-
+extension ProgressBarView {
+  private func locateImage(with progress: Float) -> CGFloat {
+    let progressBarWidth = Size.screenWidth - Size.progressBarPadding * 2
+    let progressFloat: CGFloat = progressBarWidth * CGFloat(progress)
+    return Size.progressBarPadding + progressFloat
   }
 }
