@@ -15,13 +15,14 @@ public enum AuthRepositroyEvent {
   case isSuccess(Bool)
   case updateAccessToken(String)
   case updateRefreshToken(String)
-  case sendError(String?)
+  case sendError(HouseErrorModel?)
 }
 
 public protocol AuthRepository {
   var event: PublishSubject<AuthRepositroyEvent> { get }
 
   func login(_ dto: AuthDTO.Request.LoginRequestDTO)
+  func refresh(_ dto: Token)
 }
 public final class AuthRepositoryImp: AuthRepository {
   public var event = PublishSubject<AuthRepositroyEvent>()
@@ -30,9 +31,14 @@ public final class AuthRepositoryImp: AuthRepository {
 
     NetworkService.shared.authRepository.login(dto) { [weak self] res, err in
       guard let self = self else { return }
-
       guard let data = res?.data else {
-        self.event.onNext(.sendError(res?.message))
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? ""
+        )
+
+        self.event.onNext(.sendError(errorModel))
         return
       }
 
@@ -42,5 +48,27 @@ public final class AuthRepositoryImp: AuthRepository {
 
     }
   }
+
+  public func refresh(_ dto: Token) {
+    NetworkService.shared.authRepository.refresh(dto) { [weak self] res, err in
+      guard let self = self else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      self.event.onNext(.isSuccess(true))
+      self.event.onNext(.updateAccessToken(data.accessToken))
+      self.event.onNext(.updateRefreshToken(data.refreshToken))
+
+    }
+  }
+
 }
 

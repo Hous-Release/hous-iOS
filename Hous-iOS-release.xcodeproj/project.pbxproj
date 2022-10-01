@@ -17,6 +17,8 @@
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
+		7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E128E734E20068B13C /* SplashReactor.swift */; };
+		7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E328E737520068B13C /* HouseErrorModel.swift */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
 		777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666228A74A62000BECEA /* SceneDelegate.swift */; };
 		777C666A28A74A63000BECEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C666928A74A63000BECEA /* Assets.xcassets */; };
@@ -115,6 +117,8 @@
 		7706801428E045120082A7E7 /* SignInReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInReactor.swift; sourceTree = "<group>"; };
 		7706801628E047DE0082A7E7 /* KakaoSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignIn.swift; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
+		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
+		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
 		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777C666228A74A62000BECEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 			children = (
 				777C667428A74C32000BECEA /* SplashViewController.swift */,
 				777C666B28A74A63000BECEA /* LaunchScreen.storyboard */,
+				7757A3E128E734E20068B13C /* SplashReactor.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */,
+				7757A3E328E737520068B13C /* HouseErrorModel.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -836,6 +842,7 @@
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
+				7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
@@ -853,6 +860,7 @@
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
+				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
