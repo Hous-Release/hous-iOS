@@ -11,10 +11,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ProfileViewModel: IOViewModel {
-  struct Dependency {
-    
-  }
+final class ProfileViewModel: ViewModelType {
+  
+  private let disposeBag: DisposeBag = DisposeBag()
   
   struct Input {
     
@@ -24,21 +23,11 @@ final class ProfileViewModel: IOViewModel {
     
   }
   
-  let dependency: Dependency
-  var disposeBag: DisposeBag = DisposeBag()
-  let input: Input
-  let output: Output
   
-  init(dependency: Dependency = <# 초기화할 값들 #>) {
-    self.dependency = dependency
-    
-    // Streams
-    
-    // Input & Output
-    self.input = <#Input#>
-    self.output = <#Output#>
-    
-    // Binding
-  
+  func transform(input: Input) -> Output {
+    <#code#>
   }
+  
+  
 }
+

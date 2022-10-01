@@ -5,7 +5,7 @@
 //  Created by 이의진 on 2022/09/28.
 //
 
-import Foundation
+import UIKit
 
 enum PersonalityColor: Codable {
   case red
@@ -19,7 +19,7 @@ enum PersonalityColor: Codable {
 
 struct ProfileDTO: Codable {
   let personalityColor: PersonalityColor
-  let userName, userJob, statusMessage: String
+  let userName, userJob, statusMessage, bedgeImage: String
   let hashTags: [String]
   let typeScores: [Double]
   let isEmptyView: Bool

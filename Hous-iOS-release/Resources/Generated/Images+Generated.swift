@@ -90,7 +90,9 @@ internal enum Images {
   internal static let icCheckBadge = ImageAsset(name: "ic_check_badge")
   internal static let icBackTest = ImageAsset(name: "ic_back_test")
   internal static let icForTest = ImageAsset(name: "ic_for_test")
+  internal static let icAlarm = ImageAsset(name: "ic_alarm")
 }
+
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
