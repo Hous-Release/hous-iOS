@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     print("AccessToken === ", Keychain.shared.getAccessToken() ?? "")
     print("RefreshToken === ", Keychain.shared.getRefreshToken() ?? "")
 
+    removeKeychainAtFirstLaunch()
+
     return true
   }
 
@@ -96,5 +98,13 @@ extension AppDelegate {
         print("Permission granted: \(granted)")
       }
     }
+  }
+
+  private func removeKeychainAtFirstLaunch() {
+    guard UserInformation.isFirstLaunch() else {
+      return
+    }
+
+    Keychain.shared.removeAllKeys()
   }
 }
