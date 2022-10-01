@@ -101,9 +101,8 @@ final class SignInReactor: Reactor {
         Keychain.shared.setRefreshToken(refreshToken: refreshToken)
         return .empty()
 
-      case .sendError(let errorString):
-        return .just(.setError(errorString))
-
+      case .sendError(let errorModel):
+        return .just(.setError(errorModel?.message))
       }
     }
     return Observable.merge(mutation, serviceMutation)
