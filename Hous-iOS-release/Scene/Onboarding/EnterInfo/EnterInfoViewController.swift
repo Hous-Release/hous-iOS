@@ -41,15 +41,8 @@ extension EnterInfoViewController {
   private func bindAction(_ reactor: EnterInfoViewReactor) {
     mainView.nicknameTextfield.rx.text
       .orEmpty
-      .scan("") { prev, next in
-        print("prev : \(prev), next : \(next)")
-        /// - Question : 리액터로 넘기고 싶음, 그렇다면 text를 Observable로 넘겨야하나 ?
-        if next.count > 3 {
-          return prev
-        } else {
-          return next.replacingOccurrences(of: " ", with: "")
-        }
-      }
+      .distinctUntilChanged()
+      .debug("bindAction")
       .map { Reactor.Action.enterNickname($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -75,19 +68,24 @@ extension EnterInfoViewController {
   private func bindState(_ reactor: EnterInfoViewReactor) {
 
     reactor.state.map { $0.nickname }
+      .distinctUntilChanged()
+      .debug("nickname")
       .asDriver(onErrorJustReturn: "")
       .drive(mainView.nicknameTextfield.rx.text)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.isBirthdayPublic }
+      .distinctUntilChanged()
       .bind(to: mainView.checkBirthDayButton.rx.isSelected)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.birthday }
+      .distinctUntilChanged()
       .bind(to: mainView.birthdayTextfield.rx.text)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.isNextButtonEnable }
+      .distinctUntilChanged()
       .bind(to: mainView.nextButton.rx.isEnabled)
       .disposed(by: disposeBag)
 

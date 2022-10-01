@@ -40,6 +40,7 @@ extension CreateNewRoomViewController {
   private func bindAction(_ reactor: CreateNewRoomViewReactor) {
     mainView.textField.rx.text
       .orEmpty
+      .distinctUntilChanged()
       .map { Reactor.Action.enterRoomName($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
