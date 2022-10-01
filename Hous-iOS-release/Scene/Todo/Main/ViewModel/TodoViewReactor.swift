@@ -45,10 +45,6 @@ final class TodoViewReactor: Reactor {
     }
   }
 
-//  func transform(state: Observable<State>) -> Observable<State> {
-//       return state.debug("state")
-//  }
-
   func reduce(state: State, mutation: Mutation) -> State {
 
     var newState = state

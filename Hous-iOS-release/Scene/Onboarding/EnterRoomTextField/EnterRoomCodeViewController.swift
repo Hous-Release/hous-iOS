@@ -41,6 +41,7 @@ extension EnterRoomCodeViewController {
   private func bindAction(_ reactor: EnterRoomCodeViewReactor) {
     mainView.textField.rx.text
       .orEmpty
+      .distinctUntilChanged()
       .map { Reactor.Action.enterRoomCode($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)

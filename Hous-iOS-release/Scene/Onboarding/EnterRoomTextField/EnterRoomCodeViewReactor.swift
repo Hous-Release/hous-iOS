@@ -42,14 +42,13 @@ final class EnterRoomCodeViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .enterRoomCode(code):
-      return .concat([
-        .just(Mutation.setIsButtonEnable(code.count > 0)),
-        // 서버통신 이후 결과
-        .just(Mutation.setIsValidCode(true))
-      ])
+      return .just(Mutation.setIsButtonEnable(code.count > 0))
     case .tapEnterRoom:
       // 서버통신
-      return .just(Mutation.setViewTransition(true))
+        return .concat([
+          .just(Mutation.setIsValidCode(true)),
+          .just(Mutation.setViewTransition(true))
+        ])
     }
   }
 

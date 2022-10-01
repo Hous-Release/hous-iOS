@@ -37,8 +37,8 @@ final class CreateNewRoomViewReactor: Reactor {
 
     case let .enterRoomName(roomName):
       return .concat([
-        self.limitMaxLength(of: roomName),
-        self.countToString(of: roomName),
+        limitMaxLength(of: roomName),
+        countToString(of: roomName),
         .just(Mutation.setIsButtonEnable(roomName.count > 0))
       ])
     case .tapCreateRoom:
@@ -65,19 +65,16 @@ final class CreateNewRoomViewReactor: Reactor {
 
 extension CreateNewRoomViewReactor {
 
-  private func limitMaxLength(of roomName: String) -> Observable<Mutation> {
-    /// Question : 이렇게 하면.. prev이 업뎃이 안되네
-    Observable.of(roomName)
-      .scan("") { prev, next in
-        print("prev : \(prev), next : \(next)")
-        return next.count > 8 ? prev : next
-      }
-      .map { Mutation.setRoomName($0) }
+  private func limitMaxLength(of nickname: String) -> Observable<Mutation> {
+
+    let limitedText = nickname.prefix(8)
+
+    return .just(.setRoomName(String(limitedText)))
   }
 
   private func countToString(of roomName: String) -> Observable<Mutation> {
     var count = roomName.count
-    count > 8 ? count = 8 : nil
+    if count > 8 { count = 8 }
     let labelText = "\(String(count)) / 8"
     return .just(Mutation.setRoomNameCount(labelText))
   }
