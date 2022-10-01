@@ -14,7 +14,7 @@ final class Keychain {
   private init() { }
   private let keychain: KeychainWrapper = KeychainWrapper.standard
 
-  private var accessTokenKey = "accessTokenKey"
+  private let accessTokenKey = "accessTokenKey"
   private let refreshTokenKey = "refreshTokenKey"
   private let fcmTokenKey = "FCMTokenKey"
 }
