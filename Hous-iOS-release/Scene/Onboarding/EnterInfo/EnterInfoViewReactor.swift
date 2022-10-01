@@ -43,14 +43,14 @@ final class EnterInfoViewReactor: Reactor {
     switch action {
     case let .enterNickname(nickname):
       return .concat([
-        .just(Mutation.setNickname(nickname)),
-        self.validateNextButton(nickname, currentState.birthday)
+        limitMaxLength(of: nickname),
+        validateNextButton(nickname, currentState.birthday)
       ])
 
     case let .enterBirthday(birthday):
       return .concat([
-        self.formatToString(of: birthday),
-        self.validateNextButton(currentState.nickname, toString(birthday))
+        formatToString(of: birthday),
+        validateNextButton(currentState.nickname, toString(birthday))
       ])
 
     case let .checkBirthdayPublic(flag):
@@ -89,6 +89,13 @@ final class EnterInfoViewReactor: Reactor {
 }
 
 extension EnterInfoViewReactor {
+
+  private func limitMaxLength(of nickname: String) -> Observable<Mutation> {
+
+    let limitedText = nickname.prefix(3)
+
+    return .just(.setNickname(String(limitedText)))
+  }
 
   private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Mutation> {
     let validation = nickname.count > 0 && birthday != ""

@@ -28,7 +28,7 @@ class EnterRoomViewController: UIViewController, View {
 
   func bind(reactor: EnterRoomViewReactor) {
     bindAction(reactor)
-    bindStatus(reactor)
+    bindState(reactor)
   }
 }
 
@@ -36,37 +36,37 @@ extension EnterRoomViewController {
   private func bindAction(_ reactor: EnterRoomViewReactor) {
     mainView.newRoomView.rx.tapGesture()
       .when(.recognized)
-      .withUnretained(self)
       .map { _ in Reactor.Action.didTapNewRoomButton }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
     mainView.existRoomView.rx.tapGesture()
       .when(.recognized)
-      .withUnretained(self)
       .map { _ in Reactor.Action.didTapExistRoomButton }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
 
-  private func bindStatus(_ reactor: EnterRoomViewReactor) {
+  private func bindState(_ reactor: EnterRoomViewReactor) {
     reactor.state.map { $0.newRoomTransition }
-      .subscribe (onNext: { [weak self] isTapped in
+      .withUnretained(self)
+      .subscribe (onNext: { owner, isTapped in
         if isTapped {
           let vc = CreateNewRoomViewController()
-          self?.mainView.newRoomView.animateClick {
-            self?.navigationController?.pushViewController(vc, animated: true)
+          owner.mainView.newRoomView.animateClick {
+            owner.navigationController?.pushViewController(vc, animated: true)
           }
         }
       })
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.existRoomTransition }
-      .subscribe (onNext: { [weak self] isTapped in
+      .withUnretained(self)
+      .subscribe (onNext: { owner, isTapped in
         if isTapped {
           let vc = EnterRoomCodeViewController()
-          self?.mainView.existRoomView.animateClick {
-            self?.navigationController?.pushViewController(vc, animated: true)
+          owner.mainView.existRoomView.animateClick {
+            owner.navigationController?.pushViewController(vc, animated: true)
           }
         }
       })
