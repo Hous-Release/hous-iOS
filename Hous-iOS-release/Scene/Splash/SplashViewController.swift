@@ -29,8 +29,8 @@ final class SplashViewController: UIViewController, ReactorKit.View {
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
-    self.reactor = reactor
     setupViews()
+    self.reactor = reactor
 
   }
 
@@ -58,7 +58,25 @@ final class SplashViewController: UIViewController, ReactorKit.View {
   func transferHome(_ isSuccess: Bool) {
     guard isSuccess else { return }
 
-//    let targetVC =
+    let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+    homeVC.modalPresentationStyle = .fullScreen
+    present(homeVC, animated: true)
+  }
+
+  func transferOnboarding(_ isOnboardingFlow: Bool) {
+    guard isOnboardingFlow else { return }
+
+    let onboardingVC = PagingViewController()
+    onboardingVC.modalPresentationStyle = .fullScreen
+    present(onboardingVC, animated: true)
+  }
+
+  func transferLogin(_ isLoginFlow: Bool) {
+    guard isLoginFlow else { return }
+
+    let loginVC = SignInViewController(SignInReactor())
+    loginVC.modalPresentationStyle = .fullScreen
+    present(loginVC, animated: true)
   }
 }
 
@@ -86,6 +104,7 @@ extension SplashViewController {
 extension SplashViewController {
   func bindViewWillAppearAction(_ reactor: Reactor) {
     rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .delay(.seconds(3), scheduler: MainScheduler.instance)
       .map { _ in Reactor.Action.viewWillAppear }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -95,7 +114,7 @@ extension SplashViewController {
 extension SplashViewController {
   func bindIsSuccessState(_ reactor: Reactor) {
     reactor.state.map(\.isSuccessRefresh)
-      .compactMap{ $0 }
+      .compactMap { $0 }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: false)
       .drive(onNext: self.transferHome)
@@ -104,26 +123,28 @@ extension SplashViewController {
 
   func bindIsOnboardingFlowState(_ reactor: Reactor) {
     reactor.state.map(\.isOnboardingFlow)
-      .compactMap{ $0 }
+      .compactMap { $0 }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferHome)
+      .drive(onNext: self.transferOnboarding)
       .disposed(by: disposeBag)
   }
   func bindIsLoginFlowState(_ reactor: Reactor) {
     reactor.state.map(\.isLoginFlow)
-      .compactMap{ $0 }
+      .compactMap { $0 }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferHome)
+      .drive(onNext: self.transferLogin)
       .disposed(by: disposeBag)
   }
   func bindShwoAlertByServerErrorFlagState(_ reactor: Reactor) {
-    reactor.state.map(\.shwoAlertByServerErrorFlag)
-      .compactMap{ $0 }
+    reactor.state.map(\.shwoAlertByServerErrorMessage)
+      .compactMap { $0 }
       .distinctUntilChanged()
-      .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferHome)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: { _ in
+        print("Error Alert 구현하기")
+      })
       .disposed(by: disposeBag)
   }
 }
