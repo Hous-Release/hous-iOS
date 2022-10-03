@@ -18,12 +18,15 @@ final class SignInViewController: UIViewController, ReactorKit.View {
   private struct Constant {
     static let horizontalMargin: CGFloat = 24
     static let buttonHegiht: CGFloat = 44
+    static let bottomMargin: CGFloat = 32
   }
 
-  private var signInRelay = PublishRelay<(String?, Error?)>()
-
-  private let appleLoginManager = AppleOAuthManager()
-  private let kakaoLoginManager = KakaoOAuthManager()
+  private let backgroudImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.isUserInteractionEnabled = true
+    imageView.image = Images.bg.image
+    return imageView
+  }()
 
   private lazy var kakaoLoginButton: UIButton = {
     let button = UIButton()
@@ -44,16 +47,19 @@ final class SignInViewController: UIViewController, ReactorKit.View {
     return button
   }()
 
+
+  private let appleLoginManager = AppleOAuthManager()
+  private let kakaoLoginManager = KakaoOAuthManager()
+  private var signInRelay = PublishRelay<(String?, Error?)>()
   internal var disposeBag = DisposeBag()
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
-    self.reactor = reactor
-
     configureAppleSignIn()
     configureKakaoSignIn()
-
     setupViews()
+
+    self.reactor = reactor
   }
 
   required init?(coder: NSCoder) {
@@ -65,22 +71,27 @@ final class SignInViewController: UIViewController, ReactorKit.View {
   }
 
   private func setupViews() {
-    view.addSubView(appleLoginButton)
-    view.addSubView(kakaoLoginButton)
+
+    view.addSubView(backgroudImageView)
+    backgroudImageView.addSubView(appleLoginButton)
+    backgroudImageView.addSubView(kakaoLoginButton)
+
+    backgroudImageView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
 
     appleLoginButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
       make.height.equalTo(Constant.buttonHegiht)
-      make.centerY.equalToSuperview()
+      make.bottom.equalToSuperview().inset(Constant.bottomMargin)
     }
 
     kakaoLoginButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
       make.height.equalTo(Constant.buttonHegiht)
-      make.top.equalTo(appleLoginButton.snp.bottom).offset(20)
+      make.bottom.equalTo(appleLoginButton.snp.top).offset(-Constant.horizontalMargin)
     }
   }
-
 
 }
 
@@ -155,7 +166,7 @@ extension SignInViewController {
       .filter { $0 }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferToHomeOrOnboarding)
+      .drive(onNext: self.transferToHome)
       .disposed(by: disposeBag)
   }
 }
@@ -188,12 +199,11 @@ extension SignInViewController {
   }
 
   // TODO: - 뷰 전환
-  /**
-   - 분기처리가 필요하다면 UserDefault 구현 필요.
-   **/
-  private func transferToHomeOrOnboarding(_ isSuccess: Bool) {
+
+  private func transferToHome(_ isSuccess: Bool) {
     if isSuccess {
-      print("Success")
+      let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+      changeRootViewController(to: homeVC)
     }
 
   }
