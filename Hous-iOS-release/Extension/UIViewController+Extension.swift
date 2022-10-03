@@ -18,9 +18,8 @@ extension UIViewController {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
       else { return }
 
-      sceneDelegate.window?.rootViewController?.present(rootVC, animated: true, completion: {
-        sceneDelegate.window?.rootViewController = rootVC
-      })
+      sceneDelegate.window?.rootViewController = rootVC
+      sceneDelegate.window?.makeKeyAndVisible()
     }
   }
 }
