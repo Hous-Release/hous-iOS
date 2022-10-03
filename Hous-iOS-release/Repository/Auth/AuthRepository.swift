@@ -22,7 +22,7 @@ public protocol AuthRepository {
   var event: PublishSubject<AuthRepositroyEvent> { get }
 
   func login(_ dto: AuthDTO.Request.LoginRequestDTO)
-  func refresh(_ dto: Token)
+  func refresh(_ accessToken: String, _ refreshToken: String)
 }
 public final class AuthRepositoryImp: AuthRepository {
   public var event = PublishSubject<AuthRepositroyEvent>()
@@ -49,7 +49,10 @@ public final class AuthRepositoryImp: AuthRepository {
     }
   }
 
-  public func refresh(_ dto: Token) {
+  public func refresh(_ accessToken: String, _ refreshToken: String) {
+
+    let dto = Token(accessToken: accessToken, refreshToken: refreshToken)
+
     NetworkService.shared.authRepository.refresh(dto) { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
