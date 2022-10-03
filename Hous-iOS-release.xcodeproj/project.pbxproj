@@ -14,6 +14,7 @@
 		7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801128E043C80082A7E7 /* AppleSignIn.swift */; };
 		7706801528E045120082A7E7 /* SignInReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801428E045120082A7E7 /* SignInReactor.swift */; };
 		7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801628E047DE0082A7E7 /* KakaoSignIn.swift */; };
+		770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -117,6 +118,7 @@
 		7706801128E043C80082A7E7 /* AppleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
 		7706801428E045120082A7E7 /* SignInReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInReactor.swift; sourceTree = "<group>"; };
 		7706801628E047DE0082A7E7 /* KakaoSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignIn.swift; sourceTree = "<group>"; };
+		770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
 		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */,
 				B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */,
 				B84EA6D228D621B300C92FCD /* UIView+Extension.swift */,
+				770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
+				770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
