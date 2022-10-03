@@ -26,7 +26,7 @@ public final class AuthAPI: APIRequestLoader<AuthService>, AuthAPIProtocol {
     fetchData(
       target: .refresh(refreshRequestDTO),
       responseData: BaseResponseType<Token>.self,
-      isWithInterceptor: true
+      isWithInterceptor: false
     ) { res, err in
         completion(res, err)
       }
