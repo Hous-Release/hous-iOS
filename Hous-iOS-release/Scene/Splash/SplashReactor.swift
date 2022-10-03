@@ -18,7 +18,6 @@ final class SplashReactor: Reactor {
 
   enum Action {
     case viewWillAppear
-    case shwoAlertByServerError
 
   }
 
@@ -26,23 +25,22 @@ final class SplashReactor: Reactor {
     case setIsSuccessRefresh(Bool)
     case setIsOnboardingFlow(Bool)
     case setIsLoginFlow(Bool)
-    case setShwoAlertByServerError
+    case setShwoAlertByServerError(String?)
   }
 
   struct State {
     var isSuccessRefresh: Bool? = nil
     var isOnboardingFlow: Bool? = nil
     var isLoginFlow: Bool? = nil
-    var shwoAlertByServerErrorFlag: Bool? = nil
+    var shwoAlertByServerErrorMessage: String? = nil
   }
 
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewWillAppear:
-      return .empty()
-
-    case .shwoAlertByServerError:
-      return .just(.setShwoAlertByServerError)
+      return .concat([
+        refresh()
+      ])
 
     }
   }
@@ -61,8 +59,8 @@ final class SplashReactor: Reactor {
     case .setIsLoginFlow(let isLoginFlow):
       newState.isLoginFlow = isLoginFlow
 
-    case .setShwoAlertByServerError:
-      break
+    case .setShwoAlertByServerError(let errorMessage):
+      newState.shwoAlertByServerErrorMessage = errorMessage
     }
 
     return newState
@@ -92,32 +90,36 @@ extension SplashReactor {
         guard
           let errorModel = errorModel,
           let status = errorModel.status
-
         else {
           return .empty()
         }
 
-        if status == 404 {
-          // MARK: - Login 화면으로
+        if status == 400 {
+          return .just(.setIsOnboardingFlow(true))
+        }
 
-          if UserInformation.shared.isAlreadyOnboarding != nil {
-            return .just(.setIsLoginFlow(true))
-          }
-
-          // MARK: - Onboarding Flow로
-
-          else {
-            UserInformation.shared.isAlreadyOnboarding = true
-            return .just(.setIsOnboardingFlow(true))
-          }
+        if status == 401 {
+          return .just(.setIsLoginFlow(true))
         }
 
         else {
-          return .just(.setShwoAlertByServerError)
+          return .just(.setShwoAlertByServerError(errorModel.message))
         }
+
       }
     }
 
     return Observable.merge(mutation, serviceMutation)
+  }
+}
+
+extension SplashReactor {
+  private func refresh() -> Observable<Mutation> {
+    let accessToken = Keychain.shared.getAccessToken() ?? ""
+    let refreshToken = Keychain.shared.getRefreshToken() ?? ""
+
+    repository.refresh(accessToken, refreshToken)
+
+    return .empty()
   }
 }
