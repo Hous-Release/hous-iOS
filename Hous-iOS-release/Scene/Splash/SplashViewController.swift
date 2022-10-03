@@ -57,26 +57,22 @@ final class SplashViewController: UIViewController, ReactorKit.View {
   }
   func transferHome(_ isSuccess: Bool) {
     guard isSuccess else { return }
-
     let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
-    homeVC.modalPresentationStyle = .fullScreen
-    present(homeVC, animated: true)
+    changeRootViewController(to: homeVC)
   }
 
   func transferOnboarding(_ isOnboardingFlow: Bool) {
     guard isOnboardingFlow else { return }
 
     let onboardingVC = PagingViewController()
-    onboardingVC.modalPresentationStyle = .fullScreen
-    present(onboardingVC, animated: true)
+    changeRootViewController(to: onboardingVC)
   }
 
   func transferLogin(_ isLoginFlow: Bool) {
     guard isLoginFlow else { return }
 
     let loginVC = SignInViewController(SignInReactor())
-    loginVC.modalPresentationStyle = .fullScreen
-    present(loginVC, animated: true)
+    changeRootViewController(to: loginVC)
   }
 }
 
