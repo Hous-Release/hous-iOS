@@ -14,7 +14,7 @@ struct UserInformation {
   private let user = UserDefaults.standard
   private let isOnboardingFlowKey = "isOnboardingFlowKey"
 
-  var isOnboardingFlow: Bool? {
+  var isAlreadyOnboarding: Bool? {
     get {
       return user.value(forKey: isOnboardingFlowKey) as? Bool
     }
