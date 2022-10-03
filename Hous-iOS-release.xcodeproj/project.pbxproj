@@ -8,19 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FF728DDD9200082A7E7 /* AuthRepository.swift */; };
-		77067FFB28DDDAFD0082A7E7 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FFA28DDDAFD0082A7E7 /* Keychain.swift */; };
 		7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706800D28E043A40082A7E7 /* SignInViewController.swift */; };
 		7706801228E043C80082A7E7 /* OAuthable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801028E043C80082A7E7 /* OAuthable.swift */; };
 		7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801128E043C80082A7E7 /* AppleSignIn.swift */; };
 		7706801528E045120082A7E7 /* SignInReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801428E045120082A7E7 /* SignInReactor.swift */; };
 		7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801628E047DE0082A7E7 /* KakaoSignIn.swift */; };
 		770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */; };
+		770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */ = {isa = PBXBuildFile; productRef = 770B959228EB0EFF00C8C945 /* UserInformation */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
 		7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E128E734E20068B13C /* SplashReactor.swift */; };
 		7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E328E737520068B13C /* HouseErrorModel.swift */; };
-		7757A3E628E80B250068B13C /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E528E80B250068B13C /* UserDefault.swift */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
 		777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666228A74A62000BECEA /* SceneDelegate.swift */; };
 		777C666A28A74A63000BECEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777C666928A74A63000BECEA /* Assets.xcassets */; };
@@ -111,7 +110,6 @@
 /* Begin PBXFileReference section */
 		7702A0F228BD245E00DA7712 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
 		77067FF728DDD9200082A7E7 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
-		77067FFA28DDDAFD0082A7E7 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-release.entitlements"; sourceTree = "<group>"; };
 		7706800D28E043A40082A7E7 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7706801028E043C80082A7E7 /* OAuthable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthable.swift; sourceTree = "<group>"; };
@@ -119,10 +117,10 @@
 		7706801428E045120082A7E7 /* SignInReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInReactor.swift; sourceTree = "<group>"; };
 		7706801628E047DE0082A7E7 /* KakaoSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignIn.swift; sourceTree = "<group>"; };
 		770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		770B959128EB0DFF00C8C945 /* UserInformation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserInformation; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
 		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
-		7757A3E528E80B250068B13C /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777C666228A74A62000BECEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +221,7 @@
 			files = (
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
+				770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */,
 				B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */,
 				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
 			);
@@ -254,15 +253,6 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		77067FF928DDDADF0082A7E7 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				77067FFA28DDDAFD0082A7E7 /* Keychain.swift */,
-				7757A3E528E80B250068B13C /* UserDefault.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		7706800A28E0438D0082A7E7 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +277,7 @@
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
+				770B959128EB0DFF00C8C945 /* UserInformation */,
 				7702A0F228BD245E00DA7712 /* Network */,
 				7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */,
 				777C665F28A74A62000BECEA /* Hous-iOS-release */,
@@ -656,7 +647,6 @@
 		B856701A28C9A25300B49984 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				77067FF928DDDADF0082A7E7 /* User */,
 				B595FFF328D5AD0200F6B2E4 /* Protocols */,
 				B856701B28C9A26000B49984 /* UIComponent */,
 			);
@@ -718,6 +708,7 @@
 				77393DE028BFBD2D00D78C94 /* FirebaseWrapper */,
 				B595FFBD28C9F48900F6B2E4 /* Then */,
 				773F1E8E28D5944800AE7521 /* Network */,
+				770B959228EB0EFF00C8C945 /* UserInformation */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -881,13 +872,11 @@
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B8566FFD28C86E2400B49984 /* Images+Generated.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
-				7757A3E628E80B250068B13C /* UserDefault.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
-				77067FFB28DDDAFD0082A7E7 /* Keychain.swift in Sources */,
 				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
 				B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */,
 			);
@@ -1502,6 +1491,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		770B959228EB0EFF00C8C945 /* UserInformation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserInformation;
+		};
 		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThirdPartyLibraryManager;

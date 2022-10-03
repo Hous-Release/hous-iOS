@@ -5,8 +5,9 @@
 //  Created by 김호세 on 2022/08/13.
 //
 
-import UIKit
 import FirebaseWrapper
+import UIKit
+import UserInformation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
