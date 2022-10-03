@@ -8,6 +8,7 @@
 import RxCocoa
 import RxSwift
 import ReactorKit
+import UserInformation
 
 
 final class SplashReactor: Reactor {
