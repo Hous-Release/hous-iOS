@@ -30,7 +30,7 @@ platform :ios do
   end
 
   lane :renew_codesign_staging do
-    renew_codesign(type:"adhoc")
+    renew_codesign(type:"appstore")
   end
 
   lane :renew_codesign_release do
@@ -48,7 +48,7 @@ platform :ios do
   end
 
   lane :sync_codesign_staging do
-    sync_codesign(type:"adhoc")
+    sync_codesign(type:"appstore")
   end
 
   lane :sync_codesign_release do
