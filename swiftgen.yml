@@ -61,18 +61,18 @@ input_dir: Hous-iOS-release/Resources/
 output_dir: Hous-iOS-release/Resources/
 
 xcassets:
-  inputs: Colors.xcassets
-  outputs:
-    templateName: swift5
-    output: Generated/Colors+Generated.swift
-    params:
-      enumName: Colors
   inputs: Images.xcassets
   outputs:
     templateName: swift5
     output: Generated/Images+Generated.swift
     params:
       enumName: Images
+  inputs: Colors.xcassets
+  outputs:
+    templateName: swift5
+    output: Generated/Colors+Generated.swift
+    params:
+      enumName: Colors
 
 fonts:
   inputs: Fonts

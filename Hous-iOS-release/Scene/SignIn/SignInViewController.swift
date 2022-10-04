@@ -31,9 +31,11 @@ final class SignInViewController: UIViewController, ReactorKit.View {
   private lazy var kakaoLoginButton: UIButton = {
     let button = UIButton()
     button.setTitle("카카오톡으로 계속하기", for: .normal)
-    button.setTitleColor(Colors.yellow.color, for: .normal)
+    button.backgroundColor = Colors.kakaoYellow.color
+    button.setTitleColor(Colors.kakaoBrown.color, for: .normal)
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 16)
     button.titleLabel?.textAlignment = .center
+    button.makeRounded(cornerRadius: 8)
 
     return button
   }()
@@ -41,9 +43,12 @@ final class SignInViewController: UIViewController, ReactorKit.View {
   private let appleLoginButton: UIButton = {
     let button = UIButton()
     button.setTitle("애플로그인", for: .normal)
-    button.setTitleColor(UIColor.black, for: .normal)
+    button.backgroundColor = Colors.black.color
+    button.setTitleColor(Colors.white.color, for: .normal)
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 16)
     button.titleLabel?.textAlignment = .center
+    button.makeRounded(cornerRadius: 8)
+
     return button
   }()
 
