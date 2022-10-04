@@ -109,7 +109,7 @@ final class TodoViewController: UIViewController, View {
         return footer
 
       default:
-        assert(false, "Unexpected element kind")
+        return UICollectionReusableView()
       }
     }
 

@@ -15,7 +15,7 @@
 
 default_platform(:ios)
 
-ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "Hous"
+ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "ycmp-rrjw-swbl-pnrs"
 
 platform :ios do
   
@@ -53,5 +53,19 @@ platform :ios do
 
   lane :sync_codesign_release do
     sync_codesign(type:"appstore")
+  end
+  desc "Push a new beta build to TestFlight"
+  lane :staging do
+    increment_build_number({
+      xcodeproj: "./Hous-iOS-release.xcodeproj",
+      build_number: latest_testflight_build_number(app_identifier: "com.hous.Hous-iOS-release.staging") + 1
+    })
+    build_app(
+        scheme: "Hous-iOS-release(Staging)",
+        output_directory: "./ipa"
+    )
+    upload_to_testflight(
+    	skip_waiting_for_build_processing: true
+    )
   end
 end
