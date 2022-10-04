@@ -87,12 +87,15 @@ extension PagingViewController {
     reactor.state.map { $0.next }
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isTapped in
-        if isTapped {
-          let nvc = UINavigationController(rootViewController: EnterRoomViewController())
-          nvc.modalPresentationStyle = .fullScreen
-          nvc.modalTransitionStyle = .crossDissolve
-          self?.present(nvc, animated: true, completion: nil)
-        }
+        guard isTapped else { return }
+
+        let reactor = SignInReactor()
+        let signInVC = SignInViewController(reactor)
+
+        signInVC.modalPresentationStyle = .fullScreen
+        signInVC.modalTransitionStyle = .crossDissolve
+
+        self?.changeRootViewController(to: signInVC)
       })
       .disposed(by: disposeBag)
 
