@@ -138,7 +138,7 @@ class MainHomeViewController: UIViewController {
 
         return footer
       default:
-        assert(false, "Unexpected element kind")
+        return UICollectionReusableView()
       }
     }
     
