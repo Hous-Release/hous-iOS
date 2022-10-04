@@ -1168,7 +1168,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.hous.Hous-iOS-release.staging";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hous.Hous-iOS-release.staging";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1352,7 +1352,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hous.Hous-iOS-release.staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.hous.Hous-iOS-release.staging";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hous.Hous-iOS-release.staging";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
