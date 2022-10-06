@@ -47,6 +47,7 @@
 		B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */; };
 		B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */; };
+		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A028D619FD00C92FCD /* TodoViewController.swift */; };
@@ -158,6 +159,7 @@
 		B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewModel.swift; sourceTree = "<group>"; };
 		B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeSection.swift; sourceTree = "<group>"; };
 		B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomieFactory.swift; sourceTree = "<group>"; };
+		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
 		B84EA6A028D619FD00C92FCD /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				B84EA6C628D61E2100C92FCD /* Reactive+Extension.swift */,
 				B84EA6D228D621B300C92FCD /* UIView+Extension.swift */,
 				770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */,
+				B5DCEBD028EF1C39009B065B /* ToastMessage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 			files = (
 				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
+				B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B8566FFC28C86E2400B49984 /* Fonts+Generated.swift in Sources */,
