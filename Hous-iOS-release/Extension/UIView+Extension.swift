@@ -67,4 +67,11 @@ extension UIView {
         mask.path = path.cgPath
         layer.mask = mask
     }
+  
+  /// UIView의 특정 모서리만 해당 cornerRadius로 설정하는 메서드
+  func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+          clipsToBounds = true
+          layer.cornerRadius = cornerRadius
+          layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+      }
 }
