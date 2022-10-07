@@ -11,12 +11,13 @@ import RxRelay
 
 class EditHousNameViewController: UIViewController {
   
-  private let saveButtonDidTapped = PublishSubject<String?>()
+  //MARK: Var & Let
+  private let saveButtonDidTapped = PublishSubject<String>()
   private let viewModel = EditHousNameViewModel()
   private let disposeBag = DisposeBag()
   
   
-  
+  //MARK: UI Components
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "우리 집 별명 바꾸기", rightButtonText: "저장")
     return navBar
@@ -45,15 +46,20 @@ class EditHousNameViewController: UIViewController {
   }
   
   
-  
+  //MARK: Life Cycles
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .systemBackground
-    navigationBar.delegate = self
+    setDelegate()
+    configureButtonAction()
     configUI()
     bindUI()
   }
   
+  private func setDelegate() {
+    navigationBar.delegate = self
+  }
+    
   private func configUI() {
     view.addSubViews([
       navigationBar,
@@ -93,10 +99,18 @@ class EditHousNameViewController: UIViewController {
     }
   }
   
+  private func configureButtonAction() {
+    navigationBar.rightButton.rx.tap
+      .bind {
+        let name = self.textField.text!
+        self.saveButtonDidTapped.onNext(name)
+      }
+      .disposed(by: disposeBag)
+  }
+  
   private func bindUI() {
     let input = EditHousNameViewModel.Input(
-      roomName: textField.rx.text.orEmpty
-        .asObservable(),
+      roomName: textField.rx.text.orEmpty.distinctUntilChanged().asDriver(onErrorJustReturn: ""),
       saveButtonDidTapped: saveButtonDidTapped
     )
     
@@ -111,10 +125,12 @@ class EditHousNameViewController: UIViewController {
       .drive(textField.rx.text)
       .disposed(by: disposeBag)
     
+    output.updatedRoom
+      .drive(onNext: { _ in
+        self.backButtonDidTappedWithoutPopUp()
+      })
+      .disposed(by: disposeBag)
   }
-  
-  
-  
 }
 
 extension EditHousNameViewController: NavBarWithBackButtonViewDelegate {
@@ -131,6 +147,10 @@ extension EditHousNameViewController: NavBarWithBackButtonViewDelegate {
     popUp.modalPresentationStyle = .overFullScreen
     
     present(popUp, animated: true)
+  }
+  
+  func backButtonDidTappedWithoutPopUp() {
+    self.navigationController?.popViewController(animated: true)
   }
 }
 
