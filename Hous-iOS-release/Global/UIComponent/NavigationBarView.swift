@@ -10,6 +10,7 @@ import SnapKit
 
 protocol NavBarWithBackButtonViewDelegate: AnyObject {
   func backButtonDidTapped()
+  func backButtonDidTappedWithoutPopUp()
 }
 
 class NavBarWithBackButtonView: UIView {

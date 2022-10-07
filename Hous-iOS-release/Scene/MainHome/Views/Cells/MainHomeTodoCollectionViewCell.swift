@@ -77,10 +77,15 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   private let todoTitleLabel = UILabel().then {
-    $0.text = "MY to-do • 4"
+    $0.text = "MY to-do"
     $0.textColor = Colors.black.color
     $0.font = Fonts.Montserrat.semiBold.font(size: 16)
     $0.textAlignment = .left
+  }
+  
+  private let todoCountLabel = UILabel().then {
+    $0.font = Fonts.Montserrat.semiBold.font(size: 16)
+    $0.textColor = Colors.blueL1.color
   }
   
   private let todoView = MyTodoView()
@@ -114,9 +119,10 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   //MARK: Helpers
   func setHomeTodoCell(titleText: String, progress: Float, myTodos: [String]) {
     emptyViewLabel.isHidden = !myTodos.isEmpty
+    todoLabelStackView.isHidden = myTodos.isEmpty
     self.titleLabel.text = titleText
     self.progressView.progress = progress
-    self.todoTitleLabel.text = "MY to-do • \(myTodos.count)"
+    self.todoCountLabel.text = "• \(myTodos.count)"
     
     todoLabelStackView.subviews.forEach { $0.removeFromSuperview() }
     myTodos.forEach { todoString in
@@ -140,6 +146,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     
     myTodoBackgroundView.addSubViews([
       todoTitleLabel,
+      todoCountLabel,
       todoLabelStackView,
       emptyViewLabel
     ])
@@ -183,6 +190,11 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     todoTitleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(12)
       make.leading.equalToSuperview().offset(20)
+    }
+    
+    todoCountLabel.snp.makeConstraints { make in
+      make.leading.equalTo(todoTitleLabel.snp.trailing).offset(7)
+      make.centerY.equalTo(todoTitleLabel)
     }
     
     emptyViewLabel.snp.makeConstraints { make in

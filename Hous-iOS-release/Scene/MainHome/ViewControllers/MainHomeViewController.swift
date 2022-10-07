@@ -24,6 +24,10 @@ class MainHomeViewController: UIViewController {
   //MARK: - Vars & Lets
   private let viewModel: MainHomeViewModel
   private let disposeBag = DisposeBag()
+  
+  private let editButtonClicked = PublishRelay<Void>()
+  private let copyButtonClicked = PublishRelay<Void>()
+  private let viewWillAppear = PublishRelay<Void>()
     
   //MARK: - UI Components
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -59,12 +63,26 @@ class MainHomeViewController: UIViewController {
     
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.leading.trailing.bottom.equalToSuperview()
+      make.leading.trailing.equalToSuperview()
+      make.bottom.equalTo(view.safeAreaInsets).inset(60)
     }
   }
   
   private func configCollectionView() {
     collectionView.delegate = self
+    
+    collectionView.rx.modelSelected(MainHomeSectionModel.Item.self)
+      .subscribe(onNext: { model in
+        
+        switch model {
+        case .homieProfiles(profiles: let dto):
+          //TODO: Profile화면전환
+          print(dto.userNickname)
+        default: break
+        }
+      })
+      .disposed(by: disposeBag)
+    
     // Cells
     collectionView.register(MainHomeTodoCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeTodoCollectionViewCell.className)
     collectionView.register(MainHomeRulesCollectionViewCell.self, forCellWithReuseIdentifier: MainHomeRulesCollectionViewCell.className)
@@ -86,11 +104,21 @@ class MainHomeViewController: UIViewController {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeProfileCollectionViewCell.className, for: indexPath) as? MainHomeProfileCollectionViewCell else {
         return UICollectionViewCell()
       }
-      cell.setProfileCell(userNickname: profiles[indexPath.item].userNickname)
+      
+      cell.setProfileCell(homieColor: profiles.color, userNickname: profiles.userNickname)
       return cell
     case .ourTodos(todos: let todos):
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeRulesCollectionViewCell.className, for: indexPath) as? MainHomeRulesCollectionViewCell else { return UICollectionViewCell()
       }
+      
+      cell.ourRulesArrowButton.rx.tap
+        .asDriver()
+        .drive(onNext: { [weak self] in
+          //TODO: Rules화면으로 화면전환
+          print("👍👍Rules 화면전환👍👍")
+        })
+        .disposed(by: cell.disposeBag)
+      
       cell.setHomeRulesCell(ourRules: todos.ourRules)
 
       return cell
@@ -102,14 +130,15 @@ class MainHomeViewController: UIViewController {
         .drive(onNext: { [weak self] in
           self?.navigationController?.pushViewController(EditHousNameViewController(), animated: true)
         }).disposed(by: cell.disposeBag)
-      
-      cell.editButton.rx.tap.asDriver()
-        .drive(onNext: {
-          print("CODE Copied !!!!!!")
+
+      cell.copyButton.rx.tap.asDriver()
+        .drive(onNext: { [weak self] _ in
+          guard let self = self else { return }
+          self.copyButtonClicked.accept(())
         }).disposed(by: cell.disposeBag)
       
       cell.setHomeTodoCell(
-        titleText: "\(todos.userNickname)님의\n\(todos.roomName) 하우스",
+        titleText: "\(todos.userNickname)님의,\n\(todos.roomName) 하우스",
         progress: Float(todos.progress / 100),
         myTodos: todos.myTodos
       )
@@ -119,17 +148,27 @@ class MainHomeViewController: UIViewController {
 
   //MARK: Helpers
   private func bind() {
+    rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:)))
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.viewWillAppear.accept(())
+      })
+      .disposed(by: disposeBag)
+    
     let input = MainHomeViewModel.Input(
-      viewWillAppear: rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in }.asSignal(onErrorJustReturn: ())
+      viewWillAppear: viewWillAppear.asSignal(),
+      copyButtonDidTapped: copyButtonClicked
     )
 
     let output = viewModel.transform(input: input)
     
     let dataSource =
-    RxCollectionViewSectionedReloadDataSource<MainHomeSectionModel.Model> { dataSource, collectionView, indexPath, item in
-      self.configureCollectionViewCell(
+    RxCollectionViewSectionedReloadDataSource<MainHomeSectionModel.Model> { [weak self] dataSource, collectionView, indexPath, item in
+      guard let self = self else { return UICollectionViewCell() }
+      return self.configureCollectionViewCell(
         collectionView: collectionView,
-        indexPath: indexPath, item: item
+        indexPath: indexPath,
+        item: item
       )
     }
     
@@ -155,11 +194,24 @@ class MainHomeViewController: UIViewController {
     output.sections
       .drive(collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+    
+    output.roomCode
+      .drive(onNext: { str in
+        UIPasteboard.general.string = str
+        if let _ = UIPasteboard.general.string {
+          Toast.show(message: "초대코드가 복사되었습니다", controller: self)
+        }
+      })
+      .disposed(by: disposeBag)
   }
 }
 
 
-
+extension MainHomeViewController {
+  @objc private func didPopRoomNameEditView() {
+    self.viewWillAppear.accept(())
+  }
+}
 
 //MARK: - CollectionView UICollectionViewDelegateFlowLayout
 
@@ -190,12 +242,12 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
 
     switch indexPath.section {
     case MainHomeSection.todos.rawValue:
-      return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * (312/812))
+      return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * (305/812))
     case MainHomeSection.ourRules.rawValue:
       return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * (246/812))
     case MainHomeSection.homiesProfiles.rawValue:
       let width = UIScreen.main.bounds.width / 2 - 35
-      let height = width * 0.6451612903
+      let height = width * (100/155)
 
       return CGSize(width: width, height: height)
     default:

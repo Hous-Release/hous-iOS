@@ -17,7 +17,12 @@ class MainHomeProfileCollectionViewCell: UICollectionViewCell {
   private let homieNameLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textAlignment = .left
-    $0.textColor = .black
+    $0.textColor = Colors.black.color
+  }
+  
+  private let nameLabelBackgroundView = UIView().then {
+    $0.backgroundColor = .white
+    $0.roundCorners(cornerRadius: 8, maskedCorners: .layerMaxXMaxYCorner)
   }
   
   //MARK: - Life Cycles
@@ -31,20 +36,31 @@ class MainHomeProfileCollectionViewCell: UICollectionViewCell {
   }
   
   private func configUI() {
-    addSubview(profileBackgroundImageView)
-    profileBackgroundImageView.addSubview(homieNameLabel)
+    contentView.addSubview(profileBackgroundImageView)
+    profileBackgroundImageView.addSubview(nameLabelBackgroundView)
+    nameLabelBackgroundView.addSubview(homieNameLabel)
     
     profileBackgroundImageView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
     
+    nameLabelBackgroundView.snp.makeConstraints { make in
+      make.leading.equalToSuperview()
+      make.top.equalToSuperview()
+      make.trailing.greaterThanOrEqualToSuperview().inset(89)
+      make.bottom.greaterThanOrEqualToSuperview().inset(63)
+//      make.width.equalTo(nameLabelBackgroundView.snp.width).multipliedBy(66/155)
+//      make.height.equalTo(nameLabelBackgroundView.snp.height).multipliedBy(37/100)
+    }
+    
     homieNameLabel.snp.makeConstraints { make in
-      make.leading.greaterThanOrEqualToSuperview().offset(13)
-      make.top.greaterThanOrEqualToSuperview().offset(8)
+      make.center.equalToSuperview()
     }
   }
   
-  func setProfileCell(userNickname: String) {
+  func setProfileCell(homieColor: String, userNickname: String) {
+    let factory = HomieFactory.makeHomie(type: HomieColor(rawValue: homieColor) ?? .GRAY)
+    profileBackgroundImageView.image = factory.profileBackgroundImage
     homieNameLabel.text = userNickname
   }
   
