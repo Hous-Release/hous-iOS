@@ -15,8 +15,9 @@ class OurRulesView: UIView {
   }
   
   private let ruleTextLabel = UILabel().then {
+    $0.text = "다른 Rule도 추가해보세요!"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.textColor = Colors.black.color
+    $0.textColor = Colors.g4.color
   }
       
   override init(frame: CGRect) {
@@ -46,6 +47,7 @@ class OurRulesView: UIView {
   
   func setRulesCell(number: Int, ruleText: String) {
     numberLabel.text = "\(number)."
+    ruleTextLabel.textColor = Colors.black.color
     ruleTextLabel.text = ruleText
   }
   

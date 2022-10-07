@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MainHomeRulesCollectionViewCell: UICollectionViewCell {
   
@@ -16,7 +17,7 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     $0.textColor = Colors.black.color
   }
   
-  private let ourRulesArrowButton = UIButton().then {
+  let ourRulesArrowButton = UIButton().then {
     $0.setImage(Images.icMoreOurRules.image, for: .normal)
   }
   
@@ -39,6 +40,8 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     $0.distribution = .fillEqually
   }
   
+  var disposeBag = DisposeBag()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
@@ -46,6 +49,11 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
   }
   
   private func configUI() {
@@ -95,10 +103,7 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     if ourRules.count < 3 {
       let diff = 3 - ourRules.count
       for _ in 0..<diff {
-        let emptyView = UIView().then {
-          $0.backgroundColor = Colors.blueL2.color
-        }
-        ourRulesStackView.addArrangedSubview(emptyView)
+        ourRulesStackView.addArrangedSubview(OurRulesView())
       }
     }
     

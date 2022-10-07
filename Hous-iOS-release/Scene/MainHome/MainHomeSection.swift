@@ -21,7 +21,7 @@ struct MainHomeSectionModel {
   enum Item: Equatable {
     case myTodos(todos: MainHomeDTO.Response.MainHomeResponseDTO)
     case ourTodos(todos: MainHomeDTO.Response.MainHomeResponseDTO)
-    case homieProfiles(profiles: [MainHomeDTO.Response.HomieDTO])
+    case homieProfiles(profiles: MainHomeDTO.Response.HomieDTO)
     
     static func == (lhs: MainHomeSectionModel.Item, rhs: MainHomeSectionModel.Item) -> Bool {
       switch (lhs, rhs) {
