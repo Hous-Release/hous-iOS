@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
-
+import Network
 
 
 final class EditHousNameViewModel: ViewModelType {
@@ -19,14 +19,18 @@ final class EditHousNameViewModel: ViewModelType {
   
   //MARK: - Inputs
   struct Input {
-    let roomName: Observable<String>
-    let saveButtonDidTapped: Observable<String?>
+    let roomName: Driver<String>
+    let saveButtonDidTapped: Observable<String>
   }
+  
   //MARK: - Outputs
   struct Output {
     var textCountLabelText: Driver<String>
     var text: Driver<String>
+    var updatedRoom: Driver<Void>
   }
+  
+  private let updateCompletedRelay = PublishRelay<Void>()
   
   func transform(input: Input) -> Output {
     
@@ -46,8 +50,24 @@ final class EditHousNameViewModel: ViewModelType {
     })
       .asDriver(onErrorJustReturn: "0/8")
     
+    input.saveButtonDidTapped
+      .subscribe (onNext: { str in
+        NetworkService.shared.roomRepository.updateRoomName(
+          RoomDTO.Request.updateRoomNameRequestDTO(name: str)
+        ) { [weak self] res, err in
+          if res?.status == 200 {
+            self?.updateCompletedRelay.accept(())
+          }
+        }
+      })
+      .disposed(by: disposeBag)
 
-    return Output(textCountLabelText: textCount, text: roomName.asDriver(onErrorJustReturn: ""))
+    
+    return Output(
+      textCountLabelText: textCount,
+      text: roomName.asDriver(onErrorJustReturn: ""),
+      updatedRoom: updateCompletedRelay.asDriver(onErrorJustReturn: ())
+    )
   }
   
 }
