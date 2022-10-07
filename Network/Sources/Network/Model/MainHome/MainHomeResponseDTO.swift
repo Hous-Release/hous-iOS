@@ -12,6 +12,7 @@ public extension MainHomeDTO.Response {
     public let myTodosCnt: Int
     public let ourRules: [String]
     public let progress: Int
+    public let roomCode: String
     public let roomName: String
     public let userNickname: String
   }
