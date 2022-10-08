@@ -14,8 +14,11 @@ import UserInformation
 final class SplashReactor: Reactor {
 
   let initialState: State = State()
+  private let provider: ServiceProviderType
 
-  private let repository: AuthRepository = AuthRepositoryImp()
+  init(provider: ServiceProviderType) {
+    self.provider = provider
+  }
 
   enum Action {
     case viewWillAppear
@@ -73,7 +76,7 @@ final class SplashReactor: Reactor {
 extension SplashReactor {
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let serviceMutation = repository.event.flatMap { event -> Observable<Mutation> in
+    let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case .isJoiningRoom(let isJoiningRoom):
         return .just(.setIsJoiningRoom(isJoiningRoom))
@@ -125,7 +128,7 @@ extension SplashReactor {
     let accessToken = Keychain.shared.getAccessToken() ?? ""
     let refreshToken = Keychain.shared.getRefreshToken() ?? ""
 
-    repository.refresh(accessToken, refreshToken)
+    provider.authRepository.refresh(accessToken, refreshToken)
 
     return .empty()
   }

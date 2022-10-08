@@ -15,8 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
+    let serviceProvider = ServiceProvider()
+    let reactor = SplashReactor(provider: serviceProvider)
+
+    window.rootViewController = SplashViewController(reactor)
     window.backgroundColor = .white
-    window.rootViewController = SplashViewController(SplashReactor())
     window.makeKeyAndVisible()
 
     self.window = window

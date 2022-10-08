@@ -12,6 +12,13 @@ import UserInformation
 
 final class SignInReactor: Reactor {
 
+  private let provider: ServiceProviderType
+
+  init(provider: ServiceProviderType) {
+    self.provider = provider
+  }
+
+
   enum Action {
     case didTapSignIn(SignInType)
     case login(accessToken: String?, error: Error?)
@@ -36,8 +43,6 @@ final class SignInReactor: Reactor {
   }
 
   let initialState: State = State()
-
-  private let authoRepository: AuthRepository = AuthRepositoryImp()
 
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
@@ -101,7 +106,7 @@ final class SignInReactor: Reactor {
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let serviceMutation = authoRepository.event.flatMap { event -> Observable<Mutation> in
+    let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case .isJoiningRoom(let isJoingingRoom):
         return .just(.setIsJoingingRoom(isJoingingRoom))
@@ -136,6 +141,6 @@ final class SignInReactor: Reactor {
 
 extension SignInReactor {
   private func login(_ dto: AuthDTO.Request.LoginRequestDTO) {
-    authoRepository.login(dto)
+    provider.authRepository.login(dto)
   }
 }
