@@ -15,19 +15,24 @@ final class SignInReactor: Reactor {
   enum Action {
     case didTapSignIn(SignInType)
     case login(accessToken: String?, error: Error?)
-    case resetError
+    case initial
   }
 
   enum Mutation {
-    case setSignInType(SignInType)
+    case setOAuthToken(String?)
+    case setSignInType(SignInType?)
     case setError(String?)
-    case setIsSuccess(Bool)
+    case setIsJoingingRoom(Bool?)
+    case setEnterInformationFlag(Bool?)
+    case setInitial
   }
 
   struct State {
-    var signinType: SignInType? = nil
+    var signinType: SignInType?
     var error: String? = nil
-    var isSuccessLogin: Bool = false
+    var isJoingingRoom: Bool?
+    var oauthToken: String?
+    var enterInformationFlag: Bool?
   }
 
   let initialState: State = State()
@@ -38,7 +43,6 @@ final class SignInReactor: Reactor {
     switch action {
 
     case .didTapSignIn(let signType):
-
       return .just(.setSignInType(signType))
 
     case .login(let accessToken, let error):
@@ -62,10 +66,10 @@ final class SignInReactor: Reactor {
 
       login(loginRequestDTO)
 
-      return .empty()
+      return .just(.setOAuthToken(accessToken))
 
-    case .resetError:
-      return .just(.setError(nil))
+    case .initial:
+      return .just(.setInitial)
     }
   }
 
@@ -80,9 +84,17 @@ final class SignInReactor: Reactor {
     case .setError(let error):
       newState.error = error
 
-    case .setIsSuccess(let isSuccess):
-      newState.isSuccessLogin = isSuccess
+    case .setIsJoingingRoom(let isJoingingRoom):
+      newState.isJoingingRoom = isJoingingRoom
 
+    case .setOAuthToken(let oauthToken):
+      newState.oauthToken = oauthToken
+
+    case .setEnterInformationFlag(let isGoingEnterInfo):
+      newState.enterInformationFlag = isGoingEnterInfo
+
+    case .setInitial:
+      newState = initialState
     }
 
     return newState
@@ -91,8 +103,9 @@ final class SignInReactor: Reactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = authoRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
-      case .isSuccess(let isSuccess):
-        return .just(.setIsSuccess(isSuccess))
+      case .isJoiningRoom(let isJoingingRoom):
+        // TODO: - isJoingingRoom
+        return .just(.setIsJoingingRoom(isJoingingRoom))
 
       case .updateAccessToken(let accessToken):
         Keychain.shared.setAccessToken(accessToken: accessToken)
@@ -103,7 +116,18 @@ final class SignInReactor: Reactor {
         return .empty()
 
       case .sendError(let errorModel):
-        return .just(.setError(errorModel?.message))
+        guard
+          let errorModel = errorModel,
+          let statusCode = errorModel.status
+        else {
+          return .empty()
+        }
+
+        if statusCode == 404 {
+          return .just(.setEnterInformationFlag(true))
+        }
+
+        return .just(.setError(errorModel.message))
       }
     }
     return Observable.merge(mutation, serviceMutation)
