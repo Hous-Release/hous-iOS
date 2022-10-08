@@ -146,32 +146,39 @@ extension SignInViewController {
   func bindState(_ reactor: Reactor) {
     bindSignInTypeState(reactor)
     bindErrorState(reactor)
-    bindIsSuccessState(reactor)
-
+    bindIsJoiningState(reactor)
+    bindEnterInfoState(reactor)
   }
 
   func bindSignInTypeState(_ reactor: Reactor) {
     reactor.state.map(\.signinType)
-      .filter { $0 != nil }
       .distinctUntilChanged()
+      .filter { $0 != nil }
       .asDriver(onErrorJustReturn: nil)
       .drive(onNext: login)
       .disposed(by: disposeBag)
   }
   func bindErrorState(_ reactor: Reactor) {
     reactor.state.map(\.error)
-      .filter { $0 != nil }
       .distinctUntilChanged()
-      .asDriver(onErrorJustReturn: nil)
+      .asDriver(onErrorJustReturn: "")
       .drive(onNext: self.handlingError)
       .disposed(by: disposeBag)
   }
-  func bindIsSuccessState(_ reactor: Reactor) {
-    reactor.state.map(\.isSuccessLogin)
-      .filter { $0 }
+  func bindIsJoiningState(_ reactor: Reactor) {
+    reactor.state.map(\.isJoingingRoom)
       .distinctUntilChanged()
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: true)
+      .drive(onNext: self.transferForSuccess)
+      .disposed(by: disposeBag)
+  }
+  func bindEnterInfoState(_ reactor: Reactor) {
+    reactor.state.map(\.enterInformationFlag)
+      .distinctUntilChanged()
+      .compactMap { $0 }
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferToHome)
+      .drive(onNext: self.transferToEnterInformation)
       .disposed(by: disposeBag)
   }
 }
@@ -196,24 +203,43 @@ extension SignInViewController {
   }
 
   // TODO: Error PopupView로 추후 체인지
+
   private func handlingError(_ errorMessage: String?) {
     guard let errorMessage = errorMessage else {
       return
     }
+
     debugPrint(errorMessage)
+    self.reactor?.action.onNext(.initial)
   }
 
   // TODO: - 뷰 전환
 
-  private func transferToHome(_ isSuccess: Bool) {
-    if isSuccess {
-      let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+  private func transferForSuccess(_ isJoiningRoom: Bool) {
+
+    let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+    let enterRoomVC = EnterRoomViewController()
+
+    if isJoiningRoom {
       changeRootViewController(to: homeVC)
+      return
+    }
+
+    if !isJoiningRoom {
+      reactor?.action.onNext(.initial)
+      navigationController?.pushViewController(enterRoomVC, animated: true)
+      return
     }
 
   }
-}
 
+  private func transferToEnterInformation(_ isSuccess: Bool) {
+    guard isSuccess else { return }
+    reactor?.action.onNext(.initial)
+    let enterInfoVC = EnterInfoViewController()
+    navigationController?.pushViewController(enterInfoVC, animated: true)
+  }
+}
 
   // MARK: - OAuth Method
 extension SignInViewController {
