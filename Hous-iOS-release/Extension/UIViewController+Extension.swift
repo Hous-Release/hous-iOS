@@ -12,13 +12,14 @@ extension UIViewController {
   func changeRootViewController(to rootVC: UIViewController) {
     self.view.window?.rootViewController?.dismiss(animated: false) {
 
-      rootVC.modalPresentationStyle = .fullScreen
+      let nvc = UINavigationController(rootViewController: rootVC)
+      nvc.modalPresentationStyle = .fullScreen
 
       guard
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
       else { return }
 
-      sceneDelegate.window?.rootViewController = rootVC
+      sceneDelegate.window?.rootViewController = nvc
       sceneDelegate.window?.makeKeyAndVisible()
     }
   }
