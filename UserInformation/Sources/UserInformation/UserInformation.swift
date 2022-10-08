@@ -5,18 +5,18 @@ public struct UserInformation {
   public static var shared = UserInformation()
   private init() {}
   private let user = UserDefaults.standard
-  private let isOnboardingFlowKey = "isOnboardingFlowKey"
+  private let isInitialUserKey = "isInitialUserKey"
 
-  public var isAlreadyOnboarding: Bool? {
+  public var isInitialUser: Bool? {
     get {
-      return user.value(forKey: isOnboardingFlowKey) as? Bool
+      return user.value(forKey: isInitialUserKey) as? Bool
     }
     set {
-      return user.setValue(newValue, forKey: isOnboardingFlowKey)
+      return user.setValue(newValue, forKey: isInitialUserKey)
     }
   }
   public func removeUserInformation() {
-    user.removeObject(forKey: isOnboardingFlowKey)
+    user.removeObject(forKey: isInitialUserKey)
   }
 
   public static func isFirstLaunch() -> Bool {
