@@ -24,7 +24,7 @@ public protocol AuthRepository {
   func login(_ dto: AuthDTO.Request.LoginRequestDTO)
   func refresh(_ accessToken: String, _ refreshToken: String)
 }
-public final class AuthRepositoryImp: AuthRepository {
+public final class AuthRepositoryImp: BaseService, AuthRepository {
   public var event = PublishSubject<AuthRepositroyEvent>()
 
   public func login(_ dto: AuthDTO.Request.LoginRequestDTO) {

@@ -15,6 +15,8 @@
 		7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801628E047DE0082A7E7 /* KakaoSignIn.swift */; };
 		770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */; };
 		770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */ = {isa = PBXBuildFile; productRef = 770B959228EB0EFF00C8C945 /* UserInformation */; };
+		770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959628F159F600C8C945 /* ServicesProvider.swift */; };
+		770B959928F15AFE00C8C945 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959828F15AFE00C8C945 /* BaseService.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -118,6 +120,8 @@
 		7706801628E047DE0082A7E7 /* KakaoSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignIn.swift; sourceTree = "<group>"; };
 		770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		770B959128EB0DFF00C8C945 /* UserInformation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserInformation; sourceTree = "<group>"; };
+		770B959628F159F600C8C945 /* ServicesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
+		770B959828F15AFE00C8C945 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
 		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
@@ -274,6 +278,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		770B959428F159CE00C8C945 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				770B959628F159F600C8C945 /* ServicesProvider.swift */,
+				770B959828F15AFE00C8C945 /* BaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +313,7 @@
 		777C665F28A74A62000BECEA /* Hous-iOS-release */ = {
 			isa = PBXGroup;
 			children = (
+				770B959428F159CE00C8C945 /* Services */,
 				77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */,
 				77067FF528DDD9010082A7E7 /* Repository */,
 				B856701A28C9A25300B49984 /* Global */,
@@ -825,6 +839,7 @@
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
+				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */,
@@ -848,6 +863,7 @@
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */,
 				7706801528E045120082A7E7 /* SignInReactor.swift in Sources */,
+				770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */,
 				B84EA6BB28D61BE400C92FCD /* TodoMainDTO.swift in Sources */,
 				B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
