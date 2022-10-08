@@ -104,7 +104,6 @@ final class SignInReactor: Reactor {
     let serviceMutation = authoRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case .isJoiningRoom(let isJoingingRoom):
-        // TODO: - isJoingingRoom
         return .just(.setIsJoingingRoom(isJoingingRoom))
 
       case .updateAccessToken(let accessToken):

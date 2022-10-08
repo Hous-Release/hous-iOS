@@ -213,7 +213,6 @@ extension SignInViewController {
     self.reactor?.action.onNext(.initial)
   }
 
-  // TODO: - 뷰 전환
 
   private func transferForSuccess(_ isJoiningRoom: Bool) {
 
