@@ -12,7 +12,8 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   //MARK: UI Templetes
   
   private enum Size {
-    
+    static let screenWidth = UIScreen.main.bounds.width
+    static let screenHeight = UIScreen.main.bounds.height
   }
   
   //MARK: UI Components
@@ -28,14 +29,14 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   private var titleLabel = UILabel().then {
     $0.text = "내 프로필"
     $0.textColor = Colors.black.color
-    $0.font = Fonts.SpoqaHanSansNeo.bold.fo,nt(size: 22)
+    $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 22)
     $0.textAlignment = .left
   }
   
-  private var bedgeLabel = UILabel().then {
+  var bedgeLabel = UILabel().then {
     $0.text = "왕짱파워똑똑이"
     $0.textColor = Colors.black.color
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size:13)
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
     $0.textAlignment = .center
   }
   
@@ -64,37 +65,42 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   //MARK: UI Set
   
   private func configUI() {
-    self.backgroundColor = .white
+    self.backgroundColor = .red
   }
   
   private func render() {
-    self.addSubViews([profileMainImage,
-                      bedgeImage,
-                      titleLabel,
-                      bedgeLabel,
-                      alarmButton,
-                      settingButton])
+    print("Cell Render")
+    [profileMainImage,
+     bedgeImage,
+     titleLabel,
+     bedgeLabel,
+     alarmButton,
+     settingButton].forEach { addSubview($0) }
     
     profileMainImage.snp.makeConstraints { make in
       make.top.bottom.leading.trailing.equalToSuperview()
+      make.height.equalTo(254)
+      make.width.equalTo(Size.screenWidth)
     }
     
     bedgeImage.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(106)
-      make.bottom.equalToSuperview().offset(48)
-      make.trailing.equalToSuperview().offset(50)
+      make.bottom.equalToSuperview().offset(-48)
+      make.trailing.equalToSuperview().offset(-50)
+      make.width.equalTo(100)
+      make.height.equalTo(100)
+      
     }
-    
+
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)
       make.leading.equalToSuperview().offset(24)
     }
-    
+
     bedgeLabel.snp.makeConstraints { make in
       make.top.equalTo(bedgeImage.snp.bottom).offset(8)
       make.centerX.equalTo(bedgeImage.snp.centerX)
     }
-    
+
     alarmButton.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)
       make.trailing.equalToSuperview().offset(60)
