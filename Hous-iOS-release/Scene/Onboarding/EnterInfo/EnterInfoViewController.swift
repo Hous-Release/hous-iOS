@@ -27,6 +27,7 @@ class EnterInfoViewController: UIViewController, View {
   }
 
   private func setup() {
+    view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBar.delegate = self
   }
@@ -91,12 +92,13 @@ extension EnterInfoViewController {
 
     reactor.state.map { $0.next }
       .subscribe(onNext: { [weak self] isTapped in
-        // 서버통신
+        // TODO: - 서버통신 회원가입 로직처리
         if isTapped {
-          let vc = PagingViewController()
-          vc.modalTransitionStyle = .crossDissolve
-          vc.modalPresentationStyle = .fullScreen
-          self?.present(vc, animated: true, completion: nil)
+//          let vc = PagingViewController()
+//          vc.modalTransitionStyle = .crossDissolve
+//          vc.modalPresentationStyle = .fullScreen
+//          self?.present(vc, animated: true, completion: nil)
+          print("미구현")
         }
       })
       .disposed(by: disposeBag)
