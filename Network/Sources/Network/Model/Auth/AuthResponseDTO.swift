@@ -9,11 +9,11 @@ public extension AuthDTO.Response {
   struct LoginResponseDTO: Decodable {
 
     public let token: Token
-    public let userID: Int
+    public let isJoiningRoom: Bool
 
     enum CodingKeys: String, CodingKey {
       case token
-      case userID = "userId"
+      case isJoiningRoom
     }
   }
 }
