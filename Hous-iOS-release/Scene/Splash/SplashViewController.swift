@@ -82,7 +82,9 @@ final class SplashViewController: UIViewController, ReactorKit.View {
   func transferLogin(_ isLoginFlow: Bool) {
     guard isLoginFlow else { return }
 
-    let loginVC = SignInViewController(SignInReactor())
+    let serviceProvider = ServiceProvider()
+    let reactor = SignInReactor(provider: serviceProvider)
+    let loginVC = SignInViewController(reactor)
     changeRootViewController(to: loginVC)
   }
 }

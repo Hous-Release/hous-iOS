@@ -92,7 +92,8 @@ extension PagingViewController {
 
         UserInformation.shared.isInitialUser = false
 
-        let reactor = SignInReactor()
+        let serviceProvider = ServiceProvider()
+        let reactor = SignInReactor(provider: serviceProvider)
         let signInVC = SignInViewController(reactor)
 
         signInVC.modalPresentationStyle = .fullScreen
