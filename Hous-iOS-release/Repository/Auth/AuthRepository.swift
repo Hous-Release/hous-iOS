@@ -45,7 +45,7 @@ public final class AuthRepositoryImp: AuthRepository {
       self.event.onNext(.updateAccessToken(data.token.accessToken))
       self.event.onNext(.updateRefreshToken(data.token.refreshToken))
       // TODO: - isJoining으로 바꾸기
-      self.event.onNext(.isJoiningRoom(true))
+      self.event.onNext(.isJoiningRoom(false))
 
     }
   }
@@ -70,7 +70,7 @@ public final class AuthRepositoryImp: AuthRepository {
       self.event.onNext(.updateAccessToken(data.accessToken))
       self.event.onNext(.updateRefreshToken(data.refreshToken))
       // TODO: - isJoing으로 바꾸기
-      self.event.onNext(.isJoiningRoom(true))
+      self.event.onNext(.isJoiningRoom(false))
 
     }
   }
