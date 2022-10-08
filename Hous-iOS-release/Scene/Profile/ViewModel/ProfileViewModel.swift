@@ -25,9 +25,9 @@ final class ProfileViewModel: ViewModelType {
   
   
   func transform(input: Input) -> Output {
-    <#code#>
+   return Output()
   }
-  
+   
   
 }
 
