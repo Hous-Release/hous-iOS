@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxDataSources
 import ReactorKit
+import UserInformation
 
 final class PagingViewController: UIViewController, View {
 
@@ -88,6 +89,8 @@ extension PagingViewController {
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] isTapped in
         guard isTapped else { return }
+
+        UserInformation.shared.isInitialUser = false
 
         let reactor = SignInReactor()
         let signInVC = SignInViewController(reactor)
