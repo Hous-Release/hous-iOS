@@ -12,7 +12,7 @@ import RxCocoa
 
 
 public enum AuthRepositroyEvent {
-  case isSuccess(Bool)
+  case isJoiningRoom(Bool)
   case updateAccessToken(String)
   case updateRefreshToken(String)
   case sendError(HouseErrorModel?)
@@ -44,7 +44,8 @@ public final class AuthRepositoryImp: AuthRepository {
 
       self.event.onNext(.updateAccessToken(data.token.accessToken))
       self.event.onNext(.updateRefreshToken(data.token.refreshToken))
-      self.event.onNext(.isSuccess(true))
+      // TODO: - isJoining으로 바꾸기
+      self.event.onNext(.isJoiningRoom(true))
 
     }
   }
@@ -66,9 +67,10 @@ public final class AuthRepositoryImp: AuthRepository {
         return
       }
 
-      self.event.onNext(.isSuccess(true))
       self.event.onNext(.updateAccessToken(data.accessToken))
       self.event.onNext(.updateRefreshToken(data.refreshToken))
+      // TODO: - isJoing으로 바꾸기
+      self.event.onNext(.isJoiningRoom(true))
 
     }
   }
