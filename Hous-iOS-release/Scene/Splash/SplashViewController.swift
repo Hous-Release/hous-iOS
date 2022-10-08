@@ -55,10 +55,21 @@ final class SplashViewController: UIViewController, ReactorKit.View {
       make.bottom.equalToSuperview()
     }
   }
-  func transferHome(_ isSuccess: Bool) {
-    guard isSuccess else { return }
+  func transferForSuccess(_ isJoiningRoom: Bool) {
+
     let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
-    changeRootViewController(to: homeVC)
+    let enterRoomVC = EnterRoomViewController()
+
+    if isJoiningRoom {
+      changeRootViewController(to: homeVC)
+      return
+    }
+
+    if !isJoiningRoom {
+      changeRootViewController(to: enterRoomVC)
+      return
+    }
+
   }
 
   func transferOnboarding(_ isOnboardingFlow: Bool) {
@@ -88,7 +99,7 @@ extension SplashViewController {
 
 
   func bindState(_ reactor: Reactor) {
-    bindIsSuccessState(reactor)
+    bindIsJoiningRoomState(reactor)
     bindIsLoginFlowState(reactor)
     bindIsOnboardingFlowState(reactor)
     bindShwoAlertByServerErrorFlagState(reactor)
@@ -108,12 +119,12 @@ extension SplashViewController {
 }
 
 extension SplashViewController {
-  func bindIsSuccessState(_ reactor: Reactor) {
-    reactor.state.map(\.isSuccessRefresh)
+  func bindIsJoiningRoomState(_ reactor: Reactor) {
+    reactor.state.map(\.isJoiningRoom)
       .compactMap { $0 }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.transferHome)
+      .drive(onNext: self.transferForSuccess)
       .disposed(by: disposeBag)
   }
 
