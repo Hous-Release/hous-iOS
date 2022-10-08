@@ -23,14 +23,14 @@ final class SplashReactor: Reactor {
   }
 
   enum Mutation {
-    case setIsSuccessRefresh(Bool)
+    case setIsJoiningRoom(Bool)
     case setIsOnboardingFlow(Bool)
     case setIsLoginFlow(Bool)
     case setShwoAlertByServerError(String?)
   }
 
   struct State {
-    var isSuccessRefresh: Bool? = nil
+    var isJoiningRoom: Bool? = nil
     var isOnboardingFlow: Bool? = nil
     var isLoginFlow: Bool? = nil
     var shwoAlertByServerErrorMessage: String? = nil
@@ -51,8 +51,8 @@ final class SplashReactor: Reactor {
 
     switch mutation {
 
-    case .setIsSuccessRefresh(let isSuccess):
-      newState.isSuccessRefresh = isSuccess
+    case .setIsJoiningRoom(let isJoiningRoom):
+      newState.isJoiningRoom = isJoiningRoom
 
     case .setIsOnboardingFlow(let isOnboardingFlow):
       newState.isOnboardingFlow = isOnboardingFlow
@@ -75,8 +75,8 @@ extension SplashReactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = repository.event.flatMap { event -> Observable<Mutation> in
       switch event {
-      case .isSuccess(let isSuccess):
-        return .just(.setIsSuccessRefresh(isSuccess))
+      case .isJoiningRoom(let isJoiningRoom):
+        return .just(.setIsJoiningRoom(isJoiningRoom))
 
       case .updateAccessToken(let accessToken):
         Keychain.shared.setAccessToken(accessToken: accessToken)
