@@ -96,7 +96,13 @@ extension SplashReactor {
         }
 
         if status == 400 {
-          return .just(.setIsOnboardingFlow(true))
+
+          guard
+            UserInformation.shared.isInitialUser != nil else {
+            return .just(.setIsOnboardingFlow(true))
+          }
+
+          return .just(.setIsLoginFlow(true))
         }
 
         if status == 401 {
