@@ -56,12 +56,13 @@ final class SplashViewController: UIViewController, ReactorKit.View {
     }
   }
   func transferForSuccess(_ isJoiningRoom: Bool) {
-
-    let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+    
+    let tabVC = HousTabbarViewController()
+    
     let enterRoomVC = EnterRoomViewController()
 
     if isJoiningRoom {
-      changeRootViewController(to: homeVC)
+      changeRootViewController(to: tabVC)
       return
     }
 

@@ -8,18 +8,12 @@
 import UIKit
 import RxSwift
 
-protocol MainHomeTodoProtocol: AnyObject {
-  func editButtonDidTapped()
-  func copyButtonDidTapped()
-}
 
 class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   //MARK: - Vars & Lets
   
   var disposeBag = DisposeBag()
-  
-  weak var delegate: MainHomeTodoProtocol?
   
   //MARK: - UI Components
   private let titleLabel = UILabel().then {
@@ -59,7 +53,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.progress = 0.5
   }
   
-  private let myTodoBackgroundView = UIView().then {
+  let myTodoBackgroundView = UIView().then {
     $0.backgroundColor = Colors.blueL2.color
     $0.layer.cornerRadius = 8
   }
@@ -100,7 +94,6 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
-    bindUI()
   }
   
   override func prepareForReuse() {
@@ -208,19 +201,5 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  private func bindUI() {
-    self.editButton.rx.tap
-      .bind { [weak self] in
-        guard let self = self else { return }
-        self.delegate?.editButtonDidTapped()
-      }
-      .disposed(by: disposeBag)
-    
-    self.copyButton.rx.tap
-      .bind { [weak self] in
-        guard let self = self else { return }
-        self.delegate?.copyButtonDidTapped()
-      }
-      .disposed(by: disposeBag)
-  }
+  
 }
