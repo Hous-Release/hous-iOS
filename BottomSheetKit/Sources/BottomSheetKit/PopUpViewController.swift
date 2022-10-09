@@ -28,8 +28,8 @@ internal final class PopUpViewController: UIViewController {
     self.popUpType = popUpType
 
     switch popUpType {
-    case .twoButton(let cancelText, let actionText):
-      self.popUpView = TwoButtonPopUpView(cancelText, actionText)
+    case .twoButton(let model):
+      self.popUpView = TwoButtonPopUpView(model)
 
     case .oneButtonWithImage(let actionText, let image):
       popUpView = UIView()
