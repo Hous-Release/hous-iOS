@@ -77,10 +77,10 @@ internal final class TwoButtonPopUpView: UIView {
     return stackView
   }()
 
-  internal init(_ cancelText: String, _ actionText: String) {
+  internal init(_ model: TwoButtonPopUpModel) {
     super.init(frame: .zero)
     setupViews()
-    configure(cancelText, actionText)
+    configure(model)
   }
 
   required init?(coder: NSCoder) {
@@ -90,9 +90,11 @@ internal final class TwoButtonPopUpView: UIView {
 
 extension TwoButtonPopUpView {
 
-  private func configure(_ cancelText: String, _ actionText: String) {
-    cancelButton.setTitle(cancelText, for: .normal)
-    actionButton.setTitle(actionText, for: .normal)
+  private func configure(_ model: TwoButtonPopUpModel) {
+    cancelButton.setTitle(model.cancelText, for: .normal)
+    actionButton.setTitle(model.actionText, for: .normal)
+    titleLabel.text = model.title
+    subtitleLabel.text = model.subtitle
   }
 
   private func setupViews() {
