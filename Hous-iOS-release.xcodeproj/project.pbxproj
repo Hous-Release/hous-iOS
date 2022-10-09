@@ -17,6 +17,7 @@
 		770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */ = {isa = PBXBuildFile; productRef = 770B959228EB0EFF00C8C945 /* UserInformation */; };
 		770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959628F159F600C8C945 /* ServicesProvider.swift */; };
 		770B959928F15AFE00C8C945 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959828F15AFE00C8C945 /* BaseService.swift */; };
+		770B959B28F15E5200C8C945 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959A28F15E5200C8C945 /* AlertService.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -122,6 +123,7 @@
 		770B959128EB0DFF00C8C945 /* UserInformation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserInformation; sourceTree = "<group>"; };
 		770B959628F159F600C8C945 /* ServicesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
 		770B959828F15AFE00C8C945 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		770B959A28F15E5200C8C945 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		7717A84B28BBB5E300C449CC /* ThirdPartyLibraryManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThirdPartyLibraryManager; sourceTree = "<group>"; };
 		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
 		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			children = (
 				770B959628F159F600C8C945 /* ServicesProvider.swift */,
 				770B959828F15AFE00C8C945 /* BaseService.swift */,
+				770B959A28F15E5200C8C945 /* AlertService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
+				770B959B28F15E5200C8C945 /* AlertService.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
