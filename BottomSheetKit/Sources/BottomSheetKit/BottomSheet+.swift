@@ -9,4 +9,9 @@ import UIKit
 
 public extension UIViewController {
 
+  func presentPopUp(_ type: PopUpType) {
+    let popupVC = PopUpViewController(popUpType: type)
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: true)
+  }
 }
