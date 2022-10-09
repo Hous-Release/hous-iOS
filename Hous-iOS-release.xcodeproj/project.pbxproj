@@ -18,6 +18,7 @@
 		770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959628F159F600C8C945 /* ServicesProvider.swift */; };
 		770B959928F15AFE00C8C945 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959828F15AFE00C8C945 /* BaseService.swift */; };
 		770B959B28F15E5200C8C945 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959A28F15E5200C8C945 /* AlertService.swift */; };
+		770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */ = {isa = PBXBuildFile; productRef = 770B959E28F320C400C8C945 /* BottomSheetKit */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -335,6 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */,
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
 				777085AC29040D5C0018240B /* AssetKit in Frameworks */,
@@ -1086,6 +1088,7 @@
 				770B959228EB0EFF00C8C945 /* UserInformation */,
 				777085AB29040D5C0018240B /* AssetKit */,
 				B54D39F22913B10400DA3A95 /* RxKeyboard */,
+				770B959E28F320C400C8C945 /* BottomSheetKit */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -1951,6 +1954,10 @@
 		770B959228EB0EFF00C8C945 /* UserInformation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UserInformation;
+		};
+		770B959E28F320C400C8C945 /* BottomSheetKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BottomSheetKit;
 		};
 		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
