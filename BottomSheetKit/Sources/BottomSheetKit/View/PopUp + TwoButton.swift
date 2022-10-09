@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 
+// TODO: Asset 모듈화 하고 나중에 디펜던시 적용하고 코드 수정
 internal final class TwoButtonPopUpView: UIView {
-
-
   private enum Constant {
     static let verticalMargin: CGFloat = 32
     static let horizontalMargin: CGFloat = 28
@@ -21,8 +20,8 @@ internal final class TwoButtonPopUpView: UIView {
 
   private let rootView: UIView = {
     let view = UIView()
-    view.backgroundColor = .white
     view.layer.cornerRadius = 8
+    view.backgroundColor = .white
     return view
   }()
 
@@ -57,6 +56,7 @@ internal final class TwoButtonPopUpView: UIView {
     button.layer.cornerRadius = 8
     button.setTitle("cancelButton", for: .normal)
     button.setTitleColor(UIColor.black, for: .normal)
+    button.backgroundColor = .blue
     return button
   }()
 
@@ -65,28 +65,36 @@ internal final class TwoButtonPopUpView: UIView {
     button.layer.cornerRadius = 8
     button.setTitle("actionButton", for: .normal)
     button.setTitleColor(UIColor.black, for: .normal)
+    button.backgroundColor = .red
     return button
   }()
 
   private lazy var buttonStackView: UIStackView = {
     let stackView = UIStackView()
+    stackView.backgroundColor = .white
     stackView.axis = .horizontal
     stackView.spacing = 12
     return stackView
   }()
 
-  internal init() {
+  internal init(_ cancelText: String, _ actionText: String) {
     super.init(frame: .zero)
+    setupViews()
+    configure(cancelText, actionText)
   }
 
   required init?(coder: NSCoder) {
     fatalError("TwoButtonPopUpView is not implemented")
   }
-
-
 }
 
 extension TwoButtonPopUpView {
+
+  private func configure(_ cancelText: String, _ actionText: String) {
+    cancelButton.setTitle(cancelText, for: .normal)
+    actionButton.setTitle(actionText, for: .normal)
+  }
+
   private func setupViews() {
     addSubview(rootView)
     rootView.addSubview(titleLabel)
