@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Network
+import RxGesture
 
 class MainHomeViewController: UIViewController {
   
@@ -33,7 +34,6 @@ class MainHomeViewController: UIViewController {
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
-
     $0.collectionViewLayout = layout
     $0.showsVerticalScrollIndicator = false
   }
@@ -115,7 +115,9 @@ class MainHomeViewController: UIViewController {
         .asDriver()
         .drive(onNext: { [weak self] in
           //TODO: Rules화면으로 화면전환
-          print("👍👍Rules 화면전환👍👍")
+          guard let self = self else { return }
+          let vc = TodoViewController()
+          self.navigationController?.pushViewController(vc, animated: true)
         })
         .disposed(by: cell.disposeBag)
       
@@ -126,22 +128,34 @@ class MainHomeViewController: UIViewController {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeTodoCollectionViewCell.className, for: indexPath) as? MainHomeTodoCollectionViewCell else { return UICollectionViewCell()
       }
       
+      cell.myTodoBackgroundView.rx.tapGesture()
+        .when(.recognized)
+        .subscribe(onNext: { [weak self] _ in
+          guard let self = self else { return }
+          let vc = TodoViewController()
+          self.navigationController?.pushViewController(vc, animated: true)
+        })
+        .disposed(by: disposeBag)
+      
       cell.editButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] in
           self?.navigationController?.pushViewController(EditHousNameViewController(), animated: true)
-        }).disposed(by: cell.disposeBag)
+        })
+        .disposed(by: cell.disposeBag)
 
       cell.copyButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] _ in
           guard let self = self else { return }
           self.copyButtonClicked.accept(())
-        }).disposed(by: cell.disposeBag)
+        })
+        .disposed(by: cell.disposeBag)
       
       cell.setHomeTodoCell(
         titleText: "\(todos.userNickname)님의,\n\(todos.roomName) 하우스",
         progress: Float(todos.progress / 100),
         myTodos: todos.myTodos
       )
+      
       return cell
     }
   }
@@ -206,7 +220,7 @@ class MainHomeViewController: UIViewController {
   }
 }
 
-
+// Edit홈에
 extension MainHomeViewController {
   @objc private func didPopRoomNameEditView() {
     self.viewWillAppear.accept(())
@@ -272,18 +286,4 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     }
     return UIEdgeInsets()
   }
-}
-
-
-extension MainHomeViewController: MainHomeTodoProtocol {
-  
-  func editButtonDidTapped() {
-    let editVC = EditHousNameViewController()
-    self.navigationController?.pushViewController(editVC, animated: true)
-  }
-  
-  func copyButtonDidTapped() {
-    print("copied")
-  }
-  
 }
