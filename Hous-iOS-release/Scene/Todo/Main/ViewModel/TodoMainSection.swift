@@ -7,19 +7,20 @@
 
 import Foundation
 import RxDataSources
+import Network
 
-struct TodoMainSection {
-  typealias Model = SectionModel<Section, Item>
+public struct TodoMainSection {
+  public typealias Model = SectionModel<Section, Item>
 
-  enum Section: Equatable {
+  public enum Section: Equatable {
     case myTodo(num: Int)
     case ourTodo(num: Int)
   }
-  enum Item: Equatable {
-    case myTodo(todos: MyTodoDTO)
-    case ourTodo(todos: OurTodoDTO)
+  public enum Item: Equatable {
+    case myTodo(todos: MainTodoDTO.Response.MyTodoDTO)
+    case ourTodo(todos: MainTodoDTO.Response.OurTodoDTO)
 
-    static func == (lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {
             case (.myTodo(_), .myTodo(_)),
                  (.ourTodo(_), .ourTodo(_)):
