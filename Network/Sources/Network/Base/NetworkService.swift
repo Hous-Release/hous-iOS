@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 final public class NetworkService {
   public static var shared = NetworkService()
@@ -15,4 +14,5 @@ final public class NetworkService {
 
   public let authRepository = AuthAPI(isLogging: true)
   public let mainHomeRepository = MainHomeAPI(isLogging: true)
+  public let mainTodoRepository = MainTodoAPI(isLogging: true)
 }
