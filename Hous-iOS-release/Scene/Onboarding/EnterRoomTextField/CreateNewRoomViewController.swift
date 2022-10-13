@@ -75,6 +75,10 @@ extension CreateNewRoomViewController {
 }
 
 extension CreateNewRoomViewController: NavBarWithBackButtonViewDelegate {
+  func backButtonDidTappedWithoutPopUp() {
+    print("back")
+  }
+  
   func backButtonDidTapped() {
     navigationController?.popViewController(animated: true)
   }
