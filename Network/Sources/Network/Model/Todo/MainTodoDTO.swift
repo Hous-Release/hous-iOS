@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MainTodo {
+public enum MainTodoDTO {
   public enum Request { }
   public enum Response { }
 }

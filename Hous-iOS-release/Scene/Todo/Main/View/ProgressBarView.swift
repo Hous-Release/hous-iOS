@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-enum ProgressType {
+public enum ProgressType {
   case none, underHalf, overHalf, done
 
   var text: String {

@@ -5,27 +5,27 @@
 //  Created by 김지현 on 2022/10/01.
 //
 
-public extension MainTodoResponseDTO.Response {
+public extension MainTodoDTO.Response {
 
     // MARK: - TodoMain
-    struct TodoMainDTO: Decodable {
-      let date, dayOfWeek: String
-      let myTodos: [MyTodoDTO]
-      let myTodosCnt: Int
-      let ourTodos: [OurTodoDTO]
-      let ourTodosCnt, progress: Int
+    struct MainTodoResponseDTO: Decodable {
+      public let date, dayOfWeek: String
+      public let myTodos: [MyTodoDTO]
+      public let myTodosCnt: Int
+      public let ourTodos: [OurTodoDTO]
+      public let ourTodosCnt, progress: Int
     }
 
     // MARK: - MyTodo
     struct MyTodoDTO: Decodable {
-      let isChecked: Bool
-      let todoId: Int
-      let todoName: String
+      public let isChecked: Bool
+      public let todoId: Int
+      public let todoName: String
     }
 
     // MARK: - OurTodo
     struct OurTodoDTO: Decodable {
-      let nicknames: [String]
-      let status, todoName: String
+      public let nicknames: [String]
+      public let status, todoName: String
     }
 }
