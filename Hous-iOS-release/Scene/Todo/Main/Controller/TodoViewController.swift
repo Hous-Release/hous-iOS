@@ -47,13 +47,15 @@ final class TodoViewController: UIViewController, View {
 
     reactor.state.map { $0.progressType }
       .skip(1)
-      .bind(to: mainView.progressBarView.rx.progressType)
+      .asDriver(onErrorJustReturn: .none)
+      .drive(mainView.progressBarView.rx.progressType)
       .disposed(by: disposeBag)
 
     reactor.state.map {$0.progress}
-      .subscribe(onNext: { progress in
-        self.mainView.progressBarView.progressView.progress = progress
-        self.mainView.progressBarView.progress = progress
+      .withUnretained(self)
+      .subscribe(onNext: { owner, progress in
+        owner.mainView.progressBarView.progressView.progress = progress
+        owner.mainView.progressBarView.progress = progress
       })
       .disposed(by: disposeBag)
 

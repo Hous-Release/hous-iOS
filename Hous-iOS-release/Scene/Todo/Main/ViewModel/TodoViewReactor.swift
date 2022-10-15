@@ -22,6 +22,7 @@ final class TodoViewReactor: Reactor {
     case setProgress(Float)
     case setMyTodosSection(TodoMainSection.Model)
     case setOurTodosSection(TodoMainSection.Model)
+    case setError(String?)
   }
 
   struct State {
@@ -37,6 +38,7 @@ final class TodoViewReactor: Reactor {
       model: .ourTodo(num: 0),
       items: []
     )
+    var error: String? = nil
   }
 
   let initialState = State()
@@ -69,6 +71,8 @@ final class TodoViewReactor: Reactor {
       newState.myTodosSection = myTodo
     case let .setOurTodosSection(ourTodo):
       newState.ourTodosSection = ourTodo
+    case let .setError(error):
+      newState.error = error
     }
     return newState
   }
@@ -88,17 +92,13 @@ final class TodoViewReactor: Reactor {
         return .just(.setMyTodosSection(myTodo))
       case let .ourTodosSection(ourTodo):
         return .just(.setOurTodosSection(ourTodo))
+
+      case let .sendError(errorModel):
+        guard let errorModel = errorModel else { return .empty() }
+        return .just(.setError(errorModel.message))
       }
     }
 
     return Observable.merge(mutation, serviceMutation)
   }
-
-  //  private func getTodos() -> Observable<MainTodoDTO.Response.MainTodoResponseDTO> {
-  //    NetworkService.shared.mainTodoRepository.getTodosData { res, error in
-  //      // mutate .... 늘리기... signin 로직 참고하기
-  //      guard let data = res, let model = data.data else { return }
-  //      return .just(Mutation.setTodoMain(model))
-  //    }
-  //  }
 }

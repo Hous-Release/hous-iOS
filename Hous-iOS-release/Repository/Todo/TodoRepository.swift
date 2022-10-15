@@ -17,6 +17,7 @@ public enum TodoRepositoryEvent {
   case progress(Float)
   case myTodosSection(TodoMainSection.Model)
   case ourTodosSection(TodoMainSection.Model)
+  case sendError(HouseErrorModel?)
 }
 
 public protocol TodoRepository {
@@ -30,7 +31,14 @@ public final class TodoRepositoryImp: TodoRepository {
   public func fetchTodo() {
     NetworkService.shared.mainTodoRepository.getTodosData { [weak self] res, err in
       guard let self = self else { return }
-      guard let data = res?.data else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
 
       self.event.onNext(.date(data.date))
       self.event.onNext(.dayOfWeek(self.parse(of: data.dayOfWeek)))
