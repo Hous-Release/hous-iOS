@@ -135,6 +135,9 @@
 		B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89928DF919D009FD784 /* EnterRoomView.swift */; };
 		B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */; };
 		B8D066CC28F7DF5300A99907 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066CB28F7DF5300A99907 /* TodoRepository.swift */; };
+		B8D066DC28FA95A600A99907 /* MemberTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DB28FA95A600A99907 /* MemberTodoView.swift */; };
+		B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */; };
+		B8D066E028FA95D600A99907 /* MemberTodoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */; };
 		B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */; };
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
@@ -274,6 +277,9 @@
 		B8B8A89928DF919D009FD784 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
 		B8B8A89D28DF955B009FD784 /* EnterRoomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomButton.swift; sourceTree = "<group>"; };
 		B8D066CB28F7DF5300A99907 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		B8D066DB28FA95A600A99907 /* MemberTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoView.swift; sourceTree = "<group>"; };
+		B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoCollectionReusableView.swift; sourceTree = "<group>"; };
 		B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -788,6 +794,7 @@
 		B856700128C88C4500B49984 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				B8D066D828FA958800A99907 /* MemberTodo */,
 				B84EA69E28D619E400C92FCD /* Main */,
 			);
 			path = Todo;
@@ -879,6 +886,32 @@
 				B8D066CB28F7DF5300A99907 /* TodoRepository.swift */,
 			);
 			path = Todo;
+			sourceTree = "<group>";
+		};
+		B8D066D828FA958800A99907 /* MemberTodo */ = {
+			isa = PBXGroup;
+			children = (
+				B8D066DA28FA959500A99907 /* View */,
+				B8D066D928FA959100A99907 /* Cell */,
+			);
+			path = MemberTodo;
+			sourceTree = "<group>";
+		};
+		B8D066D928FA959100A99907 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */,
+				B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		B8D066DA28FA959500A99907 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8D066DB28FA95A600A99907 /* MemberTodoView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1054,10 +1087,13 @@
 				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
+				B8D066DC28FA95A600A99907 /* MemberTodoView.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
+				B8D066E028FA95D600A99907 /* MemberTodoCollectionReusableView.swift in Sources */,
+				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
