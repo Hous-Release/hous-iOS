@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "color": "YELLOW",
+      "dayOfWeekTodos": [
+        {
+          "dayOfWeek": "string",
+          "dayOfWeekTodos": [
+            {
+              "todoId": 0,
+              "todoName": "string"
+            }
+          ],
+          "todoCnt": 0
+        }
+      ],
+      "totalTodoCnt": 0,
+      "userName": "string"
+    }
+  ],
+  "message": "string",
+  "status": 0,
+  "success": true
+}
