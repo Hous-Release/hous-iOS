@@ -139,6 +139,8 @@
 		B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */; };
 		B8D066E028FA95D600A99907 /* MemberTodoCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */; };
 		B8D066E328FAA5ED00A99907 /* MemberTodoDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D066E228FAA5ED00A99907 /* MemberTodoDTO.json */; };
+		B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */; };
+		B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066E728FAA74600A99907 /* FilteredTodoView.swift */; };
 		B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */; };
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
@@ -282,6 +284,8 @@
 		B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoCollectionReusableView.swift; sourceTree = "<group>"; };
 		B8D066E228FAA5ED00A99907 /* MemberTodoDTO.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MemberTodoDTO.json; sourceTree = "<group>"; };
+		B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoViewController.swift; sourceTree = "<group>"; };
+		B8D066E728FAA74600A99907 /* FilteredTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoView.swift; sourceTree = "<group>"; };
 		B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -893,6 +897,7 @@
 		B8D066D828FA958800A99907 /* MemberTodo */ = {
 			isa = PBXGroup;
 			children = (
+				B8D066E428FAA66400A99907 /* Controller */,
 				B8D066E128FAA5CF00A99907 /* Model */,
 				B8D066DA28FA959500A99907 /* View */,
 				B8D066D928FA959100A99907 /* Cell */,
@@ -913,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				B8D066DB28FA95A600A99907 /* MemberTodoView.swift */,
+				B8D066E728FAA74600A99907 /* FilteredTodoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -923,6 +929,14 @@
 				B8D066E228FAA5ED00A99907 /* MemberTodoDTO.json */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B8D066E428FAA66400A99907 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1052,6 +1066,7 @@
 				9B959B0828FFD0C300EB3412 /* ProfileDescriptionCollectionViewCell.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
+				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
 				9BE0C27E29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
@@ -1139,6 +1154,7 @@
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
 				9BE0C27A29081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift in Sources */,
 				9BE0C27C29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift in Sources */,
+				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
