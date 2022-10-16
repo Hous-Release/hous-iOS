@@ -162,15 +162,12 @@ class MainHomeViewController: UIViewController {
 
   //MARK: Helpers
   private func bind() {
-    rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:)))
-      .subscribe(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        self.viewWillAppear.accept(())
-      })
-      .disposed(by: disposeBag)
+    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .map { _ in }
+      .asSignal(onErrorJustReturn: ())
     
     let input = MainHomeViewModel.Input(
-      viewWillAppear: viewWillAppear.asSignal(),
+      viewWillAppear: viewWillAppear,
       copyButtonDidTapped: copyButtonClicked
     )
 
