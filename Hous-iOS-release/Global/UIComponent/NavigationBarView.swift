@@ -32,13 +32,17 @@ class NavBarWithBackButtonView: UIView {
     return label
   }()
 
-  lazy var rightButton: UIButton = {
-    var button = UIButton()
-    button.setTitleColor(Colors.blue.color, for: .normal)
-    button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    button.titleLabel?.textAlignment = .center
-    return button
-  }()
+  lazy var rightButton = UIButton().then {
+    //button.setTitleColor(Colors.blue.color, for: .normal)
+    //button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    var config = UIButton.Configuration.plain()
+    var  attrString = AttributedString("")
+    attrString.foregroundColor = Colors.blue.color
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    config.attributedTitle = attrString
+    $0.configuration = config
+    $0.titleLabel?.textAlignment = .center
+  }
 
   var title: String
   var rightButtonText: String
@@ -73,7 +77,7 @@ class NavBarWithBackButtonView: UIView {
     backButton.snp.makeConstraints { make in
       make.size.equalTo(44)
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(4)
+      make.leading.equalToSuperview().offset(24)
     }
 
     titleLabel.snp.makeConstraints { make in
@@ -83,7 +87,7 @@ class NavBarWithBackButtonView: UIView {
     rightButton.snp.makeConstraints { make in
       make.size.greaterThanOrEqualTo(44)
       make.centerY.equalToSuperview()
-      make.trailing.equalToSuperview().inset(32)
+      make.trailing.equalToSuperview().inset(24)
     }
   }
 }
