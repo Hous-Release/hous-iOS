@@ -32,11 +32,26 @@ final class TodoViewController: UIViewController, View {
   }
 
   func bind(reactor: TodoViewReactor) {
+    bindAction(reactor)
+    bindState(reactor)
+    bindCollectionView(reactor)
+  }
+}
+
+extension TodoViewController {
+  private func bindAction(_ reactor: TodoViewReactor) {
     rx.viewWillAppear
       .map { _ in Reactor.Action.fetch }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
+    mainView.viewAllButton.rx.tap
+      .map { _ in Reactor.Action.didTapViewAll }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+
+  private func bindState(_ reactor: TodoViewReactor) {
     reactor.state.map { $0.date }
       .bind(to: mainView.dateLabel.rx.text)
       .disposed(by: disposeBag)
@@ -51,7 +66,7 @@ final class TodoViewController: UIViewController, View {
       .drive(mainView.progressBarView.rx.progressType)
       .disposed(by: disposeBag)
 
-    reactor.state.map {$0.progress}
+    reactor.state.map {$0.progress }
       .withUnretained(self)
       .subscribe(onNext: { owner, progress in
         owner.mainView.progressBarView.progressView.progress = progress
@@ -59,7 +74,14 @@ final class TodoViewController: UIViewController, View {
       })
       .disposed(by: disposeBag)
 
-    bindCollectionView(reactor)
+    reactor.state.map { $0.enterViewAllFlag }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, flag in
+        if flag == true {
+          owner.navigationController?.pushViewController(FilteredTodoViewController(), animated: true)
+        }
+      })
+      .disposed(by: disposeBag)
   }
 }
 
