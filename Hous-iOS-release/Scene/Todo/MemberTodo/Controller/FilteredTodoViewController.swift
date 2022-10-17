@@ -15,7 +15,7 @@ import ReactorKit
 final class FilteredTodoViewController: UIViewController {
 
   //var disposeBag = DisposeBag()
-  var mainView = TodoView()
+  var mainView = FilteredTodoView()
 
   override func loadView() {
     super.loadView()
@@ -25,5 +25,16 @@ final class FilteredTodoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.navigationBar.isHidden = true
+    mainView.navigationBar.delegate = self
+  }
+}
+
+extension FilteredTodoViewController: NavBarWithBackButtonViewDelegate {
+  func backButtonDidTappedWithoutPopUp() {
+    print("back")
+  }
+
+  func backButtonDidTapped() {
+    navigationController?.popViewController(animated: true)
   }
 }
