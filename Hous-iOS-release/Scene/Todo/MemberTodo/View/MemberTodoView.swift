@@ -58,7 +58,8 @@ extension MemberTodoView {
 
     memberCollectionView.snp.makeConstraints { make in
       make.height.equalTo(Size.memberCollectionViewheight)
-      make.top.leading.trailing.equalToSuperview()
+      make.top.equalTo(safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
     }
 
     todoCollectionView.snp.makeConstraints { make in

@@ -44,6 +44,7 @@ final class FilteredTodoView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    backgroundColor = Colors.white.color
     render()
   }
 
@@ -59,7 +60,8 @@ extension FilteredTodoView {
 
     navigationBar.snp.makeConstraints { make in
       make.height.equalTo(Size.navigationBarHeight)
-      make.top.leading.trailing.equalToSuperview()
+      make.top.equalTo(safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
     }
 
     contentsView.snp.makeConstraints { make in

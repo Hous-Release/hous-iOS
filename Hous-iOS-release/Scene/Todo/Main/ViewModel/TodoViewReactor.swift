@@ -13,6 +13,7 @@ final class TodoViewReactor: Reactor {
 
   enum Action {
     case fetch
+    case didTapViewAll
   }
 
   enum Mutation {
@@ -23,6 +24,7 @@ final class TodoViewReactor: Reactor {
     case setMyTodosSection(TodoMainSection.Model)
     case setOurTodosSection(TodoMainSection.Model)
     case setError(String?)
+    case setViewAllFlag(Bool?)
   }
 
   struct State {
@@ -39,6 +41,7 @@ final class TodoViewReactor: Reactor {
       items: []
     )
     var error: String? = nil
+    @Pulse var enterViewAllFlag: Bool?
   }
 
   let initialState = State()
@@ -50,6 +53,8 @@ final class TodoViewReactor: Reactor {
     case .fetch:
       todoRepository.fetchTodo()
       return .empty()
+    case .didTapViewAll:
+      return .just(.setViewAllFlag(true))
     }
   }
 
@@ -73,6 +78,8 @@ final class TodoViewReactor: Reactor {
       newState.ourTodosSection = ourTodo
     case let .setError(error):
       newState.error = error
+    case let .setViewAllFlag(isGoingViewAll):
+      newState.enterViewAllFlag = isGoingViewAll
     }
     return newState
   }
