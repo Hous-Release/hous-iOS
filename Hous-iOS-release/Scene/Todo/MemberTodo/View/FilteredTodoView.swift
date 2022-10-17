@@ -34,10 +34,16 @@ final class FilteredTodoView: UIView {
 
   var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
     $0.backgroundColor = Colors.g1.color
+
     var config = UIButton.Configuration.plain()
-    config.imagePlacement = .trailing
+    var attrString = AttributedString("요일별 보기")
+
     config.image = Images.icChange.image
-    config.baseForegroundColor = Colors.g5.color
+    config.imagePlacement = .trailing
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    attrString.foregroundColor = Colors.g5.color
+    config.imagePadding = 2
+    config.attributedTitle = attrString
     $0.rightButton.configuration = config
   }
   private var contentsView = UIView()
@@ -69,4 +75,14 @@ extension FilteredTodoView {
       make.leading.trailing.bottom.equalToSuperview()
     }
   }
+
+//  private func setUp() {
+//
+//
+//    var titleAttr = AttributedString.init("요일별 보기")
+//    titleAttr.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+//    titleAttr.foregroundColor = Colors.g5.color
+//    config.attributedTitle = titleAttr
+//
+//  }
 }
