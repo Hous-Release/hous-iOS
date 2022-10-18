@@ -88,7 +88,7 @@ final class TodoView: UIView {
 
   private func render() {
     self.backgroundColor = .white
-    [navigationBarView, progressView, todoCollectionView].forEach { addSubview($0) }
+    [navigationBarView, progressBarView, todoCollectionView].forEach { addSubview($0) }
     [dateStackView, viewAllButton].forEach { navigationBarView.addSubview($0) }
     dateStackView.addArrangedSubviews(dateLabel, dayOfWeekLabel)
 
