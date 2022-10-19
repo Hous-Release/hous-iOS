@@ -25,8 +25,8 @@ final class ProfileViewController: UIViewController {
     static let screenWidth = UIScreen.main.bounds.width
     static let profileMainImageCellHeight = CGSize(width: Size.screenWidth, height: 254)
     static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 176)
-    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 290)
-    static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 200)
+    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 250)
+    static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 150)
     static let profileRetryCellHeight = CGSize(width: Size.screenWidth, height: 139)
   }
   
@@ -45,6 +45,7 @@ final class ProfileViewController: UIViewController {
     collectionView.register(cell: ProfileDescriptionCollectionViewCell.self)
     collectionView.register(cell: ProfileRetryCollectionViewCell.self)
     collectionView.contentInsetAdjustmentBehavior = .never
+    collectionView.showsVerticalScrollIndicator = false
     return collectionView
   }()
   
