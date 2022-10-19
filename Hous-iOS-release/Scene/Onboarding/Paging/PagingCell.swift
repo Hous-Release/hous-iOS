@@ -9,6 +9,13 @@ import UIKit
 
 final class PagingCell: UICollectionViewCell {
 
+  enum Size {
+    static let height = UIScreen.main.bounds.height
+    static let graphicSize = height * 280/812
+    static let stackTopOffset = height * 30/812
+    static let graphicBottomInset = height * 72/812
+  }
+
   let stackView = UIStackView().then {
     $0.axis = .vertical
     $0.alignment = .fill
@@ -18,7 +25,7 @@ final class PagingCell: UICollectionViewCell {
 
   var bigTitle = UILabel().then {
     $0.text = "Welcome to\nYour Hous-"
-    $0.font = Fonts.Montserrat.bold.font(size: 32)
+    $0.dynamicFontMontserrat(fontSize: 32, weight: .bold)
     $0.textColor = Colors.black.color
     $0.numberOfLines = 2
     $0.lineBreakMode = .byWordWrapping
@@ -28,7 +35,7 @@ final class PagingCell: UICollectionViewCell {
 
   var secondTitle = UILabel().then {
     $0.text = "Welcome to\nYour Hous-\n\n우리의 Hous-를 위한 How is-\n반가워요, 호미들!"
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    $0.dynamicFontSpoqaHanSansNeo(fontSize: 16, weight: .medium)
     $0.textColor = Colors.black.color
     $0.numberOfLines = 6
     $0.lineBreakMode = .byWordWrapping
@@ -54,15 +61,14 @@ final class PagingCell: UICollectionViewCell {
     addSubViews([stackView, graphicView])
 
     stackView.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(30)
-      make.leading.equalTo(graphicView.snp.leading)
-      make.trailing.equalTo(graphicView.snp.trailing)
+      make.top.equalToSuperview().offset(Size.stackTopOffset)
+      make.leading.trailing.equalTo(46)
     }
 
     graphicView.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
-      make.size.equalTo(280)
-      make.bottom.equalToSuperview().inset(72)
+      make.size.equalTo(Size.graphicSize)
+      make.bottom.equalToSuperview().inset(Size.graphicBottomInset)
     }
   }
 }
