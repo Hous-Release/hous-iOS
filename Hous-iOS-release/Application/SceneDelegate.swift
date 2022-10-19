@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let serviceProvider = ServiceProvider()
     let reactor = SplashReactor(provider: serviceProvider)
 
-    window.rootViewController = SplashViewController(reactor)
+    window.rootViewController = HousTabbarViewController()
     window.backgroundColor = .white
     window.makeKeyAndVisible()
 
