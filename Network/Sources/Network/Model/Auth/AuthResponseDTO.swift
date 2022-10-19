@@ -16,4 +16,17 @@ public extension AuthDTO.Response {
       case isJoiningRoom
     }
   }
+
+  struct SignupResponseDTO: Decodable {
+
+    public let isJoiningRoom: Bool
+    public let token: Token
+    public let userId: Int
+
+    enum CodingKeys: String, CodingKey {
+      case isJoiningRoom
+      case token
+      case userId
+    }
+  }
 }
