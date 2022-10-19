@@ -6,8 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+protocol profileMainImageCellDelegate: AnyObject {
+  func didTabSetting()
+  func didTabAlarm()
+}
 
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
+  
+  private let disposeBag: DisposeBag = DisposeBag()
+  weak var delegate: profileMainImageCellDelegate?
   
   //MARK: UI Templetes
   
@@ -55,7 +65,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     configUI()
     render()
-    setData()
+    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
@@ -69,7 +79,6 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    print("Cell Render")
     [profileMainImage,
      bedgeImage,
      titleLabel,
@@ -84,26 +93,27 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
     
     bedgeImage.snp.makeConstraints { make in
-      make.bottom.equalToSuperview().offset(-48)
-      make.trailing.equalToSuperview().offset(-50)
-      make.width.equalTo(100)
-      make.height.equalTo(100)
+      make.bottom.equalToSuperview().offset(-32)
+      make.trailing.equalToSuperview().offset(-45)
+      make.width.equalTo(110)
+      make.height.equalTo(110)
       
     }
-
+    
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)
       make.leading.equalToSuperview().offset(24)
     }
-
+    
     bedgeLabel.snp.makeConstraints { make in
-      make.top.equalTo(bedgeImage.snp.bottom).offset(8)
+      make.bottom.equalToSuperview().offset(-20)
+      make.height.equalTo(20)
       make.centerX.equalTo(bedgeImage.snp.centerX)
     }
-
+    
     alarmButton.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)
-      make.trailing.equalToSuperview().offset(60)
+      make.trailing.equalToSuperview().offset(-60)
     }
     
     settingButton.snp.makeConstraints { make in
@@ -112,14 +122,24 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  func setData() {
+  private func transferToViewController() {
+    self.alarmButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.delegate?.didTabAlarm()
+      }                                             
+      .disposed(by: disposeBag)
     
+    self.settingButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.delegate?.didTabSetting()
+      }
+      .disposed(by: disposeBag)
+  }
+  
+  func bind(_ data: ProfileModel) {
+    bedgeLabel.text = data.bedgeLabel
   }
   
 }
-
-
-
-
-
-

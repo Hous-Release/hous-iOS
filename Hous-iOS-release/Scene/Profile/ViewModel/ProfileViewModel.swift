@@ -16,18 +16,39 @@ final class ProfileViewModel: ViewModelType {
   private let disposeBag: DisposeBag = DisposeBag()
   
   struct Input {
-    
+    let viewWillAppear: Signal<Void>
   }
   
   struct Output {
-    
+    let profileModel: Observable<ProfileModel>
   }
   
   
   func transform(input: Input) -> Output {
-   return Output()
+    
+    // 서버 연결 후
+    // Repository로부터 받아온 profileModel data를 집어넣는다.
+    
+    // Using Dummy Data
+    
+    let profileModel = ProfileModel (
+      personalityColor: .red,
+      userName: "최인영",
+      userJob: "대학생",
+      statusMessage: "집가고싶다.",
+      bedgeImageURL: "dummyData",
+      bedgeLabel: "뱃지이름",
+      hashTags: ["23세", "10.31", "ENFP", "대학생"],
+      typeScores: [60, 70, 70, 70, 70],
+      isEmptyView: false)
+    
+    // end dummy
+    
+    let profileModelObservable = Observable.just(profileModel)
+    
+    return Output(profileModel: profileModelObservable)
   }
-   
+  
   
 }
 
