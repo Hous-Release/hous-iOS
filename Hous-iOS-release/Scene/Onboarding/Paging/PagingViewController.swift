@@ -29,6 +29,7 @@ final class PagingViewController: UIViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController?.navigationBar.isHidden = true
     reactor = PagingViewReactor()
   }
 

@@ -31,6 +31,7 @@ class EnterInfoView: UIView {
     textfield.placeholder = "Hous-에서 사용할 이름을 입력해주세요."
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     textfield.textColor = Colors.black.color
+    textfield.returnKeyType = .done
     return textfield
   }()
 
