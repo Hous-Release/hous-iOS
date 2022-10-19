@@ -42,7 +42,9 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
   
-  private var grayLineView = GrayLineView()
+  private var grayLineView = GrayLineView().then {
+    $0.backgroundColor = .white
+  }
   
   
   
@@ -71,17 +73,18 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     attributeName.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(5)
       make.leading.equalToSuperview().offset(4)
+      make.height.equalTo(21)
     }
     
     attributeDescription.snp.makeConstraints { make in
       make.top.equalTo(attributeName.snp.bottom).offset(13)
       make.leading.trailing.equalToSuperview()
-      make.width.equalTo(126)
-      make.bottom.equalToSuperview()
     }
     
     grayLineView.snp.makeConstraints { make in
       make.top.equalTo(attributeName.snp.bottom).offset(4)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(2)
     }
   }
   

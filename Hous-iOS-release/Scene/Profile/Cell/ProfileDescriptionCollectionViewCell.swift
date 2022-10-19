@@ -31,8 +31,8 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 24
     layout.scrollDirection = .horizontal
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    layout.estimatedItemSize = CGSize(width: 126, height: 74)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+    layout.itemSize = CGSize(width: 132, height: 82)
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.register(cell: ProfileDescriptionInnerCollectionViewCell.self)
@@ -45,8 +45,8 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
-    bind()
     render()
+    bind()
     transferToViewController()
   }
   
@@ -62,12 +62,10 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   
   private func bind() {
     let personalityAttributeDescriptionObservable:Observable<[PersonalityAttributeDescription]> = Observable.of(personalityAttributeDescriptions)
-    print(personalityAttributeDescriptions[0])
     
     personalityAttributeDescriptionObservable
       .bind(to: profileDescriptionCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: PersonalityAttributeDescription) in
-        print("bind")
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell =
                 self.profileDescriptionCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDescriptionInnerCollectionViewCell.className, for: indexPath) as? ProfileDescriptionInnerCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
@@ -81,8 +79,8 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     [profileDescriptionCollectionView].forEach { addSubview($0) }
     
     profileDescriptionCollectionView.snp.makeConstraints { make in
-      make.top.equalToSuperview()
-      make.leading.equalToSuperview().offset(32)
+      make.top.bottom.equalToSuperview()
+      make.leading.equalToSuperview()
       make.trailing.equalToSuperview()
     }
    
