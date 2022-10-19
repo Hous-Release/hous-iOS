@@ -15,8 +15,7 @@ protocol MainTodoAPIProtocol {
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
     public func getTodosData(completion: @escaping (BaseResponseType<MainTodoDTO.Response.MainTodoResponseDTO>?, Error?) -> Void) {
         fetchData(target: .getTodos,
-                  responseData: BaseResponseType<MainTodoDTO.Response.MainTodoResponseDTO>.self,
-                  isWithInterceptor: true) { res, err in
+                  responseData: BaseResponseType<MainTodoDTO.Response.MainTodoResponseDTO>.self) { res, err in
             completion(res, err)
         }
     }

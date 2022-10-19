@@ -92,7 +92,7 @@ extension EnterInfoViewController {
 
     reactor.state.map { $0.next }
       .subscribe(onNext: { [weak self] isTapped in
-        // TODO: - 서버통신 회원가입 로직처리
+        // TODO: - 서버통신 회원가입 로직처리 이제 해야됨 이제 해야됨 이제 해야됨
         if isTapped {
           let vc = EnterRoomViewController()
           vc.modalTransitionStyle = .crossDissolve
