@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Lottie
 
 protocol profileMainImageCellDelegate: AnyObject {
   func didTabSetting()
@@ -28,8 +29,8 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   //MARK: UI Components
   
-  private var profileMainImage = UIImageView().then {
-    $0.image = Images.profileRed.image
+  private var profileMainImage: AnimationView = .init(name:"profileRedlottie").then {
+    $0.play()
   }
   
   private var bedgeImage = UIImageView().then {
@@ -75,7 +76,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   //MARK: UI Set
   
   private func configUI() {
-    self.backgroundColor = .red
+    self.backgroundColor = Colors.redProfile.color
   }
   
   private func render() {
@@ -120,6 +121,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
       make.centerY.equalTo(alarmButton.snp.centerY)
       make.leading.equalTo(alarmButton.snp.trailing).offset(12)
     }
+  
   }
   
   private func transferToViewController() {
