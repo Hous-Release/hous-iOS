@@ -94,11 +94,10 @@ extension EnterInfoViewController {
       .subscribe(onNext: { [weak self] isTapped in
         // TODO: - 서버통신 회원가입 로직처리
         if isTapped {
-//          let vc = PagingViewController()
-//          vc.modalTransitionStyle = .crossDissolve
-//          vc.modalPresentationStyle = .fullScreen
-//          self?.present(vc, animated: true, completion: nil)
-          print("미구현")
+          let vc = EnterRoomViewController()
+          vc.modalTransitionStyle = .crossDissolve
+          vc.modalPresentationStyle = .fullScreen
+          self?.present(vc, animated: true, completion: nil)
         }
       })
       .disposed(by: disposeBag)
