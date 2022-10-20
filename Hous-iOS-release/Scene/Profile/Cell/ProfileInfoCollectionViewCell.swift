@@ -61,7 +61,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   }
   
   private let grayLineView = GrayLineView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
   }
   
   private var tags: [BasePaddingLabel] = []
