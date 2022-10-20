@@ -38,7 +38,7 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
   }
   
   private var grayLineView = GrayLineView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = Colors.g1.color
   }
   
   //MARK: Initializer
@@ -68,11 +68,10 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     attributeName.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(5)
       make.leading.equalToSuperview().offset(4)
-      make.height.equalTo(21)
     }
     
     attributeDescription.snp.makeConstraints { make in
-      make.top.equalTo(attributeName.snp.bottom).offset(13)
+      make.top.equalTo(grayLineView.snp.bottom).offset(8)
       make.leading.trailing.equalToSuperview()
     }
     
