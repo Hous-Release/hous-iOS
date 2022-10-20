@@ -41,9 +41,7 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
     $0.backgroundColor = Colors.black.color
     $0.layer.cornerRadius = 8
   }
-  
-  
-  
+
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -64,8 +62,9 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    
-    [retryTitleLabel, retryButton].forEach { addSubview($0) }
+    addSubViews([
+    retryTitleLabel,
+    retryButton])
     
     retryTitleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(32)
@@ -78,7 +77,6 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
       make.width.equalTo(Size.screenWidth - 48)
       make.height.equalTo(43)
     }
-    
   }
   
   private func transferToViewController() {

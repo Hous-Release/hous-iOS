@@ -103,6 +103,3 @@ PersonalityAttributeDescription(attributeName: "소음", attributeDescription: "
 PersonalityAttributeDescription(attributeName: "냄새", attributeDescription: "냄새에 민감한 사람들을\n위해서라도 밤 늦게 음식을 먹지 않지만 치킨은 먹지."),
 PersonalityAttributeDescription(attributeName: "내향", attributeDescription: "사람들이랑 놀고 싶은 마음은 이해하지만 기 너무 안 빨리게만 조심 좀.."),
 PersonalityAttributeDescription(attributeName: "정리 정돈", attributeDescription: "내가 할 소리는 아니지만 정리 정돈에 예민한 사람들을 위해 정리정돈 좀 하자..")]
-
-
-
