@@ -9,14 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol ProfileDescriptionCellDelegate: AnyObject {
-  
-}
-
 final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  weak var delegate: ProfileDescriptionCellDelegate?
   
   //MARK: UI Templetes
   
@@ -39,7 +34,6 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     return collectionView
   }()
   
-  
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -47,7 +41,6 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     configUI()
     render()
     bind()
-    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
@@ -67,8 +60,9 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
       .bind(to: profileDescriptionCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: PersonalityAttributeDescription) in
         let indexPath = IndexPath(row: index, section: 0)
-        guard let cell =
-                self.profileDescriptionCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDescriptionInnerCollectionViewCell.className, for: indexPath) as? ProfileDescriptionInnerCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+        guard let cell = self.profileDescriptionCollectionView
+          .dequeueReusableCell(withReuseIdentifier: ProfileDescriptionInnerCollectionViewCell.className, for: indexPath) as?
+           ProfileDescriptionInnerCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
         cell.bind(element)
         return cell
       }
@@ -76,24 +70,15 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    [profileDescriptionCollectionView].forEach { addSubview($0) }
+    addSubview(profileDescriptionCollectionView)
     
     profileDescriptionCollectionView.snp.makeConstraints { make in
       make.top.bottom.equalToSuperview()
-      make.leading.equalToSuperview()
-      make.trailing.equalToSuperview()
+      make.leading.trailing.equalToSuperview()
     }
-   
-  }
-  
-
-  
-  private func transferToViewController() {
-    
   }
   
   func bind(_ data: ProfileModel) {
     
   }
- 
 }

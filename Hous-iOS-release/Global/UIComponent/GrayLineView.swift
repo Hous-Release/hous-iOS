@@ -11,7 +11,7 @@ class GrayLineView: UIView {
   
   override func draw(_ rect: CGRect) {
     let path = UIBezierPath()
-    UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1).set()
+    Colors.g1.color.set()
     path.move(to: CGPoint(x: 0, y: bounds.size.height))
     path.addLine(to: CGPoint(x: bounds.size.width, y: bounds.size.height))
     path.close()

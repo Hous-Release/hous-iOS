@@ -44,7 +44,6 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
   
   private var profileGraphBoxView = ProfileGraphBoxView()
   
-    
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -65,7 +64,9 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    [personalityLabel, detailButton].forEach { addSubview($0) }
+    addSubViews([
+      personalityLabel,
+      detailButton])
     
     personalityLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(5)
@@ -81,7 +82,7 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
   }
   
   private func animatedRender() {
-    [profileGraphBoxView].forEach { addSubview($0)}
+    addSubview(profileGraphBoxView)
     
     profileGraphBoxView.snp.makeConstraints { make in
       make.top.equalTo(personalityLabel.snp.bottom).offset(22)
