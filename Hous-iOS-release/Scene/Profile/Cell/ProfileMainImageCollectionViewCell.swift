@@ -80,12 +80,13 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    [profileMainImage,
-     bedgeImage,
-     titleLabel,
-     bedgeLabel,
-     alarmButton,
-     settingButton].forEach { addSubview($0) }
+    addSubViews([
+      profileMainImage,
+      bedgeImage,
+      titleLabel,
+      bedgeLabel,
+      alarmButton,
+      settingButton])
     
     profileMainImage.snp.makeConstraints { make in
       make.top.bottom.leading.trailing.equalToSuperview()
@@ -96,9 +97,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     bedgeImage.snp.makeConstraints { make in
       make.bottom.equalToSuperview().offset(-32)
       make.trailing.equalToSuperview().offset(-45)
-      make.width.equalTo(110)
-      make.height.equalTo(110)
-      
+      make.width.height.equalTo(110)
     }
     
     titleLabel.snp.makeConstraints { make in
@@ -121,7 +120,6 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
       make.centerY.equalTo(alarmButton.snp.centerY)
       make.leading.equalTo(alarmButton.snp.trailing).offset(12)
     }
-  
   }
   
   private func transferToViewController() {
@@ -129,7 +127,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
       .bind { [weak self] in
         guard let self = self else { return }
         self.delegate?.didTabAlarm()
-      }                                             
+      }
       .disposed(by: disposeBag)
     
     self.settingButton.rx.tap
@@ -143,5 +141,4 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   func bind(_ data: ProfileModel) {
     bedgeLabel.text = data.bedgeLabel
   }
-  
 }

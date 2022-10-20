@@ -65,8 +65,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   }
   
   private var tags: [BasePaddingLabel] = []
-  
-  
+    
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -88,12 +87,13 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   
   private func render() {
     
-    [userName,
+    addSubViews([
+     userName,
      userJob,
      editButton,
      statusMessage,
      tagGuideStackView,
-     grayLineView].forEach { addSubview($0) }
+     grayLineView])
     
     userName.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(24)
@@ -124,8 +124,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     grayLineView.snp.makeConstraints { make in
       make.top.equalTo(statusMessage.snp.bottom).offset(10)
       make.height.equalTo(10)
-      make.leading.equalToSuperview().offset(28)
-      make.trailing.equalToSuperview().offset(-28)
+      make.leading.trailing.equalToSuperview().inset(28)
     }
   }
   

@@ -54,7 +54,7 @@ final class ProfileGraphBoxView : UIView {
   }
   
   private func render(){
-    self.addSubViews([profileGraphView])
+    self.addSubView(profileGraphView)
   
     profileGraphView.snp.makeConstraints {make in
       make.centerX.equalToSuperview()

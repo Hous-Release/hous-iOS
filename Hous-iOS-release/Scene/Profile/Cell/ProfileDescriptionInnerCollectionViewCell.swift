@@ -9,14 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol ProfileDescriptionInnerCellDelegate: AnyObject {
-  
-}
-
 final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  weak var delegate: ProfileDescriptionInnerCellDelegate?
   
   //MARK: UI Templetes
   
@@ -46,15 +41,12 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     $0.backgroundColor = .white
   }
   
-  
-  
   //MARK: Initializer
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
     render()
-    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
@@ -68,7 +60,10 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
   }
   
   private func render() {
-    [attributeName, attributeDescription, grayLineView].forEach { addSubview($0) }
+    addSubViews([
+      attributeName,
+      attributeDescription,
+      grayLineView])
     
     attributeName.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(5)
@@ -86,11 +81,6 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(2)
     }
-  }
-  
-  
-  private func transferToViewController() {
-    
   }
   
   func bind(_ data: PersonalityAttributeDescription) {

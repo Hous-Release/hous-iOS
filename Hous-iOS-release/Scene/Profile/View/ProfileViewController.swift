@@ -122,7 +122,6 @@ final class ProfileViewController: UIViewController {
         }
       }
       .disposed(by: disposeBag)
-    
   }
   
   //MARK: Render
@@ -135,7 +134,7 @@ final class ProfileViewController: UIViewController {
   }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout{
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     switch indexPath.row {
     case 0:
