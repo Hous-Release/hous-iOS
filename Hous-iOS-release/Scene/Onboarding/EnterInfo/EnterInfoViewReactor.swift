@@ -39,7 +39,7 @@ final class EnterInfoViewReactor: Reactor {
   let initialState = State()
 
   func mutate(action: Action) -> Observable<Mutation> {
-
+    // 회원가입 서버통신 action 처리하기
     switch action {
     case let .enterNickname(nickname):
       return .concat([
