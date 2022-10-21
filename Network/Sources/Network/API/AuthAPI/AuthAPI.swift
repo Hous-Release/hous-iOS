@@ -48,7 +48,9 @@ public final class AuthAPI: APIRequestLoader<AuthService>, AuthAPIProtocol {
       }
   }
 
-  public func signup(_ signupReauestDTO: AuthDTO.Request.SignupRequestDTO, completion: @escaping (BaseResponseType<AuthDTO.Response.SignupResponseDTO>?, Error?) -> Void) {
+  public func signup(
+    _ signupReauestDTO: AuthDTO.Request.SignupRequestDTO,
+    completion: @escaping (BaseResponseType<AuthDTO.Response.SignupResponseDTO>?, Error?) -> Void) {
     fetchData(
       target: .signup(signupReauestDTO),
       responseData: BaseResponseType<AuthDTO.Response.SignupResponseDTO>.self,
