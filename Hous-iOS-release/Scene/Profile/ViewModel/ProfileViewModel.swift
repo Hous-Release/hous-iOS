@@ -17,7 +17,7 @@ final class ProfileViewModel: ViewModelType {
   
   struct Input {
     let viewWillAppear: Signal<Void>
-    let actionControl: BehaviorSubject<ProfileActionControl>
+    let actionDetected: BehaviorSubject<ProfileActionControl>
   }
   
   struct Output {
@@ -51,7 +51,7 @@ final class ProfileViewModel: ViewModelType {
     
     // Action
     
-    let actionControl = input.actionControl.asObservable()
+    let actionControl = input.actionDetected.asObservable()
     
     return Output(
       profileModel: profileModelObservable,

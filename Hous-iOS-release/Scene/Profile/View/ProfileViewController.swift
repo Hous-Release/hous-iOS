@@ -81,11 +81,11 @@ final class ProfileViewController: UIViewController {
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
-    let actionControl = BehaviorSubject<ProfileActionControl>(value: .none)
+    let actionDetected = BehaviorSubject<ProfileActionControl>(value: .none)
     
     let input = ProfileViewModel.Input(
       viewWillAppear: viewWillAppear,
-      actionControl: actionControl
+      actionDetected: actionDetected
     )
     
     // output
@@ -105,7 +105,7 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           cell.cellActionControlSubject
             .subscribe(onNext: { data in
-              actionControl.onNext(data)
+              actionDetected.onNext(data)
             })
             .disposed(by: self.disposeBag)
           return cell
@@ -115,7 +115,7 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           cell.cellActionControlSubject
             .subscribe(onNext: { data in
-              actionControl.onNext(data)
+              actionDetected.onNext(data)
             })
             .disposed(by: self.disposeBag)
           return cell
@@ -125,7 +125,7 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           cell.cellActionControlSubject
             .subscribe(onNext: { data in
-              actionControl.onNext(data)
+              actionDetected.onNext(data)
             })
             .disposed(by: self.disposeBag)
           return cell
@@ -140,7 +140,7 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           cell.cellActionControlSubject
             .subscribe(onNext: { data in
-              actionControl.onNext(data)
+              actionDetected.onNext(data)
             })
             .disposed(by: self.disposeBag)
           return cell
