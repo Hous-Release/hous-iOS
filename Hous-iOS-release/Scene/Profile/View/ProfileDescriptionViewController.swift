@@ -1,5 +1,5 @@
 //
-//  ProfileSettingViewController.swift
+//  ProfileDescriptionViewController.swift
 //  Hous-iOS-release
 //
 //  Created by 이의진 on 2022/10/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileSettingViewController: UIViewController {
+final class ProfileDescriptionViewController: UIViewController {
   
   override func viewDidLoad(){
     super.viewDidLoad()
@@ -15,7 +15,7 @@ final class ProfileSettingViewController: UIViewController {
   }
   
   private let backGroundView = UIView().then {
-    $0.backgroundColor = .orange
+    $0.backgroundColor = .red
   }
   
   private func render() {
