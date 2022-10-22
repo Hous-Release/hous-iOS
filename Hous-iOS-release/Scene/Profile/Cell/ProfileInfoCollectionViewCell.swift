@@ -61,7 +61,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   }
   
   private let grayLineView = GrayLineView().then {
-    $0.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    $0.backgroundColor = Colors.g1.color
   }
   
   private var tags: [BasePaddingLabel] = []
@@ -123,7 +123,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     
     grayLineView.snp.makeConstraints { make in
       make.top.equalTo(statusMessage.snp.bottom).offset(10)
-      make.height.equalTo(10)
+      make.height.equalTo(2)
       make.leading.trailing.equalToSuperview().inset(28)
     }
   }
@@ -139,6 +139,8 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   
   func bind(_ data: ProfileModel) {
     tags = []
+    tagGuideStackView.removeFullyAllArrangedSubviews()
+    
     if data.hashTags.count == 0 {
       let tag = BasePaddingLabel(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)).then {
         $0.text = ""
