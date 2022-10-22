@@ -73,7 +73,6 @@ final class ProfileViewController: UIViewController {
   
   //MARK: Bind
   
-  
   private func bind() {
     
     // input
@@ -98,6 +97,7 @@ final class ProfileViewController: UIViewController {
       .bind(to:profileCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: ProfileModel) in
         let indexPath = IndexPath(row: index, section: 0)
+      
         switch indexPath.row {
         case 0:
           guard let cell =
@@ -113,11 +113,21 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileInfoCollectionViewCell.className, for: indexPath) as? ProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
+          cell.cellActionControlSubject
+            .subscribe(onNext: { data in
+              actionControl.onNext(data)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         case 2:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileGraphCollectionViewCell.className, for: indexPath) as? ProfileGraphCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
+          cell.cellActionControlSubject
+            .subscribe(onNext: { data in
+              actionControl.onNext(data)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         case 3:
           guard let cell =
@@ -128,6 +138,11 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileRetryCollectionViewCell.className, for: indexPath) as? ProfileRetryCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
+          cell.cellActionControlSubject
+            .subscribe(onNext: { data in
+              actionControl.onNext(data)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         default:
           print("Cell Loading ERROR!")
@@ -149,7 +164,9 @@ final class ProfileViewController: UIViewController {
       make.top.bottom.trailing.leading.equalToSuperview()
     }
   }
-                
+  
+  //MARK: Navigation
+  
   private func doNavigation(action: ProfileActionControl) {
     let destinationViewController : UIViewController
     
@@ -158,14 +175,18 @@ final class ProfileViewController: UIViewController {
       destinationViewController = ProfileAlarmViewController()
     case .didTabSetting:
       destinationViewController = ProfileSettingViewController()
-    default:
+    case .didTabEdit:
+      destinationViewController = ProfileEditViewController()
+    case .didTabDetail:
+      destinationViewController = ProfileDescriptionViewController()
+    case .didTabRetry:
+      destinationViewController = ProfileRetryViewController()
+    case .none:
       return
     }
     navigationController?.pushViewController(destinationViewController, animated: true)
   }
 }
-                 
-          
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -9,14 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol ProfileGraphCellDelegate: AnyObject {
-  func didTabDetail()
-}
-
 final class ProfileGraphCollectionViewCell: UICollectionViewCell {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  weak var delegate: ProfileGraphCellDelegate?
+  let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
   
@@ -94,7 +90,7 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
     self.detailButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
-        self.delegate?.didTabDetail()
+        self.cellActionControlSubject.onNext(.didTabDetail)
       }
       .disposed(by: disposeBag)
   }

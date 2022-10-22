@@ -10,16 +10,11 @@ import RxSwift
 import RxCocoa
 import Lottie
 
-protocol profileMainImageCellDelegate: AnyObject {
-  func didTabSetting()
-  func didTabAlarm()
-}
-
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  weak var delegate: profileMainImageCellDelegate?
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
+  
   //MARK: UI Templetes
   
   private enum Size {
