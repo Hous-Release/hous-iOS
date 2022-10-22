@@ -234,8 +234,18 @@ extension SignInViewController {
 
   private func transferToEnterInformation(_ isSuccess: Bool) {
     guard isSuccess else { return }
+    guard let signinType = reactor?.currentState.signinType,
+          let oAuthToken = reactor?.currentState.oauthToken else { return }
     reactor?.action.onNext(.initial)
-    let enterInfoVC = EnterInfoViewController()
+
+    let serviceProvider = ServiceProvider()
+
+    let enterInfoReactor = EnterInfoViewReactor(
+      provider: serviceProvider,
+      signinType: signinType,
+      oAuthToken: oAuthToken)
+
+    let enterInfoVC = EnterInfoViewController(enterInfoReactor)
     navigationController?.pushViewController(enterInfoVC, animated: true)
   }
 }

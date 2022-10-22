@@ -24,22 +24,31 @@ public class APIRequestLoader<T: TargetType> {
     let apiLogger = isLogging ? [APIEventLogger()] : []
 
     self.coniguration = configuration
-    self.session = Session(configuration: configuration, eventMonitors: apiLogger)
-    self.sessionWithInterceptor = Session(configuration: configuration, interceptor: tokenInterceptor, eventMonitors: apiLogger)
-
+    self.session = Session(
+      configuration: configuration,
+      eventMonitors: apiLogger
+    )
+    self.sessionWithInterceptor = Session(
+      configuration: configuration,
+      interceptor: tokenInterceptor,
+      eventMonitors: apiLogger
+    )
   }
 
-   internal func fetchData<M: Decodable>(target: T, responseData: M.Type, isWithInterceptor: Bool = true, completionHandler: @escaping (M?, Error?) -> Void) {
-
-    let session = isWithInterceptor ? self.sessionWithInterceptor : self.session
+  internal func fetchData<M: Decodable>(
+    target: T,
+    responseData: M.Type,
+    isWithInterceptor: Bool = true,
+    completionHandler: @escaping (M?, Error?) -> Void
+  ) {
 
     var allStatusCode = Set(200..<503)
-    allStatusCode.remove(401)
+    let session = isWithInterceptor ? self.sessionWithInterceptor : self.session
+    _ = isWithInterceptor ? allStatusCode.remove(401) : nil
 
     session.request(target)
       .validate(statusCode: allStatusCode)
       .responseDecodable(of: M.self) { response in
-          // response.response?.statusCode 를 이용해 Error 처리
 
         switch response.result {
 
