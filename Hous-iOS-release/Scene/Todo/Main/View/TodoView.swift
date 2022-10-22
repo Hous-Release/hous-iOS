@@ -27,13 +27,13 @@ final class TodoView: UIView {
   }
 
   var dateLabel = UILabel().then {
-    $0.text = ""
+    $0.text = "07.21"
     $0.font = Fonts.Montserrat.bold.font(size: 24)
     $0.textColor = Colors.blueL1.color
   }
 
   var dayOfWeekLabel = UILabel().then {
-    $0.text = ""
+    $0.text = "Thursday"
     $0.font = Fonts.Montserrat.bold.font(size: 24)
     $0.textColor = Colors.blue.color
   }
@@ -95,6 +95,7 @@ final class TodoView: UIView {
     navigationBarView.snp.makeConstraints { make in
       make.top.equalTo(safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
+      make.height.greaterThanOrEqualTo(96)
     }
 
     dateStackView.snp.makeConstraints { make in
