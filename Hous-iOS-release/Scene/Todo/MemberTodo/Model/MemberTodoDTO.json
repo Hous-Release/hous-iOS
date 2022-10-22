@@ -1,24 +1,128 @@
-{
-  "data": [
-    {
-      "color": "YELLOW",
-      "dayOfWeekTodos": [
-        {
-          "dayOfWeek": "string",
-          "dayOfWeekTodos": [
-            {
-              "todoId": 0,
-              "todoName": "string"
-            }
-          ],
-          "todoCnt": 0
-        }
-      ],
-      "totalTodoCnt": 0,
-      "userName": "string"
-    }
-  ],
-  "message": "string",
-  "status": 0,
-  "success": true
-}
+[
+  {
+    "userName": "혜조니",
+    "color": "GRAY",
+    "totalTodoCnt": 0,
+    "dayOfWeekTodos": [
+      {
+        "dayOfWeek": "월",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "화",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "수",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "목",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "금",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "토",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "일",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      }
+    ]
+  },
+  {
+    "userName": "지현",
+    "color": "YELLOW",
+    "totalTodoCnt": 0,
+    "dayOfWeekTodos": [
+      {
+        "dayOfWeek": "월",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "화",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "수",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "목",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "금",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "토",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "일",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      }
+    ]
+  },
+  {
+    "userName": "연쥬쥬",
+    "color": "PURPLE",
+    "totalTodoCnt": 0,
+    "dayOfWeekTodos": [
+      {
+        "dayOfWeek": "월",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "화",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "수",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "목",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "금",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "토",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      },
+      {
+        "dayOfWeek": "일",
+        "todoCnt": 0,
+        "dayOfWeekTodos": []
+      }
+    ]
+  }
+]

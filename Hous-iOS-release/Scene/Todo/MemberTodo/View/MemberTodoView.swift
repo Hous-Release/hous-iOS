@@ -32,7 +32,7 @@ final class MemberTodoView: UIView {
     frame: .zero,
     collectionViewLayout: UICollectionViewLayout()).then {
       let layout = UICollectionViewFlowLayout()
-      layout.scrollDirection = .horizontal
+      layout.scrollDirection = .vertical
       $0.collectionViewLayout = layout
     }
 
