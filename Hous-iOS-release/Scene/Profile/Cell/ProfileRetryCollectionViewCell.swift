@@ -9,14 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol ProfileRetryCellDelegate: AnyObject {
-  func didTabRetry()
-}
-
 final class ProfileRetryCollectionViewCell: UICollectionViewCell {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  weak var delegate: ProfileRetryCellDelegate?
+  let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
   
@@ -83,7 +79,7 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
     self.retryButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
-        self.delegate?.didTabRetry()
+        self.cellActionControlSubject.onNext(.didTabRetry)
       }
       .disposed(by: disposeBag)
   }
