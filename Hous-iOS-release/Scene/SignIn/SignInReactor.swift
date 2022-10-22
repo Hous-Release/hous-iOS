@@ -70,7 +70,6 @@ final class SignInReactor: Reactor {
       )
 
       login(loginRequestDTO)
-
       return .just(.setOAuthToken(accessToken))
 
     case .initial:

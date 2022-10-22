@@ -45,7 +45,7 @@ class EnterInfoView: UIView {
 
   var birthdayTextfield: UnderlinedTextField = {
     var textfield = UnderlinedTextField()
-    textfield.placeholder = "YYYY/MM/DD"
+    textfield.placeholder = "YYYY / MM / DD"
     textfield.font = Fonts.Montserrat.regular.font(size: 14)
     textfield.textColor = Colors.black.color
     return textfield

@@ -11,6 +11,7 @@ import RxCocoa
 import ReactorKit
 
 class EnterInfoViewController: UIViewController, View {
+  typealias Reactor = EnterInfoViewReactor
 
   var disposeBag = DisposeBag()
   let mainView = EnterInfoView()
@@ -20,9 +21,17 @@ class EnterInfoViewController: UIViewController, View {
     view = mainView
   }
 
+  init(_ reactor: Reactor) {
+    super.init(nibName: nil, bundle: nil)
+    self.reactor = reactor
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    reactor = EnterInfoViewReactor()
     setup()
   }
 
@@ -77,6 +86,7 @@ extension EnterInfoViewController {
 
     reactor.state.map { $0.isBirthdayPublic }
       .distinctUntilChanged()
+      .compactMap { $0 }
       .bind(to: mainView.checkBirthDayButton.rx.isSelected)
       .disposed(by: disposeBag)
 
@@ -90,17 +100,20 @@ extension EnterInfoViewController {
       .bind(to: mainView.nextButton.rx.isEnabled)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.next }
-      .subscribe(onNext: { [weak self] isTapped in
-        // TODO: - 서버통신 회원가입 로직처리 이제 해야됨 이제 해야됨 이제 해야됨
-        if isTapped {
-          let vc = EnterRoomViewController()
-          vc.modalTransitionStyle = .crossDissolve
-          vc.modalPresentationStyle = .fullScreen
-          self?.present(vc, animated: true, completion: nil)
-        }
-      })
+    reactor.state.map { $0.nextFlag }
+      .distinctUntilChanged()
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: transferToEnterRoom)
       .disposed(by: disposeBag)
+  }
+}
+
+extension EnterInfoViewController {
+  private func transferToEnterRoom(_ isSuccess: Bool) {
+    guard isSuccess else { return }
+    let enterRoomVC = EnterRoomViewController()
+    changeRootViewController(to: enterRoomVC)
   }
 }
 

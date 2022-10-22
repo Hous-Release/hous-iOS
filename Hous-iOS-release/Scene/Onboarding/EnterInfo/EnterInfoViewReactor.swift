@@ -7,13 +7,24 @@
 
 import Foundation
 
-import RxSwift
-import RxCocoa
 import ReactorKit
+import UserInformation
+import Network
 
 final class EnterInfoViewReactor: Reactor {
 
+  private let provider: ServiceProviderType
+  private let type: SignInType?
+  private let token: String?
+
+  init(provider: ServiceProviderType, signinType: SignInType, oAuthToken: String) {
+    self.provider = provider
+    self.type = signinType
+    self.token = oAuthToken
+  }
+
   enum Action {
+    //case viewWillAppear
     case enterNickname(String)
     case enterBirthday(Date?)
     case checkBirthdayPublic(Bool)
@@ -21,50 +32,74 @@ final class EnterInfoViewReactor: Reactor {
   }
 
   enum Mutation {
+    //case setSigninType(SignInType?)
+    //case setOAuthToken(String?)
     case setNickname(String)
     case setBirthday(String)
     case setIsNextButtonEnable(Bool)
-    case setIsBirthdayPublic(Bool)
-    case setNextResult
+    case setIsBirthdayPublic(Bool?)
+    case setNextFlag(Bool?)
+    case setError(String?)
   }
 
   struct State {
-    var nickname: String = ""
-    var birthday: String = ""
-    var isBirthdayPublic: Bool = false
+    //var signinType: SignInType?
+    //var oAuthToken: String?
+    var nickname: String?
+    var birthday: String?
+    var isBirthdayPublic: Bool?
     var isNextButtonEnable: Bool = false
-    var next: Bool = false
+    var nextFlag: Bool?
+
+    var error: String? = nil
   }
 
   let initialState = State()
 
   func mutate(action: Action) -> Observable<Mutation> {
-    // 회원가입 서버통신 action 처리하기
+
     switch action {
     case let .enterNickname(nickname):
+      let birthday = currentState.birthday ?? ""
       return .concat([
         limitMaxLength(of: nickname),
-        validateNextButton(nickname, currentState.birthday)
+        validateNextButton(nickname, birthday)
       ])
 
     case let .enterBirthday(birthday):
+      let nickname = currentState.nickname ?? ""
       return .concat([
         formatToString(of: birthday),
-        validateNextButton(currentState.nickname, toString(birthday))
+        validateNextButton(nickname, toString(birthday))
       ])
 
     case let .checkBirthdayPublic(flag):
-      return Observable.just(Mutation.setIsBirthdayPublic(!flag))
+      return .just(Mutation.setIsBirthdayPublic(!flag))
 
     case .tapNext:
-      return Observable.just(Mutation.setNextResult)
+      guard let birthday = currentState.birthday,
+            let nickname = currentState.nickname,
+            let isPublic = currentState.isBirthdayPublic,
+            let type = self.type,
+            let token = self.token
+      else { return .empty() }
+
+      let signupRequestDTO = AuthDTO.Request.SignupRequestDTO(
+        birthday: birthday.replacingOccurrences(of: " / ", with: "-"),
+        fcmToken: Keychain.shared.getFCMToken() ?? "",
+        isPublic: isPublic,
+        nickname: nickname,
+        socialType: type.description,
+        token: token
+      )
+      signup(signupRequestDTO)
+      return .empty()
     }
   }
 
   func reduce(state: State, mutation: Mutation) -> State {
 
     var newState = state
-    newState.next = false
 
     switch mutation {
 
@@ -80,11 +115,39 @@ final class EnterInfoViewReactor: Reactor {
     case let .setIsBirthdayPublic(flag):
       newState.isBirthdayPublic = flag
 
-    case .setNextResult:
-      newState.next = !currentState.next
+    case let .setNextFlag(flag):
+      newState.nextFlag = flag
+
+    case let .setError(error):
+      newState.error = error
     }
 
     return newState
+  }
+
+  func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+
+    let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
+      switch event {
+      case .isJoiningRoom(_):
+        return .empty()
+
+      case .updateAccessToken(let accessToken):
+        Keychain.shared.setAccessToken(accessToken: accessToken)
+        return .just(.setNextFlag(true))
+
+      case .updateRefreshToken(let refreshToken):
+        Keychain.shared.setRefreshToken(refreshToken: refreshToken)
+        return .empty()
+
+      case .sendError(let errorModel):
+        guard
+          let errorModel = errorModel else { return .empty() }
+
+        return .just(.setError(errorModel.message))
+      }
+    }
+    return Observable.merge(mutation, serviceMutation)
   }
 }
 
@@ -109,8 +172,14 @@ extension EnterInfoViewReactor {
   private func toString(_ birthday: Date?) -> String {
     guard let birthday = birthday else { return "" }
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYY/MM/dd"
+    dateFormatter.dateFormat = "YYYY / MM / dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
     return dateFormatter.string(from: birthday)
+  }
+}
+
+extension EnterInfoViewReactor {
+  private func signup(_ dto: AuthDTO.Request.SignupRequestDTO) {
+    provider.authRepository.signup(dto)
   }
 }

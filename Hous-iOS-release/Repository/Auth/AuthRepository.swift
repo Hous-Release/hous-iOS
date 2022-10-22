@@ -23,6 +23,7 @@ public protocol AuthRepository {
 
   func login(_ dto: AuthDTO.Request.LoginRequestDTO)
   func refresh(_ accessToken: String, _ refreshToken: String)
+  func signup(_ dto: AuthDTO.Request.SignupRequestDTO)
 }
 public final class AuthRepositoryImp: BaseService, AuthRepository {
   public var event = PublishSubject<AuthRepositroyEvent>()
@@ -72,6 +73,29 @@ public final class AuthRepositoryImp: BaseService, AuthRepository {
 
       self.event.onNext(.isJoiningRoom(data.isJoiningRoom))
 
+    }
+  }
+
+  public func signup(_ dto: AuthDTO.Request.SignupRequestDTO) {
+
+    NetworkService.shared.authRepository.signup(dto) { [weak self] res, err in
+
+      guard let self = self else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      self.event.onNext(.updateAccessToken(data.token.accessToken))
+      self.event.onNext(.updateRefreshToken(data.token.refreshToken))
+
+      self.event.onNext(.isJoiningRoom(data.isJoiningRoom))
     }
   }
 
