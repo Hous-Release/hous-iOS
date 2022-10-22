@@ -47,6 +47,8 @@
 		9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959B0B28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift */; };
 		9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98853628E3E9700013CCB9 /* ProfileModel.swift */; };
 		9B98853E28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98853D28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift */; };
+		9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */; };
+		9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -176,6 +178,8 @@
 		9B959B0B28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRetryCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B98853628E3E9700013CCB9 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		9B98853D28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmViewController.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -474,6 +478,8 @@
 			isa = PBXGroup;
 			children = (
 				B856700628C88C6F00B49984 /* ProfileViewController.swift */,
+				9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */,
+				9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */,
 				9B959B0328FF218D00EB3412 /* ProfileGraphBoxView.swift */,
 				9B959B0528FF21B300EB3412 /* ProfileGraphView.swift */,
 			);
@@ -995,6 +1001,7 @@
 				9B959AFE28FF192500EB3412 /* GraphView.swift in Sources */,
 				9B98853E28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
+				9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */,
 				9B959AF628FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift in Sources */,
 				B8D066CC28F7DF5300A99907 /* TodoRepository.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
@@ -1003,6 +1010,7 @@
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
+				9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */,
 				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,

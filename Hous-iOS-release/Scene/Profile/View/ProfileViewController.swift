@@ -51,6 +51,11 @@ final class ProfileViewController: UIViewController {
   
   //MARK: Life Cycle
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    profileCollectionView.reloadData()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -77,8 +82,11 @@ final class ProfileViewController: UIViewController {
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
+    let actionControl = BehaviorSubject<ProfileActionControl>(value: .none)
+    
     let input = ProfileViewModel.Input(
-      viewWillAppear: viewWillAppear
+      viewWillAppear: viewWillAppear,
+      actionControl: actionControl
     )
     
     // output
@@ -95,6 +103,11 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileMainImageCollectionViewCell.className, for: indexPath) as? ProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
+          cell.cellActionControlSubject
+            .subscribe(onNext: { data in
+              actionControl.onNext(data)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         case 1:
           guard let cell =
@@ -122,6 +135,10 @@ final class ProfileViewController: UIViewController {
         }
       }
       .disposed(by: disposeBag)
+    
+    output.actionControl
+      .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
+      .disposed(by: disposeBag)
   }
   
   //MARK: Render
@@ -132,7 +149,23 @@ final class ProfileViewController: UIViewController {
       make.top.bottom.trailing.leading.equalToSuperview()
     }
   }
+                
+  private func doNavigation(action: ProfileActionControl) {
+    let destinationViewController : UIViewController
+    
+    switch action {
+    case .didTabAlarm:
+      destinationViewController = ProfileAlarmViewController()
+    case .didTabSetting:
+      destinationViewController = ProfileSettingViewController()
+    default:
+      return
+    }
+    navigationController?.pushViewController(destinationViewController, animated: true)
+  }
 }
+                 
+          
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
