@@ -145,6 +145,7 @@
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
 		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
+		B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -290,6 +291,7 @@
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
+		B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -897,6 +899,7 @@
 		B8D066D828FA958800A99907 /* MemberTodo */ = {
 			isa = PBXGroup;
 			children = (
+				B8FF4D8C29040DDE0087AD40 /* ViewModel */,
 				B8D066E428FAA66400A99907 /* Controller */,
 				B8D066E128FAA5CF00A99907 /* Model */,
 				B8D066DA28FA959500A99907 /* View */,
@@ -935,8 +938,16 @@
 			isa = PBXGroup;
 			children = (
 				B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */,
+				B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8FF4D8C29040DDE0087AD40 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1126,6 +1137,7 @@
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
+				B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */,
 				B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */,
 				7706801528E045120082A7E7 /* SignInReactor.swift in Sources */,
 				770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */,
