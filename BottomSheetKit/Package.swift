@@ -17,6 +17,10 @@ let package = Package(
     .package(
       name: "ThirdPartyLibraryManager",
       path: "../ThirdPartyLibraryManager"
+    ),
+    .package(
+      name: "AssetKit",
+      path: "../AssetKit"
     )
   ],
   targets: [
@@ -26,6 +30,10 @@ let package = Package(
         .product(
           name: "ThirdPartyLibraryManager",
           package: "ThirdPartyLibraryManager"
+        ),
+        .product(
+          name: "AssetKit",
+          package: "AssetKit"
         )
       ]),
     .testTarget(
