@@ -50,7 +50,7 @@
 		9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */; };
 		9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */; };
 		9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */; };
-		9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */; };
+		9BBE13E12904102300B7D517 /* ProfileDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDescriptionViewController.swift */; };
 		9BBE13E32904160D00B7D517 /* ProfileRetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E22904160D00B7D517 /* ProfileRetryViewController.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
@@ -184,7 +184,7 @@
 		9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmViewController.swift; sourceTree = "<group>"; };
 		9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
-		9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		9BBE13E02904102300B7D517 /* ProfileDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionViewController.swift; sourceTree = "<group>"; };
 		9BBE13E22904160D00B7D517 /* ProfileRetryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRetryViewController.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 			children = (
 				B856700628C88C6F00B49984 /* ProfileViewController.swift */,
 				9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */,
-				9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */,
+				9BBE13E02904102300B7D517 /* ProfileDescriptionViewController.swift */,
 				9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */,
 				9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */,
 				9BBE13E22904160D00B7D517 /* ProfileRetryViewController.swift */,
@@ -988,7 +988,7 @@
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
-				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
+				9BBE13E12904102300B7D517 /* ProfileDescriptionViewController.swift in Sources */,
 				9B959AFC28FF110D00EB3412 /* ProfileGraphCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
