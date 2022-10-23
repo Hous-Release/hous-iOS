@@ -42,7 +42,7 @@ public enum API {
 
   static var apiBaseURL: String {
 //    return try! "https://" + Configuration.value(for: "API_BASE_URL")
-      return "http://43.200.122.252:8081/v1"
+      return "http://43.200.122.252/v1"
   }
 }
 

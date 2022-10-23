@@ -5,6 +5,8 @@
 //  Created by 김호세 on 2022/08/13.
 //
 
+@_exported import AssetKit
+
 import FirebaseWrapper
 import UIKit
 import UserInformation
