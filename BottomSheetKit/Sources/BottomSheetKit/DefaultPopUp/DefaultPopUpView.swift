@@ -2,20 +2,25 @@
 //  File.swift
 //  
 //
-//  Created by 김호세 on 2022/10/10.
+//  Created by 김호세 on 2022/10/30.
 //
+
 
 import Foundation
 import UIKit
+import AssetKit
 
-// TODO: Asset 모듈화 하고 나중에 디펜던시 적용하고 코드 수정
-internal final class TwoButtonPopUpView: UIView {
+internal final class DefaultPopUpView: UIView {
+
+  private typealias SpoqaHanSansNeo = Fonts.SpoqaHanSansNeo
+
   private enum Constant {
     static let verticalMargin: CGFloat = 32
     static let horizontalMargin: CGFloat = 28
     static let subtitleTopMargin: CGFloat = 8
     static let buttonTopMargin: CGFloat = 20
     static let buttonHorizontalMargin: CGFloat = 18
+    static let buttonHeight: CGFloat = 40
   }
 
   private let rootView: UIView = {
@@ -29,11 +34,8 @@ internal final class TwoButtonPopUpView: UIView {
     let label = UILabel()
     label.numberOfLines = 0
     label.textAlignment = .center
-    label.textColor = .black
-    label.font = .systemFont(ofSize: 18, weight: .bold)
-
-//    $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
-//    $0.dynamicFont(fontSize: 18, weight: .bold)
+    label.textColor = Colors.black.color
+    label.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
     return label
   }()
 
@@ -43,29 +45,30 @@ internal final class TwoButtonPopUpView: UIView {
     label.lineBreakMode = .byWordWrapping
     label.lineBreakStrategy = .hangulWordPriority
     label.textAlignment = .center
-    label.font = .systemFont(ofSize: 12, weight: .medium)
-//    $0.textColor = Colors.g5.color
-//    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-//    $0.dynamicFont(fontSize: 12, weight: .medium)
+    label.textColor = Colors.g5.color
+    label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     return label
   }()
 
-  // MARK: - No Action - Just Dismiss
-  private lazy var cancelButton: UIButton = {
+  internal lazy var cancelButton: UIButton = {
     let button = UIButton()
     button.layer.cornerRadius = 8
     button.setTitle("cancelButton", for: .normal)
     button.setTitleColor(UIColor.black, for: .normal)
-    button.backgroundColor = .blue
+    button.backgroundColor = Colors.g2.color
+    button.setTitleColor(Colors.g6.color, for: .normal)
+    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
     return button
   }()
 
-  private lazy var actionButton: UIButton = {
+  internal lazy var actionButton: UIButton = {
     let button = UIButton()
     button.layer.cornerRadius = 8
     button.setTitle("actionButton", for: .normal)
     button.setTitleColor(UIColor.black, for: .normal)
-    button.backgroundColor = .red
+    button.backgroundColor = Colors.red.color
+    button.setTitleColor(Colors.white.color, for: .normal)
+    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
     return button
   }()
 
@@ -73,6 +76,9 @@ internal final class TwoButtonPopUpView: UIView {
     let stackView = UIStackView()
     stackView.backgroundColor = .white
     stackView.axis = .horizontal
+    stackView.alignment = .center
+    stackView.distribution = .fillEqually
+    stackView.isLayoutMarginsRelativeArrangement = true
     stackView.spacing = 12
     return stackView
   }()
@@ -88,7 +94,7 @@ internal final class TwoButtonPopUpView: UIView {
   }
 }
 
-extension TwoButtonPopUpView {
+extension DefaultPopUpView {
 
   private func configure(_ model: TwoButtonPopUpModel) {
     cancelButton.setTitle(model.cancelText, for: .normal)
@@ -129,6 +135,12 @@ extension TwoButtonPopUpView {
         .offset(Constant.buttonTopMargin)
       make.leading.trailing.equalToSuperview()
         .inset(Constant.buttonHorizontalMargin)
+    }
+
+    [cancelButton, actionButton].forEach { button in
+      button.snp.makeConstraints { make in
+        make.height.equalTo(Constant.buttonHeight)
+      }
     }
   }
 }
