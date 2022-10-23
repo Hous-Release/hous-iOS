@@ -178,7 +178,7 @@ final class ProfileViewController: UIViewController {
     case .didTabEdit:
       destinationViewController = ProfileEditViewController()
     case .didTabDetail:
-      destinationViewController = ProfileDetailViewController()
+      destinationViewController = ProfileDescriptionViewController()
     case .didTabRetry:
       destinationViewController = ProfileRetryViewController()
     case .none:
