@@ -24,7 +24,7 @@ final class MemberTodoView: UIView {
       layout.scrollDirection = .horizontal
       layout.estimatedItemSize = Size.memberItemSize
       $0.collectionViewLayout = layout
-
+      $0.backgroundColor = .red
       $0.register(cell: MemberCollectionViewCell.self)
     }
 
@@ -34,6 +34,7 @@ final class MemberTodoView: UIView {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .vertical
       $0.collectionViewLayout = layout
+      $0.backgroundColor = .red
     }
 
   override init(frame: CGRect) {
