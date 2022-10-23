@@ -63,17 +63,18 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     render()
     transferToViewController()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   //MARK: UI Set
-  
+
+  // TODO: - 인영에게 Zeplin 업로드 요청하고 색깔 export 해주세요.
   private func configUI() {
-    self.backgroundColor = Colors.redProfile.color
+//    self.backgroundColor = Colors.redProfile.color
   }
-  
+
   private func render() {
     addSubViews([
       profileMainImage,

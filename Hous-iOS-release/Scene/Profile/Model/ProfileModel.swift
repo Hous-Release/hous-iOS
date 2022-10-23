@@ -20,7 +20,9 @@ enum PersonalityColor: Codable {
     case .red:
       return Colors.redB1.color
     case .blue:
-      return Colors.blueB1.color
+      // TODO: - 인영에게 Zeplin 업로드 요청하고 색깔 export 해주세요.
+//      return Colors.blueB1.color
+      return .blue
     case .yellow:
       return Colors.yellowB1.color
     case .green:
