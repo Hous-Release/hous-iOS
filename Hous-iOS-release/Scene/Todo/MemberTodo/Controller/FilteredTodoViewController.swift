@@ -11,21 +11,92 @@ import RxCocoa
 import RxDataSources
 import ReactorKit
 
+// Todo: FilteredTodoViewController - containerVC / memberTodoViewController & dayOfWeekViewController - contentsVC
+
+enum FilteringType {
+  case member, dayOfWeek
+}
+
 //MARK: - Controller
-final class FilteredTodoViewController: UIViewController {
+final class FilteredTodoViewController: UIViewController{
 
-  //var disposeBag = DisposeBag()
-  var mainView = FilteredTodoView()
-
-  override func loadView() {
-    super.loadView()
-    view = mainView
+  var viewType: FilteringType = .member {
+    didSet {
+      // FilteringType 에 따른 뷰 변경
+      if viewType == .member {
+        addChildVC(memberTodoViewController)
+      }
+    }
   }
+
+  enum Size {
+    static let navigationBarHeight = 64
+  }
+
+  lazy var memberTodoViewController = MemberTodoViewController()
+  // lazy var dayOfWeekView = DayOfWeekView()
+
+  var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
+    $0.backgroundColor = Colors.g1.color
+
+    var config = UIButton.Configuration.plain()
+    var attrString = AttributedString("요일별 보기")
+
+    config.image = Images.icChange.image
+    config.imagePlacement = .trailing
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    attrString.foregroundColor = Colors.g5.color
+    config.imagePadding = 2
+    config.attributedTitle = attrString
+    $0.rightButton.configuration = config
+  }
+  private var contentsView = UIView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setup()
+    render()
+  }
+}
+
+extension FilteredTodoViewController {
+  private func addChildVC(_ vc: UIViewController) {
+    addChild(vc)
+    contentsView.addSubView(vc.view)
+    vc.view.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    vc.didMove(toParent: self)
+  }
+
+  private func removeChildVC(_ vc: UIViewController) {
+    vc.willMove(toParent: nil)
+    vc.removeFromParent()
+    vc.view.removeFromSuperview()
+  }
+}
+
+extension FilteredTodoViewController {
+  private func setup() {
     navigationController?.navigationBar.isHidden = true
-    mainView.navigationBar.delegate = self
+    navigationBar.delegate = self
+    view.backgroundColor = Colors.white.color
+    viewType = .member
+  }
+
+  private func render() {
+    view.addSubViews([navigationBar, contentsView])
+
+    navigationBar.snp.makeConstraints { make in
+      make.height.equalTo(Size.navigationBarHeight)
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+    }
+
+    contentsView.snp.makeConstraints { make in
+      make.top.equalTo(navigationBar.snp.bottom)
+      make.leading.trailing.bottom.equalToSuperview()
+    }
   }
 }
 
