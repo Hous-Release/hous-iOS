@@ -7,8 +7,10 @@
 
 public extension MemberTodoDTO.Response {
 
+    typealias MemberTodosResponseDTO = [MemberTodoDTO]
+
     // MARK: - Members + Todos
-    struct MemberTodoResponseDTO: Decodable {
+    struct MemberTodoDTO: Decodable {
         public let userName, color: String
         public let totalTodoCnt: Int
         public let dayOfWeekTodos: [DayOfWeekTodo]
