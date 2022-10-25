@@ -8,7 +8,7 @@
 import Foundation
 
 final class MockParser {
-  static func load<D: Codable>(_ type: D.Type, from resourceName: String) -> D? {
+  static func load<D: Decodable>(_ type: D.Type, from resourceName: String) -> D? {
     guard let path = Bundle.main.path(forResource: resourceName, ofType: "json") else { return nil }
 
     guard let jsonString = try? String(contentsOfFile: path) else { return nil }
