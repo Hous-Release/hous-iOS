@@ -11,7 +11,7 @@ import Network
 
 public protocol ServiceProviderType: AnyObject {
   var authRepository: AuthRepository { get }
-
+  //var memberRepository: 
 //  var userDefaultsService: UserDefaultsServiceType { get }
 //  var alertService: AlertServiceType { get }
 //  var taskService: TaskServiceType { get }

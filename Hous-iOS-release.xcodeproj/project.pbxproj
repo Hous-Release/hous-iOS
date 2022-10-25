@@ -146,6 +146,10 @@
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
 		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
 		B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */; };
+		B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */; };
+		B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D91290515770087AD40 /* MemberRepository.swift */; };
+		B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */; };
+		B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D9529051E390087AD40 /* TodoByMemberDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -292,6 +296,10 @@
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
 		B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoViewController.swift; sourceTree = "<group>"; };
+		B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoViewReactor.swift; sourceTree = "<group>"; };
+		B8FF4D91290515770087AD40 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
+		B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoSection.swift; sourceTree = "<group>"; };
+		B8FF4D9529051E390087AD40 /* TodoByMemberDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemberDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -892,6 +900,7 @@
 			isa = PBXGroup;
 			children = (
 				B8D066CB28F7DF5300A99907 /* TodoRepository.swift */,
+				B8FF4D91290515770087AD40 /* MemberRepository.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -930,6 +939,7 @@
 			isa = PBXGroup;
 			children = (
 				B8D066E228FAA5ED00A99907 /* MemberTodoDTO.json */,
+				B8FF4D9529051E390087AD40 /* TodoByMemberDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -946,6 +956,8 @@
 		B8FF4D8C29040DDE0087AD40 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */,
+				B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1025,8 +1037,6 @@
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
-				B8566FF228C8661400B49984 /* SpoqaHanSansNeo-Medium.otf in Resources */,
-				B856702D28CA912C00B49984 /* Montserrat-Bold.otf in Resources */,
 				B8D066E328FAA5ED00A99907 /* MemberTodoDTO.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1116,6 +1126,8 @@
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
+				B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */,
+				B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
 				777085B029040DE00018240B /* TestViewController.swift in Sources */,
@@ -1169,10 +1181,12 @@
 				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
+				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
+				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,

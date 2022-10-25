@@ -1,0 +1,28 @@
+//
+//  File.swift
+//  
+//
+//  Created by 김지현 on 2022/10/24.
+//
+
+public extension MemberTodoDTO.Response {
+
+    // MARK: - Members + Todos
+    struct MemberTodoResponseDTO: Decodable {
+        public let userName, color: String
+        public let totalTodoCnt: Int
+        public let dayOfWeekTodos: [DayOfWeekTodo]
+    }
+
+    // MARK: - Todos
+    struct DayOfWeekTodo: Decodable {
+        public let dayOfWeek: String
+        public let dayOfWeekTodos: [TodoInfo]
+    }
+
+    // MARK: - Todo
+    struct TodoInfo: Decodable {
+        public let todoId: Int
+        public let todoName: String
+    }
+}

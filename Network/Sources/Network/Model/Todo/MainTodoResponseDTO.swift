@@ -7,7 +7,7 @@
 
 public extension MainTodoDTO.Response {
 
-    // MARK: - TodoMain
+    // MARK: - TodoMain2
     struct MainTodoResponseDTO: Decodable {
       public let date, dayOfWeek: String
       public let myTodos: [MyTodoDTO]
