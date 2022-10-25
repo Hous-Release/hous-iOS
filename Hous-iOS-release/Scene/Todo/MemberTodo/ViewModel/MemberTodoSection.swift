@@ -7,6 +7,7 @@
 
 import Foundation
 import RxDataSources
+import Network
 
 struct MemberTodoSection {
   typealias Model = SectionModel<Section, Item>
@@ -18,7 +19,7 @@ struct MemberTodoSection {
 
   enum Item: Equatable {
     case members(member: MemberDTO)
-    case todos(todo: TodoByMemberDTO)
+    case todos(todo: MemberTodoDTO.Response.DayOfWeekTodo)
 
     static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {

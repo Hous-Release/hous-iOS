@@ -12,9 +12,3 @@ struct MemberDTO {
   let color: String
   let totalTodoCnt: Int
 }
-
-struct TodoByMemberDTO {
-  let todoId: Int
-  let todoName: String
-  let isChecked: Bool
-}
