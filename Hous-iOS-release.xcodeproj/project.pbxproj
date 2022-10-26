@@ -54,6 +54,7 @@
 		9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */; };
 		9BBE13E12904102300B7D517 /* ProfileDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDescriptionViewController.swift */; };
 		9BBE13E32904160D00B7D517 /* ProfileRetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E22904160D00B7D517 /* ProfileRetryViewController.swift */; };
+		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -178,6 +179,7 @@
 		9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		9BBE13E02904102300B7D517 /* ProfileDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionViewController.swift; sourceTree = "<group>"; };
 		9BBE13E22904160D00B7D517 /* ProfileRetryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRetryViewController.swift; sourceTree = "<group>"; };
+		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 		77B1681C28ABC7DE00E1E512 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B59148542909688200618F26 /* OurRule */,
 				777085AD29040DC50018240B /* TestScene */,
 				7706800A28E0438D0082A7E7 /* SignIn */,
 				B856701528C99FEC00B49984 /* Onboarding */,
@@ -501,6 +504,14 @@
 				9B959B0B28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B59148542909688200618F26 /* OurRule */ = {
+			isa = PBXGroup;
+			children = (
+				B5914855290968AD00618F26 /* OurRulesViewController.swift */,
+			);
+			path = OurRule;
 			sourceTree = "<group>";
 		};
 		B595FFB028C9B1E800F6B2E4 /* ViewControllers */ = {
@@ -983,6 +994,7 @@
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
+				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
