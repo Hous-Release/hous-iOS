@@ -17,7 +17,7 @@ final class ProfileViewModel: ViewModelType {
   
   struct Input {
     let viewWillAppear: Signal<Void>
-    let actionDetected: BehaviorSubject<ProfileActionControl>
+    let actionDetected: PublishSubject<ProfileActionControl>
   }
   
   struct Output {

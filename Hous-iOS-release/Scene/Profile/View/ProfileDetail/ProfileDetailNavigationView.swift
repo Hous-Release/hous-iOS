@@ -29,6 +29,7 @@ final class ProfileDetailNavigationBarView: UIView {
     super.init(frame: frame)
     render()
     setup()
+    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
@@ -46,6 +47,15 @@ final class ProfileDetailNavigationBarView: UIView {
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(24)
     }
+  }
+  
+  private func transferToViewController() {
+    self.navigationBackButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.viewActionControlSubject.onNext(.didTabBack)
+      }
+      .disposed(by: disposeBag)
   }
 }
 

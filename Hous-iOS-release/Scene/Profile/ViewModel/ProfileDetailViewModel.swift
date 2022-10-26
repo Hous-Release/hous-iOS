@@ -15,10 +15,12 @@ final class ProfileDetailViewModel: ViewModelType {
   
   struct Input {
     let viewWillAppear: Signal<Void>
+    let actionDetected: PublishSubject<ProfileDetailActionControl>
   }
   
   struct Output {
     let profileDetailModel: Observable<ProfileDetailModel>
+    let actionControl: Observable<ProfileDetailActionControl>
   }
   
   
@@ -38,10 +40,11 @@ final class ProfileDetailViewModel: ViewModelType {
     
     // Action
     
-//    let actionControl = input.actionDetected.asObservable()
+    let actionControl = input.actionDetected.asObservable()
     
     return Output(
-      profileDetailModel: profileDetailModelObservable
+      profileDetailModel: profileDetailModelObservable,
+      actionControl: actionControl
     )
   }
   
