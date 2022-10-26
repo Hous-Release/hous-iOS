@@ -81,7 +81,7 @@ final class ProfileViewController: UIViewController {
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
-    let actionDetected = BehaviorSubject<ProfileActionControl>(value: .none)
+    let actionDetected = PublishSubject<ProfileActionControl>()
     
     let input = ProfileViewModel.Input(
       viewWillAppear: viewWillAppear,
@@ -125,6 +125,7 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           cell.cellActionControlSubject
             .subscribe(onNext: { data in
+              print(cell.cellActionControlSubject)
               actionDetected.onNext(data)
             })
             .disposed(by: self.disposeBag)

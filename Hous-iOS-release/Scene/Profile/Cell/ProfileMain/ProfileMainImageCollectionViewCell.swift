@@ -124,7 +124,6 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   }
   
   private func transferToViewController() {
-    
     self.alarmButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }

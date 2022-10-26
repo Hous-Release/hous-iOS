@@ -17,7 +17,6 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   let disposeBag = DisposeBag()
   var viewModel = ProfileDetailViewModel()
   
-  
   //MARK: UI Templetes
   
   private enum Size {
@@ -78,8 +77,17 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
+    let actionDetected = PublishSubject<ProfileDetailActionControl>()
+    
+    navigationBarView.viewActionControlSubject
+      .subscribe(onNext: { data in
+        actionDetected.onNext(data)
+      })
+      .disposed(by: disposeBag)
+    
     let input = ProfileDetailViewModel.Input(
-      viewWillAppear: viewWillAppear
+      viewWillAppear: viewWillAppear,
+      actionDetected: actionDetected
     )
     
     // output
@@ -115,9 +123,9 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
       }
       .disposed(by: disposeBag)
     
-//    output.actionControlz
-//      .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
-//      .disposed(by: disposeBag)
+    output.actionControl
+      .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
+      .disposed(by: disposeBag)
   }
   
   //MARK: Render
@@ -140,17 +148,15 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   
   //MARK: Navigation
   
-//  private func doNavigation(action: ProfileActionControl) {
-//    let destinationViewController : UIViewController
-//
-//    switch action {
-//    case .didTabBack:
-//      navigationController?.popViewController(animated: true)
-//    case .none:
-//      return
-//    }
-//    navigationController?.pushViewController(destinationViewController, animated: true)
-//  }
+  private func doNavigation(action: ProfileDetailActionControl) {
+    switch action {
+    case .didTabBack:
+      print(1)
+      navigationController?.popViewController(animated: true)
+    case .none:
+      return
+    }
+  }
 }
 
 extension ProfileDetailViewController: UICollectionViewDelegateFlowLayout {
