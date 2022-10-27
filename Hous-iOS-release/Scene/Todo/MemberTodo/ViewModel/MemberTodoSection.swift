@@ -9,25 +9,43 @@ import Foundation
 import RxDataSources
 import Network
 
-struct MemberTodoSection {
-  typealias Model = SectionModel<Section, Item>
+public struct MemberSection {
+  public typealias Model = SectionModel<Section, Item>
 
-  enum Section: Equatable {
+  public enum Section: Equatable {
+    //case members(num: Int)
     case members(num: Int)
+  }
+
+  public enum Item: Equatable {
+    //case members(member: MemberDTO)
+    case members(member: MemberDTO)
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+            switch (lhs, rhs) {
+            case (.members(_), .members(_)):
+                return true
+            }
+        }
+  }
+}
+
+public struct TodoByMemSection {
+  public typealias Model = SectionModel<Section, Item>
+
+  public enum Section: Equatable {
+    //case members(num: Int)
     case todos(num: Int)
   }
 
-  enum Item: Equatable {
-    case members(member: MemberDTO)
+  public enum Item: Equatable {
+    //case members(member: MemberDTO)
     case todos(todo: MemberTodoDTO.Response.DayOfWeekTodo)
 
-    static func == (lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {
-            case (.members(_), .members(_)),
-                 (.todos(_), .todos(_)):
+            case (.todos(_), .todos(_)):
                 return true
-            default:
-                return false
             }
         }
   }
