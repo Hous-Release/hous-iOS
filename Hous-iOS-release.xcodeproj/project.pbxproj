@@ -66,6 +66,8 @@
 		9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */; };
 		9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */; };
 		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
+		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
+		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -202,6 +204,8 @@
 		9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendRuleView.swift; sourceTree = "<group>"; };
 		9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendBoxView.swift; sourceTree = "<group>"; };
 		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
+		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
+		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -579,9 +583,19 @@
 		B59148542909688200618F26 /* OurRule */ = {
 			isa = PBXGroup;
 			children = (
+				B5914858290AB66B00618F26 /* Cells */,
 				B5914855290968AD00618F26 /* OurRulesViewController.swift */,
 			);
 			path = OurRule;
+			sourceTree = "<group>";
+		};
+		B5914858290AB66B00618F26 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */,
+				B591485B290AB69300618F26 /* RulesTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B595FFB028C9B1E800F6B2E4 /* ViewControllers */ = {
@@ -958,7 +972,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "swiftgen config run --config \"$SRCROOT/AssetKit/Sources/AssetKit/Script/swiftgen.yml\"\n";
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nswiftgen config run --config \"$SRCROOT/AssetKit/Sources/AssetKit/Script/swiftgen.yml\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -976,6 +990,7 @@
 				B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
 				B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */,
+				B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */,
 				9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
@@ -1007,6 +1022,7 @@
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
+				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
