@@ -13,8 +13,8 @@ import Then
 final class MemberTodoView: UIView {
 
   enum Size {
-    static let memberItemSize = CGSize(width: 50, height: 100)
-    static let memberCollectionViewheight = 64
+    static let memberItemSize = CGSize(width: 70, height: 80)
+    static let memberCollectionViewheight = 88
   }
 
   var memberCollectionView = UICollectionView(
@@ -23,8 +23,10 @@ final class MemberTodoView: UIView {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .horizontal
       layout.estimatedItemSize = Size.memberItemSize
+      layout.minimumLineSpacing = 0
       $0.collectionViewLayout = layout
-      $0.backgroundColor = .red
+      $0.showsHorizontalScrollIndicator = false
+      $0.backgroundColor = Colors.g1.color
       $0.register(cell: MemberCollectionViewCell.self)
     }
 
@@ -39,7 +41,6 @@ final class MemberTodoView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setUp()
     render()
   }
 
@@ -49,10 +50,6 @@ final class MemberTodoView: UIView {
 }
 
 extension MemberTodoView {
-
-  private func setUp() {
-
-  }
 
   private func render() {
     addSubViews([memberCollectionView, todoCollectionView])

@@ -8,35 +8,19 @@
 import UIKit
 import Then
 import ReactorKit
+import AssetKit
 
-final class MemberCollectionViewCell: UICollectionViewCell {
+final class MemberCollectionViewCell: UICollectionViewCell, ReactorKit.View {
+
+  var disposeBag = DisposeBag()
+  typealias Reactor = MemberCollectionViewCellReactor
 
   enum Size {
-    static let buttonWidth = (40/375) * UIScreen.main.bounds.width
+    static let buttonWidth = 70
+    static let buttonHeight = 80
   }
 
-  // var memberColor 민재 code Factory Pattern
-
-  var checkButton = UIButton().then {
-    $0.configurationUpdateHandler = { btn in
-      var config = btn.configuration
-      config?.imagePlacement = .top
-      config?.title = "김지현"
-      var titleAttr = AttributedString()
-      titleAttr.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-
-      switch btn.state {
-      case .normal:
-        config?.image = Images.icBlueNo.image
-        config?.baseForegroundColor = Colors.g5.color
-      case .selected:
-        config?.image = Images.icBlueYes.image
-        config?.baseForegroundColor = Colors.black.color
-      default:
-        break
-      }
-    }
-  }
+  var checkButton = UIButton(configuration: UIButton.Configuration.filled())
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -51,14 +35,40 @@ final class MemberCollectionViewCell: UICollectionViewCell {
 
 extension MemberCollectionViewCell {
   private func setUp() {
-
+    checkButton.configuration?.baseBackgroundColor = Colors.g1.color
+    checkButton.configuration?.imagePlacement = .top
+    checkButton.configuration?.imagePadding = 8
+    checkButton.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = Images.icBlueNo.image
+        btn.configuration?.baseForegroundColor = Colors.g5.color
+      case .selected:
+        btn.configuration?.image = Images.icBlueYes.image
+        btn.configuration?.baseForegroundColor = Colors.black.color
+      default:
+        break
+      }
+    }
   }
 
   private func render() {
     addSubView(checkButton)
-
     checkButton.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
+  }
+}
+
+extension MemberCollectionViewCell {
+
+  func bind(reactor: MemberCollectionViewCellReactor) {
+    let titleAttr: [NSAttributedString.Key: Any] = [
+      .font: Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    ]
+    checkButton.configuration?.attributedTitle = AttributedString(
+      reactor.currentState.userName,
+      attributes: AttributeContainer(titleAttr)
+    )
   }
 }
