@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct MemberDTO {
+public struct MemberDTO {
   let userName: String
   let color: String
-  let totalTodoCnt: Int
 }
