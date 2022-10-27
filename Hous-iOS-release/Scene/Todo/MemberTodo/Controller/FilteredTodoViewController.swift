@@ -23,6 +23,10 @@ final class FilteredTodoViewController: UIViewController{
   var viewType: FilteringType = .member {
     didSet {
       // FilteringType 에 따른 뷰 변경
+      let serviceProvider = ServiceProvider()
+      let memberTodoViewReactor = MemberTodoViewReactor(provider: serviceProvider)
+      let memberTodoViewController = MemberTodoViewController(memberTodoViewReactor)
+
       if viewType == .member {
         addChildVC(memberTodoViewController)
       }
@@ -33,7 +37,8 @@ final class FilteredTodoViewController: UIViewController{
     static let navigationBarHeight = 64
   }
 
-  lazy var memberTodoViewController = MemberTodoViewController()
+  // question: 이게 맞을까? .... 아닌 것 같아 ....
+
   // lazy var dayOfWeekView = DayOfWeekView()
 
   var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
