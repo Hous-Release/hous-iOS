@@ -114,9 +114,8 @@ class MainHomeViewController: UIViewController {
       cell.ourRulesArrowButton.rx.tap
         .asDriver()
         .drive(onNext: { [weak self] in
-          //TODO: Rules화면으로 화면전환
           guard let self = self else { return }
-          let vc = TodoViewController()
+          let vc = OurRulesViewController()
           self.navigationController?.pushViewController(vc, animated: true)
         })
         .disposed(by: cell.disposeBag)
