@@ -93,7 +93,12 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
   }
   
   func setHomeRulesCell(ourRules: [String]) {
-    ruleEmptyViewLabel.isHidden = !ourRules.isEmpty
+    if ourRules.count == 0 {
+      ourRulesStackView.isHidden = true
+      ruleEmptyViewLabel.isHidden = false
+      return
+    }
+    
     ourRulesStackView.subviews.forEach { $0.removeFromSuperview() }
     ourRules.enumerated().forEach { (idx, rule) in
       let label = OurRulesView()
@@ -102,8 +107,10 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     }
     if ourRules.count < 3 {
       let diff = 3 - ourRules.count
-      for _ in 0..<diff {
-        ourRulesStackView.addArrangedSubview(OurRulesView())
+      for i in 0..<diff {
+        let label = OurRulesView()
+        label.setEmptyRule(number: diff+i)
+        ourRulesStackView.addArrangedSubview(label)
       }
     }
     
