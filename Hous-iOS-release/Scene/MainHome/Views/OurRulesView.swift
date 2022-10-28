@@ -51,4 +51,9 @@ class OurRulesView: UIView {
     ruleTextLabel.text = ruleText
   }
   
+  func setEmptyRule(number: Int) {
+    numberLabel.text = "\(number)"
+    ruleTextLabel.textColor = Colors.g4.color
+  }
+  
 }
