@@ -82,6 +82,7 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
     navigationBarView.viewActionControlSubject
       .subscribe(onNext: { data in
         actionDetected.onNext(data)
+        print(data)
       })
       .disposed(by: disposeBag)
     

@@ -12,7 +12,7 @@ import Lottie
 
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
-  private let disposeBag: DisposeBag = DisposeBag()
+  let disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes

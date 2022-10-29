@@ -11,7 +11,7 @@ import RxCocoa
 
 final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
   
-  private let disposeBag: DisposeBag = DisposeBag()
+  let disposeBag: DisposeBag = DisposeBag()
   
   //MARK: UI Templetes
   
