@@ -208,7 +208,6 @@
 		B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		B595FFD128CC7D0F00F6B2E4 /* MainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeModel.swift; sourceTree = "<group>"; };
 		B595FFD528CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		B595FFD728CDAA1600F6B2E4 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		B595FFD928CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperatorLineCollectionReusableView.swift; sourceTree = "<group>"; };
 		B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeRulesCollectionViewCell.swift; sourceTree = "<group>"; };
 		B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +254,6 @@
 		B856702428C9CA2800B49984 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewReactor.swift; sourceTree = "<group>"; };
 		B856702828CA087E00B49984 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		B856702A28CA831000B49984 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
@@ -696,8 +694,6 @@
 		B84EA6D028D620BF00C92FCD /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				B856702A28CA831000B49984 /* TodoView.swift */,
-				B595FFD728CDAA1600F6B2E4 /* UILabel+Extension.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
