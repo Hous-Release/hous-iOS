@@ -77,12 +77,12 @@ public final class ColorAsset {
   }
   #endif
 
-  #if canImport(SwiftUI)
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public private(set) lazy var swiftUIColor: SwiftUI.Color = {
-    SwiftUI.Color(asset: self)
-  }()
-  #endif
+//  #if canImport(SwiftUI)
+//  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+//  public private(set) lazy var swiftUIColor: SwiftUI.Color = {
+//    SwiftUI.Color(asset: self)
+//  }()
+//  #endif
 
   fileprivate init(name: String) {
     self.name = name

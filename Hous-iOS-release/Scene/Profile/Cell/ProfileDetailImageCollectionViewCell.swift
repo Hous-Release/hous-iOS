@@ -24,7 +24,7 @@ final class ProfileDetailImageCollectionViewCell: UICollectionViewCell {
   }
   
   private let personalityImageView = UIImageView().then {
-    $0.image = UIImage(named: "temp_illu_result_01") // 임시로 이렇게 지정 (서버 통신 작업 후 수정 예정)
+    $0.image = Images.tempTestResult.image // 임시로 이렇게 지정 (서버 통신 작업 후 수정 예정)
   }
   
   override init(frame: CGRect){
