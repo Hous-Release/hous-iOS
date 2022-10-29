@@ -15,13 +15,21 @@ final class ProfileDetailNavigationBarView: UIView {
   let viewActionControlSubject = PublishSubject<ProfileDetailActionControl>()
   
   private let navigationBackButton = UIButton().then {
-    $0.setImage(Images.icBack.image, for: .normal)
+    let image = Images.icBack.image
+    let newWidth = 28
+    let newHeight = 28
+    let newImageRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+    image.draw(in: newImageRect)
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
+    UIGraphicsEndImageContext()
+    $0.setImage(newImage, for: .normal)
   }
   
   private let titleName = UILabel().then {
     $0.text = "성향 설명"
     $0.textColor = Colors.black.color
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 17)
     $0.textAlignment = .center
   }
 
@@ -41,11 +49,17 @@ final class ProfileDetailNavigationBarView: UIView {
   }
   
   private func render() {
-    self.addSubView(navigationBackButton)
+    self.addSubViews([navigationBackButton, titleName])
     
     navigationBackButton.snp.makeConstraints {make in
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(24)
+//      make.width.height.equalTo(24)
+    }
+    
+    titleName.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.centerY.equalTo(navigationBackButton.snp.centerY).offset(2)
     }
   }
   
