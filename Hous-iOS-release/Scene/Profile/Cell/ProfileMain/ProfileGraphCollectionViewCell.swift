@@ -11,7 +11,7 @@ import RxCocoa
 
 final class ProfileGraphCollectionViewCell: UICollectionViewCell {
   
-  private let disposeBag: DisposeBag = DisposeBag()
+  var disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
