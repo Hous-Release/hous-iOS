@@ -19,14 +19,23 @@ class OurRulesViewController: UIViewController {
   
   private let rulesTableView = UITableView()
   
-  let disposeBag = DisposeBag()
+  private let disposeBag = DisposeBag()
   
+  private let viewModel: RulesViewModel
+  
+  init(viewModel: RulesViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     configUI()
     setTableView()
-    bind(RulesViewModel(dummy: ["규칙추가1", "규칙추가2", "규칙추가3", "규칙 ㅁㄴ아ㅜ"]))
   }
   
   private func setTableView() {
@@ -57,13 +66,21 @@ class OurRulesViewController: UIViewController {
     }
   }
   
-  private func bind(_ viewModel: RulesViewModel) {
-    viewModel.getCellData()
-      .bind(to: rulesTableView.rx.items) { (tableView, row, item) -> UITableViewCell in
+  private func bind() {
+    rx.RxViewWillAppear
+      .asObservable()
+      .bind(to: viewModel.viewWillAppearSubject)
+      .disposed(by: disposeBag)
+    
+    viewModel.rules
+      .drive(rulesTableView.rx.items) { (tableView, row, item) -> UITableViewCell in
+        
         if row == 0 {
           guard let cell = tableView.dequeueReusableCell(withIdentifier: KeyRulesTableViewCell.className, for: IndexPath.init(row: row, section: 0)) as? KeyRulesTableViewCell else {
             return UITableViewCell()
           }
+          
+          
           cell.setKeyRulesCell(ourRules: [item])
           cell.selectionStyle = .none
           cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
@@ -75,7 +92,7 @@ class OurRulesViewController: UIViewController {
         }
         
         cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-        cell.setNormalRulesData(rule: item)
+        cell.setNormalRulesData(rule: item.name)
         cell.selectionStyle = .none
         return cell
         
