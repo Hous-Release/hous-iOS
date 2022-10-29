@@ -58,6 +58,7 @@
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
 		B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914884290BC2D200618F26 /* RulesViewModel.swift */; };
+		B591488A290D10FA00618F26 /* RuleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914889290D10FA00618F26 /* RuleRepository.swift */; };
 		B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591488B290D21A700618F26 /* UIViewController+Rx.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
@@ -187,6 +188,7 @@
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
 		B5914884290BC2D200618F26 /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
+		B5914889290D10FA00618F26 /* RuleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleRepository.swift; sourceTree = "<group>"; };
 		B591488B290D21A700618F26 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B5914888290D10EA00618F26 /* Rule */,
 				B8D066CA28F7DF4700A99907 /* Todo */,
 				77067FF628DDD9140082A7E7 /* Auth */,
 			);
@@ -531,6 +534,14 @@
 				B591485B290AB69300618F26 /* RulesTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		B5914888290D10EA00618F26 /* Rule */ = {
+			isa = PBXGroup;
+			children = (
+				B5914889290D10FA00618F26 /* RuleRepository.swift */,
+			);
+			path = Rule;
 			sourceTree = "<group>";
 		};
 		B595FFB028C9B1E800F6B2E4 /* ViewControllers */ = {
@@ -948,6 +959,7 @@
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
+				B591488A290D10FA00618F26 /* RuleRepository.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,
 				9B959B0228FF1EA800EB3412 /* GraphBackgroundView.swift in Sources */,
 				9B959AF828FED16400EB3412 /* BasePaddingLabel.swift in Sources */,
