@@ -130,7 +130,6 @@ final class ProfileViewController: UIViewController {
           cell.bind(element)
           if(!self.isLoaded) {
             cell.cellActionControlSubject
-              .debug("graphcell")
               .subscribe(onNext: { data in
                 actionDetected.onNext(data)
               })

@@ -21,10 +21,10 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
-    static let imageCellSize = CGSize(width: Size.screenWidth, height: 340)
+    static let imageCellSize = CGSize(width: Size.screenWidth, height: 380)
     static let textCellSize = CGSize(width: Size.screenWidth, height: 320)
     static let textSmallCellSize = CGSize(width: Size.screenWidth, height: 300)
-    static let recommendCellSize = CGSize(width: Size.screenWidth, height: 100)
+    static let recommendCellSize = CGSize(width: Size.screenWidth, height: 240)
   }
   
   //MARK: UI Components
@@ -35,7 +35,7 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     
     let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
     collectionView.register(cell: ProfileDetailImageCollectionViewCell.self)
@@ -152,7 +152,6 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   private func doNavigation(action: ProfileDetailActionControl) {
     switch action {
     case .didTabBack:
-      print(1)
       navigationController?.popViewController(animated: true)
     case .none:
       return

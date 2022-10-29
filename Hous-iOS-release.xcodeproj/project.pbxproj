@@ -60,6 +60,11 @@
 		9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */; };
 		9BE0C284290823860028F13A /* ProfileDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C283290823860028F13A /* ProfileDetailModel.swift */; };
 		9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C28629082BFD0028F13A /* ProfileDetailNavigationView.swift */; };
+		9BF945FC290D4020008F2BFC /* NeumorphismBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */; };
+		9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FD290D4301008F2BFC /* ProfileDescriptionView.swift */; };
+		9BF94600290D441B008F2BFC /* ProfileRecommendTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FF290D441B008F2BFC /* ProfileRecommendTitleView.swift */; };
+		9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */; };
+		9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -190,6 +195,11 @@
 		9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		9BE0C283290823860028F13A /* ProfileDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailModel.swift; sourceTree = "<group>"; };
 		9BE0C28629082BFD0028F13A /* ProfileDetailNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailNavigationView.swift; sourceTree = "<group>"; };
+		9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBox.swift; sourceTree = "<group>"; };
+		9BF945FD290D4301008F2BFC /* ProfileDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionView.swift; sourceTree = "<group>"; };
+		9BF945FF290D441B008F2BFC /* ProfileRecommendTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendTitleView.swift; sourceTree = "<group>"; };
+		9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendRuleView.swift; sourceTree = "<group>"; };
+		9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendBoxView.swift; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -559,6 +569,10 @@
 			isa = PBXGroup;
 			children = (
 				9BE0C28629082BFD0028F13A /* ProfileDetailNavigationView.swift */,
+				9BF945FD290D4301008F2BFC /* ProfileDescriptionView.swift */,
+				9BF945FF290D441B008F2BFC /* ProfileRecommendTitleView.swift */,
+				9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */,
+				9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */,
 			);
 			path = ProfileDetail;
 			sourceTree = "<group>";
@@ -806,6 +820,7 @@
 				9B959AFD28FF192500EB3412 /* GraphView.swift */,
 				9B959B0128FF1EA800EB3412 /* GraphBackgroundView.swift */,
 				B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */,
+				9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -974,13 +989,16 @@
 				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
+				9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,
 				9B959B0228FF1EA800EB3412 /* GraphBackgroundView.swift in Sources */,
 				9B959AF828FED16400EB3412 /* BasePaddingLabel.swift in Sources */,
+				9BF94600290D441B008F2BFC /* ProfileRecommendTitleView.swift in Sources */,
 				9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */,
+				9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
@@ -1035,6 +1053,8 @@
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */,
+				9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */,
+				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,
@@ -1057,6 +1077,7 @@
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,
 				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
+				9BF945FC290D4020008F2BFC /* NeumorphismBox.swift in Sources */,
 				B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */,
 				9B959B0A28FFD63800EB3412 /* ProfileDescriptionInnerCollectionViewCell.swift in Sources */,
 				9B959B0628FF21B300EB3412 /* ProfileGraphView.swift in Sources */,
