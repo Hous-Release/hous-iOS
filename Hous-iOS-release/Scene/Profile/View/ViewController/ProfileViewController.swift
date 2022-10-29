@@ -17,6 +17,7 @@ final class ProfileViewController: UIViewController {
   
   let disposeBag = DisposeBag()
   var viewModel = ProfileViewModel()
+  var isLoaded = false
   
   
   //MARK: UI Templetes
@@ -97,38 +98,44 @@ final class ProfileViewController: UIViewController {
       .bind(to:profileCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: ProfileModel) in
         let indexPath = IndexPath(row: index, section: 0)
-      
         switch indexPath.row {
         case 0:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileMainImageCollectionViewCell.className, for: indexPath) as? ProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          cell.cellActionControlSubject
-            .subscribe(onNext: { data in
-              actionDetected.onNext(data)
-            })
-            .disposed(by: self.disposeBag)
+          print(0)
+          if(!self.isLoaded) {
+            cell.cellActionControlSubject
+              .subscribe(onNext: { data in
+                actionDetected.onNext(data)
+              })
+              .disposed(by: cell.disposeBag)
+          }
           return cell
         case 1:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileInfoCollectionViewCell.className, for: indexPath) as? ProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          cell.cellActionControlSubject
-            .subscribe(onNext: { data in
-              actionDetected.onNext(data)
-            })
-            .disposed(by: self.disposeBag)
+          if(!self.isLoaded) {
+            cell.cellActionControlSubject
+              .subscribe(onNext: { data in
+                actionDetected.onNext(data)
+              })
+              .disposed(by: cell.disposeBag)
+          }
           return cell
         case 2:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileGraphCollectionViewCell.className, for: indexPath) as? ProfileGraphCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          cell.cellActionControlSubject
-            .subscribe(onNext: { data in
-              print(cell.cellActionControlSubject)
-              actionDetected.onNext(data)
-            })
-            .disposed(by: self.disposeBag)
+          if(!self.isLoaded) {
+            cell.cellActionControlSubject
+              .debug("graphcell")
+              .subscribe(onNext: { data in
+                actionDetected.onNext(data)
+              })
+              .disposed(by: cell.disposeBag)
+          }
           return cell
         case 3:
           guard let cell =
@@ -139,11 +146,13 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileRetryCollectionViewCell.className, for: indexPath) as? ProfileRetryCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          cell.cellActionControlSubject
-            .subscribe(onNext: { data in
-              actionDetected.onNext(data)
-            })
-            .disposed(by: self.disposeBag)
+          if(!self.isLoaded) { cell.cellActionControlSubject
+              .subscribe(onNext: { data in
+                actionDetected.onNext(data)
+              })
+              .disposed(by: cell.disposeBag)
+          }
+          self.isLoaded = true
           return cell
         default:
           print("Cell Loading ERROR!")
@@ -155,6 +164,7 @@ final class ProfileViewController: UIViewController {
     output.actionControl
       .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
       .disposed(by: disposeBag)
+    
   }
   
   //MARK: Render
@@ -185,6 +195,7 @@ final class ProfileViewController: UIViewController {
     case .none:
       return
     }
+    destinationViewController.view.backgroundColor = .white
     navigationController?.pushViewController(destinationViewController, animated: true)
   }
 }
