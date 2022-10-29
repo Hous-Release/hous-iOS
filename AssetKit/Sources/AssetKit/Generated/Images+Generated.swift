@@ -90,6 +90,8 @@ public enum Images {
   public static let icBackWhite = ImageAsset(name: "ic_back_white")
   public static let icCheckBadge = ImageAsset(name: "ic_check_badge")
   public static let icBackTest = ImageAsset(name: "ic_back_test")
+  public static let icCheckYellow = ImageAsset(name: "ic_check_yellow")
+  public static let tempTestResult = ImageAsset(name:"temp_illu_result_01")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -476,8 +476,6 @@
 			isa = PBXGroup;
 			children = (
 				77AEF34028E2009E002A102B /* Lottie */,
-				B8566FF728C86B6300B49984 /* Generated */,
-				B8566FEA28C865DF00B49984 /* Fonts */,
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -939,7 +937,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		777085AA2903FEE50018240B /* Generate Asset In AssetKit */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -951,7 +949,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "swiftgen config run --config \"$SRCROOT/AssetKit/Sources/AssetKit/Script/swiftgen.yml\"\n";
 		};
@@ -1015,7 +1013,7 @@
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
-				9BBE13E12904102300B7D517 /* ProfileDescriptionViewController.swift in Sources */,
+				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
 				777085B029040DE00018240B /* TestViewController.swift in Sources */,
 				9BE0C284290823860028F13A /* ProfileDetailModel.swift in Sources */,
 				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
@@ -1054,7 +1052,6 @@
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */,
 				9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */,
-				B8566FFB28C86E2400B49984 /* Colors+Generated.swift in Sources */,
 				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,

@@ -59,7 +59,7 @@ final class ProfileRecommendBoxView: UIView {
     personalityLabel.text = "룰 새터 육각이"
     
     // 서버 통신 시 URL로 설정
-    personalityImageView.image = UIImage(named: "temp_illu_result_01")
+    personalityImageView.image = Images.tempTestResult.image
   }
   
   private func render(){
