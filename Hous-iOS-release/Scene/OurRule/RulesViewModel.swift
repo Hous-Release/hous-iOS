@@ -7,15 +7,56 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import Network
 
-class RulesViewModel {
-  var dummy: [String]
+
+final class RulesViewModel {
   
-  init(dummy: [String]) {
-    self.dummy = dummy
+  // Inputs
+  let viewWillAppearSubject = PublishSubject<Void>()
+  
+  // Outputs
+//  var keyRules: Driver<KeyRuleViewModel>
+  var rules: Driver<[RuleViewModel]>
+  
+  init() {
+    let rules = self.viewWillAppearSubject
+      .asObservable()
+      .flatMap { _ in
+        NetworkService.shared.ruleRepository.getRulesName()
+      }
+      .asDriver(onErrorJustReturn: [])
+    
+    self.rules = rules.map(
+      {
+        $0.map { RuleViewModel(name: $0.name) }
+      }
+    )
+    
+//    self.keyRules = rules.map({ KeyRuleViewModel(rules: $0) })
   }
-  
-  func getCellData() -> Observable<[String]> {
-    return Observable.of(dummy)
+}
+
+struct KeyRuleViewModel {
+  let names: [String]
+}
+
+extension KeyRuleViewModel {
+  init(rules: [RuleDTO.Response.Rule]) {
+    let arr = rules.map { rule in
+      rule.name
+    }
+    self.names = arr
+  }
+}
+
+struct RuleViewModel {
+  var name: String
+}
+
+extension RuleViewModel {
+  init(rule: RuleDTO.Response.Rule) {
+    self.name = rule.name
   }
 }
