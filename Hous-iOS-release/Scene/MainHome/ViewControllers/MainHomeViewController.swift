@@ -115,7 +115,7 @@ class MainHomeViewController: UIViewController {
         .asDriver()
         .drive(onNext: { [weak self] in
           guard let self = self else { return }
-          let vc = OurRulesViewController()
+          let vc = OurRulesViewController(viewModel: RulesViewModel())
           self.navigationController?.pushViewController(vc, animated: true)
         })
         .disposed(by: cell.disposeBag)
