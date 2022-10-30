@@ -13,8 +13,9 @@ import Then
 final class MemberTodoView: UIView {
 
   enum Size {
-    static let memberItemSize = CGSize(width: 80, height: 80)
+    static let memberItemSize = CGSize(width: 50, height: 80)
     static let memberCollectionViewheight = 88
+    static let memberCollectionEdgeInsets = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 0)
   }
 
   var memberCollectionView = UICollectionView(
@@ -23,7 +24,7 @@ final class MemberTodoView: UIView {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .horizontal
       layout.estimatedItemSize = Size.memberItemSize
-      layout.minimumLineSpacing = 0
+      layout.sectionInset = Size.memberCollectionEdgeInsets
       $0.collectionViewLayout = layout
       $0.showsHorizontalScrollIndicator = false
       $0.backgroundColor = Colors.g1.color
