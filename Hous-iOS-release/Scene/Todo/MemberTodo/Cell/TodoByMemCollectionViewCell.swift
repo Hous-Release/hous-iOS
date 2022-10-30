@@ -53,7 +53,7 @@ extension TodoByMemListCell {
 
     var content = defaultTodoByMemConfiguration().updated(for: state)
     guard let todoItem = state.todoByMemData else { return }
-    content.image = Images.icCheckYes.image
+    content.image = Images.dotTodobymem.image
     content.imageToTextPadding = 14
     content.attributedText = NSAttributedString(
       string: todoItem.todoName,
