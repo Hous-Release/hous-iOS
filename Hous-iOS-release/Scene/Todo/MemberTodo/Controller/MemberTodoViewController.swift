@@ -39,6 +39,9 @@ class MemberTodoViewController: UIViewController, ReactorKit.View {
     super.viewDidLoad()
     makeDataSource()
     setupSnapshot()
+    if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
+      tvc.housTabBar.isHidden = true
+    }
   }
 }
 

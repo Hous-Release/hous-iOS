@@ -16,6 +16,8 @@ final class MemberTodoView: UIView {
     static let memberItemSize = CGSize(width: 50, height: 80)
     static let memberCollectionViewheight = 88
     static let memberCollectionEdgeInsets = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 0)
+    static let todoListEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+    static let floatingButtonSize = 60
   }
 
   var memberCollectionView = UICollectionView(
@@ -34,6 +36,10 @@ final class MemberTodoView: UIView {
   var todoCollectionView = UICollectionView(
     frame: .zero,
     collectionViewLayout: UICollectionViewLayout())
+
+  var floatingAddButton = UIButton().then {
+    $0.setImage(Images.btnAddFloating.image, for: .normal)
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -59,13 +65,13 @@ extension MemberTodoView {
 
     // MARK: Configure collection view
     todoCollectionView = UICollectionView(frame: bounds, collectionViewLayout: listLayout)
-    todoCollectionView.contentInset = UIEdgeInsets(top: 2, left: 0, bottom: 80, right: 0)
+    todoCollectionView.contentInset = Size.todoListEdgeInsets
     todoCollectionView.showsVerticalScrollIndicator = false
 
   }
 
   private func render() {
-    addSubViews([memberCollectionView, todoCollectionView])
+    addSubViews([memberCollectionView, todoCollectionView, floatingAddButton])
 
     memberCollectionView.snp.makeConstraints { make in
       make.height.equalTo(Size.memberCollectionViewheight)
@@ -77,6 +83,11 @@ extension MemberTodoView {
       make.top.equalTo(memberCollectionView.snp.bottom)
       make.bottom.equalTo(safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview().inset(24)
+    }
+
+    floatingAddButton.snp.makeConstraints { make in
+      make.bottom.trailing.equalToSuperview().inset(40)
+      make.size.equalTo(Size.floatingButtonSize)
     }
   }
 }
