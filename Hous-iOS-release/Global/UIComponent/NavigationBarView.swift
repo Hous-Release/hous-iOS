@@ -42,20 +42,26 @@ class NavBarWithBackButtonView: UIView {
 
   var title: String
   var rightButtonText: String
-
+  
+  //TODO: rightButtonText 설정 setter 메서드 따로 빼기
   init(title: String, rightButtonText: String = "") {
     self.title = title
     self.rightButtonText = rightButtonText
     super.init(frame: .zero)
     
     titleLabel.text = title
-    rightButtonText == "" ? (self.rightButton.isHidden = true) : (self.rightButton.isHidden = false)
+    //TODO: 이렇게 하면 이미지만 있는 경우에 쓸 수 없음
+//    rightButtonText == "" ? (self.rightButton.isHidden = true) : (self.rightButton.isHidden = false)
     rightButton.setTitle(rightButtonText, for: .normal)
     render()
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func setRightButtonImage(image: UIImage) {
+    rightButton.setImage(image, for: .normal)
   }
 
   private func render() {
