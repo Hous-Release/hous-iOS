@@ -15,11 +15,6 @@ final class MemberCollectionViewCell: UICollectionViewCell, ReactorKit.View {
   var disposeBag = DisposeBag()
   typealias Reactor = MemberCollectionViewCellReactor
 
-  enum Size {
-    static let buttonWidth = 70
-    static let buttonHeight = 80
-  }
-
   var checkButton = UIButton(configuration: UIButton.Configuration.filled())
 
   override init(frame: CGRect) {

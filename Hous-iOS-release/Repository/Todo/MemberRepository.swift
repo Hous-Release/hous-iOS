@@ -12,7 +12,7 @@ import Differentiator
 
 public enum MemberRepositoryEvent {
   case membersSection(MemberSection.Model?)
-  case todosSection(TodoByMemSection.Model?)
+  //case todosSection(TodoByMemSection.Model?)
   //case sendError(HouseErrorModel?)
 }
 
@@ -36,14 +36,14 @@ final class MemberRepositoryImp: BaseService, MemberRepository {
       items: memberItems)))
 
 
-    let todos = data.map { $0.dayOfWeekTodos }
-    guard let firstMemTodo = todos.first else { return }
-    let firstMemTodoItems = firstMemTodo.map {
-      TodoByMemSection.Item.todos(todo: $0)
-    }
-    self.event.onNext(.todosSection(TodoByMemSection.Model(
-      model: .todos(num: todos.count),
-      items: firstMemTodoItems)))
+//    let todos = data.map { $0.dayOfWeekTodos }
+//    guard let firstMemTodo = todos.first else { return }
+//    let firstMemTodoItems = firstMemTodo.map {
+//      TodoByMemSection.Item.todos(todo: $0)
+//    }
+//    self.event.onNext(.todosSection(TodoByMemSection.Model(
+//      model: .todos(num: todos.count),
+//      items: firstMemTodoItems)))
   }
 }
 
