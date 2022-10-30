@@ -105,12 +105,16 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
       label.setRulesCell(number: idx+1, ruleText: rule)
       ourRulesStackView.addArrangedSubview(label)
     }
-    if ourRules.count < 3 {
+    var number = ourRules.count
+    
+    if number < 3 {
       let diff = 3 - ourRules.count
-      for i in 0..<diff {
+      
+      for _ in 0..<diff {
         let label = OurRulesView()
-        label.setEmptyRule(number: diff+i)
+        label.setEmptyRule(number: number+1)
         ourRulesStackView.addArrangedSubview(label)
+        number += 1
       }
     }
     
