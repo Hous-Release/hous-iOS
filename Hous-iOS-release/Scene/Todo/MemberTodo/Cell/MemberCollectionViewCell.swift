@@ -16,6 +16,7 @@ final class MemberCollectionViewCell: UICollectionViewCell, ReactorKit.View {
   typealias Reactor = MemberCollectionViewCellReactor
 
   var checkButton = UIButton(configuration: UIButton.Configuration.filled())
+  var triangleView = TriangleView()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -33,12 +34,21 @@ extension MemberCollectionViewCell {
     checkButton.configuration?.baseBackgroundColor = Colors.g1.color
     checkButton.configuration?.imagePlacement = .top
     checkButton.configuration?.imagePadding = 8
+    triangleView.backgroundColor = .clear
+    triangleView.isHidden = true
   }
 
   private func render() {
     addSubView(checkButton)
+    addSubViews([checkButton, triangleView])
     checkButton.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.leading.trailing.equalToSuperview()
+    }
+    triangleView.snp.makeConstraints { make in
+      make.top.equalTo(checkButton.snp.bottom).offset(2)
+      make.centerX.equalToSuperview()
+      make.bottom.equalToSuperview()
+      make.size.equalTo(4)
     }
   }
 }
