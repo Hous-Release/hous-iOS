@@ -7,6 +7,7 @@
 
 import UIKit
 import RxCocoa
+import RxDataSources
 import RxSwift
 
 class OurRulesViewController: UIViewController {
@@ -23,6 +24,18 @@ class OurRulesViewController: UIViewController {
   
   private let viewModel: RulesViewModel
   
+  private lazy var configureCell: RxTableViewSectionedReloadDataSource<SectionOfRules>.ConfigureCell = { [unowned self] (dataSource, tableView, indexPath, item) in
+    
+    switch item {
+    case .keyRules(let keyViewModel):
+      return self.configKeyRulesCell(viewModel: keyViewModel, atIndex: indexPath)
+    case .rule(let ruleViewModel):
+      return self.configNormalRulesCell(viewModel: ruleViewModel, atIndex: indexPath)
+    }
+  }
+  
+  private lazy var dataSource = RxTableViewSectionedReloadDataSource<SectionOfRules>(configureCell: configureCell)
+  
   init(viewModel: RulesViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -36,6 +49,17 @@ class OurRulesViewController: UIViewController {
     super.viewDidLoad()
     configUI()
     setTableView()
+    bind()
+  }
+  
+//  override func viewWillAppear(_ animated: Bool) {
+//    super.viewWillAppear(animated)
+//    viewModel.viewWillAppearSubject.onNext(())
+//  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    viewModel.viewWillAppearSubject.onNext(())
   }
   
   private func setTableView() {
@@ -66,37 +90,68 @@ class OurRulesViewController: UIViewController {
     }
   }
   
-  private func bind() {
+  private func bind() {    
     rx.RxViewWillAppear
+      .debug("VC : ")
       .asObservable()
       .bind(to: viewModel.viewWillAppearSubject)
       .disposed(by: disposeBag)
     
     viewModel.rules
-      .drive(rulesTableView.rx.items) { (tableView, row, item) -> UITableViewCell in
-        
-        if row == 0 {
-          guard let cell = tableView.dequeueReusableCell(withIdentifier: KeyRulesTableViewCell.className, for: IndexPath.init(row: row, section: 0)) as? KeyRulesTableViewCell else {
-            return UITableViewCell()
-          }
-          
-          
-          cell.setKeyRulesCell(ourRules: [item])
-          cell.selectionStyle = .none
-          cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
-          return cell
-        }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RulesTableViewCell.className, for: IndexPath.init(row: row, section: 0)) as? RulesTableViewCell else {
-          return UITableViewCell()
-        }
-        
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-        cell.setNormalRulesData(rule: item.name)
-        cell.selectionStyle = .none
-        return cell
-        
-      }
+      .bind(to: rulesTableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
   }
 }
+
+extension OurRulesViewController {
+  
+  func configKeyRulesCell(viewModel: KeyRuleViewModel, atIndex: IndexPath) -> UITableViewCell {
+    guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: KeyRulesTableViewCell.className, for: atIndex) as? KeyRulesTableViewCell else {
+      return UITableViewCell()
+    }
+    
+    cell.setKeyRulesCell(ourRules: viewModel.names)
+    cell.selectionStyle = .none
+    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.rulesTableView.bounds.width)
+    return cell
+  }
+  
+  func configNormalRulesCell(viewModel: RuleViewModel, atIndex: IndexPath) -> UITableViewCell {
+    guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: RulesTableViewCell.className, for: atIndex) as? RulesTableViewCell else {
+      return UITableViewCell()
+    }
+    
+    cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+    cell.setNormalRulesData(rule: viewModel.name)
+    cell.selectionStyle = .none
+    return cell
+  }
+}
+
+
+//viewModel.rules
+//  .drive(rulesTableView.rx.items) { (tableView, row, item) -> UITableViewCell in
+//
+//    if row == 0 {
+//      guard let cell = tableView.dequeueReusableCell(withIdentifier: KeyRulesTableViewCell.className, for: IndexPath.init(row: row, section: 0)) as? KeyRulesTableViewCell else {
+//        return UITableViewCell()
+//      }
+//
+//
+//      cell.setKeyRulesCell(ourRules: [item])
+//      cell.selectionStyle = .none
+//      cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
+//      return cell
+//    }
+//
+//    guard let cell = tableView.dequeueReusableCell(withIdentifier: RulesTableViewCell.className, for: IndexPath.init(row: row, section: 0)) as? RulesTableViewCell else {
+//      return UITableViewCell()
+//    }
+//
+//    cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+//    cell.setNormalRulesData(rule: item.name)
+//    cell.selectionStyle = .none
+//    return cell
+//
+//  }
+//  .disposed(by: disposeBag)

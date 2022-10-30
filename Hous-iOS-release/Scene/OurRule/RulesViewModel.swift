@@ -9,7 +9,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Network
+import RxDataSources
 
+typealias SectionOfRules = SectionModel<TableViewSection, TableViewItem>
 
 final class RulesViewModel {
   
@@ -17,23 +19,47 @@ final class RulesViewModel {
   let viewWillAppearSubject = PublishSubject<Void>()
   
   // Outputs
-//  var keyRules: Driver<KeyRuleViewModel>
-  var rules: Driver<[RuleViewModel]>
+  var rules = PublishSubject<[SectionOfRules]>()
+  
+  let disposeBag = DisposeBag()
   
   init() {
     let rules = self.viewWillAppearSubject
+      .debug("2 : ")
       .asObservable()
-      .flatMap { _ in
+      .flatMap({ _ in
         NetworkService.shared.ruleRepository.getRulesName()
-      }
-      .asDriver(onErrorJustReturn: [])
+      })
+
+
+//    var items: [TableViewItem] = []
+//    rules.map { rules in
+//
+//      var arr: [String] = []
+//
+//      rules.enumerated().forEach { (idx, rule) in
+//
+//        if idx < 2 {
+//          arr.append(rule.name)
+//        } else if idx == 2 {
+//          arr.append(rule.name)
+//          let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr))
+//          items.append(item)
+//        } else {
+//          let item = TableViewItem.rule(viewModel: RuleViewModel(rule: rule))
+//          items.append(item)
+//        }
+//      }
+//    }
+//
+//    self.rules.onNext([SectionOfRules(model: .main, items: items)])
     
-    self.rules = rules.map(
-      {
-        $0.map { RuleViewModel(name: $0.name) }
-      }
-    )
-    
+//    self.rules = rules.map(
+//      {
+//        $0.map { RuleViewModel(name: $0.name) }
+//      }
+//    )
+//
 //    self.keyRules = rules.map({ KeyRuleViewModel(rules: $0) })
   }
 }
@@ -43,11 +69,8 @@ struct KeyRuleViewModel {
 }
 
 extension KeyRuleViewModel {
-  init(rules: [RuleDTO.Response.Rule]) {
-    let arr = rules.map { rule in
-      rule.name
-    }
-    self.names = arr
+  init(rules: [String]) {
+    self.names = rules
   }
 }
 
@@ -59,4 +82,13 @@ extension RuleViewModel {
   init(rule: RuleDTO.Response.Rule) {
     self.name = rule.name
   }
+}
+
+enum TableViewSection {
+  case main
+}
+
+enum TableViewItem {
+  case keyRules(viewModel: KeyRuleViewModel)
+  case rule(viewModel: RuleViewModel)
 }
