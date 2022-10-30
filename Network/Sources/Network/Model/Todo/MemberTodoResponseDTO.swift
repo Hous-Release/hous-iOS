@@ -17,13 +17,13 @@ public extension MemberTodoDTO.Response {
     }
 
     // MARK: - Todos
-    struct DayOfWeekTodo: Decodable {
+    struct DayOfWeekTodo: Decodable, Hashable {
         public let dayOfWeek: String
         public let dayOfWeekTodos: [TodoInfo]
     }
 
     // MARK: - Todo
-    struct TodoInfo: Decodable {
+    struct TodoInfo: Decodable, Hashable {
         public let todoId: Int
         public let todoName: String
     }
