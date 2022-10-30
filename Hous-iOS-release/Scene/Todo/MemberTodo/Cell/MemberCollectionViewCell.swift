@@ -33,18 +33,6 @@ extension MemberCollectionViewCell {
     checkButton.configuration?.baseBackgroundColor = Colors.g1.color
     checkButton.configuration?.imagePlacement = .top
     checkButton.configuration?.imagePadding = 8
-    checkButton.configurationUpdateHandler = { btn in
-      switch btn.state {
-      case .normal:
-        btn.configuration?.image = Images.icBlueNo.image
-        btn.configuration?.baseForegroundColor = Colors.g5.color
-      case .selected:
-        btn.configuration?.image = Images.icBlueYes.image
-        btn.configuration?.baseForegroundColor = Colors.black.color
-      default:
-        break
-      }
-    }
   }
 
   private func render() {
@@ -65,5 +53,20 @@ extension MemberCollectionViewCell {
       reactor.currentState.userName,
       attributes: AttributeContainer(titleAttr)
     )
+
+    let factory = HomieFactory.makeHomie(type: HomieColor(rawValue: reactor.currentState.color) ?? .GRAY)
+
+    checkButton.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = factory.todoMemberUnchosenImage
+        btn.configuration?.baseForegroundColor = Colors.g5.color
+      case .selected:
+        btn.configuration?.image = factory.todoMemberChosenImage
+        btn.configuration?.baseForegroundColor = Colors.black.color
+      default:
+        break
+      }
+    }
   }
 }
