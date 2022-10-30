@@ -91,6 +91,7 @@
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
+		B80BBA87290AA55500E4916F /* TodoByMemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemCollectionViewCell.swift */; };
 		B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A028D619FD00C92FCD /* TodoViewController.swift */; };
 		B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */; };
 		B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A528D61A5400C92FCD /* TodoView.swift */; };
@@ -128,6 +129,7 @@
 		B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */; };
 		B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702828CA087E00B49984 /* UITextField+Extension.swift */; };
 		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
+		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
 		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
 		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
@@ -242,6 +244,7 @@
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
 		B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCellReactor.swift; sourceTree = "<group>"; };
+		B80BBA86290AA55500E4916F /* TodoByMemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B84EA6A028D619FD00C92FCD /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPopupViewController.swift; sourceTree = "<group>"; };
 		B84EA6A528D61A5400C92FCD /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -280,6 +283,7 @@
 		B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewReactor.swift; sourceTree = "<group>"; };
 		B856702828CA087E00B49984 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
 		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
@@ -944,6 +948,8 @@
 				B80BBA83290A532700E4916F /* ViewModel */,
 				B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */,
 				B8D066DF28FA95D600A99907 /* MemberTodoCollectionReusableView.swift */,
+				B80BBA86290AA55500E4916F /* TodoByMemCollectionViewCell.swift */,
+				B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1114,6 +1120,7 @@
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
 				9BE0C27E29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
+				B80BBA87290AA55500E4916F /* TodoByMemCollectionViewCell.swift in Sources */,
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
@@ -1209,6 +1216,7 @@
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
+				B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */,
 				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,

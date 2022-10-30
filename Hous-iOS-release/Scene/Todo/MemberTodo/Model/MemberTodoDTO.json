@@ -7,37 +7,96 @@
       {
         "dayOfWeek": "월",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 0,
+            "todoName": "첫번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "화",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 1,
+            "todoName": "첫번째 투두"
+          },
+          {
+            "todoId": 2,
+            "todoName": "두번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "수",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 3,
+            "todoName": "첫번째 투두"
+          },
+          {
+            "todoId": 4,
+            "todoName": "두번째 투두"
+          },
+          {
+            "todoId": 5,
+            "todoName": "세번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "목",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 6,
+            "todoName": "첫번째 투두"
+          },
+          {
+            "todoId": 7,
+            "todoName": "두번째 투두"
+          },
+          {
+            "todoId": 8,
+            "todoName": "세번째 투두"
+          },
+          {
+            "todoId": 9,
+            "todoName": "네번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "금",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 10,
+            "todoName": "첫번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "토",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 11,
+            "todoName": "첫번째 투두"
+          }
+        ]
       },
       {
         "dayOfWeek": "일",
         "todoCnt": 0,
-        "dayOfWeekTodos": []
+        "dayOfWeekTodos": [
+          {
+            "todoId": 12,
+            "todoName": "첫번째 투두"
+          }
+        ]
       }
     ]
   },
