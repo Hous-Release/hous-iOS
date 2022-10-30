@@ -24,7 +24,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
 
   enum Mutation {
     case setMembersSection(MemberSection.Model?)
-    case setTodosSection(TodoByMemSection.Model?)
+    //case setTodosSection(TodoByMemSection.Model?)
   }
 
   struct State {
@@ -32,10 +32,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       model: .members(num: 0),
       items: []
     )
-    var todosSection = TodoByMemSection.Model(
-      model: .todos(num: 0),
-      items: []
-    )
+    //var todosSection = TodoByMemSection.Model(
+      //model: .todos(num: 0),
+      //items: []
+    //)
     //var error: String? = nil
   }
 
@@ -58,11 +58,11 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       newState.membersSection = data ?? MemberSection.Model(
         model: .members(num: 0),
         items: [])
-    case let .setTodosSection(data):
-      newState.todosSection = data ?? TodoByMemSection.Model(
-        model: .todos(num: 0),
-        items: []
-      )
+//    case let .setTodosSection(data):
+//      newState.todosSection = data ?? TodoByMemSection.Model(
+//        model: .todos(num: 0),
+//        items: []
+//      )
     }
     return newState
   }
@@ -72,8 +72,9 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       switch event {
       case let .membersSection(data):
         return .just(.setMembersSection(data))
-      case let .todosSection(data):
-        return .just(.setTodosSection(data))
+//      case let .todosSection(data):
+//        return .empty()
+        //return .just(.setTodosSection(data))
       }
     }
     return Observable.merge(mutation, serviceMutation)

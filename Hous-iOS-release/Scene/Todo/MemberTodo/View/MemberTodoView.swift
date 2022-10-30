@@ -13,7 +13,7 @@ import Then
 final class MemberTodoView: UIView {
 
   enum Size {
-    static let memberItemSize = CGSize(width: 70, height: 80)
+    static let memberItemSize = CGSize(width: 80, height: 80)
     static let memberCollectionViewheight = 88
   }
 
@@ -32,15 +32,11 @@ final class MemberTodoView: UIView {
 
   var todoCollectionView = UICollectionView(
     frame: .zero,
-    collectionViewLayout: UICollectionViewLayout()).then {
-      let layout = UICollectionViewFlowLayout()
-      layout.scrollDirection = .vertical
-      $0.collectionViewLayout = layout
-      $0.backgroundColor = .red
-    }
+    collectionViewLayout: UICollectionViewLayout())
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    setup()
     render()
   }
 
@@ -50,6 +46,22 @@ final class MemberTodoView: UIView {
 }
 
 extension MemberTodoView {
+
+  private func setup() {
+
+    var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
+    layoutConfig.backgroundColor = Colors.white.color
+    layoutConfig.showsSeparators = false
+    layoutConfig.headerTopPadding = 12
+    layoutConfig.headerMode = .firstItemInSection
+    let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
+
+    // MARK: Configure collection view
+    todoCollectionView = UICollectionView(frame: bounds, collectionViewLayout: listLayout)
+    todoCollectionView.contentInset = UIEdgeInsets(top: 2, left: 0, bottom: 80, right: 0)
+    todoCollectionView.showsVerticalScrollIndicator = false
+
+  }
 
   private func render() {
     addSubViews([memberCollectionView, todoCollectionView])
@@ -62,7 +74,8 @@ extension MemberTodoView {
 
     todoCollectionView.snp.makeConstraints { make in
       make.top.equalTo(memberCollectionView.snp.bottom)
-      make.leading.trailing.bottom.equalToSuperview()
+      make.bottom.equalTo(safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview().inset(24)
     }
   }
 }
