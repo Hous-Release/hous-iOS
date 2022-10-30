@@ -28,6 +28,13 @@ class KeyRulesTableViewCell: UITableViewCell {
     $0.distribution = .fillEqually
   }
   
+  private let emptyNormalRulesLabel = UILabel().then {
+    $0.text = "다른 Rule도 추가해보세요!"
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+    $0.textColor = Colors.g4.color
+    $0.numberOfLines = 1
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     configUI()
@@ -43,7 +50,12 @@ class KeyRulesTableViewCell: UITableViewCell {
   }
   
   private func configUI() {
-    addSubView(KeyRulesBackgroundView)
+    self.contentView.addSubViews([
+      KeyRulesBackgroundView,
+      emptyNormalRulesLabel
+    ])
+    
+    emptyNormalRulesLabel.isHidden = true
     
     KeyRulesBackgroundView.addSubViews([ourRulesStackView,ruleEmptyViewLabel]
     )
@@ -62,13 +74,23 @@ class KeyRulesTableViewCell: UITableViewCell {
     ruleEmptyViewLabel.snp.makeConstraints { make in
       make.center.equalToSuperview()
     }
+    
+    emptyNormalRulesLabel.snp.makeConstraints { make in
+      make.top.equalTo(KeyRulesBackgroundView.snp.bottom).offset(28)
+      make.centerX.equalToSuperview()
+    }
   }
   
   func setKeyRulesCell(ourRules: [String]) {
-    if ourRules.count == 0 {
-      ourRulesStackView.isHidden = true
-      ruleEmptyViewLabel.isHidden = false
+    var number = ourRules.count
+    
+    if number == 0 {
+      ourRulesStackView.isHidden = true // KeyRule stackView Clear
+      ruleEmptyViewLabel.isHidden = false // KeyRule Empty
+      emptyNormalRulesLabel.isHidden = false // Normal Rule Empty
       return
+    } else if number < 3 {
+      emptyNormalRulesLabel.isHidden = false // Only Normal Rule Empty
     }
     
     ourRulesStackView.subviews.forEach { $0.removeFromSuperview() }
@@ -77,12 +99,15 @@ class KeyRulesTableViewCell: UITableViewCell {
       label.setRulesCell(number: idx+1, ruleText: rule)
       ourRulesStackView.addArrangedSubview(label)
     }
-    if ourRules.count < 3 {
+    
+    if number < 3 {
       let diff = 3 - ourRules.count
-      for i in 0..<diff {
+      
+      for _ in 0..<diff {
         let label = OurRulesView()
-        label.setEmptyRule(number: diff+i)
+        label.setEmptyRule(number: number+1)
         ourRulesStackView.addArrangedSubview(label)
+        number += 1
       }
     }
     
