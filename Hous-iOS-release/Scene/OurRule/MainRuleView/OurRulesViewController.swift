@@ -65,6 +65,8 @@ class OurRulesViewController: UIViewController {
   }
   
   private func configUI() {
+    navigationBar.updateRightButtonSnapKit()
+    
     self.view.addSubViews([
       navigationBar,
       rulesTableView
