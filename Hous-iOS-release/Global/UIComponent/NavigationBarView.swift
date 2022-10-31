@@ -86,6 +86,14 @@ class NavBarWithBackButtonView: UIView {
       make.trailing.equalToSuperview().inset(32)
     }
   }
+  
+  func updateRightButtonSnapKit() {
+    rightButton.snp.remakeConstraints { make in
+      make.size.greaterThanOrEqualTo(44)
+      make.trailing.equalToSuperview().inset(4)
+      make.centerY.equalTo(titleLabel)
+    }
+  }
 }
 
 extension NavBarWithBackButtonView {
