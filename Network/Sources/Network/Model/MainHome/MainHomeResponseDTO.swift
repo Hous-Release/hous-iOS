@@ -7,6 +7,7 @@
 
 public extension MainHomeDTO.Response {
   struct MainHomeResponseDTO: Decodable {
+    public let dayOfWeek: String
     public let homies: [HomieDTO]
     public let myTodos: [String]
     public let myTodosCnt: Int
