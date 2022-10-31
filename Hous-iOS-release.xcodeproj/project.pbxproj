@@ -625,12 +625,28 @@
 			path = ProfileDetail;
 			sourceTree = "<group>";
 		};
-		B59148542909688200618F26 /* OurRule */ = {
+		B53F0FB92910166A004F1872 /* MainRuleView */ = {
 			isa = PBXGroup;
 			children = (
 				B5914858290AB66B00618F26 /* Cells */,
 				B5914855290968AD00618F26 /* OurRulesViewController.swift */,
 				B5914884290BC2D200618F26 /* RulesViewModel.swift */,
+			);
+			path = MainRuleView;
+			sourceTree = "<group>";
+		};
+		B53F0FBA2910167E004F1872 /* EditDeleteRuleView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditDeleteRuleView;
+			sourceTree = "<group>";
+		};
+		B59148542909688200618F26 /* OurRule */ = {
+			isa = PBXGroup;
+			children = (
+				B53F0FBA2910167E004F1872 /* EditDeleteRuleView */,
+				B53F0FB92910166A004F1872 /* MainRuleView */,
 			);
 			path = OurRule;
 			sourceTree = "<group>";
