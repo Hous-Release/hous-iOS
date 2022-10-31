@@ -58,7 +58,7 @@ class MainHomeViewController: UIViewController {
   //MARK: Configurations
   private func configUI() {
     view.backgroundColor = .systemBackground
-    navigationController?.isNavigationBarHidden = true
+    navigationController?.navigationBar.isHidden = true
     view.addSubview(collectionView)
     
     collectionView.snp.makeConstraints { make in
@@ -116,6 +116,7 @@ class MainHomeViewController: UIViewController {
         .drive(onNext: { [weak self] in
           guard let self = self else { return }
           let vc = OurRulesViewController(viewModel: RulesViewModel())
+          vc.view.backgroundColor = .white
           self.navigationController?.pushViewController(vc, animated: true)
         })
         .disposed(by: cell.disposeBag)
@@ -129,12 +130,14 @@ class MainHomeViewController: UIViewController {
       
       cell.myTodoBackgroundView.rx.tapGesture()
         .when(.recognized)
-        .subscribe(onNext: { [weak self] _ in
+        .asDriver(onErrorJustReturn: UITapGestureRecognizer.init())
+        .drive(onNext: { [weak self] _ in
           guard let self = self else { return }
           let vc = TodoViewController()
           self.navigationController?.pushViewController(vc, animated: true)
         })
-        .disposed(by: disposeBag)
+        .disposed(by: cell.disposeBag)
+      
       
       cell.editButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] in
