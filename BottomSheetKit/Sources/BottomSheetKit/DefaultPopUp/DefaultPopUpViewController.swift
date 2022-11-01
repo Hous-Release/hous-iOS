@@ -71,7 +71,6 @@ internal final class DefaultPopUpViewController: UIViewController {
     defaultPopUpView.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
       make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
-      make.height.equalTo(Constant.height)
 
     }
   }

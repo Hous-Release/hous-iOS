@@ -15,7 +15,7 @@ final class TestViewController: UIViewController {
 
   private lazy var presentButton: UIButton = {
     let button = UIButton()
-    button.setTitle("present", for: .normal)
+    button.setTitle("default", for: .normal)
     button.setTitleColor(UIColor.blue, for: .normal)
     button.titleLabel?.font = .boldSystemFont(ofSize: 16)
     button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
@@ -35,20 +35,20 @@ final class TestViewController: UIViewController {
   private func didTapButton() {
 
 
-    let twoButtonPopupModel = TwoButtonPopUpModel(
+    let defaultPopUpModel = DefaultPopUpModel(
       cancelText: "취소하기",
       actionText: "액션하기",
-      title: "ㅇㄴㄹㄴㅇㄹㄴㅇㄹㅇㄴㄹㄴㅇㄹ\nasdsdasdㅇ",
-      subtitle: "어쩌고저ㅓ겆고ㅓ"
+      title: "ㅇㄴㄹㄴㅇㄹㄴㅇㄹㅇㄴㄹㄴㅇㄹ\nasdsdasdㅇsdfdsfdsfdsfsdfsdfsdfsdfdsfsdf",
+      subtitle: "어쩌고저ㅓ겆고ㅓsdfsdfsdfsdfsdfsdfsdfdsdsfdddfhjjhjh"
     )
-    let popUpType = PopUpType.twoButton(twoButtonPopUpModel: twoButtonPopupModel)
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 
-    presentPopUp(popUpType) { actionType in
+    presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        print("action입니다")
+        self?.dismiss(animated: true)
       case .cancel:
-        print("Cancel입니다")
+        self?.dismiss(animated: true)
       }
     }
 
@@ -58,7 +58,7 @@ final class TestViewController: UIViewController {
     view.addSubview(presentButton)
 
     presentButton.snp.makeConstraints { make in
-      make.center.equalToSuperview()
+      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
