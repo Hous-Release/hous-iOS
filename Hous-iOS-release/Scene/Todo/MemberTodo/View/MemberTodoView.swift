@@ -59,8 +59,6 @@ extension MemberTodoView {
     var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
     layoutConfig.backgroundColor = Colors.white.color
     layoutConfig.showsSeparators = false
-    layoutConfig.headerTopPadding = 12
-    layoutConfig.headerMode = .firstItemInSection
     let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
 
     // MARK: Configure collection view
