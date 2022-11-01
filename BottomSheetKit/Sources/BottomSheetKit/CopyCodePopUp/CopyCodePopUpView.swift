@@ -66,7 +66,7 @@ internal final class CopyCodePopUpView: UIView {
   }()
 
 
-  internal init(_ model: CopyCodePopUpModel) {
+  internal init(_ model: ImagePopUpModel) {
     super.init(frame: .zero)
     setupViews()
     configure(model)
@@ -79,10 +79,10 @@ internal final class CopyCodePopUpView: UIView {
 
 extension CopyCodePopUpView {
 
-  private func configure(_ model: CopyCodePopUpModel) {
+  private func configure(_ model: ImagePopUpModel) {
 
     actionButton.setTitle(model.actionText, for: .normal)
-    subtitleLabel.text = model.subtitle
+    subtitleLabel.text = model.text
 
     // TODO: - Image
 //    imageView.image =

@@ -83,8 +83,9 @@ extension TestViewController {
   @objc
   private func didTapButton2() {
 
-    let copyCodePopUpModel = CopyCodePopUpModel(image: "", actionText: "창여코드 복사하기",
-                                                subtitle: """
+    let copyCodePopUpModel = ImagePopUpModel(image: "", actionText: "창여코드 복사하기",
+                                                text:
+"""
 방 생성이 완료 되었습니다.
 참여 코드를 복사해서
 룸메이트에게 공유해보세요!
