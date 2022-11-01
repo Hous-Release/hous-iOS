@@ -39,4 +39,5 @@ public enum TodoByMemListItem: Hashable {
   case totalNum(Int)
   case header(MemberHeaderItem)
   case todo(MemebrTodoItem)
+  case empty(String)
 }
