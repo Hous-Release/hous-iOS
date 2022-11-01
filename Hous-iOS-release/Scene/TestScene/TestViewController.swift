@@ -13,12 +13,21 @@ import UIKit
 final class TestViewController: UIViewController {
 
 
-  private lazy var presentButton: UIButton = {
+  private lazy var defaultButton: UIButton = {
     let button = UIButton()
     button.setTitle("default", for: .normal)
     button.setTitleColor(UIColor.blue, for: .normal)
     button.titleLabel?.font = .boldSystemFont(ofSize: 16)
     button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    return button
+  }()
+
+  private lazy var copyCodeButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("copyCode", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton2), for: .touchUpInside)
     return button
   }()
 
@@ -31,6 +40,24 @@ final class TestViewController: UIViewController {
     fatalError("TestViewController is not implemented")
   }
 
+  private func setupViews() {
+    view.addSubview(defaultButton)
+    view.addSubview(copyCodeButton)
+
+    defaultButton.snp.makeConstraints { make in
+      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    copyCodeButton.snp.makeConstraints { make in
+      make.top.equalTo(self.defaultButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+  }
+}
+
+extension TestViewController {
   @objc
   private func didTapButton() {
 
@@ -53,14 +80,26 @@ final class TestViewController: UIViewController {
     }
 
   }
+  @objc
+  private func didTapButton2() {
 
-  private func setupViews() {
-    view.addSubview(presentButton)
+    let copyCodePopUpModel = CopyCodePopUpModel(image: "", actionText: "창여코드 복사하기",
+                                                subtitle: """
+방 생성이 완료 되었습니다.
+참여 코드를 복사해서
+룸메이트에게 공유해보세요!
+""")
 
-    presentButton.snp.makeConstraints { make in
-      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
-      make.height.equalTo(51)
-      make.width.equalTo(300)
+    let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.dismiss(animated: true)
+      case .cancel:
+        self?.dismiss(animated: true)
+      }
     }
+
   }
 }
