@@ -14,6 +14,9 @@ import RxCocoa
 final class ProfileViewModel: ViewModelType {
   
   private let disposeBag: DisposeBag = DisposeBag()
+  private let profileRepository = ProfileRepositoryImp()
+  private var profileModel = ProfileModel()
+  private let profileModelSubject = PublishSubject<ProfileModel>()
   
   struct Input {
     let viewWillAppear: Signal<Void>
@@ -26,35 +29,38 @@ final class ProfileViewModel: ViewModelType {
   }
   
   
+  init() {
+    profileRepository.event
+      .debug("repository connected")
+      .subscribe { [weak self] event in
+      guard let self = self else { return }
+      switch event {
+      case let .getProfile(profileModel):
+        self.profileModel = profileModel
+        self.profileModelSubject.onNext(profileModel)
+      case .sendError:
+        print("😭 Network Error..😭")
+        print(event)
+      default:
+        break
+      }
+    }
+    .disposed(by: disposeBag)
+  }
+  
+  
   func transform(input: Input) -> Output {
     
     // Data
-    // 서버 연결 후
-    // Repository로부터 받아온 profileModel data를 집어넣는다.
-    
-    // Using Dummy Data
-    
-    let profileModel = ProfileModel (
-      personalityColor: .red,
-      userName: "최인영",
-      userJob: "대학생",
-      statusMessage: "집가고싶다.",
-      badgeImageURL: "dummyData",
-      badgeLabel: "뱃지이름",
-      hashTags: ["23세", "10.31", "ENFP", "대학생"],
-      typeScores: [60, 70, 70, 70, 70],
-      isEmptyView: false)
-    
-    // end dummy
-    
-    let profileModelObservable = Observable.just(profileModel)
+    self.profileRepository.getProfile()
+    self.profileModelSubject.onNext(self.profileModel)
     
     // Action
     
     let actionControl = input.actionDetected.asObservable()
     
     return Output(
-      profileModel: profileModelObservable,
+      profileModel: self.profileModelSubject.asObservable(),
       actionControl: actionControl
     )
   }
