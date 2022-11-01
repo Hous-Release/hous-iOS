@@ -13,7 +13,7 @@ import Differentiator
 public enum MemberRepositoryEvent {
   case members(MemberSection.Model?)
   case selectedMember([MemberHeaderItem]?)
-  //case sendError(HouseErrorModel?)
+  case sendError(HouseErrorModel?)
 }
 
 public protocol MemberRepository {
@@ -22,30 +22,40 @@ public protocol MemberRepository {
   func selectMember(_: Int)
 }
 
-final class MemberRepositoryImp: BaseService, MemberRepository {
-  var event = PublishSubject<MemberRepositoryEvent>()
-  var todos: [[MemberHeaderItem]]?
+public final class MemberRepositoryImp: BaseService, MemberRepository {
+  public var event = PublishSubject<MemberRepositoryEvent>()
+  public var todos: [[MemberHeaderItem]]?
 
-  func fetchMember() {
-    guard let data = MockParser.load(MemberTodoDTO.Response.MemberTodosResponseDTO.self, from: "MemberTodoDTO") else { return }
+  public func fetchMember() {
+    NetworkService.shared.memberTodoRepository.getMemberTodosData { [weak self] res, err in
+      guard let self = self else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
 
-    let members = parseMemberSection(data)
-    let memberItems = members.map {
-      MemberSection.Item.members(member: $0)
+      let members = self.parseMemberSection(data)
+      let memberItems = members.map {
+        MemberSection.Item.members(member: $0)
+      }
+      self.event.onNext(.members(MemberSection.Model(
+        model: .members(num: members.count),
+        items: memberItems)))
+
+      // MARK: - 구분선
+
+      let todos = data.map { $0.dayOfWeekTodos }
+      self.todos = todos
+      guard let firstMemTodo = todos.first else { return }
+      self.event.onNext(.selectedMember(firstMemTodo))
     }
-    self.event.onNext(.members(MemberSection.Model(
-      model: .members(num: members.count),
-      items: memberItems)))
-
-    // MARK: - 구분선
-
-    let todos = data.map { $0.dayOfWeekTodos }
-    self.todos = todos
-    guard let firstMemTodo = todos.first else { return }
-    self.event.onNext(.selectedMember(firstMemTodo))
   }
 
-  func selectMember(_ row: Int) {
+  public func selectMember(_ row: Int) {
     guard let todos = todos else { return }
     let selectedMemTodo = todos[row]
     self.event.onNext(.selectedMember(selectedMemTodo))
