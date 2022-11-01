@@ -10,7 +10,6 @@ import UIKit
 import ReactorKit
 import RxDataSources
 import Network
-import AssetKit
 
 public typealias MemberHeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
 public typealias MemebrTodoItem = MemberTodoDTO.Response.TodoInfo
@@ -74,6 +73,9 @@ extension MemberTodoViewController {
           return UICollectionViewCell()
         }
         cell.bind(reactor: MemberCollectionViewCellReactor(state: member))
+        if indexPath.row == 0 {
+          collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        }
         return cell
       }
     }
