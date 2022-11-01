@@ -79,7 +79,6 @@ extension MemberCollectionViewCell {
     )
 
     let factory = HomieFactory.makeHomie(type: HomieColor(rawValue: reactor.currentState.color) ?? .GRAY)
-
     checkButton.configurationUpdateHandler = { btn in
       switch btn.state {
       case .normal:
@@ -92,5 +91,7 @@ extension MemberCollectionViewCell {
         break
       }
     }
+
+    layoutSubviews()
   }
 }
