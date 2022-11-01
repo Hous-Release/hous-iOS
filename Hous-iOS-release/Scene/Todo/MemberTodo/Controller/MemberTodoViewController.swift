@@ -21,7 +21,7 @@ class MemberTodoViewController: UIViewController, ReactorKit.View {
   var mainView = MemberTodoView()
   var disposeBag = DisposeBag()
 
-  var dataSource: UICollectionViewDiffableDataSource<MemberHeaderItem, TodoByMemListItem>!
+  var dataSource: UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>!
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
@@ -97,13 +97,20 @@ extension MemberTodoViewController {
   // MARK: Initialize data source
   private func makeDataSource() {
 
+    let totalNumCell = totalNumCellRegistration()
     let headerCell = headerCellRegistration()
     let todoCell = todoCellRegistration()
 
-    dataSource = UICollectionViewDiffableDataSource<MemberHeaderItem, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
+    dataSource = UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
       (collectionView, indexPath, todoByMemItem) -> UICollectionViewCell? in
 
       switch todoByMemItem {
+      case .totalNum(let todoNum):
+        let cell = collectionView.dequeueConfiguredReusableCell(
+          using: totalNumCell,
+          for: indexPath,
+          item: todoNum)
+        return cell
       case .header(let headerItem):
         // 디큐 헤더 셀
         let cell = collectionView.dequeueConfiguredReusableCell(
@@ -129,18 +136,25 @@ extension MemberTodoViewController {
     }
   }
 
-  private func setupSnapshot(_ firstMemTodo: [MemberHeaderItem]) {
+  private func setupSnapshot(_ memTodo: [MemberHeaderItem]) {
     // MARK: Setup snapshots
-    var dataSourceSnapshot = NSDiffableDataSourceSnapshot<MemberHeaderItem, TodoByMemListItem>()
+    var dataSourceSnapshot = NSDiffableDataSourceSnapshot<TodoByMemSection, TodoByMemListItem>()
 
     // Datasource snapshot에 section 추가
-    dataSourceSnapshot.appendSections(firstMemTodo)
+    dataSourceSnapshot.appendSections([.main, .totalNum])
     dataSource.apply(dataSourceSnapshot)
 
-    for headerItem in firstMemTodo {
+    // section snapshot 생성
+    var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<TodoByMemListItem>()
 
-      // section snapshot 생성
-      var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<TodoByMemListItem>()
+    // totalNum CELL
+    let totalNumItem = TodoByMemListItem.totalNum(memTodo.count)
+    sectionSnapshot.append([totalNumItem])
+    dataSource.apply(sectionSnapshot, to: .totalNum, animatingDifferences: false)
+
+    // header(요일) CELL + child(todo) CELL
+    for headerItem in memTodo {
+
       // 헤더 리스트 아이템 생성 후 header로 추가
       let headerListItem = TodoByMemListItem.header(headerItem)
       sectionSnapshot.append([headerListItem])
@@ -149,15 +163,23 @@ extension MemberTodoViewController {
       sectionSnapshot.append(todoListItemArray, to: headerListItem)
       // Expand
       sectionSnapshot.expand([headerListItem])
-      // main Section에 sectionSnapshot apply
-      dataSource.apply(sectionSnapshot, to: headerItem, animatingDifferences: false)
     }
+    dataSource.apply(sectionSnapshot, to: .main, animatingDifferences: false)
   }
 }
 
+// MARK: - Cell registration
 extension MemberTodoViewController {
+
+  private func totalNumCellRegistration() -> UICollectionView.CellRegistration<TotalTodoNumListCell, Int> {
+    let totalNumCellRegistration = UICollectionView.CellRegistration<TotalTodoNumListCell, Int> {
+      (cell, indexPath, totalNum) in
+      cell.update(with: totalNum)
+    }
+    return totalNumCellRegistration
+  }
+
   private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem>  {
-    // MARK: Cell registration
     let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem> {
       (cell, indexPath, headerItem) in
 
