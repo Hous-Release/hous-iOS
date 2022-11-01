@@ -89,7 +89,7 @@ class KeyRulesTableViewCell: UITableViewCell {
       ruleEmptyViewLabel.isHidden = false // KeyRule Empty
       emptyNormalRulesLabel.isHidden = false // Normal Rule Empty
       return
-    } else if number < 3 {
+    } else if number <= 3 {
       emptyNormalRulesLabel.isHidden = false // Only Normal Rule Empty
     }
     
