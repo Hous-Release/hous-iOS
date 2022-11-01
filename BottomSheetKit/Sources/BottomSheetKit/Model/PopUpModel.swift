@@ -18,5 +18,5 @@ public struct PopUpModel {
 
 public enum PopUpType {
   case defaultPopUp(defaultPopUpModel: DefaultPopUpModel)
-  case oneButtonWithImage(actionText: String, image: UIImage)
+  case copyCode(copyPopUpModel: CopyCodePopUpModel)
 }
