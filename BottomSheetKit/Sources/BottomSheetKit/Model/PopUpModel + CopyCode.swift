@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-public struct CopyCodePopUpModel {
+public struct ImagePopUpModel {
   public init(
     image: String,
     actionText: String,
-    subtitle: String
+    text: String
   ) {
     self.image = image
     self.actionText = actionText
-    self.subtitle = subtitle
+    self.text = text
   }
 
   public let image: String
   public let actionText: String
-  public let subtitle: String
+  public let text: String
 
 }
