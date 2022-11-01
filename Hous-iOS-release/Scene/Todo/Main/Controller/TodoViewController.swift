@@ -74,7 +74,7 @@ extension TodoViewController {
       })
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.enterViewAllFlag }
+    reactor.pulse(\.$enterViewAllFlag)
       .withUnretained(self)
       .subscribe(onNext: { owner, flag in
         if flag == true {
