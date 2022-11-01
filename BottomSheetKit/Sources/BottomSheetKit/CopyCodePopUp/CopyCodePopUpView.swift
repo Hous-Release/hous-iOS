@@ -61,7 +61,7 @@ internal final class CopyCodePopUpView: UIView {
     button.setTitleColor(UIColor.black, for: .normal)
     button.backgroundColor = Colors.g1.color
     button.setTitleColor(Colors.g7.color, for: .normal)
-    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
+    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 16)
     return button
   }()
 
