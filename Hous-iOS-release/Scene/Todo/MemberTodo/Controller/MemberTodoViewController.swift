@@ -12,15 +12,16 @@ import RxDataSources
 import Network
 import AssetKit
 
+public typealias MemberHeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
+public typealias MemebrTodoItem = MemberTodoDTO.Response.TodoInfo
+
 class MemberTodoViewController: UIViewController, ReactorKit.View {
   typealias Reactor = MemberTodoViewReactor
 
   var mainView = MemberTodoView()
   var disposeBag = DisposeBag()
 
-  var dataSource: UICollectionViewDiffableDataSource<HeaderItem, TodoByMemListItem>!
-  typealias HeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
-  typealias TodoItem = MemberTodoDTO.Response.TodoInfo
+  var dataSource: UICollectionViewDiffableDataSource<MemberHeaderItem, TodoByMemListItem>!
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
@@ -38,7 +39,6 @@ class MemberTodoViewController: UIViewController, ReactorKit.View {
   override func viewDidLoad() {
     super.viewDidLoad()
     makeDataSource()
-    setupSnapshot()
     if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
       tvc.housTabBar.isHidden = true
     }
@@ -56,6 +56,11 @@ extension MemberTodoViewController {
   private func bindAction(_ reactor: Reactor) {
     rx.viewWillAppear
       .map { _ in Reactor.Action.fetch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    mainView.memberCollectionView.rx.itemSelected
+      .map { Reactor.Action.didTapMemberCell($0.row) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -78,6 +83,13 @@ extension MemberTodoViewController {
       .asDriver(onErrorJustReturn: [])
       .drive(self.mainView.memberCollectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
+
+    reactor.state.map { $0.selectedMember }
+      .distinctUntilChanged()
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: [])
+      .drive(onNext: self.setupSnapshot)
+      .disposed(by: disposeBag)
   }
 }
 
@@ -88,7 +100,7 @@ extension MemberTodoViewController {
     let headerCell = headerCellRegistration()
     let todoCell = todoCellRegistration()
 
-    dataSource = UICollectionViewDiffableDataSource<HeaderItem, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
+    dataSource = UICollectionViewDiffableDataSource<MemberHeaderItem, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
       (collectionView, indexPath, todoByMemItem) -> UICollectionViewCell? in
 
       switch todoByMemItem {
@@ -117,14 +129,9 @@ extension MemberTodoViewController {
     }
   }
 
-  private func setupSnapshot() {
+  private func setupSnapshot(_ firstMemTodo: [MemberHeaderItem]) {
     // MARK: Setup snapshots
-    var dataSourceSnapshot = NSDiffableDataSourceSnapshot<HeaderItem, TodoByMemListItem>()
-
-    // 임시 mock data
-    guard let data = MockParser.load(MemberTodoDTO.Response.MemberTodosResponseDTO.self, from: "MemberTodoDTO") else { return }
-    let todos = data.map { $0.dayOfWeekTodos }
-    guard let firstMemTodo = todos.first else { return }
+    var dataSourceSnapshot = NSDiffableDataSourceSnapshot<MemberHeaderItem, TodoByMemListItem>()
 
     // Datasource snapshot에 section 추가
     dataSourceSnapshot.appendSections(firstMemTodo)
@@ -149,9 +156,9 @@ extension MemberTodoViewController {
 }
 
 extension MemberTodoViewController {
-  private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, HeaderItem>  {
+  private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem>  {
     // MARK: Cell registration
-    let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, HeaderItem> {
+    let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem> {
       (cell, indexPath, headerItem) in
 
       cell.update(with: headerItem)
@@ -162,8 +169,8 @@ extension MemberTodoViewController {
     return headerCellRegistration
   }
 
-  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, TodoItem> {
-    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, TodoItem> {
+  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, MemebrTodoItem> {
+    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, MemebrTodoItem> {
       (cell, indexPath, todoItem) in
       cell.update(with: todoItem)
     }
