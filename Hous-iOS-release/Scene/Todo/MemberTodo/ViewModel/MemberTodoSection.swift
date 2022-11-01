@@ -22,19 +22,21 @@ public struct MemberSection {
     case members(member: MemberDTO)
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
-            switch (lhs, rhs) {
-            case (.members(_), .members(_)):
-                return true
-            }
-        }
+      switch (lhs, rhs) {
+      case (.members(_), .members(_)):
+        return true
+      }
+    }
   }
 }
 
-enum TodoByMemSection {
-    case main
+public enum TodoByMemSection: Hashable {
+  case totalNum
+  case main
 }
 
 public enum TodoByMemListItem: Hashable {
+  case totalNum(Int)
   case header(MemberHeaderItem)
   case todo(MemebrTodoItem)
 }
