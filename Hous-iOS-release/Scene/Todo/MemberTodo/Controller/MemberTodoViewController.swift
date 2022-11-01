@@ -102,6 +102,7 @@ extension MemberTodoViewController {
     let totalNumCell = totalNumCellRegistration()
     let headerCell = headerCellRegistration()
     let todoCell = todoCellRegistration()
+    let emptyCell = emptyCellRegistration()
 
     dataSource = UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
       (collectionView, indexPath, todoByMemItem) -> UICollectionViewCell? in
@@ -134,6 +135,12 @@ extension MemberTodoViewController {
           for: indexPath,
           item: todolItem)
         return cell
+      case .empty(let guideText):
+        let cell = collectionView.dequeueConfiguredReusableCell(
+          using: emptyCell,
+          for: indexPath,
+          item: guideText)
+        return cell
       }
     }
   }
@@ -148,23 +155,30 @@ extension MemberTodoViewController {
     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<TodoByMemListItem>()
 
     // totalNum CELL
-    let totalNumItem = TodoByMemListItem.totalNum(memTodo.map { $0.dayOfWeekTodos.count }.reduce(0, +))
+    let totalNum = memTodo.map { $0.dayOfWeekTodos.count }.reduce(0, +)
+    let totalNumItem = TodoByMemListItem.totalNum(totalNum)
     sectionSnapshot.append([totalNumItem])
     dataSource.apply(sectionSnapshot, to: .totalNum, animatingDifferences: false)
 
-    // header(요일) CELL + child(todo) CELL
-    for headerItem in memTodo {
+    if totalNum != 0 {
+      // header(요일) CELL + child(todo) CELL
+      for headerItem in memTodo {
 
-      // 헤더 리스트 아이템 생성 후 header로 추가
-      let headerListItem = TodoByMemListItem.header(headerItem)
-      sectionSnapshot.append([headerListItem])
-      // 투두 리스트 아이템 생성 후 child로 추가
-      let todoListItemArray = headerItem.dayOfWeekTodos.map { TodoByMemListItem.todo($0) }
-      sectionSnapshot.append(todoListItemArray, to: headerListItem)
-      // Expand
-      sectionSnapshot.expand([headerListItem])
+        // 헤더 리스트 아이템 생성 후 header로 추가
+        let headerListItem = TodoByMemListItem.header(headerItem)
+        sectionSnapshot.append([headerListItem])
+        // 투두 리스트 아이템 생성 후 child로 추가
+        let todoListItemArray = headerItem.dayOfWeekTodos.map { TodoByMemListItem.todo($0) }
+        sectionSnapshot.append(todoListItemArray, to: headerListItem)
+        // Expand
+        sectionSnapshot.expand([headerListItem])
+      }
+      dataSource.apply(sectionSnapshot, to: .main, animatingDifferences: false)
+    } else {
+      let emptyItem = TodoByMemListItem.empty("아직 담당하는 to-do가 없어요!")
+      sectionSnapshot.append([emptyItem])
+      dataSource.apply(sectionSnapshot, to: .main, animatingDifferences: false)
     }
-    dataSource.apply(sectionSnapshot, to: .main, animatingDifferences: false)
   }
 }
 
@@ -197,5 +211,13 @@ extension MemberTodoViewController {
       cell.update(with: todoItem)
     }
     return todoCellRegistration
+  }
+
+  private func emptyCellRegistration() -> UICollectionView.CellRegistration<MemEmptyListCell, String> {
+    let emptyCellRegistration = UICollectionView.CellRegistration<MemEmptyListCell, String> {
+      (cell, indexPath, emptyItem) in
+      cell.update(with: emptyItem)
+    }
+    return emptyCellRegistration
   }
 }
