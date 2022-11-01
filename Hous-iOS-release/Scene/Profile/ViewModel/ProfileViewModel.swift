@@ -32,7 +32,7 @@ final class ProfileViewModel: ViewModelType {
   init() {
     profileRepository.event
       .debug("repository connected")
-      .subscribe { [weak self] event in
+      .subscribe (onNext:{ [weak self] event in
       guard let self = self else { return }
       switch event {
       case let .getProfile(profileModel):
@@ -44,7 +44,7 @@ final class ProfileViewModel: ViewModelType {
       default:
         break
       }
-    }
+    })
     .disposed(by: disposeBag)
   }
   
