@@ -5,24 +5,26 @@
 //  Created by 김지현 on 2022/10/23.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import Network
 import Differentiator
 
 public enum MemberRepositoryEvent {
-  case membersSection(MemberSection.Model?)
-  //case todosSection(TodoByMemSection.Model?)
+  case members(MemberSection.Model?)
+  case selectedMember([MemberHeaderItem]?)
   //case sendError(HouseErrorModel?)
 }
 
 public protocol MemberRepository {
   var event: PublishSubject<MemberRepositoryEvent> { get }
   func fetchMember()
+  func selectMember(_: Int)
 }
 
 final class MemberRepositoryImp: BaseService, MemberRepository {
   var event = PublishSubject<MemberRepositoryEvent>()
+  var todos: [[MemberHeaderItem]]?
 
   func fetchMember() {
     guard let data = MockParser.load(MemberTodoDTO.Response.MemberTodosResponseDTO.self, from: "MemberTodoDTO") else { return }
@@ -31,19 +33,22 @@ final class MemberRepositoryImp: BaseService, MemberRepository {
     let memberItems = members.map {
       MemberSection.Item.members(member: $0)
     }
-    self.event.onNext(.membersSection(MemberSection.Model(
+    self.event.onNext(.members(MemberSection.Model(
       model: .members(num: members.count),
       items: memberItems)))
 
+    // MARK: - 구분선
 
-//    let todos = data.map { $0.dayOfWeekTodos }
-//    guard let firstMemTodo = todos.first else { return }
-//    let firstMemTodoItems = firstMemTodo.map {
-//      TodoByMemSection.Item.todos(todo: $0)
-//    }
-//    self.event.onNext(.todosSection(TodoByMemSection.Model(
-//      model: .todos(num: todos.count),
-//      items: firstMemTodoItems)))
+    let todos = data.map { $0.dayOfWeekTodos }
+    self.todos = todos
+    guard let firstMemTodo = todos.first else { return }
+    self.event.onNext(.selectedMember(firstMemTodo))
+  }
+
+  func selectMember(_ row: Int) {
+    guard let todos = todos else { return }
+    let selectedMemTodo = todos[row]
+    self.event.onNext(.selectedMember(selectedMemTodo))
   }
 }
 

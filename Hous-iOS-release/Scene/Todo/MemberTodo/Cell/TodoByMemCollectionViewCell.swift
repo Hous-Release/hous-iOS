@@ -13,22 +13,21 @@ private extension UIConfigurationStateCustomKey {
 }
 
 extension UIConfigurationState {
-  typealias TodoItem = MemberTodoDTO.Response.TodoInfo
-  var todoByMemData: TodoItem? {
-    get { return self[.todoByMem] as? TodoItem }
+  var todoByMemData: MemebrTodoItem? {
+    get { return self[.todoByMem] as? MemebrTodoItem }
     set { self[.todoByMem] = newValue }
   }
 }
 
 class TodoByMemListCell: UICollectionViewListCell {
-  private var todoByMemData: MemberTodoDTO.Response.TodoInfo?
+  private var todoByMemData: MemebrTodoItem?
   private func defaultTodoByMemConfiguration() -> UIListContentConfiguration {
     return .subtitleCell()
   }
 
   private lazy var todoByMemlistContentView = UIListContentView(configuration: defaultTodoByMemConfiguration())
 
-  func update(with newTodoByMemData: MemberTodoDTO.Response.TodoInfo) {
+  func update(with newTodoByMemData: MemebrTodoItem) {
     guard todoByMemData != newTodoByMemData else {
       return
     }

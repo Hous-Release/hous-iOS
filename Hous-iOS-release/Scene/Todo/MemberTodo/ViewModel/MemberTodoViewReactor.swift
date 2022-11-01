@@ -8,7 +8,7 @@
 import Foundation
 
 import ReactorKit
-import Differentiator
+import Network
 
 final class MemberTodoViewReactor: ReactorKit.Reactor {
 
@@ -20,11 +20,12 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
 
   enum Action {
     case fetch
+    case didTapMemberCell(Int)
   }
 
   enum Mutation {
-    case setMembersSection(MemberSection.Model?)
-    //case setTodosSection(TodoByMemSection.Model?)
+    case setMembers(MemberSection.Model?)
+    case setSelectedMember([MemberHeaderItem]?)
   }
 
   struct State {
@@ -32,11 +33,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       model: .members(num: 0),
       items: []
     )
-    //var todosSection = TodoByMemSection.Model(
-      //model: .todos(num: 0),
-      //items: []
-    //)
-    //var error: String? = nil
+    var selectedMember: [MemberHeaderItem]?
+    var error: String? = nil
   }
 
   let initialState = State()
@@ -45,7 +43,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     switch action {
     case .fetch:
       provider.memberRepository.fetchMember()
-      return .empty() 
+      return .empty()
+    case let .didTapMemberCell(row):
+      provider.memberRepository.selectMember(row)
+      return .empty()
     }
   }
 
@@ -54,15 +55,12 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
-    case let .setMembersSection(data):
+    case let .setMembers(data):
       newState.membersSection = data ?? MemberSection.Model(
         model: .members(num: 0),
         items: [])
-//    case let .setTodosSection(data):
-//      newState.todosSection = data ?? TodoByMemSection.Model(
-//        model: .todos(num: 0),
-//        items: []
-//      )
+    case let .setSelectedMember(data):
+      newState.selectedMember = data
     }
     return newState
   }
@@ -70,11 +68,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = provider.memberRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
-      case let .membersSection(data):
-        return .just(.setMembersSection(data))
-//      case let .todosSection(data):
-//        return .empty()
-        //return .just(.setTodosSection(data))
+      case let .members(data):
+        return .just(.setMembers(data))
+      case let .selectedMember(data):
+        return .just(.setSelectedMember(data))
       }
     }
     return Observable.merge(mutation, serviceMutation)
