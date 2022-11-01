@@ -30,7 +30,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
   
-  private var userJob = UILabel().then {
+  private var homie = UILabel().then {
     $0.text = "호미"
     $0.textColor = Colors.g4.color
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 16)
@@ -85,7 +85,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     
     addSubViews([
      userName,
-     userJob,
+     homie,
      editButton,
      statusMessage,
      tagGuideStackView,
@@ -96,7 +96,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
       make.leading.equalToSuperview().offset(24)
     }
     
-    userJob.snp.makeConstraints { make in
+    homie.snp.makeConstraints { make in
       make.centerY.equalTo(userName)
       make.leading.equalTo(userName.snp.trailing).offset(4)
     }
@@ -134,6 +134,10 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   }
   
   func bind(_ data: ProfileModel) {
+    
+    self.userName.text = data.userName
+    self.statusMessage.text = data.statusMessage
+    
     tags = []
     tagGuideStackView.removeFullyAllArrangedSubviews()
     

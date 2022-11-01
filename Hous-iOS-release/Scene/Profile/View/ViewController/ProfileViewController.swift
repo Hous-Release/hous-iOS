@@ -103,7 +103,6 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileMainImageCollectionViewCell.className, for: indexPath) as? ProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          print(0)
           if(!self.isLoaded) {
             cell.cellActionControlSubject
               .subscribe(onNext: { data in
