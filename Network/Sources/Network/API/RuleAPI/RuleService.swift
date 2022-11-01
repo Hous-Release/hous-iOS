@@ -10,8 +10,7 @@ import Alamofire
 
 public enum RuleService {
   case createRule(_ dto: RuleDTO.Request.createRuleRequestDTO)
-  case updateRuleName(_ dto: RuleDTO.Request.updateRuleRequestDTO)
-  case updateRuleOrder(_ dto: RuleDTO.Request.updateRulesOrderRequestDTO)
+  case updateRules(_ dto: RuleDTO.Request.updateRulesRequestDTO)
   case deleteRule(_ dto: RuleDTO.Request.deleteRulesRequestDTO)
   case getRuleData
 }
@@ -24,12 +23,10 @@ extension RuleService: TargetType {
   public var path: String {
     switch self {
     case .createRule,
-        .updateRuleOrder,
+        .updateRules,
         .deleteRule,
         .getRuleData:
       return "/rules"
-    case .updateRuleName(let ruleId):
-      return "rule/\(ruleId)"
     }
   }
   
@@ -37,7 +34,7 @@ extension RuleService: TargetType {
     switch self {
     case .createRule:
       return .post
-    case .updateRuleName, .updateRuleOrder:
+    case .updateRules:
       return .put
     case .deleteRule:
       return .delete
@@ -50,12 +47,10 @@ extension RuleService: TargetType {
     switch self {
     case .createRule:
       return .requestPlain
-    case .updateRuleName:
-      return .requestPlain
-
-    case .updateRuleOrder:
-      return .requestPlain
-
+      
+    case .updateRules(let dto):
+      return .body(dto)
+      
     case .deleteRule:
       return .requestPlain
 
