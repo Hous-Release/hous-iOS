@@ -20,6 +20,7 @@ final class RulesViewModel {
   let moreButtonDidTapped = PublishRelay<Void>()
   
   // Outputs
+  var editViewRules: Observable<[SectionOfRules]>
   var rules: Observable<[SectionOfRules]>
   var popViewController: Observable<Void>
   var presentBottomSheet: Observable<Void>
@@ -28,14 +29,14 @@ final class RulesViewModel {
   
   init() {
     let viewWillAppear = self.viewWillAppearSubject
-      .debug("2 : ")
       .asObservable()
       .flatMap { _ in
         NetworkService.shared.ruleRepository.getRulesName()
-      }.map { res -> [TableViewItem] in
+      }
+      
+    let defaultViewItem = viewWillAppear.map { res -> [TableViewItem] in
         
         if res.isEmpty {
-          print(res)
           return [TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: []))]
         }
         
@@ -44,7 +45,7 @@ final class RulesViewModel {
         var isOnlyKeyRule = false
         
         res.enumerated().forEach { (idx, rule) in
-          print("\(idx)번 인덱스의 규칙 : \(rule) 🏄")
+          
           if res.count < 3 {
             arr.append(rule.name)
             isOnlyKeyRule = true
@@ -55,25 +56,35 @@ final class RulesViewModel {
               arr.append(rule.name)
               let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr))
               items.append(item)
-              print("여기까지가 keyRules : \(items)")
+              
             } else {
               let item = TableViewItem.rule(viewModel: RuleViewModel(rule: rule))
               items.append(item)
             }
           }
         }
+      
         if isOnlyKeyRule {
           let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr))
           items.append(item)
         }
-        print("items ==== ", items)
+        
         return items
       }
       .map { [SectionOfRules(model: .main, items: $0)] }
     
+    let editViewItem = viewWillAppear.map { res -> [TableViewItem] in
+      var items: [TableViewItem] = []
+      res.forEach { rule in
+        items.append(TableViewItem.editRule(viewModel: RuleWithIdViewModel(rule: rule)))
+      }
+      
+      return items
+    }
+      .map { [SectionOfRules(model: .main, items: $0)] }
     
-    rules = Observable.merge(viewWillAppear)
-    
+    rules = Observable.merge(defaultViewItem)
+    editViewRules = Observable.merge(editViewItem)
     
     popViewController = backButtonDidTapped.asObservable()
     presentBottomSheet = moreButtonDidTapped.asObservable()
@@ -110,6 +121,21 @@ extension RuleViewModel {
   }
 }
 
+struct RuleWithIdViewModel {
+  let id: Int
+  var name: String
+  mutating func updateRuleName(name: String) {
+    self.name = name
+  }
+}
+
+extension RuleWithIdViewModel {
+  init(rule: RuleDTO.Response.Rule) {
+    self.id = rule.id
+    self.name = rule.name
+  }
+}
+
 //MARK: - TableView Section Model
 typealias SectionOfRules = SectionModel<TableViewSection, TableViewItem>
 
@@ -120,4 +146,7 @@ enum TableViewSection {
 enum TableViewItem {
   case keyRules(viewModel: KeyRuleViewModel)
   case rule(viewModel: RuleViewModel)
+  case editRule(viewModel: RuleWithIdViewModel)
 }
+
+
