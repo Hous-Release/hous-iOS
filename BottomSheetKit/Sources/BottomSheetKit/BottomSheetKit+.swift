@@ -15,7 +15,7 @@ public extension UIViewController {
   ) {
 
     switch type {
-    case .twoButton(let twoButtonPopUpModel):
+    case .defaultPopUp(let twoButtonPopUpModel):
 
       let view = DefaultPopUpView(twoButtonPopUpModel)
       let popUpAction = DefaultPopUpAction(view: view)
