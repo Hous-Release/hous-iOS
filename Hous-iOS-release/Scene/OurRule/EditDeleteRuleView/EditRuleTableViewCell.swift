@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditRuleTableViewCell: UITableViewCell {
   
@@ -17,6 +18,13 @@ class EditRuleTableViewCell: UITableViewCell {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g7.color
     $0.textAlignment = .left
+  }
+  
+  var disposeBag = DisposeBag()
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
