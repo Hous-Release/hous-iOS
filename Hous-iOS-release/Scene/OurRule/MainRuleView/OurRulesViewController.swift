@@ -126,8 +126,6 @@ class OurRulesViewController: UIViewController {
         let vc = EditRuleViewController(editViewRules: self.editRulesList, viewModel: EditRuleViewModel())
         vc.view.backgroundColor = .white
         self.navigationController?.pushViewController(vc, animated: true)
-//        vc.data = viewmodel.normalRules
-//         이런식으로 넘겨주기
       })
       .disposed(by: disposeBag)
     
