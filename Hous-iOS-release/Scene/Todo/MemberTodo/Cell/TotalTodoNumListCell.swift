@@ -10,18 +10,18 @@ import Then
 import SnapKit
 
 private extension UIConfigurationStateCustomKey {
-  static let todoNum = UIConfigurationStateCustomKey("todoNum")
+  static let totalNum = UIConfigurationStateCustomKey("todoNum")
 }
 
 extension UIConfigurationState {
   var todoNum: String? {
-    get { return self[.todoNum] as? String }
-    set { self[.todoNum] = newValue }
+    get { return self[.totalNum] as? String }
+    set { self[.totalNum] = newValue }
   }
 }
 
 final class TotalTodoNumListCell: UICollectionViewListCell {
-  private var todoNum: String = "0"
+  private var totalNum: String = "0"
   private func defaulTotalNumConfiguration() -> UIListContentConfiguration {
     return .subtitleCell()
   }
@@ -29,13 +29,13 @@ final class TotalTodoNumListCell: UICollectionViewListCell {
   private lazy var totalNumContentView = UIListContentView(configuration: defaulTotalNumConfiguration())
 
   func update(with newTotalNum: Int) {
-    todoNum = String(newTotalNum)
+    totalNum = String(newTotalNum)
     setNeedsUpdateConfiguration()
   }
 
   override var configurationState: UICellConfigurationState {
     var state = super.configurationState
-    state.todoNum = self.todoNum
+    state.todoNum = self.totalNum
     return state
   }
 
@@ -53,33 +53,30 @@ extension TotalTodoNumListCell {
   override func updateConfiguration(using state: UICellConfigurationState) {
     setupViewsIfNeeded()
 
-    var content = defaulTotalNumConfiguration().updated(for: state)
     guard let todoNum = state.todoNum else { return }
 
     // attributedString
     let fullText = "총 \(todoNum)개"
-
     let mutableAttributedString = NSMutableAttributedString(string: fullText)
-    mutableAttributedString.addAttributes([
-      .font: Fonts.SpoqaHanSansNeo.regular.font(size: 16),
-      .foregroundColor: Colors.g5.color
-    ], range: (fullText as NSString).range(of: fullText))
     mutableAttributedString.addAttributes([
       .font: Fonts.Montserrat.semiBold.font(size: 20),
       .foregroundColor: Colors.blue.color
     ], range: (fullText as NSString).range(of: todoNum))
-    content.attributedText = mutableAttributedString
-    totalNumContentView.configuration = content
+    todoNumLabel.attributedText = mutableAttributedString
   }
 }
 
 extension TotalTodoNumListCell {
   private func render() {
-    contentView.addSubview(totalNumContentView)
+    contentView.addSubViews([totalNumContentView, todoNumLabel])
     totalNumContentView.translatesAutoresizingMaskIntoConstraints = false
     totalNumContentView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
-      make.height.equalTo(66)
+      make.height.equalTo(60)
+    }
+    todoNumLabel.snp.makeConstraints { make in
+      make.leading.equalToSuperview().offset(4)
+      make.centerY.equalToSuperview().multipliedBy(1.05)
     }
   }
 }

@@ -44,6 +44,7 @@ class DayOfWeekHeaderListCell: UICollectionViewListCell {
 
 extension DayOfWeekHeaderListCell {
   func setupViewsIfNeeded() {
+    setup()
     render()
   }
 
@@ -76,11 +77,17 @@ extension DayOfWeekHeaderListCell {
 }
 
 extension DayOfWeekHeaderListCell {
+  private func setup() {
+//    dayOfWeeklistContentView.backgroundColor = Colors.g1.color
+//    dayOfWeeklistContentView.layer.cornerRadius = 8
+  }
+
   private func render() {
     contentView.addSubview(dayOfWeeklistContentView)
     dayOfWeeklistContentView.translatesAutoresizingMaskIntoConstraints = false
     dayOfWeeklistContentView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
+      make.height.equalTo(48)
     }
   }
 }
