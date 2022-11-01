@@ -29,8 +29,19 @@ public extension UIViewController {
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
 
-    case .oneButtonWithImage(let actionText, let image):
-      break
+    case .copyCode(let copyCodePopUpModel):
+
+      let view = CopyCodePopUpView(copyCodePopUpModel)
+      let popUpAction = CopyCodePopUpAction(view: view)
+      let vc = CopyCodePopUpViewController(popUpAction: popUpAction)
+
+      popUpAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
     }
   }
 }
