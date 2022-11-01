@@ -17,31 +17,6 @@ public struct PopUpModel {
 }
 
 public enum PopUpType {
-  case twoButton(twoButtonPopUpModel: TwoButtonPopUpModel)
+  case defaultPopUp(defaultPopUpModel: DefaultPopUpModel)
   case oneButtonWithImage(actionText: String, image: UIImage)
 }
-
-
-
-// TODO: TwoButton Model 만들기
-
-public struct TwoButtonPopUpModel {
-  public init(
-    cancelText: String,
-    actionText: String,
-    title: String,
-    subtitle: String
-  ) {
-    self.cancelText = cancelText
-    self.actionText = actionText
-    self.title = title
-    self.subtitle = subtitle
-  }
-
-  public let cancelText: String
-  public let actionText: String
-  public let title: String
-  public let subtitle: String
-
-}
-// TODO: OneButton Image 만들기

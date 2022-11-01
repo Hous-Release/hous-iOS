@@ -17,7 +17,7 @@ internal final class DefaultPopUpView: UIView {
   private enum Constant {
     static let verticalMargin: CGFloat = 32
     static let horizontalMargin: CGFloat = 28
-    static let subtitleTopMargin: CGFloat = 8
+    static let subtitleTopMargin: CGFloat = 6
     static let buttonTopMargin: CGFloat = 20
     static let buttonHorizontalMargin: CGFloat = 18
     static let buttonHeight: CGFloat = 40
@@ -83,7 +83,7 @@ internal final class DefaultPopUpView: UIView {
     return stackView
   }()
 
-  internal init(_ model: TwoButtonPopUpModel) {
+  internal init(_ model: DefaultPopUpModel) {
     super.init(frame: .zero)
     setupViews()
     configure(model)
@@ -96,7 +96,7 @@ internal final class DefaultPopUpView: UIView {
 
 extension DefaultPopUpView {
 
-  private func configure(_ model: TwoButtonPopUpModel) {
+  private func configure(_ model: DefaultPopUpModel) {
     cancelButton.setTitle(model.cancelText, for: .normal)
     actionButton.setTitle(model.actionText, for: .normal)
     titleLabel.text = model.title
@@ -135,6 +135,8 @@ extension DefaultPopUpView {
         .offset(Constant.buttonTopMargin)
       make.leading.trailing.equalToSuperview()
         .inset(Constant.buttonHorizontalMargin)
+      make.bottom.equalToSuperview().inset(Constant.verticalMargin / 2)
+
     }
 
     [cancelButton, actionButton].forEach { button in
