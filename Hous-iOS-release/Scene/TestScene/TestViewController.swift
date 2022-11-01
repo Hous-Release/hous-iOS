@@ -30,6 +30,14 @@ final class TestViewController: UIViewController {
     button.addTarget(self, action: #selector(didTapButton2), for: .touchUpInside)
     return button
   }()
+  private lazy var enterRoomButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("enterRoom", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton3), for: .touchUpInside)
+    return button
+  }()
 
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -43,6 +51,7 @@ final class TestViewController: UIViewController {
   private func setupViews() {
     view.addSubview(defaultButton)
     view.addSubview(copyCodeButton)
+    view.addSubview(enterRoomButton)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -51,6 +60,11 @@ final class TestViewController: UIViewController {
     }
     copyCodeButton.snp.makeConstraints { make in
       make.top.equalTo(self.defaultButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    enterRoomButton.snp.makeConstraints { make in
+      make.top.equalTo(self.copyCodeButton.snp.bottom).offset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
@@ -92,6 +106,22 @@ extension TestViewController {
 """)
 
     let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.dismiss(animated: true)
+      case .cancel:
+        self?.dismiss(animated: true)
+      }
+    }
+
+  }
+  @objc
+  private func didTapButton3() {
+
+    let enterRoomModel = ImagePopUpModel(image: "", actionText: "참여하기", text: "김호세")
+    let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)
 
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {

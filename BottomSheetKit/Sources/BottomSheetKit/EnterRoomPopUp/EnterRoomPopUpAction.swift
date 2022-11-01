@@ -6,3 +6,20 @@
 //
 
 import Foundation
+
+class EnterRoomPopUpAction: PopUpAction {
+
+  let view: EnterRoomPopUpView
+  var completeAction: CompleteAction?
+
+  init(view: EnterRoomPopUpView) { self.view = view }
+
+
+  func sendAction() {
+    completeAction?(.action)
+  }
+
+  func cancel() {
+    completeAction?(.cancel)
+  }
+}

@@ -13,6 +13,8 @@ import SnapKit
 internal final class CopyCodePopUpViewController: UIViewController {
 
   private enum Constant {
+    static let width: CGFloat = 272
+    static let height: CGFloat = 368
   }
 
   private let rootView: UIView = {
@@ -68,8 +70,8 @@ internal final class CopyCodePopUpViewController: UIViewController {
 
     popUpView.snp.makeConstraints { make in
       make.center.equalToSuperview()
-      make.height.equalTo(368)
-      make.width.equalTo(272)
+      make.height.equalTo(Constant.height)
+      make.width.equalTo(Constant.width)
     }
   }
 
