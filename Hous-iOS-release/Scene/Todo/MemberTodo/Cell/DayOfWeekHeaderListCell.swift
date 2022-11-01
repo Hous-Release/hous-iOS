@@ -13,22 +13,21 @@ private extension UIConfigurationStateCustomKey {
 }
 
 extension UIConfigurationState {
-  typealias HeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
-  var dayOfWeekData: HeaderItem? {
-    get { return self[.dayOfWeek] as? HeaderItem }
+  var dayOfWeekData: MemberHeaderItem? {
+    get { return self[.dayOfWeek] as? MemberHeaderItem }
     set { self[.dayOfWeek] = newValue }
   }
 }
 
 class DayOfWeekHeaderListCell: UICollectionViewListCell {
-  private var dayOfWeekData: MemberTodoDTO.Response.DayOfWeekTodo?
+  private var dayOfWeekData: MemberHeaderItem?
   private func defaultDayOfWeekConfiguration() -> UIListContentConfiguration {
     return .subtitleCell()
   }
 
   private lazy var dayOfWeeklistContentView = UIListContentView(configuration: defaultDayOfWeekConfiguration())
 
-  func update(with newDayOfWeekData: MemberTodoDTO.Response.DayOfWeekTodo) {
+  func update(with newDayOfWeekData: MemberHeaderItem) {
     guard dayOfWeekData != newDayOfWeekData else {
       return
     }

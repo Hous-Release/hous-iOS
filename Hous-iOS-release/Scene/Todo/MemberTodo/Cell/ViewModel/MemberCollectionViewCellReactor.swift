@@ -23,5 +23,4 @@ public class MemberCollectionViewCellReactor: ReactorKit.Reactor {
   init(state: MemberDTO) {
     self.initialState = state
   }
-
 }
