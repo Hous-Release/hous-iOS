@@ -34,11 +34,15 @@ class OurRulesViewController: UIViewController {
       return self.configKeyRulesCell(viewModel: keyViewModel, atIndex: indexPath)
     case .rule(let ruleViewModel):
       return self.configNormalRulesCell(viewModel: ruleViewModel, atIndex: indexPath)
+    case .editRule(viewModel: let viewModel):
+      return UITableViewCell()
     }
     
   }
   
   private lazy var dataSource = RxTableViewSectionedReloadDataSource<SectionOfRules>(configureCell: configureCell)
+  
+  private var editRulesList: [SectionOfRules] = []
   
   init(viewModel: RulesViewModel) {
     self.viewModel = viewModel
@@ -115,11 +119,25 @@ class OurRulesViewController: UIViewController {
       .disposed(by: disposeBag)
     
     viewModel.presentBottomSheet
+      .debug("✨ Bottom Sheet Presented ! ✨")
       .asObservable()
-      .subscribe(onNext: {
-        print("✨ Bottom Sheet Presented ! ✨")
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        let vc = EditRuleViewController(editViewRules: self.editRulesList, viewModel: EditRuleViewModel())
+        vc.view.backgroundColor = .white
+        self.navigationController?.pushViewController(vc, animated: true)
+//        vc.data = viewmodel.normalRules
+//         이런식으로 넘겨주기
       })
       .disposed(by: disposeBag)
+    
+    viewModel.editViewRules
+      .subscribe(onNext: { [weak self] item in
+        guard let self = self else { return }
+        self.editRulesList = item
+      })
+      .disposed(by: disposeBag)
+      
   }
 }
 
@@ -129,7 +147,7 @@ extension OurRulesViewController {
   
   // Config Cells
   func configKeyRulesCell(viewModel: KeyRuleViewModel, atIndex: IndexPath) -> UITableViewCell {
-    print("configKeyRules")
+    
     guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: KeyRulesTableViewCell.className, for: atIndex) as? KeyRulesTableViewCell else {
       return UITableViewCell()
     }
@@ -142,7 +160,7 @@ extension OurRulesViewController {
   }
   
   func configNormalRulesCell(viewModel: RuleViewModel, atIndex: IndexPath) -> UITableViewCell {
-    print("configNormalRules")
+    
     guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: RulesTableViewCell.className, for: atIndex) as? RulesTableViewCell else {
       return UITableViewCell()
     }
