@@ -94,6 +94,10 @@ class NavBarWithBackButtonView: UIView {
       make.centerY.equalTo(titleLabel)
     }
   }
+  
+  func setRightButtonText(text: String) {
+    rightButton.setTitle(text, for: .normal)
+  }
 }
 
 extension NavBarWithBackButtonView {
