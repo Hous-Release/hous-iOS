@@ -34,6 +34,7 @@
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
+		9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */; };
 		9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B454E4D2900055F00F5A319 /* profileRedlottie.json */; };
 		9B959AF628FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959AF528FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift */; };
 		9B959AF828FED16400EB3412 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959AF728FED16400EB3412 /* BasePaddingLabel.swift */; };
@@ -174,6 +175,7 @@
 		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		9B454E4D2900055F00F5A319 /* profileRedlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileRedlottie.json; sourceTree = "<group>"; };
 		9B959AF528FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B959AF728FED16400EB3412 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				9B3BDBF7290E470A0054DF23 /* Profile */,
 				B8D066CA28F7DF4700A99907 /* Todo */,
 				77067FF628DDD9140082A7E7 /* Auth */,
 			);
@@ -488,6 +491,14 @@
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9B3BDBF7290E470A0054DF23 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		9B98853828E3FF370013CCB9 /* View */ = {
@@ -1106,6 +1117,7 @@
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,
 				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
+				9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */,
 				9BF945FC290D4020008F2BFC /* NeumorphismBox.swift in Sources */,
 				B595FFDA28CDBD2800F6B2E4 /* SeperatorLineCollectionReusableView.swift in Sources */,
 				9B959B0A28FFD63800EB3412 /* ProfileDescriptionInnerCollectionViewCell.swift in Sources */,
