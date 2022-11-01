@@ -94,7 +94,7 @@ extension MemberTodoViewController {
 }
 
 extension MemberTodoViewController {
-  // MARK: Initialize data source
+  // MARK: - Initialize data source
   private func makeDataSource() {
 
     let totalNumCell = totalNumCellRegistration()
@@ -111,22 +111,22 @@ extension MemberTodoViewController {
           for: indexPath,
           item: todoNum)
         return cell
+
       case .header(let headerItem):
-        // 디큐 헤더 셀
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: headerCell,
           for: indexPath,
           item: headerItem)
         // header background color & corner radius
-        var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
+        var backgroundConfig = UIBackgroundConfiguration.listGroupedCell()
         backgroundConfig.backgroundColor = Colors.g1.color
         backgroundConfig.cornerRadius = 8
+        backgroundConfig.backgroundInsets = NSDirectionalEdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0)
         cell.backgroundConfiguration = backgroundConfig
         cell.tintColor = Colors.g4.color
         return cell
 
       case .todo(let todolItem):
-        // 디큐 투두 셀
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: todoCell,
           for: indexPath,
@@ -135,11 +135,9 @@ extension MemberTodoViewController {
       }
     }
   }
-
+  // MARK: - Setup snapshots
   private func setupSnapshot(_ memTodo: [MemberHeaderItem]) {
-    // MARK: Setup snapshots
     var dataSourceSnapshot = NSDiffableDataSourceSnapshot<TodoByMemSection, TodoByMemListItem>()
-
     // Datasource snapshot에 section 추가
     dataSourceSnapshot.appendSections([.main, .totalNum])
     dataSource.apply(dataSourceSnapshot)
@@ -148,7 +146,7 @@ extension MemberTodoViewController {
     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<TodoByMemListItem>()
 
     // totalNum CELL
-    let totalNumItem = TodoByMemListItem.totalNum(memTodo.count)
+    let totalNumItem = TodoByMemListItem.totalNum(memTodo.map { $0.dayOfWeekTodos.count }.reduce(0, +))
     sectionSnapshot.append([totalNumItem])
     dataSource.apply(sectionSnapshot, to: .totalNum, animatingDifferences: false)
 
