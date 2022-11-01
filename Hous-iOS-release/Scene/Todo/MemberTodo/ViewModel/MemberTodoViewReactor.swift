@@ -26,6 +26,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   enum Mutation {
     case setMembers(MemberSection.Model?)
     case setSelectedMember([MemberHeaderItem]?)
+    case setError(String?)
   }
 
   struct State {
@@ -61,6 +62,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
         items: [])
     case let .setSelectedMember(data):
       newState.selectedMember = data
+    case let .setError(error):
+      newState.error = error
     }
     return newState
   }
@@ -72,6 +75,9 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
         return .just(.setMembers(data))
       case let .selectedMember(data):
         return .just(.setSelectedMember(data))
+      case let .sendError(errorModel):
+        guard let errorModel = errorModel else { return .empty() }
+        return .just(.setError(errorModel.message))
       }
     }
     return Observable.merge(mutation, serviceMutation)
