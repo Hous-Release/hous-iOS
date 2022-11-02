@@ -81,16 +81,18 @@ class KeyRulesTableViewCell: UITableViewCell {
     }
   }
   
-  func setKeyRulesCell(ourRules: [String]) {
-    var number = ourRules.count
+  func setKeyRulesCell(ourRules: [String], ruleCount: Int) {
+    var ruleCount = ruleCount
     
-    if number == 0 {
+    if ruleCount == 0 {
       ourRulesStackView.isHidden = true // KeyRule stackView Clear
       ruleEmptyViewLabel.isHidden = false // KeyRule Empty
       emptyNormalRulesLabel.isHidden = false // Normal Rule Empty
       return
-    } else if number <= 3 {
+    } else if ruleCount <= 3 {
       emptyNormalRulesLabel.isHidden = false // Only Normal Rule Empty
+    } else {
+      emptyNormalRulesLabel.isHidden = true
     }
     
     ourRulesStackView.subviews.forEach { $0.removeFromSuperview() }
@@ -100,14 +102,14 @@ class KeyRulesTableViewCell: UITableViewCell {
       ourRulesStackView.addArrangedSubview(label)
     }
     
-    if number < 3 {
-      let diff = 3 - ourRules.count
+    if ruleCount < 3 {
+      let diff = 3 - ruleCount
       
       for _ in 0..<diff {
         let label = OurRulesView()
-        label.setEmptyRule(number: number+1)
+        label.setEmptyRule(number: ruleCount+1)
         ourRulesStackView.addArrangedSubview(label)
-        number += 1
+        ruleCount += 1
       }
     }
     
