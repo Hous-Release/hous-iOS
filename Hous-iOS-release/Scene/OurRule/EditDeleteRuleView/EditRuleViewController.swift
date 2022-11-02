@@ -33,6 +33,8 @@ class EditRuleViewController: UIViewController {
   
   private let disposeBag = DisposeBag()
   
+  private let saveButtonDidTapped = PublishSubject<[RuleWithIdViewModel]>()
+  
   private var editViewRules: [SectionOfRules]
   
   private let viewModel: EditRuleViewModel
@@ -65,6 +67,7 @@ class EditRuleViewController: UIViewController {
     setTableView()
     configUI()
     bind()
+    configButtonAction()
   }
   
   private func setTableView() {
@@ -108,37 +111,82 @@ class EditRuleViewController: UIViewController {
     
     rulesTableView.rx.itemMoved
       .map { $0 }
-      .subscribe { event in
+      .subscribe { [weak self] event in
+        guard let self = self else { return }
+
         self.editViewRules[0].items.swapAt(event.sourceIndex.row, event.destinationIndex.row)
+        self.rulesTableView.reloadData()
       }
       .disposed(by: disposeBag)
     
-    let editViewList = editViewRules.flatMap { model in
-      var ruleWithIds: [RuleWithIdViewModel] = []
-      
-      _ = model.items.map { item in
-        switch item {
-        case .editRule(let viewModel):
-          ruleWithIds.append(RuleWithIdViewModel(id: viewModel.id, name: viewModel.name))
-        default:
-          break
-        }
-      }
-      
-      return ruleWithIds
-    }
-    
-    let ruleWithIdsObservable = Observable.just(editViewList)
     
     let input = EditRuleViewModel.Input(
       backButtonDidTap: navigationBar.backButton.rx.tap.asObservable(),
-      saveButtonDidTap: ruleWithIdsObservable
+      saveButtonDidTap: saveButtonDidTapped
     )
+    
+    let output = viewModel.transform(input: input)
+    
+    output.isEmptyView
+      .drive(onNext: { [weak self] flag in
+        guard let self = self else { return }
+        self.ruleEmptyViewLabel.isHidden = !flag
+      })
+      .disposed(by: disposeBag)
+    
+    output.saveCompleted
+      .drive(onNext: { [weak self] _ in
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+    
+    output.moveToRuleMainView
+      .drive(onNext: { [weak self] _ in
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+    
+  }
+  
+  private func configButtonAction() {
+    navigationBar.rightButton.rx.tap
+      .subscribe(onNext: { [weak self] _ in
+        
+        guard let self = self else { return }
+        
+        let editViewList = self.editViewRules.flatMap { model in
+          var ruleWithIds: [RuleWithIdViewModel] = []
+          
+          _ = model.items.map { item in
+            switch item {
+            case .editRule(let viewModel):
+              ruleWithIds.append(RuleWithIdViewModel(id: viewModel.id, name: viewModel.name))
+            default:
+              break
+            }
+          }
+          
+          return ruleWithIds
+        }
+        
+        self.saveButtonDidTapped.onNext(editViewList)
+      })
+      .disposed(by: disposeBag)
   }
 }
 
 extension EditRuleViewController {
   func configEditRulesCell(viewModel: RuleWithIdViewModel, atIndex: IndexPath) -> UITableViewCell {
+    
+    var viewModel = viewModel
+    let item = self.editViewRules[0].items[atIndex.row]
+    switch item {
+    case .editRule(let vm):
+      viewModel = vm
+    default:
+      break
+    }
+    
     
     guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: EditRuleTableViewCell.className, for: atIndex) as? EditRuleTableViewCell else {
       return UITableViewCell()
@@ -153,14 +201,17 @@ extension EditRuleViewController {
         guard let self = self else { return }
         let changedName = str.map { $0 }
         
-        let ruleWithIdViewModel = RuleWithIdViewModel(id: viewModel.id, name: changedName ?? "WHyNIL?")
+        let ruleWithIdViewModel = RuleWithIdViewModel(id: viewModel.id, name: changedName ?? "")
         
         self.editViewRules[0].items[atIndex.row] = TableViewItem.editRule(viewModel: ruleWithIdViewModel)
+        
       })
       .disposed(by: cell.disposeBag)
     
-    if atIndex.row <= 2 {
+    if atIndex.row < 3 {
       cell.backgroundColor = Colors.blueL2.color
+    } else {
+      cell.backgroundColor = Colors.white.color
     }
     
     cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
