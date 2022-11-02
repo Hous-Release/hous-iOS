@@ -150,7 +150,7 @@ extension OurRulesViewController {
       return UITableViewCell()
     }
     
-    cell.setKeyRulesCell(ourRules: viewModel.names)
+    cell.setKeyRulesCell(ourRules: viewModel.names, ruleCount: viewModel.rulesTotalCount)
     
     cell.selectionStyle = .none
     cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.rulesTableView.bounds.width)
