@@ -37,13 +37,13 @@ final class RulesViewModel {
     let defaultViewItem = viewWillAppear.map { res -> [TableViewItem] in
         
         if res.isEmpty {
-          return [TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: []))]
+          return [TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: [], rulesTotalCount: 0))]
         }
-        
+      let rulesTotalCount = res.count
         var items: [TableViewItem] = []
         var arr: [String] = []
         var isOnlyKeyRule = false
-        
+      
         res.enumerated().forEach { (idx, rule) in
           
           if res.count < 3 {
@@ -54,7 +54,7 @@ final class RulesViewModel {
               arr.append(rule.name)
             } else if idx == 2 {
               arr.append(rule.name)
-              let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr))
+              let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount))
               items.append(item)
               
             } else {
@@ -65,7 +65,7 @@ final class RulesViewModel {
         }
       
         if isOnlyKeyRule {
-          let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr))
+          let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount))
           items.append(item)
         }
         
@@ -101,12 +101,14 @@ final class RulesViewModel {
 
 //MARK: - KeyRuleViewModel
 struct KeyRuleViewModel {
+  let rulesTotalCount: Int
   let names: [String]
 }
 
 extension KeyRuleViewModel {
-  init(rules: [String]) {
+  init(rules: [String], rulesTotalCount: Int) {
     self.names = rules
+    self.rulesTotalCount = rulesTotalCount
   }
 }
 
