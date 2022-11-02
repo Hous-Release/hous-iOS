@@ -26,6 +26,7 @@ public enum Colors {
   public static let blue = ColorAsset(name: "blue")
   public static let blueL1 = ColorAsset(name: "blueL1")
   public static let blueL2 = ColorAsset(name: "blueL2")
+  public static let blueEdit = ColorAsset(name: "blueEdit")
   public static let g1 = ColorAsset(name: "g1")
   public static let g2 = ColorAsset(name: "g2")
   public static let g3 = ColorAsset(name: "g3")
