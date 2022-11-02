@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxGesture
 import Network
 
 class EditRuleViewController: UIViewController {
@@ -34,6 +35,7 @@ class EditRuleViewController: UIViewController {
   private let disposeBag = DisposeBag()
   
   private let saveButtonDidTapped = PublishSubject<[RuleWithIdViewModel]>()
+  private let viewDidTapped = PublishSubject<Void>()
   
   private var editViewRules: [SectionOfRules]
   
@@ -102,6 +104,7 @@ class EditRuleViewController: UIViewController {
     }
   }
   
+  //MARK: - Bind
   private func bind() {
     let observable = Observable.just(self.editViewRules)
     
@@ -119,6 +122,14 @@ class EditRuleViewController: UIViewController {
       }
       .disposed(by: disposeBag)
     
+    view.rx
+      .tapGesture()
+      .asObservable()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.viewDidTapped.onNext(())
+      })
+      .disposed(by: disposeBag)
     
     let input = EditRuleViewModel.Input(
       backButtonDidTap: navigationBar.backButton.rx.tap.asObservable(),
@@ -193,6 +204,35 @@ extension EditRuleViewController {
     }
     cell.setTextFieldData(rule: viewModel.name)
     
+    if atIndex.row < 3 {
+      cell.backgroundColor = Colors.blueL2.color
+    } else {
+      cell.backgroundColor = Colors.white.color
+    }
+    
+    let existing = cell.backgroundColor
+    
+    cell.todoLabelTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
+      .asDriver()
+      .drive(onNext: { _ in
+        
+        let editBlueColor = Colors.blueEdit.color
+        
+        if cell.backgroundColor == existing {
+          cell.backgroundColor = editBlueColor
+        } else {
+          cell.backgroundColor = existing
+        }
+      })
+      .disposed(by: cell.disposeBag)
+    
+    viewDidTapped
+      .asDriver(onErrorJustReturn: ())
+      .drive(onNext: { _ in
+        cell.todoLabelTextField.endEditing(true)
+      })
+      .disposed(by: cell.disposeBag)
+    
     cell.todoLabelTextField.rx.text
       .distinctUntilChanged()
       .debug("text✨")
@@ -207,12 +247,6 @@ extension EditRuleViewController {
         
       })
       .disposed(by: cell.disposeBag)
-    
-    if atIndex.row < 3 {
-      cell.backgroundColor = Colors.blueL2.color
-    } else {
-      cell.backgroundColor = Colors.white.color
-    }
     
     cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     cell.selectionStyle = .none
