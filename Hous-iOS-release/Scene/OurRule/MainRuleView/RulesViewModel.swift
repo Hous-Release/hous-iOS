@@ -14,16 +14,16 @@ import RxDataSources
 
 final class RulesViewModel {
   
-  // Inputs
+  //MARK: - Inputs
   let viewWillAppearSubject = PublishRelay<Void>()
   let backButtonDidTapped = PublishRelay<Void>()
   let moreButtonDidTapped = PublishRelay<Void>()
   
-  // Outputs
-  var editViewRules: Observable<[SectionOfRules]>
+  //MARK: - Outputs
   var rules: Observable<[SectionOfRules]>
   var popViewController: Observable<Void>
   var presentBottomSheet: Observable<Void>
+  var ruleWithIds: Observable<[RuleWithIdViewModel]>
   
   private let disposeBag = DisposeBag()
   
@@ -72,30 +72,21 @@ final class RulesViewModel {
         return items
       }
       .map { [SectionOfRules(model: .main, items: $0)] }
-    
-    let editViewItem = viewWillAppear.map { res -> [TableViewItem] in
-      var items: [TableViewItem] = []
-      res.forEach { rule in
-        items.append(TableViewItem.editRule(viewModel: RuleWithIdViewModel(rule: rule)))
+        
+    let ruleWithIdItems = viewWillAppear.map { res -> [RuleWithIdViewModel] in
+            
+      let items = res.map { rule in
+        RuleWithIdViewModel(id: rule.id, name: rule.name)
       }
-      
+
       return items
     }
-      .map { [SectionOfRules(model: .main, items: $0)] }
     
     rules = Observable.merge(defaultViewItem)
-    editViewRules = Observable.merge(editViewItem)
+    ruleWithIds = Observable.merge(ruleWithIdItems)
     
     popViewController = backButtonDidTapped.asObservable()
     presentBottomSheet = moreButtonDidTapped.asObservable()
-    
-//    self.rules = rules.map(
-//      {
-//        $0.map { RuleViewModel(name: $0.name) }
-//      }
-//    )
-//
-//    self.keyRules = rules.map({ KeyRuleViewModel(rules: $0) })
   }
 }
 

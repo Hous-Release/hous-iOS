@@ -44,7 +44,7 @@ class OurRulesViewController: UIViewController {
   
   private lazy var dataSource = RxTableViewSectionedReloadDataSource<SectionOfRules>(configureCell: configureCell)
   
-  private var editRulesList: [SectionOfRules] = []
+  private var rulesWithIds: [RuleWithIdViewModel] = []
   
   init(viewModel: RulesViewModel) {
     self.viewModel = viewModel
@@ -125,16 +125,16 @@ class OurRulesViewController: UIViewController {
       .asObservable()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let vc = EditRuleViewController(editViewRules: self.editRulesList, viewModel: EditRuleViewModel())
+        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
         vc.view.backgroundColor = .white
         self.navigationController?.pushViewController(vc, animated: true)
       })
       .disposed(by: disposeBag)
     
-    viewModel.editViewRules
-      .subscribe(onNext: { [weak self] item in
+    viewModel.ruleWithIds
+      .subscribe(onNext: { [weak self] items in
         guard let self = self else { return }
-        self.editRulesList = item
+        self.rulesWithIds = items
       })
       .disposed(by: disposeBag)
       
