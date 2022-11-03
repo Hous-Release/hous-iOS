@@ -1089,6 +1089,7 @@
 				777085AB29040D5C0018240B /* AssetKit */,
 				B54D39F22913B10400DA3A95 /* RxKeyboard */,
 				770B959E28F320C400C8C945 /* BottomSheetKit */,
+				B54D39F22913B10400DA3A95 /* RxKeyboard */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
