@@ -93,13 +93,11 @@ class OurRulesViewController: UIViewController {
   
   private func bind() {
     rx.RxViewWillAppear
-      .debug("VC : ")
       .asObservable()
       .bind(to: viewModel.viewWillAppearSubject)
       .disposed(by: disposeBag)
     
     viewModel.rules
-      .debug("rules : ")
       .bind(to: rulesTableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
@@ -121,11 +119,15 @@ class OurRulesViewController: UIViewController {
       .disposed(by: disposeBag)
     
     viewModel.presentBottomSheet
-      .debug("✨ Bottom Sheet Presented ! ✨")
       .asObservable()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
+        //TODO: 나중에 바텀시트 버튼 3개면 Add로는 RuleList, Edit로는 RuleWithIdList, Delete로는 RuleIdList
+        let ruleList = self.rulesWithIds.map { ruleWithIdViewModel in
+          ruleWithIdViewModel.name
+        }
+        
+        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
         vc.view.backgroundColor = .white
         self.navigationController?.pushViewController(vc, animated: true)
       })
