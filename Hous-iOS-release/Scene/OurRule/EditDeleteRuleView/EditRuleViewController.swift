@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxDataSources
 import RxGesture
 import RxKeyboard
 import Network
@@ -38,26 +37,13 @@ class EditRuleViewController: UIViewController {
   private let saveButtonDidTapped = PublishSubject<[RuleWithIdViewModel]>()
   private let viewDidTapped = PublishSubject<Void>()
   
-  private var editViewRules: [SectionOfRules]
+  private var editViewRules: [RuleWithIdViewModel]
   
   private let viewModel: EditRuleViewModel
   
   private var tabBarHeight: CGFloat = 83
   
-  private lazy var configureCell: RxTableViewSectionedReloadDataSource<SectionOfRules>.ConfigureCell = { [unowned self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
-    
-    switch item {
-    case .editRule(let viewModel):
-      return self.configEditRulesCell(viewModel: viewModel, atIndex: indexPath)
-    default:
-      return UITableViewCell()
-    }
-  }
-  
-  private lazy var dataSource = RxTableViewSectionedReloadDataSource<SectionOfRules>(configureCell: configureCell)
-  
-  
-  init(editViewRules: [SectionOfRules], viewModel: EditRuleViewModel) {
+  init(editViewRules: [RuleWithIdViewModel], viewModel: EditRuleViewModel) {
     self.editViewRules = editViewRules
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -112,14 +98,67 @@ class EditRuleViewController: UIViewController {
     let observable = Observable.just(self.editViewRules)
     
     observable
-      .bind(to: rulesTableView.rx.items(dataSource: dataSource))
+      .bind(to: rulesTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { [weak self] row, _, cell in
+        guard let self = self else { return }
+        
+        let viewModel = self.editViewRules[row]
+        
+        cell.setTextFieldData(rule: viewModel.name)
+        
+        if row < 3 {
+          cell.backgroundColor = Colors.blueL2.color
+        } else {
+          cell.backgroundColor = Colors.white.color
+        }
+        
+        let existing = cell.backgroundColor
+        
+        cell.todoLabelTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
+          .asDriver()
+          .drive(onNext: { _ in
+            
+            let editBlueColor = Colors.blueEdit.color
+            
+            if cell.backgroundColor == existing {
+              cell.backgroundColor = editBlueColor
+            } else {
+              cell.backgroundColor = existing
+            }
+          })
+          .disposed(by: cell.disposeBag)
+        
+        self.viewDidTapped
+          .asDriver(onErrorJustReturn: ())
+          .drive(onNext: { _ in
+            cell.todoLabelTextField.endEditing(true)
+          })
+          .disposed(by: cell.disposeBag)
+        
+        cell.todoLabelTextField.rx.text
+          .distinctUntilChanged()
+          .debug("text✨")
+          .asObservable()
+          .subscribe(onNext: { [weak self] str in
+            guard let self = self else { return }
+            let changedName = str.map { $0 }
+            
+            let ruleWithIdViewModel = RuleWithIdViewModel(id: viewModel.id, name: changedName ?? "")
+            
+            self.editViewRules[row] = ruleWithIdViewModel
+            
+          })
+          .disposed(by: cell.disposeBag)
+        
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        cell.selectionStyle = .none
+      }
       .disposed(by: disposeBag)
     
     rulesTableView.rx.itemMoved
       .map { $0 }
       .subscribe (onNext: { [weak self] event in
         guard let self = self else { return }
-        self.editViewRules[0].items.swapAt(event.sourceIndex.row, event.destinationIndex.row)
+        self.editViewRules.swapAt(event.sourceIndex.row, event.destinationIndex.row)
         self.rulesTableView.reloadData()
       })
       .disposed(by: disposeBag)
@@ -179,106 +218,20 @@ class EditRuleViewController: UIViewController {
   private func configButtonAction() {
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
-        
         guard let self = self else { return }
-
-        let editViewList = self.editViewRules.flatMap { model -> [RuleWithIdViewModel] in
-          var ruleWithIds: [RuleWithIdViewModel] = []
-          
-          _ = model.items.map { item in
-            switch item {
-            case .editRule(let viewModel):
-              ruleWithIds.append(RuleWithIdViewModel(id: viewModel.id, name: viewModel.name))
-            default:
-              break
-            }
-          }
-          
-          return ruleWithIds
-        }
-
-        
-        self.saveButtonDidTapped.onNext(editViewList)
+        self.saveButtonDidTapped.onNext(self.editViewRules)
       })
       .disposed(by: disposeBag)
   }
 }
 
-extension EditRuleViewController {
-  func configEditRulesCell(viewModel: RuleWithIdViewModel, atIndex: IndexPath) -> UITableViewCell {
-    
-    var viewModel = viewModel
-    let item = self.editViewRules[0].items[atIndex.row]
-    switch item {
-    case .editRule(let vm):
-      viewModel = vm
-    default:
-      break
-    }
-    
-    
-    guard let cell = self.rulesTableView.dequeueReusableCell(withIdentifier: EditRuleTableViewCell.className, for: atIndex) as? EditRuleTableViewCell else {
-      return UITableViewCell()
-    }
-    cell.setTextFieldData(rule: viewModel.name)
-    
-    if atIndex.row < 3 {
-      cell.backgroundColor = Colors.blueL2.color
-    } else {
-      cell.backgroundColor = Colors.white.color
-    }
-    
-    let existing = cell.backgroundColor
-    
-    cell.todoLabelTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
-      .asDriver()
-      .drive(onNext: { _ in
-        
-        let editBlueColor = Colors.blueEdit.color
-        
-        if cell.backgroundColor == existing {
-          cell.backgroundColor = editBlueColor
-        } else {
-          cell.backgroundColor = existing
-        }
-      })
-      .disposed(by: cell.disposeBag)
-    
-    viewDidTapped
-      .asDriver(onErrorJustReturn: ())
-      .drive(onNext: { _ in
-        cell.todoLabelTextField.endEditing(true)
-      })
-      .disposed(by: cell.disposeBag)
-    
-    cell.todoLabelTextField.rx.text
-      .distinctUntilChanged()
-      .debug("text✨")
-      .asObservable()
-      .subscribe(onNext: { [weak self] str in
-        guard let self = self else { return }
-        let changedName = str.map { $0 }
-        
-        let ruleWithIdViewModel = RuleWithIdViewModel(id: viewModel.id, name: changedName ?? "")
-        
-        self.editViewRules[0].items[atIndex.row] = TableViewItem.editRule(viewModel: ruleWithIdViewModel)
-        
-      })
-      .disposed(by: cell.disposeBag)
-    
-    cell.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-    cell.selectionStyle = .none
-    return cell
-  }
-}
-
 // Hiding Delete Button in TableView edit mode
 extension EditRuleViewController: UITableViewDelegate {
-  
+
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     return .none
   }
-  
+
   func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
       return false
   }
