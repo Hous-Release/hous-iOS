@@ -23,6 +23,8 @@ class OurRulesViewController: UIViewController {
     $0.rowHeight = UITableView.automaticDimension
   }
   
+  private var tabBarHeight: CGFloat = 83
+  
   private let disposeBag = DisposeBag()
   
   private let viewModel: RulesViewModel
@@ -85,7 +87,7 @@ class OurRulesViewController: UIViewController {
     rulesTableView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.view.snp.bottom).inset(84)
+      make.bottom.equalTo(self.view.snp.bottom).inset(tabBarHeight)
     }
   }
   
