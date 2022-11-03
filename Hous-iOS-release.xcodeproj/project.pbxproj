@@ -68,6 +68,7 @@
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
+		B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = B54D39F22913B10400DA3A95 /* RxKeyboard */; };
 		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
@@ -294,6 +295,7 @@
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
 				777085AC29040D5C0018240B /* AssetKit in Frameworks */,
+				B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */,
 				770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */,
 				B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */,
 				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
@@ -930,6 +932,7 @@
 				773F1E8E28D5944800AE7521 /* Network */,
 				770B959228EB0EFF00C8C945 /* UserInformation */,
 				777085AB29040D5C0018240B /* AssetKit */,
+				B54D39F22913B10400DA3A95 /* RxKeyboard */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -961,6 +964,7 @@
 			mainGroup = 777C665428A74A62000BECEA;
 			packageReferences = (
 				B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */,
+				B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = 777C665E28A74A62000BECEA /* Products */;
 			projectDirPath = "";
@@ -1751,6 +1755,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -1781,6 +1793,11 @@
 		777085AB29040D5C0018240B /* AssetKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AssetKit;
+		};
+		B54D39F22913B10400DA3A95 /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 		B595FFBD28C9F48900F6B2E4 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

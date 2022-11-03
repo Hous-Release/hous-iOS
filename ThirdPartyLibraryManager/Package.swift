@@ -29,7 +29,8 @@ let package = Package(
         .package(url: "https://github.com/jrendel/SwiftKeychainWrapper", revision: "185a3165346a03767101c4f62e9a545a0fe0530f"),
         .package(url: "https://github.com/kakao/kakao-ios-sdk", branch: "master"),
         .package(url: "https://github.com/airbnb/lottie-ios", revision: "3cf8ade4f14cb67fd06ee760e9b579eeb9ea31fb"),
-        .package(url: "https://github.com/RxSwiftCommunity/RxFlow.git", revision: "d8d4e53d05239f1ec1bd8bec173907868afa0fa1")
+        .package(url: "https://github.com/RxSwiftCommunity/RxFlow.git", revision: "d8d4e53d05239f1ec1bd8bec173907868afa0fa1"),
+        .package(url: "https://github.com/RxSwiftCommunity/RxKeyboard.git", exact: "2.0.0")
     ],
     targets: [
         .target(
@@ -48,7 +49,8 @@ let package = Package(
                 .product(name: "KakaoSDKAuth", package: "kakao-ios-sdk"),
                 .product(name: "KakaoSDKUser", package: "kakao-ios-sdk"),
                 .product(name: "Lottie", package: "lottie-ios"),
-                .product(name: "RxFlow", package: "RxFlow")
+                .product(name: "RxFlow", package: "RxFlow"),
+                .product(name: "RxKeyboard", package: "RxKeyboard")
             ]
         ),
         .binaryTarget(name: "FBLPromises", path: "./Vender/FirebaseAnalytics/FBLPromises.xcframework"),
