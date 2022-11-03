@@ -35,9 +35,9 @@ final class EditRuleViewModel: ViewModelType {
       .asDriver(onErrorJustReturn: true)
     
     let ruleDTO = input.saveButtonDidTap
-      .map { ruleViewModels in
+      .map { ruleViewModels -> [RuleDTO.Request.Rule] in
         var ruleDTO: [RuleDTO.Request.Rule] = []
-        
+
         _ = ruleViewModels.map { ruleViewModel in
           let dto = RuleDTO.Request.Rule(id: ruleViewModel.id, name: ruleViewModel.name)
           ruleDTO.append(dto)
