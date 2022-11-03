@@ -7,9 +7,12 @@
 
 import UIKit
 import RxSwift
+import RxKeyboard
+import RxGesture
 
 class AddRuleViewController: UIViewController {
   
+  //MARK: - UI Components
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "새로운 Rules 추가")
     navBar.setRightButtonText(text: "저장")
@@ -31,13 +34,19 @@ class AddRuleViewController: UIViewController {
   
   private let ruleTableView = UITableView()
   
+  //MARK: - var & let
   private let viewModel: AddRuleViewModel
   
   private let disposeBag = DisposeBag()
   
-  private let rules: [RuleWithIdViewModel]
+  private lazy var saveButtonDidTapped = BehaviorSubject(value: self.rules)
   
-  init(rules: [RuleWithIdViewModel], viewModel: AddRuleViewModel) {
+  private var tabBarHeight: CGFloat = 83
+  
+  private var rules: [String]
+  
+  //MARK: - Lifecycle
+  init(rules: [String], viewModel: AddRuleViewModel) {
     self.rules = rules
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -52,9 +61,10 @@ class AddRuleViewController: UIViewController {
     configUI()
     setTableView()
     bind()
-    
+    configButtonAction()
   }
   
+  //MARK: - Custom Methods
   private func setTableView() {
     ruleTableView.register(EditRuleTableViewCell.self, forCellReuseIdentifier: EditRuleTableViewCell.className)
   }
@@ -101,15 +111,49 @@ class AddRuleViewController: UIViewController {
     
   }
   
+  //MARK: - Rx
   private func bind() {
-    let observable = Observable.just(self.rules)
+//    saveButtonDidTapped.onNext(self.rules)
+//    let observable = Observable.just(self.rules)
     
-    observable
-      .bind(to: ruleTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { row, viewModel, cell in
-        cell.setTextFieldData(rule: viewModel.name)
+    saveButtonDidTapped
+      .asObservable()
+      .bind(to: ruleTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { row, ruleName, cell in
+        cell.setTextFieldData(rule: ruleName)
       }
       .disposed(by: disposeBag)
-      
+    
+    view.rx
+      .tapGesture()
+      .asObservable()
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.ruleTextField.endEditing(true)
+      })
+      .disposed(by: disposeBag)
+    
+    plusButton.rx.tap
+      .asDriver()
+      .drive(onNext: { [weak self] _ in
+        guard let self = self,
+              let text = self.ruleTextField.text
+        else { return }
+        
+        self.rules.append(text)
+        self.saveButtonDidTapped.onNext(self.rules)
+        self.ruleTextField.text = ""
+        self.ruleTableView.reloadData()
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  private func configButtonAction() {
+    navigationBar.rightButton.rx.tap
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.saveButtonDidTapped.onNext(self.rules)
+      })
+      .disposed(by: disposeBag)
   }
   
 }
