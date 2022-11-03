@@ -113,8 +113,6 @@ class AddRuleViewController: UIViewController {
   
   //MARK: - Rx
   private func bind() {
-//    saveButtonDidTapped.onNext(self.rules)
-//    let observable = Observable.just(self.rules)
     
     saveButtonDidTapped
       .asObservable()
@@ -142,7 +140,9 @@ class AddRuleViewController: UIViewController {
         self.rules.append(text)
         self.saveButtonDidTapped.onNext(self.rules)
         self.ruleTextField.text = ""
+        self.ruleTextField.endEditing(true)
         self.ruleTableView.reloadData()
+        self.scrollToBottom()
       })
       .disposed(by: disposeBag)
   }
@@ -156,4 +156,12 @@ class AddRuleViewController: UIViewController {
       .disposed(by: disposeBag)
   }
   
+}
+
+
+extension AddRuleViewController {
+  private func scrollToBottom() {
+    let indexPath = IndexPath(row: rules.count-1, section: 0)
+    ruleTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+  }
 }
