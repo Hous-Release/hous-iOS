@@ -85,7 +85,7 @@ class OurRulesViewController: UIViewController {
     rulesTableView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+      make.bottom.equalTo(self.view.snp.bottom).inset(84)
     }
   }
   
