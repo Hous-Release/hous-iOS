@@ -136,7 +136,7 @@ class EditRuleViewController: UIViewController {
     RxKeyboard.instance.visibleHeight
       .drive(onNext: { [weak self] height in
         guard let self = self else { return }
-        // Keyboard 가 사라지면 height = 임 그렇기 때문에 당연히 맨마지막 아이템이 안보이는 것.
+        
         let inset = height == 0.0 ? self.tabBarHeight : height
         self.rulesTableView.snp.updateConstraints { make in
           make.bottom.equalTo(self.view.snp.bottom).inset(inset)
