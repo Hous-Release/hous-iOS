@@ -29,6 +29,7 @@ class AddRuleViewController: UIViewController {
   }
   
   private let plusButton = UIButton().then {
+    $0.isUserInteractionEnabled = false
     $0.setImage(Images.icAdd.image, for: .normal)
   }
   
@@ -39,7 +40,9 @@ class AddRuleViewController: UIViewController {
   
   private let disposeBag = DisposeBag()
   
-  private lazy var saveButtonDidTapped = BehaviorSubject(value: self.rules)
+  private lazy var rulesSubject = BehaviorSubject(value: self.rules)
+  
+  private var newRulesSubject = PublishSubject<[String]>()
   
   private var tabBarHeight: CGFloat = 83
   
@@ -114,35 +117,60 @@ class AddRuleViewController: UIViewController {
   //MARK: - Rx
   private func bind() {
     
-    saveButtonDidTapped
+    rulesSubject
       .asObservable()
       .bind(to: ruleTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { row, ruleName, cell in
         cell.setTextFieldData(rule: ruleName)
+        cell.isUserInteractionEnabled = false
       }
       .disposed(by: disposeBag)
     
-    view.rx
-      .tapGesture()
-      .asObservable()
-      .subscribe(onNext: { [weak self] _ in
+    let input = AddRuleViewModel.Input(
+      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
+      viewDidTapped: view.rx.tapGesture().asObservable(),
+      saveButtonDidTapped: newRulesSubject,
+      plusButtonDidTapped: plusButton.rx.tap.asObservable(),
+      textFieldEdit: ruleTextField.rx.text.orEmpty.asObservable()
+    )
+    
+    
+    let output = viewModel.transform(input: input)
+    
+    output.navBackButtonDidTapped
+      .drive(onNext: { [weak self] _ in
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+    
+    output.viewDidTapped
+      .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.ruleTextField.endEditing(true)
       })
       .disposed(by: disposeBag)
     
-    plusButton.rx.tap
-      .asDriver()
+    output.plusButtonDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self,
               let text = self.ruleTextField.text
         else { return }
         
         self.rules.append(text)
-        self.saveButtonDidTapped.onNext(self.rules)
+        self.rulesSubject.onNext(self.rules)
+        
         self.ruleTextField.text = ""
         self.ruleTextField.endEditing(true)
         self.ruleTableView.reloadData()
-        self.scrollToBottom()
+      })
+      .disposed(by: disposeBag)
+    
+    output.isEnableStatusOfSaveButton
+      .drive(plusButton.rx.isUserInteractionEnabled)
+      .disposed(by: disposeBag)
+    
+    output.savedCompleted
+      .drive(onNext: { [weak self] _ in
+        self?.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
   }
@@ -151,17 +179,9 @@ class AddRuleViewController: UIViewController {
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.saveButtonDidTapped.onNext(self.rules)
+        self.newRulesSubject.onNext(self.rules)
       })
       .disposed(by: disposeBag)
   }
   
-}
-
-
-extension AddRuleViewController {
-  private func scrollToBottom() {
-    let indexPath = IndexPath(row: rules.count-1, section: 0)
-    ruleTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-  }
 }
