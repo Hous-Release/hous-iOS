@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import RxGesture
+import RxKeyboard
 import Network
 
 class EditRuleViewController: UIViewController {
@@ -40,6 +41,8 @@ class EditRuleViewController: UIViewController {
   private var editViewRules: [SectionOfRules]
   
   private let viewModel: EditRuleViewModel
+  
+  private var tabBarHeight: CGFloat = 83
   
   private lazy var configureCell: RxTableViewSectionedReloadDataSource<SectionOfRules>.ConfigureCell = { [unowned self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
     
@@ -95,7 +98,7 @@ class EditRuleViewController: UIViewController {
     rulesTableView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+      make.bottom.equalTo(self.view.snp.bottom).inset(tabBarHeight)
     }
     
     ruleEmptyViewLabel.snp.makeConstraints { make in
@@ -128,6 +131,16 @@ class EditRuleViewController: UIViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.viewDidTapped.onNext(())
+      })
+      .disposed(by: disposeBag)
+    
+    RxKeyboard.instance.visibleHeight
+      .skip(1)
+      .drive(onNext: { height in
+
+        self.rulesTableView.snp.updateConstraints { make in
+          make.bottom.equalTo(self.view.snp.bottom).inset(height)
+        }
       })
       .disposed(by: disposeBag)
     
