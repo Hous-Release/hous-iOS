@@ -117,12 +117,11 @@ class EditRuleViewController: UIViewController {
     
     rulesTableView.rx.itemMoved
       .map { $0 }
-      .subscribe { [weak self] event in
+      .subscribe (onNext: { [weak self] event in
         guard let self = self else { return }
-
         self.editViewRules[0].items.swapAt(event.sourceIndex.row, event.destinationIndex.row)
         self.rulesTableView.reloadData()
-      }
+      })
       .disposed(by: disposeBag)
     
     view.rx
@@ -135,11 +134,12 @@ class EditRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
     RxKeyboard.instance.visibleHeight
-      .skip(1)
-      .drive(onNext: { height in
-
+      .drive(onNext: { [weak self] height in
+        guard let self = self else { return }
+        // Keyboard 가 사라지면 height = 임 그렇기 때문에 당연히 맨마지막 아이템이 안보이는 것.
+        let inset = height == 0.0 ? self.tabBarHeight : height
         self.rulesTableView.snp.updateConstraints { make in
-          make.bottom.equalTo(self.view.snp.bottom).inset(height)
+          make.bottom.equalTo(self.view.snp.bottom).inset(inset)
         }
       })
       .disposed(by: disposeBag)
@@ -171,14 +171,18 @@ class EditRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
   }
+
+  private func upTableView() {
+
+  }
   
   private func configButtonAction() {
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
         
         guard let self = self else { return }
-        
-        let editViewList = self.editViewRules.flatMap { model in
+
+        let editViewList = self.editViewRules.flatMap { model -> [RuleWithIdViewModel] in
           var ruleWithIds: [RuleWithIdViewModel] = []
           
           _ = model.items.map { item in
@@ -192,6 +196,7 @@ class EditRuleViewController: UIViewController {
           
           return ruleWithIds
         }
+
         
         self.saveButtonDidTapped.onNext(editViewList)
       })
