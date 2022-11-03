@@ -108,7 +108,7 @@ extension SplashReactor {
           return .just(.setIsLoginFlow(true))
         }
 
-        if status == 401 {
+        if status == 401 || status == 404 {
           return .just(.setIsLoginFlow(true))
         }
 
