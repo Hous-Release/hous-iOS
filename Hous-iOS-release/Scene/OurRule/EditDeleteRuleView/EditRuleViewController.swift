@@ -35,6 +35,7 @@ class EditRuleViewController: UIViewController {
   private let disposeBag = DisposeBag()
   
   private let saveButtonDidTapped = PublishSubject<[RuleWithIdViewModel]>()
+  
   private let viewDidTapped = PublishSubject<Void>()
   
   private var editViewRules: [RuleWithIdViewModel]
@@ -136,7 +137,6 @@ class EditRuleViewController: UIViewController {
         
         cell.todoLabelTextField.rx.text
           .distinctUntilChanged()
-          .debug("text✨")
           .asObservable()
           .subscribe(onNext: { [weak self] str in
             guard let self = self else { return }

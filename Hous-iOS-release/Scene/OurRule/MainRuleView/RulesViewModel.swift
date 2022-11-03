@@ -90,20 +90,7 @@ final class RulesViewModel {
   }
 }
 
-//MARK: - KeyRuleViewModel
-struct KeyRuleViewModel {
-  let rulesTotalCount: Int
-  let names: [String]
-}
-
-extension KeyRuleViewModel {
-  init(rules: [String], rulesTotalCount: Int) {
-    self.names = rules
-    self.rulesTotalCount = rulesTotalCount
-  }
-}
-
-//MARK: - NormalRuleViewModel
+//MARK: - OnlyNameRuleViewModel
 struct RuleViewModel {
   var name: String
 }
@@ -114,6 +101,7 @@ extension RuleViewModel {
   }
 }
 
+//MARK: - RuleWithIdViewModel
 struct RuleWithIdViewModel {
   let id: Int
   var name: String
@@ -130,6 +118,20 @@ extension RuleWithIdViewModel {
 }
 
 //MARK: - TableView Section Model
+
+//MARK: - KeyRuleViewModel
+struct KeyRuleViewModel {
+  let rulesTotalCount: Int
+  let names: [String]
+}
+
+extension KeyRuleViewModel {
+  init(rules: [String], rulesTotalCount: Int) {
+    self.names = rules
+    self.rulesTotalCount = rulesTotalCount
+  }
+}
+
 typealias SectionOfRules = SectionModel<TableViewSection, TableViewItem>
 
 enum TableViewSection {
