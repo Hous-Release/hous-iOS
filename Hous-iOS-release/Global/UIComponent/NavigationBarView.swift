@@ -77,7 +77,7 @@ class NavBarWithBackButtonView: UIView {
     backButton.snp.makeConstraints { make in
       make.size.equalTo(44)
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(24)
+      make.leading.equalToSuperview().offset(4)
     }
 
     titleLabel.snp.makeConstraints { make in
