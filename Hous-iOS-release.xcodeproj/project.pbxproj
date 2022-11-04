@@ -72,6 +72,8 @@
 		B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = B54D39F22913B10400DA3A95 /* RxKeyboard */; };
 		B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F52914197700DA3A95 /* AddRuleViewController.swift */; };
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
+		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
+		B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */; };
 		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
@@ -234,6 +236,8 @@
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
 		B54D39F52914197700DA3A95 /* AddRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewController.swift; sourceTree = "<group>"; };
 		B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewModel.swift; sourceTree = "<group>"; };
+		B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewController.swift; sourceTree = "<group>"; };
+		B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewModel.swift; sourceTree = "<group>"; };
 		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
@@ -667,6 +671,15 @@
 				B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */,
 			);
 			path = AddRuleView;
+			sourceTree = "<group>";
+		};
+		B54D39FA29153C5300DA3A95 /* DeleteRuleView */ = {
+			isa = PBXGroup;
+			children = (
+				B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */,
+				B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */,
+			);
+			path = DeleteRuleView;
 			sourceTree = "<group>";
 		};
 		B59148542909688200618F26 /* OurRule */ = {
@@ -1190,6 +1203,7 @@
 				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
 				7706801228E043C80082A7E7 /* OAuthable.swift in Sources */,
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
+				B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */,
 				9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,
@@ -1236,6 +1250,7 @@
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
+				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
