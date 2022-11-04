@@ -52,7 +52,9 @@ extension EnterRoomViewController {
       .withUnretained(self)
       .subscribe (onNext: { owner, isTapped in
         if isTapped {
-          let vc = CreateNewRoomViewController()
+          let serviceProvider = ServiceProvider()
+          let reactor = CreateNewRoomViewReactor(provider: serviceProvider)
+          let vc = CreateNewRoomViewController(reactor)
           owner.mainView.newRoomView.animateClick {
             owner.navigationController?.pushViewController(vc, animated: true)
           }
