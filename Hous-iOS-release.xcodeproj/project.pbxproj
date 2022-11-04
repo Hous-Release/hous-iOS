@@ -650,14 +650,14 @@
 			path = MainRuleView;
 			sourceTree = "<group>";
 		};
-		B53F0FBA2910167E004F1872 /* EditDeleteRuleView */ = {
+		B53F0FBA2910167E004F1872 /* EditRuleView */ = {
 			isa = PBXGroup;
 			children = (
 				B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */,
 				B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */,
 				B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */,
 			);
-			path = EditDeleteRuleView;
+			path = EditRuleView;
 			sourceTree = "<group>";
 		};
 		B54D39F42914193100DA3A95 /* AddRuleView */ = {
@@ -672,8 +672,9 @@
 		B59148542909688200618F26 /* OurRule */ = {
 			isa = PBXGroup;
 			children = (
+				B54D39FA29153C5300DA3A95 /* DeleteRuleView */,
 				B54D39F42914193100DA3A95 /* AddRuleView */,
-				B53F0FBA2910167E004F1872 /* EditDeleteRuleView */,
+				B53F0FBA2910167E004F1872 /* EditRuleView */,
 				B53F0FB92910166A004F1872 /* MainRuleView */,
 			);
 			path = OurRule;
