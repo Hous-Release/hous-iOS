@@ -73,4 +73,13 @@ enum EnterRoomType {
       return "방 참여하기"
     }
   }
+
+  var image: UIImage {
+    switch self {
+    case .new:
+      return Images.illMakeroom.image
+    case .exist:
+      return Images.illEnterroom.image
+    }
+  }
 }

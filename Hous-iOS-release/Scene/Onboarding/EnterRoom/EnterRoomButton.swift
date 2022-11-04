@@ -17,7 +17,7 @@ class EnterRoomButtonView: UIView {
       backgroundColor = buttonType.color
       titleLabel.text = buttonType.titleText
       subTitleLabel.text = buttonType.subTitleText
-      imageView.image = Images.profileGreen.image
+      imageView.image = buttonType.image
     }
   }
 
