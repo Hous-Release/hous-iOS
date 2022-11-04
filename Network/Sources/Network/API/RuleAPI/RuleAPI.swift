@@ -12,9 +12,31 @@ protocol RuleAPIProtocol {
     func getRulesName() -> Observable<[RuleDTO.Response.Rule]>
     func updateRules(_ ruleRequestDTO: RuleDTO.Request.updateRulesRequestDTO) -> Observable<Void>
     func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO) -> Observable<Int>
+    func deleteRules(_ ruleRequestDTO: RuleDTO.Request.deleteRulesRequestDTO) -> Observable<Void>
 }
 
 public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
+    public func deleteRules(_ ruleRequestDTO: RuleDTO.Request.deleteRulesRequestDTO) -> RxSwift.Observable<Void> {
+        return Observable.create { [weak self] emitter in
+            
+            self?.fetchData(
+                target: .deleteRule(ruleRequestDTO),
+                responseData: BaseResponseType<RuleDTO.Response.updateRulesResponseDTO>.self
+            ) { result, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+                
+                if result != nil {
+                    emitter.onNext(())
+                    emitter.onCompleted()
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
     public func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO) -> RxSwift.Observable<Int> {
         return Observable.create { [weak self] emitter in
             
