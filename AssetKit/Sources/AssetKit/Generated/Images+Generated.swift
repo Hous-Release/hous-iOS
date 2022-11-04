@@ -47,6 +47,8 @@ public enum Images {
   public static let profileYellowWtag = ImageAsset(name: "profile_yellow_wtag")
   public static let icBack = ImageAsset(name: "ic_back")
   public static let icAdd = ImageAsset(name: "ic_add")
+  public static let icDot4 = ImageAsset(name: "icDot4")
+  public static let icCheck2 = ImageAsset(name: "ic_check2")
   public static let icMove1 = ImageAsset(name: "ic_move_1")
   public static let frame1 = ImageAsset(name: "Frame 1")
   public static let icBack1 = ImageAsset(name: "ic_back1")
@@ -94,6 +96,7 @@ public enum Images {
   public static let icYellowNo = ImageAsset(name: "ic_yellow_no")
   public static let icYellowYes = ImageAsset(name: "ic_yellow_yes")
   public static let icAlarm = ImageAsset(name: "ic_alarm")
+  public static let icCheckYellow = ImageAsset(name: "ic_check_yellow")
   public static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
   public static let icEditProfile = ImageAsset(name: "ic_edit_profile")
   public static let icSetting = ImageAsset(name: "ic_setting")
@@ -101,8 +104,7 @@ public enum Images {
   public static let icBackWhite = ImageAsset(name: "ic_back_white")
   public static let icCheckBadge = ImageAsset(name: "ic_check_badge")
   public static let icBackTest = ImageAsset(name: "ic_back_test")
-  public static let icCheckYellow = ImageAsset(name: "ic_check_yellow")
-  public static let tempTestResult = ImageAsset(name:"temp_illu_result_01")
+  public static let tempIlluResult01 = ImageAsset(name: "temp_illu_result_01")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

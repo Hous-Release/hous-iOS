@@ -1134,7 +1134,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		777085AA2903FEE50018240B /* Generate Asset In AssetKit */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1146,7 +1146,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "PATH=/opt/homebrew/bin:$PATH\nswiftgen config run --config \"$SRCROOT/AssetKit/Sources/AssetKit/Script/swiftgen.yml\"\n";
 		};
