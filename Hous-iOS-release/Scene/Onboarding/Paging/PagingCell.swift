@@ -43,9 +43,7 @@ final class PagingCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
 
-  var graphicView = UIView().then {
-    $0.backgroundColor = Colors.g3.color
-  }
+  var graphicImageView = UIImageView()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -58,14 +56,14 @@ final class PagingCell: UICollectionViewCell {
 
   private func render() {
     stackView.addArrangedSubviews(bigTitle, secondTitle)
-    addSubViews([stackView, graphicView])
+    addSubViews([stackView, graphicImageView])
 
     stackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(Size.stackTopOffset)
       make.leading.trailing.equalTo(46)
     }
 
-    graphicView.snp.makeConstraints { make in
+    graphicImageView.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
       make.size.equalTo(Size.graphicSize)
       make.bottom.equalToSuperview().inset(Size.graphicBottomInset)
@@ -77,6 +75,6 @@ extension PagingCell {
   func setCell(content: PagingContent) {
     bigTitle.text = content.bigTitle
     secondTitle.text = content.secondTitle
-    graphicView.largeContentImage = content.graphic
+    graphicImageView.image = content.graphic
   }
 }
