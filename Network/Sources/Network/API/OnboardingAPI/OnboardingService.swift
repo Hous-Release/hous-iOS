@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 
 public enum OnboardingService {
-  case postNewRoom(_ dto: OnboardingDTO.Request.CreateNewRoomRequestDTO)
-  case postExistRoom(_ dto: OnboardingDTO.Request.EnterExistRoomRequestDTO)
-  case getIsExistRoom(_ dto: OnboardingDTO.Request.CheckExistRoomRequestDTO)
+    case postNewRoom(_ name: OnboardingDTO.Request.PostNewRoomRequestDTO)
+  case postExistRoom(_ roomId: String)
+  case getIsExistRoom(_ code: String)
 }
 
 extension OnboardingService: TargetType {
@@ -24,8 +24,8 @@ extension OnboardingService: TargetType {
 
     case .postNewRoom:
       return "/room"
-    case let .postExistRoom(dto):
-      return "/room/\(dto.roomId)/join"
+    case let .postExistRoom(roomId):
+      return "/room/\(roomId)/join"
     case .getIsExistRoom:
       return "/room/info"
     }
@@ -42,12 +42,12 @@ extension OnboardingService: TargetType {
 
   public var parameters: RequestParams {
     switch self {
-    case let .postNewRoom(dto):
-      return .body(dto)
+    case let .postNewRoom(name):
+      return .body(name)
     case .postExistRoom:
       return .requestPlain
-    case let .getIsExistRoom(dto):
-      return .query(dto)
+    case let .getIsExistRoom(code):
+      return .query(code)
     }
   }
 }

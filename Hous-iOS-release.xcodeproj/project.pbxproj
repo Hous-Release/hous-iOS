@@ -138,6 +138,7 @@
 		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
+		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
 		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
 		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
 		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
@@ -298,6 +299,7 @@
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
+		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
 		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B87FC01F2914F44700F8AA11 /* Onboarding */,
 				9B3BDBF7290E470A0054DF23 /* Profile */,
 				B8D066CA28F7DF4700A99907 /* Todo */,
 				77067FF628DDD9140082A7E7 /* Auth */,
@@ -941,6 +944,14 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
+		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		B8B56BA128E2E74C00FC99DA /* EnterRoomTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -1203,6 +1214,7 @@
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
+				B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */,
 				B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */,

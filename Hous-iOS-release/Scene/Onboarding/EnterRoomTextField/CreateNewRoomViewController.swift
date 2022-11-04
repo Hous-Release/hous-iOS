@@ -10,6 +10,7 @@ import RxCocoa
 import ReactorKit
 
 final class CreateNewRoomViewController: UIViewController, View {
+  typealias Reactor = CreateNewRoomViewReactor
 
   var disposeBag = DisposeBag()
   var mainView = EnterRoomTextFieldView(roomType: .new)
@@ -19,10 +20,24 @@ final class CreateNewRoomViewController: UIViewController, View {
     view = mainView
   }
 
+  init(_ reactor: Reactor) {
+    super.init(nibName: nil, bundle: nil)
+    setup()
+    self.reactor = reactor
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    reactor = CreateNewRoomViewReactor()
     setup()
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    mainView.textField.endEditing(true)
   }
 
   private func setup() {
@@ -37,7 +52,8 @@ final class CreateNewRoomViewController: UIViewController, View {
 }
 
 extension CreateNewRoomViewController {
-  private func bindAction(_ reactor: CreateNewRoomViewReactor) {
+  private func bindAction(_ reactor: Reactor) {
+
     mainView.textField.rx.text
       .orEmpty
       .distinctUntilChanged()
@@ -46,28 +62,41 @@ extension CreateNewRoomViewController {
       .disposed(by: disposeBag)
 
     mainView.enterRoomButton.rx.tap
-      .map { Reactor.Action.tapCreateRoom }
+      .map { Reactor.Action.tapCreateRoom(reactor.currentState.roomName) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
 
-  private func bindStatus(_ reactor: CreateNewRoomViewReactor) {
-    reactor.state.map { $0.roomName }
-      .bind(to: mainView.textField.rx.text)
-      .disposed(by: disposeBag)
+  private func bindStatus(_ reactor: Reactor) {
 
     reactor.state.map { $0.roomNameCount }
       .bind(to: mainView.textField.countLabel.rx.text)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.isButtonEnable }
-      .bind(to: mainView.enterRoomButton.rx.isEnabled )
+      .asDriver(onErrorJustReturn: false)
+      .drive(mainView.enterRoomButton.rx.isEnabled)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.viewTransition }
-      .subscribe(onNext: { isTapped in
+    reactor.state.map { $0.isErrorMessageHidden }
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: true)
+      .drive(mainView.errorLabel.rx.isHidden)
+      .disposed(by: disposeBag)
+
+    reactor.state.map { $0.errorMessage }
+      .compactMap{ $0 }
+      .asDriver(onErrorJustReturn: "")
+      .drive(mainView.errorLabel.rx.text)
+      .disposed(by: disposeBag)
+
+    reactor.pulse(\.$viewTransition)
+      .compactMap { $0 }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, isTapped in
         if isTapped {
           // 뷰 전환
+          print("✨팝업팝업팝업팝업팝업✨")
         }
       })
       .disposed(by: disposeBag)

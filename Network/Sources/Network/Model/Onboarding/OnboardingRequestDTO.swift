@@ -8,27 +8,13 @@
 import Foundation
 
 public extension OnboardingDTO.Request {
-  // MARK: - 새로운 방 생성
-  struct CreateNewRoomRequestDTO: Encodable {
+
+  struct PostNewRoomRequestDTO: Encodable {
+
     public let name: String
+    
     public init(name: String) {
       self.name = name
-    }
-  }
-
-  // MARK: - 기존 방 입장
-  struct EnterExistRoomRequestDTO: Encodable {
-    public let roomId: String
-    public init(roomId: String) {
-      self.roomId = roomId
-    }
-  }
-
-  // MARK: - 기존 방 입장 전 존재하는 방인지 확인
-  struct CheckExistRoomRequestDTO:Encodable {
-    public let code: String
-    public init(code: String) {
-      self.code = code
     }
   }
 }

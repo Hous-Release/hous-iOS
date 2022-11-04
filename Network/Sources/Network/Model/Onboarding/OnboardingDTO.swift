@@ -8,6 +8,6 @@
 import Foundation
 
 public enum OnboardingDTO {
-  public enum Request { }
+    public enum Request { }
   public enum Response { }
 }
