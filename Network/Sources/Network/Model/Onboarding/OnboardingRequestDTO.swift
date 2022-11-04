@@ -17,7 +17,7 @@ public extension OnboardingDTO.Request {
   }
 
   // MARK: - 기존 방 입장
-  struct CreateNewRoomRequestDTO: Encodable {
+  struct EnterExistRoomRequestDTO: Encodable {
     public let roomId: String
     public init(roomId: String) {
       self.roomId = roomId
