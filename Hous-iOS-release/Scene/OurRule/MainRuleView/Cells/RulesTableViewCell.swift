@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class RulesTableViewCell: UITableViewCell {
   
@@ -13,11 +14,24 @@ class RulesTableViewCell: UITableViewCell {
     $0.backgroundColor = Colors.g3.color
   }
   
+  let selectButton = UIButton().then {
+    $0.isHidden = true
+    $0.setImage(Images.icDot4.image, for: .normal)
+    $0.setImage(Images.icCheck2.image, for: .selected)
+  }
+  
   private let todoLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g7.color
     $0.textAlignment = .left
     $0.numberOfLines = 1
+  }
+  
+  var disposeBag = DisposeBag()
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,7 +54,7 @@ class RulesTableViewCell: UITableViewCell {
   }
   
   private func configUI() {
-    contentView.addSubViews([dotView, todoLabel])
+    contentView.addSubViews([dotView, selectButton, todoLabel])
     
     dotView.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
@@ -48,11 +62,29 @@ class RulesTableViewCell: UITableViewCell {
       make.size.equalTo(8)
     }
     
+    selectButton.snp.makeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.leading.equalToSuperview().offset(28)
+      make.size.equalTo(20)
+    }
+    
     todoLabel.snp.makeConstraints { make in
       make.centerY.equalTo(dotView)
       make.leading.equalTo(dotView.snp.trailing).offset(18)
       make.trailing.equalToSuperview().inset(24)
     }
+  }
+  
+  func setLayoutForDeleteRuleView() {
+    dotView.isHidden = true
+    selectButton.isHidden = false
+    
+    todoLabel.snp.remakeConstraints { make in
+      make.leading.equalTo(selectButton.snp.trailing).offset(10)
+      make.centerY.equalTo(selectButton)
+    }
+    
+    todoLabel.textColor = Colors.black.color
   }
   
   func setNormalRulesData(rule: String) {
