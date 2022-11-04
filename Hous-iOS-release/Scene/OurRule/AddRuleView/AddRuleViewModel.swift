@@ -23,18 +23,17 @@ class AddRuleViewModel: ViewModelType {
   struct Output {
     let navBackButtonDidTapped: Driver<Void>
     let viewDidTapped: Driver<UITapGestureRecognizer>
-    let savedCompleted: Driver<Void>
+    let savedCompleted: Driver<Int>
     let plusButtonDidTapped: Driver<Void>
     let isEnableStatusOfSaveButton: Driver<Bool>
   }
   
   func transform(input: Input) -> Output {
     let savedCompleted = input.saveButtonDidTapped
-      .map { ruleNames in
-        //TODO: Network - Create Rules
-        print(ruleNames, "👍👍👍👍")
+      .flatMap { ruleNames -> Observable<Int> in
+        return NetworkService.shared.ruleRepository.createRules(RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames))
       }
-      .asDriver(onErrorJustReturn: ())
+      .asDriver(onErrorJustReturn: 200)
     
     let isEnableStatusOfSaveButton = input.textFieldEdit.map { string in
       return string.count != 0

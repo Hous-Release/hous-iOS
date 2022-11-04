@@ -45,8 +45,8 @@ extension RuleService: TargetType {
   
   public var parameters: RequestParams {
     switch self {
-    case .createRule:
-      return .requestPlain
+    case .createRule(let dto):
+      return .body(dto)
       
     case .updateRules(let dto):
       return .body(dto)
