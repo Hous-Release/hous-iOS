@@ -51,8 +51,8 @@ extension RuleService: TargetType {
     case .updateRules(let dto):
       return .body(dto)
       
-    case .deleteRule:
-      return .requestPlain
+    case .deleteRule(let dto):
+      return .body(dto)
 
     case .getRuleData:
       return .requestPlain
