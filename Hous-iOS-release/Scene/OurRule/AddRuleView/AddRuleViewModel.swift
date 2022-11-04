@@ -50,7 +50,3 @@ class AddRuleViewModel: ViewModelType {
   }
   
 }
-
-
-//MARK: - GIT TEST
-//MARK: - GIT TEST2
