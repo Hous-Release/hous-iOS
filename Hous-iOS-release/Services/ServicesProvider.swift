@@ -11,6 +11,7 @@ import Network
 
 public protocol ServiceProviderType: AnyObject {
   var authRepository: AuthRepository { get }
+  var enterRoomRepository: EnterRoomRepository { get }
   var memberRepository: MemberRepository { get }
   //var memberRepository: 
 //  var userDefaultsService: UserDefaultsServiceType { get }
@@ -20,6 +21,7 @@ public protocol ServiceProviderType: AnyObject {
 
 final class ServiceProvider: ServiceProviderType {
   lazy var authRepository: AuthRepository = AuthRepositoryImp(provider: self)
+  lazy var enterRoomRepository: EnterRoomRepository = EnterRoomRepositoryImp(provider: self)
   lazy var memberRepository: MemberRepository = MemberRepositoryImp(provider: self)
 //  lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
 //  lazy var alertService: AlertServiceType = AlertService(provider: self)

@@ -9,19 +9,19 @@ import Foundation
 
 protocol OnboardingAPIProtocol {
   func postNewRoom(
-    _ requestDTO: OnboardingDTO.Request.CreateNewRoomRequestDTO,
+    _ name: OnboardingDTO.Request.PostNewRoomRequestDTO,
     completion: @escaping
       (BaseResponseType<OnboardingDTO.Response
       .EnterRoomResponseDTO>?, Error?) -> Void
   )
   func postExistRoom(
-    _ requestDTO: OnboardingDTO.Request.EnterExistRoomRequestDTO,
+    _ roomId: String,
     completion: @escaping
       (BaseResponseType<OnboardingDTO.Response
       .EnterRoomResponseDTO>?, Error?) -> Void
   )
   func getIsExistRoom(
-    _ requestDTO: OnboardingDTO.Request.CheckExistRoomRequestDTO,
+    _ code: String,
     completion: @escaping
       (BaseResponseType<OnboardingDTO.Response
       .CheckExistRoomResponseDTO>?, Error?) -> Void
@@ -29,25 +29,25 @@ protocol OnboardingAPIProtocol {
 }
 
 public final class OnboardingAPI: APIRequestLoader<OnboardingService>, OnboardingAPIProtocol {
-  func postNewRoom(_ requestDTO: OnboardingDTO.Request.CreateNewRoomRequestDTO, completion: @escaping (BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>?, Error?) -> Void) {
+    public func postNewRoom(_ name: OnboardingDTO.Request.PostNewRoomRequestDTO, completion: @escaping (BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>?, Error?) -> Void) {
     fetchData(
-      target: .postNewRoom(requestDTO),
+      target: .postNewRoom(name),
       responseData: BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>.self) { res, err in
         completion(res, err)
       }
   }
 
-  func postExistRoom(_ requestDTO: OnboardingDTO.Request.EnterExistRoomRequestDTO, completion: @escaping (BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>?, Error?) -> Void) {
+    public func postExistRoom(_ roomId: String, completion: @escaping (BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>?, Error?) -> Void) {
     fetchData(
-      target: .postExistRoom(requestDTO),
+      target: .postExistRoom(roomId),
       responseData: BaseResponseType<OnboardingDTO.Response.EnterRoomResponseDTO>.self) { res, err in
         completion(res, err)
       }
   }
 
-  func getIsExistRoom(_ requestDTO: OnboardingDTO.Request.CheckExistRoomRequestDTO, completion: @escaping (BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>?, Error?) -> Void) {
+    public func getIsExistRoom(_ code: String, completion: @escaping (BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>?, Error?) -> Void) {
     fetchData(
-      target: .getIsExistRoom(requestDTO),
+      target: .getIsExistRoom(code),
       responseData: BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>.self) { res, err in
         completion(res, err)
       }
