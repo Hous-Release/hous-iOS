@@ -16,7 +16,7 @@ public extension OnboardingDTO.Response {
 
   // MARK: - 방 정보 조회
   struct CheckExistRoomResponseDTO: Decodable {
-    public let nickname: String
-    public let roomId: Int
+    public let nickname: String?
+    public let roomId: Int?
   }
 }

@@ -148,7 +148,7 @@ class DeleteRuleViewController: UIViewController {
       .asDriver()
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let deletingRules = self.selectedDict.flatMap { (key, flag) in
+        let deletingRules = self.selectedDict.flatMap { (key, flag) -> [Int] in
           var deletingRules: [Int] = []
           if flag { deletingRules.append(key) }
           return deletingRules
