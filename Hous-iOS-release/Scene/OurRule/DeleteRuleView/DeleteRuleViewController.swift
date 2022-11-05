@@ -46,7 +46,6 @@ class DeleteRuleViewController: UIViewController {
     configUI()
     setTableView()
     bind()
-    configButtonAction()
   }
   
   //MARK: - Custom Methods
@@ -75,7 +74,7 @@ class DeleteRuleViewController: UIViewController {
     }
   }
   
-  private func bind() {
+  private func bindTableView() {
     let observable = Observable.just(self.rules)
     
     rules.forEach { [weak self] viewModel in
@@ -117,6 +116,11 @@ class DeleteRuleViewController: UIViewController {
         
       }
       .disposed(by: disposeBag)
+  }
+  
+  private func bind() {
+    bindTableView()
+    configButtonAction()
     
     let input = DeleteRuleViewModel.Input(
       deleteButtonDidTapped: deleteButtonDidTapped,
