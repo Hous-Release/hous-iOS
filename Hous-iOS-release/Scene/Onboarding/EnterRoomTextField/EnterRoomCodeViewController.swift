@@ -10,6 +10,7 @@ import RxCocoa
 import ReactorKit
 
 final class EnterRoomCodeViewController: UIViewController, View {
+  typealias Reactor = EnterRoomCodeViewReactor
 
   var disposeBag = DisposeBag()
   var mainView = EnterRoomTextFieldView(roomType: .exist)
@@ -17,12 +18,26 @@ final class EnterRoomCodeViewController: UIViewController, View {
   override func loadView() {
     super.loadView()
     view = mainView
-    reactor = EnterRoomCodeViewReactor()
+  }
+
+  init(_ reactor: Reactor) {
+    super.init(nibName: nil, bundle: nil)
+    setup()
+    self.reactor = reactor
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    mainView.textField.endEditing(true)
   }
 
   private func setup() {
@@ -38,7 +53,7 @@ final class EnterRoomCodeViewController: UIViewController, View {
 }
 
 extension EnterRoomCodeViewController {
-  private func bindAction(_ reactor: EnterRoomCodeViewReactor) {
+  private func bindAction(_ reactor: Reactor) {
     mainView.textField.rx.text
       .orEmpty
       .distinctUntilChanged()
@@ -47,24 +62,35 @@ extension EnterRoomCodeViewController {
       .disposed(by: disposeBag)
 
     mainView.enterRoomButton.rx.tap
-      .map { Reactor.Action.tapEnterRoom }
+      .map { Reactor.Action.tapEnterRoom(reactor.currentState.roomCode) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
 
-  private func bindState(_ reactor: EnterRoomCodeViewReactor) {
-    reactor.state.map { !$0.isValidCode }
-      .bind(to: mainView.errorLabel.rx.isHidden)
-      .disposed(by: disposeBag)
+  private func bindState(_ reactor: Reactor) {
 
     reactor.state.map { $0.isButtonEnable }
       .bind(to: mainView.enterRoomButton.rx.isEnabled)
       .disposed(by: disposeBag)
 
+    reactor.state.map { $0.isErrorMessageHidden }
+      .compactMap { $0 }
+      .bind(to: mainView.errorLabel.rx.isHidden)
+      .disposed(by: disposeBag)
+
+    reactor.state.map { $0.errorMessage }
+      .asDriver(onErrorJustReturn: "")
+      .drive(mainView.errorLabel.rx.text)
+      .disposed(by: disposeBag)
+
     reactor.state.map { $0.viewTransition }
-      .subscribe(onNext: { isTapped in
+      .compactMap { $0 }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, isTapped in
         if isTapped {
           // 뷰전환
+          print("✨팝업팝업팝업팝업팝업✨")
+          reactor.action.onNext(.initial)
         }
       })
       .disposed(by: disposeBag)

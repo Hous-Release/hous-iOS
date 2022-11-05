@@ -68,8 +68,8 @@ public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
   }
 
   public func checkExistRoom(_ code: String) {
-
-    NetworkService.shared.onboardingRepository.getIsExistRoom(code) { [weak self] res, err in
+    let dto = OnboardingDTO.Request.GetIsExistRoomRequestDTO(code: code)
+    NetworkService.shared.onboardingRepository.getIsExistRoom(dto) { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -77,11 +77,9 @@ public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
           status: res?.status ?? -1,
           message: res?.message ?? ""
         )
-
         self.event.onNext(.sendError(errorModel))
         return
       }
-
       self.event.onNext(.enterRoomResponse(data.nickname))
       self.event.onNext(.roomId(data.roomId))
     }

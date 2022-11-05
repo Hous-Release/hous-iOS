@@ -21,7 +21,7 @@ protocol OnboardingAPIProtocol {
       .EnterRoomResponseDTO>?, Error?) -> Void
   )
   func getIsExistRoom(
-    _ code: String,
+    _ code: OnboardingDTO.Request.GetIsExistRoomRequestDTO,
     completion: @escaping
       (BaseResponseType<OnboardingDTO.Response
       .CheckExistRoomResponseDTO>?, Error?) -> Void
@@ -45,7 +45,7 @@ public final class OnboardingAPI: APIRequestLoader<OnboardingService>, Onboardin
       }
   }
 
-    public func getIsExistRoom(_ code: String, completion: @escaping (BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>?, Error?) -> Void) {
+    public func getIsExistRoom(_ code: OnboardingDTO.Request.GetIsExistRoomRequestDTO, completion: @escaping (BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>?, Error?) -> Void) {
     fetchData(
       target: .getIsExistRoom(code),
       responseData: BaseResponseType<OnboardingDTO.Response.CheckExistRoomResponseDTO>.self) { res, err in

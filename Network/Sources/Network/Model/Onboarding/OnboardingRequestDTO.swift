@@ -17,4 +17,13 @@ public extension OnboardingDTO.Request {
       self.name = name
     }
   }
+
+  struct GetIsExistRoomRequestDTO: Encodable {
+
+    public let code: String
+
+    public init(code: String) {
+      self.code = code
+    }
+  }
 }
