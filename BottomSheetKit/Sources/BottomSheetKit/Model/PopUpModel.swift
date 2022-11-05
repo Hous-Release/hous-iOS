@@ -20,4 +20,5 @@ public enum PopUpType {
   case defaultPopUp(defaultPopUpModel: DefaultPopUpModel)
   case copyCode(copyPopUpModel: ImagePopUpModel)
   case enterRoom(enterRoomModel: ImagePopUpModel)
+  case exceed(exceedModel: ImagePopUpModel)
 }

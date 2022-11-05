@@ -52,6 +52,7 @@ final class TestViewController: UIViewController {
     view.addSubview(defaultButton)
     view.addSubview(copyCodeButton)
     view.addSubview(enterRoomButton)
+    view.addSubview(exceedButton)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -65,6 +66,11 @@ final class TestViewController: UIViewController {
     }
     enterRoomButton.snp.makeConstraints { make in
       make.top.equalTo(self.copyCodeButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    exceedButton.snp.makeConstraints { make in
+      make.top.equalTo(self.enterRoomButton.snp.bottom).offset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
@@ -122,6 +128,21 @@ extension TestViewController {
 
     let enterRoomModel = ImagePopUpModel(image: "", actionText: "참여하기", text: "김호세")
     let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.dismiss(animated: true)
+      case .cancel:
+        self?.dismiss(animated: true)
+      }
+    }
+
+  }
+  @objc
+  private func didTapButton4() {
+    let popModel = ImagePopUpModel(image: "", actionText: "참여하기", text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd", titleText: "Rules 개수 초과")
+    let popUpType = PopUpType.exceed(exceedModel: popModel)
 
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {

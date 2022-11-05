@@ -43,9 +43,9 @@ public extension UIViewController {
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
 
-    case .enterRoom(let enterRoomPopUpModel):
+    case .enterRoom(let popupModel):
 
-      let view = EnterRoomPopUpView(enterRoomPopUpModel)
+      let view = EnterRoomPopUpView(popupModel)
       let popUpAction = EnterRoomPopUpAction(view: view)
       let vc = EnterRoomPopUpViewController(popUpAction: popUpAction)
 
@@ -57,7 +57,19 @@ public extension UIViewController {
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
 
+    case .exceed(exceedModel: let popupModel):
 
+      let view = ExceedPopUpView(popupModel)
+      let popUpAction = ExceedPopUpAction(view: view)
+      let vc = ExceedPopUpViewController(popUpAction: popUpAction)
+
+      popUpAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
     }
   }
 }
