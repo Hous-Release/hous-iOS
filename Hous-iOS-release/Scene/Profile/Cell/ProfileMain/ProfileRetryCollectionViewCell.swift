@@ -11,7 +11,7 @@ import RxCocoa
 
 final class ProfileRetryCollectionViewCell: UICollectionViewCell {
   
-  let disposeBag: DisposeBag = DisposeBag()
+  var disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
@@ -29,7 +29,7 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textAlignment = .center
   }
-
+  
   private let retryButton = UIButton().then {
     $0.setTitle("다시 검사해보기", for: .normal)
     $0.setTitleColor(.white, for: .normal)
@@ -37,7 +37,7 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
     $0.backgroundColor = Colors.black.color
     $0.layer.cornerRadius = 8
   }
-
+  
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -51,6 +51,12 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+    transferToViewController()
+  }
+  
   //MARK: UI Set
   
   private func configUI() {
@@ -59,8 +65,8 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
   
   private func render() {
     addSubViews([
-    retryTitleLabel,
-    retryButton])
+      retryTitleLabel,
+      retryButton])
     
     retryTitleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(32)

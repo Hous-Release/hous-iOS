@@ -110,7 +110,7 @@ public struct ProfileModel: Encodable {
     self.badgeLabel = badgeLabel
     self.hashTags = hashTags
     self.typeScores = typeScores
-    self.isEmptyView = isEmptyView
+    self.isEmptyView = true
   }
 }
 

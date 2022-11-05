@@ -91,10 +91,16 @@ final class ProfileViewController: UIViewController {
     
     // output
     
-    let output = viewModel.transform(input: input)
+    let output = viewModel.transform(input: input) 
+    
+    var countCell: Int = 0
     
     output.profileModel
-      .map {[ProfileModel](repeating: $0, count: 5)}
+      .do {
+        countCell = $0.isEmptyView ? 3 : 5}
+      .map {
+        [ProfileModel](repeating: $0, count: countCell)
+      }
       .bind(to:profileCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: ProfileModel) in
         let indexPath = IndexPath(row: index, section: 0)
@@ -103,37 +109,35 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileMainImageCollectionViewCell.className, for: indexPath) as? ProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          if(!self.isLoaded) {
-            cell.cellActionControlSubject
-              .subscribe(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-          }
+          cell.cellActionControlSubject
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         case 1:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileInfoCollectionViewCell.className, for: indexPath) as? ProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          if(!self.isLoaded) {
-            cell.cellActionControlSubject
-              .subscribe(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-          }
+          cell.cellActionControlSubject
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         case 2:
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileGraphCollectionViewCell.className, for: indexPath) as? ProfileGraphCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          if(!self.isLoaded) {
-            cell.cellActionControlSubject
-              .subscribe(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-          }
+          
+          cell.cellActionControlSubject
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         case 3:
           guard let cell =
@@ -144,16 +148,15 @@ final class ProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileRetryCollectionViewCell.className, for: indexPath) as? ProfileRetryCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          if(!self.isLoaded) { cell.cellActionControlSubject
-              .subscribe(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-          }
-          self.isLoaded = true
+          cell.cellActionControlSubject
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         default:
-          print("Cell Loading ERROR!")
+          print("NO Cell")
           return UICollectionViewCell()
         }
       }
@@ -162,7 +165,6 @@ final class ProfileViewController: UIViewController {
     output.actionControl
       .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
       .disposed(by: disposeBag)
-    
   }
   
   //MARK: Render
