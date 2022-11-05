@@ -11,7 +11,7 @@ import Alamofire
 public enum OnboardingService {
     case postNewRoom(_ name: OnboardingDTO.Request.PostNewRoomRequestDTO)
   case postExistRoom(_ roomId: String)
-  case getIsExistRoom(_ code: String)
+    case getIsExistRoom(_ code: OnboardingDTO.Request.GetIsExistRoomRequestDTO)
 }
 
 extension OnboardingService: TargetType {

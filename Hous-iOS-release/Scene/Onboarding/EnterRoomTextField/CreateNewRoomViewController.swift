@@ -97,6 +97,7 @@ extension CreateNewRoomViewController {
         if isTapped {
           // 뷰 전환
           print("✨팝업팝업팝업팝업팝업✨")
+          reactor.action.onNext(.initial)
         }
       })
       .disposed(by: disposeBag)
