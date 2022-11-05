@@ -23,4 +23,10 @@ extension UIViewController {
       sceneDelegate.window?.makeKeyAndVisible()
     }
   }
+  
+  func setTabBarIsHidden(isHidden: Bool) {
+    if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
+      tvc.housTabBar.isHidden = isHidden
+    }
+  }
 }
