@@ -124,7 +124,6 @@ extension EnterRoomCodeViewController {
   private func enterExistRoom(_ flag: Bool) {
     let tvc = HousTabbarViewController()
     changeRootViewController(to: tvc)
-    return
   }
 }
 

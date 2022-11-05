@@ -30,7 +30,7 @@ final class CreateNewRoomViewReactor: Reactor {
     case setIsErrorMessageHidden(Bool?)
     case setErrorMessage(String?)
     case setRoomCode(String?)
-    case setViewTransition(Bool?)
+    case setEnterNewRoomFlag(Bool?)
     case setError(String?)
     case setInitial
   }
@@ -42,7 +42,7 @@ final class CreateNewRoomViewReactor: Reactor {
     var isErrorMessageHidden: Bool?
     var errorMessage: String?
     var roomCode: String?
-    @Pulse var viewTransition: Bool?
+    @Pulse var enterNewRoomFlag: Bool?
     var error: String? = nil
   }
 
@@ -84,8 +84,8 @@ final class CreateNewRoomViewReactor: Reactor {
       newState.errorMessage = message
     case let .setRoomCode(code):
       newState.roomCode = code
-    case let .setViewTransition(status):
-      newState.viewTransition = status
+    case let .setEnterNewRoomFlag(status):
+      newState.enterNewRoomFlag = status
     case let .setError(error):
       newState.error = error
     case .setInitial:
@@ -103,7 +103,10 @@ extension CreateNewRoomViewReactor {
       case .roomHostNickname:
         return .empty()
       case let .roomCode(code):
-        return .just(.setRoomCode(code))
+        return .concat([
+          .just(.setRoomCode(code)),
+          .just(.setEnterNewRoomFlag(true))
+        ])
       case .roomId:
         return .empty()
       case let .sendError(errorModel):

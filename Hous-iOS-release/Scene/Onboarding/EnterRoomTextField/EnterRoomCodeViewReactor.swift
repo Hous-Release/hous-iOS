@@ -40,7 +40,7 @@ final class EnterRoomCodeViewReactor: Reactor {
     case setRoomHostNickname(String?)
     case setRoomId(Int?)
     case setPresentPopupFlag(Bool?)
-    case setenterRoomFlag(Bool?)
+    case setEnterRoomFlag(Bool?)
     case setError(String?)
     case setInitial
   }
@@ -94,7 +94,7 @@ final class EnterRoomCodeViewReactor: Reactor {
       newState.roomId = id
     case let .setPresentPopupFlag(flag):
       newState.presentPopupFlag = flag
-    case let .setenterRoomFlag(flag):
+    case let .setEnterRoomFlag(flag):
       newState.enterRoomFlag = flag
     case let .setError(error):
       newState.error = error
@@ -113,7 +113,7 @@ extension EnterRoomCodeViewReactor {
       case let .roomHostNickname(nickname):
         return .just(.setRoomHostNickname(nickname))
       case .roomCode:
-        return .just(.setenterRoomFlag(true))
+        return .just(.setEnterRoomFlag(true))
       case let .roomId(id):
         return self.validateRoom(id)
       case let .sendError(errorModel):
