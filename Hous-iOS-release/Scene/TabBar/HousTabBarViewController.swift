@@ -64,7 +64,13 @@ class HousTabbarViewController: UITabBarController {
 
   private func bind() {
     housTabBar.itemTapped
-      .bind { [weak self] in self?.selectTabWith(index: $0) }
+      .bind { [weak self] in
+        guard let nvc = self?.viewControllers?[$0] as? UINavigationController else { return }
+        nvc.popToRootViewController(animated: false)
+        
+        self?.selectTabWith(index: $0)
+        
+      }
       .disposed(by: disposeBag)
   }
 }
