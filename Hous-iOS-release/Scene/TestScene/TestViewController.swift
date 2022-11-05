@@ -39,6 +39,15 @@ final class TestViewController: UIViewController {
     return button
   }()
 
+  private lazy var exceedButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("excced", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton4), for: .touchUpInside)
+    return button
+  }()
+
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
