@@ -90,17 +90,18 @@ extension CreateNewRoomViewController {
       .drive(mainView.errorLabel.rx.text)
       .disposed(by: disposeBag)
 
-    reactor.pulse(\.$viewTransition)
+    reactor.pulse(\.$enterNewRoomFlag)
       .compactMap { $0 }
-      .withUnretained(self)
-      .subscribe(onNext: { owner, isTapped in
-        if isTapped {
-          // 뷰 전환
-          print("✨팝업팝업팝업팝업팝업✨")
-          reactor.action.onNext(.initial)
-        }
-      })
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: enterNewRoom)
       .disposed(by: disposeBag)
+  }
+}
+
+extension CreateNewRoomViewController {
+  private func enterNewRoom(_ flag: Bool) {
+    let tvc = HousTabbarViewController()
+    changeRootViewController(to: tvc)
   }
 }
 
