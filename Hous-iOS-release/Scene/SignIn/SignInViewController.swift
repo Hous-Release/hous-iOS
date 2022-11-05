@@ -216,11 +216,11 @@ extension SignInViewController {
 
   private func transferForSuccess(_ isJoiningRoom: Bool) {
 
-    let homeVC = MainHomeViewController(viewModel: MainHomeViewModel())
+    let tvc = HousTabbarViewController()
     let enterRoomVC = EnterRoomViewController()
 
     if isJoiningRoom {
-      changeRootViewController(to: homeVC)
+      changeRootViewController(to: tvc)
       return
     }
 

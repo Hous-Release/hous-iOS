@@ -100,7 +100,7 @@ extension PagingViewController {
         signInVC.modalPresentationStyle = .fullScreen
         signInVC.modalTransitionStyle = .crossDissolve
 
-        self?.changeRootViewController(to: signInVC)
+        self?.changeRootViewController(to: UINavigationController(rootViewController: signInVC))
       })
       .disposed(by: disposeBag)
 
