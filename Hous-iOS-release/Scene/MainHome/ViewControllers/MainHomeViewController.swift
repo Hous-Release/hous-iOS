@@ -39,6 +39,11 @@ class MainHomeViewController: UIViewController {
   }
   
   //MARK: - Life Cycles
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.setTabBarIsHidden(isHidden: false)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     configUI()
