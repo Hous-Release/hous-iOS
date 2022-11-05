@@ -12,15 +12,18 @@ public struct ImagePopUpModel {
   public init(
     image: String,
     actionText: String,
-    text: String
+    text: String,
+    titleText: String? = nil
   ) {
     self.image = image
     self.actionText = actionText
     self.text = text
+    self.titleText = titleText
   }
 
   public let image: String
   public let actionText: String
   public let text: String
+  public let titleText: String?
 
 }
