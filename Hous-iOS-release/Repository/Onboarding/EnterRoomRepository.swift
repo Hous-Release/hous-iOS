@@ -12,7 +12,8 @@ import RxCocoa
 
 
 public enum EnterRoomRepositoryEvent {
-  case enterRoomResponse(String?)
+  case roomHostNickname(String?)
+  case roomCode(String?)
   case roomId(Int?)
   case sendError(HouseErrorModel?)
 }
@@ -21,7 +22,7 @@ public protocol EnterRoomRepository {
   var event: PublishSubject<EnterRoomRepositoryEvent> { get }
 
   func enterNewRoom(_ name: String)
-  func enterExistRoom(_ roomId: String)
+  func enterExistRoom(_ roomId: Int)
   func checkExistRoom(_ code: String)
 }
 public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
@@ -42,12 +43,12 @@ public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
         return
       }
 
-      self.event.onNext(.enterRoomResponse(data.roomCode))
+      self.event.onNext(.roomCode(data.roomCode))
       self.event.onNext(.roomId(data.roomId))
     }
   }
 
-  public func enterExistRoom(_ roomId: String) {
+  public func enterExistRoom(_ roomId: Int) {
 
     NetworkService.shared.onboardingRepository.postExistRoom(roomId) { [weak self] res, err in
       guard let self = self else { return }
@@ -62,7 +63,7 @@ public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
         return
       }
 
-      self.event.onNext(.enterRoomResponse(data.roomCode))
+      self.event.onNext(.roomCode(data.roomCode))
       self.event.onNext(.roomId(data.roomId))
     }
   }
@@ -80,7 +81,7 @@ public final class EnterRoomRepositoryImp: BaseService, EnterRoomRepository {
         self.event.onNext(.sendError(errorModel))
         return
       }
-      self.event.onNext(.enterRoomResponse(data.nickname))
+      self.event.onNext(.roomHostNickname(data.nickname))
       self.event.onNext(.roomId(data.roomId))
     }
   }

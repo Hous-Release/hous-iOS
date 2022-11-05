@@ -39,7 +39,8 @@ final class EnterRoomCodeViewReactor: Reactor {
     case setErrorMessage(String?)
     case setRoomHostNickname(String?)
     case setRoomId(Int?)
-    case setViewTransition(Bool?)
+    case setPresentPopupFlag(Bool?)
+    case setenterRoomFlag(Bool?)
     case setError(String?)
     case setInitial
   }
@@ -51,7 +52,8 @@ final class EnterRoomCodeViewReactor: Reactor {
     var errorMessage: String?
     var roomHostNickname: String?
     var roomId: Int?
-    @Pulse var viewTransition: Bool?
+    @Pulse var presentPopupFlag: Bool?
+    @Pulse var enterRoomFlag: Bool?
     var error: String? = nil
   }
 
@@ -90,8 +92,10 @@ final class EnterRoomCodeViewReactor: Reactor {
       newState.roomHostNickname = nickname
     case let .setRoomId(id):
       newState.roomId = id
-    case let .setViewTransition(flag):
-      newState.viewTransition = flag
+    case let .setPresentPopupFlag(flag):
+      newState.presentPopupFlag = flag
+    case let .setenterRoomFlag(flag):
+      newState.enterRoomFlag = flag
     case let .setError(error):
       newState.error = error
     case .setInitial:
@@ -103,10 +107,13 @@ final class EnterRoomCodeViewReactor: Reactor {
 
 extension EnterRoomCodeViewReactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+
     let serviceMutation = provider.enterRoomRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
-      case let .enterRoomResponse(nickname):
+      case let .roomHostNickname(nickname):
         return .just(.setRoomHostNickname(nickname))
+      case .roomCode:
+        return .just(.setenterRoomFlag(true))
       case let .roomId(id):
         return self.validateRoom(id)
       case let .sendError(errorModel):
@@ -115,6 +122,13 @@ extension EnterRoomCodeViewReactor {
       }
     }
     return Observable.merge(mutation, serviceMutation)
+  }
+}
+
+extension EnterRoomCodeViewReactor {
+  func enterRoom() {
+    guard let roomId = currentState.roomId else { return }
+    provider.enterRoomRepository.enterExistRoom(roomId)
   }
 }
 
@@ -136,7 +150,7 @@ extension EnterRoomCodeViewReactor {
     } else {
       return .concat([
         .just(.setRoomId(id)),
-        .just(.setViewTransition(true))
+        .just(.setPresentPopupFlag(true))
       ])
     }
   }

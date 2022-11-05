@@ -113,7 +113,7 @@ extension EnterInfoViewController {
   private func transferToEnterRoom(_ isSuccess: Bool) {
     guard isSuccess else { return }
     let enterRoomVC = EnterRoomViewController()
-    changeRootViewController(to: enterRoomVC)
+    changeRootViewController(to: UINavigationController(rootViewController: enterRoomVC))
   }
 }
 
