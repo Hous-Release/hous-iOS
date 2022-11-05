@@ -53,6 +53,12 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+    transferToViewController()
+  }
+  
   //MARK: UI Set
   
   private func configUI() {

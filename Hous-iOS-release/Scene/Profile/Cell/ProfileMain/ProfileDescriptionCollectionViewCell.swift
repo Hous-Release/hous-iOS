@@ -11,7 +11,7 @@ import RxCocoa
 
 final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   
-  let disposeBag: DisposeBag = DisposeBag()
+  var disposeBag: DisposeBag = DisposeBag()
   
   //MARK: UI Templetes
   
@@ -45,6 +45,10 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
   }
   
   //MARK: UI Set

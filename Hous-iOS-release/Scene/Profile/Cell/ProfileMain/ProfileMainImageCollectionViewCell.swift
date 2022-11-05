@@ -12,7 +12,7 @@ import Lottie
 
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
-  let disposeBag: DisposeBag = DisposeBag()
+  var disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
@@ -68,16 +68,21 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func prepareForReuse() {
+   super.prepareForReuse()
+   disposeBag = DisposeBag()
+   transferToViewController()
+ }
+  
   //MARK: UI Set
 
   // TODO: - 인영에게 Zeplin 업로드 요청하고 색깔 export 해주세요.
   private func configUI() {
 //    self.backgroundColor = Colors.redProfile.color
   }
-
+  
   private func render() {
     addSubViews([
-      profileMainImage,
       badgeImage,
       titleLabel,
       badgeLabel,
@@ -113,14 +118,19 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  private func animatedRender() {
-    profileMainImage.snp.makeConstraints { make in
-      make.top.bottom.leading.trailing.equalToSuperview()
-      make.height.equalTo(254)
-      make.width.equalTo(Size.screenWidth)
+  private func animatedRender(isEmptyView: Bool) {
+    if isEmptyView {
+      self.backgroundColor = Colors.g1.color
+    } else {
+      addSubview(profileMainImage)
+      profileMainImage.snp.makeConstraints { make in
+        make.top.bottom.leading.trailing.equalToSuperview()
+        make.height.equalTo(254)
+        make.width.equalTo(Size.screenWidth)
+      }
+      profileMainImage.currentProgress = 0
+      profileMainImage.play()
     }
-    profileMainImage.currentProgress = 0
-    profileMainImage.play()
   }
   
   private func transferToViewController() {
@@ -140,7 +150,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   }
   
   func bind(_ data: ProfileModel) {
-    animatedRender()
+    animatedRender(isEmptyView: data.isEmptyView)
     badgeLabel.text = data.badgeLabel
   }
 }

@@ -11,7 +11,7 @@ import RxCocoa
 
 final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   
-  let disposeBag: DisposeBag = DisposeBag()
+  var disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
@@ -73,6 +73,12 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+   override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+    transferToViewController()
   }
   
   //MARK: UI Set
