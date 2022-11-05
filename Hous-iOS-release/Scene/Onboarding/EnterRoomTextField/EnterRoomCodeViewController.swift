@@ -8,6 +8,7 @@
 import UIKit
 import RxCocoa
 import ReactorKit
+import BottomSheetKit
 
 final class EnterRoomCodeViewController: UIViewController, View {
   typealias Reactor = EnterRoomCodeViewReactor
@@ -83,17 +84,47 @@ extension EnterRoomCodeViewController {
       .drive(mainView.errorLabel.rx.text)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.viewTransition }
+    reactor.pulse(\.$presentPopupFlag)
       .compactMap { $0 }
-      .withUnretained(self)
-      .subscribe(onNext: { owner, isTapped in
-        if isTapped {
-          // 뷰전환
-          print("✨팝업팝업팝업팝업팝업✨")
-          reactor.action.onNext(.initial)
-        }
-      })
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: presentPopupView)
       .disposed(by: disposeBag)
+
+    reactor.pulse(\.$enterRoomFlag)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: enterExistRoom)
+      .disposed(by: disposeBag)
+  }
+}
+
+extension EnterRoomCodeViewController {
+  private func presentPopupView(_ flag: Bool) {
+    guard let host = reactor?.currentState.roomHostNickname else { return }
+
+    let enterRoomModel = ImagePopUpModel(
+      image: "얘 왜 스트링",
+      actionText: "참여하기",
+      text: host)
+    let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.dismiss(animated: true) {
+          self?.reactor?.enterRoom()
+        }
+        return
+      case .cancel:
+        self?.dismiss(animated: true)
+      }
+    }
+  }
+
+  private func enterExistRoom(_ flag: Bool) {
+    let tvc = HousTabbarViewController()
+    changeRootViewController(to: tvc)
+    return
   }
 }
 

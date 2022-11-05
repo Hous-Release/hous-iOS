@@ -10,7 +10,7 @@ import Alamofire
 
 public enum OnboardingService {
     case postNewRoom(_ name: OnboardingDTO.Request.PostNewRoomRequestDTO)
-  case postExistRoom(_ roomId: String)
+  case postExistRoom(_ roomId: Int)
     case getIsExistRoom(_ code: OnboardingDTO.Request.GetIsExistRoomRequestDTO)
 }
 

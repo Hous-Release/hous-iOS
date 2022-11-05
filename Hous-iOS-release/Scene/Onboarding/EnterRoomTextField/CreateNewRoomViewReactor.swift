@@ -100,11 +100,11 @@ extension CreateNewRoomViewReactor {
     let serviceMutation = provider.enterRoomRepository.event.flatMap { event ->
       Observable<Mutation> in
       switch event {
-
-      case let .enterRoomResponse(code):
+      case .roomHostNickname:
+        return .empty()
+      case let .roomCode(code):
         return .just(.setRoomCode(code))
       case .roomId:
-        // id 쓸 곳이 없음
         return .empty()
       case let .sendError(errorModel):
         guard
