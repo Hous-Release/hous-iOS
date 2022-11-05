@@ -86,7 +86,7 @@ final class SplashViewController: UIViewController, ReactorKit.View {
     let serviceProvider = ServiceProvider()
     let reactor = SignInReactor(provider: serviceProvider)
     let loginVC = SignInViewController(reactor)
-    changeRootViewController(to: loginVC)
+    changeRootViewController(to: UINavigationController(rootViewController: loginVC))
   }
 }
 
