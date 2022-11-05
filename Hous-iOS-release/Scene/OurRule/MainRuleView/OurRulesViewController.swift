@@ -21,9 +21,8 @@ class OurRulesViewController: UIViewController {
   private let rulesTableView = UITableView().then {
     $0.estimatedRowHeight = 150
     $0.rowHeight = UITableView.automaticDimension
+    $0.showsVerticalScrollIndicator = false
   }
-  
-  private var tabBarHeight: CGFloat = 83
   
   private let disposeBag = DisposeBag()
   
@@ -53,6 +52,11 @@ class OurRulesViewController: UIViewController {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.setTabBarIsHidden(isHidden: true)
   }
   
   override func viewDidLoad() {
@@ -87,7 +91,7 @@ class OurRulesViewController: UIViewController {
     rulesTableView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.view.snp.bottom).inset(tabBarHeight)
+      make.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
   }
   
@@ -126,8 +130,8 @@ class OurRulesViewController: UIViewController {
         let ruleList = self.rulesWithIds.map { ruleWithIdViewModel in
           ruleWithIdViewModel.name
         }
-        
-        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
+        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
+//        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
         vc.view.backgroundColor = .white
         self.navigationController?.pushViewController(vc, animated: true)
       })

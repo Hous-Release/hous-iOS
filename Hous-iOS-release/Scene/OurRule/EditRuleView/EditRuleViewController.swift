@@ -21,6 +21,7 @@ class EditRuleViewController: UIViewController {
   }()
   
   private let rulesTableView = UITableView().then {
+    $0.showsVerticalScrollIndicator = false
     $0.allowsSelectionDuringEditing = true
     $0.isEditing = true
   }
@@ -85,7 +86,7 @@ class EditRuleViewController: UIViewController {
     rulesTableView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(self.view.snp.bottom).inset(tabBarHeight)
+      make.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
     
     ruleEmptyViewLabel.snp.makeConstraints { make in
@@ -173,12 +174,21 @@ class EditRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
     RxKeyboard.instance.visibleHeight
+      .skip(1)
       .drive(onNext: { [weak self] height in
         guard let self = self else { return }
         
-        let inset = height == 0.0 ? self.tabBarHeight : height
+        let firstWindow = UIApplication.shared.connectedScenes
+          .filter { $0.activationState == .foregroundActive }
+          .map { $0 as? UIWindowScene }
+          .compactMap { $0 }
+          .first?.windows
+          .filter { $0.isKeyWindow }
+          .first
+        
+        let extra = firstWindow!.safeAreaInsets.bottom
         self.rulesTableView.snp.updateConstraints { make in
-          make.bottom.equalTo(self.view.snp.bottom).inset(inset)
+          make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(height - extra)
         }
       })
       .disposed(by: disposeBag)

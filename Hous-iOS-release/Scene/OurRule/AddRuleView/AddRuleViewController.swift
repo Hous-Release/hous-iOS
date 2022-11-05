@@ -33,7 +33,9 @@ class AddRuleViewController: UIViewController {
     $0.setImage(Images.icAdd.image, for: .normal)
   }
   
-  private let ruleTableView = UITableView()
+  private let ruleTableView = UITableView().then {
+    $0.showsVerticalScrollIndicator = false
+  }
   
   //MARK: - var & let
   private let viewModel: AddRuleViewModel
@@ -109,7 +111,7 @@ class AddRuleViewController: UIViewController {
     ruleTableView.snp.makeConstraints { make in
       make.top.equalTo(blueLine.snp.bottom).offset(19)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(view.snp.bottom).inset(83)
+      make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
     
   }

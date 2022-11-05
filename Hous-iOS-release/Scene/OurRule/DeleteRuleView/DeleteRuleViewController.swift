@@ -17,7 +17,9 @@ class DeleteRuleViewController: UIViewController {
     return navBar
   }()
   
-  private let rulesTableView = UITableView()
+  private let rulesTableView = UITableView().then {
+    $0.showsVerticalScrollIndicator = false
+  }
   
   //MARK: - var & let
   private let viewModel: DeleteRuleViewModel
