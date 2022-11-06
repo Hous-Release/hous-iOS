@@ -97,6 +97,9 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
       ourRulesStackView.isHidden = true
       ruleEmptyViewLabel.isHidden = false
       return
+    } else {
+      ourRulesStackView.isHidden = false
+      ruleEmptyViewLabel.isHidden = true
     }
     
     ourRulesStackView.subviews.forEach { $0.removeFromSuperview() }

@@ -130,8 +130,9 @@ class OurRulesViewController: UIViewController {
         let ruleList = self.rulesWithIds.map { ruleWithIdViewModel in
           ruleWithIdViewModel.name
         }
-        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
-//        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
+//        let vc = DeleteRuleViewController(rules: self.rulesWithIds, viewModel: DeleteRuleViewModel())
+//        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
+        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
         vc.view.backgroundColor = .white
         self.navigationController?.pushViewController(vc, animated: true)
       })
