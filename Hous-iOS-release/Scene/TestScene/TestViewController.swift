@@ -48,6 +48,15 @@ final class TestViewController: UIViewController {
     return button
   }()
 
+  private lazy var duplicateButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("duplicate", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton5), for: .touchUpInside)
+    return button
+  }()
+
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
@@ -62,6 +71,7 @@ final class TestViewController: UIViewController {
     view.addSubview(copyCodeButton)
     view.addSubview(enterRoomButton)
     view.addSubview(exceedButton)
+    view.addSubview(duplicateButton)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -80,6 +90,11 @@ final class TestViewController: UIViewController {
     }
     exceedButton.snp.makeConstraints { make in
       make.top.equalTo(self.enterRoomButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    duplicateButton.snp.makeConstraints { make in
+      make.top.equalTo(self.exceedButton.snp.bottom).offset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
@@ -162,5 +177,26 @@ extension TestViewController {
       }
     }
 
+  }
+  @objc
+  private func didTapButton5() {
+
+    let popUpModel = DefaultPopUpModel(
+      cancelText: "취소하기",
+      actionText: "현재 기기에서 로그인하기",
+      title: "다른 기기에서 로그인 중이에요!",
+      subtitle: "다른 기기에서 강제 로그아웃 후 현재 기기에서\nHous-를 사용해볼까요?"
+    )
+    let popUpType = PopUpType.duplicate(popUpModel)
+
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.dismiss(animated: true)
+      case .cancel:
+        self?.dismiss(animated: true)
+      }
+    }
   }
 }
