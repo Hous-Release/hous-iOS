@@ -92,6 +92,8 @@ class KeyRulesTableViewCell: UITableViewCell {
     } else if ruleCount <= 3 {
       emptyNormalRulesLabel.isHidden = false // Only Normal Rule Empty
     } else {
+      ourRulesStackView.isHidden = false
+      ruleEmptyViewLabel.isHidden = true
       emptyNormalRulesLabel.isHidden = true
     }
     
