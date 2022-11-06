@@ -172,9 +172,8 @@ class MainHomeViewController: UIViewController {
 
   //MARK: Helpers
   private func bind() {
-    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .map { _ in }
-      .asSignal(onErrorJustReturn: ())
+    let viewWillAppear =
+    rx.RxViewWillAppear.asSignal()
     
     let input = MainHomeViewModel.Input(
       viewWillAppear: viewWillAppear,
@@ -213,6 +212,7 @@ class MainHomeViewController: UIViewController {
     }
     
     output.sections
+      .debug("이게 안불리는건가???")
       .drive(collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
@@ -224,13 +224,6 @@ class MainHomeViewController: UIViewController {
         }
       })
       .disposed(by: disposeBag)
-  }
-}
-
-// Edit홈에
-extension MainHomeViewController {
-  @objc private func didPopRoomNameEditView() {
-    self.viewWillAppear.accept(())
   }
 }
 
