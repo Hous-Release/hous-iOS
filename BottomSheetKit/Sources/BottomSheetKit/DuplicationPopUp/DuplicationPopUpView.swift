@@ -1,0 +1,146 @@
+//
+//  File.swift
+//  
+//
+//  Created by 김호세 on 2022/11/05.
+//
+
+import Foundation
+import UIKit
+import AssetKit
+
+internal final class DuplicationPopUpView: UIView {
+
+  private typealias SpoqaHanSansNeo = Fonts.SpoqaHanSansNeo
+
+  private enum Constant {
+    static let verticalMargin: CGFloat = 32
+    static let horizontalMargin: CGFloat = 18
+    static let subtitleTopMargin: CGFloat = 12
+    static let buttonTopMargin: CGFloat = 20
+    static let buttonHeight: CGFloat = 40
+  }
+
+  private let rootView: UIView = {
+    let view = UIView()
+    view.layer.cornerRadius = 8
+    view.backgroundColor = .white
+    return view
+  }()
+
+  private let titleLabel: UILabel = {
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.textAlignment = .center
+    label.textColor = Colors.black.color
+    label.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
+    return label
+  }()
+
+  private let subtitleLabel: UILabel = {
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.lineBreakMode = .byWordWrapping
+    label.lineBreakStrategy = .hangulWordPriority
+    label.textAlignment = .center
+    label.textColor = Colors.g5.color
+    label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    return label
+  }()
+
+  internal lazy var cancelButton: UIButton = {
+    let button = UIButton()
+    button.layer.cornerRadius = 8
+    button.setTitle("cancelButton", for: .normal)
+    button.setTitleColor(UIColor.black, for: .normal)
+    button.backgroundColor = Colors.g2.color
+    button.setTitleColor(Colors.g6.color, for: .normal)
+    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
+    return button
+  }()
+
+  internal lazy var actionButton: UIButton = {
+    let button = UIButton()
+    button.layer.cornerRadius = 8
+    button.setTitle("actionButton", for: .normal)
+    button.setTitleColor(UIColor.black, for: .normal)
+    button.backgroundColor = Colors.blue.color
+    button.setTitleColor(Colors.white.color, for: .normal)
+    button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
+    return button
+  }()
+
+  private lazy var buttonStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.backgroundColor = .white
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.distribution = .fillEqually
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.spacing = 8
+    return stackView
+  }()
+
+  internal init(_ model: DefaultPopUpModel) {
+    super.init(frame: .zero)
+    setupViews()
+    configure(model)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("TwoButtonPopUpView is not implemented")
+  }
+}
+
+extension DuplicationPopUpView {
+
+  private func configure(_ model: DefaultPopUpModel) {
+    cancelButton.setTitle(model.cancelText, for: .normal)
+    actionButton.setTitle(model.actionText, for: .normal)
+    titleLabel.text = model.title
+    subtitleLabel.text = model.subtitle
+  }
+
+  private func setupViews() {
+    addSubview(rootView)
+    rootView.addSubview(titleLabel)
+    rootView.addSubview(subtitleLabel)
+    rootView.addSubview(buttonStackView)
+
+    buttonStackView.addArrangedSubview(actionButton)
+    buttonStackView.addArrangedSubview(cancelButton)
+
+    rootView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+
+    titleLabel.snp.makeConstraints { make in
+      make.top.equalToSuperview()
+        .inset(Constant.verticalMargin)
+      make.leading.trailing.equalToSuperview()
+        .inset(Constant.horizontalMargin)
+    }
+
+    subtitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(titleLabel.snp.bottom)
+        .offset(Constant.subtitleTopMargin)
+      make.leading.trailing.equalToSuperview()
+        .inset(Constant.horizontalMargin + 8)
+    }
+
+    buttonStackView.snp.makeConstraints { make in
+      make.top.equalTo(subtitleLabel.snp.bottom)
+        .offset(Constant.buttonTopMargin)
+      make.leading.trailing.equalToSuperview()
+        .inset(Constant.horizontalMargin)
+      make.bottom.equalToSuperview().inset(Constant.verticalMargin / 2)
+
+    }
+
+    [actionButton, cancelButton].forEach { button in
+      button.snp.makeConstraints { make in
+        make.height.equalTo(Constant.buttonHeight)
+      }
+    }
+  }
+}

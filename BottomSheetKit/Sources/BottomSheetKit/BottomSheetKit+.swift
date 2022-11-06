@@ -70,6 +70,20 @@ public extension UIViewController {
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
+
+    case .duplicate(let popUpModel):
+
+      let view = DuplicationPopUpView(popUpModel)
+      let popUpAction = DuplicationPopUpAction(view: view)
+      let vc = DuplicationPopUpViewController(popUpAction: popUpAction)
+
+      popUpAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
     }
   }
 }
