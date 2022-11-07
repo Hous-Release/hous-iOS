@@ -90,6 +90,7 @@ public struct ProfileModel: Encodable {
   var hashTags: [String?]
   var typeScores: [Double]
   var isEmptyView: Bool
+  var birthday: Date?
   
   init() {
     personalityColor = .red
@@ -102,7 +103,7 @@ public struct ProfileModel: Encodable {
     isEmptyView = true
   }
   
-  init(personalityColor: PersonalityColor, userName: String?, statusMessage: String?, badgeImageURL: String?, badgeLabel: String?, hashTags: [String?], typeScores: [Double], isEmptyView: Bool) {
+  init(personalityColor: PersonalityColor, userName: String?, statusMessage: String?, badgeImageURL: String?, badgeLabel: String?, hashTags: [String?], typeScores: [Double], isEmptyView: Bool, birthday: Date?) {
     self.personalityColor = personalityColor
     self.userName = userName
     self.statusMessage = statusMessage
@@ -111,6 +112,7 @@ public struct ProfileModel: Encodable {
     self.hashTags = hashTags
     self.typeScores = typeScores
     self.isEmptyView = true
+    self.birthday = birthday
   }
 }
 
