@@ -112,6 +112,7 @@ public enum Images {
   public static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
   public static let icEditProfile = ImageAsset(name: "ic_edit_profile")
   public static let icSetting = ImageAsset(name: "ic_setting")
+  public static let illNocharacter = ImageAsset(name: "ill_nocharacter")
   public static let badgeLock = ImageAsset(name: "badge_lock")
   public static let icBackWhite = ImageAsset(name: "ic_back_white")
   public static let icCheckBadge = ImageAsset(name: "ic_check_badge")
