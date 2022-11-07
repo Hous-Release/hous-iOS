@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Lottie
+import RxGesture
 
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
@@ -95,6 +96,8 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
       make.trailing.equalToSuperview().offset(-45)
       make.width.height.equalTo(110)
     }
+    
+//    badgeImage.rx.tapGesture().asObservable()
     
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)

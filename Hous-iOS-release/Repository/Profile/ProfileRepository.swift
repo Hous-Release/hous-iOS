@@ -73,6 +73,17 @@ public final class ProfileRepositoryImp: ProfileRepository {
         return
       }
       
+      let dateFormatterInput = DateFormatter()
+      dateFormatterInput.locale = Locale(identifier: "ko_KR")
+      dateFormatterInput.timeZone = TimeZone(abbreviation: "KST")
+      dateFormatterInput.dateFormat = "yyyy.MM.dd"
+      
+      let birthday = dateFormatterInput.date(from: dto.birthday ?? "")
+      
+      let dateFormatterOutput = DateFormatter()
+      dateFormatterOutput.dateFormat = "MM.dd"
+      let birthdayString = dateFormatterOutput.string(from: birthday ?? Date())
+      
       let userName = dto.nickname
       let statusMessage = dto.introduction ?? "자기소개를 수정해서 룸메이트들에게 나를 소개해보세요!"
       let badgeLabel = dto.representBadge ?? "내 대표 배지"
@@ -82,7 +93,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
       var hashTags : [String] = []
       
       if (dto.birthdayPublic) {
-        [dto.age, dto.birthday, dto.mbti, dto.job].forEach { element in
+        [dto.age, birthdayString, dto.mbti, dto.job].forEach { element in
           if (element != nil) {
             hashTags.append(element!)
           }
@@ -95,7 +106,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         }
       }
       
-      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, hashTags: hashTags, typeScores: typeScores, isEmptyView: false)))
+      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, hashTags: hashTags, typeScores: typeScores, isEmptyView: false, birthday: birthday)))
     }
   }
 }
