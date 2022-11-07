@@ -14,21 +14,24 @@ import ReactorKit
 // Todo: FilteredTodoViewController - containerVC / memberTodoViewController & dayOfWeekViewController - contentsVC
 
 enum FilteringType {
-  case member, dayOfWeek
+  case member, byDay
 }
 
 //MARK: - Controller
-final class FilteredTodoViewController: UIViewController{
+final class FilteredTodoViewController: UIViewController {
+
+  var disposeBag = DisposeBag()
 
   var viewType: FilteringType = .member {
     didSet {
       // FilteringType 에 따른 뷰 변경
-      let serviceProvider = ServiceProvider()
-      let memberTodoViewReactor = MemberTodoViewReactor(provider: serviceProvider)
-      let memberTodoViewController = MemberTodoViewController(memberTodoViewReactor)
 
       if viewType == .member {
+        removeChildVC(byDayTodoViewController)
         addChildVC(memberTodoViewController)
+      } else if viewType == .byDay {
+        removeChildVC(memberTodoViewController)
+        addChildVC(byDayTodoViewController)
       }
     }
   }
@@ -36,10 +39,6 @@ final class FilteredTodoViewController: UIViewController{
   enum Size {
     static let navigationBarHeight = 64
   }
-
-  // question: 이게 맞을까? .... 아닌 것 같아 ....
-
-  // lazy var dayOfWeekView = DayOfWeekView()
 
   var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
     $0.backgroundColor = Colors.g1.color
@@ -57,10 +56,24 @@ final class FilteredTodoViewController: UIViewController{
   }
   private var contentsView = UIView()
 
+  let serviceProvider = ServiceProvider()
+
+  lazy var memberTodoViewReactor = MemberTodoViewReactor(provider: serviceProvider)
+  lazy var memberTodoViewController = MemberTodoViewController(memberTodoViewReactor)
+
+  lazy var byDayTodoViewReactor = ByDayTodoViewReactor(provider: serviceProvider)
+  lazy var byDayTodoViewController = ByDayTodoViewController(byDayTodoViewReactor)
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: true)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
     render()
+    bindNavRightButton()
   }
 }
 
@@ -75,9 +88,10 @@ extension FilteredTodoViewController {
   }
 
   private func removeChildVC(_ vc: UIViewController) {
+    print("실행은되나요?")
     vc.willMove(toParent: nil)
-    vc.removeFromParent()
     vc.view.removeFromSuperview()
+    vc.removeFromParent()
   }
 }
 
@@ -102,6 +116,14 @@ extension FilteredTodoViewController {
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.bottom.equalToSuperview()
     }
+  }
+
+  private func bindNavRightButton() {
+    navigationBar.rightButton.rx.tap
+      .subscribe { [weak self] _ in
+        self?.viewType == .member ? (self?.viewType = .byDay) : (self?.viewType = .member)
+      }
+      .disposed(by: disposeBag)
   }
 }
 
