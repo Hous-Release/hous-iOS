@@ -73,6 +73,8 @@ public final class ProfileRepositoryImp: ProfileRepository {
         return
       }
       
+      let birthdayPublic = dto.birthdayPublic
+      
       let dateFormatterInput = DateFormatter()
       dateFormatterInput.locale = Locale(identifier: "ko_KR")
       dateFormatterInput.timeZone = TimeZone(abbreviation: "KST")
@@ -106,7 +108,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         }
       }
       
-      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, hashTags: hashTags, typeScores: typeScores, isEmptyView: false, birthday: birthday)))
+      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, hashTags: hashTags, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic)))
     }
   }
 }

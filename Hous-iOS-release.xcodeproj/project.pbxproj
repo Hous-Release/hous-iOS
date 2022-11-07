@@ -38,6 +38,10 @@
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */; };
 		9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B454E4D2900055F00F5A319 /* profileRedlottie.json */; };
+		9B832009291934DF001EBDFE /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */; };
+		9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200A29193515001EBDFE /* ProfileEditModel.swift */; };
+		9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */; };
+		9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */; };
 		9B959AF628FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959AF528FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift */; };
 		9B959AF828FED16400EB3412 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959AF728FED16400EB3412 /* BasePaddingLabel.swift */; };
 		9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B959AF928FEF64400EB3412 /* GrayLineView.swift */; };
@@ -222,6 +226,10 @@
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		9B454E4D2900055F00F5A319 /* profileRedlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileRedlottie.json; sourceTree = "<group>"; };
+		9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = ../../../../../../Desktop/ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		9B83200A29193515001EBDFE /* ProfileEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditModel.swift; sourceTree = "<group>"; };
+		9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditNavtigationView.swift; sourceTree = "<group>"; };
+		9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		9B959AF528FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B959AF728FED16400EB3412 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		9B959AF928FEF64400EB3412 /* GrayLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayLineView.swift; sourceTree = "<group>"; };
@@ -590,9 +598,19 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		9B83200C2919406C001EBDFE /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */,
+				9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
 		9B98853828E3FF370013CCB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9B83200C2919406C001EBDFE /* ProfileEdit */,
 				9BE0C28529082BEC0028F13A /* ProfileDetail */,
 				9BE0C27829081B750028F13A /* ProfileMain */,
 				9BE0C27529081B190028F13A /* ViewController */,
@@ -605,6 +623,7 @@
 			children = (
 				9B091DFD28E363A900C144BA /* ProfileViewModel.swift */,
 				9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */,
+				9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -613,6 +632,7 @@
 			isa = PBXGroup;
 			children = (
 				9B98853628E3E9700013CCB9 /* ProfileModel.swift */,
+				9B83200A29193515001EBDFE /* ProfileEditModel.swift */,
 				9BE0C283290823860028F13A /* ProfileDetailModel.swift */,
 			);
 			path = Model;
@@ -1238,6 +1258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */,
 				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
 				B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */,
@@ -1261,6 +1282,7 @@
 				9B959B0828FFD0C300EB3412 /* ProfileDescriptionCollectionViewCell.swift in Sources */,
 				B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
+				9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */,
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
 				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
@@ -1291,11 +1313,13 @@
 				9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */,
 				9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
+				9B832009291934DF001EBDFE /* ProfileEditViewModel.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
+				9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */,
