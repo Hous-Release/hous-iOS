@@ -24,7 +24,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   //MARK: UI Components
   
   private var userName = UILabel().then {
-    $0.text = "최인영"
+    $0.text = ""
     $0.textColor = Colors.black.color
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
     $0.textAlignment = .left
@@ -43,7 +43,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   
   private var statusMessage = UILabel().then {
     $0.numberOfLines = 2
-    $0.text = "으아아아아\n으아아아아"
+    $0.text = ""
     $0.textColor = Colors.g6.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textAlignment = .left

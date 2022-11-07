@@ -17,8 +17,8 @@ final class ProfileViewController: UIViewController {
   
   let disposeBag = DisposeBag()
   var viewModel = ProfileViewModel()
-  var isLoaded = false
   var isEmptyView = true
+  var data = ProfileModel()
   
   
   //MARK: UI Templetes
@@ -100,6 +100,7 @@ final class ProfileViewController: UIViewController {
     
     output.profileModel
       .do {
+        self.data = $0
         countCell = $0.isEmptyView ? 3 : 5}
       .map {
         [ProfileModel](repeating: $0, count: countCell)
@@ -204,7 +205,7 @@ final class ProfileViewController: UIViewController {
     case .didTabSetting:
       destinationViewController = ProfileSettingViewController()
     case .didTabEdit:
-      destinationViewController = ProfileEditViewController()
+      destinationViewController = ProfileEditViewController(data: self.data)
     case .didTabDetail:
       destinationViewController = ProfileDetailViewController()
     case .didTabRetry:
