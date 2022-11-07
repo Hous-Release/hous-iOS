@@ -15,6 +15,7 @@ class ProfileEditTextField: UITextField {
   var birthdayPublicButton = UIButton().then {
     $0.setImage(Images.icShow.image, for: .normal)
     $0.setImage(Images.icShowOn.image, for: .selected)
+    $0.adjustsImageWhenHighlighted = false
   }
   
   

@@ -142,6 +142,12 @@ final class ProfileEditViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
+    nameTextField.rx.text.orEmpty
+      .bind(onNext: { text in
+        actionDetected.onNext(.nameTextFieldEdited(text: text))
+      })
+      .disposed(by: disposeBag)
+    
     birthdayTextField.rx.controlEvent(.editingDidBegin)
       .bind(onNext: {
         actionDetected.onNext(.birthdayTextFieldSelected)
@@ -173,6 +179,12 @@ final class ProfileEditViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
+    mbtiTextField.rx.text.orEmpty
+      .bind(onNext: { text in
+        actionDetected.onNext(.mbtiTextFieldEdited(text: text))
+      })
+      .disposed(by: disposeBag)
+    
     jobTextField.rx.controlEvent(.editingDidBegin)
       .bind(onNext: {
         actionDetected.onNext(.jobTextFieldSelected)
@@ -182,6 +194,12 @@ final class ProfileEditViewController: UIViewController {
     jobTextField.rx.controlEvent(.editingDidEnd)
       .bind(onNext: {
         actionDetected.onNext(.jobTextFieldUnselected)
+      })
+      .disposed(by: disposeBag)
+    
+    jobTextField.rx.text.orEmpty
+      .bind(onNext: { text in
+        actionDetected.onNext(.jobTextFieldEdited(text: text))
       })
       .disposed(by: disposeBag)
     
@@ -211,7 +229,9 @@ final class ProfileEditViewController: UIViewController {
     
     output.actionControl
       .bind(onNext: {[weak self] in
-        self?.textFieldControl(action: $0)
+        guard let self = self else { return }
+        self.textFieldModeControl(action: $0)
+        self.textFieldCountConstraint(action: $0)
       })
       .disposed(by: disposeBag)
     
@@ -241,7 +261,7 @@ final class ProfileEditViewController: UIViewController {
   
   //MARK: TextField Methods
   
-  private func textFieldControl(action: ProfileEditActionControl) {
+  private func textFieldModeControl(action: ProfileEditActionControl) {
     switch action {
     case .nameTextFieldSelected:
       nameTextField.textFieldSelected()
@@ -276,4 +296,36 @@ final class ProfileEditViewController: UIViewController {
     attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length))
     birthdayTextField.attributedText = attributedString
   }
+  
+  private func textFieldCountConstraint(action: ProfileEditActionControl) {
+    var text: String
+    var maxCount: Int
+    var textField: UITextField
+    
+    switch action {
+    case let .nameTextFieldEdited(data):
+      text = data
+      maxCount = 3
+      textField = nameTextField
+      
+    case let .mbtiTextFieldEdited(data):
+      text = data
+      maxCount = 4
+      textField = mbtiTextField
+      
+    case let .jobTextFieldEdited(data):
+      text = data
+      maxCount = 3
+      textField = jobTextField
+      
+    default:
+      return
+    }
+    
+    if text.count > maxCount {
+       let index = text.index(text.startIndex, offsetBy: maxCount)
+       textField.text = String(text[..<index])
+     }
+  }
+  
 }
