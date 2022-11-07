@@ -21,14 +21,22 @@ enum ProfileEditActionControl {
   case didTabBackModified
   case didTabBackNotModified
   case didTabSave
+  
   case nameTextFieldSelected
   case nameTextFieldUnselected
+  case nameTextFieldEdited(text: String)
+  
   case birthdayTextFieldSelected
   case birthdayTextFieldUnselected
+  
   case mbtiTextFieldSelected
   case mbtiTextFieldUnselected
+  case mbtiTextFieldEdited(text: String)
+  
   case jobTextFieldSelected
   case jobTextFieldUnselected
+  case jobTextFieldEdited(text: String)
+  
   case statusTextFieldSelected
   case statusTextFieldUnselected
   case none
