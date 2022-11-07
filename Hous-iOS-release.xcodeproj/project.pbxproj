@@ -76,6 +76,10 @@
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
 		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
 		B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */; };
+		B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FF2919634A00DA3A95 /* BadgeViewController.swift */; };
+		B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */; };
+		B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */; };
+		B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */; };
 		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
@@ -254,6 +258,10 @@
 		B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewModel.swift; sourceTree = "<group>"; };
 		B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewController.swift; sourceTree = "<group>"; };
 		B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewModel.swift; sourceTree = "<group>"; };
+		B54D39FF2919634A00DA3A95 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
+		B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentingBadgeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
 		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
@@ -932,6 +940,10 @@
 				9B98853B28E3FF570013CCB9 /* Model */,
 				9B98853928E3FF4D0013CCB9 /* ViewModel */,
 				9B98853828E3FF370013CCB9 /* View */,
+				B54D39FF2919634A00DA3A95 /* BadgeViewController.swift */,
+				B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */,
+				B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */,
+				B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1224,6 +1236,7 @@
 			files = (
 				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
+				B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */,
 				B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */,
 				B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
@@ -1254,6 +1267,7 @@
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
+				B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
@@ -1353,6 +1367,7 @@
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
+				B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
@@ -1370,6 +1385,7 @@
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */,
 				B8555AC1291CBEDD00E943AE /* ByDayTodoSection.swift in Sources */,
+				B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */,
 				B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,
