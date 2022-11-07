@@ -25,6 +25,11 @@ final class TodoViewController: UIViewController, View {
     view = mainView
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: false)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     reactor = TodoViewReactor()
