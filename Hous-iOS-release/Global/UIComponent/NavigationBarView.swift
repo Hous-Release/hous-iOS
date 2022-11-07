@@ -32,17 +32,7 @@ class NavBarWithBackButtonView: UIView {
     return label
   }()
 
-  lazy var rightButton = UIButton().then {
-    //button.setTitleColor(Colors.blue.color, for: .normal)
-    //button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    var config = UIButton.Configuration.plain()
-    var  attrString = AttributedString("")
-    attrString.foregroundColor = Colors.blue.color
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    config.attributedTitle = attrString
-    $0.configuration = config
-    $0.titleLabel?.textAlignment = .center
-  }
+  lazy var rightButton = UIButton(configuration: UIButton.Configuration.plain())
 
   var title: String
   var rightButtonText: String
@@ -54,9 +44,12 @@ class NavBarWithBackButtonView: UIView {
     super.init(frame: .zero)
     
     titleLabel.text = title
-    //TODO: 이렇게 하면 이미지만 있는 경우에 쓸 수 없음
-//    rightButtonText == "" ? (self.rightButton.isHidden = true) : (self.rightButton.isHidden = false)
-    rightButton.setTitle(rightButtonText, for: .normal)
+
+    var  attrString = AttributedString(rightButtonText)
+    attrString.foregroundColor = Colors.blue.color
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    rightButton.configuration?.attributedTitle = attrString
+    
     render()
   }
 
