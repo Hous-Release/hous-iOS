@@ -14,7 +14,7 @@ import Network
 public typealias MemberHeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
 public typealias MemebrTodoItem = MemberTodoDTO.Response.TodoInfo
 
-class MemberTodoViewController: UIViewController, ReactorKit.View {
+final class MemberTodoViewController: UIViewController, ReactorKit.View {
   typealias Reactor = MemberTodoViewReactor
 
   var mainView = MemberTodoView()
@@ -25,6 +25,7 @@ class MemberTodoViewController: UIViewController, ReactorKit.View {
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
     self.reactor = reactor
+    makeDataSource()
   }
 
   required init?(coder: NSCoder) {
@@ -37,15 +38,11 @@ class MemberTodoViewController: UIViewController, ReactorKit.View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    makeDataSource()
-    if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
-      tvc.housTabBar.isHidden = true
-    }
   }
 }
 
 extension MemberTodoViewController {
-  func bind(reactor: MemberTodoViewReactor) {
+  func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
   }

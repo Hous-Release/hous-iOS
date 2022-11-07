@@ -124,6 +124,9 @@
 		B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6DE28DD81D400C92FCD /* PagingView.swift */; };
 		B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */; };
 		B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */; };
+		B8555AA02917D22D00E943AE /* ByDayTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */; };
+		B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */; };
+		B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AA32917D24600E943AE /* ByDayTodoView.swift */; };
 		B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700228C88C6100B49984 /* MainHomeViewController.swift */; };
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
@@ -289,6 +292,9 @@
 		B84EA6DE28DD81D400C92FCD /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		B84EA6E028DD914F00C92FCD /* PagingViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewReactor.swift; sourceTree = "<group>"; };
 		B84EA6E228DF431B00C92FCD /* PagingViewContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewContents.swift; sourceTree = "<group>"; };
+		B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoViewController.swift; sourceTree = "<group>"; };
+		B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoViewReactor.swift; sourceTree = "<group>"; };
+		B8555AA32917D24600E943AE /* ByDayTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoView.swift; sourceTree = "<group>"; };
 		B856700228C88C6100B49984 /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewController.swift; sourceTree = "<group>"; };
 		B856700628C88C6F00B49984 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B856700828C88CAF00B49984 /* HousTabBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItemView.swift; sourceTree = "<group>"; };
@@ -1035,6 +1041,7 @@
 			children = (
 				B8D066DB28FA95A600A99907 /* MemberTodoView.swift */,
 				B8D066E728FAA74600A99907 /* FilteredTodoView.swift */,
+				B8555AA32917D24600E943AE /* ByDayTodoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1053,6 +1060,7 @@
 			children = (
 				B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */,
 				B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */,
+				B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1062,6 +1070,7 @@
 			children = (
 				B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */,
 				B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */,
+				B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1180,6 +1189,7 @@
 				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
 				B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */,
+				B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
@@ -1202,6 +1212,7 @@
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
 				9BE0C27E29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
+				B8555AA02917D22D00E943AE /* ByDayTodoViewController.swift in Sources */,
 				B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */,
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
@@ -1232,6 +1243,7 @@
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
+				B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */,
 				B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */,
