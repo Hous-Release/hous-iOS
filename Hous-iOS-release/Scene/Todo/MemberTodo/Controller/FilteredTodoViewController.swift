@@ -24,15 +24,20 @@ final class FilteredTodoViewController: UIViewController {
 
   var viewType: FilteringType = .member {
     didSet {
-      // FilteringType 에 따른 뷰 변경
+      var attrString = AttributedString()
 
       if viewType == .member {
+        attrString = AttributedString("멤버별 보기")
         removeChildVC(byDayTodoViewController)
         addChildVC(memberTodoViewController)
       } else if viewType == .byDay {
+        attrString = AttributedString("요일별 보기")
         removeChildVC(memberTodoViewController)
         addChildVC(byDayTodoViewController)
       }
+      attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+      attrString.foregroundColor = Colors.g5.color
+      navigationBar.rightButton.configuration?.attributedTitle = attrString
     }
   }
 
@@ -42,17 +47,10 @@ final class FilteredTodoViewController: UIViewController {
 
   var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
     $0.backgroundColor = Colors.g1.color
-
-    var config = UIButton.Configuration.plain()
-    var attrString = AttributedString("요일별 보기")
-
-    config.image = Images.icChange.image
-    config.imagePlacement = .trailing
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    attrString.foregroundColor = Colors.g5.color
-    config.imagePadding = 2
-    config.attributedTitle = attrString
-    $0.rightButton.configuration = config
+    $0.rightButton.configuration?.imagePadding = 2
+    $0.rightButton.configuration?.imagePlacement = .trailing
+    $0.rightButton.configuration?.image = Images.icChange.image
+    $0.rightButton.configuration?.baseForegroundColor = Colors.g5.color
   }
   private var contentsView = UIView()
 
