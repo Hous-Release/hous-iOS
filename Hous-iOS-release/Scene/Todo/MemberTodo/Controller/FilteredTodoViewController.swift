@@ -27,11 +27,11 @@ final class FilteredTodoViewController: UIViewController {
       var attrString = AttributedString()
 
       if viewType == .member {
-        attrString = AttributedString("멤버별 보기")
+        attrString = AttributedString("요일별 보기")
         removeChildVC(byDayTodoViewController)
         addChildVC(memberTodoViewController)
       } else if viewType == .byDay {
-        attrString = AttributedString("요일별 보기")
+        attrString = AttributedString("멤버별 보기")
         removeChildVC(memberTodoViewController)
         addChildVC(byDayTodoViewController)
       }
