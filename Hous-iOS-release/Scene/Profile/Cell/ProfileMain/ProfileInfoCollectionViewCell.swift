@@ -142,12 +142,33 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
   func bind(_ data: ProfileModel) {
     
     self.userName.text = data.userName
-    self.statusMessage.text = data.statusMessage
+    self.statusMessage.text = data.statusMessage ?? "자기소개를 수정해서 룸메이트들에게 나를 소개해보세요!"
     
     tags = []
     tagGuideStackView.removeFullyAllArrangedSubviews()
     
-    if data.hashTags.count == 0 {
+    var hashTags: [String] = []
+    
+    hashTags.append(String(data.userAge ?? -1) + "세")
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+    dateFormatter.dateFormat = "MM.dd"
+    
+    if (data.birthdayPublic) {
+      hashTags.append(dateFormatter.string(from: data.birthday ?? Date()))
+    }
+    
+    if let mbti = data.mbti {
+      hashTags.append(mbti)
+    }
+    
+    if let userJob = data.userJob {
+      hashTags.append(userJob)
+    }
+    
+    if hashTags.count == 0 {
       let tag = BasePaddingLabel(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)).then {
         $0.text = ""
         $0.textColor = .white
@@ -158,7 +179,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
       }
       tags.append(tag)
     } else {
-      for item in data.hashTags {
+      for item in hashTags {
         let tag = BasePaddingLabel(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)).then {
           $0.text = item
           $0.textColor = Colors.g6.color

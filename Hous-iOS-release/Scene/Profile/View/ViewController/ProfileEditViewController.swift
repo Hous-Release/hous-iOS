@@ -16,9 +16,7 @@ final class ProfileEditViewController: UIViewController {
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
-  var viewModel = ProfileEditViewModel()
-  var data: ProfileModel
-  var originalData: ProfileModel
+  let viewModel: ProfileEditViewModel
   
   
   //MARK: UI Templetes
@@ -52,7 +50,7 @@ final class ProfileEditViewController: UIViewController {
   
   private var birthdayTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "yyyy/MM/dd"
+    textfield.placeholder = "생년월일"
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -92,15 +90,9 @@ final class ProfileEditViewController: UIViewController {
   //MARK: Initalizer
   
   init(data: ProfileModel) {
-    self.data = data
-    self.originalData = data
+    self.viewModel = ProfileEditViewModel(data: data)
     super.init(nibName: nil, bundle: nil)
-    
-    nameTextField.text = self.data.userName
-    birthdayTextFieldSet(date: self.data.birthday)
-    configureDatePicker()
-    birthdayTextField.delegate = self
-    birthdayTextField.inputView = self.datePicker
+    setInitialData(data: data)
   }
   
   required init?(coder: NSCoder) {
@@ -123,9 +115,20 @@ final class ProfileEditViewController: UIViewController {
   
   //MARK: Setup UI
   
+  private func setInitialData(data: ProfileModel) {
+    nameTextField.text = data.userName
+    birthdayTextFieldSet(date: data.birthday)
+    configureDatePicker(date: data.birthday ?? Date())
+    mbtiTextField.text = data.mbti
+    jobTextField.text = data.userJob
+    statusTextField.text = data.statusMessage
+  }
+  
   private func setup() {
     self.view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
+    birthdayTextField.delegate = self
+    birthdayTextField.inputView = self.datePicker
   }
   
   //MARK: Bind
@@ -172,17 +175,14 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     birthdayTextField.birthdayPublicButton.rx.tap
-      .bind(onNext: { [weak self] in
-        guard let self = self else { return }
-        self.birthdayTextField.birthdayPublicButton.isSelected = !self.birthdayTextField.birthdayPublicButton.isSelected
+      .bind(onNext: {
+        actionDetected.onNext(.birthdayPublicEdited(isPublic: !self.birthdayTextField.birthdayPublicButton.isSelected))
       })
       .disposed(by: disposeBag)
     
     datePicker.rx.date
-      .bind(onNext: { [weak self] date in
-        guard let self = self else { return }
-        self.data.birthday = date
-        self.birthdayTextFieldSet(date: self.data.birthday)
+      .bind(onNext: { date in
+        actionDetected.onNext(.birthdayTextFieldEdited(date: date))
       })
       .disposed(by: disposeBag)
     
@@ -224,22 +224,19 @@ final class ProfileEditViewController: UIViewController {
     
     statusTextField.rx.controlEvent(.editingDidBegin)
       .bind(onNext: {
-        actionDetected.onNext(.statusTextFieldSelected)
+        actionDetected.onNext(.statusTextViewSelected)
       })
       .disposed(by: disposeBag)
     
     statusTextField.rx.controlEvent(.editingDidEnd)
       .bind(onNext: {
-        actionDetected.onNext(.statusTextFieldUnselected)
+        actionDetected.onNext(.statusTextViewUnselected)
       })
       .disposed(by: disposeBag)
     
-    
-    
     let input = ProfileEditViewModel.Input(
       viewWillAppear: viewWillAppear,
-      actionDetected: actionDetected,
-      data: self.data
+      actionDetected: actionDetected
     )
     
     // output
@@ -251,9 +248,17 @@ final class ProfileEditViewController: UIViewController {
         guard let self = self else { return }
         self.textFieldModeControl(action: $0)
         self.textFieldCountConstraint(action: $0)
+        self.birthdayButtonControl(action: $0)
+        self.birthdayTextFieldControl(action: $0)
       })
       .disposed(by: disposeBag)
     
+    output.isModifiedObservable
+      .bind(onNext: {[weak self] isModified in
+        guard let self = self else { return }
+        self.navigationBar.saveButton.isEnabled = isModified
+      })
+      .disposed(by: disposeBag)
     
   }
   
@@ -298,9 +303,9 @@ final class ProfileEditViewController: UIViewController {
       jobTextField.textFieldSelected()
     case .jobTextFieldUnselected:
       jobTextField.textFieldUnselected()
-    case .statusTextFieldSelected:
+    case .statusTextViewSelected:
       statusTextField.textFieldSelected()
-    case .statusTextFieldUnselected:
+    case .statusTextViewUnselected:
       statusTextField.textFieldUnselected()
     default:
       return
@@ -308,6 +313,9 @@ final class ProfileEditViewController: UIViewController {
   }
   
   private func birthdayTextFieldSet(date: Date?) {
+    if (date == nil) {
+      birthdayTextField.text = nil
+    }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy/MM/dd"
     birthdayTextField.text = dateFormatter.string(from: date ?? Date())
@@ -342,15 +350,45 @@ final class ProfileEditViewController: UIViewController {
     }
     
     if text.count > maxCount {
-       let index = text.index(text.startIndex, offsetBy: maxCount)
-       textField.text = String(text[..<index])
-     }
+      let index = text.index(text.startIndex, offsetBy: maxCount)
+      textField.text = String(text[..<index])
+    }
   }
   
-  private func configureDatePicker() {
-    self.datePicker.date = self.data.birthday ?? Date()
+  private func configureDatePicker(date: Date) {
+    self.datePicker.date = date
     self.datePicker.datePickerMode = .date
     self.datePicker.preferredDatePickerStyle = .wheels
+  }
+  
+  private func saveButtonControl(isModified: Bool) {
+    if isModified {
+      navigationBar.saveButton.isEnabled = true
+    } else {
+      navigationBar.saveButton.isEnabled = false
+    }
+  }
+  
+  private func birthdayButtonControl(action: ProfileEditActionControl) {
+    switch action {
+    case let .birthdayPublicEdited(isPublic):
+      if isPublic {
+        self.birthdayTextField.birthdayPublicButton.isSelected = true
+      } else {
+        self.birthdayTextField.birthdayPublicButton.isSelected = false
+      }
+    default:
+      return
+    }
+  }
+  
+  private func birthdayTextFieldControl(action: ProfileEditActionControl) {
+    switch action {
+    case let .birthdayTextFieldEdited(date):
+      birthdayTextFieldSet(date: date)
+    default:
+      return
+    }
   }
   
 }

@@ -84,38 +84,44 @@ enum PersonalityColor: Codable {
   }
 }
 
-public struct ProfileModel: Encodable {
+public struct ProfileModel: Encodable, Equatable {
   var personalityColor: PersonalityColor
   var userName, statusMessage, badgeImageURL, badgeLabel: String?
-  var hashTags: [String?]
   var typeScores: [Double]
   var isEmptyView: Bool
   var birthday: Date?
   var birthdayPublic: Bool
+  var userJob: String?
+  var mbti: String?
+  var userAge: Int?
   
   init() {
     personalityColor = .red
     userName = "default"
+    userAge = 0
+    userJob = ""
     statusMessage = "default\ndefault"
     badgeImageURL = ""
     badgeLabel = "default"
-    hashTags = ["default", "default", "default", "default"]
     typeScores = [10, 10, 10, 10, 10]
     isEmptyView = true
     birthdayPublic = false
+    mbti = ""
   }
   
-  init(personalityColor: PersonalityColor, userName: String?, statusMessage: String?, badgeImageURL: String?, badgeLabel: String?, hashTags: [String?], typeScores: [Double], isEmptyView: Bool, birthday: Date?, birthdayPublic: Bool) {
+  init(personalityColor: PersonalityColor, userName: String?, userAge: Int?, statusMessage: String?, badgeImageURL: String?, badgeLabel: String?, typeScores: [Double], isEmptyView: Bool, birthday: Date?, birthdayPublic: Bool, userJob: String?, mbti: String?) {
     self.personalityColor = personalityColor
     self.userName = userName
+    self.userAge = userAge
     self.statusMessage = statusMessage
     self.badgeImageURL = badgeImageURL
     self.badgeLabel = badgeLabel
-    self.hashTags = hashTags
     self.typeScores = typeScores
     self.isEmptyView = true
     self.birthday = birthday
     self.birthdayPublic = birthdayPublic
+    self.userJob = userJob
+    self.mbti = mbti
   }
 }
 
