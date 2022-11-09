@@ -212,7 +212,6 @@ class MainHomeViewController: UIViewController {
     }
     
     output.sections
-      .debug("이게 안불리는건가???")
       .drive(collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
