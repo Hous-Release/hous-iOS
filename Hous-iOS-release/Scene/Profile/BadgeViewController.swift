@@ -6,24 +6,195 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
+import RxGesture
+
 
 class BadgeViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+  private let navigationBar: NavBarWithBackButtonView = {
+    let navBar = NavBarWithBackButtonView(title: "내 배지")
+    navBar.backgroundColor = .clear
+    navBar.setBackButtonColor(color: Colors.white.color)
+    navBar.setTitleLabelTextColor(color: Colors.white.color)
+    return navBar
+  }()
+  
+  private let badgeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    $0.collectionViewLayout = layout
+    $0.showsVerticalScrollIndicator = false
+  }
+  
+  private lazy var configureCell: RxCollectionViewSectionedReloadDataSource<SectionOfProfile>.ConfigureCell = { [unowned self] (dataSource, cv, indexPath, item) -> UICollectionViewCell in
+    
+    switch item {
+    case .representingBadge(let representViewModel):
+      return self.configRepresentingBadgeCell(viewModel: representViewModel, indexPath: indexPath)
+    case .badges(let roomBadgeViewModel):
+      return self.configBadgesCell(viewModel: roomBadgeViewModel, indexPath: indexPath)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+  }
+  
+  private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfProfile>(configureCell: configureCell)
+  
+  private let disposeBag = DisposeBag()
+  
+  private let viewModel: BadgeViewModel
+  
+  init(viewModel: BadgeViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configUI()
+    setBadgeCollectionView()
+    bind()
+  }
+  
+  private func setBadgeCollectionView() {
+    badgeCollectionView
+      .rx
+      .setDelegate(self)
+      .disposed(by: disposeBag)
+    
+    
+    badgeCollectionView.register(RepresentingBadgeCollectionViewCell.self, forCellWithReuseIdentifier: RepresentingBadgeCollectionViewCell.className)
+    
+    badgeCollectionView.register(BadgeCollectionViewCell.self, forCellWithReuseIdentifier: BadgeCollectionViewCell.className)
+    
+    //TODO: - 배지 라디오버튼 구현하기
+    Observable
+      .zip(badgeCollectionView.rx.itemSelected, badgeCollectionView.rx.modelSelected(RoomBadgeViewModel.self))
+      .asObservable()
+      .map { indexPath, vm in
+        BadgeModel(row: indexPath.row, id: vm.id, tapState: .none)
+      }
+    
+//    badgeCollectionView.rx.modelSelected(RoomBadgeViewModel.self)
+//      .asDriver()
+//      .drive(onNext: { viewModel in
+//        let id = viewModel.id
+//        let
+//
+//      })
+//      .disposed(by: disposeBag)
+      
+      
+  }
+  
+  private func configUI() {
+    view.addSubViews([
+      badgeCollectionView,
+      navigationBar
+    ])
+    
+    badgeCollectionView.snp.makeConstraints { make in
+      make.top.equalTo(view.snp.top)
+      make.leading.trailing.equalToSuperview()
+      make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
-    */
-
+    
+    navigationBar.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(60)
+    }
+  }
+  
+  private func bind() {
+    let input = BadgeViewModel.Input(
+      viewWillAppear: rx.RxViewWillAppear.asObservable(),
+      backButtonDidTapped: navigationBar.backButton.rx.tap.asObservable()
+    )
+    
+    let output = viewModel.transform(input: input)
+    
+    output.sections
+      .drive(badgeCollectionView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+  
 }
+
+extension BadgeViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    if indexPath.section == 0 {
+      return CGSize(width: view.window?.windowScene?.screen.bounds.width ?? 375, height: (view.window?.windowScene?.screen.bounds.height ?? 812) * (255/812))
+    }
+    return CGSize(width: 80, height: 152)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 28
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 32
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    if section == 0 {
+      return .zero
+    }
+    return UIEdgeInsets(top: 39, left: 24, bottom: 0, right: 24)
+  }
+}
+
+extension BadgeViewController {
+  
+  func configRepresentingBadgeCell(
+    viewModel: RepresentingBadgeViewModel,
+    indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = self.badgeCollectionView.dequeueReusableCell(withReuseIdentifier: RepresentingBadgeCollectionViewCell.className, for: indexPath) as? RepresentingBadgeCollectionViewCell else { return UICollectionViewCell() }
+    
+    cell.setRepresntingBadgeCellData(viewModel: viewModel)
+    
+    return cell
+  }
+  
+  func configBadgesCell(
+    viewModel: RoomBadgeViewModel,
+    indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = self.badgeCollectionView.dequeueReusableCell(withReuseIdentifier: BadgeCollectionViewCell.className, for: indexPath) as? BadgeCollectionViewCell else { return UICollectionViewCell() }
+      
+      
+      cell.setRoomBadgeCellData(viewModel: viewModel)
+      
+      
+    return cell
+  }
+}
+
+
+
+enum BadgeViewTapState {
+  case none
+  case selected
+  case representing
+}
+
+
+struct BadgeModel {
+  let row: Int
+  let id: Int
+  let tapState: BadgeViewTapState
+  
+  init(row: Int, id: Int, tapState: BadgeViewTapState) {
+    self.row = row
+    self.id = id
+    self.tapState = tapState
+  }
+}
+
