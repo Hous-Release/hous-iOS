@@ -95,6 +95,14 @@ class NavBarWithBackButtonView: UIView {
   func setRightButtonText(text: String) {
     rightButton.setTitle(text, for: .normal)
   }
+  
+  func setTitleLabelTextColor(color: UIColor) {
+    titleLabel.textColor = color
+  }
+  
+  func setBackButtonColor(color: UIColor) {
+    backButton.tintColor = color
+  }
 }
 
 extension NavBarWithBackButtonView {
