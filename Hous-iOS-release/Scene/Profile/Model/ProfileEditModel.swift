@@ -7,19 +7,18 @@
 
 import Foundation
 
-struct ProfileEditModel {
-  let name: String?
-  let birthday: Date?
-  let mbti: String?
-  let job: String?
-  let statusMessage: String?
-  let birthdayPublic: Bool
+struct ProfileEditModel: Equatable {
+  var name: String
+  var birthday: Date
+  var mbti: String
+  var job: String
+  var statusMessage: String
+  var birthdayPublic: Bool
 }
 
 
 enum ProfileEditActionControl {
-  case didTabBackModified
-  case didTabBackNotModified
+  case didTabBack(isModified: Bool)
   case didTabSave
   
   case nameTextFieldSelected
@@ -28,6 +27,8 @@ enum ProfileEditActionControl {
   
   case birthdayTextFieldSelected
   case birthdayTextFieldUnselected
+  case birthdayTextFieldEdited(date: Date)
+  case birthdayPublicEdited(isPublic: Bool)
   
   case mbtiTextFieldSelected
   case mbtiTextFieldUnselected
@@ -37,7 +38,9 @@ enum ProfileEditActionControl {
   case jobTextFieldUnselected
   case jobTextFieldEdited(text: String)
   
-  case statusTextFieldSelected
-  case statusTextFieldUnselected
+  case statusTextViewSelected
+  case statusTextViewUnselected
+  case statusTextViewEdited(text: String)
+  
   case none
 }

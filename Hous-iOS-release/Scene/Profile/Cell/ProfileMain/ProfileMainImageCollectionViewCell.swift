@@ -154,6 +154,6 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   func bind(_ data: ProfileModel) {
     animatedRender(isEmptyView: data.isEmptyView)
-    badgeLabel.text = data.badgeLabel
+    badgeLabel.text = data.badgeLabel ?? "내 대표 배지"
   }
 }

@@ -75,40 +75,23 @@ public final class ProfileRepositoryImp: ProfileRepository {
       
       let birthdayPublic = dto.birthdayPublic
       
-      let dateFormatterInput = DateFormatter()
-      dateFormatterInput.locale = Locale(identifier: "ko_KR")
-      dateFormatterInput.timeZone = TimeZone(abbreviation: "KST")
-      dateFormatterInput.dateFormat = "yyyy.MM.dd"
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "ko_KR")
+      dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+      dateFormatter.dateFormat = "yyyy.MM.dd"
       
-      let birthday = dateFormatterInput.date(from: dto.birthday ?? "")
-      
-      let dateFormatterOutput = DateFormatter()
-      dateFormatterOutput.dateFormat = "MM.dd"
-      let birthdayString = dateFormatterOutput.string(from: birthday ?? Date())
+      let birthday = dateFormatter.date(from: dto.birthday ?? "")
       
       let userName = dto.nickname
-      let statusMessage = dto.introduction ?? "자기소개를 수정해서 룸메이트들에게 나를 소개해보세요!"
-      let badgeLabel = dto.representBadge ?? "내 대표 배지"
+      let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
+      let userJob = dto.job
+      let mbti = dto.mbti
+      let statusMessage = dto.introduction
+      let badgeLabel = dto.representBadge 
       let badgeImageURL = dto.representBadgeImage
       let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
       
-      var hashTags : [String] = []
-      
-      if (dto.birthdayPublic) {
-        [dto.age, birthdayString, dto.mbti, dto.job].forEach { element in
-          if (element != nil) {
-            hashTags.append(element!)
-          }
-        }
-      } else {
-        [dto.age, dto.mbti, dto.job].forEach { element in
-          if (element != nil) {
-            hashTags.append(element!)
-          }
-        }
-      }
-      
-      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, hashTags: hashTags, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic)))
+      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }
   }
 }

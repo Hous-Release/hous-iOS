@@ -26,7 +26,7 @@ final class ProfileEditNavigationBarView: UIView {
     $0.setImage(newImage, for: .normal)
   }
   
-  private var saveButton = UIButton().then {
+  let saveButton = UIButton().then {
     $0.setTitle("저장", for: .normal)
     $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     $0.setTitleColor(Colors.g4.color, for: .disabled)
@@ -82,7 +82,7 @@ final class ProfileEditNavigationBarView: UIView {
     self.navigationBackButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
-        self.viewActionControlSubject.onNext(.didTabBackNotModified)
+        self.viewActionControlSubject.onNext(.didTabBack(isModified: false))
       }
       .disposed(by: disposeBag)
   }
