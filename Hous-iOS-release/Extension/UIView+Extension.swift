@@ -17,6 +17,7 @@ extension UIView {
         layer.shadowOpacity = opacity
         layer.shadowOffset = offset
         layer.shadowRadius = radius
+      layer.masksToBounds = false
         return self
     }
 
@@ -55,8 +56,9 @@ extension UIView {
             // cornerRadius 가 nil 일 경우의 default
             self.layer.cornerRadius = self.layer.frame.height / 2
         }
-
-        self.layer.masksToBounds = true
+        
+//      self.clipsToBounds = true
+        self.layer.masksToBounds = false
     }
 
     /// UIView 의 모서리가 둥근 정도를 방향과 함께 설정하는 메서드
