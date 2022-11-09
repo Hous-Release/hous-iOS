@@ -18,6 +18,8 @@ final class ProfileEditViewController: UIViewController {
   let disposeBag = DisposeBag()
   var viewModel = ProfileEditViewModel()
   var data: ProfileModel
+  var originalData: ProfileModel
+  
   
   //MARK: UI Templetes
   
@@ -26,6 +28,8 @@ final class ProfileEditViewController: UIViewController {
   }
   
   //MARK: UI Components
+  
+  private let datePicker = UIDatePicker()
   
   private let navigationBar = ProfileEditNavigationBarView()
   
@@ -89,12 +93,14 @@ final class ProfileEditViewController: UIViewController {
   
   init(data: ProfileModel) {
     self.data = data
+    self.originalData = data
     super.init(nibName: nil, bundle: nil)
     
     nameTextField.text = self.data.userName
     birthdayTextFieldSet(date: self.data.birthday)
-    
-    
+    configureDatePicker()
+    birthdayTextField.delegate = self
+    birthdayTextField.inputView = self.datePicker
   }
   
   required init?(coder: NSCoder) {
@@ -109,6 +115,10 @@ final class ProfileEditViewController: UIViewController {
     setup()
     bind()
     render()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
   }
   
   //MARK: Setup UI
@@ -151,6 +161,7 @@ final class ProfileEditViewController: UIViewController {
     birthdayTextField.rx.controlEvent(.editingDidBegin)
       .bind(onNext: {
         actionDetected.onNext(.birthdayTextFieldSelected)
+        
       })
       .disposed(by: disposeBag)
     
@@ -164,6 +175,14 @@ final class ProfileEditViewController: UIViewController {
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.birthdayTextField.birthdayPublicButton.isSelected = !self.birthdayTextField.birthdayPublicButton.isSelected
+      })
+      .disposed(by: disposeBag)
+    
+    datePicker.rx.date
+      .bind(onNext: { [weak self] date in
+        guard let self = self else { return }
+        self.data.birthday = date
+        self.birthdayTextFieldSet(date: self.data.birthday)
       })
       .disposed(by: disposeBag)
     
@@ -328,4 +347,16 @@ final class ProfileEditViewController: UIViewController {
      }
   }
   
+  private func configureDatePicker() {
+    self.datePicker.date = self.data.birthday ?? Date()
+    self.datePicker.datePickerMode = .date
+    self.datePicker.preferredDatePickerStyle = .wheels
+  }
+  
+}
+
+extension ProfileEditViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    return false
+  }
 }
