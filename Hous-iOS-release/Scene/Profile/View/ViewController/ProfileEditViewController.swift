@@ -119,6 +119,7 @@ final class ProfileEditViewController: UIViewController {
     nameTextField.text = data.userName
     birthdayTextFieldSet(date: data.birthday)
     configureDatePicker(date: data.birthday ?? Date())
+    birthdayTextField.birthdayPublicButton.isSelected = data.birthdayPublic
     mbtiTextField.text = data.mbti
     jobTextField.text = data.userJob
     statusTextField.text = data.statusMessage
