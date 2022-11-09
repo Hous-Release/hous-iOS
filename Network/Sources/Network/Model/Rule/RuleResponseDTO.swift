@@ -14,9 +14,9 @@ public extension RuleDTO.Response {
     public let id: Int
     public let name: String
   }
+  
+  struct updateRulesResponseDTO: Decodable {
     
-    struct updateRulesResponseDTO: Decodable {
-        
-    }
+  }
 }
 
