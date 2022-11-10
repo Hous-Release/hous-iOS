@@ -77,5 +77,6 @@ internal final class ExceedPopUpViewController: UIViewController {
 extension ExceedPopUpViewController {
   func sendAction() {
     popUpAction.sendAction()
+    self.dismiss(animated: true)
   }
 }

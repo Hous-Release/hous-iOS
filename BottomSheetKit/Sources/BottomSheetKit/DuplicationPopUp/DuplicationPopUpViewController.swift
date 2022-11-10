@@ -80,8 +80,10 @@ internal final class DuplicationPopUpViewController: UIViewController {
 extension DuplicationPopUpViewController {
   func sendAction() {
     popUpAction.sendAction()
+    self.dismiss(animated: true)
   }
   func cancel() {
     popUpAction.cancel()
+    self.dismiss(animated: true)
   }
 }

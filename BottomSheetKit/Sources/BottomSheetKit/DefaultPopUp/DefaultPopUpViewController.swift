@@ -80,9 +80,11 @@ internal final class DefaultPopUpViewController: UIViewController {
 extension DefaultPopUpViewController {
   func sendAction() {
     popUpAction.sendAction()
+    self.dismiss(animated: true)
   }
   func cancel() {
     popUpAction.cancel()
+    self.dismiss(animated: true)
   }
 }
 
