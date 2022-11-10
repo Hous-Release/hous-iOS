@@ -8,7 +8,7 @@
 class CopyCodePopUpAction: PopUpAction {
 
   let view: CopyCodePopUpView
-  var completeAction: CompleteAction?
+  var completeAction: CompletePopUpAction?
 
   init(view: CopyCodePopUpView) { self.view = view }
 

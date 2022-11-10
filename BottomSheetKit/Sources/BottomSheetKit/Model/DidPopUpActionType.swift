@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum DidActionType {
+public enum DidPopUpActionType {
   case cancel
   case action
 }

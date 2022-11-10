@@ -12,7 +12,7 @@ import UIKit
 class DuplicationPopUpAction: PopUpAction {
 
   let view: DuplicationPopUpView
-  var completeAction: CompleteAction?
+  var completeAction: CompletePopUpAction?
 
   init(view: DuplicationPopUpView) { self.view = view }
 

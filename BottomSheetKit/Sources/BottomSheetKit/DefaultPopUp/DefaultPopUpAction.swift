@@ -11,7 +11,7 @@ import Foundation
 class DefaultPopUpAction: PopUpAction {
 
   let view: DefaultPopUpView
-  var completeAction: CompleteAction?
+  var completeAction: CompletePopUpAction?
 
   init(view: DefaultPopUpView) { self.view = view }
 

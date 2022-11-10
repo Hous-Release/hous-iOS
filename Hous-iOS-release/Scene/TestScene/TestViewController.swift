@@ -57,6 +57,15 @@ final class TestViewController: UIViewController {
     return button
   }()
 
+  private lazy var defaultBottomSheetButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("defaultBottomSheet", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton6), for: .touchUpInside)
+    return button
+  }()
+
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
@@ -72,6 +81,7 @@ final class TestViewController: UIViewController {
     view.addSubview(enterRoomButton)
     view.addSubview(exceedButton)
     view.addSubview(duplicateButton)
+    view.addSubview(defaultBottomSheetButton)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -95,6 +105,11 @@ final class TestViewController: UIViewController {
     }
     duplicateButton.snp.makeConstraints { make in
       make.top.equalTo(self.exceedButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    defaultBottomSheetButton.snp.makeConstraints { make in
+      make.top.equalTo(self.duplicateButton.snp.bottom).offset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
@@ -198,5 +213,10 @@ extension TestViewController {
         self?.dismiss(animated: true)
       }
     }
+  }
+  @objc
+  private func didTapButton6() {
+    let bottomSheetType = BottomSheetType.defaultType
+    presentBottomSheet(bottomSheetType)
   }
 }

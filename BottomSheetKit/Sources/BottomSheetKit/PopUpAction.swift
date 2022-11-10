@@ -7,10 +7,10 @@
 
 import Foundation
 
-public typealias CompleteAction = ((DidActionType) -> Void)
+public typealias CompletePopUpAction = ((DidPopUpActionType) -> Void)
 
 protocol PopUpAction {
   func sendAction()
   func cancel()
-  var completeAction: CompleteAction? { get }
+  var completeAction: CompletePopUpAction? { get }
 }

@@ -10,7 +10,7 @@ import Foundation
 class EnterRoomPopUpAction: PopUpAction {
 
   let view: EnterRoomPopUpView
-  var completeAction: CompleteAction?
+  var completeAction: CompletePopUpAction?
 
   init(view: EnterRoomPopUpView) { self.view = view }
 
