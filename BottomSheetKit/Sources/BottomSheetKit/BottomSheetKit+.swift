@@ -11,7 +11,7 @@ public extension UIViewController {
 
   func presentPopUp(
     _ type: PopUpType,
-    _ completion: CompleteAction? = nil
+    _ completion: CompletePopUpAction? = nil
   ) {
 
     switch type {
@@ -85,5 +85,21 @@ public extension UIViewController {
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
     }
+  }
+  func presentBottomSheet(
+    _ type: BottomSheetType,
+    _ completion: CompleteBottomSheetAction? = nil
+  ) {
+
+    switch type {
+    case .defaultType:
+      let view = DefaultBottomSheetView()
+      let bottomSheetAction = DefaultBottomSheetAction(view: view)
+      let vc = DefaultBottomSheetViewController(action: bottomSheetAction)
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
+    }
+
   }
 }

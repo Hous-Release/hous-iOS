@@ -10,7 +10,7 @@ import Foundation
 class ExceedPopUpAction: PopUpAction {
 
   let view: ExceedPopUpView
-  var completeAction: CompleteAction?
+  var completeAction: CompletePopUpAction?
 
   init(view: ExceedPopUpView) { self.view = view }
 
