@@ -16,6 +16,8 @@ internal final class DefaultBottomSheetView: UIView {
     static let verticalMargin: CGFloat = 16
     static let horizontalMargin: CGFloat = 24
     static let buttonHeight: CGFloat = 40
+    static let handleWidth: CGFloat = 80
+    static let handleHeight: CGFloat = 4
   }
 
   private let rootView: UIView = {
@@ -97,8 +99,8 @@ internal final class DefaultBottomSheetView: UIView {
     }
 
     handleView.snp.makeConstraints { make in
-      make.width.equalTo(80)
-      make.height.equalTo(4)
+      make.width.equalTo(Constants.handleWidth)
+      make.height.equalTo(Constants.handleHeight)
       make.centerX.equalToSuperview()
       make.top.equalToSuperview().inset(Constants.verticalMargin)
     }
