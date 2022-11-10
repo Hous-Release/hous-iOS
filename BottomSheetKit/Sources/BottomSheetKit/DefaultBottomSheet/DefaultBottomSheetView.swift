@@ -13,9 +13,9 @@ internal final class DefaultBottomSheetView: UIView {
   private typealias SpoqaHanSansNeo = Fonts.SpoqaHanSansNeo
 
   private struct Constants {
-    static let verticalMargin: CGFloat = 18
+    static let verticalMargin: CGFloat = 16
     static let horizontalMargin: CGFloat = 24
-    static let buttonHeight: CGFloat = 38
+    static let buttonHeight: CGFloat = 40
   }
 
   private let rootView: UIView = {
@@ -36,7 +36,6 @@ internal final class DefaultBottomSheetView: UIView {
 
   private let stackView: UIStackView = {
     let stackView = UIStackView()
-
     stackView.alignment = .fill
     stackView.distribution = .fillEqually
     stackView.spacing = Constants.verticalMargin
@@ -51,7 +50,7 @@ internal final class DefaultBottomSheetView: UIView {
     return stackView
   }()
 
-  private let addButton: UIButton = {
+  internal lazy var addButton: UIButton = {
     let button = UIButton()
     button.setTitle("추가하기", for: .normal)
     button.setTitleColor(Colors.blue.color, for: .normal)
@@ -59,7 +58,8 @@ internal final class DefaultBottomSheetView: UIView {
     button.titleLabel?.textAlignment = .center
     return button
   }()
-  private let modifyButton: UIButton = {
+
+  internal lazy var modifyButton: UIButton = {
     let button = UIButton()
     button.setTitle("수정하기", for: .normal)
     button.setTitleColor(Colors.black.color, for: .normal)
@@ -67,9 +67,10 @@ internal final class DefaultBottomSheetView: UIView {
     button.titleLabel?.textAlignment = .center
     return button
   }()
-  private let deleteButton: UIButton = {
+
+  internal lazy var deleteButton: UIButton = {
     let button = UIButton()
-    button.setTitle("추가하기", for: .normal)
+    button.setTitle("삭제하기", for: .normal)
     button.setTitleColor(Colors.red.color, for: .normal)
     button.titleLabel?.font = SpoqaHanSansNeo.medium.font(size: 14)
     button.titleLabel?.textAlignment = .center
