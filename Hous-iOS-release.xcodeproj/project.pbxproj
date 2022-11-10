@@ -104,6 +104,7 @@
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
+		B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5F9FB19291D3F090056C0B1 /* Kingfisher */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
@@ -261,7 +262,7 @@
 		B54D39FF2919634A00DA3A95 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
 		B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentingBadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
-		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
+		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
@@ -373,6 +374,7 @@
 				770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */,
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
+				B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */,
 				777085AC29040D5C0018240B /* AssetKit in Frameworks */,
 				B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */,
 				770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */,
@@ -1149,6 +1151,7 @@
 				B54D39F22913B10400DA3A95 /* RxKeyboard */,
 				770B959E28F320C400C8C945 /* BottomSheetKit */,
 				B54D39F22913B10400DA3A95 /* RxKeyboard */,
+				B5F9FB19291D3F090056C0B1 /* Kingfisher */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -1181,6 +1184,7 @@
 			packageReferences = (
 				B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */,
 				B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 777C665E28A74A62000BECEA /* Products */;
 			projectDirPath = "";
@@ -2025,6 +2029,14 @@
 				kind = branch;
 			};
 		};
+		B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2061,6 +2073,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		B5F9FB19291D3F090056C0B1 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
