@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class RepresentingBadgeCollectionViewCell: UICollectionViewCell {
   
@@ -30,15 +31,15 @@ class RepresentingBadgeCollectionViewCell: UICollectionViewCell {
   }
   
   private let starImageView1 = UIImageView().then {
-    $0.image = Images.badgeStar.image
+    $0.image = Images.star.image
   }
   
   private let starImageView2 = UIImageView().then {
-    $0.image = Images.badgeStar.image
+    $0.image = Images.star.image
   }
   
   private let starImageView3 = UIImageView().then {
-    $0.image = Images.badgeStar.image
+    $0.image = Images.star.image
   }
   
   var disposeBag = DisposeBag()
@@ -99,9 +100,8 @@ class RepresentingBadgeCollectionViewCell: UICollectionViewCell {
     }
     
     starImageView2.snp.makeConstraints { make in
-      make.centerY.equalTo(badgeView.snp.bottom)
+      make.top.equalTo(badgeView.snp.bottom).inset(10)
       make.leading.equalTo(badgeView.snp.trailing).offset(35)
-      make.bottom.equalTo(contentView.snp.bottom).inset(28)
     }
     
     starImageView3.snp.makeConstraints { make in
@@ -111,7 +111,9 @@ class RepresentingBadgeCollectionViewCell: UICollectionViewCell {
   }
   
   func setRepresntingBadgeCellData(viewModel: RepresentingBadgeViewModel) {
-    badgeView.image = viewModel.image
+    guard let url = URL(string: viewModel.imageURL) else { return }
+    badgeView.kf.setImage(with: url)
+//    badgeView.image = viewModel.image
     if viewModel.title.count > 0 {
       titleLabel.text = viewModel.title
       emptyBadgeLabel.isHidden = true
