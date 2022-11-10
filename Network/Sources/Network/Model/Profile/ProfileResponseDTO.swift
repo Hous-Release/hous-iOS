@@ -59,4 +59,8 @@ public extension ProfileDTO.Response {
             case name
         }
     }
+    
+    struct updateRepresentBadge: Decodable {
+        
+    }
 }

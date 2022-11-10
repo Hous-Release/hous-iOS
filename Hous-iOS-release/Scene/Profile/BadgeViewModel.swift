@@ -23,6 +23,7 @@ class BadgeViewModel: ViewModelType {
   struct Output {
     let sections: Driver<[SectionOfProfile]>
     let badgesWithState: Driver<[RoomBadgeViewModel]>
+    let updatedRepresentBadge: Driver<Int>
     //    let popViewController: Driver<Void>
   }
   
@@ -107,11 +108,19 @@ class BadgeViewModel: ViewModelType {
       return badges
     }
       .asDriver(onErrorJustReturn: [])
+    
+    let updatedRepresentBadge = input.selectedMainBadge
+      .map { badgeId -> Int in
+        _ = NetworkService.shared.profileRepository.updateRepresentBadge(badgeId)
+        return badgeId
+      }
+      .asDriver(onErrorJustReturn: -1)
       
     
     return Output(
       sections: sections.asDriver(onErrorJustReturn: []),
-      badgesWithState: badgesWithState
+      badgesWithState: badgesWithState,
+      updatedRepresentBadge: updatedRepresentBadge
     )
   }
   
