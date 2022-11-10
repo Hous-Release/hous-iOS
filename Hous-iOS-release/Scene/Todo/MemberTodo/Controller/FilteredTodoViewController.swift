@@ -86,7 +86,6 @@ extension FilteredTodoViewController {
   }
 
   private func removeChildVC(_ vc: UIViewController) {
-    print("실행은되나요?")
     vc.willMove(toParent: nil)
     vc.view.removeFromSuperview()
     vc.removeFromParent()
