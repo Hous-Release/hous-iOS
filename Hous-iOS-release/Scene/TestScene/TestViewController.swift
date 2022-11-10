@@ -132,9 +132,9 @@ extension TestViewController {
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.dismiss(animated: true)
+        break
       case .cancel:
-        self?.dismiss(animated: true)
+        break
       }
     }
 
@@ -155,9 +155,9 @@ extension TestViewController {
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.dismiss(animated: true)
+        break
       case .cancel:
-        self?.dismiss(animated: true)
+        break
       }
     }
 
@@ -171,9 +171,9 @@ extension TestViewController {
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.dismiss(animated: true)
+        break
       case .cancel:
-        self?.dismiss(animated: true)
+        break
       }
     }
 
@@ -186,9 +186,9 @@ extension TestViewController {
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.dismiss(animated: true)
+        break
       case .cancel:
-        self?.dismiss(animated: true)
+        break
       }
     }
 
@@ -202,15 +202,15 @@ extension TestViewController {
       title: "다른 기기에서 로그인 중이에요!",
       subtitle: "다른 기기에서 강제 로그아웃 후 현재 기기에서\nHous-를 사용해볼까요?"
     )
-    let popUpType = PopUpType.duplicate(popUpModel)
 
+    let popUpType = PopUpType.duplicate(popUpModel)
 
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.dismiss(animated: true)
+        break
       case .cancel:
-        self?.dismiss(animated: true)
+        break
       }
     }
   }
@@ -218,7 +218,7 @@ extension TestViewController {
   private func didTapButton6() {
     let bottomSheetType = BottomSheetType.defaultType
 
-    presentBottomSheet(bottomSheetType) { actionType in
+    presentBottomSheet(bottomSheetType) { [weak self] actionType in
 
       switch actionType {
       case .add:
@@ -230,7 +230,6 @@ extension TestViewController {
       case .cancel:
         print("Cancel")
       }
-
     }
   }
 }
