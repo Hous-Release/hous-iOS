@@ -15,15 +15,12 @@ class DefaultBottomSheetAction: BottomSheetAction {
 
   init(view: DefaultBottomSheetView) { self.view = view }
 
-
-
-
-  func sendAction() {
-//    completeAction?(.action)
+  func sendAction(_ action: DidBottomSheetActionType) {
+    completeAction?(action)
   }
 
 
   func cancel() {
-//    completeAction?(.cancel)
+    completeAction?(.cancel)
   }
 }

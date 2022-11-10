@@ -10,7 +10,7 @@ import Foundation
 public typealias CompleteBottomSheetAction = ((DidBottomSheetActionType) -> Void)
 
 protocol BottomSheetAction {
-  func sendAction()
+  func sendAction(_ action: DidBottomSheetActionType)
   func cancel()
   var completeAction: CompleteBottomSheetAction? { get }
 }

@@ -217,6 +217,20 @@ extension TestViewController {
   @objc
   private func didTapButton6() {
     let bottomSheetType = BottomSheetType.defaultType
-    presentBottomSheet(bottomSheetType)
+
+    presentBottomSheet(bottomSheetType) { actionType in
+
+      switch actionType {
+      case .add:
+        print("ADD")
+      case .modify:
+        print("Modify")
+      case .delete:
+        print("Delete")
+      case .cancel:
+        print("Cancel")
+      }
+
+    }
   }
 }
