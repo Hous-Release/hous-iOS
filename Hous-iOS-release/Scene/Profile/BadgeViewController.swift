@@ -46,6 +46,10 @@ class BadgeViewController: UIViewController {
   
   private let viewModel: BadgeViewModel
   
+  private let selectedMainBadgeSubject = PublishSubject<Int>()
+  
+  private var badgeWithStateModel: [RoomBadgeViewModel] = []
+  
   init(viewModel: BadgeViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -72,28 +76,11 @@ class BadgeViewController: UIViewController {
     badgeCollectionView.register(RepresentingBadgeCollectionViewCell.self, forCellWithReuseIdentifier: RepresentingBadgeCollectionViewCell.className)
     
     badgeCollectionView.register(BadgeCollectionViewCell.self, forCellWithReuseIdentifier: BadgeCollectionViewCell.className)
-    
-    //TODO: - 배지 라디오버튼 구현하기
-    Observable
-      .zip(badgeCollectionView.rx.itemSelected, badgeCollectionView.rx.modelSelected(RoomBadgeViewModel.self))
-      .asObservable()
-      .map { indexPath, vm in
-        BadgeModel(row: indexPath.row, id: vm.id, tapState: .none)
-      }
-    
-//    badgeCollectionView.rx.modelSelected(RoomBadgeViewModel.self)
-//      .asDriver()
-//      .drive(onNext: { viewModel in
-//        let id = viewModel.id
-//        let
-//
-//      })
-//      .disposed(by: disposeBag)
-      
-      
   }
   
   private func configUI() {
+    self.setTabBarIsHidden(isHidden: true)
+    
     view.addSubViews([
       badgeCollectionView,
       navigationBar
@@ -115,13 +102,21 @@ class BadgeViewController: UIViewController {
   private func bind() {
     let input = BadgeViewModel.Input(
       viewWillAppear: rx.RxViewWillAppear.asObservable(),
-      backButtonDidTapped: navigationBar.backButton.rx.tap.asObservable()
+      backButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
+      selectedMainBadge: selectedMainBadgeSubject
     )
     
     let output = viewModel.transform(input: input)
     
     output.sections
       .drive(badgeCollectionView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    
+    output.badgesWithState
+      .drive(onNext: { [weak self] models in
+        guard let self = self else { return }
+        self.badgeWithStateModel = models
+      })
       .disposed(by: disposeBag)
   }
   
@@ -158,6 +153,21 @@ extension BadgeViewController {
     viewModel: RepresentingBadgeViewModel,
     indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = self.badgeCollectionView.dequeueReusableCell(withReuseIdentifier: RepresentingBadgeCollectionViewCell.className, for: indexPath) as? RepresentingBadgeCollectionViewCell else { return UICollectionViewCell() }
+      
+      selectedMainBadgeSubject
+        .asDriver(onErrorJustReturn: -1)
+        .drive(onNext: { id in
+          var idx = 0
+          self.badgeWithStateModel.enumerated().forEach { (index, model) in
+            if model.id == id {
+              idx = index
+            }
+          }
+          let urlString = self.badgeWithStateModel[idx].imageURL
+          let title = self.badgeWithStateModel[idx].title
+          cell.setRepresntingBadgeCellData(viewModel: RepresentingBadgeViewModel(imageURL: urlString, title: title))
+        })
+        .disposed(by: disposeBag)
     
     cell.setRepresntingBadgeCellData(viewModel: viewModel)
     
@@ -169,32 +179,35 @@ extension BadgeViewController {
     indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = self.badgeCollectionView.dequeueReusableCell(withReuseIdentifier: BadgeCollectionViewCell.className, for: indexPath) as? BadgeCollectionViewCell else { return UICollectionViewCell() }
       
+      cell.badgeImageView.rx.tapGesture()
+        .when(.recognized)
+        .subscribe(onNext: { _ in
+          var idx = 0
+          self.badgeWithStateModel.enumerated().forEach { (index, model) in
+            if model.id == viewModel.id {
+              idx = index
+            }
+          }
+          
+          let state = self.badgeWithStateModel[idx].tapState
+          
+          switch state {
+          case .none:
+            self.badgeWithStateModel[idx].tapState = .selected
+          case .selected:
+            self.badgeWithStateModel[idx].tapState = .representing
+            self.selectedMainBadgeSubject.onNext(viewModel.id)
+          case .representing:
+            print("대표 최고 !! 👍")
+          }
+          
+          cell.setTapStatusView(tapState: self.badgeWithStateModel[idx].tapState)
+        })
+        .disposed(by: cell.disposeBag)
+
       
       cell.setRoomBadgeCellData(viewModel: viewModel)
-      
       
     return cell
   }
 }
-
-
-
-enum BadgeViewTapState {
-  case none
-  case selected
-  case representing
-}
-
-
-struct BadgeModel {
-  let row: Int
-  let id: Int
-  let tapState: BadgeViewTapState
-  
-  init(row: Int, id: Int, tapState: BadgeViewTapState) {
-    self.row = row
-    self.id = id
-    self.tapState = tapState
-  }
-}
-
