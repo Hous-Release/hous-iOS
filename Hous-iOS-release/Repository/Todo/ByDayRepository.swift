@@ -14,7 +14,7 @@ public enum ByDayRepositoryEvent {
   case countTodoSection(ByDayTodoSection.Model)
   case myTodosByDaySection(ByDayTodoSection.Model)
   case ourTodosByDaySection(ByDayTodoSection.Model)
-  //case sendError(HouseErrorModel?)
+  case sendError(HouseErrorModel?)
 }
 
 public protocol ByDayRepository {
@@ -28,10 +28,22 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
   public var todos: ByDayTodoDTO.Response.ByDayTodosResponseDTO?
 
   public func fetchTodo() {
-    guard let data = MockParser.load(ByDayTodoDTO.Response.ByDayTodosResponseDTO.self, from: "ByDayTodoDTO") else { return }
 
-    self.todos = data
-    onNextEvents(data: data, row: 0)
+    NetworkService.shared.byDayTodoRepository.getDaysOfWeekTodosData { [weak self] res, err in
+
+      guard let self = self else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      self.todos = data
+      self.onNextEvents(data: data, row: 0)
+    }
   }
 
   public func selectDaysOfWeek(_ row: Int) {
