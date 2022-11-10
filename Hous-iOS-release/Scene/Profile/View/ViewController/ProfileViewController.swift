@@ -210,7 +210,7 @@ final class ProfileViewController: UIViewController {
       destinationViewController = ProfileDetailViewController()
     case .didTabRetry:
       destinationViewController = ProfileRetryViewController()
-    case .none:
+    default:
       return
     }
     destinationViewController.view.backgroundColor = .white

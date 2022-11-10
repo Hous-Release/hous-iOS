@@ -27,14 +27,15 @@ public enum ProfileRepositoryEvent {
 }
 
 public protocol ProfileRepository {
-  var event: PublishSubject<ProfileRepositoryEvent> { get }
+  static var event: PublishSubject<ProfileRepositoryEvent> { get }
   func getProfile()
+  func putProfileEditInfo(data: ProfileEditModel)
 }
 
 public final class ProfileRepositoryImp: ProfileRepository {
   
-  public var event = PublishSubject<ProfileRepositoryEvent>()
-  
+  public static var event = PublishSubject<ProfileRepositoryEvent>()
+
   public func getProfile() {
     
     //MARK: Get Data
@@ -46,7 +47,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
           success: res?.success ?? false,
           status: res?.status ?? -1,
           message: res?.message ?? "")
-        self.event.onNext(.sendError(errorModel))
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
       
@@ -69,7 +70,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
       }
       
       if (personalityColor == .none) {
-        self.event.onNext(.getProfile(ProfileModel()))
+        ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel()))
         return
       }
       
@@ -87,11 +88,52 @@ public final class ProfileRepositoryImp: ProfileRepository {
       let userJob = dto.job
       let mbti = dto.mbti
       let statusMessage = dto.introduction
-      let badgeLabel = dto.representBadge 
+      let badgeLabel = dto.representBadge
       let badgeImageURL = dto.representBadgeImage
       let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
       
-      self.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+      ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+    }
+  }
+  
+  public func putProfileEditInfo(data: ProfileEditModel) {
+    
+    //MARK: Model To DTO
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    
+    let birthday = dateFormatter.string(from: data.birthday)
+    
+    let introduction = (data.statusMessage != "") ? data.statusMessage : nil
+    
+    let isPublic = data.birthdayPublic
+    
+    let job = (data.job != "") ? data.job : nil
+    
+    let mbti = (data.mbti != "") ? data.mbti : nil
+    
+    let nickname = data.name
+    
+    let dto = ProfileDTO.Request.ProfileEditRequestDTO(birthday: birthday, introduction: introduction, isPublic: isPublic, job: job, mbti: mbti, nickname: nickname)
+
+    
+    //MARK: Put Data
+    
+    NetworkService.shared.profileRepository.putProfileEditInfo(dto) { [weak self] res, err in
+      guard let self = self else { return }
+      if (res?.status != 200) {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? ""
+        )
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      print("⭐️⭐️⭐️⭐️⭐️")
+      ProfileRepositoryImp.event.onNext(.putProfile)
     }
   }
 }
