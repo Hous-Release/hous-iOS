@@ -92,10 +92,16 @@ public extension UIViewController {
   ) {
 
     switch type {
+
     case .defaultType:
       let view = DefaultBottomSheetView()
       let bottomSheetAction = DefaultBottomSheetAction(view: view)
       let vc = DefaultBottomSheetViewController(action: bottomSheetAction)
+
+      bottomSheetAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
