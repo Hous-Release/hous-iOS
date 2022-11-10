@@ -1,5 +1,5 @@
 //
-//  ProfileGetService.swift
+//  ProfileService.swift
 //  
 //
 //  Created by 이의진 on 2022/10/30.
@@ -12,6 +12,7 @@ public enum ProfileService {
     case getProfile
     case getBadges
     case updateRepresentBadge(_ id: Int)
+    case putProfileEdit(_ data: ProfileDTO.Request.ProfileEditRequestDTO)
 }
 
 extension ProfileService: TargetType {
@@ -27,6 +28,9 @@ extension ProfileService: TargetType {
             return "/user/badges"
         case .updateRepresentBadge(let id):
             return "/user/badge/\(id)/represent"
+            
+        case .putProfileEdit:
+            return "/user"
         }
     }
     
@@ -34,6 +38,9 @@ extension ProfileService: TargetType {
         switch self {
         case .getProfile, .getBadges:
             return .get
+            
+        case .putProfileEdit:
+            return .put
         case .updateRepresentBadge:
             return .put
         }
@@ -43,6 +50,9 @@ extension ProfileService: TargetType {
         switch self {
         case .getProfile, .getBadges, .updateRepresentBadge:
             return .requestPlain
+            
+        case let .putProfileEdit(dto):
+            return .body(dto)
         }
     }
 }

@@ -13,7 +13,7 @@ internal final class TokenInterceptor: RequestInterceptor, RequestRetrier {
   func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
     var urlRequest = urlRequest
 
-    let value = Keychain.shared.getAccessToken() ?? "eyJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxMiwiZXhwIjoxNjk4OTE0MTk5fQ.seQoe7uoHX8hXlellquf25-ZEEj9fCDFApNThc91ZF9l9otmr2Zwin7nzsWB_x1Rx8-zYRhF0g2bLuDFE_tY_w"
+    let value = Keychain.shared.getAccessToken() ?? ""
     urlRequest.setValue("Bearer \(value)", forHTTPHeaderField: "Authorization")
 
 

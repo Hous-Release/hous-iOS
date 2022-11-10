@@ -30,7 +30,7 @@ final class ProfileViewModel: ViewModelType {
   
   
   init() {
-    profileRepository.event
+    ProfileRepositoryImp.event
       .debug("repository connected")
       .subscribe (onNext:{ [weak self] event in
       guard let self = self else { return }
@@ -38,6 +38,8 @@ final class ProfileViewModel: ViewModelType {
       case let .getProfile(profileModel):
         self.profileModel = profileModel
         self.profileModelSubject.onNext(profileModel)
+      case .putProfile:
+        self.profileRepository.getProfile()
       case .sendError:
         print("😭 Network Error..😭")
         print(event)
@@ -47,7 +49,6 @@ final class ProfileViewModel: ViewModelType {
     })
     .disposed(by: disposeBag)
   }
-  
   
   func transform(input: Input) -> Output {
     
