@@ -17,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     let serviceProvider = ServiceProvider()
     let reactor = SplashReactor(provider: serviceProvider)
-
     window.rootViewController = SplashViewController(reactor)
     window.backgroundColor = .white
     window.makeKeyAndVisible()
