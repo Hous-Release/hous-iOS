@@ -17,7 +17,11 @@ final class ProfileEditViewController: UIViewController {
   
   let disposeBag = DisposeBag()
   let viewModel: ProfileEditViewModel
+  let actionDetected = PublishSubject<ProfileEditActionControl>()
   
+  //MARK: Network
+  
+  private let profileRepository = ProfileRepositoryImp()
   
   //MARK: UI Templetes
   
@@ -129,7 +133,16 @@ final class ProfileEditViewController: UIViewController {
     self.view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
     birthdayTextField.delegate = self
-    birthdayTextField.inputView = self.datePicker
+    birthdayTextField.setDatePicker(target: self, selector: #selector(setDate), datePicker: datePicker)
+  }
+  
+  @objc func setDate() {
+    birthdayTextField.endEditing(true)
+    birthdayTextFieldSet(date: datePicker.date)
+    self.actionDetected.onNext(.birthdayTextFieldEdited(date: datePicker.date))
+  }
+  @objc func handleDatePickerTap() {
+    datePicker.resignFirstResponder()
   }
   
   //MARK: Bind
@@ -142,96 +155,141 @@ final class ProfileEditViewController: UIViewController {
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
-    let actionDetected = PublishSubject<ProfileEditActionControl>()
+
     
     nameTextField.rx.controlEvent(.editingDidBegin)
-      .bind(onNext: {
-        actionDetected.onNext(.nameTextFieldSelected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.nameTextFieldSelected)
       })
       .disposed(by: disposeBag)
     
     nameTextField.rx.controlEvent(.editingDidEnd)
-      .bind(onNext: {
-        actionDetected.onNext(.nameTextFieldUnselected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: {[weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.nameTextFieldUnselected)
       })
       .disposed(by: disposeBag)
     
     nameTextField.rx.text.orEmpty
-      .bind(onNext: { text in
-        actionDetected.onNext(.nameTextFieldEdited(text: text))
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] text in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.nameTextFieldEdited(text: text))
       })
       .disposed(by: disposeBag)
     
     birthdayTextField.rx.controlEvent(.editingDidBegin)
-      .bind(onNext: {
-        actionDetected.onNext(.birthdayTextFieldSelected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: {[weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.birthdayTextFieldSelected)
         
       })
       .disposed(by: disposeBag)
     
     birthdayTextField.rx.controlEvent(.editingDidEnd)
-      .bind(onNext: {
-        actionDetected.onNext(.birthdayTextFieldUnselected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: {[weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.birthdayTextFieldUnselected)
       })
       .disposed(by: disposeBag)
     
     birthdayTextField.birthdayPublicButton.rx.tap
-      .bind(onNext: {
-        actionDetected.onNext(.birthdayPublicEdited(isPublic: !self.birthdayTextField.birthdayPublicButton.isSelected))
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.birthdayPublicEdited(isPublic: !self.birthdayTextField.birthdayPublicButton.isSelected))
       })
       .disposed(by: disposeBag)
     
-    datePicker.rx.date
-      .bind(onNext: { date in
-        actionDetected.onNext(.birthdayTextFieldEdited(date: date))
-      })
-      .disposed(by: disposeBag)
+//    datePicker.rx.date
+//      .bind(onNext: { date in
+//        actionDetected.onNext(.birthdayTextFieldEdited(date: date))
+//      })
+//      .disposed(by: disposeBag)
     
     mbtiTextField.rx.controlEvent(.editingDidBegin)
-      .bind(onNext: {
-        actionDetected.onNext(.mbtiTextFieldSelected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: {[weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.mbtiTextFieldSelected)
       })
       .disposed(by: disposeBag)
     
     mbtiTextField.rx.controlEvent(.editingDidEnd)
-      .bind(onNext: {
-        actionDetected.onNext(.mbtiTextFieldUnselected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: {[weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.mbtiTextFieldUnselected)
       })
       .disposed(by: disposeBag)
     
     mbtiTextField.rx.text.orEmpty
-      .bind(onNext: { text in
-        actionDetected.onNext(.mbtiTextFieldEdited(text: text))
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] text in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.mbtiTextFieldEdited(text: text))
       })
       .disposed(by: disposeBag)
     
     jobTextField.rx.controlEvent(.editingDidBegin)
-      .bind(onNext: {
-        actionDetected.onNext(.jobTextFieldSelected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.jobTextFieldSelected)
       })
       .disposed(by: disposeBag)
     
     jobTextField.rx.controlEvent(.editingDidEnd)
-      .bind(onNext: {
-        actionDetected.onNext(.jobTextFieldUnselected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.jobTextFieldUnselected)
       })
       .disposed(by: disposeBag)
     
     jobTextField.rx.text.orEmpty
-      .bind(onNext: { text in
-        actionDetected.onNext(.jobTextFieldEdited(text: text))
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] text in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.jobTextFieldEdited(text: text))
       })
       .disposed(by: disposeBag)
     
     statusTextField.rx.controlEvent(.editingDidBegin)
-      .bind(onNext: {
-        actionDetected.onNext(.statusTextViewSelected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.statusTextViewSelected)
       })
       .disposed(by: disposeBag)
     
     statusTextField.rx.controlEvent(.editingDidEnd)
-      .bind(onNext: {
-        actionDetected.onNext(.statusTextViewUnselected)
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.statusTextViewUnselected)
+      })
+      .disposed(by: disposeBag)
+    
+    navigationBar.saveButton.rx.tap
+      .observe(on:MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabSave)
+      })
+      .disposed(by: disposeBag)
+    
+    self.view.rx.tapGesture()
+      .when(.recognized)
+      .debug("hoho")
+      .bind(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabBackgroundView)
       })
       .disposed(by: disposeBag)
     
@@ -247,10 +305,12 @@ final class ProfileEditViewController: UIViewController {
     output.actionControl
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
+        self.doNavigation(action: $0)
         self.textFieldModeControl(action: $0)
         self.textFieldCountConstraint(action: $0)
         self.birthdayButtonControl(action: $0)
-        self.birthdayTextFieldControl(action: $0)
+        self.keyPadControl(action: $0)
+//        self.birthdayTextFieldControl(action: $0)
       })
       .disposed(by: disposeBag)
     
@@ -319,6 +379,7 @@ final class ProfileEditViewController: UIViewController {
     }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy/MM/dd"
+    dateFormatter.locale = Locale(identifier: "ko_KR")
     birthdayTextField.text = dateFormatter.string(from: date ?? Date())
     let attributedString = NSMutableAttributedString(string: birthdayTextField.text ?? "")
     attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length))
@@ -333,7 +394,7 @@ final class ProfileEditViewController: UIViewController {
     switch action {
     case let .nameTextFieldEdited(data):
       text = data
-      maxCount = 3
+      maxCount = 5
       textField = nameTextField
       
     case let .mbtiTextFieldEdited(data):
@@ -360,6 +421,8 @@ final class ProfileEditViewController: UIViewController {
     self.datePicker.date = date
     self.datePicker.datePickerMode = .date
     self.datePicker.preferredDatePickerStyle = .wheels
+    self.datePicker.locale = Locale(identifier: "ko-KR")
+    
   }
   
   private func saveButtonControl(isModified: Bool) {
@@ -383,15 +446,35 @@ final class ProfileEditViewController: UIViewController {
     }
   }
   
-  private func birthdayTextFieldControl(action: ProfileEditActionControl) {
+//  private func birthdayTextFieldControl(action: ProfileEditActionControl) {
+//    switch action {
+//    case let .birthdayTextFieldEdited(date):
+//      birthdayTextFieldSet(date: date)
+//    default:
+//      return
+//    }
+//  }
+  
+  private func doNavigation(action: ProfileEditActionControl) {
     switch action {
-    case let .birthdayTextFieldEdited(date):
-      birthdayTextFieldSet(date: date)
+    case .didTabSave:
+      profileRepository.putProfileEditInfo(data: viewModel.modifiedData)
+      self.navigationController?.popViewController(animated: true)
+      
     default:
       return
     }
   }
   
+  private func keyPadControl(action: ProfileEditActionControl) {
+    print("⭐️", action)
+    switch action {
+    case .didTabBackgroundView:
+      self.view.endEditing(true)
+    default:
+      return
+    }
+  }
 }
 
 extension ProfileEditViewController: UITextFieldDelegate {

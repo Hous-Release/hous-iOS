@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProfileEditModel: Equatable {
+public struct ProfileEditModel: Equatable {
   var name: String
   var birthday: Date
   var mbti: String
@@ -20,6 +20,7 @@ struct ProfileEditModel: Equatable {
 enum ProfileEditActionControl {
   case didTabBack(isModified: Bool)
   case didTabSave
+  case didTabBackgroundView
   
   case nameTextFieldSelected
   case nameTextFieldUnselected

@@ -63,4 +63,13 @@ public extension ProfileDTO.Response {
     struct updateRepresentBadge: Decodable {
         
     }
+    //MARK: ProfileEdit
+    
+    struct ProfileEditResponseDTO: Codable {
+        public let data: String
+        public let message: String
+        public let status: Int
+        public let success: Bool
+    }
+
 }
