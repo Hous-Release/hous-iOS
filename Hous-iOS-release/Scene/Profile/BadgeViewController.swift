@@ -48,6 +48,8 @@ class BadgeViewController: UIViewController {
   
   private let selectedMainBadgeSubject = PublishSubject<Int>()
   
+  private let updatedRepresentBadgeCompleted = PublishSubject<Int>()
+  
   private var badgeWithStateModel: [RoomBadgeViewModel] = []
   
   init(viewModel: BadgeViewModel) {
@@ -118,6 +120,13 @@ class BadgeViewController: UIViewController {
         self.badgeWithStateModel = models
       })
       .disposed(by: disposeBag)
+    
+    output.updatedRepresentBadge
+      .drive(onNext: { [weak self] representbadgeId in
+        guard let self = self else { return }
+        self.updatedRepresentBadgeCompleted.onNext(representbadgeId)
+      })
+      .disposed(by: disposeBag)
   }
   
 }
@@ -154,7 +163,7 @@ extension BadgeViewController {
     indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = self.badgeCollectionView.dequeueReusableCell(withReuseIdentifier: RepresentingBadgeCollectionViewCell.className, for: indexPath) as? RepresentingBadgeCollectionViewCell else { return UICollectionViewCell() }
       
-      selectedMainBadgeSubject
+      updatedRepresentBadgeCompleted
         .asDriver(onErrorJustReturn: -1)
         .drive(onNext: { id in
           var idx = 0
@@ -167,7 +176,7 @@ extension BadgeViewController {
           let title = self.badgeWithStateModel[idx].title
           cell.setRepresntingBadgeCellData(viewModel: RepresentingBadgeViewModel(imageURL: urlString, title: title))
         })
-        .disposed(by: disposeBag)
+        .disposed(by: cell.disposeBag)
     
     cell.setRepresntingBadgeCellData(viewModel: viewModel)
     
