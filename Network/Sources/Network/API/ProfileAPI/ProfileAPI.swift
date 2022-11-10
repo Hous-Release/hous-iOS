@@ -15,6 +15,8 @@ protocol ProfileAPIProtocol {
     )
     
     func getBadges() -> Observable<ProfileDTO.Response.getBadgesResponseDTO>
+    
+    func updateRepresentBadge(_ id: Int) -> Observable<Void>
 }
 
 public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProtocol {
@@ -43,6 +45,27 @@ public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProto
                         emitter.onNext(data)
                         emitter.onCompleted()
                     }
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    public func updateRepresentBadge(_ id: Int) -> Observable<Void> {
+        return Observable.create { [weak self] emitter in
+            
+            self?.fetchData(
+                target: .updateRepresentBadge(id),
+                responseData: BaseResponseType<ProfileDTO.Response.updateRepresentBadge>.self
+            ) { result, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+                
+                if result != nil {
+                    emitter.onNext(())
+                    emitter.onCompleted()
                 }
             }
             

@@ -11,6 +11,7 @@ import Alamofire
 public enum ProfileService {
     case getProfile
     case getBadges
+    case updateRepresentBadge(_ id: Int)
 }
 
 extension ProfileService: TargetType {
@@ -24,6 +25,8 @@ extension ProfileService: TargetType {
             return "/user"
         case .getBadges:
             return "/user/badges"
+        case .updateRepresentBadge(let id):
+            return "/user/badge/\(id)/represent"
         }
     }
     
@@ -31,12 +34,14 @@ extension ProfileService: TargetType {
         switch self {
         case .getProfile, .getBadges:
             return .get
+        case .updateRepresentBadge:
+            return .put
         }
     }
     
     public var parameters: RequestParams {
         switch self {
-        case .getProfile, .getBadges:
+        case .getProfile, .getBadges, .updateRepresentBadge:
             return .requestPlain
         }
     }
