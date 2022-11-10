@@ -12,7 +12,9 @@ import SnapKit
 
 internal final class DefaultBottomSheetViewController: UIViewController {
 
-  private enum Constant { }
+  private enum Constant {
+    static let dismissPoint: CGFloat = 60
+  }
 
   private let rootView: UIView = {
     let view = UIView()
@@ -61,18 +63,18 @@ internal final class DefaultBottomSheetViewController: UIViewController {
 
     case .changed:
 
-      if translation > 0 {
+      if translation > .zero {
         updateBottomLayout(translation)
         view.layoutIfNeeded()
       }
     case .ended:
 
-      if translation <= 60 {
+      if translation <= Constant.dismissPoint {
         updateBottomLayout(0)
         view.layoutIfNeeded()
       }
 
-      else if translation > 60 {
+      else if translation > Constant.dismissPoint {
         animateDismissView(.cancel)
       }
 
