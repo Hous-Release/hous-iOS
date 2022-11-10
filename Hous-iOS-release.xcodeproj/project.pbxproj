@@ -127,6 +127,14 @@
 		B8555AA02917D22D00E943AE /* ByDayTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */; };
 		B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */; };
 		B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AA32917D24600E943AE /* ByDayTodoView.swift */; };
+		B8555ABB291BA2CC00E943AE /* MyTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555ABA291BA2CC00E943AE /* MyTodoByDayCollectionViewCell.swift */; };
+		B8555ABD291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555ABC291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift */; };
+		B8555ABF291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555ABE291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift */; };
+		B8555AC1291CBEDD00E943AE /* ByDayTodoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC0291CBEDD00E943AE /* ByDayTodoSection.swift */; };
+		B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC2291CCAA700E943AE /* ByDayRepository.swift */; };
+		B8555AC5291CCC4800E943AE /* ByDayTodoDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B8555AC4291CCC4800E943AE /* ByDayTodoDTO.json */; };
+		B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC6291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift */; };
+		B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */; };
 		B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700228C88C6100B49984 /* MainHomeViewController.swift */; };
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
@@ -295,6 +303,14 @@
 		B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoViewController.swift; sourceTree = "<group>"; };
 		B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoViewReactor.swift; sourceTree = "<group>"; };
 		B8555AA32917D24600E943AE /* ByDayTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoView.swift; sourceTree = "<group>"; };
+		B8555ABA291BA2CC00E943AE /* MyTodoByDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoByDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8555ABC291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurTodoByDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8555ABE291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysOfWeekCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8555AC0291CBEDD00E943AE /* ByDayTodoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayTodoSection.swift; sourceTree = "<group>"; };
+		B8555AC2291CCAA700E943AE /* ByDayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayRepository.swift; sourceTree = "<group>"; };
+		B8555AC4291CCC4800E943AE /* ByDayTodoDTO.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ByDayTodoDTO.json; sourceTree = "<group>"; };
+		B8555AC6291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodoByDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		B856700228C88C6100B49984 /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewController.swift; sourceTree = "<group>"; };
 		B856700628C88C6F00B49984 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B856700828C88CAF00B49984 /* HousTabBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItemView.swift; sourceTree = "<group>"; };
@@ -870,6 +886,18 @@
 			path = Paging;
 			sourceTree = "<group>";
 		};
+		B8555AB9291B9BC800E943AE /* DaysOfWeek */ = {
+			isa = PBXGroup;
+			children = (
+				B8555ABA291BA2CC00E943AE /* MyTodoByDayCollectionViewCell.swift */,
+				B8555ABC291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift */,
+				B8555ABE291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift */,
+				B8555AC6291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift */,
+				B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */,
+			);
+			path = DaysOfWeek;
+			sourceTree = "<group>";
+		};
 		B8566FFE28C88C3200B49984 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1035,7 @@
 			children = (
 				B8D066CB28F7DF5300A99907 /* TodoRepository.swift */,
 				B8FF4D91290515770087AD40 /* MemberRepository.swift */,
+				B8555AC2291CCAA700E943AE /* ByDayRepository.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -1026,6 +1055,7 @@
 		B8D066D928FA959100A99907 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				B8555AB9291B9BC800E943AE /* DaysOfWeek */,
 				B80BBA83290A532700E4916F /* ViewModel */,
 				B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */,
 				B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */,
@@ -1051,6 +1081,7 @@
 			children = (
 				B8D066E228FAA5ED00A99907 /* MemberTodoDTO.json */,
 				B8FF4D9529051E390087AD40 /* TodoByMemberDTO.swift */,
+				B8555AC4291CCC4800E943AE /* ByDayTodoDTO.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1071,6 +1102,7 @@
 				B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */,
 				B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */,
 				B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */,
+				B8555AC0291CBEDD00E943AE /* ByDayTodoSection.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1151,6 +1183,7 @@
 			files = (
 				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */,
+				B8555AC5291CCC4800E943AE /* ByDayTodoDTO.json in Resources */,
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
@@ -1193,6 +1226,7 @@
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
+				B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */,
 				B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */,
 				B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
@@ -1245,9 +1279,11 @@
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */,
 				B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */,
+				B8555ABB291BA2CC00E943AE /* MyTodoByDayCollectionViewCell.swift in Sources */,
 				777C667D28A75039000BECEA /* BaseViewController.swift in Sources */,
 				770B958B28EAF92600C8C945 /* UIViewController+Extension.swift in Sources */,
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
+				B8555ABF291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift in Sources */,
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
@@ -1309,15 +1345,18 @@
 				9BE0C27C29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift in Sources */,
 				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
+				B8555ABD291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
+				B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */,
 				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
+				B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */,
@@ -1326,6 +1365,7 @@
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,
 				B8B8A89A28DF919D009FD784 /* EnterRoomView.swift in Sources */,
+				B8555AC1291CBEDD00E943AE /* ByDayTodoSection.swift in Sources */,
 				B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,

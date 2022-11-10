@@ -8,7 +8,6 @@
 import UIKit
 import Then
 import ReactorKit
-import AssetKit
 
 final class MemberCollectionViewCell: UICollectionViewCell, ReactorKit.View {
 
@@ -53,7 +52,6 @@ extension MemberCollectionViewCell {
   }
 
   private func render() {
-    addSubView(checkButton)
     addSubViews([checkButton, triangleView])
     checkButton.snp.makeConstraints { make in
       make.top.leading.trailing.equalToSuperview()

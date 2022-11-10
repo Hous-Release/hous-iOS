@@ -20,14 +20,23 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
   enum Action {
     case fetch
+    case didTapDaysOfWeekCell(Int)
   }
 
   enum Mutation {
-    case setTodos
+    case setCountTodoSection(ByDayTodoSection.Model)
+    case setMyTodosByDaySection(ByDayTodoSection.Model)
+    case setOurTodosByDaySection(ByDayTodoSection.Model)
   }
 
   struct State {
-    var todos: [String] = []
+    var countTodoSection = ByDayTodoSection.Model(model: .countTodo, items: [])
+    var myTodosByDaySection = ByDayTodoSection.Model(
+      model: .myTodo(num: 0),
+      items: [])
+    var ourTodosByDaySection = ByDayTodoSection.Model(
+      model: .ourTodo(num: 0),
+      items: [])
   }
 
   let initialState = State()
@@ -35,6 +44,10 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
+      provider.byDayRepository.fetchTodo()
+      return .empty()
+    case let .didTapDaysOfWeekCell(row):
+      provider.byDayRepository.selectDaysOfWeek(row)
       return .empty()
     }
   }
@@ -44,9 +57,29 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
-    case let .setTodos:
-      newState.todos = []
-    return newState
+
+    case let .setCountTodoSection(cnt):
+      newState.countTodoSection = cnt
+    case let .setMyTodosByDaySection(myTodo):
+      newState.myTodosByDaySection = myTodo
+    case let .setOurTodosByDaySection(ourTodo):
+      newState.ourTodosByDaySection = ourTodo
     }
+    return newState
+  }
+
+  func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+    let serviceMutation = provider.byDayRepository.event.flatMap { event -> Observable<Mutation> in
+      switch event {
+      case let .countTodoSection(cnt):
+        return .just(.setCountTodoSection(cnt))
+      case let .myTodosByDaySection(myTodo):
+        return .just(.setMyTodosByDaySection(myTodo))
+      case let .ourTodosByDaySection(ourTodo):
+        return .just(.setOurTodosByDaySection(ourTodo))
+      }
+    }
+
+    return .merge(mutation, serviceMutation)
   }
 }
