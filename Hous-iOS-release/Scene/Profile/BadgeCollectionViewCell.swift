@@ -6,15 +6,36 @@
 //
 
 import UIKit
+import RxSwift
+import Kingfisher
 
 class BadgeCollectionViewCell: UICollectionViewCell {
   
-  private let badgeImageView = UIImageView().then {
+  let badgeImageView = UIImageView().then {
     $0.backgroundColor = .clear
   }
   
+  var tapState: BadgeViewTapState = .none
+  
   private lazy var blurView = UIView().then {
     $0.backgroundColor = Colors.g7.color.withAlphaComponent(0.8)
+  }
+  
+  private let yelloBackgroundView = UIView().then {
+    $0.isHidden = true
+    $0.backgroundColor = Colors.yellow.color
+  }
+  
+  private let checkView = UIImageView().then {
+    $0.image = Images.icCheckBadge.image
+  }
+  
+  private let selectedLabel = UILabel().then {
+    $0.textAlignment = .center
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.white.color
+    $0.numberOfLines = 1
+    $0.text = "배지로 설정"
   }
   
   private let representLabel = UILabel().then {
@@ -41,10 +62,19 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     $0.textColor = Colors.g4.color
   }
   
+  var disposeBag = DisposeBag()
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+  }
+  
   override func draw(_ rect: CGRect) {
     super.draw(rect)
     badgeImageView.makeShadow(color: .black, opacity: 0.4, offset: CGSize(width: 0, height: 0), radius: 10)
     badgeImageView.makeRounded(cornerRadius: nil)
+    yelloBackgroundView.makeRounded(cornerRadius: nil)
+    blurView.makeRounded(cornerRadius: nil)
   }
   
   override init(frame: CGRect) {
@@ -65,12 +95,32 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     
     badgeImageView.addSubViews([
       blurView,
+      yelloBackgroundView,
       representLabel
+    ])
+    
+    yelloBackgroundView.addSubViews([
+      checkView,
+      selectedLabel
     ])
     
     badgeImageView.snp.makeConstraints { make in
       make.top.leading.trailing.equalToSuperview()
       make.size.equalTo(80)
+    }
+    
+    yelloBackgroundView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    
+    checkView.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalToSuperview().offset(23)
+    }
+    
+    selectedLabel.snp.makeConstraints { make in
+      make.centerX.equalTo(checkView)
+      make.top.equalTo(checkView.snp.bottom).offset(4)
     }
     
     blurView.snp.makeConstraints { make in
@@ -96,10 +146,12 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     badgeTitleLabel.text = viewModel.title
     badgeDescriptionLabel.text = viewModel.description
     
+    guard let url = URL(string: viewModel.imageURL) else { return }
     if viewModel.isAcquired {
-      badgeImageView.image = viewModel.image
+      badgeImageView.kf.setImage(with: url)
     } else {
-      badgeImageView.image = Images.badgeLock.image
+      badgeImageView.isUserInteractionEnabled = false
+      badgeImageView.image = Images.lockBg.image
     }
     
     if viewModel.isRepresenting {
@@ -111,4 +163,17 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     }
   }
   
+  
+  func setTapStatusView(tapState: BadgeViewTapState) {
+    switch tapState {
+    case .none:
+      break
+    case .selected:
+      yelloBackgroundView.isHidden = false
+    case .representing:
+      yelloBackgroundView.isHidden = true
+      blurView.isHidden = false
+      representLabel.isHidden = false
+    }
+  }
 }
