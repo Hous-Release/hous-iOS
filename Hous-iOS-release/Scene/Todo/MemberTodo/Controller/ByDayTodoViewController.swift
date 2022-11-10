@@ -41,7 +41,8 @@ extension ByDayTodoViewController {
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
-    bindCollectionView(reactor)
+    bindDaysOfWeekCollectionView()
+    bindTodoCollectionView(reactor)
   }
 }
 
@@ -51,22 +52,43 @@ extension ByDayTodoViewController {
       .map { _ in Reactor.Action.fetch }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+
+    mainView.daysOfWeekCollectionview.rx.itemSelected
+      .map { Reactor.Action.didTapDaysOfWeekCell($0.row) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
 
   private func bindState(_ reactor: Reactor) {
-
+    
   }
 }
 
 extension ByDayTodoViewController {
-  private func bindCollectionView(_ reactor: Reactor) {
+
+  private func bindDaysOfWeekCollectionView() {
+    Observable.of(["월", "화", "수", "목", "금", "토", "일"])
+      .bind(to: mainView.daysOfWeekCollectionview.rx.items) {
+        (collectionView, row, item) -> UICollectionViewCell in
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DaysOfWeekCollectionViewCell.className, for: IndexPath(row: row, section: 0)) as? DaysOfWeekCollectionViewCell else { return UICollectionViewCell() }
+
+        cell.setCell(item)
+        if row == 0 {
+          collectionView.selectItem(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: [])
+        }
+        return cell
+      }
+      .disposed(by: disposeBag)
+  }
+
+  private func bindTodoCollectionView(_ reactor: Reactor) {
 
     // MARK: -
     mainView.todoCollectionView.rx.setDelegate(self)
         .disposed(by: disposeBag)
 
     // MARK: - Cell
-    let dataSource = RxCollectionViewSectionedReloadDataSource<ByDayTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
+    let todoDataSource = RxCollectionViewSectionedReloadDataSource<ByDayTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
       switch item {
       case let .countTodo(num):
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountTodoByDayCollectionViewCell.className, for: indexPath) as? CountTodoByDayCollectionViewCell else {
@@ -90,7 +112,7 @@ extension ByDayTodoViewController {
     })
 
     // MARK: - Header & Footer
-    dataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
+    todoDataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
 
       switch kind {
       case UICollectionView.elementKindSectionHeader:
@@ -119,7 +141,7 @@ extension ByDayTodoViewController {
 
     reactor.state.map { [$0.countTodoSection, $0.myTodosByDaySection, $0.ourTodosByDaySection] }
       .distinctUntilChanged()
-      .bind(to: self.mainView.todoCollectionView.rx.items(dataSource: dataSource))
+      .bind(to: self.mainView.todoCollectionView.rx.items(dataSource: todoDataSource))
       .disposed(by: disposeBag)
   }
 }

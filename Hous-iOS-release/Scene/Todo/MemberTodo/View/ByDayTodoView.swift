@@ -13,12 +13,10 @@ import SnapKit
 class ByDayTodoView: UIView {
 
   enum Size {
-    static let daysOfWeekItemSize = CGSize(width: 50, height: 62)
+    static let daysOfWeekItemSize = CGSize(width: 40, height: 70)
     static let todoItemSize = CGSize(width: UIScreen.main.bounds.width, height: 30)
     static let daysOfWeekCollectionViewHeight = 70
     static let daysOfWeekCollectionEdgeInsets = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 0)
-    static let headerSize = CGSize(width: UIScreen.main.bounds.width, height: 48)
-    static let footerSize = CGSize(width: UIScreen.main.bounds.width, height: 40)
   }
 
   var daysOfWeekCollectionview = UICollectionView(
@@ -27,7 +25,9 @@ class ByDayTodoView: UIView {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .horizontal
       layout.estimatedItemSize = Size.daysOfWeekItemSize
+      layout.sectionInset = Size.daysOfWeekCollectionEdgeInsets
       $0.collectionViewLayout = layout
+      $0.showsHorizontalScrollIndicator = false
       $0.backgroundColor = Colors.g1.color
       $0.register(cell: DaysOfWeekCollectionViewCell.self)
     }
@@ -55,7 +55,6 @@ class ByDayTodoView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setup()
     render()
   }
 
@@ -65,10 +64,6 @@ class ByDayTodoView: UIView {
 }
 
 extension ByDayTodoView {
-
-  private func setup() {
-
-  }
 
   private func render() {
     addSubViews([daysOfWeekCollectionview, todoCollectionView])
