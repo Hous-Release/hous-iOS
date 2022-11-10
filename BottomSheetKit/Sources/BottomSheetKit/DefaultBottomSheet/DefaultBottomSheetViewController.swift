@@ -13,7 +13,7 @@ import SnapKit
 internal final class DefaultBottomSheetViewController: UIViewController {
 
   private enum Constant {
-    static let dismissPoint: CGFloat = 60
+    static let dismissPoint: CGFloat = 100
   }
 
   private let rootView: UIView = {

@@ -15,7 +15,7 @@ internal final class DefaultBottomSheetView: UIView {
   private struct Constants {
     static let verticalMargin: CGFloat = 16
     static let horizontalMargin: CGFloat = 24
-    static let buttonHeight: CGFloat = 40
+    static let buttonHeight: CGFloat = 38
     static let handleWidth: CGFloat = 80
     static let handleHeight: CGFloat = 4
   }
@@ -39,7 +39,7 @@ internal final class DefaultBottomSheetView: UIView {
   private let stackView: UIStackView = {
     let stackView = UIStackView()
     stackView.alignment = .fill
-    stackView.distribution = .fillEqually
+    stackView.distribution = .fill
     stackView.spacing = Constants.verticalMargin
     stackView.axis = .vertical
     stackView.isLayoutMarginsRelativeArrangement = true
@@ -114,12 +114,6 @@ internal final class DefaultBottomSheetView: UIView {
     let l1 = makeG2LineView()
     let l2 = makeG2LineView()
 
-    stackView.addArrangedSubview(addButton)
-    stackView.addArrangedSubview(l1)
-    stackView.addArrangedSubview(modifyButton)
-    stackView.addArrangedSubview(l2)
-    stackView.addArrangedSubview(deleteButton)
-
     [addButton, modifyButton, deleteButton].forEach { button in
       button.snp.makeConstraints { make in
         make.height.equalTo(Constants.buttonHeight)
@@ -131,6 +125,12 @@ internal final class DefaultBottomSheetView: UIView {
         make.height.equalTo(1)
       }
     }
+
+    stackView.addArrangedSubview(addButton)
+    stackView.addArrangedSubview(l1)
+    stackView.addArrangedSubview(modifyButton)
+    stackView.addArrangedSubview(l2)
+    stackView.addArrangedSubview(deleteButton)
   }
 
   private func makeG2LineView() -> UIView {
