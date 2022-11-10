@@ -27,6 +27,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     case setCountTodoSection(ByDayTodoSection.Model)
     case setMyTodosByDaySection(ByDayTodoSection.Model)
     case setOurTodosByDaySection(ByDayTodoSection.Model)
+    case setError(String?)
   }
 
   struct State {
@@ -37,6 +38,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     var ourTodosByDaySection = ByDayTodoSection.Model(
       model: .ourTodo(num: 0),
       items: [])
+    var error: String? = nil
   }
 
   let initialState = State()
@@ -64,6 +66,8 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       newState.myTodosByDaySection = myTodo
     case let .setOurTodosByDaySection(ourTodo):
       newState.ourTodosByDaySection = ourTodo
+    case let .setError(error):
+      newState.error = error
     }
     return newState
   }
@@ -77,6 +81,9 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
         return .just(.setMyTodosByDaySection(myTodo))
       case let .ourTodosByDaySection(ourTodo):
         return .just(.setOurTodosByDaySection(ourTodo))
+      case let .sendError(errorModel):
+        guard let errormodel = errorModel else { return .empty() }
+        return .just(.setError(errorModel?.message))
       }
     }
 
