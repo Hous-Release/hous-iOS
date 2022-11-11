@@ -251,16 +251,11 @@ extension TestViewController {
   @objc
   private func didTapButton7() {
 
-//    let factory = HomieFactory.makeHomie(type: HomieColor(rawValue: reactor.currentState.color) ?? .GRAY)
-
-
-//    let factory = HomieFactory.makeHomie(type: .BLUE)
-
-//    let homieCellModels: [HomieCellModel]
-
-
     let homies = TestViewController.generateMock()
-    let bottomSheetType = BottomSheetType.todoType(homies)
+    let todoName = "유메니 보쿠라데 호오 핫테 키타루베키 히노 타메니 요루오 코에"
+    let days :[Days] = [.fri, .fri, .mon, .sat, .sun, .tue, .thu, .mon]
+    let model = TodoModel(homies: homies, todoName: todoName, days: days)
+    let bottomSheetType = BottomSheetType.todoType(model)
 
     presentBottomSheet(bottomSheetType) { [weak self] actionType in
 
@@ -299,6 +294,8 @@ extension TestViewController {
       HomieCellModel(homieName: "김호세1", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
       HomieCellModel(homieName: "김호세2", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
       HomieCellModel(homieName: "김호세3", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+      HomieCellModel(homieName: "김호세3", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+      HomieCellModel(homieName: "김호세3", homieColor: HomieFactory.makeHomie(type: .PURPLE).color)
 
     ]
 
