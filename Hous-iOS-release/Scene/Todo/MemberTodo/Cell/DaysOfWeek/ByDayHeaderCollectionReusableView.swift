@@ -36,7 +36,7 @@ extension ByDayHeaderCollectionReusableView {
   func setHeader(_ sectionType: ByDayTodoSection.Section) {
     var title = ""
     switch sectionType {
-    case .countTodo:
+    case .countTodo, .myTodoEmpty, .ourTodoEmpty:
       title = ""
     case .myTodo:
       title = "My to-do"

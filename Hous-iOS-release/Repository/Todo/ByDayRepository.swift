@@ -13,8 +13,11 @@ import RxCocoa
 public enum ByDayRepositoryEvent {
   case countTodoSection(ByDayTodoSection.Model)
   case myTodosByDaySection(ByDayTodoSection.Model)
+  case myTodosEmptySection(ByDayTodoSection.Model)
   case ourTodosByDaySection(ByDayTodoSection.Model)
+  case ourTodosEmptySection(ByDayTodoSection.Model)
   case sendError(HouseErrorModel?)
+  case initial
 }
 
 public protocol ByDayRepository {
@@ -48,6 +51,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
 
   public func selectDaysOfWeek(_ row: Int) {
     guard let todos = todos else { return }
+    self.event.onNext(.initial)
     onNextEvents(data: todos, row: row)
   }
 }
@@ -59,14 +63,32 @@ extension ByDayRepositoryImp {
     let countTodoItem = ByDayTodoSection.Item.countTodo(num: dataByDay.ourTodosCnt)
     self.event.onNext(.countTodoSection(ByDayTodoSection.Model(model: .countTodo, items: [countTodoItem])))
 
-    let myTodoItems = dataByDay.myTodos.map { ByDayTodoSection.Item.myTodo(todos: $0) }
-    self.event.onNext(.myTodosByDaySection(
-      ByDayTodoSection.Model(model: .myTodo(num: dataByDay.myTodos.count), items: myTodoItems)
-    ))
+    if dataByDay.myTodos.count == 0 {
+      self.event.onNext(.myTodosEmptySection(
+        ByDayTodoSection.Model(
+          model: .myTodoEmpty,
+          items: [ByDayTodoSection.Item.myTodoEmpty])))
+    } else {
+      let myTodoItems = dataByDay.myTodos.map { ByDayTodoSection.Item.myTodo(todos: $0) }
+      self.event.onNext(.myTodosByDaySection(
+        ByDayTodoSection.Model(
+          model: .myTodo(num: dataByDay.myTodos.count),
+          items: myTodoItems)
+      ))
+    }
 
-    let ourTodoItems = dataByDay.ourTodos.map { ByDayTodoSection.Item.ourTodo(todos: $0) }
-    self.event.onNext(.ourTodosByDaySection(
-      ByDayTodoSection.Model(model: .ourTodo(num: dataByDay.ourTodos.count), items: ourTodoItems)
-    ))
+    if dataByDay.ourTodos.count == 0 {
+      self.event.onNext(.ourTodosEmptySection(
+        ByDayTodoSection.Model(
+          model: .ourTodoEmpty,
+          items: [ByDayTodoSection.Item.ourTodoEmpty])))
+    } else {
+      let ourTodoItems = dataByDay.ourTodos.map { ByDayTodoSection.Item.ourTodo(todos: $0) }
+      self.event.onNext(.ourTodosByDaySection(
+        ByDayTodoSection.Model(
+          model: .ourTodo(num: dataByDay.ourTodos.count),
+          items: ourTodoItems)
+        ))
+    }
   }
 }

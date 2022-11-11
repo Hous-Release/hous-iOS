@@ -15,13 +15,17 @@ public struct ByDayTodoSection {
   public enum Section: Equatable {
     case countTodo
     case myTodo(num: Int)
+    case myTodoEmpty
     case ourTodo(num: Int)
+    case ourTodoEmpty
   }
 
   public enum Item: Equatable {
     case countTodo(num: Int)
     case myTodo(todos: ByDayTodoDTO.Response.MyTodoByDayDTO)
+    case myTodoEmpty
     case ourTodo(todos: ByDayTodoDTO.Response.OurTodoBtDayDTO)
+    case ourTodoEmpty
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {

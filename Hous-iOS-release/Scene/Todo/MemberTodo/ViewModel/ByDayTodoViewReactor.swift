@@ -26,8 +26,11 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   enum Mutation {
     case setCountTodoSection(ByDayTodoSection.Model)
     case setMyTodosByDaySection(ByDayTodoSection.Model)
+    case setMyTodosEmptySection(ByDayTodoSection.Model)
     case setOurTodosByDaySection(ByDayTodoSection.Model)
+    case setOurTodosEmptySection(ByDayTodoSection.Model)
     case setError(String?)
+    case setInitial
   }
 
   struct State {
@@ -35,9 +38,11 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     var myTodosByDaySection = ByDayTodoSection.Model(
       model: .myTodo(num: 0),
       items: [])
+    var myTodosEmptySection = ByDayTodoSection.Model(model: .myTodoEmpty, items: [])
     var ourTodosByDaySection = ByDayTodoSection.Model(
       model: .ourTodo(num: 0),
       items: [])
+    var ourTodosEmptySection = ByDayTodoSection.Model(model: .ourTodoEmpty, items: [])
     var error: String? = nil
   }
 
@@ -64,10 +69,16 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       newState.countTodoSection = cnt
     case let .setMyTodosByDaySection(myTodo):
       newState.myTodosByDaySection = myTodo
+    case let .setMyTodosEmptySection(empty):
+      newState.myTodosEmptySection = empty
     case let .setOurTodosByDaySection(ourTodo):
       newState.ourTodosByDaySection = ourTodo
+    case let .setOurTodosEmptySection(empty):
+      newState.ourTodosEmptySection = empty
     case let .setError(error):
       newState.error = error
+    case .setInitial:
+      newState = initialState
     }
     return newState
   }
@@ -76,14 +87,25 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     let serviceMutation = provider.byDayRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case let .countTodoSection(cnt):
+        print("countTodoSection 🌝🌝🌝🌝🌝\(cnt)")
         return .just(.setCountTodoSection(cnt))
       case let .myTodosByDaySection(myTodo):
+        print("myTodosByDaySection 🌝🌝🌝🌝🌝\(myTodo)")
         return .just(.setMyTodosByDaySection(myTodo))
+      case let .myTodosEmptySection(empty):
+        print("myTodosEmptySection 🌝🌝🌝🌝🌝\(empty)")
+        return .just(.setMyTodosEmptySection(empty))
       case let .ourTodosByDaySection(ourTodo):
+        print("ourTodosByDaySection 🌝🌝🌝🌝🌝\(ourTodo)")
         return .just(.setOurTodosByDaySection(ourTodo))
+      case let .ourTodosEmptySection(empty):
+        print("ourTodosEmptySection 🌝🌝🌝🌝🌝\(empty)")
+        return .just(.setOurTodosEmptySection(empty))
       case let .sendError(errorModel):
-        guard let errormodel = errorModel else { return .empty() }
-        return .just(.setError(errorModel?.message))
+        guard let errorModel = errorModel else { return .empty() }
+        return .just(.setError(errorModel.message))
+      case .initial:
+        return.just(.setInitial)
       }
     }
 
