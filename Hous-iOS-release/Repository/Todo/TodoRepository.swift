@@ -16,7 +16,9 @@ public enum TodoRepositoryEvent {
   case progressType(ProgressType)
   case progress(Float)
   case myTodosSection(TodoMainSection.Model)
+  case myTodosEmptySection(TodoMainSection.Model)
   case ourTodosSection(TodoMainSection.Model)
+  case ourTodosEmptySection(TodoMainSection.Model)
   case sendError(HouseErrorModel?)
 }
 
@@ -45,15 +47,30 @@ public final class TodoRepositoryImp: TodoRepository {
       self.event.onNext(.progressType(self.getType(of: data.progress)))
       self.event.onNext(.progress(Float(data.progress)))
 
-      let myTodoItems = data.myTodos.map { TodoMainSection.Item.myTodo(todos: $0) }
-      self.event.onNext(.myTodosSection(
-        TodoMainSection.Model(model: .myTodo(num: data.myTodosCnt), items: myTodoItems)
-      ))
 
-      let ourTodoItems = data.ourTodos.map { TodoMainSection.Item.ourTodo(todos: $0) }
-      self.event.onNext(.ourTodosSection(
-        TodoMainSection.Model(model: .ourTodo(num: data.ourTodosCnt), items: ourTodoItems)
-      ))
+      if data.myTodosCnt == 0 {
+        self.event.onNext(.myTodosEmptySection(
+          TodoMainSection.Model(
+            model: .myTodoEmpty,
+            items: [TodoMainSection.Item.myTodoEmpty])))
+      } else {
+        let myTodoItems = data.myTodos.map { TodoMainSection.Item.myTodo(todos: $0) }
+        self.event.onNext(.myTodosSection(
+          TodoMainSection.Model(model: .myTodo(num: data.myTodosCnt), items: myTodoItems)
+        ))
+      }
+
+      if data.ourTodosCnt == 0 {
+        self.event.onNext(.ourTodosEmptySection(
+          TodoMainSection.Model(
+            model: .ourTodoEmpty,
+            items: [TodoMainSection.Item.ourTodoEmpty])))
+      } else {
+        let ourTodoItems = data.ourTodos.map { TodoMainSection.Item.ourTodo(todos: $0) }
+        self.event.onNext(.ourTodosSection(
+          TodoMainSection.Model(model: .ourTodo(num: data.ourTodosCnt), items: ourTodoItems)
+        ))
+      }
     }
   }
 

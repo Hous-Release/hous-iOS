@@ -87,19 +87,14 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     let serviceMutation = provider.byDayRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case let .countTodoSection(cnt):
-        print("countTodoSection 🌝🌝🌝🌝🌝\(cnt)")
         return .just(.setCountTodoSection(cnt))
       case let .myTodosByDaySection(myTodo):
-        print("myTodosByDaySection 🌝🌝🌝🌝🌝\(myTodo)")
         return .just(.setMyTodosByDaySection(myTodo))
       case let .myTodosEmptySection(empty):
-        print("myTodosEmptySection 🌝🌝🌝🌝🌝\(empty)")
         return .just(.setMyTodosEmptySection(empty))
       case let .ourTodosByDaySection(ourTodo):
-        print("ourTodosByDaySection 🌝🌝🌝🌝🌝\(ourTodo)")
         return .just(.setOurTodosByDaySection(ourTodo))
       case let .ourTodosEmptySection(empty):
-        print("ourTodosEmptySection 🌝🌝🌝🌝🌝\(empty)")
         return .just(.setOurTodosEmptySection(empty))
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }

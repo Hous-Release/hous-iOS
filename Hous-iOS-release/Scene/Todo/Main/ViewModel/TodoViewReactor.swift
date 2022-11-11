@@ -22,7 +22,9 @@ final class TodoViewReactor: Reactor {
     case setProgressType(ProgressType)
     case setProgress(Float)
     case setMyTodosSection(TodoMainSection.Model)
+    case setMyTodosEmptySection(TodoMainSection.Model)
     case setOurTodosSection(TodoMainSection.Model)
+    case setOurTodosEmptySection(TodoMainSection.Model)
     case setError(String?)
     case setViewAllFlag(Bool?)
   }
@@ -34,12 +36,16 @@ final class TodoViewReactor: Reactor {
     var progress: Float = 0
     var myTodosSection = TodoMainSection.Model(
       model: .myTodo(num: 0),
-      items: []
-    )
+      items: [])
+    var myTodosEmptySection = TodoMainSection.Model(
+      model: .myTodoEmpty,
+      items: [])
     var ourTodosSection = TodoMainSection.Model(
       model: .ourTodo(num: 0),
-      items: []
-    )
+      items: [])
+    var ourTodosEmptySection = TodoMainSection.Model(
+      model: .ourTodoEmpty,
+      items: [])
     var error: String? = nil
     @Pulse var enterViewAllFlag: Bool?
   }
@@ -74,8 +80,12 @@ final class TodoViewReactor: Reactor {
       newState.progress = progress
     case let .setMyTodosSection(myTodo):
       newState.myTodosSection = myTodo
+    case let .setMyTodosEmptySection(empty):
+      newState.myTodosEmptySection = empty
     case let .setOurTodosSection(ourTodo):
       newState.ourTodosSection = ourTodo
+    case let .setOurTodosEmptySection(empty):
+      newState.ourTodosEmptySection = empty
     case let .setError(error):
       newState.error = error
     case let .setViewAllFlag(isGoingViewAll):
@@ -97,9 +107,12 @@ final class TodoViewReactor: Reactor {
         return .just(.setProgress(progress))
       case let .myTodosSection(myTodo):
         return .just(.setMyTodosSection(myTodo))
+      case let .myTodosEmptySection(empty):
+        return .just(.setMyTodosEmptySection(empty))
       case let .ourTodosSection(ourTodo):
         return .just(.setOurTodosSection(ourTodo))
-
+      case let .ourTodosEmptySection(empty):
+        return .just(.setOurTodosEmptySection(empty))
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))
