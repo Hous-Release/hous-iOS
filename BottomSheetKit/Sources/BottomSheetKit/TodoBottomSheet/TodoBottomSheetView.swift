@@ -106,7 +106,7 @@ internal final class TodoBottomSheetView: UIView {
     configureDataSource()
     setupViews()
     applyInitialSnapshot()
-    applyHomiesSnapShot(homies)
+    applyHomiesSnapShot(homies.uniqued())
 
   }
 
