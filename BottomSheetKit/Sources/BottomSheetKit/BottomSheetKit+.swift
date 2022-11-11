@@ -105,6 +105,21 @@ public extension UIViewController {
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
+
+      // TODO: 데이터 변경
+    case .todoType(let homies):
+      let view = TodoBottomSheetView(homies)
+      let bottomSheetAction = TodoBottomSheetAction(view: view)
+      let vc = TodoBottomSheetViewController(action: bottomSheetAction)
+
+      bottomSheetAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
+
     }
 
   }
