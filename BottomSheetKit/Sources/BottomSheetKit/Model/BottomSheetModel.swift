@@ -18,4 +18,5 @@ public struct BottomSheetModel {
 
 public enum BottomSheetType {
   case defaultType
+  case todoType([HomieCellModel])
 }
