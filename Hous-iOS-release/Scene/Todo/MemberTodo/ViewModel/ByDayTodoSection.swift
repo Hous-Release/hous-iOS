@@ -8,7 +8,7 @@
 import Foundation
 import RxDataSources
 import Network
-// todo: 
+
 public struct ByDayTodoSection {
   public typealias Model = SectionModel<Section, Item>
 
