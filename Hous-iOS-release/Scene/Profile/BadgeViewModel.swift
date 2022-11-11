@@ -110,10 +110,9 @@ class BadgeViewModel: ViewModelType {
       .asDriver(onErrorJustReturn: [])
     
     let updatedRepresentBadge = input.selectedMainBadge
-      .map { badgeId -> Int in
-        _ = NetworkService.shared.profileRepository.updateRepresentBadge(badgeId)
-        return badgeId
-      }
+      .flatMap({ badgeId -> Observable<Int> in
+        return NetworkService.shared.profileRepository.updateRepresentBadge(badgeId)
+      })
       .asDriver(onErrorJustReturn: -1)
       
     

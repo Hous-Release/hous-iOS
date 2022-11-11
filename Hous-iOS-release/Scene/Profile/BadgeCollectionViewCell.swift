@@ -154,22 +154,15 @@ class BadgeCollectionViewCell: UICollectionViewCell {
       badgeImageView.image = Images.lockBg.image
     }
     
-    if viewModel.isRepresenting {
-      blurView.isHidden = false
-      representLabel.isHidden = false
-    } else {
+    switch viewModel.tapState {
+    case .none:
+      yelloBackgroundView.isHidden = true
       blurView.isHidden = true
       representLabel.isHidden = true
-    }
-  }
-  
-  
-  func setTapStatusView(tapState: BadgeViewTapState) {
-    switch tapState {
-    case .none:
-      break
     case .selected:
       yelloBackgroundView.isHidden = false
+      blurView.isHidden = true
+      representLabel.isHidden = true
     case .representing:
       yelloBackgroundView.isHidden = true
       blurView.isHidden = false

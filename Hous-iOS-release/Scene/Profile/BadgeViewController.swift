@@ -165,16 +165,23 @@ extension BadgeViewController {
       
       updatedRepresentBadgeCompleted
         .asDriver(onErrorJustReturn: -1)
-        .drive(onNext: { id in
+        .drive(onNext: { [weak self] id in
+          guard let self = self else { return }
+          
           var idx = 0
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == id {
               idx = index
+            } else {
+              self.badgeWithStateModel[index].tapState = .none
             }
           }
           let urlString = self.badgeWithStateModel[idx].imageURL
           let title = self.badgeWithStateModel[idx].title
           cell.setRepresntingBadgeCellData(viewModel: RepresentingBadgeViewModel(imageURL: urlString, title: title))
+          
+          //MARK: - 이거보다 더 나은 방법이 있을까
+          self.badgeCollectionView.reloadSections(IndexSet(integer: 1))
         })
         .disposed(by: cell.disposeBag)
     
@@ -190,11 +197,15 @@ extension BadgeViewController {
       
       cell.badgeImageView.rx.tapGesture()
         .when(.recognized)
-        .subscribe(onNext: { _ in
+        .subscribe(onNext: { [weak self] _ in
+          guard let self = self else { return }
+          
           var idx = 0
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == viewModel.id {
               idx = index
+            } else {
+              self.badgeWithStateModel[index].tapState = .none
             }
           }
           
@@ -210,12 +221,18 @@ extension BadgeViewController {
             print("대표 최고 !! 👍")
           }
           
-          cell.setTapStatusView(tapState: self.badgeWithStateModel[idx].tapState)
+          cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])
+          
         })
         .disposed(by: cell.disposeBag)
-
       
-      cell.setRoomBadgeCellData(viewModel: viewModel)
+      if badgeWithStateModel.isEmpty {
+        cell.setRoomBadgeCellData(viewModel: viewModel)
+      } else {
+        cell.setRoomBadgeCellData(viewModel: badgeWithStateModel[indexPath.row])
+      }
+      
+      
       
     return cell
   }
