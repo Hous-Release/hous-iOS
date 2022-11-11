@@ -117,7 +117,7 @@ public struct ProfileModel: Encodable, Equatable {
     self.badgeImageURL = badgeImageURL
     self.badgeLabel = badgeLabel
     self.typeScores = typeScores
-    self.isEmptyView = true
+    self.isEmptyView = isEmptyView
     self.birthday = birthday
     self.birthdayPublic = birthdayPublic
     self.userJob = userJob

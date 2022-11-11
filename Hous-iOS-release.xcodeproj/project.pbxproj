@@ -73,6 +73,7 @@
 		9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */; };
 		9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */; };
 		9BF9AD6D291E0A58006A0BDE /* ProfileEditBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */; };
+		9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6E291E8D3E006A0BDE /* testLottie.json */; };
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
@@ -262,6 +263,7 @@
 		9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendRuleView.swift; sourceTree = "<group>"; };
 		9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendBoxView.swift; sourceTree = "<group>"; };
 		9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditBackButton.swift; sourceTree = "<group>"; };
+		9BF9AD6E291E8D3E006A0BDE /* testLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testLottie.json; sourceTree = "<group>"; };
 		B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewController.swift; sourceTree = "<group>"; };
 		B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				9B454E4D2900055F00F5A319 /* profileRedlottie.json */,
+				9BF9AD6E291E8D3E006A0BDE /* testLottie.json */,
 				77AEF34128E200D2002A102B /* splashlottie.json */,
 			);
 			path = Lottie;
@@ -1223,6 +1226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */,
 				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */,
 				B8555AC5291CCC4800E943AE /* ByDayTodoDTO.json in Resources */,
