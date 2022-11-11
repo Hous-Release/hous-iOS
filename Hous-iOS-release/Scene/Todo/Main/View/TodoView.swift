@@ -61,13 +61,11 @@ final class TodoView: UIView {
     collectionViewLayout: UICollectionViewLayout()).then {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .vertical
-      layout.estimatedItemSize = Size.itemSize
-      layout.headerReferenceSize = Size.headerSize
-      layout.footerReferenceSize = Size.footerSize
       $0.collectionViewLayout = layout
       $0.showsVerticalScrollIndicator = false
       $0.register(cell: MyTodoCollectionViewCell.self)
       $0.register(cell: OurTodoCollectionViewCell.self)
+      $0.register(cell: EmptyTodoByDayCollectionViewCell.self)
       $0.register(TodoHeaderCollectionReusableView.self,
                   forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                   withReuseIdentifier: TodoHeaderCollectionReusableView.className)
