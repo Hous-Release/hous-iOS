@@ -40,8 +40,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
     
     //MARK: Get Data
     
-    NetworkService.shared.profileRepository.getProfileInfo { [weak self] res, err in
-      guard let self = self else { return }
+    NetworkService.shared.profileRepository.getProfileInfo { res, err in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -121,8 +120,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
     
     //MARK: Put Data
     
-    NetworkService.shared.profileRepository.putProfileEditInfo(dto) { [weak self] res, err in
-      guard let self = self else { return }
+    NetworkService.shared.profileRepository.putProfileEditInfo(dto) { res, err in
       if (res?.status != 200) {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -132,7 +130,6 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      print("⭐️⭐️⭐️⭐️⭐️")
       ProfileRepositoryImp.event.onNext(.putProfile)
     }
   }
