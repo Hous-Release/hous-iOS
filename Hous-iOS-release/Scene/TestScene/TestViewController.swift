@@ -66,6 +66,15 @@ final class TestViewController: UIViewController {
     return button
   }()
 
+  private lazy var todoBottomSheetButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("todoBottomSheet", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton7), for: .touchUpInside)
+    return button
+  }()
+
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
@@ -82,6 +91,7 @@ final class TestViewController: UIViewController {
     view.addSubview(exceedButton)
     view.addSubview(duplicateButton)
     view.addSubview(defaultBottomSheetButton)
+    view.addSubview(todoBottomSheetButton)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -110,6 +120,11 @@ final class TestViewController: UIViewController {
     }
     defaultBottomSheetButton.snp.makeConstraints { make in
       make.top.equalTo(self.duplicateButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    todoBottomSheetButton.snp.makeConstraints { make in
+      make.top.equalTo(self.defaultBottomSheetButton.snp.bottom).offset(10)
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
@@ -231,5 +246,62 @@ extension TestViewController {
         print("Cancel")
       }
     }
+  }
+
+  @objc
+  private func didTapButton7() {
+
+//    let factory = HomieFactory.makeHomie(type: HomieColor(rawValue: reactor.currentState.color) ?? .GRAY)
+
+
+//    let factory = HomieFactory.makeHomie(type: .BLUE)
+
+//    let homieCellModels: [HomieCellModel]
+
+
+    let homies = TestViewController.generateMock()
+    let bottomSheetType = BottomSheetType.todoType(homies)
+
+    presentBottomSheet(bottomSheetType) { [weak self] actionType in
+
+      switch actionType {
+      case .add:
+        break
+      case .modify:
+        print("Modify")
+      case .delete:
+        print("Delete")
+      case .cancel:
+        print("Cancel")
+      }
+    }
+  }
+}
+
+extension TestViewController {
+  static func generateMock() -> [HomieCellModel] {
+
+
+    return [
+      HomieCellModel(homieName: "민재쿤", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
+      HomieCellModel(homieName: "김민재", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
+      HomieCellModel(homieName: "민재김", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
+      HomieCellModel(homieName: "민재킴", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
+      HomieCellModel(homieName: "지현", homieColor: HomieFactory.makeHomie(type: .YELLOW).color),
+      HomieCellModel(homieName: "지현킴", homieColor: HomieFactory.makeHomie(type: .YELLOW).color),
+      HomieCellModel(homieName: "김지현", homieColor: HomieFactory.makeHomie(type: .YELLOW).color),
+      HomieCellModel(homieName: "지현김", homieColor: HomieFactory.makeHomie(type: .YELLOW).color),
+      HomieCellModel(homieName: "의진리", homieColor: HomieFactory.makeHomie(type: .GREEN).color),
+      HomieCellModel(homieName: "이의진", homieColor: HomieFactory.makeHomie(type: .GREEN).color),
+      HomieCellModel(homieName: "의진", homieColor: HomieFactory.makeHomie(type: .GREEN).color),
+      HomieCellModel(homieName: "의진이", homieColor: HomieFactory.makeHomie(type: .GREEN).color),
+      HomieCellModel(homieName: "김호세", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+      HomieCellModel(homieName: "김호세1", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+      HomieCellModel(homieName: "김호세2", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+      HomieCellModel(homieName: "김호세3", homieColor: HomieFactory.makeHomie(type: .PURPLE).color),
+
+    ]
+
+
   }
 }
