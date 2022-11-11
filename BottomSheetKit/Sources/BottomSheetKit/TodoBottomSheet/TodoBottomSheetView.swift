@@ -53,7 +53,7 @@ internal final class TodoBottomSheetView: UIView {
 
   private let daysLabel: UILabel = {
     let label = UILabel()
-    label.text = "월,화,수,목,금,토,일"
+    label.text = "daysLabel"
     label.font = SpoqaHanSansNeo.medium.font(size: 13)
     label.textColor = Colors.g6.color
     label.numberOfLines = 1
@@ -99,14 +99,17 @@ internal final class TodoBottomSheetView: UIView {
   private var dataSource: DataSource! = nil
   private var snapShot: SnapShot! = nil
 
-  internal init(_ homies: [HomieCellModel]) {
+  internal init(
+    _ model: TodoModel
+  ) {
 
     super.init(frame: .zero)
     configureCollectionView()
     configureDataSource()
+    setLabel(model)
     setupViews()
     applyInitialSnapshot()
-    applyHomiesSnapShot(homies.uniqued())
+    applyHomiesSnapShot(model.homies.uniqued())
 
   }
 
@@ -117,6 +120,30 @@ internal final class TodoBottomSheetView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     updateCollectionViewHeight()
+  }
+
+  private func setLabel(_ model: TodoModel) {
+    todoLabel.text = model.todoName
+    daysLabel.text = processDaysModel(model.days)
+  }
+
+  private func processDaysModel(_ models: [Days]) -> String {
+    guard !models.isEmpty else { return "" }
+
+    var res = ""
+
+    let removeDup = models.uniqued().sorted(by: <)
+
+    for (i, day) in removeDup.enumerated() {
+      if i == removeDup.endIndex - 1 {
+        res += day.description
+        break
+      }
+
+      res += (day.description + ", ")
+    }
+
+    return res
   }
 
   private func updateCollectionViewHeight() {
@@ -152,7 +179,7 @@ internal final class TodoBottomSheetView: UIView {
 
     todoLabel.snp.makeConstraints { make in
       make.top.equalTo(handleView.snp.bottom).offset(Constants.todoLabelTopMargin)
-      make.leading.equalToSuperview().inset(Constants.horizontalMargin)
+      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
     }
 
     daysLabel.snp.makeConstraints { make in

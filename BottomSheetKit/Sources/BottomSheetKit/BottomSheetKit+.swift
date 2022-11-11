@@ -106,9 +106,8 @@ public extension UIViewController {
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
 
-      // TODO: 데이터 변경
-    case .todoType(let homies):
-      let view = TodoBottomSheetView(homies)
+    case .todoType(let model):
+      let view = TodoBottomSheetView(model)
       let bottomSheetAction = TodoBottomSheetAction(view: view)
       let vc = TodoBottomSheetViewController(action: bottomSheetAction)
 
