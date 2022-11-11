@@ -43,6 +43,7 @@ class ByDayTodoView: UIView {
       $0.register(cell: CountTodoByDayCollectionViewCell.self)
       $0.register(cell: MyTodoByDayCollectionViewCell.self)
       $0.register(cell: OurTodoByDayCollectionViewCell.self)
+      $0.register(cell: EmptyTodoByDayCollectionViewCell.self)
       $0.register(
         ByDayHeaderCollectionReusableView.self,
         forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
