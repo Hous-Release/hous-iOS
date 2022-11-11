@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheetKit
 import Then
 import RxSwift
 import RxCocoa
@@ -154,9 +155,7 @@ final class ProfileEditViewController: UIViewController {
     let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
-    
-
-    
+  
     nameTextField.rx.controlEvent(.editingDidBegin)
       .observe(on:MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
@@ -205,12 +204,6 @@ final class ProfileEditViewController: UIViewController {
         self.actionDetected.onNext(.birthdayPublicEdited(isPublic: !self.birthdayTextField.birthdayPublicButton.isSelected))
       })
       .disposed(by: disposeBag)
-    
-//    datePicker.rx.date
-//      .bind(onNext: { date in
-//        actionDetected.onNext(.birthdayTextFieldEdited(date: date))
-//      })
-//      .disposed(by: disposeBag)
     
     mbtiTextField.rx.controlEvent(.editingDidBegin)
       .observe(on:MainScheduler.asyncInstance)
@@ -284,9 +277,16 @@ final class ProfileEditViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
+    navigationBar.navigationBackButton.rx.tap
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabBack)
+      })
+      .disposed(by: disposeBag)
+    
     self.view.rx.tapGesture()
       .when(.recognized)
-      .debug("hoho")
       .bind(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.actionDetected.onNext(.didTabBackgroundView)
@@ -310,7 +310,6 @@ final class ProfileEditViewController: UIViewController {
         self.textFieldCountConstraint(action: $0)
         self.birthdayButtonControl(action: $0)
         self.keyPadControl(action: $0)
-//        self.birthdayTextFieldControl(action: $0)
       })
       .disposed(by: disposeBag)
     
@@ -388,22 +387,26 @@ final class ProfileEditViewController: UIViewController {
   
   private func textFieldCountConstraint(action: ProfileEditActionControl) {
     var text: String
+    var attributeName: String
     var maxCount: Int
-    var textField: UITextField
+    var textField: ProfileEditTextField
     
     switch action {
     case let .nameTextFieldEdited(data):
       text = data
-      maxCount = 5
+      attributeName = "닉네임은"
+      maxCount = 3
       textField = nameTextField
       
     case let .mbtiTextFieldEdited(data):
       text = data
+      attributeName = "MBTI는"
       maxCount = 4
       textField = mbtiTextField
       
     case let .jobTextFieldEdited(data):
       text = data
+      attributeName = "직업은"
       maxCount = 3
       textField = jobTextField
       
@@ -412,8 +415,16 @@ final class ProfileEditViewController: UIViewController {
     }
     
     if text.count > maxCount {
-      let index = text.index(text.startIndex, offsetBy: maxCount)
-      textField.text = String(text[..<index])
+      textField.invalidDataOn(attributeName: attributeName, count: maxCount)
+      navigationBar.saveButton.isEnabled = false
+    }
+    else if text.count == 0 && textField == nameTextField {
+      navigationBar.saveButton.isEnabled = false
+    } else {
+      textField.invalidDataOff()
+      if viewModel.isModifiedData {
+        navigationBar.saveButton.isEnabled = true
+      }
     }
   }
   
@@ -446,28 +457,43 @@ final class ProfileEditViewController: UIViewController {
     }
   }
   
-//  private func birthdayTextFieldControl(action: ProfileEditActionControl) {
-//    switch action {
-//    case let .birthdayTextFieldEdited(date):
-//      birthdayTextFieldSet(date: date)
-//    default:
-//      return
-//    }
-//  }
-  
   private func doNavigation(action: ProfileEditActionControl) {
     switch action {
     case .didTabSave:
       profileRepository.putProfileEditInfo(data: viewModel.modifiedData)
       self.navigationController?.popViewController(animated: true)
-      
+    
+    case .didTabBack:
+      if self.viewModel.isModifiedData {
+        let backButtonPopUpModel = DefaultPopUpModel(
+          cancelText: "계속 수정하기",
+          actionText: "나가기",
+          title: "수정사항이 저장되지 않았어요!",
+          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        )
+        
+        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: backButtonPopUpModel)
+        
+        presentPopUp(popUpType) { [weak self] actionType in
+          switch actionType {
+          case .action:
+            self?.dismiss(animated: true)
+            self?.view.endEditing(true)
+            self?.navigationController?.popViewController(animated: true)
+          case .cancel:
+            self?.dismiss(animated: true)
+          }
+        }
+      } else {
+        
+        self.navigationController?.popViewController(animated: true)
+      }
     default:
       return
     }
   }
   
   private func keyPadControl(action: ProfileEditActionControl) {
-    print("⭐️", action)
     switch action {
     case .didTabBackgroundView:
       self.view.endEditing(true)

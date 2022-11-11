@@ -12,19 +12,8 @@ import RxCocoa
 final class ProfileEditNavigationBarView: UIView {
   
   private let disposeBag: DisposeBag = DisposeBag()
-  let viewActionControlSubject = PublishSubject<ProfileEditActionControl>()
   
-  private let navigationBackButton = UIButton().then {
-    let image = Images.icBack.image
-    let newWidth = 28
-    let newHeight = 28
-    let newImageRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
-    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-    image.draw(in: newImageRect)
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
-    UIGraphicsEndImageContext()
-    $0.setImage(newImage, for: .normal)
-  }
+  let navigationBackButton = ProfileEditBackButton()
   
   let saveButton = UIButton().then {
     $0.setTitle("저장", for: .normal)
@@ -33,7 +22,6 @@ final class ProfileEditNavigationBarView: UIView {
     $0.setTitleColor(Colors.blue.color, for: .normal)
     $0.isEnabled = false
   }
-  
   
   private let titleName = UILabel().then {
     $0.text = "프로필 수정"
@@ -46,7 +34,6 @@ final class ProfileEditNavigationBarView: UIView {
     super.init(frame: frame)
     render()
     setup()
-    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
@@ -75,16 +62,6 @@ final class ProfileEditNavigationBarView: UIView {
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().inset(24)
     }
-    
-  }
-  
-  private func transferToViewController() {
-    self.navigationBackButton.rx.tap
-      .bind { [weak self] in
-        guard let self = self else { return }
-        self.viewActionControlSubject.onNext(.didTabBack(isModified: false))
-      }
-      .disposed(by: disposeBag)
   }
 }
 

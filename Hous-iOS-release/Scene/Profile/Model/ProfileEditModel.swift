@@ -18,7 +18,7 @@ public struct ProfileEditModel: Equatable {
 
 
 enum ProfileEditActionControl {
-  case didTabBack(isModified: Bool)
+  case didTabBack
   case didTabSave
   case didTabBackgroundView
   

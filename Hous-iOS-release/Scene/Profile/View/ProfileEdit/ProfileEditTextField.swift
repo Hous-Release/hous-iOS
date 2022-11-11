@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Then
 
 class ProfileEditTextField: UITextField {
-
+  
   let underlineLayer = CALayer()
   let animatedUnderlineLayer = CALayer()
-
+  private let invalidMessageLabel = UILabel().then {
+    $0.textColor = Colors.red.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+  }
+  
   var birthdayPublicButton = UIButton().then {
     $0.setImage(Images.icShow.image, for: .normal)
     $0.setImage(Images.icShowOn.image, for: .selected)
@@ -24,7 +29,7 @@ class ProfileEditTextField: UITextField {
     super.layoutSubviews()
     setupUnderlineLayer()
   }
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.layer.addSublayer(underlineLayer)
@@ -33,16 +38,16 @@ class ProfileEditTextField: UITextField {
     self.rightView = birthdayPublicButton
     self.rightViewMode = .always
   }
-
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   func setupUnderlineLayer() {
     var frame = self.bounds
     frame.origin.y = frame.size.height + 8
     frame.size.height = 2
-
+    
     underlineLayer.frame = frame
     underlineLayer.backgroundColor = Colors.g3.color.cgColor
     
@@ -67,4 +72,22 @@ extension ProfileEditTextField {
     let animatedUnderLineLayer = self.animatedUnderlineLayer
     animatedUnderLineLayer.removeFromSuperlayer()
   }
+  
+  func invalidDataOn(attributeName: String, count: Int) {
+    self.addSubview(invalidMessageLabel)
+    
+    invalidMessageLabel.snp.makeConstraints { make in
+      make.leading.equalTo(self.snp.leading).offset(12)
+      make.top.equalTo(self.snp.bottom).offset(16)
+    }
+    
+    invalidMessageLabel.text = "\(attributeName) \(count)자 이내로 입력해주세요!"
+    
+  }
+  
+  func invalidDataOff() {
+    invalidMessageLabel.removeFromSuperview()
+  }
+  
 }
+
