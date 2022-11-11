@@ -131,6 +131,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
         make.height.equalTo(254)
         make.width.equalTo(Size.screenWidth)
       }
+      self.sendSubviewToBack(profileMainImage)
       profileMainImage.currentProgress = 0
       profileMainImage.play()
     }
