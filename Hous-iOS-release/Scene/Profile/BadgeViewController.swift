@@ -81,6 +81,7 @@ class BadgeViewController: UIViewController {
   }
   
   private func configUI() {
+    navigationController?.navigationBar.isHidden = true
     self.setTabBarIsHidden(isHidden: true)
     
     view.addSubViews([
