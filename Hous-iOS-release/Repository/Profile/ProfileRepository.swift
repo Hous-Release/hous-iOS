@@ -54,9 +54,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
       
       var personalityColor: PersonalityColor
       switch dto.personalityColor {
-      case "RED":
-        personalityColor = .red
       case "GRAY":
+        personalityColor = .red
+      case "BLUE":
         personalityColor = .blue
       case "YELLOW":
         personalityColor = .yellow

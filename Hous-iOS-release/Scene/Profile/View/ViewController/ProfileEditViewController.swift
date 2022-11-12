@@ -45,7 +45,7 @@ final class ProfileEditViewController: UIViewController {
   
   private var nameTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "이름"
+    textfield.placeholder = "닉네임"
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -82,15 +82,18 @@ final class ProfileEditViewController: UIViewController {
     return textfield
   }()
   
-  private var statusTextField: ProfileEditTextField = {
-    var textfield = ProfileEditTextField()
-    textfield.placeholder = "자기소개"
-    textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    textfield.textColor = Colors.black.color
-    textfield.returnKeyType = .done
-    textfield.rightView?.isHidden = true
-    return textfield
-  }()
+  private var statusTextView = ProfileEditTextViewObject()
+  
+  private var statusTextCountLabel = UILabel().then {
+    $0.text = "0/40"
+    $0.font = Fonts.Montserrat.medium.font(size: 12)
+    $0.textColor = Colors.g5.color
+  }
+  
+  private var statusTextInvalidMessageLabel = UILabel().then {
+    $0.textColor = Colors.red.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+  }
   
   //MARK: Initalizer
   
@@ -127,7 +130,17 @@ final class ProfileEditViewController: UIViewController {
     birthdayTextField.birthdayPublicButton.isSelected = data.birthdayPublic
     mbtiTextField.text = data.mbti
     jobTextField.text = data.userJob
-    statusTextField.text = data.statusMessage
+    if (data.statusMessage == nil) {
+      statusTextView.isEmptyState = true
+      statusTextView.textView.text = statusTextView.placeHolderString
+      statusTextView.textView.textColor = Colors.g5.color
+      statusTextView.textViewResize()
+    } else {
+      statusTextView.isEmptyState = false
+      statusTextView.textView.text = data.statusMessage
+      statusTextCountLabel.text = "\(String(describing: data.statusMessage!.count))/40"
+      statusTextView.textViewResize()
+    }
   }
   
   private func setup() {
@@ -155,7 +168,7 @@ final class ProfileEditViewController: UIViewController {
     let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
-  
+    
     nameTextField.rx.controlEvent(.editingDidBegin)
       .observe(on:MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
@@ -185,7 +198,6 @@ final class ProfileEditViewController: UIViewController {
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.birthdayTextFieldSelected)
-        
       })
       .disposed(by: disposeBag)
     
@@ -253,7 +265,7 @@ final class ProfileEditViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
-    statusTextField.rx.controlEvent(.editingDidBegin)
+    statusTextView.textView.rx.didBeginEditing
       .observe(on:MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
@@ -261,11 +273,20 @@ final class ProfileEditViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
-    statusTextField.rx.controlEvent(.editingDidEnd)
+    statusTextView.textView.rx.didEndEditing
       .observe(on:MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.statusTextViewUnselected)
+      })
+      .disposed(by: disposeBag)
+    
+    statusTextView.textView.rx.didChange
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        let text = self.statusTextView.textView.text ?? ""
+        self.actionDetected.onNext(.statusTextViewEdited(text: text))
       })
       .disposed(by: disposeBag)
     
@@ -308,6 +329,7 @@ final class ProfileEditViewController: UIViewController {
         self.doNavigation(action: $0)
         self.textFieldModeControl(action: $0)
         self.textFieldCountConstraint(action: $0)
+        self.textViewControl(action: $0)
         self.birthdayButtonControl(action: $0)
         self.keyPadControl(action: $0)
       })
@@ -326,9 +348,9 @@ final class ProfileEditViewController: UIViewController {
   //MARK: Render
   
   private func render() {
-    [nameTextField, birthdayTextField, mbtiTextField, jobTextField, statusTextField].forEach {profileEditStackView.addArrangedSubview($0)}
+    [nameTextField, birthdayTextField, mbtiTextField, jobTextField].forEach {profileEditStackView.addArrangedSubview($0)}
     
-    view.addSubViews([navigationBar, profileEditStackView])
+    view.addSubViews([navigationBar, profileEditStackView, statusTextView, statusTextCountLabel])
     
     navigationBar.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
@@ -339,7 +361,17 @@ final class ProfileEditViewController: UIViewController {
     profileEditStackView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.height.equalTo(260)
+      make.height.equalTo(200)
+    }
+    
+    statusTextView.snp.makeConstraints { make in
+      make.top.equalTo(profileEditStackView.snp.bottom).offset(38)
+      make.leading.trailing.equalToSuperview().inset(24)
+    }
+    
+    statusTextCountLabel.snp.makeConstraints { make in
+      make.top.equalTo(statusTextView.snp.bottom).offset(7)
+      make.trailing.equalToSuperview().offset(-34)
     }
   }
   
@@ -364,9 +396,9 @@ final class ProfileEditViewController: UIViewController {
     case .jobTextFieldUnselected:
       jobTextField.textFieldUnselected()
     case .statusTextViewSelected:
-      statusTextField.textFieldSelected()
+      statusTextView.textViewSelected()
     case .statusTextViewUnselected:
-      statusTextField.textFieldUnselected()
+      statusTextView.textViewUnselected()
     default:
       return
     }
@@ -389,7 +421,7 @@ final class ProfileEditViewController: UIViewController {
     var text: String
     var attributeName: String
     var maxCount: Int
-    var textField: ProfileEditTextField
+    var textField: ProfileEditTextField?
     
     switch action {
     case let .nameTextFieldEdited(data):
@@ -410,7 +442,32 @@ final class ProfileEditViewController: UIViewController {
       maxCount = 3
       textField = jobTextField
       
+    case let .statusTextViewEdited(data):
+      text = data
+      attributeName = "자기소개는"
+      maxCount = 40
+      
     default:
+      return
+    }
+    
+    guard let textField = textField else {
+      if text.count > maxCount {
+        self.view.addSubview(statusTextInvalidMessageLabel)
+        
+        statusTextInvalidMessageLabel.snp.makeConstraints { make in
+          make.leading.equalTo(statusTextView.snp.leading).offset(12)
+          make.top.equalTo(statusTextView.snp.bottom).offset(16)
+        }
+        
+        statusTextInvalidMessageLabel.text = "\(attributeName) \(maxCount)자 이내로 입력해주세요!"
+        navigationBar.saveButton.isEnabled = false
+      } else {
+        statusTextInvalidMessageLabel.removeFromSuperview()
+        if viewModel.isModifiedData {
+          navigationBar.saveButton.isEnabled = true
+        }
+      }
       return
     }
     
@@ -428,12 +485,23 @@ final class ProfileEditViewController: UIViewController {
     }
   }
   
+  private func textViewControl(action: ProfileEditActionControl) {
+    switch action {
+    case .statusTextViewEdited:
+      let count = statusTextView.textView.text.count
+      self.statusTextCountLabel.text = "\(count)/40"
+      statusTextView.textViewResize()
+      statusTextView.textEmptyControl()
+    default:
+      return
+    }
+  }
+  
   private func configureDatePicker(date: Date) {
     self.datePicker.date = date
     self.datePicker.datePickerMode = .date
     self.datePicker.preferredDatePickerStyle = .wheels
     self.datePicker.locale = Locale(identifier: "ko-KR")
-    
   }
   
   private func saveButtonControl(isModified: Bool) {
@@ -462,7 +530,7 @@ final class ProfileEditViewController: UIViewController {
     case .didTabSave:
       profileRepository.putProfileEditInfo(data: viewModel.modifiedData)
       self.navigationController?.popViewController(animated: true)
-    
+      
     case .didTabBack:
       if self.viewModel.isModifiedData {
         let backButtonPopUpModel = DefaultPopUpModel(

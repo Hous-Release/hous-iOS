@@ -121,6 +121,7 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     statusMessage.snp.makeConstraints { make in
       make.top.equalTo(tagGuideStackView.snp.bottom).offset(13)
       make.leading.equalTo(userName)
+      make.trailing.equalToSuperview().offset(-28)
     }
     
     grayLineView.snp.makeConstraints { make in
