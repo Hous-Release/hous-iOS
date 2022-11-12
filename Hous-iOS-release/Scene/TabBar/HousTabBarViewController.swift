@@ -33,6 +33,7 @@ class HousTabbarViewController: UITabBarController {
     render()
     setUp()
     bind()
+    setChangeTabBarIndex()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +72,21 @@ class HousTabbarViewController: UITabBarController {
         self?.selectTabWith(index: $0)
         
       }
+      .disposed(by: disposeBag)
+  }
+  
+  private func setChangeTabBarIndex() {
+    guard let mainNVC = self.viewControllers?[0] as? UINavigationController,
+          let mainVC = mainNVC.viewControllers[0] as? MainHomeViewController
+    else {
+      return
+    }
+    
+    mainVC.todoBackgroundViewDidTap
+      .withUnretained(self)
+      .subscribe(onNext: { (owner, _) in
+        owner.housTabBar.todoBackgroundViewDidTapped.onNext(())
+      })
       .disposed(by: disposeBag)
   }
 }
