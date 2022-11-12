@@ -11,6 +11,7 @@ import RxCocoa
 import RxGesture
 import RxKeyboard
 import Network
+import BottomSheetKit
 
 class EditRuleViewController: UIViewController {
   
@@ -68,6 +69,16 @@ class EditRuleViewController: UIViewController {
     rulesTableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
   
+  private func setEmptyView() {
+    if editViewRules.isEmpty {
+      ruleEmptyViewLabel.isHidden = false
+      navigationBar.rightButton.isEnabled = false
+    } else {
+      ruleEmptyViewLabel.isHidden = true
+      navigationBar.rightButton.isEnabled = true
+    }
+  }
+  
   private func configUI() {
     navigationBar.updateRightButtonSnapKit()
     
@@ -93,6 +104,8 @@ class EditRuleViewController: UIViewController {
       make.top.equalTo(navigationBar.snp.bottom).offset(48)
       make.centerX.equalToSuperview()
     }
+    
+    setEmptyView()
   }
   
   //MARK: - Bind
@@ -122,7 +135,12 @@ class EditRuleViewController: UIViewController {
             let editBlueColor = Colors.blueEdit.color
             
             if cell.backgroundColor == existing {
-              cell.backgroundColor = editBlueColor
+              if row < 3 {
+                cell.backgroundColor = editBlueColor
+              } else {
+                cell.backgroundColor = Colors.g3.color
+              }
+              
             } else {
               cell.backgroundColor = existing
             }
@@ -200,12 +218,14 @@ class EditRuleViewController: UIViewController {
     
     let output = viewModel.transform(input: input)
     
-    output.isEmptyView
-      .drive(onNext: { [weak self] flag in
-        guard let self = self else { return }
-        self.ruleEmptyViewLabel.isHidden = !flag
-      })
-      .disposed(by: disposeBag)
+//    output.isEmptyView
+//      .debug("EMPTY VIEW ! ")
+//      .drive(onNext: { [weak self] flag in
+//        guard let self = self else { return }
+//        print("flag : ", flag, "✅✅✅✅✅")
+//        self.ruleEmptyViewLabel.isHidden = !flag
+//      })
+//      .disposed(by: disposeBag)
     
     output.saveCompleted
       .drive(onNext: { [weak self] _ in
@@ -215,7 +235,23 @@ class EditRuleViewController: UIViewController {
     
     output.moveToRuleMainView
       .drive(onNext: { [weak self] _ in
-        self?.navigationController?.popViewController(animated: true)
+        guard let self = self else { return }
+        let defaultPopUpModel = DefaultPopUpModel(
+          cancelText: "계속 수정하기",
+          actionText: "나가기",
+          title: "수정사항이 저장되지 않았어요!",
+          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        )
+        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          switch actionType {
+          case .action:
+            self?.navigationController?.popViewController(animated: true)
+          case .cancel:
+            break
+          }
+        }
       })
       .disposed(by: disposeBag)
     

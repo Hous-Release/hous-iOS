@@ -19,7 +19,7 @@ final class EditRuleViewModel: ViewModelType {
   }
   
   struct Output {
-    let isEmptyView: Driver<Bool>
+//    let isEmptyView: Driver<Bool>
     let saveCompleted: Driver<Void>
     let moveToRuleMainView: Driver<Void>
   }
@@ -28,11 +28,12 @@ final class EditRuleViewModel: ViewModelType {
   
   func transform(input: Input) -> Output {
     
-    let isEmptyView = input.saveButtonDidTap
-      .map { viewModels in
-        viewModels.count == 0
-      }
-      .asDriver(onErrorJustReturn: true)
+//    let isEmptyView = input.saveButtonDidTap
+//      .map { viewModels -> Bool in
+//        print("viewModels 개수", viewModels.count, "👍👍👍👍")
+//        return viewModels.count == 0
+//      }
+//      .asDriver(onErrorJustReturn: true)
     
     let ruleDTO = input.saveButtonDidTap
       .map { ruleViewModels -> [RuleDTO.Request.Rule] in
@@ -54,7 +55,6 @@ final class EditRuleViewModel: ViewModelType {
       .asDriver(onErrorJustReturn: ())
       
     return Output(
-      isEmptyView: isEmptyView,
       saveCompleted: ruleDriver,
       moveToRuleMainView: moveToRuleMainView
     )

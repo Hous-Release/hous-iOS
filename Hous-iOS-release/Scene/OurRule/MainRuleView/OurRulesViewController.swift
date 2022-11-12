@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheetKit
 import RxCocoa
 import RxDataSources
 import RxSwift
@@ -127,14 +128,32 @@ class OurRulesViewController: UIViewController {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         //TODO: 나중에 바텀시트 버튼 3개면 Add로는 RuleList, Edit로는 RuleWithIdList, Delete로는 RuleIdList
+        let bottomSheetType = BottomSheetType.defaultType
+        
         let ruleList = self.rulesWithIds.map { ruleWithIdViewModel in
           ruleWithIdViewModel.name
         }
-//        let vc = DeleteRuleViewController(rules: self.rulesWithIds, viewModel: DeleteRuleViewModel())
-//        let vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
-        let vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
-        vc.view.backgroundColor = .white
-        self.navigationController?.pushViewController(vc, animated: true)
+
+        self.presentBottomSheet(bottomSheetType) { actionType in
+          
+          var vc = UIViewController()
+          
+          switch actionType {
+          case .add:
+            vc = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
+            
+          case .modify:
+            vc = EditRuleViewController(editViewRules: self.rulesWithIds, viewModel: EditRuleViewModel())
+          case .delete:
+            vc = DeleteRuleViewController(rules: self.rulesWithIds, viewModel: DeleteRuleViewModel())
+          case .cancel:
+            //TODO: - 호세형 이부분 바텀시트끌어내리면 흰 화면
+            break
+          }
+          
+          vc.view.backgroundColor = .white
+          self.navigationController?.pushViewController(vc, animated: true)
+        }
       })
       .disposed(by: disposeBag)
     

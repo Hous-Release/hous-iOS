@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import BottomSheetKit
 
 class DeleteRuleViewController: UIViewController {
   //MARK: - UI Components
@@ -16,6 +17,13 @@ class DeleteRuleViewController: UIViewController {
     navBar.setRightButtonText(text: "삭제")
     return navBar
   }()
+  
+  private let ruleEmptyViewLabel = UILabel().then {
+    $0.isHidden = true
+    $0.text = "아직 우리 집 Rules가 없어요!"
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+    $0.textColor = Colors.g5.color
+  }
   
   private let rulesTableView = UITableView().then {
     $0.showsVerticalScrollIndicator = false
@@ -55,12 +63,23 @@ class DeleteRuleViewController: UIViewController {
     rulesTableView.register(RulesTableViewCell.self, forCellReuseIdentifier: RulesTableViewCell.className)
   }
   
+  private func setEmptyView() {
+    if rules.isEmpty {
+      ruleEmptyViewLabel.isHidden = false
+      navigationBar.rightButton.isEnabled = false
+    } else {
+      ruleEmptyViewLabel.isHidden = true
+      navigationBar.rightButton.isEnabled = true
+    }
+  }
+  
   private func configUI() {
     navigationBar.updateRightButtonSnapKit()
     
     view.addSubViews([
       navigationBar,
-      rulesTableView
+      rulesTableView,
+      ruleEmptyViewLabel
     ])
     
     navigationBar.snp.makeConstraints { make in
@@ -74,6 +93,13 @@ class DeleteRuleViewController: UIViewController {
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
+    
+    ruleEmptyViewLabel.snp.makeConstraints { make in
+      make.top.equalTo(navigationBar.snp.bottom).offset(48)
+      make.centerX.equalToSuperview()
+    }
+    
+    setEmptyView()
   }
   
   private func bindTableView() {
@@ -150,12 +176,29 @@ class DeleteRuleViewController: UIViewController {
       .asDriver()
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let deletingRules = self.selectedDict.flatMap { (key, flag) -> [Int] in
-          var deletingRules: [Int] = []
-          if flag { deletingRules.append(key) }
-          return deletingRules
+        
+        let defaultPopUpModel = DefaultPopUpModel(
+          cancelText: "취소하기",
+          actionText: "삭제하기",
+          title: "안녕, Rules...",
+          subtitle: "Rules는 한 번 삭제하면 복구되지 않아요."
+        )
+        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          guard let self = self else { return }
+          switch actionType {
+          case .action:
+            let deletingRules = self.selectedDict.flatMap { (key, flag) -> [Int] in
+              var deletingRules: [Int] = []
+              if flag { deletingRules.append(key) }
+              return deletingRules
+            }
+            self.deleteButtonDidTapped.onNext(deletingRules)
+          case .cancel:
+            break
+          }
         }
-        self.deleteButtonDidTapped.onNext(deletingRules)
       })
       .disposed(by: disposeBag)
   }
