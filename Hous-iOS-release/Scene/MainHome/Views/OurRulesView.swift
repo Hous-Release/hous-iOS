@@ -10,6 +10,7 @@ import UIKit
 class OurRulesView: UIView {
   
   private let numberLabel = UILabel().then {
+    $0.textAlignment = .center
     $0.font = Fonts.Montserrat.semiBold.font(size: 16)
     $0.textColor = Colors.blue.color
   }
@@ -39,7 +40,7 @@ class OurRulesView: UIView {
     }
     
     ruleTextLabel.snp.makeConstraints { make in
-      make.leading.equalTo(numberLabel.snp.trailing).offset(14)
+      make.leading.equalToSuperview().inset(24)
       make.centerY.equalTo(numberLabel)
       make.bottom.equalToSuperview()
     }

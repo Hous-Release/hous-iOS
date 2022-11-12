@@ -23,7 +23,6 @@ class DeleteRuleViewModel: ViewModelType {
   
   func transform(input: Input) -> Output {
     let deletedCompleted = input.deleteButtonDidTapped.flatMap { ruleId in
-      //TODO: Network
       return NetworkService.shared.ruleRepository.deleteRules(RuleDTO.Request.deleteRulesRequestDTO(rulesIdList: ruleId))
     }
     .asDriver(onErrorJustReturn: ())

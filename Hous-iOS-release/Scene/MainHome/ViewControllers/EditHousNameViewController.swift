@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxRelay
+import BottomSheetKit
 
 class EditHousNameViewController: UIViewController {
   
@@ -28,7 +29,6 @@ class EditHousNameViewController: UIViewController {
     $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요!"
     $0.textColor = Colors.g5.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.dynamicFont(fontSize: 14, weight: .medium)
   }
   
   private let textcountLabel = UILabel().then {
@@ -42,6 +42,13 @@ class EditHousNameViewController: UIViewController {
     $0.textAlignment = .center
   }
   
+  private let inValidTextLabel = UILabel().then {
+    $0.isHidden = true
+    $0.text = "방 이름은 8자 이내로 입력해주세요!"
+    $0.textColor = Colors.red.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+  }
+  
   private let blueLine = UIView().then {
     $0.backgroundColor = Colors.blue.color
   }
@@ -50,23 +57,20 @@ class EditHousNameViewController: UIViewController {
   //MARK: Life Cycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .systemBackground
-    setDelegate()
     configureButtonAction()
     configUI()
     bindUI()
   }
-  
-  private func setDelegate() {
-    navigationBar.delegate = self
-  }
     
   private func configUI() {
+    self.view.backgroundColor = .systemBackground
+    
     view.addSubViews([
       navigationBar,
       descriptionLabel,
       textField,
       blueLine,
+      inValidTextLabel,
       textcountLabel
     ])
     
@@ -94,6 +98,11 @@ class EditHousNameViewController: UIViewController {
       make.centerX.equalTo(textField)
     }
     
+    inValidTextLabel.snp.makeConstraints { make in
+      make.top.equalTo(blueLine.snp.bottom).offset(8)
+      make.leading.equalTo(blueLine)
+    }
+    
     textcountLabel.snp.makeConstraints { make in
       make.top.equalTo(blueLine.snp.bottom).offset(7)
       make.trailing.equalTo(blueLine)
@@ -110,12 +119,43 @@ class EditHousNameViewController: UIViewController {
   }
   
   private func bindUI() {
+    navigationBar.backButton.rx.tap
+      .asDriver()
+      .drive(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        let defaultPopUpModel = DefaultPopUpModel(
+          cancelText: "돌아가기",
+          actionText: "나가기",
+          title: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
+          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        )
+        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          switch actionType {
+          case .action:
+            self?.navigationController?.popViewController(animated: true)
+          case .cancel:
+            break
+          }
+        }
+      })
+      .disposed(by: disposeBag)
+    
     let input = EditHousNameViewModel.Input(
       roomName: textField.rx.text.orEmpty.distinctUntilChanged().asDriver(onErrorJustReturn: ""),
       saveButtonDidTapped: saveButtonDidTapped
     )
     
     let output = self.viewModel.transform(input: input)
+    
+    output.isValidText
+      .drive(onNext: { [weak self] isValidFlag in
+        guard let self = self else { return }
+        self.navigationBar.rightButton.isEnabled = isValidFlag
+        self.inValidTextLabel.isHidden = isValidFlag
+      })
+      .disposed(by: disposeBag)
     
     output.textCountLabelText
       .drive(textcountLabel.rx.text)
@@ -127,36 +167,10 @@ class EditHousNameViewController: UIViewController {
       .disposed(by: disposeBag)
     
     output.updatedRoom
-      .drive(onNext: { _ in
-        self.backButtonDidTappedWithoutPopUp()
+      .drive(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
-  }
-}
-
-extension EditHousNameViewController: NavBarWithBackButtonViewDelegate {
-  func backButtonDidTapped() {
-    let popUp = QuitPopViewController()
-    popUp.configPopupTexts(
-      titleLabelText: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
-      subtitleLabelText: "정말 취소하려면 나가기 버튼을 눌러주세요",
-      continueButtonText: "돌아가기",
-      cancelButtonText: "나가기"
-    )
-    popUp.delegate = self
-    popUp.modalTransitionStyle = .crossDissolve
-    popUp.modalPresentationStyle = .overFullScreen
-    
-    present(popUp, animated: true)
-  }
-  
-  func backButtonDidTappedWithoutPopUp() {
-    self.navigationController?.popViewController(animated: true)
-  }
-}
-
-extension EditHousNameViewController: QuitPopViewControllerDelegate {
-  func cancelButtonDidTapped() {
-    self.navigationController?.popViewController(animated: true)
   }
 }
