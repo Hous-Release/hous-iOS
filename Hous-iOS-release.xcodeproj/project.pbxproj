@@ -112,6 +112,11 @@
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5F9FB19291D3F090056C0B1 /* Kingfisher */; };
+		B5F9FB22291FCDC90056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1D291FCDC90056C0B1 /* thursday.json */; };
+		B5F9FB23291FCDC90056C0B1 /* tuesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1E291FCDC90056C0B1 /* tuesday.json */; };
+		B5F9FB24291FCDC90056C0B1 /* friday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1F291FCDC90056C0B1 /* friday.json */; };
+		B5F9FB25291FCDC90056C0B1 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB20291FCDC90056C0B1 /* monday.json */; };
+		B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB21291FCDC90056C0B1 /* wednesday.json */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
@@ -299,6 +304,11 @@
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
+		B5F9FB1D291FCDC90056C0B1 /* thursday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thursday.json; sourceTree = "<group>"; };
+		B5F9FB1E291FCDC90056C0B1 /* tuesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tuesday.json; sourceTree = "<group>"; };
+		B5F9FB1F291FCDC90056C0B1 /* friday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = friday.json; sourceTree = "<group>"; };
+		B5F9FB20291FCDC90056C0B1 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
+		B5F9FB21291FCDC90056C0B1 /* wednesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wednesday.json; sourceTree = "<group>"; };
 		B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCellReactor.swift; sourceTree = "<group>"; };
 		B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemListCell.swift; sourceTree = "<group>"; };
 		B8249A5429116E69008005DE /* MemEmptyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemEmptyListCell.swift; sourceTree = "<group>"; };
@@ -555,6 +565,11 @@
 		77AEF34028E2009E002A102B /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				B5F9FB21291FCDC90056C0B1 /* wednesday.json */,
+				B5F9FB20291FCDC90056C0B1 /* monday.json */,
+				B5F9FB1E291FCDC90056C0B1 /* tuesday.json */,
+				B5F9FB1D291FCDC90056C0B1 /* thursday.json */,
+				B5F9FB1F291FCDC90056C0B1 /* friday.json */,
 				9B454E4D2900055F00F5A319 /* profileRedlottie.json */,
 				9BF9AD6E291E8D3E006A0BDE /* testLottie.json */,
 				77AEF34128E200D2002A102B /* splashlottie.json */,
@@ -1233,10 +1248,15 @@
 				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */,
 				B8555AC5291CCC4800E943AE /* ByDayTodoDTO.json in Resources */,
+				B5F9FB25291FCDC90056C0B1 /* monday.json in Resources */,
+				B5F9FB22291FCDC90056C0B1 /* thursday.json in Resources */,
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
+				B5F9FB23291FCDC90056C0B1 /* tuesday.json in Resources */,
+				B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */,
 				B8D066E328FAA5ED00A99907 /* MemberTodoDTO.json in Resources */,
+				B5F9FB24291FCDC90056C0B1 /* friday.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
