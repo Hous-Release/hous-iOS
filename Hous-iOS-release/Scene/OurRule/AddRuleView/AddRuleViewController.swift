@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxKeyboard
 import RxGesture
+import BottomSheetKit
+import Kingfisher
 
 class AddRuleViewController: UIViewController {
   
@@ -140,7 +142,24 @@ class AddRuleViewController: UIViewController {
     
     output.navBackButtonDidTapped
       .drive(onNext: { [weak self] _ in
-        self?.navigationController?.popViewController(animated: true)
+        guard let self = self else { return }
+        let defaultPopUpModel = DefaultPopUpModel(
+          cancelText: "계속 작성하기",
+          actionText: "나가기",
+          title: "앗, 잠깐! 이대로 나가면\nRules가 추가되지 않아요!",
+          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        )
+        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          switch actionType {
+          case .action:
+            self?.navigationController?.popViewController(animated: true)
+          case .cancel:
+            break
+          }
+        }
+        
       })
       .disposed(by: disposeBag)
     
@@ -157,12 +176,34 @@ class AddRuleViewController: UIViewController {
               let text = self.ruleTextField.text
         else { return }
         
-        self.rules.append(text)
-        self.rulesSubject.onNext(self.rules)
-        
-        self.ruleTextField.text = ""
-        self.ruleTextField.endEditing(true)
-        self.ruleTableView.reloadData()
+        if self.rules.count >= 30 {
+          //TODO: - 호세형 'Rule 개수 초과'  image string으로 어떻게??
+//          let popModel = ImagePopUpModel(
+//            image: Images.illLimit.image.kf.,
+//            actionText: "알겠어요!",
+//            text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
+//            titleText: "Rules 개수 초과"
+//          )
+//
+//          let popUpType = PopUpType.exceed(exceedModel: popModel)
+//
+//          self.presentPopUp(popUpType) { actionType in
+//            switch actionType {
+//            case .action:
+//              break
+//            case .cancel:
+//              break
+//            }
+//          }
+          
+        } else {
+          self.rules.append(text)
+          self.rulesSubject.onNext(self.rules)
+          
+          self.ruleTextField.text = ""
+          self.ruleTextField.endEditing(true)
+          self.ruleTableView.reloadData()
+        }
       })
       .disposed(by: disposeBag)
     
