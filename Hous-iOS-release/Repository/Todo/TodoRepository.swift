@@ -15,6 +15,7 @@ public enum TodoRepositoryEvent {
   case dayOfWeek(String)
   case progressType(ProgressType)
   case progress(Float)
+  case isTodoEmpty(Bool)
   case myTodosSection(TodoMainSection.Model)
   case myTodosEmptySection(TodoMainSection.Model)
   case ourTodosSection(TodoMainSection.Model)
@@ -46,7 +47,7 @@ public final class TodoRepositoryImp: TodoRepository {
       self.event.onNext(.dayOfWeek(self.parse(of: data.dayOfWeek)))
       self.event.onNext(.progressType(self.getType(of: data.progress)))
       self.event.onNext(.progress(Float(data.progress)))
-
+      self.event.onNext(.isTodoEmpty(self.zeroTodoFlag(data)))
 
       if data.myTodosCnt == 0 {
         self.event.onNext(.myTodosEmptySection(
@@ -92,5 +93,9 @@ extension TodoRepositoryImp {
     } else {
       return .done
     }
+  }
+
+  private func zeroTodoFlag(_ data: MainTodoDTO.Response.MainTodoResponseDTO) -> Bool{
+    return (data.myTodosCnt + data.ourTodosCnt == 0) ? true : false
   }
 }
