@@ -23,17 +23,6 @@ public enum ProgressType {
       return "오늘 to-do 끝~!"
     }
   }
-
-  var image: UIImage {
-    switch self {
-    case .none:
-      return Images.profileGreen.image
-    case .underHalf, .overHalf:
-      return Images.profileBlue.image
-    case .done:
-      return Images.profilePurple.image
-    }
-  }
 }
 
 final class ProgressBarView: UIView {
@@ -43,7 +32,7 @@ final class ProgressBarView: UIView {
     static let progressBarPadding: CGFloat = 24
   }
 
-  var isTodoEmpty: Bool = true { // 엠티 레이블 숨기기, progressbar remove from superview
+  var isTodoEmpty: Bool = true {
     didSet {
       if isTodoEmpty {
         [leftBubbleView, rightBubbleView, progressImageView].forEach { $0.isHidden = true }
@@ -59,7 +48,6 @@ final class ProgressBarView: UIView {
 
   var progressType: ProgressType = .none {
     didSet {
-      progressImageView.image = progressType.image
       switch progressType {
       case .none, .underHalf:
         leftBubbleView.isHidden = true
@@ -79,12 +67,12 @@ final class ProgressBarView: UIView {
       progressImageView.snp.remakeConstraints { make in
         make.leading.equalTo(leftBubbleView.snp.trailing).offset(6)
         make.trailing.equalTo(rightBubbleView.snp.leading).offset(-6)
-        make.size.equalTo(40)
+        make.width.equalTo(84)
         switch progressType {
         case .none, .underHalf:
-          make.centerX.equalTo(locateImage(with: progress) + 10)
+          make.centerX.equalTo(locateImage(with: progress) + 21)
         case .overHalf, .done:
-          make.centerX.equalTo(locateImage(with: progress) - 10)
+          make.centerX.equalTo(locateImage(with: progress) - 21)
         }
       }
     }
@@ -99,7 +87,7 @@ final class ProgressBarView: UIView {
   var rightBubbleView = ProgressBubbleView(bubbleViewType: .right)
 
   private var progressImageView = UIImageView().then {
-    $0.image = Images.profilePurple.image
+    $0.image = Images.icProgressbar.image
   }
 
   var progressView = UIProgressView().then {
