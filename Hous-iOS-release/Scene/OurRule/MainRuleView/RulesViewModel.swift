@@ -33,6 +33,7 @@ final class RulesViewModel {
       .flatMap { _ in
         NetworkService.shared.ruleRepository.getRulesName()
       }
+      .share()
       
     let defaultViewItem = viewWillAppear.map { res -> [TableViewItem] in
         
