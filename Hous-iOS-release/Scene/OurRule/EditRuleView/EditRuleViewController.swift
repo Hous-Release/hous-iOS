@@ -218,15 +218,6 @@ class EditRuleViewController: UIViewController {
     
     let output = viewModel.transform(input: input)
     
-//    output.isEmptyView
-//      .debug("EMPTY VIEW ! ")
-//      .drive(onNext: { [weak self] flag in
-//        guard let self = self else { return }
-//        print("flag : ", flag, "✅✅✅✅✅")
-//        self.ruleEmptyViewLabel.isHidden = !flag
-//      })
-//      .disposed(by: disposeBag)
-    
     output.saveCompleted
       .drive(onNext: { [weak self] _ in
         self?.navigationController?.popViewController(animated: true)

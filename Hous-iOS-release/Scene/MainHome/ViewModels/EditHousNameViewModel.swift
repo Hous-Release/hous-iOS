@@ -28,11 +28,19 @@ final class EditHousNameViewModel: ViewModelType {
     var textCountLabelText: Driver<String>
     var text: Driver<String>
     var updatedRoom: Driver<Void>
+    let isValidText: Driver<Bool>
   }
   
   private let updateCompletedRelay = PublishRelay<Void>()
   
   func transform(input: Input) -> Output {
+    
+    let isValidText = input.roomName
+      .map { string -> Bool in
+        return string.count <= 8
+      }
+      .asDriver()
+      
     
     let roomName = input.roomName
       .scan("") { [weak self] prev, next in
@@ -66,7 +74,8 @@ final class EditHousNameViewModel: ViewModelType {
     return Output(
       textCountLabelText: textCount,
       text: roomName.asDriver(onErrorJustReturn: ""),
-      updatedRoom: updateCompletedRelay.asDriver(onErrorJustReturn: ())
+      updatedRoom: updateCompletedRelay.asDriver(onErrorJustReturn: ()),
+      isValidText: isValidText
     )
   }
   

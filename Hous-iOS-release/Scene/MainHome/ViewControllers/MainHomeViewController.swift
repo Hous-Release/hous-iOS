@@ -84,8 +84,8 @@ class MainHomeViewController: UIViewController {
         
         switch model {
         case .homieProfiles(profiles: let dto):
-          //TODO: Profile화면전환
-          print(dto.userNickname)
+          //TODO: Profile화면전환 - id로 넘기기로함
+          print(dto.homieID)
         default: break
         }
       })
@@ -165,6 +165,10 @@ class MainHomeViewController: UIViewController {
         progress: Float(todos.progress / 100),
         myTodos: todos.myTodos
       )
+      
+      cell.setDailyLottie(day: Weekend(rawValue: todos.dayOfWeek) ?? .sat)
+      
+      cell.playLottie()
       
       return cell
     }
@@ -255,9 +259,19 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
 
     switch indexPath.section {
     case MainHomeSection.todos.rawValue:
-      return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * (305/812))
+      
+      let width = view.window?.windowScene?.screen.bounds.width ?? 0
+      let estimatedHeight: CGFloat = 300
+      let dummyCell = MainHomeTodoCollectionViewCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+      
+      dummyCell.layoutIfNeeded()
+      let estimatedSize = dummyCell.systemLayoutSizeFitting(
+        CGSize(width: width, height: estimatedHeight)
+      )
+      return CGSize(width: width, height: estimatedSize.height)
+      
     case MainHomeSection.ourRules.rawValue:
-      return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * (246/812))
+      return CGSize(width: UIScreen.main.bounds.width, height: 200)
     case MainHomeSection.homiesProfiles.rawValue:
       let width = UIScreen.main.bounds.width / 2 - 35
       let height = width * (100/155)
@@ -283,6 +297,17 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     if section == MainHomeSection.homiesProfiles.rawValue {
       return UIEdgeInsets(top: 16, left: 24, bottom: 24, right: 24)
     }
-    return UIEdgeInsets()
+    return UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
   }
+}
+
+
+enum Weekend: String {
+  case mon = "MONDAY"
+  case tue = "TUESDAY"
+  case wed = "WEDNESDAY"
+  case thur = "THURSDAY"
+  case fri = "FRIDAY"
+  case sat = "SATURDAY"
+  case sun = "SUNDAY"
 }

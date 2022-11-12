@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Lottie
 
 
 class MainHomeTodoCollectionViewCell: UICollectionViewCell {
@@ -17,10 +18,10 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   //MARK: - UI Components
   private let titleLabel = UILabel().then {
+    $0.dynamicFontSpoqaHanSansNeo(fontSize: 20, weight: .bold)
     $0.numberOfLines = 2
     $0.text = "최인영님의,\n러블리더블리 하우스"
     $0.textColor = Colors.black.color
-    $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
     $0.textAlignment = .left
   }
   
@@ -65,8 +66,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.textColor = Colors.g5.color
   }
   
-  private let dailyLottie = UIView().then {
-    $0.backgroundColor = .blue
+  private var dailyLottie = AnimationView().then {
     $0.layer.cornerRadius = 8
   }
   
@@ -126,7 +126,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   //MARK: Configures
-  private func configUI() {
+  func configUI() {
     backgroundColor = .systemBackground
     addSubViews([
       titleLabel,
@@ -145,17 +145,17 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     ])
     
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(self.safeAreaLayoutGuide).offset(28)
+      make.top.equalToSuperview().offset(28)
       make.leading.equalToSuperview().offset(24)
     }
     
     topButtonStack.snp.makeConstraints { make in
-      make.top.equalTo(titleLabel)
+      make.top.equalTo(titleLabel.snp.top)
       make.trailing.equalToSuperview().inset(32)
     }
     
     progressLabel.snp.makeConstraints { make in
-      make.leading.equalToSuperview().offset(30)
+      make.leading.equalTo(titleLabel)
       make.top.equalTo(titleLabel.snp.bottom).offset(28)
     }
     
@@ -169,6 +169,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     myTodoBackgroundView.snp.makeConstraints { make in
       make.top.equalTo(progressView.snp.bottom).offset(16)
       make.leading.equalTo(titleLabel)
+      make.bottom.equalToSuperview()
       make.width.equalTo(UIScreen.main.bounds.width * (218/375))
       make.height.equalTo(myTodoBackgroundView.snp.width).multipliedBy(0.5733944954)
     }
@@ -201,5 +202,29 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     }
   }
   
+  func setDailyLottie(day: Weekend) {
+    
+    dailyLottie.pause()
+    switch day {
+    case .mon:
+      dailyLottie.animation = Animation.named("monday")
+    case .tue:
+      dailyLottie.animation = Animation.named("tuesday")
+    case .wed:
+      dailyLottie.animation = Animation.named("wednesday")
+    case .thur:
+      dailyLottie.animation = Animation.named("thursday")
+    case .fri:
+      dailyLottie.animation = Animation.named("friday")
+    case .sat:
+      dailyLottie.animation = Animation.named("monday")
+    case .sun:
+      dailyLottie.animation = Animation.named("monday")
+    }
+  }
   
+  func playLottie() {
+    dailyLottie.currentProgress = 0
+    dailyLottie.play()
+  }
 }
