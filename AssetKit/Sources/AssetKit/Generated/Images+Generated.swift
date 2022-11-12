@@ -59,6 +59,7 @@ public enum Images {
   public static let profileYellowWtag = ImageAsset(name: "profile_yellow_wtag")
   public static let icBack = ImageAsset(name: "ic_back")
   public static let icAdd = ImageAsset(name: "ic_add")
+  public static let illLimit = ImageAsset(name: "ill_limit")
   public static let icDot4 = ImageAsset(name: "icDot4")
   public static let icCheck2 = ImageAsset(name: "ic_check2")
   public static let icMove1 = ImageAsset(name: "ic_move_1")
