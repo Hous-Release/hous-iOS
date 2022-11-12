@@ -21,6 +21,7 @@ final class TodoViewReactor: Reactor {
     case setDayOfWeek(String)
     case setProgressType(ProgressType)
     case setProgress(Float)
+    case setIsTodoEmpty(Bool)
     case setMyTodosSection(TodoMainSection.Model)
     case setMyTodosEmptySection(TodoMainSection.Model)
     case setOurTodosSection(TodoMainSection.Model)
@@ -34,6 +35,7 @@ final class TodoViewReactor: Reactor {
     var dayOfWeek: String = ""
     var progressType: ProgressType = .none
     var progress: Float = 0
+    var isTodoEmpty: Bool?
     var myTodosSection = TodoMainSection.Model(
       model: .myTodo(num: 0),
       items: [])
@@ -78,6 +80,8 @@ final class TodoViewReactor: Reactor {
       newState.progressType = type
     case let .setProgress(progress):
       newState.progress = progress
+    case let .setIsTodoEmpty(flag):
+      newState.isTodoEmpty = flag
     case let .setMyTodosSection(myTodo):
       newState.myTodosSection = myTodo
     case let .setMyTodosEmptySection(empty):
@@ -105,6 +109,8 @@ final class TodoViewReactor: Reactor {
         return .just(.setProgressType(type))
       case let .progress(progress):
         return .just(.setProgress(progress))
+      case let .isTodoEmpty(flag):
+        return .just(.setIsTodoEmpty(flag))
       case let .myTodosSection(myTodo):
         return .just(.setMyTodosSection(myTodo))
       case let .myTodosEmptySection(empty):
