@@ -101,6 +101,7 @@ extension CreateNewRoomViewController {
 extension CreateNewRoomViewController {
   private func enterNewRoom(_ flag: Bool) {
     let tvc = HousTabbarViewController()
+    tvc.firstCreatedSubject.onNext(true)
     changeRootViewController(to: tvc)
   }
 }
