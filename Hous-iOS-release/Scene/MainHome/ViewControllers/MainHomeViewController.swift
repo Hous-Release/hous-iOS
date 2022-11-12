@@ -29,6 +29,8 @@ class MainHomeViewController: UIViewController {
   private let editButtonClicked = PublishRelay<Void>()
   private let copyButtonClicked = PublishRelay<Void>()
   private let viewWillAppear = PublishRelay<Void>()
+  
+  let todoBackgroundViewDidTap = PublishSubject<Void>()
     
   //MARK: - UI Components
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -141,8 +143,7 @@ class MainHomeViewController: UIViewController {
         .asDriver(onErrorJustReturn: UITapGestureRecognizer.init())
         .drive(onNext: { [weak self] _ in
           guard let self = self else { return }
-          let vc = TodoViewController()
-          self.navigationController?.pushViewController(vc, animated: true)
+          self.todoBackgroundViewDidTap.onNext(())
         })
         .disposed(by: cell.disposeBag)
       
