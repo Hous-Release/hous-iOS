@@ -108,13 +108,13 @@ final class TodoView: UIView {
     }
 
     progressBarView.snp.makeConstraints { make in
-      make.top.equalTo(navigationBarView.snp.bottom)
-      make.leading.trailing.equalToSuperview()
+      make.top.equalTo(navigationBarView.snp.bottom).offset(12)
+      make.leading.trailing.equalToSuperview().inset(12)
       make.height.equalTo(92)
     }
 
     todoCollectionView.snp.makeConstraints { make in
-      make.top.equalTo(progressBarView.snp.bottom)
+      make.top.equalTo(progressBarView.snp.bottom).offset(12)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalToSuperview().inset(80)
     }

@@ -43,6 +43,20 @@ final class ProgressBarView: UIView {
     static let progressBarPadding: CGFloat = 24
   }
 
+  var isTodoEmpty: Bool = true { // 엠티 레이블 숨기기, progressbar remove from superview
+    didSet {
+      if isTodoEmpty {
+        [leftBubbleView, rightBubbleView, progressImageView].forEach { $0.isHidden = true }
+        self.backgroundColor = Colors.blueL2.color
+        self.emptyGuideLabel.isHidden = false
+      } else {
+        [leftBubbleView, rightBubbleView, progressImageView].forEach { $0.isHidden = false }
+        self.backgroundColor = Colors.white.color
+        self.emptyGuideLabel.isHidden = true
+      }
+    }
+  }
+
   var progressType: ProgressType = .none {
     didSet {
       progressImageView.image = progressType.image
@@ -61,15 +75,26 @@ final class ProgressBarView: UIView {
 
   var progress: Float = 0 {
     didSet {
+      progressView.progress = progress
       progressImageView.snp.remakeConstraints { make in
         make.leading.equalTo(leftBubbleView.snp.trailing).offset(6)
         make.trailing.equalTo(rightBubbleView.snp.leading).offset(-6)
         make.size.equalTo(40)
-        make.centerX.equalTo(locateImage(with: progress))
+        switch progressType {
+        case .none, .underHalf:
+          make.centerX.equalTo(locateImage(with: progress) + 10)
+        case .overHalf, .done:
+          make.centerX.equalTo(locateImage(with: progress) - 10)
+        }
       }
     }
   }
 
+  var emptyGuideLabel = UILabel().then {
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.g5.color
+    $0.text = "아직 완료할 to-do가 없어요!"
+  }
   var leftBubbleView = ProgressBubbleView(bubbleViewType: .left)
   var rightBubbleView = ProgressBubbleView(bubbleViewType: .right)
 
@@ -87,6 +112,7 @@ final class ProgressBarView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    setup()
     render()
   }
 
@@ -94,8 +120,16 @@ final class ProgressBarView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  private func setup() {
+    makeRounded(cornerRadius: 8)
+  }
+
   private func render() {
-    addSubViews([leftBubbleView, rightBubbleView, progressImageView, progressView])
+    addSubViews([emptyGuideLabel, leftBubbleView, rightBubbleView, progressImageView, progressView])
+
+    emptyGuideLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
 
     leftBubbleView.snp.makeConstraints { make in
       make.centerY.equalTo(progressImageView.snp.centerY)
@@ -112,7 +146,7 @@ final class ProgressBarView: UIView {
     progressView.snp.makeConstraints { make in
       make.top.equalTo(progressImageView.snp.bottom).offset(12)
       make.height.equalTo(8)
-      make.leading.trailing.equalToSuperview().inset(24)
+      make.leading.trailing.equalToSuperview().inset(12)
       make.bottom.equalToSuperview().inset(12)
     }
   }

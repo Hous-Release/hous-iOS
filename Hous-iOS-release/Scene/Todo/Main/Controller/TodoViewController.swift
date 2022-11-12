@@ -72,12 +72,15 @@ extension TodoViewController {
       .drive(mainView.progressBarView.rx.progressType)
       .disposed(by: disposeBag)
 
-    reactor.state.map {$0.progress }
-      .withUnretained(self)
-      .subscribe(onNext: { owner, progress in
-        owner.mainView.progressBarView.progressView.progress = progress
-        owner.mainView.progressBarView.progress = progress
-      })
+    reactor.state.map { $0.progress }
+      .asDriver(onErrorJustReturn: 0)
+      .drive(mainView.progressBarView.rx.progress)
+      .disposed(by: disposeBag)
+
+    reactor.state.map { $0.isTodoEmpty }
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: true)
+      .drive(mainView.progressBarView.rx.isTodoEmpty)
       .disposed(by: disposeBag)
 
     reactor.pulse(\.$enterViewAllFlag)
