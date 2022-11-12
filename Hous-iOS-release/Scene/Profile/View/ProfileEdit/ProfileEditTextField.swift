@@ -11,7 +11,7 @@ import Then
 class ProfileEditTextField: UITextField {
   
   let underlineLayer = CALayer()
-  let animatedUnderlineLayer = CALayer()
+  let animatedunderlineLayer = CALayer()
   private let invalidMessageLabel = UILabel().then {
     $0.textColor = Colors.red.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
@@ -51,26 +51,26 @@ class ProfileEditTextField: UITextField {
     underlineLayer.frame = frame
     underlineLayer.backgroundColor = Colors.g3.color.cgColor
     
-    animatedUnderlineLayer.frame = frame
-    animatedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
+    animatedunderlineLayer.frame = frame
+    animatedunderlineLayer.backgroundColor = Colors.blue.color.cgColor
   }
 }
 
 extension ProfileEditTextField {
   func textFieldSelected() {
-    self.layer.addSublayer(animatedUnderlineLayer)
+    self.layer.addSublayer(animatedunderlineLayer)
     
     let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
     animation.timingFunction = CAMediaTimingFunction(controlPoints: 0, -0.7, 0, 1.01)
     animation.values = [0, 1]
     animation.duration = 0.8
     animation.keyTimes = [0, 0.8]
-    animatedUnderlineLayer.add(animation, forKey: "Selected")
+    animatedunderlineLayer.add(animation, forKey: "Selected")
   }
   
   func textFieldUnselected() {
-    let animatedUnderLineLayer = self.animatedUnderlineLayer
-    animatedUnderLineLayer.removeFromSuperlayer()
+    let animatedunderlineLayer = self.animatedunderlineLayer
+    animatedunderlineLayer.removeFromSuperlayer()
   }
   
   func invalidDataOn(attributeName: String, count: Int) {

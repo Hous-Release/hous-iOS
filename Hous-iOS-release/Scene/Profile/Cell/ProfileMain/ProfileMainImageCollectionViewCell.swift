@@ -125,6 +125,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     if isEmptyView {
       self.backgroundColor = Colors.g1.color
     } else {
+//      self.backgroundColor = UIColor(red: 1, green: 216/255, blue: 216/255, alpha: 1)
       addSubview(profileMainImage)
       profileMainImage.snp.makeConstraints { make in
         make.top.bottom.leading.trailing.equalToSuperview()
