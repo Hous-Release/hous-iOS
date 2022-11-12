@@ -13,6 +13,7 @@ import RxCocoa
 import RxDataSources
 import Network
 import RxGesture
+import BottomSheetKit
 
 class MainHomeViewController: UIViewController {
   
@@ -31,6 +32,7 @@ class MainHomeViewController: UIViewController {
   private let viewWillAppear = PublishRelay<Void>()
   
   let todoBackgroundViewDidTap = PublishSubject<Void>()
+  let welcomePopUpSubject = PublishSubject<Bool>()
     
   //MARK: - UI Components
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -226,6 +228,32 @@ class MainHomeViewController: UIViewController {
         if let _ = UIPasteboard.general.string {
           Toast.show(message: "초대코드가 복사되었습니다", controller: self)
         }
+      })
+      .disposed(by: disposeBag)
+    
+    welcomePopUpSubject
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: { [weak self] isFirst in
+        guard let self = self else { return }
+        let copyCodePopUpModel = ImagePopUpModel(image: "", actionText: "호미들 바로 초대하기",
+                                                    text:
+    """
+    방 생성이 완료 되었습니다.
+    참여 코드를 복사해서
+    룸메이트에게 공유해보세요!
+    """)
+
+        let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
+
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          switch actionType {
+          case .action:
+            print("action !!")
+          case .cancel:
+            break
+          }
+        }
+        
       })
       .disposed(by: disposeBag)
   }
