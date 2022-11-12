@@ -89,7 +89,6 @@ final class HousTabBar: UIStackView {
 
     todoItemView.rx.tapGesture()
       .when(.recognized)
-      .debug("TODO 탭 누름 !!")
       .withUnretained(self)
       .bind(onNext: { owner, _ in
         owner.todoItemView.animateClick {
@@ -109,7 +108,6 @@ final class HousTabBar: UIStackView {
       .disposed(by: disposeBag)
     
     todoBackgroundViewDidTapped
-      .debug("HousTabBarVC -> HousTabBar Animation")
       .asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }

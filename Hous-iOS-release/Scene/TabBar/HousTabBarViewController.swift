@@ -11,6 +11,8 @@ import RxSwift
 import SnapKit
 
 class HousTabbarViewController: UITabBarController {
+  
+  var firstCreatedSubject = PublishSubject<Bool>()
 
   public let housTabBar: HousTabBar = {
     let tabbar = HousTabBar()
@@ -72,6 +74,20 @@ class HousTabbarViewController: UITabBarController {
         self?.selectTabWith(index: $0)
         
       }
+      .disposed(by: disposeBag)
+    
+    guard let mainNVC = self.viewControllers?[0] as? UINavigationController,
+          let mainVC = mainNVC.viewControllers[0] as? MainHomeViewController
+    else {
+      return
+    }
+    
+    firstCreatedSubject
+      .observe(on: MainScheduler.asyncInstance)
+      .filter({ $0 })
+      .subscribe(onNext: { isFirstFlag in
+        mainVC.welcomePopUpSubject.onNext(isFirstFlag)
+      })
       .disposed(by: disposeBag)
   }
   
