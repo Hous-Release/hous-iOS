@@ -101,6 +101,7 @@ final class ProfileViewController: UIViewController {
     output.profileModel
       .do {
         self.data = $0
+        self.isEmptyView = $0.isEmptyView
         countCell = $0.isEmptyView ? 3 : 5}
       .map {
         [ProfileModel](repeating: $0, count: countCell)

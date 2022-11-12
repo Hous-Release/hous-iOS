@@ -74,6 +74,7 @@
 		9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */; };
 		9BF9AD6D291E0A58006A0BDE /* ProfileEditBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */; };
 		9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6E291E8D3E006A0BDE /* testLottie.json */; };
+		9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */; };
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
@@ -264,6 +265,7 @@
 		9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendBoxView.swift; sourceTree = "<group>"; };
 		9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditBackButton.swift; sourceTree = "<group>"; };
 		9BF9AD6E291E8D3E006A0BDE /* testLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testLottie.json; sourceTree = "<group>"; };
+		9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextView.swift; sourceTree = "<group>"; };
 		B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewController.swift; sourceTree = "<group>"; };
 		B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */,
 				9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */,
 				9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */,
+				9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */,
 			);
 			path = ProfileEdit;
 			sourceTree = "<group>";
@@ -1378,6 +1381,7 @@
 				9BBE13E32904160D00B7D517 /* ProfileRetryViewController.swift in Sources */,
 				9B959AFE28FF192500EB3412 /* GraphView.swift in Sources */,
 				9B98853E28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift in Sources */,
+				9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */,
 				B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */,
 				9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */,
 				9B959AF628FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift in Sources */,
