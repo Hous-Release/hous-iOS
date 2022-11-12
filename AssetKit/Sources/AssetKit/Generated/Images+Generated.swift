@@ -81,6 +81,7 @@ public enum Images {
   public static let icNoInfo = ImageAsset(name: "ic_no_info")
   public static let icNoMy = ImageAsset(name: "ic_no_my")
   public static let icNoOur = ImageAsset(name: "ic_no_our")
+  public static let icProgressbar = ImageAsset(name: "ic_progressbar")
   public static let btnAddFloating = ImageAsset(name: "btn_add_floating")
   public static let icChange = ImageAsset(name: "ic_change")
   public static let icChosen = ImageAsset(name: "ic_chosen")
