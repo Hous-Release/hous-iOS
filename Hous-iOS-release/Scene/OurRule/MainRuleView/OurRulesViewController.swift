@@ -127,7 +127,7 @@ class OurRulesViewController: UIViewController {
       .asObservable()
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        //TODO: 나중에 바텀시트 버튼 3개면 Add로는 RuleList, Edit로는 RuleWithIdList, Delete로는 RuleIdList
+        
         let bottomSheetType = BottomSheetType.defaultType
         
         let ruleList = self.rulesWithIds.map { ruleWithIdViewModel in

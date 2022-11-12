@@ -67,7 +67,7 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     ourRulesBackgroundView.addSubViews([ourRulesStackView,ruleEmptyViewLabel])
     
     ourRulesTitleLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(24)
+      make.top.equalToSuperview()
       make.leading.equalToSuperview().offset(32)
     }
     
@@ -79,8 +79,7 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     ourRulesBackgroundView.snp.makeConstraints { make in
       make.top.equalTo(ourRulesTitleLabel.snp.bottom).offset(16)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.width.equalTo(UIScreen.main.bounds.width * (327/375))
-      make.height.equalTo(ourRulesBackgroundView.snp.width).multipliedBy(0.4770642202)
+      make.height.equalTo(156)
     }
     
     ourRulesStackView.snp.makeConstraints { make in
