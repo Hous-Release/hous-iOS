@@ -264,6 +264,10 @@ class EditRuleViewController: UIViewController {
 
 // Hiding Delete Button in TableView edit mode
 extension EditRuleViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 52
+  }
 
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     return .none
