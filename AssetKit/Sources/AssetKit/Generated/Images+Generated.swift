@@ -51,6 +51,7 @@ public enum Images {
   public static let profileBlueWtag = ImageAsset(name: "profile_blue_wtag")
   public static let profileGreen = ImageAsset(name: "profile_green")
   public static let profileGreenWtag = ImageAsset(name: "profile_green_wtag")
+  public static let profileNone = ImageAsset(name: "profile_none")
   public static let profilePurple = ImageAsset(name: "profile_purple")
   public static let profilePurpleWtag = ImageAsset(name: "profile_purple_wtag")
   public static let profileRed = ImageAsset(name: "profile_red")
