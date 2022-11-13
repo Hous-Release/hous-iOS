@@ -10,6 +10,9 @@ import Alamofire
 
 public enum MainTodoService {
   case getTodos
+  case checkTodo(
+    _ todoId: Int,
+    _ status: MainTodoDTO.Request.updateTodoRequestDTO)
 }
 
 extension MainTodoService: TargetType {
@@ -21,6 +24,8 @@ extension MainTodoService: TargetType {
     switch self {
     case .getTodos:
       return "/todos"
+    case let .checkTodo(todoId, _):
+      return "/todo/\(todoId)/check"
     }
   }
 
@@ -28,6 +33,8 @@ extension MainTodoService: TargetType {
     switch self {
     case .getTodos:
       return .get
+    case .checkTodo:
+      return .post
     }
   }
 
@@ -35,6 +42,8 @@ extension MainTodoService: TargetType {
     switch self {
     case .getTodos:
       return .requestPlain
+    case let .checkTodo(_, status):
+      return .body(status)
     }
   }
 }
