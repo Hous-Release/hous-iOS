@@ -34,6 +34,12 @@
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
+		77E86F2F2920BFA500FACD23 /* TestAddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F2E2920BFA500FACD23 /* TestAddTodoViewController.swift */; };
+		77E86F332920C84000FACD23 /* TestHomie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F322920C84000FACD23 /* TestHomie.swift */; };
+		77E86F352920CAB400FACD23 /* TestAddTodoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F342920CAB400FACD23 /* TestAddTodoDataSource.swift */; };
+		77E86F382920D08B00FACD23 /* AssigneeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F372920D08B00FACD23 /* AssigneeCell.swift */; };
+		77E86F3A292107C700FACD23 /* IndividualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F39292107C700FACD23 /* IndividualCell.swift */; };
+		77E86F3C2921095C00FACD23 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E86F3B2921095C00FACD23 /* DayCell.swift */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */; };
@@ -260,6 +266,12 @@
 		77AEF33E28E1FE9C002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInType.swift; sourceTree = "<group>"; };
 		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		77E86F2E2920BFA500FACD23 /* TestAddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddTodoViewController.swift; sourceTree = "<group>"; };
+		77E86F322920C84000FACD23 /* TestHomie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHomie.swift; sourceTree = "<group>"; };
+		77E86F342920CAB400FACD23 /* TestAddTodoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddTodoDataSource.swift; sourceTree = "<group>"; };
+		77E86F372920D08B00FACD23 /* AssigneeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeCell.swift; sourceTree = "<group>"; };
+		77E86F39292107C700FACD23 /* IndividualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCell.swift; sourceTree = "<group>"; };
+		77E86F3B2921095C00FACD23 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoNavigationView.swift; sourceTree = "<group>"; };
@@ -530,6 +542,7 @@
 		777085AD29040DC50018240B /* TestScene */ = {
 			isa = PBXGroup;
 			children = (
+				77E86F2D2920BF9900FACD23 /* TestTodo */,
 				777085AF29040DE00018240B /* TestViewController.swift */,
 			);
 			path = TestScene;
@@ -685,6 +698,43 @@
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		77E86F2D2920BF9900FACD23 /* TestTodo */ = {
+			isa = PBXGroup;
+			children = (
+				77E86F362920D07400FACD23 /* SubViews */,
+				77E86F312920BFAF00FACD23 /* DataSoruce */,
+				77E86F302920BFAB00FACD23 /* Model */,
+				77E86F2E2920BFA500FACD23 /* TestAddTodoViewController.swift */,
+			);
+			path = TestTodo;
+			sourceTree = "<group>";
+		};
+		77E86F302920BFAB00FACD23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77E86F322920C84000FACD23 /* TestHomie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		77E86F312920BFAF00FACD23 /* DataSoruce */ = {
+			isa = PBXGroup;
+			children = (
+				77E86F342920CAB400FACD23 /* TestAddTodoDataSource.swift */,
+			);
+			path = DataSoruce;
+			sourceTree = "<group>";
+		};
+		77E86F362920D07400FACD23 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				77E86F372920D08B00FACD23 /* AssigneeCell.swift */,
+				77E86F39292107C700FACD23 /* IndividualCell.swift */,
+				77E86F3B2921095C00FACD23 /* DayCell.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		9B3BDBF7290E470A0054DF23 /* Profile */ = {
@@ -1419,6 +1469,7 @@
 				B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
+				77E86F2F2920BFA500FACD23 /* TestAddTodoViewController.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */,
 				B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */,
@@ -1461,11 +1512,13 @@
 				9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,
+				77E86F382920D08B00FACD23 /* AssigneeCell.swift in Sources */,
 				9B959B0228FF1EA800EB3412 /* GraphBackgroundView.swift in Sources */,
 				9B959AF828FED16400EB3412 /* BasePaddingLabel.swift in Sources */,
 				9BF94600290D441B008F2BFC /* ProfileRecommendTitleView.swift in Sources */,
 				9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */,
 				9BDBAD8429242A020096FE38 /* MateProfileBadgeEmptyView.swift in Sources */,
+				77E86F3A292107C700FACD23 /* IndividualCell.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				9BDBAD7429240C2B0096FE38 /* MateProfileViewController.swift in Sources */,
 				9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */,
@@ -1497,6 +1550,7 @@
 				B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
 				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
+				77E86F352920CAB400FACD23 /* TestAddTodoDataSource.swift in Sources */,
 				777085B029040DE00018240B /* TestViewController.swift in Sources */,
 				9BE0C284290823860028F13A /* ProfileDetailModel.swift in Sources */,
 				9BDBAD86292566420096FE38 /* MateProfileNameView.swift in Sources */,
@@ -1513,6 +1567,7 @@
 				7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
+				77E86F3C2921095C00FACD23 /* DayCell.swift in Sources */,
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
 				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
@@ -1569,6 +1624,7 @@
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */,
+				77E86F332920C84000FACD23 /* TestHomie.swift in Sources */,
 				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */,
