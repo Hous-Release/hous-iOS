@@ -14,6 +14,7 @@ final class MyTodoCollectionViewCell: UICollectionViewCell, View {
 
   var disposeBag = DisposeBag()
 
+  var id: Int = 0
   var isChecked: Bool = false {
     didSet {
       if isChecked {
@@ -54,8 +55,12 @@ final class MyTodoCollectionViewCell: UICollectionViewCell, View {
 
   func bind(reactor: MyTodoCollectionViewCellReactor) {
     checkButton.rx.tap
+      .withUnretained(self)
       .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
-      .map { [weak self] in Reactor.Action.check((self?.checkButton.isSelected)!) }
+      .map { owner, _ in
+        Reactor.Action.check(
+        owner.id,
+        owner.checkButton.isSelected) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
@@ -85,7 +90,8 @@ extension MyTodoCollectionViewCell {
     }
   }
 
-  func setCell(_ isChecked: Bool, _ todoName: String) {
+  func setCell(_ todoId: Int, _ isChecked: Bool, _ todoName: String) {
+    self.id = todoId
     self.isChecked = isChecked
     myTodoLabel.text = todoName
   }
