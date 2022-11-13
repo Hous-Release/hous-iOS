@@ -85,9 +85,7 @@ extension ExceedPopUpView {
     actionButton.setTitle(model.actionText, for: .normal)
     subtitleLabel.text = model.text
     titleTextLabel.text = model.titleText
-
-    // TODO: - Image
-//    imageView.image =
+    model.image.setImage(to: imageView)
   }
 
   private func setupViews() {
