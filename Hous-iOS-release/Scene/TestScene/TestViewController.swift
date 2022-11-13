@@ -157,7 +157,9 @@ extension TestViewController {
   @objc
   private func didTapButton2() {
 
-    let copyCodePopUpModel = ImagePopUpModel(image: "", actionText: "창여코드 복사하기",
+    let copyCodePopUpModel = ImagePopUpModel(
+      image: .exceed,
+      actionText: "창여코드 복사하기",
                                                 text:
 """
 방 생성이 완료 되었습니다.
@@ -180,7 +182,11 @@ extension TestViewController {
   @objc
   private func didTapButton3() {
 
-    let enterRoomModel = ImagePopUpModel(image: "", actionText: "참여하기", text: "김호세")
+    let enterRoomModel = ImagePopUpModel(
+      image: .test,
+      actionText: "참여하기",
+      text: "김호세"
+    )
     let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)
 
     presentPopUp(popUpType) { [weak self] actionType in
@@ -195,7 +201,7 @@ extension TestViewController {
   }
   @objc
   private func didTapButton4() {
-    let popModel = ImagePopUpModel(image: "", actionText: "참여하기", text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd", titleText: "Rules 개수 초과")
+    let popModel = ImagePopUpModel(image: .test, actionText: "참여하기", text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd", titleText: "Rules 개수 초과")
     let popUpType = PopUpType.exceed(exceedModel: popModel)
 
     presentPopUp(popUpType) { [weak self] actionType in
