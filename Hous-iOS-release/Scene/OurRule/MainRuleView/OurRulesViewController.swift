@@ -73,6 +73,10 @@ class OurRulesViewController: UIViewController {
     
     rulesTableView.rowHeight = UITableView.automaticDimension
     rulesTableView.estimatedRowHeight = 150
+    
+    rulesTableView.rx
+      .setDelegate(self)
+      .disposed(by: disposeBag)
   }
   
   private func configUI() {
@@ -194,5 +198,14 @@ extension OurRulesViewController {
     cell.setNormalRulesData(rule: viewModel.name)
     cell.selectionStyle = .none
     return cell
+  }
+}
+
+extension OurRulesViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.row == 0 {
+      return 156
+    }
+    return 52
   }
 }

@@ -68,7 +68,8 @@ class KeyRulesTableViewCell: UITableViewCell {
     }
     
     ourRulesStackView.snp.makeConstraints { make in
-      make.edges.equalToSuperview().inset(20)
+      make.leading.trailing.equalToSuperview().inset(20)
+      make.top.bottom.equalToSuperview().inset(10)
     }
     
     ruleEmptyViewLabel.snp.makeConstraints { make in

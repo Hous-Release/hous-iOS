@@ -144,6 +144,11 @@ class DeleteRuleViewController: UIViewController {
         
       }
       .disposed(by: disposeBag)
+    
+    rulesTableView.rx
+      .setDelegate(self)
+      .disposed(by: disposeBag)
+      
   }
   
   private func bind() {
@@ -203,4 +208,11 @@ class DeleteRuleViewController: UIViewController {
       .disposed(by: disposeBag)
   }
   
+}
+
+
+extension DeleteRuleViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 52
+  }
 }
