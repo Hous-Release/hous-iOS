@@ -110,9 +110,7 @@ extension EnterRoomPopUpView {
 
     actionButton.setTitle(model.actionText, for: .normal)
     nameLabel.text = model.text
-
-    // TODO: - Image
-//    imageView.image =
+    model.image.setImage(to: imageView)
   }
 
   private func setupViews() {
