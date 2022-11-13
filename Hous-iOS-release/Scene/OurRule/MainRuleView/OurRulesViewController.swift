@@ -147,8 +147,7 @@ class OurRulesViewController: UIViewController {
           case .delete:
             vc = DeleteRuleViewController(rules: self.rulesWithIds, viewModel: DeleteRuleViewModel())
           case .cancel:
-            //TODO: - 호세형 이부분 바텀시트끌어내리면 흰 화면
-            break
+            return
           }
           
           vc.view.backgroundColor = .white
