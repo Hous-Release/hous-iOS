@@ -33,9 +33,9 @@ final class TodoViewReactor: Reactor {
   struct State {
     var date: String = ""
     var dayOfWeek: String = ""
-    var progressType: ProgressType = .none
-    var progress: Float = 0
-    var isTodoEmpty: Bool?
+    @Pulse var progressType: ProgressType?
+    @Pulse var progress: Float?
+    @Pulse var isTodoEmpty: Bool?
     var myTodosSection = TodoMainSection.Model(
       model: .myTodo(num: 0),
       items: [])

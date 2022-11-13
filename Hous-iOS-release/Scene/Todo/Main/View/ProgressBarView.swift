@@ -39,7 +39,7 @@ final class ProgressBarView: UIView {
         self.backgroundColor = Colors.blueL2.color
         self.emptyGuideLabel.isHidden = false
       } else {
-        [leftBubbleView, rightBubbleView, progressImageView].forEach { $0.isHidden = false }
+        self.progressImageView.isHidden = false
         self.backgroundColor = Colors.white.color
         self.emptyGuideLabel.isHidden = true
       }
@@ -63,18 +63,8 @@ final class ProgressBarView: UIView {
 
   var progress: Float = 0 {
     didSet {
-      progressView.progress = progress
-      progressImageView.snp.remakeConstraints { make in
-        make.leading.equalTo(leftBubbleView.snp.trailing).offset(6)
-        make.trailing.equalTo(rightBubbleView.snp.leading).offset(-6)
-        make.width.equalTo(84)
-        switch progressType {
-        case .none, .underHalf:
-          make.centerX.equalTo(locateImage(with: progress) + 21)
-        case .overHalf, .done:
-          make.centerX.equalTo(locateImage(with: progress) - 21)
-        }
-      }
+      progressView.progress = progress / 100
+      animateProgress(progress)
     }
   }
 
@@ -95,7 +85,7 @@ final class ProgressBarView: UIView {
     $0.trackTintColor = Colors.blueL2.color
     $0.progressViewStyle = .default
     $0.layer.cornerRadius = 8
-    $0.progress = 0.5
+    $0.progress = 0.0
   }
 
   override init(frame: CGRect) {
@@ -109,6 +99,7 @@ final class ProgressBarView: UIView {
   }
 
   private func setup() {
+    [emptyGuideLabel, leftBubbleView, rightBubbleView, progressImageView].forEach { $0.isHidden = true }
     makeRounded(cornerRadius: 8)
   }
 
@@ -131,6 +122,13 @@ final class ProgressBarView: UIView {
       make.width.lessThanOrEqualTo(138)
     }
 
+    progressImageView.snp.makeConstraints { make in
+      make.leading.equalTo(leftBubbleView.snp.trailing).offset(6)
+      make.trailing.equalTo(rightBubbleView.snp.leading).offset(-6)
+      make.width.equalTo(84)
+      make.centerX.equalTo(locateImage(with: 0))
+    }
+
     progressView.snp.makeConstraints { make in
       make.top.equalTo(progressImageView.snp.bottom).offset(12)
       make.height.equalTo(8)
@@ -143,7 +141,24 @@ final class ProgressBarView: UIView {
 extension ProgressBarView {
   private func locateImage(with progress: Float) -> CGFloat {
     let progressBarWidth = Size.screenWidth - Size.progressBarPadding * 2
-    let progressFloat: CGFloat = progressBarWidth * CGFloat(progress)
-    return Size.progressBarPadding + progressFloat
+    let progressFloat: CGFloat = progressBarWidth * CGFloat(progress/100)
+    return Size.progressBarPadding / 2 + progressFloat
+  }
+
+  func animateProgress(_ progress: Float) {
+    UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {
+      self.progressImageView.snp.updateConstraints { make in
+        switch self.progressType {
+        case .none, .underHalf:
+          let offset = CGFloat(42 - 0.84 * self.progress)
+          make.centerX.equalTo(self.locateImage(with: self.progress) + offset)
+
+        case .overHalf, .done:
+          let offset = CGFloat(42 - 0.84 * (100 - self.progress))
+          make.centerX.equalTo(self.locateImage(with: self.progress) - offset)
+        }
+      }
+      self.progressImageView.superview?.layoutIfNeeded()
+    })
   }
 }

@@ -66,19 +66,20 @@ extension TodoViewController {
       .bind(to: mainView.dayOfWeekLabel.rx.text)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.isTodoEmpty }
+    reactor.pulse(\.$isTodoEmpty)
       .compactMap { $0 }
       .asDriver(onErrorJustReturn: true)
       .drive(mainView.progressBarView.rx.isTodoEmpty)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.progressType }
-      .skip(1)
+    reactor.pulse(\.$progressType)
+      .compactMap { $0 }
       .asDriver(onErrorJustReturn: .none)
       .drive(mainView.progressBarView.rx.progressType)
       .disposed(by: disposeBag)
 
-    reactor.state.map { $0.progress }
+    reactor.pulse(\.$progress)
+      .compactMap { $0 }
       .asDriver(onErrorJustReturn: 0)
       .drive(mainView.progressBarView.rx.progress)
       .disposed(by: disposeBag)
