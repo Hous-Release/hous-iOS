@@ -177,24 +177,23 @@ class AddRuleViewController: UIViewController {
         else { return }
         
         if self.rules.count >= 30 {
-          //TODO: - 호세형 'Rule 개수 초과'  image string으로 어떻게??
-//          let popModel = ImagePopUpModel(
-//            image: Images.illLimit.image.kf.,
-//            actionText: "알겠어요!",
-//            text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
-//            titleText: "Rules 개수 초과"
-//          )
-//
-//          let popUpType = PopUpType.exceed(exceedModel: popModel)
-//
-//          self.presentPopUp(popUpType) { actionType in
-//            switch actionType {
-//            case .action:
-//              break
-//            case .cancel:
-//              break
-//            }
-//          }
+          let popModel = ImagePopUpModel(
+            image: .exceed,
+            actionText: "알겠어요!",
+            text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
+            titleText: "Rules 개수 초과"
+          )
+
+          let popUpType = PopUpType.exceed(exceedModel: popModel)
+
+          self.presentPopUp(popUpType) { actionType in
+            switch actionType {
+            case .action:
+              break
+            case .cancel:
+              break
+            }
+          }
           
         } else {
           self.rules.append(text)
@@ -204,6 +203,7 @@ class AddRuleViewController: UIViewController {
           self.ruleTextField.endEditing(true)
           self.ruleTableView.reloadData()
         }
+        
       })
       .disposed(by: disposeBag)
     
