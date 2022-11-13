@@ -129,6 +129,10 @@ class AddRuleViewController: UIViewController {
       }
       .disposed(by: disposeBag)
     
+    ruleTableView.rx
+      .setDelegate(self)
+      .disposed(by: disposeBag)
+    
     let input = AddRuleViewModel.Input(
       navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
       viewDidTapped: view.rx.tapGesture().asObservable(),
@@ -227,4 +231,10 @@ class AddRuleViewController: UIViewController {
       .disposed(by: disposeBag)
   }
   
+}
+
+extension AddRuleViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 52
+  }
 }
