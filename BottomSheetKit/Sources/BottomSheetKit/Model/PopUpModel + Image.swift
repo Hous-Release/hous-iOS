@@ -32,6 +32,7 @@ public struct ImagePopUpModel {
 public enum PopUpImage {
   case test
   case exceed
+  case welcome
   case url(String)
 
   func setImage(to uiImageView: UIImageView) {
@@ -41,7 +42,9 @@ public enum PopUpImage {
       uiImageView.image = Images.badgeLock.image
     case .exceed:
       // TODO: 해당하는 이미지 넣기
-      uiImageView.image = Images.badgeLock.image
+      uiImageView.image = Images.illLimit.image
+    case .welcome:
+        uiImageView.image = Images.illDone.image
     case .url(let string):
       // TODO: - 킹피셔
       break

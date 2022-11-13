@@ -235,7 +235,7 @@ class MainHomeViewController: UIViewController {
       .asDriver(onErrorJustReturn: false)
       .drive(onNext: { [weak self] isFirst in
         guard let self = self else { return }
-        let copyCodePopUpModel = ImagePopUpModel(image: "", actionText: "호미들 바로 초대하기",
+        let copyCodePopUpModel = ImagePopUpModel(image: .welcome, actionText: "호미들 바로 초대하기",
                                                     text:
     """
     방 생성이 완료 되었습니다.
@@ -245,10 +245,11 @@ class MainHomeViewController: UIViewController {
 
         let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
 
-        self.presentPopUp(popUpType) { [weak self] actionType in
+        self.presentPopUp(popUpType) { actionType in
           switch actionType {
           case .action:
-            print("action !!")
+            //TODO: OS 공유
+            print("action !! ")
           case .cancel:
             break
           }
