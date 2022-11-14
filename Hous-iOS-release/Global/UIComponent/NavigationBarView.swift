@@ -34,7 +34,9 @@ class NavBarWithBackButtonView: UIView {
 
   lazy var rightButton = UIButton(configuration: UIButton.Configuration.plain())
 
-  var title: String
+  var title: String {
+    didSet { self.titleLabel.text = title}
+  }
   var rightButtonText: String
   
   //TODO: rightButtonText 설정 setter 메서드 따로 빼기
@@ -42,8 +44,6 @@ class NavBarWithBackButtonView: UIView {
     self.title = title
     self.rightButtonText = rightButtonText
     super.init(frame: .zero)
-    
-    titleLabel.text = title
 
     var  attrString = AttributedString(rightButtonText)
     attrString.foregroundColor = Colors.blue.color

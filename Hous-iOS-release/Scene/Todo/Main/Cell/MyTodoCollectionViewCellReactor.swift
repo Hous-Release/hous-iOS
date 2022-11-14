@@ -15,6 +15,7 @@ final class MyTodoCollectionViewCellReactor: Reactor {
 
   enum Action {
     case check(Int, Bool)
+    case checkStatus(Bool)
   }
 
   enum Mutation {
@@ -32,18 +33,28 @@ final class MyTodoCollectionViewCellReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .check(todoId, isChecked):
-      var observable: Observable<Mutation> = .empty()
-      NetworkService.shared.mainTodoRepository.checkTodo(todoId, !isChecked) { res, err in
-        guard (res?.data) != nil else {
+      let newCheckStatus = !isChecked
+      var errObservable: Observable<Mutation> = .empty()
+      NetworkService.shared.mainTodoRepository.checkTodo(todoId, newCheckStatus) { res, err in
+        guard let res = res else { return }
+
+        guard res.success else {
           let errorModel = HouseErrorModel(
-            success: res?.success ?? false,
-            status: res?.status ?? -1,
-            message: res?.message ?? "")
-          observable = .just(Mutation.setError(errorModel.message))
+            success: res.success,
+            status: res.status,
+            message: res.message)
+          errObservable = .just(Mutation.setError(errorModel.message))
           return
         }
+
+        if res.success {
+          self.action.onNext(.checkStatus(newCheckStatus))
+        }
       }
-      return .concat([.just(Mutation.setCheckStatus(isChecked)), observable])
+      return errObservable
+
+    case let .checkStatus(status):
+      return .just(.setCheckStatus(status))
     }
   }
 
@@ -53,7 +64,7 @@ final class MyTodoCollectionViewCellReactor: Reactor {
 
     switch mutation {
     case let .setCheckStatus(isChecked):
-      newState.isChecked = !isChecked
+      newState.isChecked = isChecked
     case let .setError(err):
       newState.error = err
     }
