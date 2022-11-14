@@ -195,7 +195,6 @@ extension TodoViewController {
     }
 
     reactor.state.map { [$0.myTodosSection, $0.myTodosEmptySection, $0.ourTodosSection, $0.ourTodosEmptySection] }
-      .distinctUntilChanged()
       .bind(to: self.mainView.todoCollectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
   }
