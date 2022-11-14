@@ -10,7 +10,7 @@ import UIKit
 enum OurTodoStatus: String {
   case empty = "EMPTY"
   case full = "FULL"
-  case fullCheck = "FULLCHECK"
+  case fullCheck = "FULL_CHECK"
 }
 
 final class OurTodoCollectionViewCell: UICollectionViewCell {
@@ -21,6 +21,7 @@ final class OurTodoCollectionViewCell: UICollectionViewCell {
       case .empty:
         iconImageView.image = Images.icNoOur.image
       case .full:
+        //
         iconImageView.image = Images.icHalfDoneOur.image
       case .fullCheck:
         iconImageView.image = Images.icDoneOur.image
