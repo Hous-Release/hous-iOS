@@ -61,7 +61,9 @@ extension TestAddTodoViewController {
   /// - Tag: CreateFullLayout
   private func createLayout() -> UICollectionViewLayout {
 
-    let sectionProvider = { [weak self] (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+    let sectionProvider = { [weak self] (
+      sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment
+    ) -> NSCollectionLayoutSection? in
 
       guard
         let self = self,
@@ -108,7 +110,12 @@ extension TestAddTodoViewController {
 
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(4), top: nil, trailing: .fixed(4), bottom: nil)
+    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+      leading: .fixed(4),
+      top: nil,
+      trailing: .fixed(4),
+      bottom: nil
+    )
 
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
@@ -120,7 +127,12 @@ extension TestAddTodoViewController {
       subitems: [item]
     )
 
-    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: .fixed(2), trailing: nil, bottom: .fixed(2))
+    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+      leading: nil,
+      top: .fixed(2),
+      trailing: nil,
+      bottom: .fixed(2)
+    )
 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(
@@ -148,9 +160,10 @@ extension TestAddTodoViewController {
   private func createHeaderRegistration() -> SupplementaryRegistration<TitleSupplementaryView> {
 
     return SupplementaryRegistration<TitleSupplementaryView>(
-      elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
-        supplementaryView.label.text = "담당자"
-      }
+      elementKind: UICollectionView.elementKindSectionHeader
+    ) { supplementaryView, elementKind, indexPath in
+      supplementaryView.label.text = "담당자"
+    }
   }
 
   private func createAssigneeRegistration() -> CellRegistration<AssigneeCell, ITEM> {
