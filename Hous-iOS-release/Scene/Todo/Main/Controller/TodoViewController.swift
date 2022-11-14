@@ -109,6 +109,10 @@ extension TodoViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyTodoCollectionViewCell.className, for: indexPath) as? MyTodoCollectionViewCell else {
           return UICollectionViewCell()
         }
+        cell.cellCheckSubject
+          .map { _ in Reactor.Action.fetch }
+          .bind(to: reactor.action)
+          .disposed(by: cell.disposeBag)
         cell.setCell(todos.todoId, todos.isChecked, todos.todoName)
         return cell
 

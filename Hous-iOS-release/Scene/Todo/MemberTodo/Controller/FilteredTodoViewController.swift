@@ -30,10 +30,12 @@ final class FilteredTodoViewController: UIViewController {
         attrString = AttributedString("요일별 보기")
         removeChildVC(byDayTodoViewController)
         addChildVC(memberTodoViewController)
+        navigationBar.title = "멤버별 보기"
       } else if viewType == .byDay {
         attrString = AttributedString("멤버별 보기")
         removeChildVC(memberTodoViewController)
         addChildVC(byDayTodoViewController)
+        navigationBar.title = "요일별 보기"
       }
       attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
       attrString.foregroundColor = Colors.g5.color

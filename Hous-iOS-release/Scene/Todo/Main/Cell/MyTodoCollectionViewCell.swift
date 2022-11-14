@@ -13,6 +13,7 @@ import ReactorKit
 final class MyTodoCollectionViewCell: UICollectionViewCell, View {
 
   var disposeBag = DisposeBag()
+  let cellCheckSubject = PublishSubject<Bool>()
 
   var id: Int = 0
   var isChecked: Bool = false {
@@ -65,9 +66,8 @@ final class MyTodoCollectionViewCell: UICollectionViewCell, View {
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.isChecked }
-      .subscribe { [weak self] status in
-        self?.isChecked = status
-      }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: updateCheckStatus)
       .disposed(by: disposeBag)
   }
 }
@@ -94,5 +94,10 @@ extension MyTodoCollectionViewCell {
     self.id = todoId
     self.isChecked = isChecked
     myTodoLabel.text = todoName
+  }
+
+  private func updateCheckStatus(_ status: Bool) {
+    isChecked = status
+    cellCheckSubject.onNext(true)
   }
 }
