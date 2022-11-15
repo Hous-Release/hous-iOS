@@ -16,7 +16,7 @@ class BadgeViewController: UIViewController {
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "내 배지")
-    navBar.backgroundColor = .clear
+    navBar.backgroundColor = Colors.g7.color
     navBar.setBackButtonColor(color: Colors.white.color)
     navBar.setTitleLabelTextColor(color: Colors.white.color)
     return navBar
@@ -68,6 +68,10 @@ class BadgeViewController: UIViewController {
     bind()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.setTabBarIsHidden(isHidden: true)
+  }
+  
   private func setBadgeCollectionView() {
     badgeCollectionView
       .rx
@@ -90,7 +94,7 @@ class BadgeViewController: UIViewController {
     ])
     
     badgeCollectionView.snp.makeConstraints { make in
-      make.top.equalTo(view.snp.top)
+      make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
@@ -136,7 +140,7 @@ extension BadgeViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
     if indexPath.section == 0 {
-      return CGSize(width: view.window?.windowScene?.screen.bounds.width ?? 375, height: (view.window?.windowScene?.screen.bounds.height ?? 812) * (255/812))
+      return CGSize(width: view.window?.windowScene?.screen.bounds.width ?? 375, height: (view.window?.windowScene?.screen.bounds.width ?? 375) * (180 / (view.window?.windowScene?.screen.bounds.width ?? 375)))
     }
     return CGSize(width: 80, height: 152)
   }
@@ -185,7 +189,7 @@ extension BadgeViewController {
           self.badgeCollectionView.reloadSections(IndexSet(integer: 1))
         })
         .disposed(by: cell.disposeBag)
-    
+      
     cell.setRepresntingBadgeCellData(viewModel: viewModel)
     
     return cell
