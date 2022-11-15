@@ -36,9 +36,9 @@
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
+		9B2F46952923A918002D9BD2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F46942923A918002D9BD2 /* ProfileEditViewModel.swift */; };
 		9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */; };
 		9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B454E4D2900055F00F5A319 /* profileRedlottie.json */; };
-		9B832009291934DF001EBDFE /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */; };
 		9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200A29193515001EBDFE /* ProfileEditModel.swift */; };
 		9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */; };
 		9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */; };
@@ -227,9 +227,9 @@
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B2F46942923A918002D9BD2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		9B454E4D2900055F00F5A319 /* profileRedlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileRedlottie.json; sourceTree = "<group>"; };
-		9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = ../../../../../../Desktop/ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		9B83200A29193515001EBDFE /* ProfileEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditModel.swift; sourceTree = "<group>"; };
 		9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditNavtigationView.swift; sourceTree = "<group>"; };
 		9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
@@ -632,7 +632,7 @@
 			children = (
 				9B091DFD28E363A900C144BA /* ProfileViewModel.swift */,
 				9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */,
-				9B832008291934DF001EBDFE /* ProfileEditViewModel.swift */,
+				9B2F46942923A918002D9BD2 /* ProfileEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1305,6 +1305,7 @@
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */,
+				9B2F46952923A918002D9BD2 /* ProfileEditViewModel.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
@@ -1324,7 +1325,6 @@
 				9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */,
 				9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
-				9B832009291934DF001EBDFE /* ProfileEditViewModel.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
