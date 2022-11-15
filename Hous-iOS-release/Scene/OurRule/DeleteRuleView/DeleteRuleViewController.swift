@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import BottomSheetKit
 
-class DeleteRuleViewController: UIViewController {
+class DeleteRuleViewController: LoadingBaseViewController {
   //MARK: - UI Components
   
   private let navigationBar: NavBarWithBackButtonView = {
@@ -81,6 +81,8 @@ class DeleteRuleViewController: UIViewController {
       rulesTableView,
       ruleEmptyViewLabel
     ])
+    
+    configLoadingLayout()
     
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -156,7 +158,8 @@ class DeleteRuleViewController: UIViewController {
     configButtonAction()
     
     let input = DeleteRuleViewModel.Input(
-      deleteButtonDidTapped: deleteButtonDidTapped,
+      deleteButtonDidTapped: deleteButtonDidTapped
+        .do(onNext: { [weak self] _ in self?.showLoading() }),
       navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable())
     
     let output = viewModel.transform(input: input)
@@ -169,6 +172,7 @@ class DeleteRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
     output.deletedCompleted
+      .do(onNext: { [weak self] _ in self?.hideLoading() })
       .drive(onNext: {
         self.navigationController?.popViewController(animated: true)
       })

@@ -12,7 +12,7 @@ import RxDataSources
 import RxGesture
 
 
-class BadgeViewController: UIViewController {
+class BadgeViewController: LoadingBaseViewController {
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "내 배지")
@@ -93,6 +93,8 @@ class BadgeViewController: UIViewController {
       navigationBar
     ])
     
+    configLoadingLayout()
+    
     badgeCollectionView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview()
@@ -108,7 +110,8 @@ class BadgeViewController: UIViewController {
   
   private func bind() {
     let input = BadgeViewModel.Input(
-      viewWillAppear: rx.RxViewWillAppear.asObservable(),
+      viewWillAppear: rx.RxViewWillAppear.asObservable()
+        .do(onNext: { [weak self] _ in self?.showLoading() }),
       backButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
       selectedMainBadge: selectedMainBadgeSubject
     )
@@ -116,6 +119,7 @@ class BadgeViewController: UIViewController {
     let output = viewModel.transform(input: input)
     
     output.sections
+      .do(onNext: { [weak self] _ in self?.hideLoading() })
       .drive(badgeCollectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     

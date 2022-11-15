@@ -12,7 +12,7 @@ import RxGesture
 import BottomSheetKit
 import Kingfisher
 
-class AddRuleViewController: UIViewController {
+class AddRuleViewController: LoadingBaseViewController {
   
   //MARK: - UI Components
   private let navigationBar: NavBarWithBackButtonView = {
@@ -89,6 +89,8 @@ class AddRuleViewController: UIViewController {
       ruleTableView
     ])
     
+    configLoadingLayout()
+    
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
@@ -138,7 +140,8 @@ class AddRuleViewController: UIViewController {
     let input = AddRuleViewModel.Input(
       navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
       viewDidTapped: view.rx.tapGesture().asObservable(),
-      saveButtonDidTapped: newRulesSubject,
+      saveButtonDidTapped: newRulesSubject
+        .do(onNext: { [weak self] _ in self?.showLoading() }),
       plusButtonDidTapped: plusButton.rx.tap.asObservable(),
       textFieldEdit: ruleTextField.rx.text.orEmpty.asObservable()
     )
@@ -220,6 +223,7 @@ class AddRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
     output.savedCompleted
+      .do(onNext: { [weak self] _ in self?.hideLoading() })
       .drive(onNext: { [weak self] _ in
         self?.navigationController?.popViewController(animated: true)
       })
