@@ -81,7 +81,7 @@ class RepresentingBadgeCollectionViewCell: UICollectionViewCell {
     
     badgeView.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(contentView).offset(107)
+      make.top.equalTo(contentView).offset(20)
       make.size.equalTo(100)
     }
     
