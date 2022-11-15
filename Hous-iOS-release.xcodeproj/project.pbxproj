@@ -119,6 +119,7 @@
 		B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB21291FCDC90056C0B1 /* wednesday.json */; };
 		B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB472923DA0B0056C0B1 /* loading.json */; };
 		B5F9FB4A2923DA180056C0B1 /* birthday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB492923DA180056C0B1 /* birthday.json */; };
+		B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
@@ -313,6 +314,7 @@
 		B5F9FB21291FCDC90056C0B1 /* wednesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wednesday.json; sourceTree = "<group>"; };
 		B5F9FB472923DA0B0056C0B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		B5F9FB492923DA180056C0B1 /* birthday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = birthday.json; sourceTree = "<group>"; };
+		B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBaseViewController.swift; sourceTree = "<group>"; };
 		B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCellReactor.swift; sourceTree = "<group>"; };
 		B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemListCell.swift; sourceTree = "<group>"; };
 		B8249A5429116E69008005DE /* MemEmptyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemEmptyListCell.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				777C667C28A75039000BECEA /* BaseViewController.swift */,
+				B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1371,6 +1374,7 @@
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
+				B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */,
 				B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */,
