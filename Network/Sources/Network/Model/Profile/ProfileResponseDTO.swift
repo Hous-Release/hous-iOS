@@ -71,5 +71,14 @@ public extension ProfileDTO.Response {
         public let status: Int
         public let success: Bool
     }
+    
+    //MARK: ProfileTest
+    struct ProfileTestResponseDTO: Codable {
+        public let question: String
+        public let testNum: Int
+        public let questionImg: String
+        public let questionType: String
+        public let answers: [String]
+    }
 
 }

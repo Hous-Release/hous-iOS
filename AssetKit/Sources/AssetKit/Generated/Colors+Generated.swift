@@ -45,6 +45,7 @@ public enum Colors {
   public static let white = ColorAsset(name: "white")
   public static let yellow = ColorAsset(name: "yellow")
   public static let yellowB1 = ColorAsset(name: "yellowB1")
+  public static let redL1 = ColorAsset(name: "redL1")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -209,8 +209,11 @@ final class ProfileViewController: UIViewController {
       destinationViewController = ProfileEditViewController(data: self.data)
     case .didTabDetail:
       destinationViewController = ProfileDetailViewController()
+    case .didTabBadge:
+      let badgeViewModel = BadgeViewModel()
+      destinationViewController = BadgeViewController(viewModel: badgeViewModel)
     case .didTabRetry:
-      destinationViewController = ProfileRetryViewController()
+      destinationViewController = ProfileTestInfoViewController()
     default:
       return
     }

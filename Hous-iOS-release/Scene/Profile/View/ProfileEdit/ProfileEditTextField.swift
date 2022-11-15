@@ -23,8 +23,6 @@ class ProfileEditTextField: UITextField {
     $0.adjustsImageWhenHighlighted = false
   }
   
-  
-  
   override func layoutSubviews() {
     super.layoutSubviews()
     setupUnderlineLayer()
@@ -65,7 +63,7 @@ extension ProfileEditTextField {
     animation.values = [0, 1]
     animation.duration = 0.8
     animation.keyTimes = [0, 0.8]
-    animatedunderlineLayer.add(animation, forKey: "Selected")
+//    animatedunderlineLayer.add(animation, forKey: "Selected")
   }
   
   func textFieldUnselected() {

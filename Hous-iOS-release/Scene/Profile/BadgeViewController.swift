@@ -26,6 +26,7 @@ class BadgeViewController: LoadingBaseViewController {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
     $0.collectionViewLayout = layout
+    $0.contentInsetAdjustmentBehavior = .never
     $0.showsVerticalScrollIndicator = false
   }
   
@@ -85,9 +86,6 @@ class BadgeViewController: LoadingBaseViewController {
   }
   
   private func configUI() {
-    navigationController?.navigationBar.isHidden = true
-    self.setTabBarIsHidden(isHidden: true)
-    
     view.addSubViews([
       badgeCollectionView,
       navigationBar
@@ -136,6 +134,14 @@ class BadgeViewController: LoadingBaseViewController {
         self.updatedRepresentBadgeCompleted.onNext(representbadgeId)
       })
       .disposed(by: disposeBag)
+    
+    output.popViewController
+      .drive(onNext: { [weak self] in
+        self?.setTabBarIsHidden(isHidden: false)
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+    
   }
   
 }
@@ -246,3 +252,5 @@ extension BadgeViewController {
     return cell
   }
 }
+
+

@@ -24,7 +24,7 @@ class BadgeViewModel: ViewModelType {
     let sections: Driver<[SectionOfProfile]>
     let badgesWithState: Driver<[RoomBadgeViewModel]>
     let updatedRepresentBadge: Driver<Int>
-    //    let popViewController: Driver<Void>
+    let popViewController: Driver<Void>
   }
   
   private let disposeBag = DisposeBag()
@@ -114,12 +114,15 @@ class BadgeViewModel: ViewModelType {
         return NetworkService.shared.profileRepository.updateRepresentBadge(badgeId)
       })
       .asDriver(onErrorJustReturn: -1)
-      
+    
+    let popViewController = input.backButtonDidTapped
+      .asDriver(onErrorJustReturn: ())
     
     return Output(
       sections: sections.asDriver(onErrorJustReturn: []),
       badgesWithState: badgesWithState,
-      updatedRepresentBadge: updatedRepresentBadge
+      updatedRepresentBadge: updatedRepresentBadge,
+      popViewController: popViewController
     )
   }
   
