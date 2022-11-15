@@ -93,7 +93,7 @@ extension ProfileEditTextViewObject {
     animation.values = [0, 1]
     animation.duration = 0.8
     animation.keyTimes = [0, 0.8]
-    animatedUnderlineLayer.add(animation, forKey: "Selected")
+//    animatedUnderlineLayer.add(animation, forKey: "Selected")
   }
   
   func textViewUnselected() {
