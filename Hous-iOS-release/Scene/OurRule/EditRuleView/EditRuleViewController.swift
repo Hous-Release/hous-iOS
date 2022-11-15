@@ -13,7 +13,9 @@ import RxKeyboard
 import Network
 import BottomSheetKit
 
-class EditRuleViewController: UIViewController {
+class EditRuleViewController: LoadingBaseViewController {
+  
+  //MARK: - UI Components
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "Rules 수정")
@@ -33,6 +35,8 @@ class EditRuleViewController: UIViewController {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g5.color
   }
+  
+  //MARK: - Var & lets
   
   private let disposeBag = DisposeBag()
   
@@ -87,6 +91,8 @@ class EditRuleViewController: UIViewController {
       rulesTableView,
       ruleEmptyViewLabel
     ])
+    
+    configLoadingLayout()
     
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -212,13 +218,20 @@ class EditRuleViewController: UIViewController {
       .disposed(by: disposeBag)
     
     let input = EditRuleViewModel.Input(
-      backButtonDidTap: navigationBar.backButton.rx.tap.asObservable(),
+      backButtonDidTap: navigationBar.backButton.rx.tap
+        .asObservable(),
       saveButtonDidTap: saveButtonDidTapped
+        .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
     )
     
     let output = viewModel.transform(input: input)
     
     output.saveCompleted
+      .do(onNext: { [weak self] _ in
+        self?.hideLoading()
+      })
       .drive(onNext: { [weak self] _ in
         self?.navigationController?.popViewController(animated: true)
       })
