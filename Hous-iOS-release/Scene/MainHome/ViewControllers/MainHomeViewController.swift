@@ -15,7 +15,7 @@ import Network
 import RxGesture
 import BottomSheetKit
 
-class MainHomeViewController: UIViewController {
+class MainHomeViewController: LoadingBaseViewController {
   
   private enum MainHomeSection: Int {
     case todos
@@ -42,7 +42,7 @@ class MainHomeViewController: UIViewController {
     $0.collectionViewLayout = layout
     $0.showsVerticalScrollIndicator = false
   }
-  
+    
   //MARK: - Life Cycles
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -73,6 +73,8 @@ class MainHomeViewController: UIViewController {
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     
     view.addSubview(collectionView)
+    
+    configLoadingLayout()
     
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -181,7 +183,11 @@ class MainHomeViewController: UIViewController {
   //MARK: Helpers
   private func bind() {
     let viewWillAppear =
-    rx.RxViewWillAppear.asSignal()
+    rx.RxViewWillAppear
+      .asSignal()
+      .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
     
     let input = MainHomeViewModel.Input(
       viewWillAppear: viewWillAppear,
@@ -220,6 +226,8 @@ class MainHomeViewController: UIViewController {
     }
     
     output.sections
+      .do(onNext: { [weak self] _ in
+        self?.hideLoading() })
       .drive(collectionView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
@@ -235,7 +243,6 @@ class MainHomeViewController: UIViewController {
     welcomePopUpSubject
       .asDriver(onErrorJustReturn: "")
       .drive(onNext: { [weak self] roomCode in
-        print("roomCode : ", roomCode, "✨✨✨✨✨")
         guard let self = self else { return }
         let copyCodePopUpModel = ImagePopUpModel(image: .welcome, actionText: "호미들 바로 초대하기",
                                                     text:
