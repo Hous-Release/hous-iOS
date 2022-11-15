@@ -6,24 +6,45 @@
 //
 
 import UIKit
+import Lottie
 
 class LoadingBaseViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+  let loadingBackgroundView = UIView().then {
+    $0.isHidden = true
+    $0.backgroundColor = Colors.black.color.withAlphaComponent(0.7)
+  }
+  
+  let loadingLottie = AnimationView(name: "loading").then {
+    $0.loopMode = .loop
+    $0.play()
+  }
+  
+  func showLoading() {
+    DispatchQueue.main.async {
+      self.loadingBackgroundView.isHidden = false
+    }
+  }
+  
+  func hideLoading() {
+    DispatchQueue.main.async {
+      self.loadingBackgroundView.isHidden = true
+    }
+  }
+  
+  func configLoadingLayout() {
+    view.addSubview(loadingBackgroundView)
+    
+    loadingBackgroundView.addSubview(loadingLottie)
+    
+    loadingBackgroundView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    loadingLottie.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+      make.size.equalTo(200)
     }
-    */
+  }
 
 }
