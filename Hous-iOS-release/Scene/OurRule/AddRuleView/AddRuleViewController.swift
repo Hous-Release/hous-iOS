@@ -48,6 +48,8 @@ class AddRuleViewController: UIViewController {
   
   private var newRulesSubject = PublishSubject<[String]>()
   
+  private var newRules: [String] = []
+  
   private var tabBarHeight: CGFloat = 83
   
   private var rules: [String]
@@ -201,6 +203,8 @@ class AddRuleViewController: UIViewController {
           
         } else {
           self.rules.append(text)
+          self.newRules.append(text)
+          
           self.rulesSubject.onNext(self.rules)
           
           self.ruleTextField.text = ""
@@ -226,7 +230,7 @@ class AddRuleViewController: UIViewController {
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.newRulesSubject.onNext(self.rules)
+        self.newRulesSubject.onNext(self.newRules)
       })
       .disposed(by: disposeBag)
   }
