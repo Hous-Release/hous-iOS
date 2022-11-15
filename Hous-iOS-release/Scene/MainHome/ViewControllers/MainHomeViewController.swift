@@ -32,7 +32,8 @@ class MainHomeViewController: UIViewController {
   private let viewWillAppear = PublishRelay<Void>()
   
   let todoBackgroundViewDidTap = PublishSubject<Void>()
-  let welcomePopUpSubject = PublishSubject<Bool>()
+  let welcomePopUpSubject = PublishSubject<String>()
+  let shareCodeSubject = PublishSubject<String>()
     
   //MARK: - UI Components
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -232,8 +233,9 @@ class MainHomeViewController: UIViewController {
       .disposed(by: disposeBag)
     
     welcomePopUpSubject
-      .asDriver(onErrorJustReturn: false)
-      .drive(onNext: { [weak self] isFirst in
+      .asDriver(onErrorJustReturn: "")
+      .drive(onNext: { [weak self] roomCode in
+        print("roomCode : ", roomCode, "✨✨✨✨✨")
         guard let self = self else { return }
         let copyCodePopUpModel = ImagePopUpModel(image: .welcome, actionText: "호미들 바로 초대하기",
                                                     text:
@@ -245,16 +247,44 @@ class MainHomeViewController: UIViewController {
 
         let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
 
-        self.presentPopUp(popUpType) { actionType in
+        self.presentPopUp(popUpType) { [weak self] actionType in
+          guard let self = self else { return }
           switch actionType {
           case .action:
-            //TODO: OS 공유
-            print("action !! ")
+            self.dismiss(animated: true) {
+              self.shareCodeSubject.onNext(roomCode)
+            }
           case .cancel:
             break
           }
         }
         
+      })
+      .disposed(by: disposeBag)
+    
+    shareCodeSubject
+      .asDriver(onErrorJustReturn: "")
+      .drive(onNext: { [weak self] roomCode in
+        guard let self = self else { return }
+        
+        let textToShare: String = roomCode
+
+        let activityViewController = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.assignToContact]
+        
+        
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+          if success {
+            // 성공했을 때 작업
+            print("success")
+            
+          }  else  {
+            // 실패했을 때 작업
+            
+          }
+        }
+        self.present(activityViewController, animated: true)
       })
       .disposed(by: disposeBag)
   }

@@ -12,7 +12,7 @@ import SnapKit
 
 class HousTabbarViewController: UITabBarController {
   
-  var firstCreatedSubject = PublishSubject<Bool>()
+  var firstCreatedSubject = PublishSubject<String>()
 
   public let housTabBar: HousTabBar = {
     let tabbar = HousTabBar()
@@ -84,9 +84,8 @@ class HousTabbarViewController: UITabBarController {
     
     firstCreatedSubject
       .observe(on: MainScheduler.asyncInstance)
-      .filter({ $0 })
-      .subscribe(onNext: { isFirstFlag in
-        mainVC.welcomePopUpSubject.onNext(isFirstFlag)
+      .subscribe(onNext: { roomCode in
+        mainVC.welcomePopUpSubject.onNext(roomCode)
       })
       .disposed(by: disposeBag)
   }
