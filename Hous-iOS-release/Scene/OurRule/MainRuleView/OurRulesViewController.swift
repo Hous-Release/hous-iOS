@@ -11,7 +11,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-class OurRulesViewController: UIViewController {
+class OurRulesViewController: LoadingBaseViewController {
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "우리 집 Rules")
@@ -86,6 +86,7 @@ class OurRulesViewController: UIViewController {
       navigationBar,
       rulesTableView
     ])
+    configLoadingLayout()
     
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -103,10 +104,12 @@ class OurRulesViewController: UIViewController {
   private func bind() {
     rx.RxViewWillAppear
       .asObservable()
+      .do(onNext: { [weak self] _ in self?.showLoading() })
       .bind(to: viewModel.viewWillAppearSubject)
       .disposed(by: disposeBag)
     
     viewModel.rules
+      .do(onNext: { [weak self] _ in self?.hideLoading() })
       .bind(to: rulesTableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
