@@ -97,8 +97,6 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
       make.width.height.equalTo(110)
     }
     
-//    badgeImage.rx.tapGesture().asObservable()
-    
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(62)
       make.leading.equalToSuperview().offset(24)
@@ -140,17 +138,24 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   private func transferToViewController() {
     self.alarmButton.rx.tap
-      .bind { [weak self] in
+      .bind (onNext:{ [weak self] in
         guard let self = self else { return }
         self.cellActionControlSubject.onNext(.didTabAlarm)
-      }
+      })
       .disposed(by: disposeBag)
     
     self.settingButton.rx.tap
-      .bind { [weak self] in
+      .bind (onNext:{ [weak self] in
         guard let self = self else { return }
         self.cellActionControlSubject.onNext(.didTabSetting)
-      }
+      })
+      .disposed(by: disposeBag)
+    
+     badgeImage.rx.tapGesture()
+      .bind(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.cellActionControlSubject.onNext(.didTabBadge)
+      })
       .disposed(by: disposeBag)
   }
   

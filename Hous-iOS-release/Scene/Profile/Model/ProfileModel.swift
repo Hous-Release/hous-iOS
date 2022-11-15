@@ -143,6 +143,7 @@ enum ProfileActionControl {
   case didTabEdit
   case didTabDetail
   case didTabRetry
+  case didTabBadge
   case network
   case none
 }
