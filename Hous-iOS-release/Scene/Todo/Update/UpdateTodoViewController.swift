@@ -29,6 +29,9 @@ final class UpdateTodoViewController: UIViewController, View {
   }
 
   private var collectionView: UICollectionView!
+
+  private var todoTextField: HousTextField!
+
   internal var disposeBag: DisposeBag = DisposeBag()
   private var dataSource: DataSource! = nil
   private var allSnapShot = SnapShot()
@@ -40,7 +43,8 @@ final class UpdateTodoViewController: UIViewController, View {
     _ homies: [UpdateTodoHomieModel]
   ) {
     super.init(nibName: nil, bundle: nil)
-    configureHierarchy()
+    setupView()
+    setupLayout()
     configureDataSource()
     applyInitialSnapshots()
     applySnapShot(homies)
@@ -56,6 +60,10 @@ final class UpdateTodoViewController: UIViewController, View {
     super.viewDidLoad()
   }
 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
@@ -68,12 +76,35 @@ final class UpdateTodoViewController: UIViewController, View {
 
 
 extension UpdateTodoViewController {
-  private func configureHierarchy() {
+  private func setupLayout() {
+    view.addSubView(todoTextField)
+    view.addSubView(collectionView)
+
+    todoTextField.snp.makeConstraints { make in
+      make.height.equalTo(22)
+      make.leading.trailing.equalToSuperview().inset(24)
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(32)
+    }
+    collectionView.snp.makeConstraints { make in
+      make.top.equalTo(todoTextField.snp.bottom).offset(46)
+      make.leading.trailing.equalToSuperview()
+      make.bottom.equalToSuperview()
+    }
+  }
+
+
+
+  private func setupView() {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-    collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
-    view.addSubview(collectionView)
+
+    todoTextField = HousTextField(
+      "Todo 입력",
+      useMaxCount: true,
+      maxCount: 15,
+      exceedString: "어쩔티비"
+    )
   }
 
   /// - Tag: CreateFullLayout

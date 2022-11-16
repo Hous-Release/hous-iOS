@@ -42,6 +42,7 @@
 		77EB7210292540D600032776 /* TodoHomieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720F292540D600032776 /* TodoHomieModel.swift */; };
 		77EB72122925413200032776 /* UpdateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72112925413200032776 /* UpdateTodoViewController.swift */; };
 		77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7213292541CF00032776 /* UpdateTodoReactor.swift */; };
+		77EB72162925489500032776 /* HousTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72152925489500032776 /* HousTextField.swift */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */; };
@@ -276,6 +277,7 @@
 		77EB720F292540D600032776 /* TodoHomieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHomieModel.swift; sourceTree = "<group>"; };
 		77EB72112925413200032776 /* UpdateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoViewController.swift; sourceTree = "<group>"; };
 		77EB7213292541CF00032776 /* UpdateTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoReactor.swift; sourceTree = "<group>"; };
+		77EB72152925489500032776 /* HousTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTextField.swift; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoNavigationView.swift; sourceTree = "<group>"; };
@@ -1212,6 +1214,7 @@
 				9B959B0128FF1EA800EB3412 /* GraphBackgroundView.swift */,
 				B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */,
 				9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */,
+				77EB72152925489500032776 /* HousTextField.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1477,6 +1480,7 @@
 				B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */,
 				9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
+				77EB72162925489500032776 /* HousTextField.swift in Sources */,
 				B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */,
 				77EB720629253FBE00032776 /* AssigneeCell.swift in Sources */,
 				B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */,
