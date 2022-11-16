@@ -1,14 +1,14 @@
 //
-//  TestHomie.swift
+//  TodoHomieModel.swift
 //  Hous-iOS-release
 //
-//  Created by 김호세 on 2022/11/13.
+//  Created by 김호세 on 2022/11/17.
 //
 
 import Foundation
 import UIKit
 
-struct TestHomie: Hashable {
+struct UpdateTodoHomieModel: Hashable {
   enum Day: Int, Hashable, CaseIterable, CustomStringConvertible, Comparable {
     case mon, tue ,wed ,thu ,fri ,sat ,sun
   }
@@ -19,7 +19,7 @@ struct TestHomie: Hashable {
   private let identifier = UUID()
 }
 
-extension TestHomie.Day {
+extension UpdateTodoHomieModel.Day {
   public static func < (lhs: Self, rhs: Self) -> Bool {
     lhs.rawValue < rhs.rawValue
   }

@@ -20,12 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    window.rootViewController = SplashViewController(reactor)
 
 
-    let homies: [TestHomie] = [
+    let homies: [UpdateTodoHomieModel] = [
       .init(name: "호세", color: .brown, selectedDay: [.fri]),
       .init(name: "지현", color: .cyan, selectedDay: [.mon])
     ]
 
-    window.rootViewController = TestAddTodoViewController(homies)
+    window.rootViewController = UpdateTodoViewController(homies)
     window.backgroundColor = .white
     window.makeKeyAndVisible()
 

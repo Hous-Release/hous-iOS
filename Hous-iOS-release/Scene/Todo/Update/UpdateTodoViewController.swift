@@ -1,17 +1,16 @@
 //
-//  TestAddTodoViewController.swift
+//  UpdateTodoViewController.swift
 //  Hous-iOS-release
 //
-//  Created by 김호세 on 2022/11/13.
+//  Created by 김호세 on 2022/11/17.
 //
 
 import UIKit
 
+final class UpdateTodoViewController: UIViewController {
 
-final class TestAddTodoViewController: UIViewController {
-
-  private typealias SECTION = TestAddTodoDataSource.Section
-  private typealias ITEM = TestAddTodoDataSource.Item
+  private typealias SECTION = UpdateTodoDataSource.Section
+  private typealias ITEM = UpdateTodoDataSource.Item
   private typealias DataSource = UICollectionViewDiffableDataSource<SECTION, ITEM>
   private typealias SnapShot = NSDiffableDataSourceSnapshot<SECTION, ITEM>
   private typealias CellRegistration = UICollectionView.CellRegistration
@@ -30,7 +29,7 @@ final class TestAddTodoViewController: UIViewController {
   private var assigneeSectionSnapShot = SectionSnapShot()
   private var individualSectionSnapShot = SectionSnapShot()
 
-  init(_ homies: [TestHomie]) {
+  init(_ homies: [UpdateTodoHomieModel]) {
     super.init(nibName: nil, bundle: nil)
     configureHierarchy()
     configureDataSource()
@@ -49,7 +48,7 @@ final class TestAddTodoViewController: UIViewController {
 
 }
 
-extension TestAddTodoViewController {
+extension UpdateTodoViewController {
   private func configureHierarchy() {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
     collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -252,12 +251,12 @@ extension TestAddTodoViewController {
     }
   }
 
-  private func applySnapShot(_ homies: [TestHomie]) {
+  private func applySnapShot(_ homies: [UpdateTodoHomieModel]) {
     applyAssigneeSnapShot(homies)
     applyIndividualSnapShot(homies)
   }
 
-  private func applyAssigneeSnapShot(_ homies: [TestHomie]) {
+  private func applyAssigneeSnapShot(_ homies: [UpdateTodoHomieModel]) {
     var snapShot = NSDiffableDataSourceSectionSnapshot<ITEM>()
 
     let selectedHomies = homies.filter { !$0.selectedDay.isEmpty }
@@ -270,7 +269,7 @@ extension TestAddTodoViewController {
     dataSource.apply(snapShot, to: .assignee, animatingDifferences: false)
   }
 
-  private func applyIndividualSnapShot(_ homies: [TestHomie]) {
+  private func applyIndividualSnapShot(_ homies: [UpdateTodoHomieModel]) {
 
     var snapShot = NSDiffableDataSourceSectionSnapshot<ITEM>()
 
@@ -293,7 +292,7 @@ extension TestAddTodoViewController {
   }
 }
 
-extension TestAddTodoViewController: UICollectionViewDelegate {
+extension UpdateTodoViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard
       let item = self.dataSource.itemIdentifier(for: indexPath),
