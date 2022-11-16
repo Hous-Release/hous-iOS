@@ -546,7 +546,6 @@
 		777085AD29040DC50018240B /* TestScene */ = {
 			isa = PBXGroup;
 			children = (
-				77E86F2D2920BF9900FACD23 /* TestTodo */,
 				777085AF29040DE00018240B /* TestViewController.swift */,
 			);
 			path = TestScene;
@@ -702,13 +701,6 @@
 				777C666928A74A63000BECEA /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		77E86F2D2920BF9900FACD23 /* TestTodo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TestTodo;
 			sourceTree = "<group>";
 		};
 		77EB720029253F6D00032776 /* Update */ = {
