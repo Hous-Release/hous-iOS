@@ -79,7 +79,7 @@ final internal class AssigneeCell: UICollectionViewCell {
 
   }
 
-  func configure(_ model: TestHomie) {
+  func configure(_ model: UpdateTodoHomieModel) {
     homieNamelabel.text = model.name
     colorLabel.backgroundColor = model.color
   }

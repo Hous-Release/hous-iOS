@@ -1,15 +1,15 @@
 //
-//  TestAddTodoDataSource.swift
+//  UpdateTodoDataSource.swift
 //  Hous-iOS-release
 //
-//  Created by 김호세 on 2022/11/13.
+//  Created by 김호세 on 2022/11/17.
 //
 
 import Foundation
 
-public enum TestAddTodoDataSource { }
+public enum UpdateTodoDataSource { }
 
-extension TestAddTodoDataSource {
+extension UpdateTodoDataSource {
   enum Section: Int, Hashable, CaseIterable, CustomStringConvertible {
     case assignee
     case individual
@@ -26,11 +26,11 @@ extension TestAddTodoDataSource {
   }
 
   struct Item: Hashable {
-    let homie: TestHomie?
+    let homie: UpdateTodoHomieModel?
     let hasChild: Bool
     private let identifier = UUID()
 
-    init(homie: TestHomie?, hasChild: Bool) {
+    init(homie: UpdateTodoHomieModel?, hasChild: Bool) {
       self.hasChild = hasChild
       self.homie = homie
     }

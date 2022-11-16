@@ -48,7 +48,7 @@ final class IndividualCell: UICollectionViewCell {
     fatalError("Not Implemnted")
   }
 
-  func configure(_ model: TestHomie) {
+  func configure(_ model: UpdateTodoHomieModel) {
     colorLabel.backgroundColor = model.color
     homieNamelabel.text = model.name
   }
