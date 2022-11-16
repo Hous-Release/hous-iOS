@@ -25,7 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       .init(name: "지현", color: .cyan, selectedDay: [.mon])
     ]
 
-    window.rootViewController = UpdateTodoViewController(homies)
+    let serviceProvider = ServiceProvider()
+
+    let reactor = UpdateTodoReactor(
+      provider: serviceProvider,
+      state: .init()
+    )
+
+    window.rootViewController = UpdateTodoViewController(reactor, homies)
     window.backgroundColor = .white
     window.makeKeyAndVisible()
 
