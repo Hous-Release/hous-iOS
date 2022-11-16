@@ -41,6 +41,7 @@
 		77EB720E2925406000032776 /* UpdateTodoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720D2925406000032776 /* UpdateTodoDataSource.swift */; };
 		77EB7210292540D600032776 /* TodoHomieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720F292540D600032776 /* TodoHomieModel.swift */; };
 		77EB72122925413200032776 /* UpdateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72112925413200032776 /* UpdateTodoViewController.swift */; };
+		77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7213292541CF00032776 /* UpdateTodoReactor.swift */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */; };
@@ -274,6 +275,7 @@
 		77EB720D2925406000032776 /* UpdateTodoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoDataSource.swift; sourceTree = "<group>"; };
 		77EB720F292540D600032776 /* TodoHomieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHomieModel.swift; sourceTree = "<group>"; };
 		77EB72112925413200032776 /* UpdateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoViewController.swift; sourceTree = "<group>"; };
+		77EB7213292541CF00032776 /* UpdateTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoReactor.swift; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoNavigationView.swift; sourceTree = "<group>"; };
@@ -715,6 +717,7 @@
 				77EB720429253FA100032776 /* Subviews */,
 				77EB720329253F9600032776 /* Model */,
 				77EB72112925413200032776 /* UpdateTodoViewController.swift */,
+				77EB7213292541CF00032776 /* UpdateTodoReactor.swift */,
 			);
 			path = Update;
 			sourceTree = "<group>";
@@ -1576,6 +1579,7 @@
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */,
 				B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */,

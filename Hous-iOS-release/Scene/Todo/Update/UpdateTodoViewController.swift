@@ -5,9 +5,14 @@
 //  Created by 김호세 on 2022/11/17.
 //
 
+import ReactorKit
+import RxCocoa
+import RxSwift
 import UIKit
 
-final class UpdateTodoViewController: UIViewController {
+final class UpdateTodoViewController: UIViewController, View {
+
+  typealias Reactor = UpdateTodoReactor
 
   private typealias SECTION = UpdateTodoDataSource.Section
   private typealias ITEM = UpdateTodoDataSource.Item
@@ -24,18 +29,23 @@ final class UpdateTodoViewController: UIViewController {
   }
 
   private var collectionView: UICollectionView!
+  internal var disposeBag: DisposeBag = DisposeBag()
   private var dataSource: DataSource! = nil
   private var allSnapShot = SnapShot()
   private var assigneeSectionSnapShot = SectionSnapShot()
   private var individualSectionSnapShot = SectionSnapShot()
 
-  init(_ homies: [UpdateTodoHomieModel]) {
+  init(
+    _ reactor: Reactor,
+    _ homies: [UpdateTodoHomieModel]
+  ) {
     super.init(nibName: nil, bundle: nil)
     configureHierarchy()
     configureDataSource()
     applyInitialSnapshots()
     applySnapShot(homies)
 
+    self.reactor = reactor
   }
 
   required init?(coder: NSCoder) {
@@ -46,7 +56,16 @@ final class UpdateTodoViewController: UIViewController {
     super.viewDidLoad()
   }
 
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
+
+  func bindAction(_ reactor: Reactor) { }
+  func bindState(_ reactor: Reactor) { }
+
 }
+
 
 extension UpdateTodoViewController {
   private func configureHierarchy() {
