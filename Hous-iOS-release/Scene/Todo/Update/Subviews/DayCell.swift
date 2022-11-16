@@ -42,14 +42,14 @@ final class DayCell: UICollectionViewCell {
     super.layoutSubviews()
   }
 
-  func configure(_ model: TestHomie) {
+  func configure(_ model: UpdateTodoHomieModel) {
     let uniqued = Array(Set(model.selectedDay))
     _ = uniqued.map {
       selectButton($0)
     }
   }
 
-  private func selectButton(_ day: TestHomie.Day) {
+  private func selectButton(_ day: UpdateTodoHomieModel.Day) {
     initializeButtonState()
     self.stackView.subviews.forEach { view in
       if view.accessibilityIdentifier == day.description {
@@ -67,7 +67,7 @@ final class DayCell: UICollectionViewCell {
     }
   }
 
-  private func makeDayButton(_ day: TestHomie.Day) -> UIButton {
+  private func makeDayButton(_ day: UpdateTodoHomieModel.Day) -> UIButton {
     let button = UIButton()
     button.setTitle(day.description, for: .normal)
     button.layer.masksToBounds = true
@@ -98,7 +98,7 @@ final class DayCell: UICollectionViewCell {
       make.top.bottom.equalToSuperview().inset(Constants.verticalMargin)
     }
 
-    for day in TestHomie.Day.allCases {
+    for day in UpdateTodoHomieModel.Day.allCases {
       let button = makeDayButton(day)
       stackView.addArrangedSubviews(button)
 
