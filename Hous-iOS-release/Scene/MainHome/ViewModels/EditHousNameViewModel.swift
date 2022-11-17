@@ -26,7 +26,6 @@ final class EditHousNameViewModel: ViewModelType {
   //MARK: - Outputs
   struct Output {
     var textCountLabelText: Driver<String>
-    var text: Driver<String>
     var updatedRoom: Driver<Void>
     let isValidText: Driver<Bool>
   }
@@ -37,22 +36,12 @@ final class EditHousNameViewModel: ViewModelType {
     
     let isValidText = input.roomName
       .map { string -> Bool in
-        return string.count <= 8
+        return string.count <= 8 || string.count > 0
       }
       .asDriver()
       
     
-    let roomName = input.roomName
-      .scan("") { [weak self] prev, next in
-        
-        if next.count > self!.maxCount {
-          return prev
-        } else {
-          return next
-        }
-      }
-    
-    let textCount = roomName.map({ [weak self] str -> String in
+    let textCount = input.roomName.map({ [weak self] str -> String in
       guard let self = self else { return "" }
       return "\(str.count)/\(self.maxCount)"
     })
@@ -73,7 +62,6 @@ final class EditHousNameViewModel: ViewModelType {
     
     return Output(
       textCountLabelText: textCount,
-      text: roomName.asDriver(onErrorJustReturn: ""),
       updatedRoom: updateCompletedRelay.asDriver(onErrorJustReturn: ()),
       isValidText: isValidText
     )

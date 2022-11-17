@@ -161,11 +161,6 @@ class EditHousNameViewController: UIViewController {
       .drive(textcountLabel.rx.text)
       .disposed(by: disposeBag)
     
-    output.text
-      .map { $0 }
-      .drive(textField.rx.text)
-      .disposed(by: disposeBag)
-    
     output.updatedRoom
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }

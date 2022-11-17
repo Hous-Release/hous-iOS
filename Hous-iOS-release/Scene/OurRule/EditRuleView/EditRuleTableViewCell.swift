@@ -10,6 +10,8 @@ import RxSwift
 
 class EditRuleTableViewCell: UITableViewCell {
   
+  private let maxCount = 20
+  
   private let dotView = UIView().then {
     $0.backgroundColor = Colors.g3.color
   }
@@ -30,6 +32,7 @@ class EditRuleTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     configUI()
+    setNoti()
   }
   
   required init?(coder: NSCoder) {
@@ -45,6 +48,10 @@ class EditRuleTableViewCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
     
     // Configure the view for the selected state
+  }
+  
+  private func setNoti() {
+    NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: nil)
   }
   
   private func configUI() {
@@ -67,6 +74,26 @@ class EditRuleTableViewCell: UITableViewCell {
     todoLabelTextField.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     todoLabelTextField.text = rule
   }
-  
-  
+}
+
+
+extension EditRuleTableViewCell {
+  @objc func textFieldDidChange(noti: NSNotification) {
+    if let textField = noti.object as? UITextField {
+      switch textField {
+      case todoLabelTextField:
+        if let text = todoLabelTextField.text {
+          if text.count > maxCount {
+            let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
+            let newString = String(text[text.startIndex..<maxIndex])
+            todoLabelTextField.text = newString
+          }
+        }
+      default:
+        return
+      }
+    }
+    
+    
+  }
 }
