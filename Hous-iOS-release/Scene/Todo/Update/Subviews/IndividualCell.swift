@@ -49,7 +49,7 @@ final class IndividualCell: UICollectionViewCell {
   }
 
   func configure(_ model: UpdateTodoHomieModel) {
-    colorLabel.backgroundColor = model.color
+//    colorLabel.backgroundColor = model.color
     homieNamelabel.text = model.name
   }
 
