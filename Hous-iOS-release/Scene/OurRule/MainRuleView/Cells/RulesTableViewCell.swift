@@ -64,8 +64,8 @@ class RulesTableViewCell: UITableViewCell {
     
     selectButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(28)
-      make.size.equalTo(20)
+      make.leading.equalToSuperview().offset(4)
+      make.size.equalTo(44)
     }
     
     todoLabel.snp.makeConstraints { make in
