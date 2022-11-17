@@ -81,7 +81,9 @@ final internal class AssigneeCell: UICollectionViewCell {
 
   func configure(_ model: UpdateTodoHomieModel) {
     homieNamelabel.text = model.name
-    colorLabel.backgroundColor = model.color
+
+    let color = HomieFactory.makeHomie(type: model.color).color
+    colorLabel.backgroundColor = color
   }
 
 }

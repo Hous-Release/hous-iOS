@@ -14,7 +14,7 @@ struct UpdateTodoHomieModel: Hashable {
   }
 
   let name: String
-  let color: UIColor
+  let color: HomieColor
   let selectedDay: [Day]
   private let identifier = UUID()
 }
