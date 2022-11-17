@@ -21,9 +21,25 @@ class AddRuleViewController: LoadingBaseViewController {
     return navBar
   }()
   
+  private let inValidTextLabel = UILabel().then {
+    $0.isHidden = true
+    $0.text = "방 이름은 8자 이내로 입력해주세요!"
+    $0.textColor = Colors.red.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+  }
+  
   private let ruleTextField = UITextField().then {
+    $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.placeholder = "Rules 입력"
+  }
+  
+  private let textCountLabel = UILabel().then {
+    $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    $0.text = "0/20"
+    $0.textColor = Colors.g5.color
+    $0.font = Fonts.Montserrat.medium.font(size: 12)
+    $0.dynamicFont(fontSize: 12, weight: .medium)
   }
   
   private let blueLine = UIView().then {
@@ -40,6 +56,8 @@ class AddRuleViewController: LoadingBaseViewController {
   }
   
   //MARK: - var & let
+  private let maxCount = 20
+  
   private let viewModel: AddRuleViewModel
   
   private let disposeBag = DisposeBag()
@@ -71,11 +89,16 @@ class AddRuleViewController: LoadingBaseViewController {
     setTableView()
     bind()
     configButtonAction()
+    setNoti()
   }
   
   //MARK: - Custom Methods
   private func setTableView() {
     ruleTableView.register(EditRuleTableViewCell.self, forCellReuseIdentifier: EditRuleTableViewCell.className)
+  }
+  
+  private func setNoti() {
+    NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: nil)
   }
   
   private func configUI() {
@@ -85,6 +108,7 @@ class AddRuleViewController: LoadingBaseViewController {
       navigationBar,
       ruleTextField,
       blueLine,
+      textCountLabel,
       plusButton,
       ruleTableView
     ])
@@ -98,20 +122,27 @@ class AddRuleViewController: LoadingBaseViewController {
     }
     
     plusButton.snp.makeConstraints { make in
-      make.centerY.equalTo(ruleTextField)
-      make.centerX.equalTo(navigationBar.rightButton)
+      make.centerY.equalTo(textCountLabel.snp.top).inset(11)
+      make.leading.equalTo(blueLine.snp.trailing).offset(9)
+      make.size.equalTo(44)
     }
     
     ruleTextField.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
       make.leading.equalToSuperview().offset(25)
-      make.trailing.equalTo(plusButton.snp.leading)
+      make.trailing.lessThanOrEqualTo(textCountLabel.snp.leading)
+    }
+    
+    textCountLabel.snp.makeConstraints { make in
+      make.centerY.equalTo(ruleTextField)
+      make.trailing.equalTo(blueLine.snp.trailing).inset(7).priority(.high)
     }
     
     blueLine.snp.makeConstraints { make in
       make.top.equalTo(ruleTextField.snp.bottom).offset(7)
       make.height.equalTo(2)
-      make.leading.trailing.equalToSuperview().inset(24)
+      make.leading.equalToSuperview().inset(24)
+      make.trailing.equalToSuperview().inset(65)
     }
     
     ruleTableView.snp.makeConstraints { make in
@@ -143,7 +174,10 @@ class AddRuleViewController: LoadingBaseViewController {
       saveButtonDidTapped: newRulesSubject
         .do(onNext: { [weak self] _ in self?.showLoading() }),
       plusButtonDidTapped: plusButton.rx.tap.asObservable(),
-      textFieldEdit: ruleTextField.rx.text.orEmpty.asObservable()
+      textFieldEdit: ruleTextField.rx.text
+        .orEmpty
+        .distinctUntilChanged()
+        .asObservable()
     )
     
     
@@ -228,6 +262,10 @@ class AddRuleViewController: LoadingBaseViewController {
         self?.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
+        
+        output.textCountLabelText
+          .drive(textCountLabel.rx.text)
+          .disposed(by: disposeBag)
   }
   
   private func configButtonAction() {
@@ -245,4 +283,25 @@ extension AddRuleViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 52
   }
+}
+
+extension AddRuleViewController {
+  
+  @objc func textFieldDidChange(noti: NSNotification) {
+    if let textField = noti.object as? UITextField {
+      switch textField {
+      case ruleTextField:
+        if let text = ruleTextField.text {
+          if text.count > maxCount {
+            let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
+            let newString = String(text[text.startIndex..<maxIndex])
+            ruleTextField.text = newString
+          }
+        }
+      default:
+        return
+      }
+    }
+  }
+  
 }

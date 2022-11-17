@@ -12,6 +12,9 @@ import Network
 
 
 class AddRuleViewModel: ViewModelType {
+  
+  private let maxCount = 20
+  
   struct Input {
     let navBackButtonDidTapped: Observable<Void>
     let viewDidTapped: Observable<UITapGestureRecognizer>
@@ -26,6 +29,7 @@ class AddRuleViewModel: ViewModelType {
     let savedCompleted: Driver<Int>
     let plusButtonDidTapped: Driver<Void>
     let isEnableStatusOfSaveButton: Driver<Bool>
+    let textCountLabelText: Driver<String>
   }
   
   func transform(input: Input) -> Output {
@@ -40,12 +44,24 @@ class AddRuleViewModel: ViewModelType {
     }
       .asDriver(onErrorJustReturn: false)
     
+    let textCount = input.textFieldEdit.map({ [weak self] str -> String in
+      guard let self = self else { return "" }
+      
+      var strCount = str.count
+      if strCount > 20 {
+        strCount = 20
+      }
+      return "\(strCount)/\(self.maxCount)"
+    })
+      .asDriver(onErrorJustReturn: "0/\(maxCount)")
+    
     return Output(
       navBackButtonDidTapped: input.navBackButtonDidTapped.asDriver(onErrorJustReturn: ()),
       viewDidTapped: input.viewDidTapped.asDriver(onErrorJustReturn: UITapGestureRecognizer()),
       savedCompleted: savedCompleted,
       plusButtonDidTapped: input.plusButtonDidTapped.asDriver(onErrorJustReturn: ()),
-      isEnableStatusOfSaveButton: isEnableStatusOfSaveButton
+      isEnableStatusOfSaveButton: isEnableStatusOfSaveButton,
+      textCountLabelText: textCount
     )
   }
   
