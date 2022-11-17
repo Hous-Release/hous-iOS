@@ -48,15 +48,11 @@ public struct MateProfileModel: Encodable, Equatable {
   }
 }
 
-//enum ProfileActionControl {
-//  case didTabAlarm
-//  case didTabSetting
-//  case didTabEdit
-//  case didTabDetail
-//  case didTabTest
-//  case didTabBadge
-//  case network
-//  case none
-//}
+enum MateActionControl {
+  case didTabBack
+  case didTabDetail
+  case network
+  case none
+}
 
 

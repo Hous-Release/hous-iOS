@@ -15,15 +15,7 @@ final class ProfileTestInfoNavigationBarView: UIView {
   let viewActionControlSubject = PublishSubject<ProfileTestInfoActionControl>()
   
   let navigationBackButton = UIButton().then {
-    let image = Images.icBack.image
-    let newWidth = 28
-    let newHeight = 28
-    let newImageRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
-    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-    image.draw(in: newImageRect)
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
-    UIGraphicsEndImageContext()
-    $0.setImage(newImage, for: .normal)
+    $0.setImage(Images.icBack.image, for: .normal)
   }
   
   override init(frame: CGRect) {

@@ -12,7 +12,7 @@ import RxCocoa
 final class MateProfileGraphCollectionViewCell: UICollectionViewCell {
   
   var disposeBag: DisposeBag = DisposeBag()
-  let cellActionControlSubject = PublishSubject<ProfileActionControl>()
+  let cellActionControlSubject = PublishSubject<MateActionControl>()
   
   //MARK: UI Templetes
   

@@ -16,7 +16,7 @@ import Kingfisher
 final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   var disposeBag: DisposeBag = DisposeBag()
-  let cellActionControlSubject = PublishSubject<ProfileActionControl>()
+  let cellActionControlSubject = PublishSubject<MateActionControl>()
   
   //MARK: UI Templetes
   
@@ -31,15 +31,7 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   
   private let navigationBackButton = UIButton().then {
-    let image = Images.icBack.image
-    let newWidth = 28
-    let newHeight = 28
-    let newImageRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
-    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-    image.draw(in: newImageRect)
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
-    UIGraphicsEndImageContext()
-    $0.setImage(newImage, for: .normal)
+    $0.setImage(Images.icBack.image, for: .normal)
   }
   
   private let nameView = MateProfileNameView()
@@ -63,6 +55,7 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     configUI()
     render()
+    transferToViewController()
   }
 
   required init?(coder: NSCoder) {
@@ -72,6 +65,7 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
   override func prepareForReuse() {
    super.prepareForReuse()
    disposeBag = DisposeBag()
+   transferToViewController()
  }
   
   //MARK: UI Set
@@ -98,6 +92,7 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
     navigationBackButton.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(64)
       make.leading.equalToSuperview().offset(24)
+      make.width.height.equalTo(28)
     }
     
     nameView.snp.makeConstraints { make in
@@ -134,5 +129,14 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
     
     nameLabel.text = data.userName
+  }
+  
+  private func transferToViewController() {
+    self.navigationBackButton.rx.tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.cellActionControlSubject.onNext(.didTabBack)
+      }
+      .disposed(by: disposeBag)
   }
 }

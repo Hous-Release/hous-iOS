@@ -10,6 +10,7 @@ import Alamofire
 
 public enum ProfileService {
     case getProfile
+    case getHomieProfile(_ id:String)
     case getBadges
     case updateRepresentBadge(_ id: Int)
     case putProfileEdit(_ data: ProfileDTO.Request.ProfileEditRequestDTO)
@@ -24,6 +25,8 @@ extension ProfileService: TargetType {
         switch self {
         case .getProfile:
             return "/user"
+        case .getHomieProfile(let id):
+            return "/user/\(id)"
         case .getBadges:
             return "/user/badges"
         case .updateRepresentBadge(let id):
@@ -36,7 +39,7 @@ extension ProfileService: TargetType {
     
     public var method: HTTPMethod {
         switch self {
-        case .getProfile, .getBadges:
+        case .getProfile, .getBadges, .getHomieProfile:
             return .get
             
         case .putProfileEdit:
@@ -48,7 +51,7 @@ extension ProfileService: TargetType {
     
     public var parameters: RequestParams {
         switch self {
-        case .getProfile, .getBadges, .updateRepresentBadge:
+        case .getProfile, .getBadges, .updateRepresentBadge, .getHomieProfile:
             return .requestPlain
             
         case let .putProfileEdit(dto):
