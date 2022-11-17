@@ -17,6 +17,8 @@ protocol HomieProtocol {
   var profileBackgroundImage: UIImage { get set }
   var todoMemberChosenImage: UIImage { get set }
   var todoMemberUnchosenImage: UIImage { get set }
+  var todoUpdateMemberSelectedImage: UIImage { get set }
+  var todoUpdateMemberUnSelectedImage: UIImage { get set }
 }
 
 struct YellowHomie: HomieProtocol {
@@ -24,6 +26,8 @@ struct YellowHomie: HomieProtocol {
   var profileBackgroundImage = Images.profileYellow.image
   var todoMemberChosenImage = Images.icYellowChosen.image
   var todoMemberUnchosenImage = Images.icYellowUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icYellowYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icYellowNo.image
 }
 
 struct BlueHomie: HomieProtocol {
@@ -31,6 +35,8 @@ struct BlueHomie: HomieProtocol {
   var profileBackgroundImage = Images.profileBlue.image
   var todoMemberChosenImage = Images.icBlueChosen.image
   var todoMemberUnchosenImage = Images.icBlueUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icBlueYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icBlueNo.image
 }
 
 struct PurpleHomie: HomieProtocol {
@@ -38,6 +44,8 @@ struct PurpleHomie: HomieProtocol {
   var profileBackgroundImage = Images.profilePurple.image
   var todoMemberChosenImage = Images.icPurpleChosen.image
   var todoMemberUnchosenImage = Images.icPurpleUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icPurpleYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icPurpleNo.image
 }
 
 struct RedHomie: HomieProtocol {
@@ -45,6 +53,8 @@ struct RedHomie: HomieProtocol {
   var profileBackgroundImage = Images.profileRed.image
   var todoMemberChosenImage = Images.icRedChosen.image
   var todoMemberUnchosenImage = Images.icRedUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icRedYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icRedNo.image
 }
 
 struct GreenHomie: HomieProtocol {
@@ -52,6 +62,8 @@ struct GreenHomie: HomieProtocol {
   var profileBackgroundImage = Images.profileGreen.image
   var todoMemberChosenImage = Images.icGreenChosen.image
   var todoMemberUnchosenImage = Images.icGreenUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icGreenYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icGreenNo.image
 }
 
 struct GrayHomie: HomieProtocol {
@@ -59,6 +71,8 @@ struct GrayHomie: HomieProtocol {
   var profileBackgroundImage = Images.profileNone.image
   var todoMemberChosenImage = Images.icGreenChosen.image
   var todoMemberUnchosenImage = Images.icGreenUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icGreenYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icGreenNo.image
 }
 
 struct HomieFactory {
