@@ -14,7 +14,7 @@ public enum ProfileRepositoryEvent {
   case getProfile(ProfileModel)
   case putProfile
   case deleteProfile
-  case getHomieProfile
+  case getHomieProfile(ProfileModel)
   case putRepresentingBadge
   case getBadges
   case postFeedBackBadge
@@ -29,6 +29,7 @@ public enum ProfileRepositoryEvent {
 public protocol ProfileRepository {
   static var event: PublishSubject<ProfileRepositoryEvent> { get }
   func getProfile()
+  func getHomieProfile(id: String)
   func putProfileEditInfo(data: ProfileEditModel)
 }
 
@@ -91,6 +92,63 @@ public final class ProfileRepositoryImp: ProfileRepository {
       ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }
   }
+  
+  public func getHomieProfile(id: String) {
+    
+    //MARK: Get Data
+    
+    NetworkService.shared.profileRepository.getHomieProfileInfo(id: id) { res, err in
+      guard let dto = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      
+      //MARK: From DTO To Model
+      
+      var personalityColor: PersonalityColor
+      var isEmptyView = false
+      switch dto.personalityColor {
+      case "RED":
+        personalityColor = .red
+      case "BLUE":
+        personalityColor = .blue
+      case "YELLOW":
+        personalityColor = .yellow
+      case "GRAY":
+        personalityColor = .green
+      case "PURPLE":
+        personalityColor = .purple
+      default:
+        personalityColor = .none
+        isEmptyView = true
+      }
+      
+      let birthdayPublic = dto.birthdayPublic
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "ko_KR")
+      dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+      dateFormatter.dateFormat = "yyyy.MM.dd"
+      
+      let birthday = dateFormatter.date(from: dto.birthday ?? "")
+      
+      let userName = dto.nickname
+      let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
+      let userJob = dto.job
+      let mbti = dto.mbti
+      let statusMessage = dto.introduction
+      let badgeLabel: String? = dto.representBadge
+      let badgeImageURL: String? = dto.representBadgeImage
+      let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
+      
+      ProfileRepositoryImp.event.onNext(.getHomieProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+    }
+  }
+  
   
   public func putProfileEditInfo(data: ProfileEditModel) {
     
