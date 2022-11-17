@@ -93,7 +93,7 @@ class MainHomeViewController: LoadingBaseViewController {
         case .homieProfiles(profiles: let dto):
           //TODO: Profile화면전환
 //          print(dto.userNickname)
-          let destinationViewController = MateProfileViewController()
+          let destinationViewController = MateProfileViewController(id: String(dto.homieID))
           self.navigationController?.pushViewController(destinationViewController, animated: true)
         default: break
         }

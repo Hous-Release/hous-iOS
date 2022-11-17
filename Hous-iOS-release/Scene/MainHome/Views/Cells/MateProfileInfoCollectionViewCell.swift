@@ -12,7 +12,6 @@ import RxCocoa
 final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   
   var disposeBag: DisposeBag = DisposeBag()
-  let cellActionControlSubject = PublishSubject<ProfileActionControl>()
   
   //MARK: UI Templetes
   

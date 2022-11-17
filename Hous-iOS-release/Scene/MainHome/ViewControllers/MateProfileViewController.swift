@@ -16,8 +16,9 @@ final class MateProfileViewController: UIViewController {
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
-  var viewModel = ProfileViewModel()
+  var viewModel = MateProfileViewModel()
   var data = ProfileModel()
+  var id: String
   
   
   //MARK: UI Templetes
@@ -51,6 +52,15 @@ final class MateProfileViewController: UIViewController {
   
   //MARK: Life Cycle
   
+  init(id: String) {
+    self.id = id
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     profileCollectionView.reloadData()
@@ -81,11 +91,12 @@ final class MateProfileViewController: UIViewController {
       .map { _ in }
       .asSignal(onErrorJustReturn: ())
     
-    let actionDetected = PublishSubject<ProfileActionControl>()
+    let actionDetected = PublishSubject<MateActionControl>()
     
-    let input = ProfileViewModel.Input(
+    let input = MateProfileViewModel.Input(
       viewWillAppear: viewWillAppear,
-      actionDetected: actionDetected
+      actionDetected: actionDetected,
+      id: self.id
     )
     
     // output
@@ -115,12 +126,6 @@ final class MateProfileViewController: UIViewController {
           guard let cell =
                   self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: MateProfileInfoCollectionViewCell.className, for: indexPath) as? MateProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
-          cell.cellActionControlSubject
-            .asDriver(onErrorJustReturn: .none)
-            .drive(onNext: { data in
-              actionDetected.onNext(data)
-            })
-            .disposed(by: cell.disposeBag)
           return cell
         case 2:
           guard let cell =
@@ -163,28 +168,20 @@ final class MateProfileViewController: UIViewController {
   
   //MARK: Navigation
   
-  private func doNavigation(action: ProfileActionControl) {
-    let destinationViewController : UIViewController
+  private func doNavigation(action: MateActionControl) {
     
     switch action {
-    case .didTabAlarm:
-      destinationViewController = ProfileAlarmViewController()
-    case .didTabSetting:
-      destinationViewController = ProfileSettingViewController()
-    case .didTabEdit:
-      destinationViewController = ProfileEditViewController(data: self.data)
     case .didTabDetail:
-      destinationViewController = ProfileDetailViewController()
-    case .didTabBadge:
-      let badgeViewModel = BadgeViewModel()
-      destinationViewController = BadgeViewController(viewModel: badgeViewModel)
-    case .didTabTest:
-      destinationViewController = ProfileTestInfoViewController()
+      let destinationViewController = ProfileDetailViewController()
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
+      
+    case .didTabBack:
+      navigationController?.popViewController(animated: true)
+
     default:
       return
     }
-    destinationViewController.view.backgroundColor = .white
-    navigationController?.pushViewController(destinationViewController, animated: true)
   }
 }
 
@@ -199,8 +196,6 @@ extension MateProfileViewController: UICollectionViewDelegateFlowLayout {
       return Size.profileGraphCellHeight
     case 3:
       return Size.profileAttributeInfoCellHeight
-    case 4:
-      return Size.profileRetryCellHeight
     default:
       return CGSize(width: 0, height: 0)
     }
