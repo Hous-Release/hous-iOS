@@ -22,11 +22,10 @@ final class IndividualCell: UICollectionViewCell {
     return view
   }()
 
-  private let colorLabel: UIView = {
-    let view = UIView()
-    view.layer.cornerRadius = Constants.colorViewSize.height / 2
-    view.layer.cornerCurve = .circular
-    return view
+  private let colorButton: UIButton = {
+    let button = UIButton()
+    button.isUserInteractionEnabled = false
+    return button
   }()
 
   private let homieNamelabel: UILabel = {
@@ -49,8 +48,12 @@ final class IndividualCell: UICollectionViewCell {
   }
 
   func configure(_ model: UpdateTodoHomieModel) {
-//    colorLabel.backgroundColor = model.color
+    let factory = HomieFactory.makeHomie(type: model.color)
+
     homieNamelabel.text = model.name
+    colorButton.setImage(factory.todoUpdateMemberSelectedImage, for: .selected)
+    colorButton.setImage(factory.todoUpdateMemberUnSelectedImage, for: .normal)
+
   }
 
 
@@ -58,23 +61,23 @@ final class IndividualCell: UICollectionViewCell {
     contentView.backgroundColor = Colors.white.color
     contentView.addSubview(containerView)
 
-    containerView.addSubview(colorLabel)
+    containerView.addSubview(colorButton)
     containerView.addSubview(homieNamelabel)
 
     containerView.snp.makeConstraints { make in
       make.top.bottom.equalToSuperview().inset(Constants.verticalMargin)
       make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
     }
-    colorLabel.snp.makeConstraints { make in
+    colorButton.snp.makeConstraints { make in
       make.size.equalTo(Constants.colorViewSize)
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview()
     }
     homieNamelabel.snp.makeConstraints { make in
-      make.leading.equalTo(colorLabel.snp.trailing).offset(Constants.distance)
+      make.leading.equalTo(colorButton.snp.trailing).offset(Constants.distance)
       make.top.bottom.equalToSuperview()
       make.trailing.equalToSuperview()
     }
-
   }
+
 }
