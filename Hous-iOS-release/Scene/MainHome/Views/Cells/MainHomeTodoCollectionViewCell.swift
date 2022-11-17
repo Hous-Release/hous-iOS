@@ -217,9 +217,9 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     case .fri:
       dailyLottie.animation = Animation.named("friday")
     case .sat:
-      dailyLottie.animation = Animation.named("monday")
+      dailyLottie.animation = Animation.named("weekend")
     case .sun:
-      dailyLottie.animation = Animation.named("monday")
+      dailyLottie.animation = Animation.named("weekend")
     }
   }
   
