@@ -208,7 +208,7 @@ final class ProfileViewController: UIViewController {
     case .didTabEdit:
       destinationViewController = ProfileEditViewController(data: self.data)
     case .didTabDetail:
-      destinationViewController = ProfileDetailViewController()
+      destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
     case .didTabBadge:
       let badgeViewModel = BadgeViewModel()
       destinationViewController = BadgeViewController(viewModel: badgeViewModel)

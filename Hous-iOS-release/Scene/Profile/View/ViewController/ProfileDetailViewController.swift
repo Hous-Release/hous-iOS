@@ -15,7 +15,8 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
-  var viewModel = ProfileDetailViewModel()
+  var viewModel: ProfileDetailViewModel
+  var color: PersonalityColor
   
   //MARK: UI Templetes
   
@@ -46,6 +47,16 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   }()
   
   //MARK: Life Cycle
+  
+  init(color: PersonalityColor) {
+    self.color = color
+    self.viewModel = ProfileDetailViewModel(color: color)
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -105,17 +116,17 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
         case 0:
           guard let cell =
                   self.profileDetailCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDetailImageCollectionViewCell.className, for: indexPath) as? ProfileDetailImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-//          cell.bind(element)
+          cell.bind(element)
           return cell
         case 1:
           guard let cell =
                   self.profileDetailCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDetailTextCollectionViewCell.className, for: indexPath) as? ProfileDetailTextCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-//          cell.bind(element)
+          cell.bind(element)
           return cell
         case 2:
           guard let cell =
                   self.profileDetailCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDetailRecommendCollectionViewCell.className, for: indexPath) as? ProfileDetailRecommendCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-//          cell.bind(element)
+          cell.bind(element)
           return cell
         default:
           print("Cell Loading ERROR!")
@@ -126,6 +137,11 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
     
     output.actionControl
       .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
+      .disposed(by: disposeBag)
+    
+    output.profileDetailModel
+      .subscribe(onNext: {[weak self] data in
+        self?.profileDetailCollectionView.reloadData()})
       .disposed(by: disposeBag)
   }
   

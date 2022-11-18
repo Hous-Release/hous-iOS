@@ -30,7 +30,6 @@ final class MateProfileViewModel: ViewModelType {
   
   init() {
     ProfileRepositoryImp.event
-      .debug("repository connected")
       .subscribe (onNext:{ [weak self] event in
       guard let self = self else { return }
       switch event {

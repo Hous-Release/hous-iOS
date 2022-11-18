@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 enum CellType: String {
   case empty = ""
@@ -36,9 +37,9 @@ final class ProfileRecommendBoxView: UIView {
   
   private let neumorphismBox = NeumorphismBox(shadowColor: Colors.black.color.cgColor, shadowOpacity: 0.05, shadowRadius: 3)
   
-  convenience init(personalityColor: PersonalityColor, cellType : CellType) {
+  convenience init(personalityName: String, imageURL: String, cellType : CellType) {
     self.init(frame: .zero)
-    configUI(personalityColor: personalityColor, cellType: cellType)
+    configUI(personalityName: personalityName, imageURL: imageURL, cellType: cellType)
     render()
   }
   
@@ -50,16 +51,15 @@ final class ProfileRecommendBoxView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func configUI(personalityColor: PersonalityColor, cellType: CellType){
+  private func configUI(personalityName: String, imageURL: String, cellType: CellType){
     self.layer.cornerRadius = 20
     self.layer.masksToBounds = true
     
     titleLabel.text = cellType.rawValue
     
-    personalityLabel.text = "룰 새터 육각이"
+    personalityLabel.text = personalityName
     
-    // 서버 통신 시 URL로 설정
-    personalityImageView.image = Images.tempIlluResult01.image
+    personalityImageView.kf.setImage(with: URL(string: imageURL))
   }
   
   private func render(){

@@ -111,6 +111,10 @@ public enum Images {
   public static let icYellowNo = ImageAsset(name: "ic_yellow_no")
   public static let icYellowYes = ImageAsset(name: "ic_yellow_yes")
   public static let icAlarm = ImageAsset(name: "ic_alarm")
+  public static let icCheckBlue = ImageAsset(name: "ic_check_blue")
+  public static let icCheckGreen = ImageAsset(name: "ic_check_green")
+  public static let icCheckPurple = ImageAsset(name: "ic_check_purple")
+  public static let icCheckRed = ImageAsset(name: "ic_check_red")
   public static let icCheckYellow = ImageAsset(name: "ic_check_yellow")
   public static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
   public static let icEditProfile = ImageAsset(name: "ic_edit_profile")
@@ -130,7 +134,6 @@ public enum Images {
   public static let icRight = ImageAsset(name: "ic_right")
   public static let icRightOn = ImageAsset(name: "ic_right_on")
   public static let illTeststart = ImageAsset(name: "illTeststart")
-  public static let tempIlluResult01 = ImageAsset(name: "temp_illu_result_01")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

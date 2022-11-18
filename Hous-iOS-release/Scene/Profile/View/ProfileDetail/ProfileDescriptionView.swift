@@ -15,13 +15,13 @@ final class ProfileDescriptionView : UIView {
   }
   
   let personalityTitleLabel = UILabel().then {
-    $0.text = "어떤 상황에서도 Happy~"
+    $0.text = ""
     $0.textColor = Colors.yellow.color
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
   }
    
   let personalityDescriptionLabel = UILabel().then {
-    $0.text = "둥글둥글한 사람이예요. 민감하게 생각하는 영역이\n거의 없어 공동생활에 쉽게 적응할 수 있어요.\n동글이님과 함께 생활하는 룸메이트는\n조금 더 세심한 배려가 필요한 영역이 있다면\n동글이님과 직접 얘기해보는 것도 좋을 거예요."
+    $0.text = ""
     $0.textColor = Colors.black.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 15)
     $0.numberOfLines = 5

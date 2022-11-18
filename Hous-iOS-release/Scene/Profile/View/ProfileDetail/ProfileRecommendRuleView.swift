@@ -65,7 +65,7 @@ final class ProfileRecommendRuleView : UIView {
     static let screenHeight = UIScreen.main.bounds.height
   }
   
-  private let recommendRuleStackView = UIStackView().then {
+  let recommendRuleStackView = UIStackView().then {
     $0.distribution = .fillProportionally
     $0.alignment = .center
     $0.spacing = 6
@@ -74,7 +74,7 @@ final class ProfileRecommendRuleView : UIView {
   
   var recommendRuleStackItems: [ProfileRecommendRuleStackItemView] = []
   
-  var recommendRuleList = ["쓰레기 배출 요일 확인하고 정리하기", "외출 시 가스벨브, 전등 확인하기"]
+  var recommendRuleList = ["", ""]
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -106,6 +106,13 @@ final class ProfileRecommendRuleView : UIView {
       make.top.equalToSuperview()
       make.centerX.equalToSuperview()
       make.bottom.equalToSuperview().offset(-16)
+    }
+  }
+  
+  func reloadRuleData() {
+    for i in 0...1 {
+      guard let stackItem = recommendRuleStackView.arrangedSubviews[i] as? ProfileRecommendRuleStackItemView else { return }
+      stackItem.setLabelText(recommendRuleList[i])
     }
   }
 }
