@@ -10,6 +10,10 @@ import RxSwift
 
 protocol ProfileAPIProtocol {
     
+    func getProfileTestResultInfo(dto: ProfileDTO.Request.ProfileTestResultDTO, completion: @escaping
+     (BaseResponseType<ProfileDTO.Response.ProfileTestResultResponseDTO>?, Error?) -> Void
+    )
+    
     func getHomieProfileInfo(id: String, completion: @escaping
      (BaseResponseType<ProfileDTO.Response.ProfileGetResponseDTO>?, Error?) -> Void
     )
@@ -28,6 +32,13 @@ protocol ProfileAPIProtocol {
 }
 
 public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProtocol {
+    
+    public func getProfileTestResultInfo(dto: ProfileDTO.Request.ProfileTestResultDTO, completion: @escaping (BaseResponseType<ProfileDTO.Response.ProfileTestResultResponseDTO>?, Error?) -> Void) {
+        fetchData(target: .getProfileTestResult(dto), responseData: BaseResponseType<ProfileDTO.Response.ProfileTestResultResponseDTO>.self, isWithInterceptor: true) {res, err in
+            completion(res, err)
+        }
+    }
+    
     public func getHomieProfileInfo(id: String, completion: @escaping (BaseResponseType<ProfileDTO.Response.ProfileGetResponseDTO>?, Error?) -> Void) {
         fetchData(target: .getHomieProfile(id), responseData: BaseResponseType<ProfileDTO.Response.ProfileGetResponseDTO>.self, isWithInterceptor: true) {res, err in
             completion(res, err)

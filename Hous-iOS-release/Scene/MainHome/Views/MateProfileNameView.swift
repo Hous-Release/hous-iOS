@@ -27,8 +27,6 @@ final class MateProfileNameView: UIView {
 
     Colors.white.color.setFill()
     roundedPath!.fill()
-    print("⭐️")
-    
   }
   
   override init(frame: CGRect) {

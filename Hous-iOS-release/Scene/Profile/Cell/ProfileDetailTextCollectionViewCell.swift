@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
-
+  
   private enum Size{
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
@@ -58,26 +58,64 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
     }
   }
   
-//  func setData(_ dataPack: ProfileTestResultDataPack) {
-//    self.descriptionView.personalityTitleLabel.text = dataPack.personalityTitleLabel
-//    self.descriptionView.personalityTitleLabel.textColor = dataPack.personalityType.textColor
-//
-//    let descriptionAttributedString = NSAttributedString(string: dataPack.personalityDescriptionLabel).withLineSpacing(2.5)
-//    self.descriptionView.personalityDescriptionLabel.attributedText = descriptionAttributedString
-//
-//    self.descriptionView.backgroundColor = dataPack.personalityType.backgroundColor
-//
-//    self.recommendRuleTitleView.recommendTitleLabel.text = dataPack.recommandTitleLabel
-//    self.recommendRuleTitleView.recommendTitleLabel.textColor = dataPack.personalityType.textColor
-//    self.recommendRuleTitleView.backgroundColor = dataPack.personalityType.backgroundColor
-//
-//    for (index, item) in dataPack.recommandRuleLabel.enumerated() {
-//      self.recommendRuleView.recommendRuleStackItems[index].setLabelText(item)
-//    }
-//
-//    self.recommendRuleView.backgroundColor = dataPack.personalityType.backgroundColor
-//    self.recommendRuleView.recommendRuleStackItems[0].indexImageView.image = dataPack.personalityType.ruleRecommendImage
-//    self.recommendRuleView.recommendRuleStackItems[1].indexImageView.image = dataPack.personalityType.ruleRecommendImage
+  func bind(_ data: ProfileDetailModel) {
+    descriptionView.personalityTitleLabel.text = data.title
+    var descriptionMessage: String = ""
+    for message in data.description {
+      descriptionMessage += (message + "\n")
+    }
     
+    if (descriptionMessage.count > 2) {
+      let start = descriptionMessage.startIndex
+      let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -3)
+      let newMessage = descriptionMessage[start...end]
+      
+      descriptionView.personalityDescriptionLabel.text = String(newMessage)
+    }
+    
+    recommendRuleTitleView.recommendTitleLabel.text = data.recommendTitle
+    
+    guard let recommendRuleStackItems =  recommendRuleView.recommendRuleStackView.arrangedSubviews as? [ProfileRecommendRuleStackItemView] else { return }
+    
+    switch data.personalityType {
+    case .red:
+      descriptionView.personalityTitleLabel.textColor = Colors.red.color
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.red.color
+      recommendRuleStackItems.forEach {
+        $0.indexImageView.image = Images.icCheckRed.image
+      }
+    case .blue:
+      descriptionView.personalityTitleLabel.textColor = Colors.blue.color
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.blue.color
+      recommendRuleStackItems.forEach {
+        $0.indexImageView.image = Images.icCheckBlue.image
+      }
+    case .yellow:
+      descriptionView.personalityTitleLabel.textColor = Colors.yellow.color
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.yellow.color
+      recommendRuleStackItems.forEach {
+        $0.indexImageView.image = Images.icCheckYellow.image
+      }
+    case .green:
+      descriptionView.personalityTitleLabel.textColor = Colors.green.color
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.green.color
+      recommendRuleStackItems.forEach {
+        $0.indexImageView.image = Images.icCheckGreen.image
+      }
+    case .purple:
+      descriptionView.personalityTitleLabel.textColor = Colors.purple.color
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.purple.color
+      recommendRuleStackItems.forEach {
+        $0.indexImageView.image = Images.icCheckPurple.image
+      }
+    case .none:
+      recommendRuleTitleView.recommendTitleLabel.textColor = Colors.g1.color
+    }
+    
+    recommendRuleView.recommendRuleList = data.recommendTodo
+    recommendRuleView.reloadRuleData()
+    
+  }
+  
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PersonalityColor: Codable {
+public enum PersonalityColor: Codable {
   case red
   case blue
   case yellow

@@ -80,5 +80,28 @@ public extension ProfileDTO.Response {
         public let questionType: String
         public let answers: [String]
     }
+    
+    struct ProfileTestResultResponseDTO: Codable {
+        public let name: String
+        public let imageURL: String
+        public let color, title: String
+        public let dataDescription: [String]
+        public let recommendTitle: String
+        public let recommendTodo: [String]
+        public let goodPersonalityName: String
+        public let goodPersonalityImageURL: String
+        public let badPersonalityName: String
+        public let badPersonalityImageURL: String
 
+        enum CodingKeys: String, CodingKey {
+            case name
+            case imageURL = "imageUrl"
+            case color, title
+            case dataDescription = "description"
+            case recommendTitle, recommendTodo, goodPersonalityName
+            case goodPersonalityImageURL = "goodPersonalityImageUrl"
+            case badPersonalityName
+            case badPersonalityImageURL = "badPersonalityImageUrl"
+        }
+    }
 }

@@ -293,7 +293,7 @@ extension ProfileTestViewController: TestCollectionViewCellDelegate {
 
       // 나의 테스트 성향 점수 변경
       self.updateTest(typeScore: finalScore) {
-        let testResultVC = ProfileDetailViewController()
+        let testResultVC = ProfileDetailViewController(color: .purple) // #temp
         testResultVC.modalPresentationStyle = .fullScreen
         self.present(testResultVC, animated: true)
         return
