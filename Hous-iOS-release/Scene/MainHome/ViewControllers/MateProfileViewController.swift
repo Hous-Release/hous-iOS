@@ -104,6 +104,9 @@ final class MateProfileViewController: UIViewController {
     let output = viewModel.transform(input: input)
     
     output.profileModel
+      .do {
+        self.data = $0
+      }
       .map {
         [ProfileModel](repeating: $0, count: 4)
       }
@@ -172,7 +175,9 @@ final class MateProfileViewController: UIViewController {
     
     switch action {
     case .didTabDetail:
-      let destinationViewController = ProfileDetailViewController()
+      print("⭐️")
+      print(self.data.personalityColor)
+      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
       

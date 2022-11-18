@@ -21,9 +21,9 @@ final class ProfileDetailRecommendCollectionViewCell: UICollectionViewCell {
     $0.spacing = 4
   }
   
-  private var badRecommendView = ProfileRecommendBoxView(personalityColor: .blue, cellType: .bad)
+  private var badRecommendView = ProfileRecommendBoxView(personalityName: "", imageURL: "", cellType: .bad)
   
-  private var goodRecommendView = ProfileRecommendBoxView(personalityColor: .red, cellType: .good)
+  private var goodRecommendView = ProfileRecommendBoxView(personalityName: "", imageURL: "", cellType: .good)
   
   override init(frame: CGRect){
     super.init(frame: frame)
@@ -50,14 +50,11 @@ final class ProfileDetailRecommendCollectionViewCell: UICollectionViewCell {
     }
   }
   
-//  func setData(_ dataPack: ProfileTestResultDataPack) {
-//    self.badRecommendView.backgroundColor = dataPack.badPersonalityType.backgroundColor
-//    self.badRecommendView.titleLabel.textColor = dataPack.badPersonalityType.textColor
-//    self.badRecommendView.personalityLabel.text = dataPack.badPersonalityLabel
-//    self.badRecommendView.personalityImageView.urlToImage(urlString: dataPack.badPersonalityImageURL)
-//    self.goodRecommmendView.backgroundColor = dataPack.goodPersonalityType.backgroundColor
-//    self.goodRecommmendView.titleLabel.textColor = dataPack.goodPersonalityType.textColor
-//    self.goodRecommmendView.personalityLabel.text = dataPack.goodPersonalityLabel
-//    self.goodRecommmendView.personalityImageView.urlToImage(urlString: dataPack.goodPersonalityImageURL)
-//  }
+  func bind(_ data: ProfileDetailModel) {
+    profileTestResultRecommendStackView.removeFullyAllArrangedSubviews()
+
+    badRecommendView = ProfileRecommendBoxView(personalityName: data.badPersonalityName, imageURL: data.badPersonalityImageURL, cellType: .bad)
+    goodRecommendView = ProfileRecommendBoxView(personalityName: data.goodPersonalityName, imageURL: data.goodPersonalityImageURL, cellType: .good)
+    render()
+  }
 }

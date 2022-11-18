@@ -12,6 +12,10 @@ import RxCocoa
 final class ProfileDetailViewModel: ViewModelType {
   
   private let disposeBag: DisposeBag = DisposeBag()
+  private var profileDetailModel = ProfileDetailModel()
+  private var profileDetailModelSubject = PublishSubject<ProfileDetailModel>()
+  private let profileRepository = ProfileRepositoryImp()
+  private var color: PersonalityColor
   
   struct Input {
     let viewWillAppear: Signal<Void>
@@ -23,20 +27,33 @@ final class ProfileDetailViewModel: ViewModelType {
     let actionControl: Observable<ProfileDetailActionControl>
   }
   
+  init(color: PersonalityColor) {
+    self.color = color
+    ProfileRepositoryImp.event
+      .subscribe(onNext: { [weak self] event in
+        guard let self = self else { return }
+        switch event {
+        case let .getProfileTest(profileDetailModel):
+          self.profileDetailModel = profileDetailModel
+          self.profileDetailModelSubject.onNext(profileDetailModel)
+        case .sendError:
+          print("😭 Network Error..😭")
+          print(event)
+        default:
+          break
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
   
   func transform(input: Input) -> Output {
     
     // Data
-    // 서버 연결 후
-    // Repository로부터 받아온 profileModel data를 집어넣는다.
+    self.profileRepository.getProfileTestResult(color: self.color)
+    self.profileDetailModelSubject.onNext(self.profileDetailModel)
     
-    // Using Dummy Data
-    
-    let profileDetailModel = ProfileDetailModel (personalityType: .red)
-    
-    // end dummy
-    
-    let profileDetailModelObservable = Observable.just(profileDetailModel)
+    let profileDetailModelObservable = profileDetailModelSubject.asObservable()
     
     // Action
     

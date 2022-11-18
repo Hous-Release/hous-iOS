@@ -21,7 +21,7 @@ public enum ProfileRepositoryEvent {
   case getNotifications
   case getPersonality
   case putPersonality
-  case getPersonalityTest
+  case getProfileTest(ProfileDetailModel)
   case patchPushAlarm
   case sendError(HouseErrorModel?)
 }
@@ -30,12 +30,67 @@ public protocol ProfileRepository {
   static var event: PublishSubject<ProfileRepositoryEvent> { get }
   func getProfile()
   func getHomieProfile(id: String)
+  func getProfileTestResult(color: PersonalityColor)
   func putProfileEditInfo(data: ProfileEditModel)
 }
 
 public final class ProfileRepositoryImp: ProfileRepository {
   
   public static var event = PublishSubject<ProfileRepositoryEvent>()
+  
+  public func getProfileTestResult(color: PersonalityColor) {
+    
+    //MARK: Request Query param Set and Get Data
+    var requestDTO : ProfileDTO.Request.ProfileTestResultDTO {
+      switch color {
+      case .red:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "RED")
+      case .blue:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "BLUE")
+      case .yellow:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "YELLOW")
+      case .green:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "GREEN")
+      case .purple:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "PURPLE")
+      case .none:
+        return ProfileDTO.Request.ProfileTestResultDTO(color: "GRAY")
+      }
+    }
+    
+    
+    
+    NetworkService.shared.profileRepository.getProfileTestResultInfo(dto: requestDTO) { res, err in
+      guard let dto = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+     
+      
+      //MARK: From DTO To Model
+      var personalityType: PersonalityColor
+      switch dto.color {
+      case "RED":
+        personalityType = .red
+      case "BLUE":
+        personalityType = .blue
+      case "YELLOW":
+        personalityType = .yellow
+      case "GREEN":
+        personalityType = .green
+      case "PURPLE":
+        personalityType = .purple
+      default:
+        personalityType = .none
+      }
+      
+      ProfileRepositoryImp.event.onNext(.getProfileTest(ProfileDetailModel(personalityType: personalityType, badPersonalityImageURL: dto.badPersonalityImageURL, badPersonalityName: dto.badPersonalityName, goodPersonalityImageURL: dto.goodPersonalityImageURL, goodPersonalityName: dto.goodPersonalityName, imageURL: dto.imageURL, name: dto.name, recommendTitle: dto.recommendTitle, recommendTodo: dto.recommendTodo, title: dto.title, description: dto.dataDescription)))
+    }
+  }
 
   public func getProfile() {
     

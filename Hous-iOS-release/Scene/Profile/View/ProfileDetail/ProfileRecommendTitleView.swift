@@ -17,7 +17,7 @@ final class ProfileRecommendTitleView : UIView {
   }
   
   let recommendTitleLabel = UILabel().then {
-    $0.text = "둥글이가 만들면 좋은 Rules"
+    $0.text = ""
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
     $0.textColor = Colors.yellow.color
   }

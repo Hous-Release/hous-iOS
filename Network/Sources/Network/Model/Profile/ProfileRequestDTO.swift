@@ -36,4 +36,12 @@ public extension ProfileDTO.Request {
             self.nickname = nickname
         }
     }
+    
+    struct ProfileTestResultDTO: Encodable {
+        public var color: String
+        
+        public init(color: String) {
+            self.color = color
+        }
+    }
 }
