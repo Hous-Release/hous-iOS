@@ -552,7 +552,6 @@ final class ProfileEditViewController: UIViewController {
           }
         }
       } else {
-        
         self.navigationController?.popViewController(animated: true)
       }
     default:

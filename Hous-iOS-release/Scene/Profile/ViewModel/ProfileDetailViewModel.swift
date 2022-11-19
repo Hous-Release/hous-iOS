@@ -33,7 +33,7 @@ final class ProfileDetailViewModel: ViewModelType {
       .subscribe(onNext: { [weak self] event in
         guard let self = self else { return }
         switch event {
-        case let .getProfileTest(profileDetailModel):
+        case let .getProfileTestResult(profileDetailModel):
           self.profileDetailModel = profileDetailModel
           self.profileDetailModelSubject.onNext(profileDetailModel)
         case .sendError:
