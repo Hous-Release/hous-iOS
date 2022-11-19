@@ -33,7 +33,85 @@ final class ProfileTestInfoViewModel: ViewModelType {
       actionControl: actionControl
     )
   }
+}
+
+final class ProfileTestViewModel: ViewModelType {
   
+  private let disposeBag : DisposeBag = DisposeBag()
+  private var profileTestItemModels = [ProfileTestItemModel]()
+  private var profileTestItemModelSubject = PublishSubject<[ProfileTestItemModel]>()
+  private let profileRepository = ProfileRepositoryImp()
+  var selectedData = [Int](repeating: 0, count: 15)
+  let selectedDataSubject = PublishSubject<[Int]>()
   
+  struct Input {
+    let viewWillAppear: Signal<Void>
+    let actionDetected: PublishSubject<ProfileTestActionControl>
+  }
+  
+  struct Output {
+    let profileTestData: Observable<[ProfileTestItemModel]>
+    let actionControl: Observable<ProfileTestActionControl>
+    let selectedDataObservable: Observable<[Int]>
+  }
+  
+  init() {
+    ProfileRepositoryImp.event
+      .subscribe(onNext: { [weak self] event in
+        guard let self = self else { return }
+        switch event {
+        case let .getProfileTest(profileTestItemModels):
+          self.profileTestItemModels = profileTestItemModels
+          self.profileTestItemModelSubject.onNext(profileTestItemModels)
+        case .sendError:
+          print("😭 Network Error..😭")
+          print(event)
+        default:
+          break
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
+  func transform(input: Input) -> Output {
+    
+    // Data
+    self.profileRepository.getProfileTest()
+    self.profileTestItemModelSubject.onNext(self.profileTestItemModels)
+    
+    let profileTestItemModelObservable = profileTestItemModelSubject.asObservable()
+    
+    // Action
+    
+    let actionControl = input.actionDetected.asObservable()
+    
+    actionControl
+      .bind(onNext: { [weak self] action in
+        guard let self = self else { return }
+        switch action {
+        case let .didTabAnswer(answer, questionNum):
+          self.selectedData[questionNum - 1] = answer
+          self.profileTestItemModels[questionNum - 1].testAnswers.forEach {
+            $0.isSelected = false
+          }
+          self.profileTestItemModels[questionNum - 1].testAnswers[answer-1].isSelected = true
+          self.profileTestItemModelSubject.onNext(self.profileTestItemModels)
+        default:
+          break
+        }
+      })
+      .disposed(by: disposeBag)
+    
+    // SelectedLogic
+    self.selectedDataSubject.onNext(self.selectedData)
+    
+    let selectedDataObservable = selectedDataSubject.asObservable()
+    
+    return Output(
+      profileTestData: profileTestItemModelObservable,
+      actionControl: actionControl,
+      selectedDataObservable: selectedDataObservable
+    )
+  }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ProfileRetryViewController.swift
+//  ProfileTestViewController.swift
 //  Hous-iOS-release
 //
 //  Created by 이의진 on 2022/10/22.
@@ -7,208 +7,280 @@
 
 import UIKit
 import BottomSheetKit
+import Then
+import RxSwift
+import RxCocoa
 
 final class ProfileTestViewController: UIViewController {
-
+  
+  private var testIndex = 0
+  
+  //MARK: RX Components
+  
+  let disposeBag = DisposeBag()
+  var viewModel = ProfileTestViewModel()
+  var data: [ProfileTestItemModel] = []
+  let actionDetected = PublishSubject<ProfileTestActionControl>()
+  
+  //MARK: UI Templetes
+  
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
   }
-
+  
   private enum QuestionType: String {
     case light = "LIGHT"
     case noise = "NOISE"
     case smell = "SMELL"
-    case personality = "PERSONALITY"
+    case introversion = "INTROVERSION"
     case clean = "CLEAN"
     case none = "NONE"
   }
-
-  // LIGHT, NOISE, SMELL, PERSONAITY, CLEAN
-  var profileTestCellData: [ProfileTestCellItem]
-
-  private lazy var questionTypeScoreList = [ProfileTest](repeating: ProfileTest(testType: QuestionType.none.rawValue, score: 0), count: profileTestCellData.count)
-
-  private lazy var finalScore = [Int](repeating: 0, count: 5)
-
-  private var testIndex = 0
-
-  var isMovedBackward: Bool = false
-
-  private var indexPathRow: Int?
-
+  
+  //MARK: UI Components
+  
   private lazy var backwardButton = UIButton().then {
     $0.setImage(Images.icLeft.image, for: .normal)
     $0.setImage(Images.icLeftOn.image, for: .selected)
-    $0.addTarget(self, action: #selector(scrollBackward), for: .touchUpInside)
+    $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    $0.isEnabled = false
+    $0.alpha = 0
   }
-
+  
   private let testCountLabel = UILabel().then {
     $0.font = Fonts.Montserrat.bold.font(size: 16)
     $0.textColor = Colors.black.color
   }
-
+  
   private lazy var forwardButton = UIButton().then {
     $0.setImage(Images.icRight.image, for: .normal)
     $0.setImage(Images.icRightOn.image, for: .selected)
-    $0.addTarget(self, action: #selector(scrollForward), for: .touchUpInside)
+    $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    $0.isEnabled = false
+    $0.alpha = 0
   }
-
+  
   private lazy var testNavigationStackView = UIStackView(arrangedSubviews: [backwardButton, testCountLabel, forwardButton]).then {
     $0.axis = .horizontal
     $0.spacing = 30
   }
-
+  
   private lazy var quitButton = UIButton().then {
     var container = AttributeContainer()
     container.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-
+    
     var config = UIButton.Configuration.plain()
     config.baseForegroundColor = Colors.g4.color
     config.attributedTitle = AttributedString("그만두기", attributes: container)
-    config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
+    config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 0)
+    
     $0.configuration = config
-    $0.addTarget(self, action: #selector(showQuitTestPopUp), for: .touchUpInside)
   }
-
+  
   private let testCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
     var layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
-
+    
     $0.isPagingEnabled = true
     $0.isScrollEnabled = false
     $0.collectionViewLayout = layout
     $0.showsHorizontalScrollIndicator = false
   }
-
+  
+  
+  // LIGHT, NOISE, SMELL, INTROVERSION, CLEAN
+  
+  
+  var isMovedBackward: Bool = false
+  
+  private var indexPathRow: Int?
+  
   var isAnimationing: Bool = false
-
-  init(profileTestCellItems: [ProfileTestCellItem]) {
-    self.profileTestCellData = profileTestCellItems
-    super.init(nibName: nil, bundle: nil)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
+  
+  //MARK: Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     render()
     setTestCollectionView()
     configUI()
+    bind()
   }
-
+  
+  //MARK: Setup UI
+  
   private func configUI() {
-    testCountLabel.text = "1 / \(profileTestCellData.count)"
+    testCountLabel.text = "1 / \(data.count)"
   }
-
+  
+  private func setTestCollectionView() {
+    testCollectionView.register(cell: TestCollectionViewCell.self)
+    testCollectionView.delegate = self
+  }
+  
+  //MARK: Bind
+  
+  private func bind() {
+    
+    // input
+    
+    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .map { _ in }
+      .asSignal(onErrorJustReturn: ())
+    
+    forwardButton.rx.tap
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabForward)
+      })
+      .disposed(by: disposeBag)
+    
+    backwardButton.rx.tap
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabBackward)
+      })
+      .disposed(by: disposeBag)
+    
+    quitButton.rx.tap
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabQuit)
+      })
+      .disposed(by: disposeBag)
+    
+    let input = ProfileTestViewModel.Input(
+      viewWillAppear: viewWillAppear,
+      actionDetected: actionDetected
+    )
+    
+    // output
+    
+    let output = viewModel.transform(input: input)
+    
+    output.profileTestData
+      .bind(to: testCollectionView.rx.items) {
+        (collectionView: UICollectionView, index: Int, element: ProfileTestItemModel) in
+        let indexPath = IndexPath(row: index, section: 0)
+        guard let cell =
+                self.testCollectionView.dequeueReusableCell(withReuseIdentifier: TestCollectionViewCell.className , for: indexPath) as? TestCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+        cell.cellIndex = indexPath.row
+        cell.transferToViewController(cellIndex: cell.cellIndex)
+        cell.bind(element, self.viewModel.selectedData)
+        cell.cellActionControlSubject
+          .asDriver(onErrorJustReturn: .none)
+          .drive(onNext: { [weak self] data in
+            guard let self = self else { return }
+            self.actionDetected.onNext(data)
+          })
+          .disposed(by: cell.disposeBag)
+        return cell
+      }
+      .disposed(by: disposeBag)
+    
+    output.profileTestData
+      .bind(onNext: { [weak self] data in
+        guard let self = self else { return }
+        self.data = data
+        self.testCollectionView.reloadData()
+        self.testCountLabel.text = "1 / \(data.count)"
+      })
+      .disposed(by: disposeBag)
+    
+    output.selectedDataObservable
+      .bind(onNext: { [weak self] data in
+        guard let self = self else { return }
+        self.selectedLogicControl(data: data)
+      })
+      .disposed(by: disposeBag)
+    
+    output.actionControl
+      .bind(onNext: { [weak self] action in
+        guard let self = self else { return }
+        switch action {
+        case .didTabAnswer:
+          self.scrollForward()
+          self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
+        case .didTabBackward:
+          self.scrollBackward()
+          self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
+        case .didTabForward:
+          self.scrollForward()
+          self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
+        case .didTabQuit:
+          self.showQuitPopUp()
+        case .didTabFinish:
+          self.finishTest()
+        default:
+          break
+        }
+      })
+      .disposed(by: disposeBag)
+  }
+  
   private func render() {
     self.view.addSubViews([testNavigationStackView, quitButton, testCollectionView])
-
+    
     testNavigationStackView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
       make.centerX.equalToSuperview()
     }
-
+    
     quitButton.snp.makeConstraints { make in
       make.centerY.equalTo(testNavigationStackView)
       make.trailing.equalToSuperview().inset(24)
     }
-
+    
     testCollectionView.snp.makeConstraints { make in
       make.top.equalTo(testNavigationStackView.snp.bottom).offset(30)
       make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
     }
   }
-
-  private func setTestCollectionView() {
-    testCollectionView.register(cell: TestCollectionViewCell.self)
-    testCollectionView.delegate = self
-    testCollectionView.dataSource = self
-  }
-
+  
   private func setButtonIsEnabled(_ button: UIButton, isEnabled flag: Bool) {
     button.alpha = flag ? 1 : 0
     button.isEnabled = flag
   }
-
-
-  private func setNotChoosedView(index: Int) {
-    if index == 1 {
-      setButtonIsEnabled(backwardButton, isEnabled: false)
+  
+  private func selectedLogicControl(data: [Int]) {
+    if data[self.testIndex] != 0 {
+      setButtonIsEnabled(forwardButton, isEnabled: true)
+    } else {
       setButtonIsEnabled(forwardButton, isEnabled: false)
+    }
+    if self.testIndex == 0 {
+      setButtonIsEnabled(backwardButton, isEnabled: false)
     } else {
       setButtonIsEnabled(backwardButton, isEnabled: true)
+    }
+    
+    if self.testIndex == 14 && data.contains(0) {
       setButtonIsEnabled(forwardButton, isEnabled: false)
     }
   }
-
-  private func setChoosedView(index: Int) {
-    if index == 1 {
-      setButtonIsEnabled(backwardButton, isEnabled: false)
-      setButtonIsEnabled(forwardButton, isEnabled: true)
-    } else if index == profileTestCellData.count {
-      setButtonIsEnabled(backwardButton, isEnabled: true)
-      setButtonIsEnabled(forwardButton, isEnabled: false)
-    } else {
-      setButtonIsEnabled(backwardButton, isEnabled: true)
-      setButtonIsEnabled(forwardButton, isEnabled: true)
+  
+  private func scrollBackward() {
+    if testIndex <= 0 { return }
+    testIndex -= 1
+    testCollectionView.scrollToItem(at: IndexPath(row: testIndex, section: 0), at: .left, animated: true)
+    testCountLabel.text = "\(testIndex + 1) / \(data.count)"
+  }
+  
+  private func scrollForward() {
+    testIndex += 1
+    if testIndex == data.count {
+      actionDetected.onNext(.didTabFinish)
+      return
     }
+    testCollectionView.scrollToItem(at: IndexPath(row: testIndex, section: 0), at: .right, animated: true)
+    testCountLabel.text = "\(testIndex + 1) / \(data.count)"
   }
-
-  private func checkViewState(index: Int) -> (Bool) {
-    if questionTypeScoreList[index - 1].score == 0 { return false }
-    else { return true }
-  }
-
-  private func setBackforwardButton(index: Int) {
-    if checkViewState(index: index) { setChoosedView(index: index) }
-    else { setNotChoosedView(index: index) }
-  }
-}
-
-extension ProfileTestViewController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return profileTestCellData.count
-  }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = testCollectionView.dequeueReusableCell(withReuseIdentifier: TestCollectionViewCell.className, for: indexPath) as? TestCollectionViewCell
-    else { return UICollectionViewCell() }
-
-    cell.delegate = self
-
-    cell.setTestData(profileTestCellData[indexPath.row])
-    setBackforwardButton(index: indexPath.row + 1)
-
-    return cell
-  }
-}
-
-extension ProfileTestViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-    return CGSize(width: Size.screenWidth, height: testCollectionView.frame.height)
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-}
-
-//MARK: Objective-C methods
-extension ProfileTestViewController {
-  @objc private func showQuitTestPopUp() {
+  
+  private func showQuitPopUp() {
     let quitTestPopUpModel = DefaultPopUpModel(
       cancelText: "계속하기",
       actionText: "그만두기",
@@ -220,127 +292,60 @@ extension ProfileTestViewController {
     presentPopUp(popUpType) { [weak self] actionType in
       switch actionType {
       case .action:
-        self?.navigationController?.popViewController(animated: true)
+        let housTabbarViewController = HousTabbarViewController()
+        
+        self?.view.window?.rootViewController = housTabbarViewController
+        self?.view.window?.makeKeyAndVisible()
+        
+        housTabbarViewController.housTabBar.selectItem(index: 2)
+        self?.dismiss(animated: true)
       case .cancel:
         break
       }
     }
   }
-
-  @objc private func scrollBackward() {
-
-    if testIndex <= 0 { return }
-
-    testIndex -= 1
-
-    isMovedBackward = true
-
-    testCollectionView.scrollToItem(at: IndexPath(row: testIndex, section: 0), at: .left, animated: true)
-
-    setBackforwardButton(index: testIndex + 1)
-
-    testCountLabel.text = "\(testIndex + 1) / \(profileTestCellData.count)"
-  }
-
-  @objc private func scrollForward() {
-
-    testIndex += 1
-
-    if testIndex == profileTestCellData.count {
-      return
-    }
-
-    isMovedBackward = false
-
-    setBackforwardButton(index: testIndex + 1)
-
-    testCollectionView.scrollToItem(at: IndexPath(row: testIndex, section: 0), at: .right, animated: true)
-
-    testCountLabel.text = "\(testIndex + 1) / \(profileTestCellData.count)"
+  
+  private func finishTest() {
+    
   }
 }
 
-extension ProfileTestViewController: TestCollectionViewCellDelegate {
-
-  func optionButtonDidTapped(_ sender: UIButton, _ tag: Int ) {
-
-    if testIndex + 1 == profileTestCellData.count {
-
-      let type = profileTestCellData[testIndex].testType
-      let score = tag + 1
-
-      questionTypeScoreList[testIndex] = ProfileTest(testType: type, score: score)
-
-      for item in questionTypeScoreList {
-        switch item.questionType {
-        case QuestionType.light.rawValue : finalScore[0] += item.score
-        case QuestionType.noise.rawValue : finalScore[1] += item.score
-        case QuestionType.smell.rawValue : finalScore[2] += item.score
-        case QuestionType.personality.rawValue : finalScore[3] += item.score
-        case QuestionType.clean.rawValue : finalScore[4] += item.score
-        default:
-          break
-        }
-      }
-
-      // deselect all buttons
-      profileTestCellData[testIndex].testAnswers.forEach {
-        $0.deselectIsSelected()
-      }
-
-      // select button -> true
-      self.profileTestCellData[testIndex].testAnswers[tag].isSelected = true
-
-      // 나의 테스트 성향 점수 변경
-      self.updateTest(typeScore: finalScore) {
-        let testResultVC = ProfileDetailViewController(color: .purple) // #temp
-        testResultVC.modalPresentationStyle = .fullScreen
-        self.present(testResultVC, animated: true)
-        return
-      }
-
-    } else {
-
-      let type = profileTestCellData[testIndex].testType
-      let score = tag + 1
-
-      questionTypeScoreList[testIndex] = ProfileTest(testType: type, score: score)
-      testIndex += 1
-
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-
-        testCollectionView.scrollToItem(at: IndexPath(row: testIndex, section: 0), at: .right, animated: true)
-
-        testCountLabel.text = "\(testIndex + 1) / \(profileTestCellData.count)"
-
-        // deselect all buttons
-        profileTestCellData[testIndex - 1].testAnswers.forEach {
-          $0.deselectIsSelected()
-        }
-
-        // select button -> true
-        profileTestCellData[testIndex - 1].testAnswers[tag].isSelected = true
-
-        setBackforwardButton(index: testIndex + 1)
-      }
-    }
+extension ProfileTestViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    return CGSize(width: Size.screenWidth, height: testCollectionView.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
   }
 }
+
+//MARK: Objective-C methods
+
 
 extension ProfileTestViewController {
-
+  
   private func updateTest(typeScore: [Int], completion: @escaping () -> Void) {
-//    ProfileTestAPIService.shared.requestUpdateTest(typeScore: typeScore) { result in
-//      if let responseResult = NetworkResultFactory.makeResult(resultType: result)
-//          as? Success<UpdateTestDTO> {
-//        responseResult.resultMethod()
-//
-//        completion()
-//      } else {
-//        let responseResult = NetworkResultFactory.makeResult(resultType: result)
-//        responseResult.resultMethod()
-//      }
-//    }
+    //    ProfileTestAPIService.shared.requestUpdateTest(typeScore: typeScore) { result in
+    //      if let responseResult = NetworkResultFactory.makeResult(resultType: result)
+    //          as? Success<UpdateTestDTO> {
+    //        responseResult.resultMethod()
+    //
+    //        completion()
+    //      } else {
+    //        let responseResult = NetworkResultFactory.makeResult(resultType: result)
+    //        responseResult.resultMethod()
+    //      }
+    //    }
   }
 }
 

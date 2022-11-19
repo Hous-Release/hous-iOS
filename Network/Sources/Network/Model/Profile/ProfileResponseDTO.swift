@@ -74,11 +74,17 @@ public extension ProfileDTO.Response {
     
     //MARK: ProfileTest
     struct ProfileTestResponseDTO: Codable {
-        public let question: String
-        public let testNum: Int
+        public let question: [String]
+        public let questionNum: Int
         public let questionImg: String
         public let questionType: String
-        public let answers: [String]
+        public let answers: [[String]]
+        
+        enum CodingKeys: String, CodingKey {
+            case question, questionType, answers
+            case questionNum = "index"
+            case questionImg = "imageUrl"
+        }
     }
     
     struct ProfileTestResultResponseDTO: Codable {

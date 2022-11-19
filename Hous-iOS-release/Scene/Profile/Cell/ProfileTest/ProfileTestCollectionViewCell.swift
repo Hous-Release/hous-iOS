@@ -7,13 +7,18 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 protocol TestCollectionViewCellDelegate: AnyObject {
   func optionButtonDidTapped(_ sender: UIButton, _ tag: Int)
 }
 
-
 class TestCollectionViewCell: UICollectionViewCell {
+  
+  var cellIndex: Int = -1
+  var disposeBag: DisposeBag = DisposeBag()
+  let cellActionControlSubject = PublishSubject<ProfileTestActionControl>()
 
   weak var delegate: TestCollectionViewCellDelegate?
 
@@ -56,6 +61,11 @@ class TestCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+  }
+  
   private func setOptionButton(sender: UIButton, optionText: String) {
     var configuration = UIButton.Configuration.filled()
     configuration.automaticallyUpdateForSelection = false
@@ -67,9 +77,11 @@ class TestCollectionViewCell: UICollectionViewCell {
       switch button.state {
       case .selected:
         button.configuration?.baseBackgroundColor = Colors.redL1.color
-
+        button.configuration?.attributedTitle?.foregroundColor = Colors.red.color
+        
       default:
         button.configuration?.baseBackgroundColor = Colors.g1.color
+        button.configuration?.attributedTitle?.foregroundColor = Colors.black.color
       }
     }
 
@@ -81,8 +93,6 @@ class TestCollectionViewCell: UICollectionViewCell {
     sender.configuration = configuration
     sender.configurationUpdateHandler = handler
     sender.titleLabel?.textAlignment = .center
-
-    sender.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
   }
 
   private func render() {
@@ -96,7 +106,6 @@ class TestCollectionViewCell: UICollectionViewCell {
     testImageView.snp.makeConstraints { make in
       make.top.equalTo(testTitleLabel.snp.bottom).offset(18)
       make.centerX.equalTo(testTitleLabel)
-      make.leading.trailing.equalToSuperview().inset(25)
       make.width.height.equalTo(325)
     }
 
@@ -104,37 +113,51 @@ class TestCollectionViewCell: UICollectionViewCell {
       make.top.equalTo(testImageView.snp.bottom).offset(30).multipliedBy(0.9)
       make.centerX.equalTo(testImageView)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.bottom.equalToSuperview().inset(21)
+      make.bottom.equalToSuperview().offset(-45)
     }
   }
+  
+  func transferToViewController(cellIndex: Int) {
+    self.optionButton1.rx.tap
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.cellActionControlSubject.onNext(.didTabAnswer(answer: 1, questionNum: cellIndex + 1))
+        self.optionButton1.isSelected = true
+        self.optionButton2.isSelected = false
+        self.optionButton3.isSelected = false
+      })
+      .disposed(by: disposeBag)
+    
+    self.optionButton2.rx.tap
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.cellActionControlSubject.onNext(.didTabAnswer(answer: 2, questionNum: cellIndex + 1))
+        self.optionButton1.isSelected = false
+        self.optionButton2.isSelected = true
+        self.optionButton3.isSelected = false
+      })
+      .disposed(by: disposeBag)
+    
+    self.optionButton3.rx.tap
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.cellActionControlSubject.onNext(.didTabAnswer(answer: 3, questionNum: cellIndex + 1))
+        self.optionButton1.isSelected = false
+        self.optionButton2.isSelected = false
+        self.optionButton3.isSelected = true
+      })
+      .disposed(by: disposeBag)
+  }
 
-  func setTestData(_ data: ProfileTestCellItem) {
-    testTitleLabel.text = data.testTitle
-    // url -> image
-    testImageView.kf.setImage(with: URL(string: data.testImg))
+  func bind(_ data: ProfileTestItemModel, _ selectedData: [Int]) {
+    testTitleLabel.text = data.question
+    testImageView.kf.setImage(with: URL(string: data.questionImg))
 
     let sequence = zip([optionButton1, optionButton2, optionButton3], data.testAnswers)
 
     for (button, data) in sequence {
-
       setOptionButton(sender: button, optionText: data.optionText)
       button.isSelected = data.isSelected
-    }
-  }
-
-}
-
-extension TestCollectionViewCell {
-  @objc private func buttonPressed(_ sender: UIButton) {
-
-    deselectButtons([optionButton1, optionButton2, optionButton3])
-    sender.isSelected = true
-    delegate?.optionButtonDidTapped(sender, sender.tag)
-  }
-
-  func deselectButtons(_ buttonList: [UIButton]) {
-    buttonList.forEach {
-      $0.isSelected = false
     }
   }
 }

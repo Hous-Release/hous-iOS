@@ -691,6 +691,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		9B6DD14929290D590038BFD7 /* ProfileTest */ = {
+			isa = PBXGroup;
+			children = (
+				9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */,
+			);
+			path = ProfileTest;
+			sourceTree = "<group>";
+		};
 		9B83200C2919406C001EBDFE /* ProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,10 +747,8 @@
 		9B98853C28E3FF6B0013CCB9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				9B6DD14929290D590038BFD7 /* ProfileTest */,
 				9BE0C27729081B670028F13A /* ProfileDetail */,
-				9BE0C27929081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift */,
-				9BE0C27B29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift */,
-				9BE0C27D29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift */,
 				9BE0C27629081B490028F13A /* ProfileMain */,
 			);
 			path = Cell;
@@ -779,6 +785,9 @@
 		9BE0C27729081B670028F13A /* ProfileDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9BE0C27929081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift */,
+				9BE0C27B29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift */,
+				9BE0C27D29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift */,
 			);
 			path = ProfileDetail;
 			sourceTree = "<group>";
@@ -807,7 +816,6 @@
 		9BF9AD72291FBA50006A0BDE /* ProfileTest */ = {
 			isa = PBXGroup;
 			children = (
-				9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */,
 				9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */,
 			);
 			path = ProfileTest;

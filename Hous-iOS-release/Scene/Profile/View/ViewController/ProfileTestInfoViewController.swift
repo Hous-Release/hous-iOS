@@ -159,12 +159,7 @@ class ProfileTestInfoViewController: UIViewController {
   //MARK: Objective-C Methods
   extension ProfileTestInfoViewController {
     @objc private func startProfileTest() {
-      
-      let profileTestCellData = profileTestData.map {
-        ProfileTestCellItem(dto: $0)
-      }
-      
-      let profileTest = ProfileTestViewController(profileTestCellItems: profileTestCellData)
+      let profileTest = ProfileTestViewController()
       profileTest.modalTransitionStyle = .crossDissolve
       profileTest.modalPresentationStyle = .fullScreen
       
