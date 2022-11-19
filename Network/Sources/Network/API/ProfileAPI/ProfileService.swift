@@ -15,6 +15,7 @@ public enum ProfileService {
     case getBadges
     case updateRepresentBadge(_ id: Int)
     case putProfileEdit(_ data: ProfileDTO.Request.ProfileEditRequestDTO)
+    case getProfileTest
 }
 
 extension ProfileService: TargetType {
@@ -24,6 +25,8 @@ extension ProfileService: TargetType {
     
     public var path: String {
         switch self {
+        case .getProfileTest:
+            return "/user/personality/test"
         case .getProfile:
             return "/user"
         case .getHomieProfile(let id):
@@ -42,7 +45,7 @@ extension ProfileService: TargetType {
     
     public var method: HTTPMethod {
         switch self {
-        case .getProfile, .getBadges, .getHomieProfile, .getProfileTestResult:
+        case .getProfile, .getBadges, .getHomieProfile, .getProfileTestResult, .getProfileTest:
             return .get
             
         case .putProfileEdit:
@@ -54,7 +57,7 @@ extension ProfileService: TargetType {
     
     public var parameters: RequestParams {
         switch self {
-        case .getProfile, .getBadges, .updateRepresentBadge, .getHomieProfile:
+        case .getProfile, .getBadges, .updateRepresentBadge, .getHomieProfile, .getProfileTest:
             return .requestPlain
             
         case let .putProfileEdit(dto):

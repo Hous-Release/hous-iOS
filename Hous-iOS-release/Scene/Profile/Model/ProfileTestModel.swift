@@ -8,30 +8,63 @@
 import Foundation
 import Network
 
+enum ProfileTestActionControl {
+  case didTabQuit
+  case didTabForward
+  case didTabBackward
+  case didTabAnswer(answer: Int, questionNum: Int)
+  case didTabFinish
+  case none
+}
+
 enum ProfileTestInfoActionControl {
   case didTabBack
   case none
 }
 
-struct ProfileTestCellItem {
-  let testTitle: String
-  let testIdx: Int
-  let testImg: String
-  let testType: String
+public struct ProfileTestItemModel {
+  let question: String
+  let questionNum: Int
+  let questionImg: String
+  let questionType: String
   var testAnswers: [ProfileTestButtonState]
   
-  init(dto: ProfileDTO.Response.ProfileTestResponseDTO) {
-    self.testTitle = dto.question
-    self.testIdx = dto.testNum
-    self.testImg = dto.questionImg
-    self.testType = dto.questionType
+  init(question: [String], questionNum: Int, questionImg: String, questionType: String, answers: [[String]]) {
     
-    var t: [ProfileTestButtonState] = []
-    for answer in dto.answers {
-      let button = ProfileTestButtonState(optionText: answer, isSelected: false)
-      t.append(button)
+    var questionCombined: String = ""
+    for line in question {
+      questionCombined += (line + "\n")
     }
-    self.testAnswers = t
+    
+    if questionCombined.count > 2 {
+      let start = questionCombined.startIndex
+      let end = questionCombined.index(questionCombined.endIndex, offsetBy: -2)
+      self.question = String(questionCombined[start...end])
+    } else { self.question = ""}
+    
+    self.questionNum = questionNum
+    self.questionImg = questionImg
+    self.questionType = questionType
+    
+    var buttons: [ProfileTestButtonState] = []
+    for answer in answers {
+      var answerCombined: String = ""
+      var processedAnswer = ""
+      for line in answer {
+        answerCombined += (line + "\n")
+      }
+      
+      if answerCombined.count > 2 {
+        let start = answerCombined.startIndex
+        let end = answerCombined.index(answerCombined.endIndex, offsetBy: -2)
+        processedAnswer = String(answerCombined[start...end])
+      }
+      
+      let button = ProfileTestButtonState(optionText: processedAnswer, isSelected: false)
+      buttons.append(button)
+    }
+    
+    self.testAnswers = buttons
   }
 }
 
@@ -54,7 +87,11 @@ class ProfileTestButtonState {
     self.isSelected = isSelected
   }
   
-  func deselectIsSelected() {
+  func deselectButton() {
     isSelected = false
+  }
+  
+  func selectButton() {
+    isSelected = true
   }
 }

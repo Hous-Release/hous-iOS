@@ -65,7 +65,7 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
       descriptionMessage += (message + "\n")
     }
     
-    if (descriptionMessage.count > 2) {
+    if descriptionMessage.count > 2 {
       let start = descriptionMessage.startIndex
       let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -3)
       let newMessage = descriptionMessage[start...end]

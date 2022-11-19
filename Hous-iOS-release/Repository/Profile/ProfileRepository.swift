@@ -19,15 +19,16 @@ public enum ProfileRepositoryEvent {
   case getBadges
   case postFeedBackBadge
   case getNotifications
-  case getPersonality
+  case getProfileTest([ProfileTestItemModel])
   case putPersonality
-  case getProfileTest(ProfileDetailModel)
+  case getProfileTestResult(ProfileDetailModel)
   case patchPushAlarm
   case sendError(HouseErrorModel?)
 }
 
 public protocol ProfileRepository {
   static var event: PublishSubject<ProfileRepositoryEvent> { get }
+  func getProfileTest()
   func getProfile()
   func getHomieProfile(id: String)
   func getProfileTestResult(color: PersonalityColor)
@@ -37,6 +38,40 @@ public protocol ProfileRepository {
 public final class ProfileRepositoryImp: ProfileRepository {
   
   public static var event = PublishSubject<ProfileRepositoryEvent>()
+  
+  public func getProfileTest() {
+    
+    //MARK: Get Data
+    
+    NetworkService.shared.profileRepository.getProfileTest { res, err in
+      guard let dto = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      
+      var profileTestItemModels: [ProfileTestItemModel] = []
+      
+      //MARK: From DTO to Model
+      
+      dto.forEach {
+        profileTestItemModels.append(ProfileTestItemModel(
+                                      question: $0.question,
+                                      questionNum: $0.questionNum,
+                                      questionImg: $0.questionImg,
+                                      questionType: $0.questionType,
+                                      answers: $0.answers)
+                                     )
+      }
+      
+      ProfileRepositoryImp.event.onNext(.getProfileTest(profileTestItemModels))
+      
+    }
+  }
+  
   
   public func getProfileTestResult(color: PersonalityColor) {
     
@@ -58,8 +93,6 @@ public final class ProfileRepositoryImp: ProfileRepository {
       }
     }
     
-    
-    
     NetworkService.shared.profileRepository.getProfileTestResultInfo(dto: requestDTO) { res, err in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
@@ -69,7 +102,6 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-     
       
       //MARK: From DTO To Model
       var personalityType: PersonalityColor
@@ -88,10 +120,10 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityType = .none
       }
       
-      ProfileRepositoryImp.event.onNext(.getProfileTest(ProfileDetailModel(personalityType: personalityType, badPersonalityImageURL: dto.badPersonalityImageURL, badPersonalityName: dto.badPersonalityName, goodPersonalityImageURL: dto.goodPersonalityImageURL, goodPersonalityName: dto.goodPersonalityName, imageURL: dto.imageURL, name: dto.name, recommendTitle: dto.recommendTitle, recommendTodo: dto.recommendTodo, title: dto.title, description: dto.dataDescription)))
+      ProfileRepositoryImp.event.onNext(.getProfileTestResult(ProfileDetailModel(personalityType: personalityType, badPersonalityImageURL: dto.badPersonalityImageURL, badPersonalityName: dto.badPersonalityName, goodPersonalityImageURL: dto.goodPersonalityImageURL, goodPersonalityName: dto.goodPersonalityName, imageURL: dto.imageURL, name: dto.name, recommendTitle: dto.recommendTitle, recommendTodo: dto.recommendTodo, title: dto.title, description: dto.dataDescription)))
     }
   }
-
+  
   public func getProfile() {
     
     //MARK: Get Data
@@ -226,7 +258,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
     let nickname = data.name
     
     let dto = ProfileDTO.Request.ProfileEditRequestDTO(birthday: birthday, introduction: introduction, isPublic: isPublic, job: job, mbti: mbti, nickname: nickname)
-
+    
     
     //MARK: Put Data
     
