@@ -23,8 +23,8 @@ public extension UpdateTodoDTO {
 }
 
 public struct SelectedUser: Codable {
-  let color, nickname: String
-  let onboardingID: Int
+  public let color, nickname: String
+  public let onboardingID: Int
 
   enum CodingKeys: String, CodingKey {
     case color, nickname
