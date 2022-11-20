@@ -147,7 +147,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityColor = .red
       case "BLUE":
         personalityColor = .blue
-      case "GRAY":
+      case "YELLOW":
         personalityColor = .yellow
       case "GREEN":
         personalityColor = .green

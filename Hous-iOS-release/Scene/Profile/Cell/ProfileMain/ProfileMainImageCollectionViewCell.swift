@@ -121,7 +121,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   private func animatedRender(data: ProfileModel) {
     if data.isEmptyView {
-      self.backgroundColor = Colors.g7.color
+      self.backgroundColor = Colors.blueL2.color
       profileMainImage.removeFromSuperview()
       profileMainImage = AnimationView.init(name: "empty_profile")
       addSubview(profileMainImage)
@@ -131,6 +131,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
         make.width.equalTo(Size.screenWidth)
       }
       self.sendSubviewToBack(profileMainImage)
+      profileMainImage.loopMode = .loop
       profileMainImage.play()
       
     } else {
