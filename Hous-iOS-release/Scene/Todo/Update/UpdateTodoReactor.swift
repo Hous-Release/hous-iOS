@@ -29,20 +29,27 @@ public final class UpdateTodoReactor: Reactor {
   }
 
   public enum Mutation {
-
+    case setNotification(Bool)
+    case setTodo(String?)
+    case setHomies([UpdateTodoHomieModel])
   }
 
   public struct State {
+    var id: Int? = nil
     var isModifying: Bool = false
     var isPushNotification: Bool = false
     var todo: String? = nil
-    var todoHomies: [UpdateTodoHomieModel] = []
+    var todoHomies: [UpdateTodoHomieModel]
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
+      if initialState.isModifying {
+        provider.todoRepository.fetchModifyingTodo(initialState.id ?? -1)
+      }
       return .empty()
+
     case .enterTodo:
       return .empty()
     case .didTapHomie:
@@ -57,6 +64,18 @@ public final class UpdateTodoReactor: Reactor {
   public func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
 
+    switch mutation {
+    case .setNotification(let notification):
+      newState.isPushNotification = notification
+
+    case .setTodo(let todo):
+      newState.todo = todo
+
+    case .setHomies(let homies):
+      newState.todoHomies = homies
+
+    }
+
     return newState
   }
 
@@ -65,8 +84,17 @@ public final class UpdateTodoReactor: Reactor {
 public extension UpdateTodoReactor {
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let service = provider.todoRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+    let service =
+      provider.todoRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+
       switch event {
+      case .getModifyingTodo(let state):
+        return Observable.concat([
+          .just(.setNotification(state.isPushNotification)),
+          .just(.setTodo(state.todo)),
+          .just(.setHomies(state.todoHomies))
+        ])
+
       default:
         return .empty()
       }
