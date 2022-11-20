@@ -69,9 +69,55 @@ final class UpdateTodoViewController: UIViewController, View {
     bindState(reactor)
   }
 
-  func bindAction(_ reactor: Reactor) { }
-  func bindState(_ reactor: Reactor) { }
+}
 
+  // MARK: - Action Bind
+extension UpdateTodoViewController {
+  func bindAction(_ reactor: Reactor) {
+    bindViewWillAppearAction(reactor)
+  }
+
+  func bindViewWillAppearAction(_ reactor: Reactor) {
+    rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .map { _ in Reactor.Action.fetch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+}
+
+  // MARK: - State Bind
+extension UpdateTodoViewController {
+  func bindState(_ reactor: Reactor) {
+    bindPushNotificationState(reactor)
+    bindTodoState(reactor)
+    bindHomiesState(reactor)
+  }
+
+  func bindPushNotificationState(_ reactor: Reactor) {
+    reactor.state.map(\.isPushNotification)
+      .distinctUntilChanged()
+    // TODO: - bind로 유아이 바꾸기
+      .asDriver(onErrorJustReturn: false)
+      .debug("bindPushNotificationState")
+      .drive()
+      .disposed(by: disposeBag)
+  }
+  func bindTodoState(_ reactor: Reactor) {
+    reactor.state.map(\.todo)
+      .distinctUntilChanged()
+      .debug("bindTodoState")
+      .bind(to: self.todoTextField.rx.text)
+      .disposed(by: disposeBag)
+  }
+  func bindHomiesState(_ reactor: Reactor) {
+    reactor.state.map(\.todoHomies)
+      .distinctUntilChanged()
+      .asDriver(onErrorJustReturn: [])
+      .map { $0 }
+      .debug("bindHomiesState")
+      .drive()
+      .disposed(by: disposeBag)
+  }
 }
 
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // MARK: - TodoUser에 대응함.
-struct UpdateTodoHomieModel: Hashable {
+public struct UpdateTodoHomieModel: Hashable {
   enum Day: Int, Hashable, CaseIterable, CustomStringConvertible, Comparable {
     case mon, tue ,wed ,thu ,fri ,sat ,sun
   }
