@@ -21,8 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     let homies: [UpdateTodoHomieModel] = [
-      .init(name: "호세", color: .BLUE, selectedDay: [.fri]),
-      .init(name: "지현", color: .GREEN, selectedDay: [.mon])
     ]
 
     let serviceProvider = ServiceProvider()
