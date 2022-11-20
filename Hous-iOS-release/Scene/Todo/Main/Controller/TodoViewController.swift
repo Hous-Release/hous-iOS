@@ -33,7 +33,8 @@ final class TodoViewController: UIViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    reactor = TodoViewReactor()
+    let serviceProvider = ServiceProvider()
+    reactor = TodoViewReactor(provider: serviceProvider)
     navigationController?.navigationBar.isHidden = true
   }
 

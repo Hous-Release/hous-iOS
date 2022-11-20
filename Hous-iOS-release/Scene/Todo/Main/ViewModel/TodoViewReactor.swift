@@ -54,12 +54,16 @@ final class TodoViewReactor: Reactor {
 
   let initialState = State()
 
-  private let todoRepository: TodoRepository = TodoRepositoryImp()
+  private let provider: ServiceProviderType
+
+  init(provider: ServiceProviderType) {
+    self.provider = provider
+  }
 
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      todoRepository.fetchTodo()
+      provider.todoRepository.fetchTodo()
       return .empty()
     case .didTapViewAll:
       return .just(.setViewAllFlag(true))
@@ -99,7 +103,7 @@ final class TodoViewReactor: Reactor {
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let serviceMutation = todoRepository.event.flatMap { event -> Observable<Mutation> in
+    let serviceMutation = provider.todoRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
       case let .date(date):
         return .just(.setDate(date))
