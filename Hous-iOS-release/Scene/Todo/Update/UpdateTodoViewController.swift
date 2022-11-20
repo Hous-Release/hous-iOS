@@ -39,15 +39,14 @@ final class UpdateTodoViewController: UIViewController, View {
   private var individualSectionSnapShot = SectionSnapShot()
 
   init(
-    _ reactor: Reactor,
-    _ homies: [UpdateTodoHomieModel]
+    _ reactor: Reactor
   ) {
     super.init(nibName: nil, bundle: nil)
     setupView()
     setupLayout()
     configureDataSource()
     applyInitialSnapshots()
-    applySnapShot(homies)
+//    applySnapShot(homies)
 
     self.reactor = reactor
   }

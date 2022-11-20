@@ -18,7 +18,9 @@ enum FilteringType {
 }
 
 //MARK: - Controller
-final class FilteredTodoViewController: UIViewController {
+final class FilteredTodoViewController: UIViewController, ReactorKit.View {
+
+  typealias Reactor = FilteredTodoReactor
 
   var disposeBag = DisposeBag()
 
@@ -45,6 +47,7 @@ final class FilteredTodoViewController: UIViewController {
 
   enum Size {
     static let navigationBarHeight = 64
+    static let floatingButtonSize = 60
   }
 
   var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
@@ -55,6 +58,10 @@ final class FilteredTodoViewController: UIViewController {
     $0.rightButton.configuration?.baseForegroundColor = Colors.g5.color
   }
   private var contentsView = UIView()
+
+  private var floatingAddButton = UIButton().then {
+    $0.setImage(Images.btnAddFloating.image, for: .normal)
+  }
 
   let serviceProvider = ServiceProvider()
 
@@ -74,6 +81,12 @@ final class FilteredTodoViewController: UIViewController {
     setup()
     render()
     bindNavRightButton()
+    self.reactor = Reactor(provider: self.serviceProvider)
+
+  }
+
+  internal func bind(reactor: Reactor) {
+    
   }
 }
 
@@ -103,7 +116,7 @@ extension FilteredTodoViewController {
   }
 
   private func render() {
-    view.addSubViews([navigationBar, contentsView])
+    view.addSubViews([navigationBar, contentsView, floatingAddButton])
 
     navigationBar.snp.makeConstraints { make in
       make.height.equalTo(Size.navigationBarHeight)
@@ -114,6 +127,11 @@ extension FilteredTodoViewController {
     contentsView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.bottom.equalToSuperview()
+    }
+
+    floatingAddButton.snp.makeConstraints { make in
+      make.bottom.trailing.equalToSuperview().inset(40)
+      make.size.equalTo(Size.floatingButtonSize)
     }
   }
 

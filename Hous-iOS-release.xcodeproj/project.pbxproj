@@ -43,6 +43,7 @@
 		77EB72122925413200032776 /* UpdateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72112925413200032776 /* UpdateTodoViewController.swift */; };
 		77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7213292541CF00032776 /* UpdateTodoReactor.swift */; };
 		77EB72162925489500032776 /* HousTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72152925489500032776 /* HousTextField.swift */; };
+		77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7219292A1AE200032776 /* FilteredTodoReactor.swift */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */; };
@@ -278,6 +279,7 @@
 		77EB72112925413200032776 /* UpdateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoViewController.swift; sourceTree = "<group>"; };
 		77EB7213292541CF00032776 /* UpdateTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoReactor.swift; sourceTree = "<group>"; };
 		77EB72152925489500032776 /* HousTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTextField.swift; sourceTree = "<group>"; };
+		77EB7219292A1AE200032776 /* FilteredTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoReactor.swift; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoNavigationView.swift; sourceTree = "<group>"; };
@@ -1321,6 +1323,7 @@
 				B8FF4D9329051D7B0087AD40 /* MemberTodoSection.swift */,
 				B8555AA12917D23500E943AE /* ByDayTodoViewReactor.swift */,
 				B8555AC0291CBEDD00E943AE /* ByDayTodoSection.swift */,
+				77EB7219292A1AE200032776 /* FilteredTodoReactor.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1489,6 +1492,7 @@
 				9B959B0828FFD0C300EB3412 /* ProfileDescriptionCollectionViewCell.swift in Sources */,
 				B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
+				77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */,
 				9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */,
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
 				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,
