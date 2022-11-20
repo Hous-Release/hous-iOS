@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// MARK: - TodoUser에 대응함.
 struct UpdateTodoHomieModel: Hashable {
   enum Day: Int, Hashable, CaseIterable, CustomStringConvertible, Comparable {
     case mon, tue ,wed ,thu ,fri ,sat ,sun
@@ -16,6 +17,7 @@ struct UpdateTodoHomieModel: Hashable {
   let name: String
   let color: HomieColor
   let selectedDay: [Day]
+  let onboardingID: Int
   private let identifier = UUID()
 }
 
