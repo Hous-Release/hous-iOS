@@ -199,6 +199,7 @@ final class ProfileTestViewController: UIViewController {
       .disposed(by: disposeBag)
     
     output.actionControl
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] action in
         guard let self = self else { return }
         switch action {
@@ -247,6 +248,8 @@ final class ProfileTestViewController: UIViewController {
   }
   
   private func selectedLogicControl(data: [Int]) {
+    if self.testIndex >= data.count { return }
+    
     if data[self.testIndex] != 0 {
       setButtonIsEnabled(forwardButton, isEnabled: true)
     } else {
@@ -273,6 +276,7 @@ final class ProfileTestViewController: UIViewController {
   private func scrollForward() {
     testIndex += 1
     if testIndex == data.count {
+      print("⭐️")
       actionDetected.onNext(.didTabFinish)
       return
     }
@@ -306,7 +310,11 @@ final class ProfileTestViewController: UIViewController {
   }
   
   private func finishTest() {
-    
+    print("🔥")
+    let destinationViewController = ProfileTestLoadingViewController()
+    destinationViewController.modalPresentationStyle = .fullScreen
+    destinationViewController.modalTransitionStyle = .crossDissolve
+    self.present(destinationViewController, animated: true)
   }
 }
 
