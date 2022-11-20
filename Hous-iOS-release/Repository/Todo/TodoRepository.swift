@@ -20,12 +20,14 @@ public enum TodoRepositoryEvent {
   case myTodosEmptySection(TodoMainSection.Model)
   case ourTodosSection(TodoMainSection.Model)
   case ourTodosEmptySection(TodoMainSection.Model)
+  case getModifyingTodo(UpdateTodoReactor.State)
   case sendError(HouseErrorModel?)
 }
 
 public protocol TodoRepository {
   var event: PublishSubject<TodoRepositoryEvent> { get }
   func fetchTodo()
+  func fetchModifyingTodo(_ id: Int)
 }
 
 public final class TodoRepositoryImp: BaseService, TodoRepository {
@@ -74,11 +76,68 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       }
     }
   }
+  public func fetchModifyingTodo(_ id: Int) {
+    NetworkService.shared.memberTodoRepository.getModifyingTodo(
+      todoID: id
+    ) { [weak self] res, err in
+      guard let self = self else { return }
 
+      guard let data = res?.data else {
 
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      let homieModels = data.todoUsers.map {
+        UpdateTodoHomieModel(
+          name: $0.nickname,
+          color: HomieColor(rawValue: $0.color) ?? .GRAY,
+          selectedDay: $0.dayOfWeeks.map { self.asDay($0) },
+          onboardingID: $0.onboardingID
+        )
+      }
+
+      let state = UpdateTodoReactor.State(
+        isModifying: true,
+        isPushNotification: data.isPushNotification,
+        todo: data.name,
+        todoHomies: homieModels
+      )
+
+      self.event.onNext(.getModifyingTodo(state))
+
+    }
+  }
 }
 
 extension TodoRepositoryImp {
+  private func asDay(_ day: String) -> UpdateTodoHomieModel.Day {
+    switch day {
+    case "MONDAY":
+      return .mon
+    case "TUESDAY":
+      return .tue
+    case "WEDNESDAY":
+      return .wed
+    case "THURSDAY":
+      return .thu
+    case "FRIDAY":
+      return .fri
+    case "SATURDAY":
+      return .sat
+    case "SUNDAY":
+      return .sun
+
+    default:
+      return .mon
+
+    }
+  }
   private func parse(of dayOfWeek: String) -> String {
     return dayOfWeek.prefix(1) + dayOfWeek.dropFirst().lowercased()
   }
