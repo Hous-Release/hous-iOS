@@ -28,7 +28,7 @@ public protocol TodoRepository {
   func fetchTodo()
 }
 
-public final class TodoRepositoryImp: TodoRepository {
+public final class TodoRepositoryImp: BaseService, TodoRepository {
   public var event = PublishSubject<TodoRepositoryEvent>()
 
   public func fetchTodo() {
