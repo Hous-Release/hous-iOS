@@ -162,21 +162,10 @@ extension TodoViewController {
           header.setHeader(.ourTodo, 0)
         }
 
-        header.infoButton.rx.tap
-          .subscribe { [weak self] _ in
-            let popupViewController = TodoPopupViewController()
-            popupViewController.modalTransitionStyle = .crossDissolve
-            popupViewController.modalPresentationStyle = .overFullScreen
-
-            let headerYOffset = self?.getHeaderYOffset(indexPath)
-
-            popupViewController.mainView.buttonPoint =
-            CGPoint(
-              x: header.infoButton.center.x,
-              y: headerYOffset! + header.infoButton.center.y)
-            self?.present(popupViewController, animated: true)
-          }
-          .disposed(by: header.disposeBag)
+        // 만약 ourtodo header 일 때만 버튼 action 활성화
+        if indexPath.section == 2 {
+          self.bindHeaderGuideButton(header, at: indexPath)
+        }
 
         return header
 
@@ -202,12 +191,33 @@ extension TodoViewController {
 
 extension TodoViewController {
 
+  private func bindHeaderGuideButton(_ header: TodoHeaderCollectionReusableView, at indexPath: IndexPath) {
+    header.infoButton.rx.tap
+      .subscribe { [weak self] _ in
+
+        let popupViewController = TodoPopupViewController()
+        popupViewController.modalTransitionStyle = .crossDissolve
+        popupViewController.modalPresentationStyle = .overFullScreen
+
+        let headerYOffset = self?.getHeaderYOffset(indexPath)
+
+        popupViewController.mainView.buttonPoint =
+        CGPoint(
+          x: header.infoButton.center.x,
+          y: headerYOffset! + header.infoButton.center.y)
+        self?.present(popupViewController, animated: true)
+      }
+      .disposed(by: header.disposeBag)
+  }
+
   private func getHeaderYOffset(_ indexPath: IndexPath) -> CGFloat {
 
     let attributes = self.mainView.todoCollectionView.layoutAttributesForItem(at: indexPath)
     let point = self.mainView.todoCollectionView.frame.origin.y
     let offset = self.mainView.todoCollectionView.contentOffset.y
-    return (attributes?.center.y)! + point - offset
+    let attributesCenter = attributes?.center ?? CGPoint(x: 0, y: 0)
+
+    return attributesCenter.y + point - offset
   }
 }
 
