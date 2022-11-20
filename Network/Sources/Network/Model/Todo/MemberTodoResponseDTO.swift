@@ -5,6 +5,8 @@
 //  Created by 김지현 on 2022/10/24.
 //
 
+import Foundation
+
 public extension MemberTodoDTO.Response {
 
     typealias MemberTodosResponseDTO = [MemberTodoDTO]
