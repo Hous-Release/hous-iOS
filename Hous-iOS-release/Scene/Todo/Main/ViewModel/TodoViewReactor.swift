@@ -126,6 +126,9 @@ final class TodoViewReactor: Reactor {
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))
+
+      default:
+        return .empty()
       }
     }
 
