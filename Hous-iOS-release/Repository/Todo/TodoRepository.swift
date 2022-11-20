@@ -21,6 +21,7 @@ public enum TodoRepositoryEvent {
   case ourTodosSection(TodoMainSection.Model)
   case ourTodosEmptySection(TodoMainSection.Model)
   case getModifyingTodo(UpdateTodoReactor.State)
+  case getMembers([UpdateTodoHomieModel])
   case sendError(HouseErrorModel?)
 }
 
@@ -28,6 +29,7 @@ public protocol TodoRepository {
   var event: PublishSubject<TodoRepositoryEvent> { get }
   func fetchTodo()
   func fetchModifyingTodo(_ id: Int)
+  func fetchHomie()
 }
 
 public final class TodoRepositoryImp: BaseService, TodoRepository {
@@ -111,6 +113,31 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
 
       self.event.onNext(.getModifyingTodo(state))
 
+    }
+  }
+
+  public func fetchHomie() {
+    NetworkService.shared.mainTodoRepository.getMembers { [weak self] res, err in
+      guard let self = self else { return }
+      guard let data = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+      let homies = data.users.map {
+        UpdateTodoHomieModel(
+          name: $0.nickname,
+          color: HomieColor(rawValue: $0.color) ?? .GRAY,
+          selectedDay: [],
+          onboardingID: $0.onboardingID
+        )
+      }
+
+      self.event.onNext(.getMembers(homies))
     }
   }
 }
