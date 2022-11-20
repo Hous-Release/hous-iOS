@@ -25,7 +25,7 @@ public extension MainHomeDTO.Response {
     
     enum CodingKeys: String, CodingKey {
       case color
-      case homieID = "homieId"
+      case homieID = "onboardingId"
       case userNickname
     }
   }
