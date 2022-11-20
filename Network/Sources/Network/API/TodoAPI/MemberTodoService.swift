@@ -8,8 +8,10 @@
 import Foundation
 import Alamofire
 
+// TODO: TodoAPI 다 합치기~~~
 public enum MemberTodoService {
   case getMemberTodos
+  case getModifyTodoID(Int)
 }
 
 extension MemberTodoService: TargetType {
@@ -21,6 +23,8 @@ extension MemberTodoService: TargetType {
     switch self {
     case .getMemberTodos:
       return "todos/member"
+    case .getModifyTodoID(let id):
+      return "todo/\(id)"
     }
   }
 
@@ -28,12 +32,16 @@ extension MemberTodoService: TargetType {
     switch self {
     case .getMemberTodos:
       return .get
+    case .getModifyTodoID:
+      return .get
     }
   }
 
   public var parameters: RequestParams {
     switch self {
     case .getMemberTodos:
+      return .requestPlain
+    case .getModifyTodoID:
       return .requestPlain
     }
   }
