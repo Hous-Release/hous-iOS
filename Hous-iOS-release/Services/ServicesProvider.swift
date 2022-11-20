@@ -14,9 +14,7 @@ public protocol ServiceProviderType: AnyObject {
   var enterRoomRepository: EnterRoomRepository { get }
   var memberRepository: MemberRepository { get }
   var byDayRepository: ByDayRepository { get }
-//  var userDefaultsService: UserDefaultsServiceType { get }
-//  var alertService: AlertServiceType { get }
-//  var taskService: TaskServiceType { get }
+  var todoRepository: TodoRepository { get }
 }
 
 final class ServiceProvider: ServiceProviderType {
@@ -24,7 +22,6 @@ final class ServiceProvider: ServiceProviderType {
   lazy var enterRoomRepository: EnterRoomRepository = EnterRoomRepositoryImp(provider: self)
   lazy var memberRepository: MemberRepository = MemberRepositoryImp(provider: self)
   lazy var byDayRepository: ByDayRepository = ByDayRepositoryImp(provider: self)
-//  lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
-//  lazy var alertService: AlertServiceType = AlertService(provider: self)
+  lazy var todoRepository: TodoRepository = TodoRepositoryImp(provider: self)
 
 }
