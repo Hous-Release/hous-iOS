@@ -17,11 +17,11 @@ public protocol ServiceProviderType: AnyObject {
   var todoRepository: TodoRepository { get }
 }
 
-final class ServiceProvider: ServiceProviderType {
-  lazy var authRepository: AuthRepository = AuthRepositoryImp(provider: self)
-  lazy var enterRoomRepository: EnterRoomRepository = EnterRoomRepositoryImp(provider: self)
-  lazy var memberRepository: MemberRepository = MemberRepositoryImp(provider: self)
-  lazy var byDayRepository: ByDayRepository = ByDayRepositoryImp(provider: self)
-  lazy var todoRepository: TodoRepository = TodoRepositoryImp(provider: self)
+public final class ServiceProvider: ServiceProviderType {
+  public lazy var authRepository: AuthRepository = AuthRepositoryImp(provider: self)
+  public lazy var enterRoomRepository: EnterRoomRepository = EnterRoomRepositoryImp(provider: self)
+  public lazy var memberRepository: MemberRepository = MemberRepositoryImp(provider: self)
+  public lazy var byDayRepository: ByDayRepository = ByDayRepositoryImp(provider: self)
+  public lazy var todoRepository: TodoRepository = TodoRepositoryImp(provider: self)
 
 }
