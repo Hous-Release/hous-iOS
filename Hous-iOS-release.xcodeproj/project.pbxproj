@@ -50,6 +50,9 @@
 		9B2F46AB2923FBAD002D9BD2 /* squ_no.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F46A92923FBAC002D9BD2 /* squ_no.json */; };
 		9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */; };
 		9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B454E4D2900055F00F5A319 /* profileRedlottie.json */; };
+		9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */; };
+		9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */; };
+		9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */; };
 		9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200A29193515001EBDFE /* ProfileEditModel.swift */; };
 		9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */; };
 		9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */; };
@@ -72,7 +75,6 @@
 		9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */; };
 		9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */; };
 		9BBE13E32904160D00B7D517 /* ProfileTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E22904160D00B7D517 /* ProfileTestViewController.swift */; };
-		9BDBAD722924074A0096FE38 /* empty_profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BDBAD712924074A0096FE38 /* empty_profile.json */; };
 		9BDBAD7429240C2B0096FE38 /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7329240C2B0096FE38 /* MateProfileViewController.swift */; };
 		9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7529240C3C0096FE38 /* MateProfileViewModel.swift */; };
 		9BDBAD782924175C0096FE38 /* MateProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD772924175C0096FE38 /* MateProfileModel.swift */; };
@@ -96,7 +98,6 @@
 		9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */; };
 		9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */; };
 		9BF9AD6D291E0A58006A0BDE /* ProfileEditBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */; };
-		9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BF9AD6E291E8D3E006A0BDE /* testLottie.json */; };
 		9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */; };
 		9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */; };
 		9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */; };
@@ -274,6 +275,9 @@
 		9B2F46A92923FBAC002D9BD2 /* squ_no.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = squ_no.json; sourceTree = "<group>"; };
 		9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		9B454E4D2900055F00F5A319 /* profileRedlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileRedlottie.json; sourceTree = "<group>"; };
+		9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestLoadingViewController.swift; sourceTree = "<group>"; };
+		9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_lottie.json; sourceTree = "<group>"; };
+		9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_profile.json; sourceTree = "<group>"; };
 		9B83200A29193515001EBDFE /* ProfileEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditModel.swift; sourceTree = "<group>"; };
 		9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditNavtigationView.swift; sourceTree = "<group>"; };
 		9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
@@ -296,7 +300,6 @@
 		9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		9BBE13E22904160D00B7D517 /* ProfileTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestViewController.swift; sourceTree = "<group>"; };
-		9BDBAD712924074A0096FE38 /* empty_profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_profile.json; sourceTree = "<group>"; };
 		9BDBAD7329240C2B0096FE38 /* MateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewController.swift; sourceTree = "<group>"; };
 		9BDBAD7529240C3C0096FE38 /* MateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewModel.swift; sourceTree = "<group>"; };
 		9BDBAD772924175C0096FE38 /* MateProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileModel.swift; sourceTree = "<group>"; };
@@ -320,7 +323,6 @@
 		9BF94601290D44AF008F2BFC /* ProfileRecommendRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendRuleView.swift; sourceTree = "<group>"; };
 		9BF94603290D6C6C008F2BFC /* ProfileRecommendBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendBoxView.swift; sourceTree = "<group>"; };
 		9BF9AD6C291E0A58006A0BDE /* ProfileEditBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditBackButton.swift; sourceTree = "<group>"; };
-		9BF9AD6E291E8D3E006A0BDE /* testLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testLottie.json; sourceTree = "<group>"; };
 		9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextView.swift; sourceTree = "<group>"; };
 		9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestModel.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 		77AEF34028E2009E002A102B /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */,
 				9BDBAD712924074A0096FE38 /* empty_profile.json */,
 				B5F9FB4D2925CD520056C0B1 /* weekend.json */,
 				B5F9FB492923DA180056C0B1 /* birthday.json */,
@@ -638,11 +641,11 @@
 				9B2F469D2923FB8C002D9BD2 /* cir_yes.json */,
 				9B2F46A02923FB95002D9BD2 /* hex_no.json */,
 				9B2F46A12923FB95002D9BD2 /* hex_yes.json */,
+				9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */,
 				9B2F46A52923FBA3002D9BD2 /* pen_no.json */,
 				9B2F46A42923FBA3002D9BD2 /* pen_yes.json */,
 				9B2F46A92923FBAC002D9BD2 /* squ_no.json */,
 				9B2F46A82923FBAC002D9BD2 /* squ_yes.json */,
-				9BF9AD6E291E8D3E006A0BDE /* testLottie.json */,
 				77AEF34128E200D2002A102B /* splashlottie.json */,
 			);
 			path = Lottie;
@@ -764,6 +767,7 @@
 				9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */,
 				9BBE13E22904160D00B7D517 /* ProfileTestViewController.swift */,
 				9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */,
+				9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1344,9 +1348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */,
 				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
-				9BDBAD722924074A0096FE38 /* empty_profile.json in Resources */,
 				9B2F46AB2923FBAD002D9BD2 /* squ_no.json in Resources */,
 				9B2F46A72923FBA3002D9BD2 /* pen_no.json in Resources */,
 				9B2F46AA2923FBAD002D9BD2 /* squ_yes.json in Resources */,
@@ -1361,10 +1363,12 @@
 				B5F9FB22291FCDC90056C0B1 /* thursday.json in Resources */,
 				B5F9FB4E2925CD520056C0B1 /* weekend.json in Resources */,
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
+				9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */,
 				9B2F469E2923FB8D002D9BD2 /* cir_no.json in Resources */,
 				9B2F46A62923FBA3002D9BD2 /* pen_yes.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
+				9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */,
 				B5F9FB23291FCDC90056C0B1 /* tuesday.json in Resources */,
 				B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */,
 				B5F9FB4A2923DA180056C0B1 /* birthday.json in Resources */,
@@ -1554,6 +1558,7 @@
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */,
+				9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */,
 				9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */,
