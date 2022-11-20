@@ -13,6 +13,7 @@ public enum MainTodoService {
   case checkTodo(
     _ todoId: Int,
     _ status: MainTodoDTO.Request.updateTodoRequestDTO)
+  case getMembers
 }
 
 extension MainTodoService: TargetType {
@@ -26,6 +27,8 @@ extension MainTodoService: TargetType {
       return "/todos"
     case let .checkTodo(todoId, _):
       return "/todo/\(todoId)/check"
+    case .getMembers:
+      return "/todo"
     }
   }
 
@@ -35,6 +38,8 @@ extension MainTodoService: TargetType {
       return .get
     case .checkTodo:
       return .post
+    case .getMembers:
+      return .get
     }
   }
 
@@ -44,6 +49,8 @@ extension MainTodoService: TargetType {
       return .requestPlain
     case let .checkTodo(_, status):
       return .body(status)
+    case .getMembers:
+      return .requestPlain
     }
   }
 }
