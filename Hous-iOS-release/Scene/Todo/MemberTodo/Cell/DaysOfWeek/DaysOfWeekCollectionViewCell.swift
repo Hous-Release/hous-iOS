@@ -52,7 +52,7 @@ extension DaysOfWeekCollectionViewCell {
         break
       }
     }
-    dayButton.makeRounded(cornerRadius: 20)
+    dayButton.configuration?.cornerStyle = .capsule
     dayButton.isUserInteractionEnabled = false
     triangleView.backgroundColor = .clear
     triangleView.isHidden = true
