@@ -11,8 +11,8 @@ import ReactorKit
 import RxDataSources
 import Network
 
-public typealias MemberHeaderItem = MemberTodoDTO.Response.DayOfWeekTodo
-public typealias MemebrTodoItem = MemberTodoDTO.Response.TodoInfo
+public typealias MemberHeaderItem = DayOfWeekTodoDTO
+public typealias MemberTodoItemWithID = TodoInfoWithIdDTO
 
 final class MemberTodoViewController: UIViewController, ReactorKit.View {
   typealias Reactor = MemberTodoViewReactor
@@ -202,8 +202,8 @@ extension MemberTodoViewController {
     return headerCellRegistration
   }
 
-  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, MemebrTodoItem> {
-    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, MemebrTodoItem> {
+  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, MemberTodoItemWithID> {
+    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, MemberTodoItemWithID> {
       (cell, indexPath, todoItem) in
       cell.update(with: todoItem)
     }

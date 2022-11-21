@@ -12,7 +12,7 @@ import Differentiator
 
 public enum MemberRepositoryEvent {
   case members(MemberSection.Model?)
-  case selectedMember([MemberHeaderItem]?)
+  case selectedMember([DayOfWeekTodoDTO]?)
   case sendError(HouseErrorModel?)
 }
 
@@ -24,7 +24,7 @@ public protocol MemberRepository {
 
 public final class MemberRepositoryImp: BaseService, MemberRepository {
   public var event = PublishSubject<MemberRepositoryEvent>()
-  public var todos: [[MemberHeaderItem]]?
+  public var todos: [[DayOfWeekTodoDTO]]?
 
   public func fetchMember() {
     NetworkService.shared.memberTodoRepository.getMemberTodosData { [weak self] res, err in
@@ -48,7 +48,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
 
       // MARK: - 구분선
 
-      let todos = data.map { $0.dayOfWeekTodos }
+      let todos = data.map { self.parseMemberTodoWIthID($0.dayOfWeekTodos) }
       self.todos = todos
       guard let firstMemTodo = todos.first else { return }
       self.event.onNext(.selectedMember(firstMemTodo))
@@ -70,5 +70,30 @@ extension MemberRepositoryImp {
         color: $0.color)
     }
     return membersDTO
+  }
+
+  private func parseMemberTodoWIthID(_ data: [MemberTodoDTO.Response.DayOfWeekTodo]) -> [DayOfWeekTodoDTO] {
+
+    var todoArray: [DayOfWeekTodoDTO] = []
+
+    data.forEach { dayOfWeekTodo in
+
+      var infoArray: [TodoInfoWithIdDTO] = []
+
+      dayOfWeekTodo.dayOfWeekTodos.forEach { todoInfo in
+        let infoDTO = TodoInfoWithIdDTO(
+          todoId: todoInfo.todoId,
+          todoName: todoInfo.todoName)
+
+        infoArray.append(infoDTO)
+      }
+
+      let todoDTO = DayOfWeekTodoDTO(
+        dayOfWeek: dayOfWeekTodo.dayOfWeek,
+        dayOfWeekTodos: infoArray)
+      todoArray.append(todoDTO)
+    }
+
+    return todoArray
   }
 }
