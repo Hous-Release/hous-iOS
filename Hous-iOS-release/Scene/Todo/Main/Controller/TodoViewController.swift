@@ -127,7 +127,7 @@ extension TodoViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OurTodoCollectionViewCell.className, for: indexPath) as? OurTodoCollectionViewCell else {
           return UICollectionViewCell()
         }
-        cell.setCell(todos.status, todos.todoName)
+        cell.setCell(todos.status, todos.todoName, todos.nicknames)
         return cell
 
       case .ourTodoEmpty:
