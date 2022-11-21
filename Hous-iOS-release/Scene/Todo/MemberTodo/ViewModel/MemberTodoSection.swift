@@ -13,12 +13,10 @@ public struct MemberSection {
   public typealias Model = SectionModel<Section, Item>
 
   public enum Section: Equatable {
-    //case members(num: Int)
     case members(num: Int)
   }
 
   public enum Item: Equatable {
-    //case members(member: MemberDTO)
     case members(member: MemberDTO)
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -36,8 +34,9 @@ public enum TodoByMemSection: Hashable {
 }
 
 public enum TodoByMemListItem: Hashable {
+
   case totalNum(Int)
   case header(MemberHeaderItem)
-  case todo(MemebrTodoItem)
+  case todo(MemberTodoItemWithID)
   case empty(String)
 }
