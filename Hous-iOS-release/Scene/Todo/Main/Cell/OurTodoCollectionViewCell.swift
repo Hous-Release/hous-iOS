@@ -71,11 +71,10 @@ extension OurTodoCollectionViewCell {
     ourTodoLabel.snp.makeConstraints { make in
       make.leading.equalTo(iconImageView.snp.trailing).offset(12)
       make.centerY.equalToSuperview()
-      make.width.greaterThanOrEqualTo(200)
     }
 
     assigneeLabel.snp.makeConstraints { make in
-      make.trailing.equalToSuperview().inset(26)
+      make.trailing.equalToSuperview().inset(26).priority(.high)
       make.leading.equalTo(ourTodoLabel.snp.trailing)
       make.centerY.equalToSuperview()
       make.width.lessThanOrEqualTo(75)
