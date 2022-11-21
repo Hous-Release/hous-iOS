@@ -67,7 +67,7 @@ final class TodoHeaderCollectionReusableView: UICollectionReusableView {
     infoButton.snp.makeConstraints { make in
       make.top.equalToSuperview()
       make.size.equalTo(40)
-      make.trailing.equalToSuperview().inset(34)
+      make.trailing.equalToSuperview().inset(14)
     }
   }
 }

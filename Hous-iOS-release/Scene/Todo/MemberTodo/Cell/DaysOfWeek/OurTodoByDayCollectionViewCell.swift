@@ -14,7 +14,7 @@ final class OurTodoByDayCollectionViewCell: UICollectionViewCell {
     $0.layer.cornerRadius = 4
   }
 
-  private var myTodoLabel = UILabel().then {
+  private var ourTodoLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g5.color
     $0.text = "블라블라블라"
@@ -41,7 +41,7 @@ extension OurTodoByDayCollectionViewCell {
 
   private func render() {
 
-    [dotView, myTodoLabel, assigneeLabel].forEach { addSubview($0) }
+    [dotView, ourTodoLabel, assigneeLabel].forEach { addSubview($0) }
 
     dotView.snp.makeConstraints { make in
       make.leading.equalToSuperview().offset(26).priority(.high)
@@ -49,21 +49,36 @@ extension OurTodoByDayCollectionViewCell {
       make.size.equalTo(8)
     }
 
-    myTodoLabel.snp.makeConstraints { make in
+    ourTodoLabel.snp.makeConstraints { make in
       make.leading.equalTo(dotView.snp.trailing).offset(12)
       make.centerY.equalToSuperview()
     }
 
     assigneeLabel.snp.makeConstraints { make in
       make.trailing.equalToSuperview().inset(26).priority(.high)
-      make.leading.equalTo(myTodoLabel.snp.trailing)
+      make.leading.equalTo(ourTodoLabel.snp.trailing)
       make.centerY.equalToSuperview()
       make.width.lessThanOrEqualTo(75)
     }
   }
 
-  func setCell(_ todoName: String, _ assignee: [String]) {
-    myTodoLabel.text = todoName
-    //assigneeLabel.text = assignee
+  func setCell(_ todoName: String, _ assignees: [String]) {
+    ourTodoLabel.text = todoName
+    assigneeLabel.text = parsingAssignee(assignees)
+  }
+}
+
+extension OurTodoByDayCollectionViewCell {
+  private func parsingAssignee(_ assigneeArray: [String]) -> String {
+
+    switch assigneeArray.count {
+    case 1:
+      return assigneeArray.first ?? ""
+    case 2:
+      return assigneeArray.joined(separator: ", ")
+    default:
+      let firstAssignee = assigneeArray.first ?? ""
+      return "\(firstAssignee) 외 \(assigneeArray.count - 1)인"
+    }
   }
 }
