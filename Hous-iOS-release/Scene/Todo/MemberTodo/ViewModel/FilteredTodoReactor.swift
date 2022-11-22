@@ -58,7 +58,7 @@ final class FilteredTodoReactor: Reactor {
       newState.isTransfer = Void()
     }
 
-    return newStatec
+    return newState
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {

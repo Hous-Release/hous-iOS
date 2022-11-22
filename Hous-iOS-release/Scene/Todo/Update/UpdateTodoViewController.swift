@@ -38,6 +38,10 @@ final class UpdateTodoViewController: UIViewController, View {
   private var assigneeSectionSnapShot = SectionSnapShot()
   private var individualSectionSnapShot = SectionSnapShot()
 
+  // MARK: Cell Action Relay
+
+  private let tapIndividual = PublishRelay<(_ : IndexPath)>()
+
   init(
     _ reactor: Reactor
   ) {
@@ -46,7 +50,6 @@ final class UpdateTodoViewController: UIViewController, View {
     setupLayout()
     configureDataSource()
     applyInitialSnapshots()
-//    applySnapShot(homies)
 
     self.reactor = reactor
   }
@@ -74,11 +77,19 @@ final class UpdateTodoViewController: UIViewController, View {
 extension UpdateTodoViewController {
   func bindAction(_ reactor: Reactor) {
     bindViewWillAppearAction(reactor)
+    bindTapIndividualAction(reactor)
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
     rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
       .map { _ in Reactor.Action.fetch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+
+  func bindTapIndividualAction(_ reactor: Reactor) {
+    tapIndividual
+      .map { Reactor.Action.didTapHomie($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -90,6 +101,7 @@ extension UpdateTodoViewController {
     bindPushNotificationState(reactor)
     bindTodoState(reactor)
     bindHomiesState(reactor)
+    bindDidTapIndividualState(reactor)
   }
 
   func bindPushNotificationState(_ reactor: Reactor) {
@@ -97,14 +109,12 @@ extension UpdateTodoViewController {
       .distinctUntilChanged()
     // TODO: - bind로 유아이 바꾸기
       .asDriver(onErrorJustReturn: false)
-      .debug("bindPushNotificationState")
       .drive()
       .disposed(by: disposeBag)
   }
   func bindTodoState(_ reactor: Reactor) {
     reactor.state.map(\.todo)
       .distinctUntilChanged()
-      .debug("bindTodoState")
       .bind(to: self.todoTextField.rx.text)
       .disposed(by: disposeBag)
   }
@@ -112,15 +122,43 @@ extension UpdateTodoViewController {
     reactor.state.map(\.todoHomies)
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: [])
-      .map { $0 }
-      .debug("bindHomiesState")
-      .drive()
+      .drive(onNext: self.applySnapShot)
+      .disposed(by: disposeBag)
+  }
+  func bindDidTapIndividualState(_ reactor: Reactor) {
+    reactor.pulse(\.$didTappedIndividual)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.tappedIndividualCell)
       .disposed(by: disposeBag)
   }
 }
 
-
 extension UpdateTodoViewController {
+  private func tappedIndividualCell(_ indexPath: IndexPath?) {
+    guard
+      let indexPath = indexPath,
+      let item = self.dataSource.itemIdentifier(for: indexPath)
+    else {
+      return
+    }
+    var homie = item.homie
+    homie?.isExpanded.toggle()
+    let newItem = ITEM(homie: homie, hasChild: true)
+
+    individualSectionSnapShot.insert([newItem], after: item)
+    individualSectionSnapShot.delete([item])
+
+    let updateItems = individualSectionSnapShot.items
+      .filter{ $0.hasChild }
+      .compactMap { $0.homie }
+
+
+    DispatchQueue.main.async { [weak self] in
+      self?.reactor?.action.onNext(Reactor.Action.updateHomie(updateItems))
+    }
+
+  }
+
   private func setupLayout() {
     view.addSubView(todoTextField)
     view.addSubView(collectionView)
@@ -374,9 +412,15 @@ extension UpdateTodoViewController {
 
       let childItem = ITEM(homie: homie, hasChild: false)
       snapShot.append([childItem], to: rootItem)
+
+      homie.isExpanded ?
+      snapShot.expand([rootItem])
+      :
+      snapShot.collapse([rootItem])
+
       self.individualSectionSnapShot = snapShot
     }
-    dataSource.apply(snapShot, to: .individual, animatingDifferences: false)
+    dataSource.apply(snapShot, to: .individual, animatingDifferences: true)
   }
 
   private func applyInitialSnapshots() {
@@ -390,21 +434,12 @@ extension UpdateTodoViewController {
 extension UpdateTodoViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard
-      let item = self.dataSource.itemIdentifier(for: indexPath),
-      let homie = item.homie
+      let item = self.dataSource.itemIdentifier(for: indexPath)
     else {
       return
     }
-
     if item.hasChild {
-      let isExpanded = individualSectionSnapShot.isExpanded(item)
-
-      isExpanded ?
-      individualSectionSnapShot.collapse([item])
-      :
-      individualSectionSnapShot.expand([item])
-      self.dataSource.apply(individualSectionSnapShot, to: .individual, animatingDifferences: true)
-
+      tapIndividual.accept(indexPath)
     }
   }
 }
