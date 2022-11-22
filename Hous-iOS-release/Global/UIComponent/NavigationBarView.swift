@@ -49,7 +49,7 @@ class NavBarWithBackButtonView: UIView {
     attrString.foregroundColor = Colors.blue.color
     attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     rightButton.configuration?.attributedTitle = attrString
-    
+    self.titleLabel.text = title
     render()
   }
 
