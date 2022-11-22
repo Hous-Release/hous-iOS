@@ -85,8 +85,27 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
 
   }
 
-  internal func bind(reactor: Reactor) {
-    
+  func bind(reactor: Reactor) {
+    bindAction(reactor)
+    bindState(reactor)
+  }
+
+  func bindAction(_ reactor: Reactor) {
+    bindViewWillAppearAction(reactor)
+  }
+
+  func bindViewWillAppearAction(_ reactor: Reactor) {
+    rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .map { _ in Reactor.Action.viewWillAppear }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+
+  func bindState(_ reactor: Reactor) {
+    reactor.pulse(\.$isTransfer)
+      .map { $0 }
+      .subscribe()
+      .disposed(by: disposeBag)
   }
 }
 
