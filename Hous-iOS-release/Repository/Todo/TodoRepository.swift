@@ -100,7 +100,8 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           name: $0.nickname,
           color: HomieColor(rawValue: $0.color) ?? .GRAY,
           selectedDay: $0.dayOfWeeks.map { self.asDay($0) },
-          onboardingID: $0.onboardingID
+          onboardingID: $0.onboardingID,
+          isExpanded: false
         )
       }
 
@@ -133,7 +134,8 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           name: $0.nickname,
           color: HomieColor(rawValue: $0.color) ?? .GRAY,
           selectedDay: [],
-          onboardingID: $0.onboardingID
+          onboardingID: $0.onboardingID,
+          isExpanded: false
         )
       }
 

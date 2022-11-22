@@ -26,7 +26,7 @@ extension UpdateTodoDataSource {
   }
 
   struct Item: Hashable {
-    let homie: UpdateTodoHomieModel?
+    var homie: UpdateTodoHomieModel?
     let hasChild: Bool
     private let identifier = UUID()
 
