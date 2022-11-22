@@ -26,12 +26,14 @@ public final class UpdateTodoReactor: Reactor {
     case didTapHomie(IndexPath)
     case didTapDays(IndexPath)
     case didTapUpdate
+    case updateHomie([UpdateTodoHomieModel])
   }
 
   public enum Mutation {
     case setNotification(Bool)
     case setTodo(String?)
     case setHomies([UpdateTodoHomieModel])
+    case setIndividual(IndexPath)
   }
 
   public struct State {
@@ -40,6 +42,8 @@ public final class UpdateTodoReactor: Reactor {
     var isPushNotification: Bool = false
     var todo: String? = nil
     var todoHomies: [UpdateTodoHomieModel]
+    @Pulse
+    var didTappedIndividual: IndexPath? = nil
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
@@ -48,16 +52,27 @@ public final class UpdateTodoReactor: Reactor {
       if initialState.isModifying {
         provider.todoRepository.fetchModifyingTodo(initialState.id ?? -1)
       }
+
+      else {
+        return Observable.concat([
+          .just(.setTodo(initialState.todo)),
+          .just(.setHomies(initialState.todoHomies))
+        ])
+      }
+
       return .empty()
 
     case .enterTodo:
       return .empty()
-    case .didTapHomie:
-      return .empty()
+    case .didTapHomie(let indexPath):
+      return .just(.setIndividual(indexPath))
     case .didTapDays:
       return .empty()
     case .didTapUpdate:
       return .empty()
+
+    case .updateHomie(let homies):
+      return .just(.setHomies(homies))
     }
   }
 
@@ -74,6 +89,8 @@ public final class UpdateTodoReactor: Reactor {
     case .setHomies(let homies):
       newState.todoHomies = homies
 
+    case .setIndividual(let indexPath):
+      newState.didTappedIndividual = indexPath
     }
 
     return newState
