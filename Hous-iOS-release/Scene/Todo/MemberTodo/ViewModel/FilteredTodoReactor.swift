@@ -24,6 +24,7 @@ final class FilteredTodoReactor: Reactor {
   }
 
   enum Mutation {
+    case setHomies([UpdateTodoHomieModel])
     case setTransfer
   }
 
@@ -38,7 +39,9 @@ final class FilteredTodoReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .viewWillAppear:
+      provider.todoRepository.fetchHomie()
       return .empty()
+
     case .didTapAdd:
       return .just(.setTransfer)
     }
@@ -47,12 +50,23 @@ final class FilteredTodoReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
 
-    return newState
+    switch mutation {
+    case .setHomies(let homies):
+      newState.homies = homies
+
+    case .setTransfer:
+      newState.isTransfer = Void()
+    }
+
+    return newStatec
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = provider.todoRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
+      case .getMembers(let homies):
+
+        return .just(.setHomies(homies))
       default:
         return .empty()
       }
