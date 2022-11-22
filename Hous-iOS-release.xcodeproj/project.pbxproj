@@ -140,15 +140,15 @@
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5F9FB19291D3F090056C0B1 /* Kingfisher */; };
-		B5F9FB22291FCDC90056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1D291FCDC90056C0B1 /* thursday.json */; };
-		B5F9FB23291FCDC90056C0B1 /* tuesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1E291FCDC90056C0B1 /* tuesday.json */; };
-		B5F9FB24291FCDC90056C0B1 /* friday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB1F291FCDC90056C0B1 /* friday.json */; };
-		B5F9FB25291FCDC90056C0B1 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB20291FCDC90056C0B1 /* monday.json */; };
-		B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB21291FCDC90056C0B1 /* wednesday.json */; };
 		B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB472923DA0B0056C0B1 /* loading.json */; };
-		B5F9FB4A2923DA180056C0B1 /* birthday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB492923DA180056C0B1 /* birthday.json */; };
 		B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */; };
-		B5F9FB4E2925CD520056C0B1 /* weekend.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB4D2925CD520056C0B1 /* weekend.json */; };
+		B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB51292CCB690056C0B1 /* thursday.json */; };
+		B5F9FB59292CCB6A0056C0B1 /* weekend.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB52292CCB690056C0B1 /* weekend.json */; };
+		B5F9FB5A292CCB6A0056C0B1 /* friday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB53292CCB690056C0B1 /* friday.json */; };
+		B5F9FB5B292CCB6A0056C0B1 /* wednesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB54292CCB690056C0B1 /* wednesday.json */; };
+		B5F9FB5C292CCB6A0056C0B1 /* tuesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB55292CCB6A0056C0B1 /* tuesday.json */; };
+		B5F9FB5D292CCB6A0056C0B1 /* birthday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB56292CCB6A0056C0B1 /* birthday.json */; };
+		B5F9FB5E292CCB6A0056C0B1 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB57292CCB6A0056C0B1 /* monday.json */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
@@ -362,15 +362,15 @@
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
-		B5F9FB1D291FCDC90056C0B1 /* thursday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thursday.json; sourceTree = "<group>"; };
-		B5F9FB1E291FCDC90056C0B1 /* tuesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tuesday.json; sourceTree = "<group>"; };
-		B5F9FB1F291FCDC90056C0B1 /* friday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = friday.json; sourceTree = "<group>"; };
-		B5F9FB20291FCDC90056C0B1 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
-		B5F9FB21291FCDC90056C0B1 /* wednesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wednesday.json; sourceTree = "<group>"; };
 		B5F9FB472923DA0B0056C0B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		B5F9FB492923DA180056C0B1 /* birthday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = birthday.json; sourceTree = "<group>"; };
 		B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBaseViewController.swift; sourceTree = "<group>"; };
-		B5F9FB4D2925CD520056C0B1 /* weekend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weekend.json; sourceTree = "<group>"; };
+		B5F9FB51292CCB690056C0B1 /* thursday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thursday.json; sourceTree = "<group>"; };
+		B5F9FB52292CCB690056C0B1 /* weekend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weekend.json; sourceTree = "<group>"; };
+		B5F9FB53292CCB690056C0B1 /* friday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = friday.json; sourceTree = "<group>"; };
+		B5F9FB54292CCB690056C0B1 /* wednesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wednesday.json; sourceTree = "<group>"; };
+		B5F9FB55292CCB6A0056C0B1 /* tuesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tuesday.json; sourceTree = "<group>"; };
+		B5F9FB56292CCB6A0056C0B1 /* birthday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = birthday.json; sourceTree = "<group>"; };
+		B5F9FB57292CCB6A0056C0B1 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
 		B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCellReactor.swift; sourceTree = "<group>"; };
 		B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemListCell.swift; sourceTree = "<group>"; };
 		B8249A5429116E69008005DE /* MemEmptyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemEmptyListCell.swift; sourceTree = "<group>"; };
@@ -627,14 +627,14 @@
 			isa = PBXGroup;
 			children = (
 				9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */,
-				B5F9FB4D2925CD520056C0B1 /* weekend.json */,
-				B5F9FB492923DA180056C0B1 /* birthday.json */,
+				B5F9FB56292CCB6A0056C0B1 /* birthday.json */,
+				B5F9FB53292CCB690056C0B1 /* friday.json */,
+				B5F9FB57292CCB6A0056C0B1 /* monday.json */,
+				B5F9FB51292CCB690056C0B1 /* thursday.json */,
+				B5F9FB55292CCB6A0056C0B1 /* tuesday.json */,
+				B5F9FB54292CCB690056C0B1 /* wednesday.json */,
+				B5F9FB52292CCB690056C0B1 /* weekend.json */,
 				B5F9FB472923DA0B0056C0B1 /* loading.json */,
-				B5F9FB21291FCDC90056C0B1 /* wednesday.json */,
-				B5F9FB20291FCDC90056C0B1 /* monday.json */,
-				B5F9FB1E291FCDC90056C0B1 /* tuesday.json */,
-				B5F9FB1D291FCDC90056C0B1 /* thursday.json */,
-				B5F9FB1F291FCDC90056C0B1 /* friday.json */,
 				9B454E4D2900055F00F5A319 /* profileRedlottie.json */,
 				9B2F46992923FB80002D9BD2 /* tri_yes.json */,
 				9BDBAD89292574530096FE38 /* tri_no.json */,
@@ -1356,27 +1356,29 @@
 				9B2F46AA2923FBAD002D9BD2 /* squ_yes.json in Resources */,
 				9BDBAD8A292574530096FE38 /* tri_no.json in Resources */,
 				9B2F469F2923FB8D002D9BD2 /* cir_yes.json in Resources */,
+				9BF9AD6F291E8D3E006A0BDE /* testLottie.json in Resources */,
+				B5F9FB5B292CCB6A0056C0B1 /* wednesday.json in Resources */,
+				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
+				B5F9FB5C292CCB6A0056C0B1 /* tuesday.json in Resources */,
+				B5F9FB59292CCB6A0056C0B1 /* weekend.json in Resources */,
 				9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */,
 				9B2F46A22923FB95002D9BD2 /* hex_no.json in Resources */,
 				9B2F469B2923FB80002D9BD2 /* tri_yes.json in Resources */,
 				B8555AC5291CCC4800E943AE /* ByDayTodoDTO.json in Resources */,
 				B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */,
-				B5F9FB25291FCDC90056C0B1 /* monday.json in Resources */,
-				B5F9FB22291FCDC90056C0B1 /* thursday.json in Resources */,
-				B5F9FB4E2925CD520056C0B1 /* weekend.json in Resources */,
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
 				9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */,
 				9B2F469E2923FB8D002D9BD2 /* cir_no.json in Resources */,
 				9B2F46A62923FBA3002D9BD2 /* pen_yes.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
+				B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */,
+				B5F9FB5E292CCB6A0056C0B1 /* monday.json in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
 				9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */,
-				B5F9FB23291FCDC90056C0B1 /* tuesday.json in Resources */,
-				B5F9FB26291FCDC90056C0B1 /* wednesday.json in Resources */,
-				B5F9FB4A2923DA180056C0B1 /* birthday.json in Resources */,
 				B8D066E328FAA5ED00A99907 /* MemberTodoDTO.json in Resources */,
 				9B2F46A32923FB95002D9BD2 /* hex_yes.json in Resources */,
-				B5F9FB24291FCDC90056C0B1 /* friday.json in Resources */,
+				B5F9FB5D292CCB6A0056C0B1 /* birthday.json in Resources */,
+				B5F9FB5A292CCB6A0056C0B1 /* friday.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
