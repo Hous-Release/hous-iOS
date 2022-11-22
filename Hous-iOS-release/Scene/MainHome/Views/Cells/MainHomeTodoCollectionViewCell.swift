@@ -67,6 +67,8 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   private var dailyLottie = AnimationView().then {
+    $0.contentMode = .scaleAspectFill
+    $0.clipsToBounds = true
     $0.layer.cornerRadius = 8
   }
   
