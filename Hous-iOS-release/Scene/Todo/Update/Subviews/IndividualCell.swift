@@ -53,7 +53,7 @@ final class IndividualCell: UICollectionViewCell {
     homieNamelabel.text = model.name
     colorButton.setImage(factory.todoUpdateMemberSelectedImage, for: .selected)
     colorButton.setImage(factory.todoUpdateMemberUnSelectedImage, for: .normal)
-
+    colorButton.isSelected = model.isExpanded
   }
 
 
