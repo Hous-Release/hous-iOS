@@ -67,7 +67,7 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
     
     if descriptionMessage.count > 2 {
       let start = descriptionMessage.startIndex
-      let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -3)
+      let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -2)
       let newMessage = descriptionMessage[start...end]
       
       descriptionView.personalityDescriptionLabel.text = String(newMessage)
