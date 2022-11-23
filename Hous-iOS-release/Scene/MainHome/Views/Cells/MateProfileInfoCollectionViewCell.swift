@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   
@@ -43,7 +44,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   
   private var tags: [BasePaddingLabel] = []
   
-  private var badgeEmptyView = UIImageView().then {
+  private var badgeView = UIImageView().then {
     $0.image = Images.noBadgeProfile.image
   }
   
@@ -84,7 +85,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
      statusMessage,
      tagGuideStackView,
      grayLineView,
-     badgeEmptyView,
+     badgeView,
      badgeLabel])
     
     tagGuideStackView.snp.makeConstraints { make in
@@ -104,15 +105,15 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
       make.leading.trailing.equalToSuperview().inset(28)
     }
     
-    badgeEmptyView.snp.makeConstraints { make in
+    badgeView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(29)
       make.trailing.equalToSuperview().offset(-37)
       make.width.height.equalTo(52)
     }
     
     badgeLabel.snp.makeConstraints { make in
-      make.top.equalTo(badgeEmptyView.snp.bottom).offset(8)
-      make.centerX.equalTo(badgeEmptyView)
+      make.top.equalTo(badgeView.snp.bottom).offset(8)
+      make.centerX.equalTo(badgeView)
     }
   }
   
@@ -122,8 +123,9 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   func bind(_ data: ProfileModel) {
     
     self.statusMessage.text = data.statusMessage ?? "아직 소개가 작성되지 않았어요."
-    
-    badgeEmptyView.reloadInputViews()
+
+    badgeView.kf.setImage(with: URL(string: data.badgeImageURL ?? ""))
+    badgeLabel.text = data.badgeLabel
     
     tags = []
     tagGuideStackView.removeFullyAllArrangedSubviews()
