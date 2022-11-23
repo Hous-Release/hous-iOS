@@ -91,7 +91,9 @@ class MainHomeViewController: LoadingBaseViewController {
         
         switch model {
         case .homieProfiles(profiles: let dto):
-          //TODO: Profile화면전환
+          if dto.color == "GRAY" {
+            break
+          }
           let destinationViewController = MateProfileViewController(id: String(dto.homieID))
           self.navigationController?.pushViewController(destinationViewController, animated: true)
         default: break
@@ -285,11 +287,8 @@ class MainHomeViewController: LoadingBaseViewController {
         activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
           if success {
             // 성공했을 때 작업
-            print("success")
-            
           }  else  {
             // 실패했을 때 작업
-            
           }
         }
         self.present(activityViewController, animated: true)
