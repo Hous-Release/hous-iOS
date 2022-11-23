@@ -184,6 +184,8 @@ final class ProfileViewController: UIViewController {
     output.actionControl
       .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
       .disposed(by: disposeBag)
+    
+    
   }
   
   //MARK: Render
@@ -198,27 +200,36 @@ final class ProfileViewController: UIViewController {
   //MARK: Navigation
   
   private func doNavigation(action: ProfileActionControl) {
-    let destinationViewController : UIViewController
-    
     switch action {
     case .didTabAlarm:
-      destinationViewController = ProfileAlarmViewController()
+      let destinationViewController = ProfileAlarmViewController()
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabSetting:
-      destinationViewController = ProfileSettingViewController()
+      let destinationViewController = ProfileSettingViewController()
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabEdit:
-      destinationViewController = ProfileEditViewController(data: self.data)
+      let destinationViewController = ProfileEditViewController(data: self.data)
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabDetail:
-      destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
+      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
+      destinationViewController.isFromTypeTest = false
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabBadge:
       let badgeViewModel = BadgeViewModel()
-      destinationViewController = BadgeViewController(viewModel: badgeViewModel)
+      let destinationViewController = BadgeViewController(viewModel: badgeViewModel)
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabTest:
-      destinationViewController = ProfileTestInfoViewController()
+      let destinationViewController = ProfileTestInfoViewController()
+      destinationViewController.view.backgroundColor = .white
+      navigationController?.pushViewController(destinationViewController, animated: true)
     default:
       return
     }
-    destinationViewController.view.backgroundColor = .white
-    navigationController?.pushViewController(destinationViewController, animated: true)
   }
 }
 

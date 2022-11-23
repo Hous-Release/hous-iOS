@@ -47,6 +47,7 @@ public enum Images {
   public static let icCopy = ImageAsset(name: "ic_copy")
   public static let icEditHous = ImageAsset(name: "ic_edit_hous")
   public static let icMoreOurRules = ImageAsset(name: "ic_more_our_rules")
+  public static let noBadgeProfile = ImageAsset(name: "no_badge_profile")
   public static let profileBlue = ImageAsset(name: "profile_blue")
   public static let profileBlueWtag = ImageAsset(name: "profile_blue_wtag")
   public static let profileGreen = ImageAsset(name: "profile_green")

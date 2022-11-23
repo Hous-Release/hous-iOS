@@ -43,10 +43,12 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   
   private var tags: [BasePaddingLabel] = []
   
-  private var badgeEmptyView = MateProfileBadgeEmptyView()
+  private var badgeEmptyView = UIImageView().then {
+    $0.image = Images.noBadgeProfile.image
+  }
   
   private var badgeLabel = UILabel().then {
-    $0.text = "아직 대표 뱃지가 없어요"
+    $0.text = "뱃지가 없어요"
     $0.textColor = Colors.g6.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
@@ -121,7 +123,6 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     self.statusMessage.text = data.statusMessage ?? "아직 소개가 작성되지 않았어요."
     
-    self.badgeEmptyView.personalityColor = data.personalityColor
     badgeEmptyView.reloadInputViews()
     
     tags = []
