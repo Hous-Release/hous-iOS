@@ -14,7 +14,7 @@ final class ProfileTestInfoNavigationBarView: UIView {
   private let disposeBag: DisposeBag = DisposeBag()
   let viewActionControlSubject = PublishSubject<ProfileTestInfoActionControl>()
   
-  private let navigationBackButton = UIButton().then {
+  let navigationBackButton = UIButton().then {
     let image = Images.icBack.image
     let newWidth = 28
     let newHeight = 28
@@ -25,7 +25,7 @@ final class ProfileTestInfoNavigationBarView: UIView {
     UIGraphicsEndImageContext()
     $0.setImage(newImage, for: .normal)
   }
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()

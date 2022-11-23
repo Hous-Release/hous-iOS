@@ -53,12 +53,13 @@ public final class ProfileRepositoryImp: ProfileRepository {
       //MARK: From DTO To Model
       
       var personalityColor: PersonalityColor
+      var isEmptyView = false
       switch dto.personalityColor {
-      case "GRAY":
+      case "RED":
         personalityColor = .red
       case "BLUE":
         personalityColor = .blue
-      case "YELLOW":
+      case "GRAY":
         personalityColor = .yellow
       case "GREEN":
         personalityColor = .green
@@ -66,11 +67,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityColor = .purple
       default:
         personalityColor = .none
-      }
-      
-      if (personalityColor == .none) {
-        ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel()))
-        return
+        isEmptyView = true
       }
       
       let birthdayPublic = dto.birthdayPublic
@@ -87,11 +84,11 @@ public final class ProfileRepositoryImp: ProfileRepository {
       let userJob = dto.job
       let mbti = dto.mbti
       let statusMessage = dto.introduction
-      let badgeLabel = dto.representBadge
-      let badgeImageURL = dto.representBadgeImage
+      let badgeLabel: String? = dto.representBadge
+      let badgeImageURL: String? = dto.representBadgeImage
       let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
       
-      ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: false, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+      ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }
   }
   

@@ -91,8 +91,10 @@ class MainHomeViewController: LoadingBaseViewController {
         
         switch model {
         case .homieProfiles(profiles: let dto):
-          //TODO: Profile화면전환 - id로 넘기기로함
-          print(dto.homieID)
+          //TODO: Profile화면전환
+//          print(dto.userNickname)
+          let destinationViewController = MateProfileViewController()
+          self.navigationController?.pushViewController(destinationViewController, animated: true)
         default: break
         }
       })

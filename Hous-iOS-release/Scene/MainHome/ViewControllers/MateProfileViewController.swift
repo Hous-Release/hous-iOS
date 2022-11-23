@@ -1,8 +1,8 @@
 //
-//  ProfileViewController.swift
+//  MateProfileViewController.swift
 //  Hous-iOS-release
 //
-//  Created by 김지현 on 2022/09/07.
+//  Created by 이의진 on 2022/11/16.
 //
 
 import UIKit
@@ -11,13 +11,12 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileViewController: UIViewController {
+final class MateProfileViewController: UIViewController {
   
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
   var viewModel = ProfileViewModel()
-  var isEmptyView = true
   var data = ProfileModel()
   
   
@@ -26,11 +25,10 @@ final class ProfileViewController: UIViewController {
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let profileMainImageCellHeight = CGSize(width: Size.screenWidth, height: 254)
-    static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 176)
+    static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 162)
     static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 250)
     static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 150)
     static let profileRetryCellHeight = CGSize(width: Size.screenWidth, height: 139)
-    static let profileEmptyCellHeight = CGSize(width: Size.screenWidth, height: 325)
   }
   
   //MARK: UI Components
@@ -42,12 +40,10 @@ final class ProfileViewController: UIViewController {
     layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     
     let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
-    collectionView.register(cell: ProfileMainImageCollectionViewCell.self)
-    collectionView.register(cell: ProfileInfoCollectionViewCell.self)
-    collectionView.register(cell: ProfileGraphCollectionViewCell.self)
-    collectionView.register(cell: ProfileDescriptionCollectionViewCell.self)
-    collectionView.register(cell: ProfileRetryCollectionViewCell.self)
-    collectionView.register(cell: ProfileEmptyCollectionViewCell.self)
+    collectionView.register(cell: MateProfileMainImageCollectionViewCell.self)
+    collectionView.register(cell: MateProfileInfoCollectionViewCell.self)
+    collectionView.register(cell: MateProfileGraphCollectionViewCell.self)
+    collectionView.register(cell: MateProfileDescriptionCollectionViewCell.self)
     collectionView.contentInsetAdjustmentBehavior = .never
     collectionView.showsVerticalScrollIndicator = false
     return collectionView
@@ -94,17 +90,11 @@ final class ProfileViewController: UIViewController {
     
     // output
     
-    let output = viewModel.transform(input: input) 
-    
-    var countCell: Int = 0
+    let output = viewModel.transform(input: input)
     
     output.profileModel
-      .do {
-        self.data = $0
-        self.isEmptyView = $0.isEmptyView
-        countCell = $0.isEmptyView ? 3 : 5}
       .map {
-        [ProfileModel](repeating: $0, count: countCell)
+        [ProfileModel](repeating: $0, count: 4)
       }
       .bind(to:profileCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: ProfileModel) in
@@ -112,7 +102,7 @@ final class ProfileViewController: UIViewController {
         switch indexPath.row {
         case 0:
           guard let cell =
-                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileMainImageCollectionViewCell.className, for: indexPath) as? ProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: MateProfileMainImageCollectionViewCell.className, for: indexPath) as? MateProfileMainImageCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
           cell.cellActionControlSubject
             .asDriver(onErrorJustReturn: .none)
@@ -123,7 +113,7 @@ final class ProfileViewController: UIViewController {
           return cell
         case 1:
           guard let cell =
-                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileInfoCollectionViewCell.className, for: indexPath) as? ProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: MateProfileInfoCollectionViewCell.className, for: indexPath) as? MateProfileInfoCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
           cell.cellActionControlSubject
             .asDriver(onErrorJustReturn: .none)
@@ -133,39 +123,8 @@ final class ProfileViewController: UIViewController {
             .disposed(by: cell.disposeBag)
           return cell
         case 2:
-          self.isEmptyView = element.isEmptyView
-          if element.isEmptyView {
-            guard let cell =
-                    self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileEmptyCollectionViewCell.className, for: indexPath) as? ProfileEmptyCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-            cell.bind(element)
-            cell.cellActionControlSubject
-              .asDriver(onErrorJustReturn: .none)
-              .drive(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-            return cell
-          } else {
-            guard let cell =
-                    self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileGraphCollectionViewCell.className, for: indexPath) as? ProfileGraphCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-            cell.bind(element)
-            cell.cellActionControlSubject
-              .asDriver(onErrorJustReturn: .none)
-              .drive(onNext: { data in
-                actionDetected.onNext(data)
-              })
-              .disposed(by: cell.disposeBag)
-            return cell
-          }
-        
-        case 3:
           guard let cell =
-                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileDescriptionCollectionViewCell.className, for: indexPath) as? ProfileDescriptionCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-          cell.bind(element)
-          return cell
-        case 4:
-          guard let cell =
-                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileRetryCollectionViewCell.className, for: indexPath) as? ProfileRetryCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: MateProfileGraphCollectionViewCell.className, for: indexPath) as? MateProfileGraphCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(element)
           cell.cellActionControlSubject
             .asDriver(onErrorJustReturn: .none)
@@ -174,12 +133,19 @@ final class ProfileViewController: UIViewController {
             })
             .disposed(by: cell.disposeBag)
           return cell
+        case 3:
+          guard let cell =
+                  self.profileCollectionView.dequeueReusableCell(withReuseIdentifier: MateProfileDescriptionCollectionViewCell.className, for: indexPath) as? MateProfileDescriptionCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+          cell.bind(element)
+          return cell
+          
         default:
-          print("NO Cell")
           return UICollectionViewCell()
         }
       }
       .disposed(by: disposeBag)
+    
+    
     
     output.actionControl
       .subscribe(onNext: {[weak self] in self?.doNavigation(action: $0)})
@@ -222,7 +188,7 @@ final class ProfileViewController: UIViewController {
   }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+extension MateProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     switch indexPath.row {
     case 0:
@@ -230,11 +196,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     case 1:
       return Size.profileInfoCellHeight
     case 2:
-      if self.isEmptyView {
-        return Size.profileEmptyCellHeight
-      } else {
-        return Size.profileGraphCellHeight
-      }
+      return Size.profileGraphCellHeight
     case 3:
       return Size.profileAttributeInfoCellHeight
     case 4:
@@ -244,4 +206,5 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 }
+
 

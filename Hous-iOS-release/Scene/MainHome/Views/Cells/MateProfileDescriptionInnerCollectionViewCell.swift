@@ -1,15 +1,15 @@
 //
-//  ProfileDescriptionInnerCollectionViewCell.swift
+//  MateProfileDescriptionInnerCollectionViewCell.swift
 //  Hous-iOS-release
 //
-//  Created by 이의진 on 2022/10/14
+//  Created by 이의진 on 2022/11/16.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
+final class MateProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
   
   var disposeBag: DisposeBag = DisposeBag()
   

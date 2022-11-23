@@ -29,6 +29,7 @@ final class ProfileEditTextViewObject: UIStackView {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     $0.textColor = Colors.black.color
     $0.returnKeyType = .done
+    $0.isScrollEnabled = false
   }
   
   override init(frame: CGRect) {
