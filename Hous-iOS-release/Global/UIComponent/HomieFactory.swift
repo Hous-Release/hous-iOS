@@ -8,7 +8,7 @@
 import UIKit
 import AssetKit
 
-enum HomieColor: String {
+enum HomieColor: String, CaseIterable {
   case YELLOW, RED, BLUE, PURPLE, GREEN, GRAY
 }
 

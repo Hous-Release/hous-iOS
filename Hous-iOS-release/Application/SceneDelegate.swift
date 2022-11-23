@@ -19,12 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    let reactor = SplashReactor(provider: serviceProvider)
 //    window.rootViewController = SplashViewController(reactor)
 
-//
-    let homies: [UpdateTodoHomieModel] = [
-      .init(name: "호세", color: .GRAY, selectedDay: [.mon], onboardingID: 3123, isExpanded: false),
-      .init(name: "지현", color: .BLUE, selectedDay: [.mon], onboardingID: 3124, isExpanded: false),
-      .init(name: "민재", color: .RED, selectedDay: [.mon], onboardingID: 3125, isExpanded: false)
-    ]
+    let homies = UpdateTodoHomieModel.generateMock(n: 16)
     let reactor = UpdateTodoReactor(
       provider: serviceProvider,
       state: .init(todoHomies: homies)

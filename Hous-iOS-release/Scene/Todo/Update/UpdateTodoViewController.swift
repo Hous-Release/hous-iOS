@@ -41,6 +41,7 @@ final class UpdateTodoViewController: UIViewController, View {
   // MARK: Cell Action Relay
 
   private let tapIndividual = PublishRelay<(_ : IndexPath)>()
+  private let tapDay = PublishRelay<([UpdateTodoHomieModel.Day], id: Int)>()
 
   init(
     _ reactor: Reactor
@@ -78,6 +79,7 @@ extension UpdateTodoViewController {
   func bindAction(_ reactor: Reactor) {
     bindViewWillAppearAction(reactor)
     bindTapIndividualAction(reactor)
+    bindTapDayAction(reactor)
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
@@ -93,6 +95,12 @@ extension UpdateTodoViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
+  func bindTapDayAction(_ reactor: Reactor) {
+    tapDay
+      .map { Reactor.Action.didTapDays($0.0, id: $0.id) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
 }
 
   // MARK: - State Bind
@@ -102,6 +110,7 @@ extension UpdateTodoViewController {
     bindTodoState(reactor)
     bindHomiesState(reactor)
     bindDidTapIndividualState(reactor)
+    bindDidTapDayState(reactor)
   }
 
   func bindPushNotificationState(_ reactor: Reactor) {
@@ -131,9 +140,40 @@ extension UpdateTodoViewController {
       .drive(onNext: self.tappedIndividualCell)
       .disposed(by: disposeBag)
   }
+  func bindDidTapDayState(_ reactor: Reactor) {
+    reactor.pulse(\.$didTappedDay)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.tappedDayCell)
+      .disposed(by: disposeBag)
+  }
 }
 
 extension UpdateTodoViewController {
+
+  private func tappedDayCell(_ tuple: (days: [UpdateTodoHomieModel.Day], id: Int)?) {
+
+    guard let tuple = tuple else {
+      return
+    }
+    let updateItems = individualSectionSnapShot.items
+      .filter { $0.hasChild }
+      .compactMap { item -> UpdateTodoHomieModel? in
+        if item.homie?.onboardingID == tuple.id {
+
+          var newHomie = item.homie
+          newHomie?.selectedDay = tuple.days
+          return newHomie
+        }
+
+        else {
+          return item.homie
+        }
+      }
+    DispatchQueue.main.async { [weak self] in
+      self?.reactor?.action.onNext(Reactor.Action.updateHomie(updateItems))
+    }
+  }
+
   private func tappedIndividualCell(_ indexPath: IndexPath?) {
     guard
       let indexPath = indexPath,
@@ -156,7 +196,6 @@ extension UpdateTodoViewController {
     DispatchQueue.main.async { [weak self] in
       self?.reactor?.action.onNext(Reactor.Action.updateHomie(updateItems))
     }
-
   }
 
   private func setupLayout() {
@@ -174,8 +213,6 @@ extension UpdateTodoViewController {
       make.bottom.equalToSuperview()
     }
   }
-
-
 
   private func setupView() {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
@@ -205,7 +242,6 @@ extension UpdateTodoViewController {
       }
 
       let section: NSCollectionLayoutSection
-
 
       switch sectionKind {
       case .assignee:
@@ -283,9 +319,6 @@ extension UpdateTodoViewController {
         elementKind: UICollectionView.elementKindSectionHeader, alignment: .top
     )
     section.boundarySupplementaryItems = [sectionHeader]
-
-
-
     return section
   }
 
@@ -299,9 +332,8 @@ extension UpdateTodoViewController {
   }
 
   private func createAssigneeRegistration() -> CellRegistration<AssigneeCell, ITEM> {
-    return CellRegistration<AssigneeCell, ITEM> { [weak self] (cell, indexPath, item) in
+    return CellRegistration<AssigneeCell, ITEM> { (cell, indexPath, item) in
       guard
-        let self = self,
         let item = item.homie
       else {
         return
@@ -311,26 +343,24 @@ extension UpdateTodoViewController {
   }
 
   private func createIndividualRegistration() -> CellRegistration<IndividualCell, ITEM> {
-    return CellRegistration<IndividualCell, ITEM> { [weak self] (cell, indexPath, item) in
+    return CellRegistration<IndividualCell, ITEM> { (cell, indexPath, item) in
       guard
-        let self = self,
         let item = item.homie
       else {
         return
       }
       cell.configure(item)
-
     }
   }
   private func createDayRegistration() -> CellRegistration<DayCell, ITEM> {
-    return CellRegistration<DayCell, ITEM> { [weak self] (cell, indexPath, item) in
+    return CellRegistration<DayCell, ITEM> { (cell, indexPath, item) in
       guard
-        let self = self,
         let item = item.homie
       else {
         return
       }
       cell.configure(item)
+      cell.delegate = self
     }
   }
 
@@ -403,7 +433,6 @@ extension UpdateTodoViewController {
   }
 
   private func applyIndividualSnapShot(_ homies: [UpdateTodoHomieModel]) {
-
     var snapShot = NSDiffableDataSourceSectionSnapshot<ITEM>()
 
     for homie in homies {
@@ -441,5 +470,12 @@ extension UpdateTodoViewController: UICollectionViewDelegate {
     if item.hasChild {
       tapIndividual.accept(indexPath)
     }
+  }
+}
+// MARK: Cell Delegate
+
+extension UpdateTodoViewController: DidTapDayDelegate {
+  func didTapDay(days: [UpdateTodoHomieModel.Day], to id: Int) {
+    tapDay.accept((days, id))
   }
 }
