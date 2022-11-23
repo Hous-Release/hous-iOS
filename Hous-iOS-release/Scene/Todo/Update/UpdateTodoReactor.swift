@@ -24,7 +24,7 @@ public final class UpdateTodoReactor: Reactor {
     case fetch
     case enterTodo
     case didTapHomie(IndexPath)
-    case didTapDays(IndexPath)
+    case didTapDays([UpdateTodoHomieModel.Day], id: Int)
     case didTapUpdate
     case updateHomie([UpdateTodoHomieModel])
   }
@@ -34,6 +34,7 @@ public final class UpdateTodoReactor: Reactor {
     case setTodo(String?)
     case setHomies([UpdateTodoHomieModel])
     case setIndividual(IndexPath)
+    case setDay([UpdateTodoHomieModel.Day], Int)
   }
 
   public struct State {
@@ -44,6 +45,8 @@ public final class UpdateTodoReactor: Reactor {
     var todoHomies: [UpdateTodoHomieModel]
     @Pulse
     var didTappedIndividual: IndexPath? = nil
+    @Pulse
+    var didTappedDay: ([UpdateTodoHomieModel.Day], Int)? = nil
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
@@ -66,11 +69,10 @@ public final class UpdateTodoReactor: Reactor {
       return .empty()
     case .didTapHomie(let indexPath):
       return .just(.setIndividual(indexPath))
-    case .didTapDays:
-      return .empty()
+    case .didTapDays(let days, let id):
+      return .just(.setDay(days, id))
     case .didTapUpdate:
       return .empty()
-
     case .updateHomie(let homies):
       return .just(.setHomies(homies))
     }
@@ -78,31 +80,27 @@ public final class UpdateTodoReactor: Reactor {
 
   public func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
-
     switch mutation {
     case .setNotification(let notification):
       newState.isPushNotification = notification
-
     case .setTodo(let todo):
       newState.todo = todo
-
     case .setHomies(let homies):
       newState.todoHomies = homies
-
     case .setIndividual(let indexPath):
       newState.didTappedIndividual = indexPath
+    case .setDay(let days, let id):
+      newState.didTappedDay = (days, id)
     }
-
     return newState
   }
-
 }
 
 public extension UpdateTodoReactor {
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let service =
-      provider.todoRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+      provider.todoRepository.event.flatMap { event -> Observable<Mutation> in
 
       switch event {
       case .getModifyingTodo(let state):
