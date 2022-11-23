@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Lottie
 import RxGesture
+import Kingfisher
 
 final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
@@ -25,12 +26,11 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   //MARK: UI Components
   
-  private var profileMainImage: AnimationView = .init(name:"profileRedlottie").then {
-    $0.play()
-  }
+  private var profileMainImage = AnimationView()
+  
   
   private var badgeImage = UIImageView().then {
-    $0.image = Images.badgeLock.image
+    $0.image = Images.noBadge.image
   }
   
   private var titleLabel = UILabel().then {
@@ -77,9 +77,9 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   //MARK: UI Set
 
-  // TODO: - 인영에게 Zeplin 업로드 요청하고 색깔 export 해주세요.
+
   private func configUI() {
-//    self.backgroundColor = Colors.redProfile.color
+
   }
   
   private func render() {
@@ -92,9 +92,9 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     
     
     badgeImage.snp.makeConstraints { make in
-      make.bottom.equalToSuperview().offset(-32)
-      make.trailing.equalToSuperview().offset(-45)
-      make.width.height.equalTo(110)
+      make.bottom.equalToSuperview().offset(-48)
+      make.trailing.equalToSuperview().offset(-50)
+      make.width.height.equalTo(100)
     }
     
     titleLabel.snp.makeConstraints { make in
@@ -103,7 +103,7 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
     
     badgeLabel.snp.makeConstraints { make in
-      make.bottom.equalToSuperview().offset(-20)
+      make.top.equalTo(badgeImage.snp.bottom).offset(8)
       make.height.equalTo(20)
       make.centerX.equalTo(badgeImage.snp.centerX)
     }
@@ -119,11 +119,11 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  private func animatedRender(isEmptyView: Bool) {
-    if isEmptyView {
-      self.backgroundColor = Colors.g1.color
-    } else {
-//      self.backgroundColor = UIColor(red: 1, green: 216/255, blue: 216/255, alpha: 1)
+  private func animatedRender(data: ProfileModel) {
+    if data.isEmptyView {
+      self.backgroundColor = Colors.g7.color
+      profileMainImage.removeFromSuperview()
+      profileMainImage = AnimationView.init(name: "empty_profile")
       addSubview(profileMainImage)
       profileMainImage.snp.makeConstraints { make in
         make.top.bottom.leading.trailing.equalToSuperview()
@@ -131,7 +131,66 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
         make.width.equalTo(Size.screenWidth)
       }
       self.sendSubviewToBack(profileMainImage)
-      profileMainImage.currentProgress = 0
+      profileMainImage.play()
+      
+    } else {
+      var selectedColor: UIColor
+      var selectedLottie: AnimationView
+      
+      switch data.personalityColor {
+      case .red:
+        selectedColor = Colors.redB1.color
+        if let _ = data.badgeLabel {
+          selectedLottie = AnimationView.init(name: "tri_yes")
+        } else {
+          selectedLottie = AnimationView.init(name: "tri_no")
+        }
+      case .blue:
+        selectedColor = Colors.blueL1.color
+        if let _ = data.badgeLabel {
+          selectedLottie = AnimationView.init(name: "squ_yes")
+        } else {
+          selectedLottie = AnimationView.init(name: "squ_no")
+        }
+        
+      case .yellow:
+        selectedColor = Colors.yellowB1.color
+        if let _ = data.badgeLabel {
+          selectedLottie = AnimationView.init(name: "cir_yes")
+        } else {
+          selectedLottie = AnimationView.init(name: "cir_no")
+        }
+        
+      case .green:
+        selectedColor = Colors.greenB1.color
+        if let _ = data.badgeLabel {
+          selectedLottie = AnimationView.init(name: "hex_yes")
+        } else {
+          selectedLottie = AnimationView.init(name: "hex_no")
+        }
+        
+      case .purple:
+        selectedColor = Colors.purpleB1.color
+        if let _ = data.badgeLabel {
+          selectedLottie = AnimationView.init(name: "pen_yes")
+        } else {
+          selectedLottie = AnimationView.init(name: "pen_no")
+        }
+        
+      default:
+        return
+      }
+      
+      self.backgroundColor = selectedColor
+      profileMainImage.removeFromSuperview()
+      profileMainImage = selectedLottie
+      addSubview(profileMainImage)
+      profileMainImage.snp.makeConstraints { make in
+        make.top.bottom.leading.trailing.equalToSuperview()
+        make.height.equalTo(254)
+        make.width.equalTo(Size.screenWidth)
+      }
+      self.sendSubviewToBack(profileMainImage)
       profileMainImage.play()
     }
   }
@@ -160,7 +219,12 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   }
   
   func bind(_ data: ProfileModel) {
-    animatedRender(isEmptyView: data.isEmptyView)
+    animatedRender(data: data)
+    if let imageURL = data.badgeImageURL{
+      badgeImage.kf.setImage(with: URL(string: imageURL))
+    } else {
+      badgeImage.image = Images.noBadge.image
+    }
     badgeLabel.text = data.badgeLabel ?? "내 대표 배지"
   }
 }

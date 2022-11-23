@@ -545,11 +545,10 @@ final class ProfileEditViewController: UIViewController {
         presentPopUp(popUpType) { [weak self] actionType in
           switch actionType {
           case .action:
-            self?.dismiss(animated: true)
             self?.view.endEditing(true)
             self?.navigationController?.popViewController(animated: true)
           case .cancel:
-            self?.dismiss(animated: true)
+            break
           }
         }
       } else {

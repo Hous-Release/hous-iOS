@@ -1,15 +1,15 @@
 //
-//  ProfileDescriptionCollectionViewCell.swift
+//  MateProfileDescriptionCollectionViewCell.swift
 //  Hous-iOS-release
 //
-//  Created by 이의진 on 2022/10/14.
+//  Created by 이의진 on 2022/11/16.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
+final class MateProfileDescriptionCollectionViewCell: UICollectionViewCell {
   
   var disposeBag: DisposeBag = DisposeBag()
   
@@ -30,7 +30,7 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     layout.itemSize = CGSize(width: 136, height: 82)
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.register(cell: ProfileDescriptionInnerCollectionViewCell.self)
+    collectionView.register(cell: MateProfileDescriptionInnerCollectionViewCell.self)
     return collectionView
   }()
   
@@ -65,8 +65,8 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
         (collectionView: UICollectionView, index: Int, element: PersonalityAttributeDescription) in
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.profileDescriptionCollectionView
-          .dequeueReusableCell(withReuseIdentifier: ProfileDescriptionInnerCollectionViewCell.className, for: indexPath) as?
-           ProfileDescriptionInnerCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+          .dequeueReusableCell(withReuseIdentifier: MateProfileDescriptionInnerCollectionViewCell.className, for: indexPath) as?
+           MateProfileDescriptionInnerCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
         cell.bind(element)
         return cell
       }
