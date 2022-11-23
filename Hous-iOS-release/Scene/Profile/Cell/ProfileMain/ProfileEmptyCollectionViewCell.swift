@@ -98,7 +98,7 @@ final class ProfileEmptyCollectionViewCell: UICollectionViewCell {
     self.emptyButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
-        self.cellActionControlSubject.onNext(.didTabRetry)
+        self.cellActionControlSubject.onNext(.didTabTest)
       }
       .disposed(by: disposeBag)
   }
