@@ -87,6 +87,10 @@ public extension ProfileDTO.Response {
         }
     }
     
+    struct ProfileTestSaveResponseDTO: Codable {
+        public let color: String
+    }
+    
     struct ProfileTestResultResponseDTO: Codable {
         public let name: String
         public let imageURL: String

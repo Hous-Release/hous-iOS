@@ -17,6 +17,7 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   let disposeBag = DisposeBag()
   var viewModel: ProfileDetailViewModel
   var color: PersonalityColor
+  var isFromTypeTest = false
   
   //MARK: UI Templetes
   
@@ -168,7 +169,18 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   private func doNavigation(action: ProfileDetailActionControl) {
     switch action {
     case .didTabBack:
-      navigationController?.popViewController(animated: true)
+      if self.isFromTypeTest {
+        let housTabbarViewController = HousTabbarViewController()
+        self.view.window?.rootViewController = housTabbarViewController
+        self.view.window?.makeKeyAndVisible()
+        
+        housTabbarViewController.housTabBar.selectItem(index: 2)
+        
+        self.view.window?.rootViewController?.dismiss(animated: true)
+        
+      } else {
+        navigationController?.popViewController(animated: true)
+      }
     case .none:
       return
     }

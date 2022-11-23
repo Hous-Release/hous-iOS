@@ -8,13 +8,28 @@
 import Foundation
 import Network
 
-enum ProfileTestActionControl {
+enum ProfileTestActionControl: Equatable {
   case didTabQuit
   case didTabForward
   case didTabBackward
   case didTabAnswer(answer: Int, questionNum: Int)
   case didTabFinish
   case none
+  
+  static func == (lhs: Self, rhs: Self) -> Bool {
+    switch (lhs, rhs) {
+    case (.didTabQuit, .didTabQuit), (.didTabForward, .didTabForward), (.didTabBackward, .didTabBackward), (.didTabFinish, .didTabFinish), (.none, .none):
+      return true
+    case let (.didTabAnswer(answer: _, questionNum: questionNumLeft), .didTabAnswer(answer: _, questionNum: questionNumRight)):
+      if questionNumLeft == questionNumRight {
+        return true
+      } else {
+        return false
+      }
+    default:
+      return false
+    }
+  }
 }
 
 enum ProfileTestInfoActionControl {
@@ -94,4 +109,9 @@ class ProfileTestButtonState {
   func selectButton() {
     isSelected = true
   }
+}
+
+public struct ProfileTestSaveModel {
+  let selectedData: [Int]
+  let questionType: [String]
 }

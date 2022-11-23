@@ -1,5 +1,5 @@
 //
-//  ProfileSettingViewController.swift
+//  ProfileTestLoadingViewController.swift
 //  Hous-iOS-release
 //
 //  Created by 이의진 on 2022/10/22.
@@ -17,7 +17,12 @@ final class ProfileTestLoadingViewController: UIViewController {
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
-  let viewModel = ProfileTestViewModel()
+  let viewModel = ProfileTestLoadingViewModel()
+  private let profileRepository = ProfileRepositoryImp()
+  
+  //MARK: Data
+  
+  var profileTestSaveData = ProfileTestSaveModel(selectedData: [0], questionType: [""])
   
   //MARK: UI Templetes
   
@@ -48,6 +53,7 @@ final class ProfileTestLoadingViewController: UIViewController {
   override func viewDidLoad(){
     super.viewDidLoad()
     render()
+    bind()
   }
   
   private func render() {
@@ -69,6 +75,32 @@ final class ProfileTestLoadingViewController: UIViewController {
       make.top.equalTo(loadingLabel.snp.bottom)
     }
     
+  }
+  
+  private func bind() {
+    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
+      .map { _ in }
+      .asSignal(onErrorJustReturn: ())
+    
+    let input = ProfileTestLoadingViewModel.Input(
+      viewWillAppear: viewWillAppear)
+    
+    let output = viewModel.transform(input: input)
+    
+    let combinedObservable = Observable.combineLatest(output.dataLoaded, output.timeFlag)
+    combinedObservable
+      .bind(onNext: { [weak self] data in
+        let destinationViewController = ProfileDetailViewController(color: data.0)
+        destinationViewController.modalPresentationStyle = .fullScreen
+        destinationViewController.modalTransitionStyle = .crossDissolve
+        destinationViewController.view.backgroundColor = .white
+        destinationViewController.isFromTypeTest = true
+        self?.present(destinationViewController, animated: true)
+      })
+      .disposed(by: disposeBag)
+    print(self.profileTestSaveData)
+    self.profileRepository.putProfileTest(data: self.profileTestSaveData)
+    viewModel.timeStart.onNext(())
   }
 }
 

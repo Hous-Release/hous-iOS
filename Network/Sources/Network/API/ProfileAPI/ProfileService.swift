@@ -13,9 +13,10 @@ public enum ProfileService {
     case getProfileTestResult(_ data: ProfileDTO.Request.ProfileTestResultDTO)
     case getHomieProfile(_ id: String)
     case getBadges
+    case getProfileTest
     case updateRepresentBadge(_ id: Int)
     case putProfileEdit(_ data: ProfileDTO.Request.ProfileEditRequestDTO)
-    case getProfileTest
+    case putProfileTest(_ data: ProfileDTO.Request.ProfileTestSaveRequestDTO)
 }
 
 extension ProfileService: TargetType {
@@ -37,7 +38,9 @@ extension ProfileService: TargetType {
             return "/user/badges"
         case .updateRepresentBadge(let id):
             return "/user/badge/\(id)/represent"
-            
+        
+        case .putProfileTest:
+            return "/user/personality"
         case .putProfileEdit:
             return "/user"
         }
@@ -48,9 +51,7 @@ extension ProfileService: TargetType {
         case .getProfile, .getBadges, .getHomieProfile, .getProfileTestResult, .getProfileTest:
             return .get
             
-        case .putProfileEdit:
-            return .put
-        case .updateRepresentBadge:
+        case .putProfileEdit, .updateRepresentBadge, .putProfileTest:
             return .put
         }
     }
@@ -61,6 +62,9 @@ extension ProfileService: TargetType {
             return .requestPlain
             
         case let .putProfileEdit(dto):
+            return .body(dto)
+            
+        case let .putProfileTest(dto):
             return .body(dto)
             
         case let .getProfileTestResult(dto):

@@ -59,6 +59,14 @@ final class ProfileViewModel: ViewModelType {
     
     let actionControl = input.actionDetected.asObservable()
     
+    // viewWillAppear
+    
+    input.viewWillAppear.asObservable()
+      .bind(onNext: { [weak self] in
+        self?.profileRepository.getProfile()
+      })
+      .disposed(by: disposeBag)
+    
     return Output(
       profileModel: self.profileModelSubject.asObservable(),
       actionControl: actionControl

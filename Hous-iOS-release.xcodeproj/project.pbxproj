@@ -53,6 +53,7 @@
 		9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */; };
 		9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */; };
 		9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */; };
+		9B6DD151292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DD150292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift */; };
 		9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200A29193515001EBDFE /* ProfileEditModel.swift */; };
 		9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */; };
 		9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */; };
@@ -278,6 +279,7 @@
 		9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestLoadingViewController.swift; sourceTree = "<group>"; };
 		9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_lottie.json; sourceTree = "<group>"; };
 		9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_profile.json; sourceTree = "<group>"; };
+		9B6DD150292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestLoadingViewModel.swift; sourceTree = "<group>"; };
 		9B83200A29193515001EBDFE /* ProfileEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditModel.swift; sourceTree = "<group>"; };
 		9B83200D2919408A001EBDFE /* ProfileEditNavtigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditNavtigationView.swift; sourceTree = "<group>"; };
 		9B83200F29196B09001EBDFE /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
@@ -625,7 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */,
-				9BDBAD712924074A0096FE38 /* empty_profile.json */,
 				B5F9FB4D2925CD520056C0B1 /* weekend.json */,
 				B5F9FB492923DA180056C0B1 /* birthday.json */,
 				B5F9FB472923DA0B0056C0B1 /* loading.json */,
@@ -732,6 +733,7 @@
 				9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */,
 				9B2F46942923A918002D9BD2 /* ProfileEditViewModel.swift */,
 				9B2F46962923BBBF002D9BD2 /* ProfileTestViewModel.swift */,
+				9B6DD150292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1569,6 +1571,7 @@
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
+				9B6DD151292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift in Sources */,
 				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */,
 				B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */,
