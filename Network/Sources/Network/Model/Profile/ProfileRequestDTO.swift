@@ -44,4 +44,26 @@ public extension ProfileDTO.Request {
             self.color = color
         }
     }
+    
+    struct ProfileTestSaveRequestDTO: Encodable {
+        public let clean: Int
+        public let introversion: Int
+        public let light: Int
+        public let noise: Int
+        public let smell: Int
+        
+        public init(
+            clean: Int,
+            introversion: Int,
+            light: Int,
+            noise: Int,
+            smell: Int
+        ) {
+            self.clean = clean
+            self.light = light
+            self.introversion = introversion
+            self.noise = noise
+            self.smell = smell
+        }
+    }
 }

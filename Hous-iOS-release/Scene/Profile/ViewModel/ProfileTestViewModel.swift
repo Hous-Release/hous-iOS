@@ -43,6 +43,7 @@ final class ProfileTestViewModel: ViewModelType {
   private let profileRepository = ProfileRepositoryImp()
   var selectedData = [Int](repeating: 0, count: 15)
   let selectedDataSubject = PublishSubject<[Int]>()
+  var questionTypes: [String] = []
   
   struct Input {
     let viewWillAppear: Signal<Void>
@@ -63,6 +64,9 @@ final class ProfileTestViewModel: ViewModelType {
         case let .getProfileTest(profileTestItemModels):
           self.profileTestItemModels = profileTestItemModels
           self.profileTestItemModelSubject.onNext(profileTestItemModels)
+          for model in profileTestItemModels {
+            self.questionTypes.append(model.questionType)
+          }
         case .sendError:
           print("😭 Network Error..😭")
           print(event)

@@ -20,7 +20,7 @@ public enum ProfileRepositoryEvent {
   case postFeedBackBadge
   case getNotifications
   case getProfileTest([ProfileTestItemModel])
-  case putPersonality
+  case putProfileTestSave(PersonalityColor)
   case getProfileTestResult(ProfileDetailModel)
   case patchPushAlarm
   case sendError(HouseErrorModel?)
@@ -33,6 +33,7 @@ public protocol ProfileRepository {
   func getHomieProfile(id: String)
   func getProfileTestResult(color: PersonalityColor)
   func putProfileEditInfo(data: ProfileEditModel)
+  func putProfileTest(data: ProfileTestSaveModel)
 }
 
 public final class ProfileRepositoryImp: ProfileRepository {
@@ -59,12 +60,12 @@ public final class ProfileRepositoryImp: ProfileRepository {
       
       dto.forEach {
         profileTestItemModels.append(ProfileTestItemModel(
-                                      question: $0.question,
-                                      questionNum: $0.questionNum,
-                                      questionImg: $0.questionImg,
-                                      questionType: $0.questionType,
-                                      answers: $0.answers)
-                                     )
+          question: $0.question,
+          questionNum: $0.questionNum,
+          questionImg: $0.questionImg,
+          questionType: $0.questionType,
+          answers: $0.answers)
+        )
       }
       
       ProfileRepositoryImp.event.onNext(.getProfileTest(profileTestItemModels))
@@ -174,7 +175,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
       let statusMessage = dto.introduction
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
-      let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
+      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
+      
+      typeScores = typeScores.map { $0 * 10 - 10 }
       
       ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }
@@ -205,7 +208,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityColor = .blue
       case "YELLOW":
         personalityColor = .yellow
-      case "GRAY":
+      case "GREEN":
         personalityColor = .green
       case "PURPLE":
         personalityColor = .purple
@@ -230,7 +233,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
       let statusMessage = dto.introduction
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
-      let typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
+      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
+      
+      typeScores = typeScores.map { $0 * 10 - 10 }
       
       ProfileRepositoryImp.event.onNext(.getHomieProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }
@@ -239,7 +244,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
   
   public func putProfileEditInfo(data: ProfileEditModel) {
     
-    //MARK: Model To DTO
+    //MARK: From Model To DTO
     
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -275,6 +280,67 @@ public final class ProfileRepositoryImp: ProfileRepository {
       ProfileRepositoryImp.event.onNext(.putProfile)
     }
   }
+  
+  public func putProfileTest(data: ProfileTestSaveModel) {
+    
+    //MARK: From Model To DTO
+    
+    var clean: Int = 0
+    var introversion: Int = 0
+    var light: Int = 0
+    var noise: Int = 0
+    var smell: Int = 0
+    
+    for (questionType, score) in zip(data.questionType, data.selectedData) {
+      switch questionType {
+      case "CLEAN":
+        clean += score
+      case "INTROVERSION":
+        introversion += score
+      case "LIGHT":
+        light += score
+      case "NOISE":
+        noise += score
+      case "SMELL":
+        smell += score
+      default:
+        print("QuestionTypeError")
+      }
+    }
+    let dto = ProfileDTO.Request.ProfileTestSaveRequestDTO(clean: clean, introversion: introversion, light: light, noise: noise, smell: smell)
+    
+    //MARK: Put Data
+    
+    NetworkService.shared.profileRepository.putProfileTest(dto) { res, err in
+      if (res?.status != 200) {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? ""
+        )
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      var personalityColor: PersonalityColor {
+        switch res?.data?.color {
+        case "RED":
+          return .red
+        case "BLUE":
+          return .blue
+        case "YELLOW":
+          return .yellow
+        case "GREEN":
+          return .green
+        case "PURPLE":
+          return .purple
+        default:
+          return .none
+        }
+      }
+      ProfileRepositoryImp.event.onNext(.putProfileTestSave(personalityColor))
+    }
+  }
 }
+
 
 

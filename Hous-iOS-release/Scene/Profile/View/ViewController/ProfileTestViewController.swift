@@ -21,6 +21,7 @@ final class ProfileTestViewController: UIViewController {
   var viewModel = ProfileTestViewModel()
   var data: [ProfileTestItemModel] = []
   let actionDetected = PublishSubject<ProfileTestActionControl>()
+  private var latestAction: ProfileTestActionControl = .none
   
   //MARK: UI Templetes
   
@@ -203,7 +204,11 @@ final class ProfileTestViewController: UIViewController {
       .bind(onNext: { [weak self] action in
         guard let self = self else { return }
         switch action {
-        case .didTabAnswer:
+        case let .didTabAnswer(_, questionNum):
+          if self.latestAction == action {
+            self.testCountLabel.text = "\(questionNum + 1) / \(self.data.count)"
+            break
+          }
           self.scrollForward()
           self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
         case .didTabBackward:
@@ -219,6 +224,7 @@ final class ProfileTestViewController: UIViewController {
         default:
           break
         }
+        self.latestAction = action
       })
       .disposed(by: disposeBag)
   }
@@ -276,7 +282,6 @@ final class ProfileTestViewController: UIViewController {
   private func scrollForward() {
     testIndex += 1
     if testIndex == data.count {
-      print("⭐️")
       actionDetected.onNext(.didTabFinish)
       return
     }
@@ -310,8 +315,8 @@ final class ProfileTestViewController: UIViewController {
   }
   
   private func finishTest() {
-    print("🔥")
     let destinationViewController = ProfileTestLoadingViewController()
+    destinationViewController.profileTestSaveData = ProfileTestSaveModel(selectedData: viewModel.selectedData, questionType: viewModel.questionTypes)
     destinationViewController.modalPresentationStyle = .fullScreen
     destinationViewController.modalTransitionStyle = .crossDissolve
     self.present(destinationViewController, animated: true)
