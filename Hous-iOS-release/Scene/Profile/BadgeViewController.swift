@@ -233,7 +233,7 @@ extension BadgeViewController {
             self.badgeWithStateModel[idx].tapState = .representing
             self.selectedMainBadgeSubject.onNext(viewModel.id)
           case .representing:
-            print("대표 최고 !! 👍")
+            break
           }
           
           cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])

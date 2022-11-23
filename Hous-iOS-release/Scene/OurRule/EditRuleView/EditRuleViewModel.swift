@@ -28,12 +28,6 @@ final class EditRuleViewModel: ViewModelType {
   
   func transform(input: Input) -> Output {
     
-//    let isEmptyView = input.saveButtonDidTap
-//      .map { viewModels -> Bool in
-//        print("viewModels 개수", viewModels.count, "👍👍👍👍")
-//        return viewModels.count == 0
-//      }
-//      .asDriver(onErrorJustReturn: true)
     
     let ruleDTO = input.saveButtonDidTap
       .map { ruleViewModels -> [RuleDTO.Request.Rule] in
