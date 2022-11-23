@@ -76,6 +76,7 @@ final class MateProfileViewController: UIViewController {
   //MARK: Setup UI
   
   private func setup() {
+    self.setTabBarIsHidden(isHidden: true)
     profileCollectionView.backgroundColor = .white
     profileCollectionView.delegate = self
     navigationController?.navigationBar.isHidden = true
