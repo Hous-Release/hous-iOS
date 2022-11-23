@@ -8,6 +8,10 @@
 import AssetKit
 import UIKit
 
+protocol DidTapDayDelegate: AnyObject {
+  func didTapDay(days: [UpdateTodoHomieModel.Day], to id: Int)
+}
+
 final class DayCell: UICollectionViewCell {
   private struct Constants {
     static let dayButtonSize: CGSize = CGSize(width: 40, height: 40)
@@ -31,6 +35,9 @@ final class DayCell: UICollectionViewCell {
     return stackView
   }()
 
+  weak var delegate: DidTapDayDelegate?
+  var onboardingID: Int?
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupViews()
@@ -43,18 +50,19 @@ final class DayCell: UICollectionViewCell {
   }
 
   func configure(_ model: UpdateTodoHomieModel) {
-    let uniqued = Array(Set(model.selectedDay))
-    _ = uniqued.map {
-      selectButton($0)
-    }
+    self.onboardingID = model.onboardingID
+    configureButtonState(model.selectedDay)
   }
 
-  private func selectButton(_ day: UpdateTodoHomieModel.Day) {
-    initializeButtonState()
-    self.stackView.subviews.forEach { view in
-      if view.accessibilityIdentifier == day.description {
-        (view as? UIButton)?.isSelected = true
+  private func configureButtonState(_ days: [UpdateTodoHomieModel.Day]) {
+    self.stackView.subviews.forEach { subviews in
+      guard let button = subviews as? UIButton else {
+        return
       }
+
+      button.isSelected = days.contains(
+        where: { $0.description == button.accessibilityIdentifier }
+      )
     }
   }
 
@@ -81,7 +89,36 @@ final class DayCell: UICollectionViewCell {
     button.setTitleColor(Colors.g4.color, for: .normal)
     button.setBackgroundColor(Colors.blueL1.color, for: .selected)
     button.setTitleColor(Colors.blue.color, for: .selected)
+
+    button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     return button
+  }
+
+  @objc
+  private func didTapButton(_ sender: UIButton) {
+    sender.isSelected = !sender.isSelected
+
+    guard let id = self.onboardingID else {
+      return
+    }
+
+    let days = daysState().compactMap { $0 }
+    delegate?.didTapDay(days: days, to: id)
+  }
+
+  private func daysState() -> [UpdateTodoHomieModel.Day?] {
+
+    var result: [UpdateTodoHomieModel.Day?] = []
+
+    self.stackView.subviews.forEach { view in
+      if
+        let des = view.accessibilityIdentifier,
+        let button = view as? UIButton {
+        result.append(button.isSelected ? des.returnDay() : nil )
+      }
+    }
+    return result
+
   }
 
   private func setupViews() {
