@@ -18,11 +18,33 @@ protocol MainTodoAPIProtocol {
       BaseResponseType<MainTodoDTO.Response.MemberDTO>?, Error?
     ) -> Void
   )
-  func checkTodo(_ todoId: Int, _ status: Bool, completion: @escaping (BaseResponseType<String>?, Error?) -> Void
+  func checkTodo(
+    _ todoId: Int,
+    _ status: Bool,
+    completion: @escaping (BaseResponseType<String>?, Error?
+    ) -> Void
+  )
+  func addTodo(
+    _ dto: UpdateTodoDTO.ModifyTodo,
+    completion: @escaping (BaseResponseType<String>?, Error?
+    ) -> Void
   )
 }
 
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
+  func addTodo(
+    _ dto: UpdateTodoDTO.ModifyTodo,
+    completion: @escaping (BaseResponseType<String>?, Error?
+    ) -> Void
+  ) {
+    fetchData(
+      target: .addTodo(dto),
+      responseData: BaseResponseType<String>.self
+    ) { res, err in
+      completion(res, err)
+    }
+  }
+
   public func checkTodo(
     _ todoId: Int,
     _ status: Bool,
