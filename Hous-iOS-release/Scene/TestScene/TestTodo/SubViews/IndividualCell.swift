@@ -11,8 +11,8 @@ import UIKit
 final class IndividualCell: UICollectionViewCell {
   private struct Constants {
     static let colorViewSize: CGSize = CGSize(width: 16, height: 16)
-    static let verticalMargin: CGFloat = 4
-    static let horizontalMargin: CGFloat = 6
+    static let verticalMargin: CGFloat = 14
+    static let horizontalMargin: CGFloat = 28
     static let distance: CGFloat = 12
   }
 
@@ -62,7 +62,8 @@ final class IndividualCell: UICollectionViewCell {
     containerView.addSubview(homieNamelabel)
 
     containerView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.bottom.equalToSuperview().inset(Constants.verticalMargin)
+      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
     }
     colorLabel.snp.makeConstraints { make in
       make.size.equalTo(Constants.colorViewSize)

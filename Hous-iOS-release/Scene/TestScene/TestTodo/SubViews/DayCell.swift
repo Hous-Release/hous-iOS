@@ -11,14 +11,13 @@ import UIKit
 final class DayCell: UICollectionViewCell {
   private struct Constants {
     static let dayButtonSize: CGSize = CGSize(width: 40, height: 40)
-//    static let verticalMargin: CGFloat = 4
-//    static let horizontalMargin: CGFloat = 6
+    static let verticalMargin: CGFloat = 12
+    static let horizontalMargin: CGFloat = 24
     static let distance: CGFloat = 8
   }
 
   private let containerView: UIView = {
     let view = UIView()
-    view.layer.cornerCurve = .continuous
     return view
   }()
 
@@ -26,32 +25,52 @@ final class DayCell: UICollectionViewCell {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.alignment = .fill
-    stackView.distribution = .fillEqually
-    stackView.spacing = 8
+    stackView.distribution = .equalSpacing
+    stackView.spacing = Constants.distance
 
     return stackView
   }()
 
-
   override init(frame: CGRect) {
     super.init(frame: frame)
-
     setupViews()
-
-
-    print("dho dkSEj")
   }
-
   required init?(coder: NSCoder) {
     fatalError("Not Implemnted")
   }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+  }
+
   func configure(_ model: TestHomie) {
-    print("Daycell Model", model)
+    let uniqued = Array(Set(model.selectedDay))
+    _ = uniqued.map {
+      selectButton($0)
+    }
+  }
+
+  private func selectButton(_ day: TestHomie.Day) {
+    initializeButtonState()
+    self.stackView.subviews.forEach { view in
+      if view.accessibilityIdentifier == day.description {
+        (view as? UIButton)?.isSelected = true
+      }
+    }
+  }
+
+  private func initializeButtonState() {
+    self.stackView.subviews.forEach { subview in
+      guard let button = subview as? UIButton else {
+         return
+      }
+      button.isSelected = false
+    }
   }
 
   private func makeDayButton(_ day: TestHomie.Day) -> UIButton {
     let button = UIButton()
     button.setTitle(day.description, for: .normal)
+    button.layer.masksToBounds = true
     button.layer.cornerCurve = .circular
     button.layer.cornerRadius = Constants.dayButtonSize.height / 2
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
@@ -75,12 +94,18 @@ final class DayCell: UICollectionViewCell {
     }
 
     stackView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
+      make.top.bottom.equalToSuperview().inset(Constants.verticalMargin)
     }
 
     for day in TestHomie.Day.allCases {
-      stackView.addArrangedSubviews(makeDayButton(day))
-    }
+      let button = makeDayButton(day)
+      stackView.addArrangedSubviews(button)
 
+      button.snp.makeConstraints { make in
+        make.height.equalTo(button.snp.width).multipliedBy(1)
+        make.height.greaterThanOrEqualTo(Constants.dayButtonSize.height)
+      }
+    }
   }
 }
