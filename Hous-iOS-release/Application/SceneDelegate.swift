@@ -16,16 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     let serviceProvider = ServiceProvider()
-//    let reactor = SplashReactor(provider: serviceProvider)
-//    window.rootViewController = SplashViewController(reactor)
-
-    let homies = UpdateTodoHomieModel.generateMock(n: 16)
-    let reactor = UpdateTodoReactor(
-      provider: serviceProvider,
-      state: .init(todoHomies: homies)
-    )
-
-    window.rootViewController = UpdateTodoViewController(reactor)
+    let reactor = SplashReactor(provider: serviceProvider)
+    window.rootViewController = SplashViewController(reactor)
     window.backgroundColor = .white
     window.makeKeyAndVisible()
 
