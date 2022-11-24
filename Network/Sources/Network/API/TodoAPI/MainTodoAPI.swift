@@ -32,7 +32,7 @@ protocol MainTodoAPIProtocol {
 }
 
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
-  func addTodo(
+  public func addTodo(
     _ dto: UpdateTodoDTO.ModifyTodo,
     completion: @escaping (BaseResponseType<String>?, Error?
     ) -> Void
