@@ -87,7 +87,7 @@ extension DayOfWeekHeaderListCell {
     dayOfWeeklistContentView.translatesAutoresizingMaskIntoConstraints = false
     dayOfWeeklistContentView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
-      make.height.equalTo(48)
+      //make.height.equalTo(44)
     }
   }
 }

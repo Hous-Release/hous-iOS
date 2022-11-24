@@ -17,7 +17,7 @@ final class MemberTodoView: UIView {
     static let memberCollectionViewheight = 88
     static let memberCollectionEdgeInsets = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 0)
     static let floatingButtonSize = 60
-    static let todoListEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+    static let todoListEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 30, right: 0)
   }
 
   var memberCollectionView = UICollectionView(

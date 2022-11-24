@@ -70,6 +70,7 @@ extension TodoByMemListCell {
     todoByMemlistContentView.translatesAutoresizingMaskIntoConstraints = false
     todoByMemlistContentView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
+      make.height.equalTo(36)
     }
   }
 }
