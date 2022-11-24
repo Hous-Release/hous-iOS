@@ -35,10 +35,10 @@ final class EditHousNameViewModel: ViewModelType {
   func transform(input: Input) -> Output {
     
     let isValidText = input.roomName
-      .map { string -> Bool in
-        return string.count <= 8 || string.count > 0
+      .map { str -> Bool in
+        return str.count <= 8
       }
-      .asDriver()
+      .asDriver(onErrorJustReturn: false)
       
     
     let textCount = input.roomName.map({ [weak self] str -> String in
