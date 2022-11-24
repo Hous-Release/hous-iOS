@@ -7,6 +7,7 @@
 
 import Foundation
 import ReactorKit
+import Network
 
 public final class UpdateTodoReactor: Reactor {
   private let provider: ServiceProvider
@@ -22,7 +23,7 @@ public final class UpdateTodoReactor: Reactor {
 
   public enum Action {
     case fetch
-    case enterTodo
+    case enterTodo(String?)
     case didTapHomie(IndexPath)
     case didTapDays([UpdateTodoHomieModel.Day], id: Int)
     case didTapUpdate
@@ -65,13 +66,25 @@ public final class UpdateTodoReactor: Reactor {
 
       return .empty()
 
-    case .enterTodo:
-      return .empty()
+    case .enterTodo(let string):
+      return .just(.setTodo(string))
     case .didTapHomie(let indexPath):
       return .just(.setIndividual(indexPath))
     case .didTapDays(let days, let id):
       return .just(.setDay(days, id))
     case .didTapUpdate:
+
+      if initialState.isModifying {
+      //TODO: - 수정 API
+      }
+      else {
+        // TODO: 값 바꾸줘기 푸시
+        provider.todoRepository.addTodo(
+          isOnPushNotification: false,
+          name: currentState.todo ?? "",
+          currentState.todoHomies
+        )
+      }
       return .empty()
     case .updateHomie(let homies):
       return .just(.setHomies(homies))
@@ -109,6 +122,10 @@ public extension UpdateTodoReactor {
           .just(.setTodo(state.todo)),
           .just(.setHomies(state.todoHomies))
         ])
+
+      case .isSuccess(let isSuccess):
+        // TODO: 화면 뒤로 전환하기.
+        return .empty()
 
       default:
         return .empty()

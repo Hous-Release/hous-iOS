@@ -15,6 +15,18 @@ public enum UpdateTodoDTO {
 public extension UpdateTodoDTO {
 
   struct ModifyTodo: Codable {
+    public init(
+      isPushNotification: Bool,
+      name: String,
+      selectedUsers: [SelectedUser]?,
+      todoUsers: [TodoUser]
+    ) {
+      self.isPushNotification = isPushNotification
+      self.name = name
+      self.selectedUsers = selectedUsers
+      self.todoUsers = todoUsers
+    }
+
     public let isPushNotification: Bool
     public let name: String
     public let selectedUsers: [SelectedUser]?
@@ -36,7 +48,7 @@ public struct TodoUser: Codable {
   public init(
     color: String,
     dayOfWeeks: [String],
-    isSelected: Bool,
+    isSelected: Bool?,
     nickname: String,
     onboardingID: Int
   ) {
@@ -49,7 +61,7 @@ public struct TodoUser: Codable {
 
  public let color: String
  public let dayOfWeeks: [String]
- public let isSelected: Bool
+ public let isSelected: Bool?
  public let nickname: String
  public let onboardingID: Int
 
