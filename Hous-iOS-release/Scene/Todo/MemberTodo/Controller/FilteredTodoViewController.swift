@@ -89,9 +89,14 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
     bindAction(reactor)
     bindState(reactor)
   }
+}
 
+// MARK: Bind Action
+
+extension FilteredTodoViewController {
   func bindAction(_ reactor: Reactor) {
     bindViewWillAppearAction(reactor)
+    bindDidTapPlusButtonAction(reactor)
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
@@ -100,16 +105,49 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
+  func bindDidTapPlusButtonAction(_ reactor: Reactor) {
+    floatingAddButton.rx.tap
+      .map { _ in Reactor.Action.didTapPlusButton }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+}
+
+// MARK: - Bind State
+
+extension FilteredTodoViewController {
 
   func bindState(_ reactor: Reactor) {
+    bindTrasnferState(reactor)
+  }
+
+  func bindTrasnferState(_ reactor: Reactor) {
     reactor.pulse(\.$isTransfer)
-      .map { $0 }
-      .subscribe()
+      .skip(1)
+      .map { reactor.currentState.homies }
+      .asDriver(onErrorJustReturn: [])
+      .drive(onNext: self.transferToAddTodoViewController)
       .disposed(by: disposeBag)
   }
 }
 
 extension FilteredTodoViewController {
+
+  private func transferToAddTodoViewController(_ homies: [UpdateTodoHomieModel]) {
+
+    let state = UpdateTodoReactor.State(
+      todoHomies: homies
+    )
+    let provider = ServiceProvider()
+    let reactor = UpdateTodoReactor(
+      provider: provider,
+      state: state
+    )
+
+    let vc = UpdateTodoViewController(reactor)
+    navigationController?.pushViewController(vc, animated: true)
+  }
+
   private func addChildVC(_ vc: UIViewController) {
     addChild(vc)
     contentsView.addSubView(vc.view)
