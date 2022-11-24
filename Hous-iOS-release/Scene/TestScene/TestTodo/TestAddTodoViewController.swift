@@ -15,6 +15,8 @@ final class TestAddTodoViewController: UIViewController {
   private typealias DataSource = UICollectionViewDiffableDataSource<SECTION, ITEM>
   private typealias SnapShot = NSDiffableDataSourceSnapshot<SECTION, ITEM>
   private typealias CellRegistration = UICollectionView.CellRegistration
+  private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration
+  private typealias SectionSnapShot = NSDiffableDataSourceSectionSnapshot<ITEM>
 
   private struct Constants {
     static let verticalMargin: CGFloat = 16
@@ -24,6 +26,9 @@ final class TestAddTodoViewController: UIViewController {
 
   private var collectionView: UICollectionView!
   private var dataSource: DataSource! = nil
+  private var allSnapShot = SnapShot()
+  private var assigneeSectionSnapShot = SectionSnapShot()
+  private var individualSectionSnapShot = SectionSnapShot()
 
   init(_ homies: [TestHomie]) {
     super.init(nibName: nil, bundle: nil)
@@ -46,11 +51,11 @@ final class TestAddTodoViewController: UIViewController {
 
 extension TestAddTodoViewController {
   private func configureHierarchy() {
-      collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-      collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-      collectionView.backgroundColor = .systemGroupedBackground
-//      collectionView.delegate = self
-      view.addSubview(collectionView)
+    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+    collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    collectionView.backgroundColor = Colors.white.color
+    collectionView.delegate = self
+    view.addSubview(collectionView)
   }
 
   /// - Tag: CreateFullLayout
@@ -73,15 +78,19 @@ extension TestAddTodoViewController {
         section = self.createSection()
 
       case .individual:
+
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.showsSeparators = false
         section = NSCollectionLayoutSection.list(
-          using: .init(appearance: .plain),
+          using: configuration,
           layoutEnvironment: layoutEnvironment
         )
+
         section.contentInsets = NSDirectionalEdgeInsets(
           top: 0,
-          leading: 28,
+          leading: 0,
           bottom: 0,
-          trailing: 28
+          trailing: 0
         )
       }
 
@@ -115,47 +124,67 @@ extension TestAddTodoViewController {
 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(
-      top: 0,
+      top: Constants.verticalMargin / 2,
       leading: Constants.horizontalMargin,
       bottom: Constants.verticalMargin,
-      trailing: 0
+      trailing: Constants.horizontalMargin
     )
+
+    let headerFooterSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0),
+      heightDimension: .estimated(44)
+    )
+    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+        layoutSize: headerFooterSize,
+        elementKind: UICollectionView.elementKindSectionHeader, alignment: .top
+    )
+    section.boundarySupplementaryItems = [sectionHeader]
+
+
 
     return section
   }
 
+  private func createHeaderRegistration() -> SupplementaryRegistration<TitleSupplementaryView> {
+
+    return SupplementaryRegistration<TitleSupplementaryView>(
+      elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
+        supplementaryView.label.text = "담당자"
+      }
+  }
+
   private func createAssigneeRegistration() -> CellRegistration<AssigneeCell, ITEM> {
     return CellRegistration<AssigneeCell, ITEM> { [weak self] (cell, indexPath, item) in
-        guard
-          let self = self,
-          let item = item.homie
+      guard
+        let self = self,
+        let item = item.homie
       else {
-          return
-        }
+        return
+      }
       cell.configure(item)
     }
   }
 
   private func createIndividualRegistration() -> CellRegistration<IndividualCell, ITEM> {
     return CellRegistration<IndividualCell, ITEM> { [weak self] (cell, indexPath, item) in
-        guard
-          let self = self,
-          let item = item.homie
+      guard
+        let self = self,
+        let item = item.homie
       else {
-          return
-        }
+        return
+      }
       cell.configure(item)
 
     }
   }
   private func createDayRegistration() -> CellRegistration<DayCell, ITEM> {
     return CellRegistration<DayCell, ITEM> { [weak self] (cell, indexPath, item) in
-        guard
-          let self = self,
-          let item = item.homie
+      guard
+        let self = self,
+        let item = item.homie
       else {
-          return
-        }
+        return
+      }
       cell.configure(item)
     }
   }
@@ -165,6 +194,7 @@ extension TestAddTodoViewController {
     let assigneeCellRegistration = createAssigneeRegistration()
     let individualRegistration = createIndividualRegistration()
     let dayRegistration = createDayRegistration()
+    let headerRegistration = createHeaderRegistration()
 
     dataSource = DataSource(collectionView: collectionView) {
       (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -184,7 +214,6 @@ extension TestAddTodoViewController {
         )
 
       case .individual:
-        print("item.hasChild ===" ,item.hasChild)
 
         if item.hasChild {
           return collectionView.dequeueConfiguredReusableCell(
@@ -202,6 +231,12 @@ extension TestAddTodoViewController {
         }
       }
     }
+    dataSource.supplementaryViewProvider = { (view, kind, index) in
+      return self.collectionView.dequeueConfiguredReusableSupplementary(
+        using: headerRegistration,
+        for: index
+      )
+    }
   }
 
   private func applySnapShot(_ homies: [TestHomie]) {
@@ -218,6 +253,7 @@ extension TestAddTodoViewController {
       ITEM.init(homie: $0, hasChild: false)
     }
     snapShot.append(items)
+    self.assigneeSectionSnapShot = snapShot
     dataSource.apply(snapShot, to: .assignee, animatingDifferences: false)
   }
 
@@ -231,10 +267,8 @@ extension TestAddTodoViewController {
 
       let childItem = ITEM(homie: homie, hasChild: false)
       snapShot.append([childItem], to: rootItem)
-      snapShot.expand([rootItem])
+      self.individualSectionSnapShot = snapShot
     }
-
-    print("SnapShot ===", snapShot)
     dataSource.apply(snapShot, to: .individual, animatingDifferences: false)
   }
 
@@ -243,5 +277,27 @@ extension TestAddTodoViewController {
     var snapshot = SnapShot()
     snapshot.appendSections(sections)
     dataSource.apply(snapshot, animatingDifferences: false)
+  }
+}
+
+extension TestAddTodoViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard
+      let item = self.dataSource.itemIdentifier(for: indexPath),
+      let homie = item.homie
+    else {
+      return
+    }
+
+    if item.hasChild {
+      let isExpanded = individualSectionSnapShot.isExpanded(item)
+
+      isExpanded ?
+      individualSectionSnapShot.collapse([item])
+      :
+      individualSectionSnapShot.expand([item])
+      self.dataSource.apply(individualSectionSnapShot, to: .individual, animatingDifferences: true)
+
+    }
   }
 }
