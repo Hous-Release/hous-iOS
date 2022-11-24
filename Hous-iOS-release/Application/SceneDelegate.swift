@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     let homies: [TestHomie] = [
-      .init(name: "호세", color: .brown, selectedDay: [.fri])
+      .init(name: "호세", color: .brown, selectedDay: [.fri]),
+      .init(name: "지현", color: .cyan, selectedDay: [.mon])
     ]
 
     window.rootViewController = TestAddTodoViewController(homies)

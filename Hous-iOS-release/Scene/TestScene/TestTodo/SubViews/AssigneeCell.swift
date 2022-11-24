@@ -17,20 +17,21 @@ final internal class AssigneeCell: UICollectionViewCell {
     static let verticalMargin: CGFloat = 4
     static let horizontalMargin: CGFloat = 6
     static let distance: CGFloat = 4
+    static let radius: CGFloat = 6
   }
 
   private let containerView: UIView = {
     let view = UIView()
     view.backgroundColor = Colors.g1.color
     view.layer.cornerCurve = .continuous
-    view.layer.cornerRadius = 6
+    view.layer.cornerRadius = Constants.radius
     return view
   }()
 
   private let colorLabel: UIView = {
     let view = UIView()
-    view.layer.cornerRadius = 6
     view.layer.cornerCurve = .circular
+    view.layer.cornerRadius = Constants.radius
     return view
   }()
 
@@ -56,17 +57,20 @@ final internal class AssigneeCell: UICollectionViewCell {
   func setupViews() {
     contentView.backgroundColor = Colors.white.color
     contentView.addSubview(containerView)
+
     containerView.addSubview(colorLabel)
     containerView.addSubview(homieNamelabel)
 
     containerView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
+
     colorLabel.snp.makeConstraints { make in
       make.size.equalTo(Constants.colorViewSize)
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(Constants.horizontalMargin)
     }
+
     homieNamelabel.snp.makeConstraints { make in
       make.leading.equalTo(colorLabel.snp.trailing).offset(Constants.distance)
       make.top.bottom.equalToSuperview().inset(Constants.verticalMargin)
