@@ -121,7 +121,7 @@ extension MemberTodoViewController {
         var backgroundConfig = UIBackgroundConfiguration.listGroupedCell()
         backgroundConfig.backgroundColor = Colors.g1.color
         backgroundConfig.cornerRadius = 8
-        backgroundConfig.backgroundInsets = NSDirectionalEdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0)
+        backgroundConfig.backgroundInsets = NSDirectionalEdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0)
         cell.backgroundConfiguration = backgroundConfig
         cell.tintColor = Colors.g4.color
         return cell
@@ -131,12 +131,14 @@ extension MemberTodoViewController {
           using: todoCell,
           for: indexPath,
           item: todolItem)
+        cell.isUserInteractionEnabled = false
         return cell
       case .empty(let guideText):
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: emptyCell,
           for: indexPath,
           item: guideText)
+        cell.isUserInteractionEnabled = false
         return cell
       }
     }
