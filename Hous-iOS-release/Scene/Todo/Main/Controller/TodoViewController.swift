@@ -18,6 +18,13 @@ import ReactorKit
 final class TodoViewController: UIViewController, View {
   typealias Reactor = TodoViewReactor
 
+  private enum Size {
+    static let todoItemHeight: CGFloat = 30
+    static let emptyItemHeight: CGFloat = 60
+    static let headerItemHeight: CGFloat = 48
+    static let footerItmeHeight: CGFloat = 40
+  }
+
   var disposeBag = DisposeBag()
   var mainView = TodoView()
 
@@ -163,8 +170,8 @@ extension TodoViewController {
           header.setHeader(.ourTodo, 0)
         }
 
-        // 만약 ourtodo header 일 때만 버튼 action 활성화
-        if indexPath.section == 2 {
+        // ourtodo 관련 header 일 때만 버튼 action 활성화
+        if indexPath.section >= 2 {
           self.bindHeaderGuideButton(header, at: indexPath)
         }
 
@@ -215,10 +222,12 @@ extension TodoViewController {
 
     let attributes = self.mainView.todoCollectionView.layoutAttributesForItem(at: indexPath)
     let point = self.mainView.todoCollectionView.frame.origin.y
-    let offset = self.mainView.todoCollectionView.contentOffset.y
+    let scrollOffset = self.mainView.todoCollectionView.contentOffset.y
     let attributesCenter = attributes?.center ?? CGPoint(x: 0, y: 0)
+    let currentTodoCount = reactor?.currentState.ourTodosSection.items.count
 
-    return attributesCenter.y + point - offset
+    let boxOffset = attributesCenter.y + point - scrollOffset
+    return currentTodoCount == 0 ? boxOffset - 15 : boxOffset
   }
 }
 
@@ -226,17 +235,24 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if indexPath.section == 1 || indexPath.section == 3 {
-      return CGSize(width: UIScreen.main.bounds.width, height: 60)
+      return CGSize(width: UIScreen.main.bounds.width, height: Size.emptyItemHeight)
     } else {
-      return CGSize(width: UIScreen.main.bounds.width, height: 30)
+      return CGSize(width: UIScreen.main.bounds.width, height: Size.todoItemHeight)
     }
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    if section == 1 || section == 3 {
-      return .zero
+
+    let headerSize = CGSize(width: UIScreen.main.bounds.width, height: Size.headerItemHeight)
+    // ourTodo 개수 0일 땐 empty header 사용
+    if reactor?.currentState.ourTodosSection.items.count == 0 {
+
+      return (section == 1 || section == 3) ? headerSize : .zero
+
     } else {
-      return CGSize(width: UIScreen.main.bounds.width, height: 48)
+
+      return (section == 1 || section == 3) ? .zero : headerSize
+
     }
   }
 
@@ -244,7 +260,7 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
     if section == 0 || section == 2 {
       return .zero
     } else {
-      return CGSize(width: UIScreen.main.bounds.width, height: 40)
+      return CGSize(width: UIScreen.main.bounds.width, height: Size.footerItmeHeight)
     }
   }
 }
