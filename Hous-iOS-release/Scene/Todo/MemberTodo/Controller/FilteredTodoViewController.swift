@@ -80,7 +80,6 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
     super.viewDidLoad()
     setup()
     render()
-    bindNavRightButton()
     self.reactor = Reactor(provider: self.serviceProvider)
 
   }
@@ -88,6 +87,7 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
   func bind(reactor: Reactor) {
     bindAction(reactor)
     bindState(reactor)
+    bindNavRightButton()
   }
 }
 
@@ -127,6 +127,14 @@ extension FilteredTodoViewController {
       .map { reactor.currentState.homies }
       .asDriver(onErrorJustReturn: [])
       .drive(onNext: self.transferToAddTodoViewController)
+      .disposed(by: disposeBag)
+  }
+
+  private func bindNavRightButton() {
+    navigationBar.rightButton.rx.tap
+      .subscribe { [weak self] _ in
+        self?.viewType == .member ? (self?.viewType = .byDay) : (self?.viewType = .member)
+      }
       .disposed(by: disposeBag)
   }
 }
@@ -190,14 +198,6 @@ extension FilteredTodoViewController {
       make.bottom.trailing.equalToSuperview().inset(40)
       make.size.equalTo(Size.floatingButtonSize)
     }
-  }
-
-  private func bindNavRightButton() {
-    navigationBar.rightButton.rx.tap
-      .subscribe { [weak self] _ in
-        self?.viewType == .member ? (self?.viewType = .byDay) : (self?.viewType = .member)
-      }
-      .disposed(by: disposeBag)
   }
 }
 
