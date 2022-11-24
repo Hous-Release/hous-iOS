@@ -61,6 +61,24 @@ extension UpdateTodoHomieModel.Day {
       return "일"
     }
   }
+  public var asDTO: String {
+    switch self {
+    case .mon:
+      return "MONDAY"
+    case .tue:
+      return "TUESDAY"
+    case .wed:
+      return "WEDNESDAY"
+    case .thu:
+      return "THURSDAY"
+    case .fri:
+      return "FRIDAY"
+    case .sat:
+      return "SATURDAY"
+    case .sun:
+      return "SUNDAY"
+    }
+  }
 }
 extension String {
   func returnDay() -> UpdateTodoHomieModel.Day? {

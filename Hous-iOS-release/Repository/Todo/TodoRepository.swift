@@ -22,6 +22,7 @@ public enum TodoRepositoryEvent {
   case ourTodosEmptySection(TodoMainSection.Model)
   case getModifyingTodo(UpdateTodoReactor.State)
   case getMembers([UpdateTodoHomieModel])
+  case isSuccess(Bool)
   case sendError(HouseErrorModel?)
 }
 
@@ -30,6 +31,11 @@ public protocol TodoRepository {
   func fetchTodo()
   func fetchModifyingTodo(_ id: Int)
   func fetchHomie()
+  func addTodo(
+    isOnPushNotification: Bool,
+    name: String,
+    _ homies: [UpdateTodoHomieModel]
+  )
 }
 
 public final class TodoRepositoryImp: BaseService, TodoRepository {
@@ -140,6 +146,50 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       }
 
       self.event.onNext(.getMembers(homies))
+    }
+  }
+  public func addTodo(
+    isOnPushNotification: Bool,
+    name: String,
+    _ homies: [UpdateTodoHomieModel]
+  ) {
+
+
+    let homiesDTO = homies.map { homie -> TodoUser? in
+      guard !homie.selectedDay.isEmpty else { return nil }
+
+      return TodoUser(
+        color: homie.color.rawValue,
+        dayOfWeeks: homie.selectedDay.map { $0.asDTO },
+        isSelected: nil,
+        nickname: homie.name,
+        onboardingID: homie.onboardingID
+      )
+    }
+      .compactMap { $0 }
+
+    let dto = UpdateTodoDTO.ModifyTodo(
+      isPushNotification: isOnPushNotification,
+      name: name,
+      selectedUsers: nil,
+      todoUsers: homiesDTO
+    )
+
+    NetworkService.shared.mainTodoRepository.addTodo(dto) { [weak self] res, err in
+      guard let self = self else { return }
+      guard  res?.data != nil else {
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+        self.event.onNext(.isSuccess(false))
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      self.event.onNext(.isSuccess(true))
+
     }
   }
 }

@@ -88,13 +88,21 @@ final class UpdateTodoViewController: UIViewController, View {
 extension UpdateTodoViewController {
   func bindAction(_ reactor: Reactor) {
     bindViewWillAppearAction(reactor)
+    bindDidEnterTodoAciton(reactor)
     bindTapIndividualAction(reactor)
     bindTapDayAction(reactor)
+    bindTapUpdateAction(reactor)
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
     rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
       .map { _ in Reactor.Action.fetch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  func bindDidEnterTodoAciton(_ reactor: Reactor) {
+    todoTextField.rx.text
+      .map { Reactor.Action.enterTodo($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -109,6 +117,12 @@ extension UpdateTodoViewController {
     tapDay
       .map { Reactor.Action.didTapDays($0.0, id: $0.id) }
       .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  func bindTapUpdateAction(_ reactor: Reactor) {
+    actionButton.rx.tap
+      .asDriver()
+      .drive(onNext: self.tappedUpdate)
       .disposed(by: disposeBag)
   }
 }
@@ -159,6 +173,10 @@ extension UpdateTodoViewController {
 }
 
 extension UpdateTodoViewController {
+
+  private func tappedUpdate() {
+    self.reactor?.action.onNext(.didTapUpdate)
+  }
 
   private func tappedDayCell(_ tuple: (days: [UpdateTodoHomieModel.Day], id: Int)?) {
 
