@@ -20,7 +20,7 @@ final class FilteredTodoReactor: Reactor {
 
   enum Action {
     case viewWillAppear
-    case didTapAdd
+    case didTapPlusButton
   }
 
   enum Mutation {
@@ -42,7 +42,7 @@ final class FilteredTodoReactor: Reactor {
       provider.todoRepository.fetchHomie()
       return .empty()
 
-    case .didTapAdd:
+    case .didTapPlusButton:
       return .just(.setTransfer)
     }
   }

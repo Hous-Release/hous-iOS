@@ -5,6 +5,7 @@
 //  Created by 김호세 on 2022/11/17.
 //
 
+import AssetKit
 import ReactorKit
 import RxCocoa
 import RxSwift
@@ -25,12 +26,15 @@ final class UpdateTodoViewController: UIViewController, View {
   private struct Constants {
     static let verticalMargin: CGFloat = 16
     static let horizontalMargin: CGFloat = 24
-    static let buttonHeight: CGFloat = 38
+    static let buttonHeight: CGFloat = 44
   }
 
+  private lazy var navigationBar = NavBarWithBackButtonView(title: "")
   private var collectionView: UICollectionView!
-
   private var todoTextField: HousTextField!
+
+  private var actionButton: UIButton!
+
 
   internal var disposeBag: DisposeBag = DisposeBag()
   private var dataSource: DataSource! = nil
@@ -53,6 +57,7 @@ final class UpdateTodoViewController: UIViewController, View {
     applyInitialSnapshots()
 
     self.reactor = reactor
+
   }
 
   required init?(coder: NSCoder) {
@@ -61,6 +66,11 @@ final class UpdateTodoViewController: UIViewController, View {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setupNavigationBar()
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -199,22 +209,61 @@ extension UpdateTodoViewController {
   }
 
   private func setupLayout() {
+    view.addSubView(navigationBar)
     view.addSubView(todoTextField)
+    view.addSubView(actionButton)
     view.addSubView(collectionView)
 
+    navigationBar.snp.makeConstraints { make in
+      make.height.equalTo(64)
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+    }
     todoTextField.snp.makeConstraints { make in
       make.height.equalTo(22)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(32)
+      make.top.equalTo(navigationBar.snp.bottom).offset(32)
     }
+
+    actionButton.snp.makeConstraints { make in
+      make.height.equalTo(Constants.buttonHeight)
+      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.verticalMargin)
+      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
+    }
+
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(todoTextField.snp.bottom).offset(46)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalToSuperview()
+      make.bottom.equalTo(actionButton.snp.top).offset(-Constants.verticalMargin / 2)
     }
   }
 
+  private func setupNavigationBar() {
+    guard let reactor = reactor else {
+      return
+    }
+
+    let navTitle = reactor.initialState.isModifying ?
+    "to-do 수정"
+    :
+    "새로운 to-do 추가"
+
+    let buttonTilte = reactor.initialState.isModifying ?
+    "저장하기"
+    :
+    "추가하기"
+
+    // TODO: 추가하기
+
+//    navigationBar.rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+//    navigationBar.rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .selected)
+    navigationBar.title = navTitle
+    actionButton.setTitle(buttonTilte, for: .normal)
+  }
+
   private func setupView() {
+
+    view.backgroundColor = Colors.white.color
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
@@ -225,6 +274,11 @@ extension UpdateTodoViewController {
       maxCount: 15,
       exceedString: "어쩔티비"
     )
+    actionButton = UIButton()
+    actionButton.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    actionButton.setTitleColor(Colors.white.color, for: .normal)
+    actionButton.backgroundColor = Colors.blue.color
+    actionButton.layer.cornerRadius = 5
   }
 
   /// - Tag: CreateFullLayout
