@@ -24,14 +24,14 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
-    case setIsClearSelectedMem(Bool?)
+    case setSelectedMemIndexPathRow(Int?)
     case setMembers(MemberSection.Model?)
     case setSelectedMember([MemberHeaderItem]?)
     case setError(String?)
   }
 
   struct State {
-    @Pulse var isClearSelectedMem: Bool?
+    @Pulse var selectedMemIndexPathRow: Int?
     var membersSection = MemberSection.Model(
       model: .members(num: 0),
       items: []
@@ -45,11 +45,14 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      provider.memberRepository.fetchMember()
-      return .just(Mutation.setIsClearSelectedMem(true))
+      let currentRow = currentState.selectedMemIndexPathRow ?? 0
+
+      provider.memberRepository.fetchMember(currentRow)
+      return .just(Mutation.setSelectedMemIndexPathRow(currentRow))
+
     case let .didTapMemberCell(row):
       provider.memberRepository.selectMember(row)
-      return .empty()
+      return .just(Mutation.setSelectedMemIndexPathRow(row))
     }
   }
 
@@ -58,8 +61,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
-    case let .setIsClearSelectedMem(flag):
-      newState.isClearSelectedMem = flag
+    case let .setSelectedMemIndexPathRow(row):
+      newState.selectedMemIndexPathRow = row
     case let .setMembers(data):
       newState.membersSection = data ?? MemberSection.Model(
         model: .members(num: 0),
