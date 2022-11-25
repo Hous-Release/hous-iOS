@@ -29,6 +29,7 @@ public final class UpdateTodoReactor: Reactor {
     case didTapUpdate
     case updateHomie([UpdateTodoHomieModel])
     case back(Bool)
+    case didTapAlarm
   }
 
   public enum Mutation {
@@ -83,9 +84,8 @@ public final class UpdateTodoReactor: Reactor {
       //TODO: - 수정 API
       }
       else {
-        // TODO: 값 바꾸줘기 푸시
-        provider.todoRepository.addTodo(
-          isOnPushNotification: false,
+        provider.todoRepository.updateTodo(
+          isOnPushNotification: currentState.isPushNotification,
           name: currentState.todo ?? "",
           currentState.todoHomies
         )
@@ -97,6 +97,8 @@ public final class UpdateTodoReactor: Reactor {
     case .back(let backFlag):
       return .just(.setBack(backFlag))
 
+    case .didTapAlarm:
+      return .just(.setNotification(!currentState.isPushNotification))
     }
   }
 

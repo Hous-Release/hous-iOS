@@ -31,7 +31,7 @@ public protocol TodoRepository {
   func fetchTodo()
   func fetchModifyingTodo(_ id: Int)
   func fetchHomie()
-  func addTodo(
+  func updateTodo(
     isOnPushNotification: Bool,
     name: String,
     _ homies: [UpdateTodoHomieModel]
@@ -148,7 +148,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       self.event.onNext(.getMembers(homies))
     }
   }
-  public func addTodo(
+  public func updateTodo(
     isOnPushNotification: Bool,
     name: String,
     _ homies: [UpdateTodoHomieModel]
@@ -175,7 +175,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       todoUsers: homiesDTO
     )
 
-    NetworkService.shared.mainTodoRepository.addTodo(dto) { [weak self] res, err in
+    NetworkService.shared.mainTodoRepository.updateTodo(dto) { [weak self] res, err in
       guard let self = self else { return }
       guard
         let isSuccess = res?.success,
