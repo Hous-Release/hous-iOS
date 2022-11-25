@@ -63,10 +63,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios staging
+### ios development
 
 ```sh
-[bundle exec] fastlane ios staging
+[bundle exec] fastlane ios development
 ```
 
 Push a new beta build to TestFlight
