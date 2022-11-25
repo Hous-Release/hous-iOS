@@ -80,16 +80,12 @@ public final class UpdateTodoReactor: Reactor {
       return .just(.setDay(days, id))
     case .didTapUpdate:
 
-      if initialState.isModifying {
-      //TODO: - 수정 API
-      }
-      else {
-        provider.todoRepository.updateTodo(
-          isOnPushNotification: currentState.isPushNotification,
-          name: currentState.todo ?? "",
-          currentState.todoHomies
-        )
-      }
+      provider.todoRepository.updateTodo(
+        id: currentState.id,
+        isOnPushNotification: currentState.isPushNotification,
+        name: currentState.todo ?? "",
+        currentState.todoHomies
+      )
       return .empty()
     case .updateHomie(let homies):
       return .just(.setHomies(homies))
