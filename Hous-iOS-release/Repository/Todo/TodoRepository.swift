@@ -32,6 +32,7 @@ public protocol TodoRepository {
   func fetchModifyingTodo(_ id: Int)
   func fetchHomie()
   func updateTodo(
+    id: Int?,
     isOnPushNotification: Bool,
     name: String,
     _ homies: [UpdateTodoHomieModel]
@@ -149,6 +150,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
     }
   }
   public func updateTodo(
+    id: Int? = nil,
     isOnPushNotification: Bool,
     name: String,
     _ homies: [UpdateTodoHomieModel]
@@ -175,7 +177,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       todoUsers: homiesDTO
     )
 
-    NetworkService.shared.mainTodoRepository.updateTodo(dto) { [weak self] res, err in
+    NetworkService.shared.mainTodoRepository.updateTodo(id, dto) { [weak self] res, err in
       guard let self = self else { return }
       guard
         let isSuccess = res?.success,
