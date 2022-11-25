@@ -92,6 +92,7 @@ extension UpdateTodoViewController {
     bindTapIndividualAction(reactor)
     bindTapDayAction(reactor)
     bindTapUpdateAction(reactor)
+    bindTapAlarmAction(reactor)
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
@@ -126,6 +127,12 @@ extension UpdateTodoViewController {
       .drive(onNext: self.tappedUpdate)
       .disposed(by: disposeBag)
   }
+  func bindTapAlarmAction(_ reactor: Reactor) {
+    navigationBar.rightButton.rx.tap
+      .map { _ in Reactor.Action.didTapAlarm }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
 }
 
   // MARK: - State Bind
@@ -143,8 +150,7 @@ extension UpdateTodoViewController {
     reactor.state.map(\.isPushNotification)
       .distinctUntilChanged()
     // TODO: - bind로 유아이 바꾸기
-      .asDriver(onErrorJustReturn: false)
-      .drive()
+      .bind(to: navigationBar.rightButton.rx.isSelected)
       .disposed(by: disposeBag)
   }
   func bindTodoState(_ reactor: Reactor) {
@@ -285,10 +291,9 @@ extension UpdateTodoViewController {
     :
     "추가하기"
 
-    // TODO: 추가하기
-
-//    navigationBar.rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
-//    navigationBar.rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .selected)
+    navigationBar.rightButton.setImage(Images.icAlarmoff.image, for: .normal)
+    navigationBar.rightButton.setImage(Images.icAlarmon.image, for: .selected)
+    navigationBar.rightButton.backgroundColor = Colors.white.color
     navigationBar.title = navTitle
     actionButton.setTitle(buttonTilte, for: .normal)
   }
