@@ -14,12 +14,12 @@ class HousTabbarViewController: UITabBarController {
   
   var firstCreatedSubject = PublishSubject<String>()
 
-  public let housTabBar: HousTabBar = {
+  internal let housTabBar: HousTabBar = {
     let tabbar = HousTabBar()
     return tabbar
   }()
 
-  private let backgroundView: UIView = {
+  public let backgroundView: UIView = {
     let view = UIView()
     view.layer.applySketchShadow(color: Colors.black.color, alpha: 0.05, x: 0, y: -4, blur: 10, spread: 0)
     view.layer.cornerRadius = 20
