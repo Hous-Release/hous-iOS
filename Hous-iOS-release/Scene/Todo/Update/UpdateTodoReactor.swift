@@ -39,6 +39,7 @@ public final class UpdateTodoReactor: Reactor {
     case setIndividual(IndexPath)
     case setDay([UpdateTodoHomieModel.Day], Int)
     case setBack(Bool)
+    case sendError(String?)
   }
 
   public struct State {
@@ -54,6 +55,8 @@ public final class UpdateTodoReactor: Reactor {
 
     @Pulse
     var isBack: Bool = false
+    @Pulse
+    var errorMessage: String? = nil
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
@@ -113,6 +116,8 @@ public final class UpdateTodoReactor: Reactor {
       newState.didTappedDay = (days, id)
     case .setBack(let backFlag):
       newState.isBack = backFlag
+    case .sendError(let errorMessage):
+      newState.errorMessage = errorMessage
     }
     return newState
   }
@@ -134,6 +139,9 @@ public extension UpdateTodoReactor {
 
       case .isSuccess(let isSuccess):
         return .just(.setBack(isSuccess))
+      case .sendError(let sendError):
+        return .just(.sendError(sendError?.message))
+
       default:
         return .empty()
       }
