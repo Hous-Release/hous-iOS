@@ -209,12 +209,15 @@ final class ProfileTestViewController: UIViewController {
             self.testCountLabel.text = "\(questionNum + 1) / \(self.data.count)"
             break
           }
+          self.testCollectionView.reloadData()
           self.scrollForward()
           self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
         case .didTabBackward:
+          self.testCollectionView.reloadData()
           self.scrollBackward()
           self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
         case .didTabForward:
+          self.testCollectionView.reloadData()
           self.scrollForward()
           self.viewModel.selectedDataSubject.onNext(self.viewModel.selectedData)
         case .didTabQuit:
