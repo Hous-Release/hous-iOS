@@ -22,7 +22,7 @@ public enum ByDayRepositoryEvent {
 
 public protocol ByDayRepository {
   var event: PublishSubject<ByDayRepositoryEvent> { get }
-  func fetchTodo()
+  func fetchTodo(_: Int)
   func selectDaysOfWeek(_: Int)
 }
 
@@ -30,7 +30,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
   public var event = PublishSubject<ByDayRepositoryEvent>()
   public var todos: ByDayTodoDTO.Response.ByDayTodosResponseDTO?
 
-  public func fetchTodo() {
+  public func fetchTodo(_ row: Int) {
 
     NetworkService.shared.byDayTodoRepository.getDaysOfWeekTodosData { [weak self] res, err in
 
@@ -45,7 +45,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
       }
 
       self.todos = data
-      self.onNextEvents(data: data, row: 0)
+      self.onNextEvents(data: data, row: row)
     }
   }
 
