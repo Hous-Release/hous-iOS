@@ -50,6 +50,7 @@ extension MemberTodoViewController {
 
 extension MemberTodoViewController {
   private func bindAction(_ reactor: Reactor) {
+
     rx.viewWillAppear
       .map { _ in Reactor.Action.fetch }
       .bind(to: reactor.action)
@@ -77,12 +78,12 @@ extension MemberTodoViewController {
       }
     }
 
-    reactor.pulse(\.$isClearSelectedMem)
+    reactor.pulse(\.$selectedMemIndexPathRow)
       .compactMap { $0 }
-      .subscribe(onNext: { [weak self] _ in
+      .subscribe(onNext: { [weak self] row in
         guard let self = self else { return }
         self.mainView.memberCollectionView.selectItem(
-          at: IndexPath(row: 0, section: 0),
+          at: IndexPath(row: row, section: 0),
           animated: false,
           scrollPosition: [])
       })

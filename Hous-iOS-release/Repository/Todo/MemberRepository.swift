@@ -18,7 +18,7 @@ public enum MemberRepositoryEvent {
 
 public protocol MemberRepository {
   var event: PublishSubject<MemberRepositoryEvent> { get }
-  func fetchMember()
+  func fetchMember(_: Int)
   func selectMember(_: Int)
 }
 
@@ -26,7 +26,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
   public var event = PublishSubject<MemberRepositoryEvent>()
   public var todos: [[DayOfWeekTodoDTO]]?
 
-  public func fetchMember() {
+  public func fetchMember(_ row: Int) {
     NetworkService.shared.memberTodoRepository.getMemberTodosData { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
@@ -50,8 +50,8 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
 
       let todos = data.map { self.parseMemberTodoWIthID($0.dayOfWeekTodos) }
       self.todos = todos
-      guard let firstMemTodo = todos.first else { return }
-      self.event.onNext(.selectedMember(firstMemTodo))
+      let selectedMemTodo = todos[row]
+      self.event.onNext(.selectedMember(selectedMemTodo))
     }
   }
 
