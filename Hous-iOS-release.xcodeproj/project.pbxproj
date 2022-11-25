@@ -1812,7 +1812,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1846,7 +1846,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1943,7 +1943,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2040,7 +2040,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2131,7 +2131,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2222,7 +2222,7 @@
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Hous(Dev)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
