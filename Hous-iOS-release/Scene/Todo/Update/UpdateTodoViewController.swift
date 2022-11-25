@@ -93,6 +93,7 @@ extension UpdateTodoViewController {
     bindTapDayAction(reactor)
     bindTapUpdateAction(reactor)
     bindTapAlarmAction(reactor)
+    bindReturnKeyAction()
   }
 
   func bindViewWillAppearAction(_ reactor: Reactor) {
@@ -131,6 +132,15 @@ extension UpdateTodoViewController {
     navigationBar.rightButton.rx.tap
       .map { _ in Reactor.Action.didTapAlarm }
       .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+  func bindReturnKeyAction() {
+    todoTextField.rx.controlEvent(.editingDidEndOnExit)
+      .map { _ in true }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: { [weak self] endEditing in
+        self?.view.endEditing(endEditing)
+      })
       .disposed(by: disposeBag)
   }
 }
@@ -311,6 +321,8 @@ extension UpdateTodoViewController {
       maxCount: 15,
       exceedString: "어쩔티비"
     )
+    todoTextField.returnKeyType = .done
+
     actionButton = UIButton()
     actionButton.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     actionButton.setTitleColor(Colors.white.color, for: .normal)
