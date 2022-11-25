@@ -28,6 +28,7 @@ public final class UpdateTodoReactor: Reactor {
     case didTapDays([UpdateTodoHomieModel.Day], id: Int)
     case didTapUpdate
     case updateHomie([UpdateTodoHomieModel])
+    case back(Bool)
   }
 
   public enum Mutation {
@@ -36,6 +37,7 @@ public final class UpdateTodoReactor: Reactor {
     case setHomies([UpdateTodoHomieModel])
     case setIndividual(IndexPath)
     case setDay([UpdateTodoHomieModel.Day], Int)
+    case setBack(Bool)
   }
 
   public struct State {
@@ -48,6 +50,9 @@ public final class UpdateTodoReactor: Reactor {
     var didTappedIndividual: IndexPath? = nil
     @Pulse
     var didTappedDay: ([UpdateTodoHomieModel.Day], Int)? = nil
+
+    @Pulse
+    var isBack: Bool = false
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
@@ -88,6 +93,10 @@ public final class UpdateTodoReactor: Reactor {
       return .empty()
     case .updateHomie(let homies):
       return .just(.setHomies(homies))
+
+    case .back(let backFlag):
+      return .just(.setBack(backFlag))
+
     }
   }
 
@@ -104,6 +113,8 @@ public final class UpdateTodoReactor: Reactor {
       newState.didTappedIndividual = indexPath
     case .setDay(let days, let id):
       newState.didTappedDay = (days, id)
+    case .setBack(let backFlag):
+      newState.isBack = backFlag
     }
     return newState
   }
@@ -124,9 +135,7 @@ public extension UpdateTodoReactor {
         ])
 
       case .isSuccess(let isSuccess):
-        // TODO: 화면 뒤로 전환하기.
-        return .empty()
-
+        return .just(.setBack(isSuccess))
       default:
         return .empty()
       }
