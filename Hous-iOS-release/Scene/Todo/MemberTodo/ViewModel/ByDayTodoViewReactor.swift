@@ -24,6 +24,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
+    case setSelectedDayIndexPathRow(Int?)
     case setCountTodoSection(ByDayTodoSection.Model)
     case setMyTodosByDaySection(ByDayTodoSection.Model)
     case setMyTodosEmptySection(ByDayTodoSection.Model)
@@ -34,6 +35,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   }
 
   struct State {
+    @Pulse var selectedDayIndexPathRow: Int?
     var countTodoSection = ByDayTodoSection.Model(model: .countTodo, items: [])
     var myTodosByDaySection = ByDayTodoSection.Model(
       model: .myTodo(num: 0),
@@ -51,11 +53,15 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      provider.byDayRepository.fetchTodo()
+      
+      let currentRow = currentState.selectedDayIndexPathRow ?? 0
+      provider.byDayRepository.fetchTodo(currentRow)
       return .empty()
+
     case let .didTapDaysOfWeekCell(row):
+
       provider.byDayRepository.selectDaysOfWeek(row)
-      return .empty()
+      return .just(Mutation.setSelectedDayIndexPathRow(row))
     }
   }
 
@@ -65,6 +71,8 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
     switch mutation {
 
+    case let .setSelectedDayIndexPathRow(row):
+      newState.selectedDayIndexPathRow = row
     case let .setCountTodoSection(cnt):
       newState.countTodoSection = cnt
     case let .setMyTodosByDaySection(myTodo):
