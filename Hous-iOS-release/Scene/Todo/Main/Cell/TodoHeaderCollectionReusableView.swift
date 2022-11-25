@@ -40,6 +40,10 @@ final class TodoHeaderCollectionReusableView: UICollectionReusableView {
     $0.setImage(Images.icHelp.image, for: .normal)
   }
 
+  override func prepareForReuse() {
+    disposeBag = DisposeBag()
+  }
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()

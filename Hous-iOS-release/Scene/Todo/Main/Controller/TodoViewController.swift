@@ -225,7 +225,7 @@ extension TodoViewController {
     let scrollOffset = self.mainView.todoCollectionView.contentOffset.y
     let attributesCenter = attributes?.center ?? CGPoint(x: 0, y: 0)
     let currentTodoCount = reactor?.currentState.ourTodosSection.items.count
-
+    //print("point: \(point), scrollOffset : \(scrollOffset), attributesCenter: \(attributesCenter.y)")
     let boxOffset = attributesCenter.y + point - scrollOffset
     return currentTodoCount == 0 ? boxOffset - 15 : boxOffset
   }
