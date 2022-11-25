@@ -25,6 +25,7 @@ protocol MainTodoAPIProtocol {
     ) -> Void
   )
   func updateTodo(
+    _ id: Int?,
     _ dto: UpdateTodoDTO.ModifyTodo,
     completion: @escaping (BaseResponseType<String>?, Error?
     ) -> Void
@@ -33,12 +34,13 @@ protocol MainTodoAPIProtocol {
 
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
   public func updateTodo(
+    _ id: Int? = nil,
     _ dto: UpdateTodoDTO.ModifyTodo,
     completion: @escaping (BaseResponseType<String>?, Error?
     ) -> Void
   ) {
     fetchData(
-      target: .updateTodo(dto),
+      target: .updateTodo(id, dto),
       responseData: BaseResponseType<String>.self
     ) { res, err in
       completion(res, err)
