@@ -77,6 +77,17 @@ extension MemberTodoViewController {
       }
     }
 
+    reactor.pulse(\.$isClearSelectedMem)
+      .compactMap { $0 }
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.mainView.memberCollectionView.selectItem(
+          at: IndexPath(row: 0, section: 0),
+          animated: false,
+          scrollPosition: [])
+      })
+      .disposed(by: disposeBag)
+
     reactor.state.map { [$0.membersSection] }
       .distinctUntilChanged()
       .asDriver(onErrorJustReturn: [])
