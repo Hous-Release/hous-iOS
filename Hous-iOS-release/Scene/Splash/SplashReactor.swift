@@ -125,7 +125,7 @@ extension SplashReactor {
 
 extension SplashReactor {
   private func refresh() -> Observable<Mutation> {
-    let accessToken = Keychain.shared.getAccessToken() ?? "eyJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjozLCJleHAiOjE2OTc5NjM0ODh9.yG1Jc3FngP7zzJtj_1v4fw0PwrAhu8ovS1rMo7ob_uzbrqgDoYZXKVIpuwkWdZ5W0ySlCYgvW--e4e8N2KMLdw"
+    let accessToken = Keychain.shared.getAccessToken() ?? ""
     let refreshToken = Keychain.shared.getRefreshToken() ?? ""
 
     provider.authRepository.refresh(accessToken, refreshToken)
