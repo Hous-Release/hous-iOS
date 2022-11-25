@@ -154,6 +154,7 @@ extension UpdateTodoViewController {
     bindDidTapIndividualState(reactor)
     bindDidTapDayState(reactor)
     bindBackState(reactor)
+    bindErrorState(reactor)
   }
 
   func bindPushNotificationState(_ reactor: Reactor) {
@@ -194,9 +195,22 @@ extension UpdateTodoViewController {
       .drive(onNext: self.back)
       .disposed(by: disposeBag)
   }
+  func bindErrorState(_ reactor: Reactor) {
+    reactor.pulse(\.$errorMessage)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.showErrorToast)
+      .disposed(by: disposeBag)
+  }
 }
 
 extension UpdateTodoViewController {
+
+  private func showErrorToast(_ errorMessage: String?) {
+    guard let errorMessage = errorMessage else {
+      return
+    }
+    Toast.show(message: errorMessage, controller: self)
+  }
 
   private func back(_ backFlag: Bool) {
     if backFlag {
@@ -315,6 +329,7 @@ extension UpdateTodoViewController {
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
 
+    // TODO: - 경고문구가 뭔지 모르겠어요
     todoTextField = HousTextField(
       "Todo 입력",
       useMaxCount: true,
