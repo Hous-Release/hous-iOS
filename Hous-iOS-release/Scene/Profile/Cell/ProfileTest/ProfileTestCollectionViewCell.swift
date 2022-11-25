@@ -21,6 +21,12 @@ class TestCollectionViewCell: UICollectionViewCell {
   let cellActionControlSubject = PublishSubject<ProfileTestActionControl>()
 
   weak var delegate: TestCollectionViewCellDelegate?
+  
+  private enum Size {
+    static let screenWidth = UIScreen.main.bounds.width
+    static let screenHeight = UIScreen.main.bounds.height
+  }
+  
 
   private let testTitleLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
@@ -96,21 +102,23 @@ class TestCollectionViewCell: UICollectionViewCell {
   }
 
   private func render() {
-    self.addSubViews([testTitleLabel, testImageView, buttonStackView])
+    self.addSubViews([testImageView, buttonStackView, testTitleLabel])
 
     testTitleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview()
       make.centerX.equalToSuperview()
+      make.height.equalTo(56)
     }
 
     testImageView.snp.makeConstraints { make in
-      make.top.equalTo(testTitleLabel.snp.bottom).offset(18)
+      make.top.equalTo(testTitleLabel.snp.bottom).offset(20)
       make.centerX.equalTo(testTitleLabel)
-      make.width.height.equalTo(325)
+      make.width.equalTo(testImageView.snp.height)
     }
 
     buttonStackView.snp.makeConstraints { make in
-      make.top.equalTo(testImageView.snp.bottom).offset(30).multipliedBy(0.9)
+      make.top.equalTo(testImageView.snp.bottom).offset(30)
+      make.height.equalTo(Size.screenHeight * (212 / 812))
       make.centerX.equalTo(testImageView)
       make.leading.trailing.equalToSuperview().inset(24)
       make.bottom.equalToSuperview().offset(-45)
