@@ -177,7 +177,10 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
 
     NetworkService.shared.mainTodoRepository.addTodo(dto) { [weak self] res, err in
       guard let self = self else { return }
-      guard  res?.data != nil else {
+      guard
+        let isSuccess = res?.success,
+        isSuccess
+      else {
         let errorModel = HouseErrorModel(
           success: res?.success,
           status: res?.status,

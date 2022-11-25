@@ -121,7 +121,8 @@ extension UpdateTodoViewController {
   }
   func bindTapUpdateAction(_ reactor: Reactor) {
     actionButton.rx.tap
-      .asDriver()
+      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+      .asDriver(onErrorJustReturn: Void())
       .drive(onNext: self.tappedUpdate)
       .disposed(by: disposeBag)
   }
@@ -135,6 +136,7 @@ extension UpdateTodoViewController {
     bindHomiesState(reactor)
     bindDidTapIndividualState(reactor)
     bindDidTapDayState(reactor)
+    bindBackState(reactor)
   }
 
   func bindPushNotificationState(_ reactor: Reactor) {
@@ -170,9 +172,21 @@ extension UpdateTodoViewController {
       .drive(onNext: self.tappedDayCell)
       .disposed(by: disposeBag)
   }
+  func bindBackState(_ reactor: Reactor) {
+    reactor.pulse(\.$isBack)
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: self.back)
+      .disposed(by: disposeBag)
+  }
 }
 
 extension UpdateTodoViewController {
+
+  private func back(_ backFlag: Bool) {
+    if backFlag {
+      navigationController?.popViewController(animated: true)
+    }
+  }
 
   private func tappedUpdate() {
     self.reactor?.action.onNext(.didTapUpdate)
