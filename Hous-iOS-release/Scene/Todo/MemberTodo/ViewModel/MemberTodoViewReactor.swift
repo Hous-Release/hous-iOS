@@ -45,12 +45,13 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      let currentRow = currentState.selectedMemIndexPathRow ?? 0
 
+      let currentRow = currentState.selectedMemIndexPathRow ?? 0
       provider.memberRepository.fetchMember(currentRow)
-      return .just(Mutation.setSelectedMemIndexPathRow(currentRow))
+      return .empty()
 
     case let .didTapMemberCell(row):
+      
       provider.memberRepository.selectMember(row)
       return .just(Mutation.setSelectedMemIndexPathRow(row))
     }

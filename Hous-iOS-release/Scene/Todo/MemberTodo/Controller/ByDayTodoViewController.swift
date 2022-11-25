@@ -60,7 +60,17 @@ extension ByDayTodoViewController {
   }
 
   private func bindState(_ reactor: Reactor) {
-    
+
+    reactor.pulse(\.$selectedDayIndexPathRow)
+      .compactMap { $0 }
+      .subscribe(onNext: { [weak self] row in
+        guard let self = self else { return }
+        self.mainView.daysOfWeekCollectionview.selectItem(
+          at: IndexPath(row: row, section: 0),
+          animated: false,
+          scrollPosition: [])
+      })
+      .disposed(by: disposeBag)
   }
 }
 
