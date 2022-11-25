@@ -23,8 +23,10 @@ for_platform :ios do
     for_lane :sync_codesign_staging do
       app_identifier 'com.hous.Hous-iOS-release.staging'
     end
-  
-    # release
+
+    for_lane :staging do
+    	app_identifier 'com.hous.Hous-iOS-release.staging'
+    end
 
     for_lane :renew_codesign_release do
         app_identifier 'com.hous.Hous-iOS-release'
@@ -32,6 +34,10 @@ for_platform :ios do
 
     for_lane :sync_codesign_release do
       app_identifier 'com.hous.Hous-iOS-release'
+    end
+
+    for_lane :prod do
+        app_identifier 'com.hous.Hous-iOS-release'
     end
 
   end

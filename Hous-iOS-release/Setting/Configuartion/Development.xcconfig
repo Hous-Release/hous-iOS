@@ -12,4 +12,5 @@ PRODUCT_NAME = $(inherited)(Development)
 APP_BUNDLE_ID = com.hous.Hous-iOS-release.development
 APP_NAME = Hous(Dev)
 OTHER_LDFLAGS = -ObjC
+CFBundleDisplayName = Hous(Dev)
 //API_BASE_URL =

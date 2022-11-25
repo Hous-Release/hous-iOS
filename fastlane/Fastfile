@@ -26,15 +26,18 @@ platform :ios do
   end
 
   lane :renew_codesign_development do
+    renew_codesign(type:"appstore")
     renew_codesign(type:"development")
   end
 
   lane :renew_codesign_staging do
     renew_codesign(type:"appstore")
+    renew_codesign(type:"development")
   end
 
   lane :renew_codesign_release do
     renew_codesign(type:"appstore")
+    renew_codesign(type:"development")
   end
 
   # match 로드 (certificate, profile visioning)
@@ -43,25 +46,29 @@ platform :ios do
     match(type:options[:type], readonly: true)
   end
 
-  lane :sync_codesign_development do 
+  lane :sync_codesign_development do
+    sync_codesign(type:"appstore")
     sync_codesign(type:"development")
   end
 
   lane :sync_codesign_staging do
     sync_codesign(type:"appstore")
+    sync_codesign(type:"development")
   end
 
   lane :sync_codesign_release do
     sync_codesign(type:"appstore")
+    sync_codesign(type:"development")
   end
+
   desc "Push a new beta build to TestFlight"
-  lane :staging do
+  lane :development do
     increment_build_number({
       xcodeproj: "./Hous-iOS-release.xcodeproj",
-      build_number: latest_testflight_build_number(app_identifier: "com.hous.Hous-iOS-release.staging") + 1
+      build_number: latest_testflight_build_number(app_identifier: "com.hous.Hous-iOS-release.development") + 1
     })
     build_app(
-        scheme: "Hous-iOS-release(Staging)",
+        scheme: "Hous-iOS-release(Development)",
         output_directory: "./ipa"
     )
     upload_to_testflight(

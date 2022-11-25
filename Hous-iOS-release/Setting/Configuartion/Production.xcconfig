@@ -12,3 +12,4 @@ PRODUCT_NAME = $(inherited)
 APP_BUNDLE_ID = com.hous.Hous-iOS-release
 APP_NAME = Hous
 OTHER_LDFLAGS = -ObjC
+CFBundleDisplayName = Hous
