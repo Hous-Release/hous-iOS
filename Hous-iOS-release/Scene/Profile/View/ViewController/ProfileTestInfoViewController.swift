@@ -86,7 +86,7 @@ class ProfileTestInfoViewController: UIViewController {
     }
     
     testStartImageView.snp.makeConstraints { make in
-      make.top.equalTo(testNavigationBar.snp.bottom).offset(193)
+      make.centerY.equalToSuperview().offset(-100)
       make.centerX.equalToSuperview()
     }
     
