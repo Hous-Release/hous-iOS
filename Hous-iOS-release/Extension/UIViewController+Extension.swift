@@ -26,7 +26,7 @@ extension UIViewController {
   
   func setTabBarIsHidden(isHidden: Bool) {
     if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
-      tvc.housTabBar.isHidden = isHidden
+      tvc.backgroundView.isHidden = isHidden
     }
   }
 }
