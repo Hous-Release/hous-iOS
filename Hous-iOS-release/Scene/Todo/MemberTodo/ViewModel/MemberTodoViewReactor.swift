@@ -24,12 +24,14 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
+    case setIsClearSelectedMem(Bool?)
     case setMembers(MemberSection.Model?)
     case setSelectedMember([MemberHeaderItem]?)
     case setError(String?)
   }
 
   struct State {
+    @Pulse var isClearSelectedMem: Bool?
     var membersSection = MemberSection.Model(
       model: .members(num: 0),
       items: []
@@ -44,7 +46,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     switch action {
     case .fetch:
       provider.memberRepository.fetchMember()
-      return .empty()
+      return .just(Mutation.setIsClearSelectedMem(true))
     case let .didTapMemberCell(row):
       provider.memberRepository.selectMember(row)
       return .empty()
@@ -56,6 +58,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
+    case let .setIsClearSelectedMem(flag):
+      newState.isClearSelectedMem = flag
     case let .setMembers(data):
       newState.membersSection = data ?? MemberSection.Model(
         model: .members(num: 0),
