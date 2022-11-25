@@ -36,6 +36,7 @@ internal final class TodoBottomSheetViewController: UIViewController {
 
     setupViews()
     applyPanGesture()
+    applyTapGesture()
     bind()
   }
 
@@ -46,6 +47,14 @@ internal final class TodoBottomSheetViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     caculatePosition(bottomSheetView)
+  }
+  private func applyTapGesture() {
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+    rootView.addGestureRecognizer(tapGesture)
+  }
+  @objc
+  private func handleTapGesture() {
+    animateDismissView(.cancel)
   }
 
   private func applyPanGesture() {
@@ -84,7 +93,7 @@ internal final class TodoBottomSheetViewController: UIViewController {
   }
   private func setupViews() {
     view.addSubview(rootView)
-    rootView.addSubview(bottomSheetView)
+    view.addSubview(bottomSheetView)
     rootView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
