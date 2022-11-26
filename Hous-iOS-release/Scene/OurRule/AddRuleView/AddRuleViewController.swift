@@ -18,6 +18,7 @@ class AddRuleViewController: LoadingBaseViewController {
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "새로운 Rules 추가")
     navBar.setRightButtonText(text: "저장")
+    navBar.rightButton.isEnabled = false
     return navBar
   }()
   
@@ -246,6 +247,7 @@ class AddRuleViewController: LoadingBaseViewController {
           
           self.ruleTextField.text = ""
           self.ruleTextField.endEditing(true)
+          self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
         }
         
@@ -263,9 +265,9 @@ class AddRuleViewController: LoadingBaseViewController {
       })
       .disposed(by: disposeBag)
         
-        output.textCountLabelText
-          .drive(textCountLabel.rx.text)
-          .disposed(by: disposeBag)
+    output.textCountLabelText
+        .drive(textCountLabel.rx.text)
+        .disposed(by: disposeBag)
   }
   
   private func configButtonAction() {
