@@ -158,7 +158,7 @@ class MainHomeViewController: LoadingBaseViewController {
       
       cell.editButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] in
-          self?.navigationController?.pushViewController(EditHousNameViewController(), animated: true)
+          self?.navigationController?.pushViewController(EditHousNameViewController(roomName: todos.roomName), animated: true)
         })
         .disposed(by: cell.disposeBag)
 
