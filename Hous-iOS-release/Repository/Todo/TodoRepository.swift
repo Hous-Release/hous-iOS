@@ -20,9 +20,11 @@ public enum TodoRepositoryEvent {
   case myTodosEmptySection(TodoMainSection.Model)
   case ourTodosSection(TodoMainSection.Model)
   case ourTodosEmptySection(TodoMainSection.Model)
+
+  case getAssignees([UpdateTodoHomieModel])
   case getModifyingTodo(UpdateTodoReactor.State)
-  case getMembers([UpdateTodoHomieModel])
   case isSuccess(Bool)
+
   case sendError(HouseErrorModel?)
 }
 
@@ -85,6 +87,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       }
     }
   }
+
   public func fetchModifyingTodo(_ id: Int) {
     NetworkService.shared.memberTodoRepository.getModifyingTodo(
       todoID: id
@@ -125,7 +128,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
   }
 
   public func fetchHomie() {
-    NetworkService.shared.mainTodoRepository.getMembers { [weak self] res, err in
+    NetworkService.shared.mainTodoRepository.getAssignees { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -146,7 +149,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
         )
       }
 
-      self.event.onNext(.getMembers(homies))
+      self.event.onNext(.getAssignees(homies))
     }
   }
   public func updateTodo(

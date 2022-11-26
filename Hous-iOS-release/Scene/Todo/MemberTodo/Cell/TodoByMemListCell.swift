@@ -8,6 +8,10 @@
 import UIKit
 import Network
 
+protocol DidTapMemTodoDelegate: AnyObject {
+  func didTapTodo(todoId: Int)
+}
+
 private extension UIConfigurationStateCustomKey {
   static let todoByMem = UIConfigurationStateCustomKey("todoByMem")
 }
@@ -21,6 +25,8 @@ extension UIConfigurationState {
 
 class TodoByMemListCell: UICollectionViewListCell {
   private var todoByMemData: MemberTodoItemWithID?
+  var delegate: DidTapMemTodoDelegate?
+
   private func defaultTodoByMemConfiguration() -> UIListContentConfiguration {
     return .subtitleCell()
   }
@@ -61,6 +67,16 @@ extension TodoByMemListCell {
         .foregroundColor: Colors.black.color
       ])
     todoByMemlistContentView.configuration = content
+
+    var background = UIBackgroundConfiguration.listPlainCell().updated(for: state)
+    background.backgroundColor = .clear
+    self.backgroundConfiguration = background
+
+
+    if state.isSelected {
+      let todo = todoByMemData ?? MemberTodoItemWithID(todoId: 0, todoName: "")
+      delegate?.didTapTodo(todoId: todo.todoId)
+    }
   }
 }
 

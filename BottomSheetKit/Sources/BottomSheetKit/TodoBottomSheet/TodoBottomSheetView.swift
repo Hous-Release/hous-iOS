@@ -47,7 +47,7 @@ internal final class TodoBottomSheetView: UIView {
     label.text = "todoLabel"
     label.font = SpoqaHanSansNeo.medium.font(size: 16)
     label.textColor = Colors.black.color
-    label.textAlignment = .center
+    //label.textAlignment = .center
     return label
   }()
 
@@ -124,7 +124,8 @@ internal final class TodoBottomSheetView: UIView {
 
   private func setLabel(_ model: TodoModel) {
     todoLabel.text = model.todoName
-    daysLabel.text = processDaysModel(model.days)
+    daysLabel.text = model.days
+    //daysLabel.text = processDaysModel(model.days)
   }
 
   private func processDaysModel(_ models: [Days]) -> String {
@@ -273,7 +274,7 @@ extension TodoBottomSheetView {
 
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(4), top: nil, trailing: .fixed(4), bottom: nil)
+    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: nil, trailing: .fixed(4), bottom: nil)
 
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
