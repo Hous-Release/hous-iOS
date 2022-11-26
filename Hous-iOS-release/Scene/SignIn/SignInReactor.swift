@@ -32,6 +32,7 @@ final class SignInReactor: Reactor {
     case setIsJoingingRoom(Bool?)
     case setEnterInformationFlag(Bool?)
     case setInitial
+    case setDuplicateLogin(Bool)
   }
 
   struct State {
@@ -40,6 +41,8 @@ final class SignInReactor: Reactor {
     var isJoingingRoom: Bool?
     var oauthToken: String?
     var enterInformationFlag: Bool?
+    @Pulse
+    var isDuplicateLogin: Bool?
   }
 
   let initialState: State = State()
@@ -99,6 +102,8 @@ final class SignInReactor: Reactor {
 
     case .setInitial:
       newState = initialState
+    case .setDuplicateLogin(let isDuplicateLogin):
+      newState.isDuplicateLogin = isDuplicateLogin
     }
 
     return newState
@@ -128,6 +133,9 @@ final class SignInReactor: Reactor {
 
         if statusCode == 404 {
           return .just(.setEnterInformationFlag(true))
+        }
+        if statusCode == 409 {
+          return .just(.setDuplicateLogin(true))
         }
 
         return .just(.setError(errorModel.message))
