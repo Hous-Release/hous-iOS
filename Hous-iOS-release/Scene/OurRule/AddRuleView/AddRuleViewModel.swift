@@ -40,7 +40,7 @@ class AddRuleViewModel: ViewModelType {
       .asDriver(onErrorJustReturn: 200)
     
     let isEnableStatusOfSaveButton = input.textFieldEdit.map { string in
-      return string.count != 0
+      return string.trimmingCharacters(in: .whitespaces).count != 0
     }
       .asDriver(onErrorJustReturn: false)
     
