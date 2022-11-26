@@ -22,6 +22,7 @@ final class SignInReactor: Reactor {
   enum Action {
     case didTapSignIn(SignInType)
     case login(accessToken: String?, error: Error?)
+    case forceLogin
     case initial
   }
 
@@ -75,8 +76,25 @@ final class SignInReactor: Reactor {
       login(loginRequestDTO)
       return .just(.setOAuthToken(accessToken))
 
+    case .forceLogin:
+      guard
+        let accessToken = currentState.oauthToken,
+        let signinType = currentState.signinType
+      else {
+        return .empty()
+      }
+      let loginRequestDTO = AuthDTO.Request.LoginRequestDTO(
+        fcmToken: Keychain.shared.getFCMToken() ?? "",
+        socialType: signinType.description,
+        token: accessToken
+      )
+
+      forceLogin(loginRequestDTO)
+      return .just(.setOAuthToken(accessToken))
+
     case .initial:
       return .just(.setInitial)
+
     }
   }
 
@@ -149,5 +167,8 @@ final class SignInReactor: Reactor {
 extension SignInReactor {
   private func login(_ dto: AuthDTO.Request.LoginRequestDTO) {
     provider.authRepository.login(dto)
+  }
+  private func forceLogin(_ dto: AuthDTO.Request.LoginRequestDTO) {
+    provider.authRepository.forceLogin(dto)
   }
 }

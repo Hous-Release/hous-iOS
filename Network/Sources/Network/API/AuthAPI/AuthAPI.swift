@@ -9,6 +9,11 @@ import Foundation
 
 protocol AuthAPIProtocol {
 
+  func forceLogin(
+    _ loginRequestDTO: AuthDTO.Request.LoginRequestDTO,
+    completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void
+  )
+
   func login(
     _ loginRequestDTO: AuthDTO.Request.LoginRequestDTO,
     completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void
@@ -24,6 +29,19 @@ protocol AuthAPIProtocol {
 }
 
 public final class AuthAPI: APIRequestLoader<AuthService>, AuthAPIProtocol {
+
+  public func forceLogin(
+    _ loginRequestDTO: AuthDTO.Request.LoginRequestDTO,
+    completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void) {
+    fetchData(
+      target: .forceLogin(loginRequestDTO),
+      responseData: BaseResponseType<AuthDTO.Response.LoginResponseDTO>.self,
+      isWithInterceptor: false
+    ) { res, err in
+        completion(res, err)
+      }
+  }
+
   public func refresh(
     _ refreshRequestDTO: Token,
     completion: @escaping (BaseResponseType<AuthDTO.Response.LoginResponseDTO>?, Error?) -> Void) {
