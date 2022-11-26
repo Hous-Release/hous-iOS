@@ -64,7 +64,7 @@ final class FilteredTodoReactor: Reactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = provider.todoRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
-      case .getMembers(let homies):
+      case .getAssignees(let homies):
 
         return .just(.setHomies(homies))
       default:

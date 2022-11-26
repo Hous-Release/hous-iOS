@@ -11,12 +11,14 @@ public struct TodoModel {
 
   let homies: [HomieCellModel]
   let todoName: String
-  let days: [Days]
+    let days: String
+  //let days: [Days]
 
   public init(
     homies: [HomieCellModel],
     todoName: String,
-    days: [Days]
+    days: String
+    //days: [Days]
   ) {
     self.homies = homies
     self.todoName = todoName

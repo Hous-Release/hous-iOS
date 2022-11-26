@@ -13,9 +13,9 @@ protocol MainTodoAPIProtocol {
       BaseResponseType<MainTodoDTO.Response.MainTodoResponseDTO>?, Error?
     ) -> Void
   )
-  func getMembers(
+  func getAssignees(
     completion: @escaping (
-      BaseResponseType<MainTodoDTO.Response.MemberDTO>?, Error?
+      BaseResponseType<MainTodoDTO.Response.AssigneeDTO>?, Error?
     ) -> Void
   )
   func checkTodo(
@@ -24,15 +24,21 @@ protocol MainTodoAPIProtocol {
     completion: @escaping (BaseResponseType<String>?, Error?
     ) -> Void
   )
+  func getTodoSummary(
+    _ todoId: Int,
+    completion: @escaping (BaseResponseType<MainTodoDTO.Response.TodoSummaryResponseDTO>?, Error?
+    ) -> Void
+  )
   func updateTodo(
     _ id: Int?,
     _ dto: UpdateTodoDTO.ModifyTodo,
     completion: @escaping (BaseResponseType<String>?, Error?
-    ) -> Void
+                          ) -> Void
   )
 }
 
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
+
   public func updateTodo(
     _ id: Int? = nil,
     _ dto: UpdateTodoDTO.ModifyTodo,
@@ -60,11 +66,11 @@ public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIPr
       completion(res, err)
     }
   }
-  public func getMembers(
-    completion: @escaping (BaseResponseType<MainTodoDTO.Response.MemberDTO>?, Error?) -> Void) {
+  public func getAssignees(
+    completion: @escaping (BaseResponseType<MainTodoDTO.Response.AssigneeDTO>?, Error?) -> Void) {
       fetchData(
-        target: .getMembers,
-        responseData: BaseResponseType<MainTodoDTO.Response.MemberDTO>.self
+        target: .getAssignees,
+        responseData: BaseResponseType<MainTodoDTO.Response.AssigneeDTO>.self
       ) { res, err in
         completion(res, err)
       }
@@ -79,5 +85,17 @@ public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIPr
     ) { res, err in
       completion(res, err)
     }
+  }
+
+  public func getTodoSummary(
+    _ todoId: Int,
+    completion: @escaping (BaseResponseType<MainTodoDTO.Response.TodoSummaryResponseDTO>?, Error?
+    ) -> Void) {
+    fetchData(
+      target: .getTodoSummary(todoId),
+      responseData: BaseResponseType<MainTodoDTO.Response.TodoSummaryResponseDTO>.self
+    ) { res, err in
+        completion(res, err)
+      }
   }
 }

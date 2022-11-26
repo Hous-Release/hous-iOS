@@ -9,7 +9,9 @@ import UIKit
 
 import ReactorKit
 import RxDataSources
+import RxCocoa
 import Network
+import BottomSheetKit
 
 public typealias MemberHeaderItem = DayOfWeekTodoDTO
 public typealias MemberTodoItemWithID = TodoInfoWithIdDTO
@@ -21,6 +23,9 @@ final class MemberTodoViewController: UIViewController, ReactorKit.View {
   var disposeBag = DisposeBag()
 
   var dataSource: UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>!
+
+  // cell action
+  private let tapTodo = PublishRelay<Int>()
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
@@ -58,6 +63,11 @@ extension MemberTodoViewController {
 
     mainView.memberCollectionView.rx.itemSelected
       .map { Reactor.Action.didTapMemberCell($0.row) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    tapTodo
+      .map { Reactor.Action.didTapTodo($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -101,6 +111,11 @@ extension MemberTodoViewController {
       .asDriver(onErrorJustReturn: [])
       .drive(onNext: self.setupSnapshot)
       .disposed(by: disposeBag)
+
+    reactor.pulse(\.$selectedTodoSummary)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.tappedTodo)
+      .disposed(by: disposeBag)
   }
 }
 
@@ -122,6 +137,7 @@ extension MemberTodoViewController {
           using: totalNumCell,
           for: indexPath,
           item: todoNum)
+        cell.isUserInteractionEnabled = false
         return cell
 
       case .header(let headerItem):
@@ -143,8 +159,9 @@ extension MemberTodoViewController {
           using: todoCell,
           for: indexPath,
           item: todolItem)
-        cell.isUserInteractionEnabled = false
+        cell.delegate = self
         return cell
+
       case .empty(let guideText):
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: emptyCell,
@@ -230,5 +247,19 @@ extension MemberTodoViewController {
       cell.update(with: emptyItem)
     }
     return emptyCellRegistration
+  }
+}
+
+extension MemberTodoViewController: DidTapMemTodoDelegate {
+  func didTapTodo(todoId: Int) {
+    tapTodo.accept(todoId)
+  }
+}
+
+extension MemberTodoViewController {
+  private func tappedTodo(_ model: TodoModel?) {
+    guard let model = model else { return }
+
+    presentBottomSheet(.todoType(model))
   }
 }
