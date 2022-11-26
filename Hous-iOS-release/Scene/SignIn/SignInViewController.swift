@@ -148,6 +148,7 @@ extension SignInViewController {
     bindSignInTypeState(reactor)
     bindErrorState(reactor)
     bindIsJoiningState(reactor)
+    bindIsDuplicateLoginState(reactor)
     bindEnterInfoState(reactor)
   }
 
@@ -174,11 +175,11 @@ extension SignInViewController {
       .drive(onNext: self.transferForSuccess)
       .disposed(by: disposeBag)
   }
-  func bindIsDuplicateLoginStae(_ reactor: Reactor) {
+  func bindIsDuplicateLoginState(_ reactor: Reactor) {
     reactor.pulse(\.$isDuplicateLogin)
       .compactMap { $0 }
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: self.)
+      .drive(onNext: self.showDuplicatePopUp)
       .disposed(by: disposeBag)
   }
   func bindEnterInfoState(_ reactor: Reactor) {
@@ -204,13 +205,12 @@ extension SignInViewController {
       subtitle: "다른 기기에서 강제 로그아웃 후 현재 기기에서\nHous-를 사용해볼까요?"
     )
 
-    presentPopUp(.duplicate(popupModel)) { actionType in
+    presentPopUp(.duplicate(popupModel)) { [weak self] actionType in
       switch actionType {
       case .action:
-        // TODO: - 
-        break
+        self?.reactor?.action.onNext(.forceLogin)
       case .cancel:
-        break
+        return
       }
     }
   }
