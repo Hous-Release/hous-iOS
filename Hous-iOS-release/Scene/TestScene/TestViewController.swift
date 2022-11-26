@@ -259,8 +259,8 @@ extension TestViewController {
 
     let homies = TestViewController.generateMock()
     let todoName = "유메니 보쿠라데 호오 핫테 키타루베키 히노 타메니 요루오 코에"
-    let days :[Days] = [.fri, .fri, .mon, .sat, .sun, .tue, .thu, .mon]
-    let model = TodoModel(homies: homies, todoName: todoName, days: days)
+    //let days :[Days] = [.fri, .fri, .mon, .sat, .sun, .tue, .thu, .mon]
+    let model = TodoModel(homies: homies, todoName: todoName, days: "")
     let bottomSheetType = BottomSheetType.todoType(model)
 
     presentBottomSheet(bottomSheetType) { [weak self] actionType in

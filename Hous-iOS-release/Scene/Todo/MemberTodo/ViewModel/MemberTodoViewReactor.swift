@@ -9,6 +9,7 @@ import Foundation
 
 import ReactorKit
 import Network
+import BottomSheetKit
 
 final class MemberTodoViewReactor: ReactorKit.Reactor {
 
@@ -21,22 +22,31 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   enum Action {
     case fetch
     case didTapMemberCell(Int)
+    case didTapTodo(Int)
   }
 
   enum Mutation {
     case setSelectedMemIndexPathRow(Int?)
     case setMembers(MemberSection.Model?)
     case setSelectedMember([MemberHeaderItem]?)
+
+    case setSelectedTodoSummary(TodoModel?)
+
     case setError(String?)
   }
 
   struct State {
-    @Pulse var selectedMemIndexPathRow: Int?
+    @Pulse
+    var selectedMemIndexPathRow: Int?
     var membersSection = MemberSection.Model(
       model: .members(num: 0),
       items: []
     )
     var selectedMember: [MemberHeaderItem]?
+
+    @Pulse
+    var selectedTodoSummary: TodoModel? = nil
+
     var error: String? = nil
   }
 
@@ -54,6 +64,11 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       
       provider.memberRepository.selectMember(row)
       return .just(Mutation.setSelectedMemIndexPathRow(row))
+
+    case let .didTapTodo(id):
+
+      provider.memberRepository.fetchTodoSummary(id)
+      return .empty()
     }
   }
 
@@ -70,6 +85,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
         items: [])
     case let .setSelectedMember(data):
       newState.selectedMember = data
+    case let .setSelectedTodoSummary(info):
+      newState.selectedTodoSummary = info
     case let .setError(error):
       newState.error = error
     }
@@ -83,6 +100,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
         return .just(.setMembers(data))
       case let .selectedMember(data):
         return .just(.setSelectedMember(data))
+      case let .todoSummary(info):
+        return .just(.setSelectedTodoSummary(info))
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))

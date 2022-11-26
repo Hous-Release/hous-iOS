@@ -28,7 +28,15 @@ public extension MainTodoDTO.Response {
     public let nicknames: [String]
     public let status, todoName: String
   }
-  struct MemberDTO: Decodable {
+
+  struct AssigneeDTO: Decodable {
     public let users: [SelectedUser]
+  }
+
+  // MARK: - GetTodoDetailInfo
+  struct TodoSummaryResponseDTO: Decodable {
+    public let dayOfWeeks: String
+    public let name: String
+    public let selectedUsers: [SelectedUser]
   }
 }
