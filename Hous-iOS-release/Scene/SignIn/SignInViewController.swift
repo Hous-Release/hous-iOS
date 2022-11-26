@@ -5,6 +5,7 @@
 //  Created by 김호세 on 2022/09/25.
 //
 
+import BottomSheetKit
 import Foundation
 import UIKit
 
@@ -173,6 +174,13 @@ extension SignInViewController {
       .drive(onNext: self.transferForSuccess)
       .disposed(by: disposeBag)
   }
+  func bindIsDuplicateLoginStae(_ reactor: Reactor) {
+    reactor.pulse(\.$isDuplicateLogin)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: self.)
+      .disposed(by: disposeBag)
+  }
   func bindEnterInfoState(_ reactor: Reactor) {
     reactor.state.map(\.enterInformationFlag)
       .distinctUntilChanged()
@@ -185,6 +193,27 @@ extension SignInViewController {
 
 // MARK: Method Helper
 extension SignInViewController {
+
+  private func showDuplicatePopUp(_ isDuplicateLogin: Bool) {
+    guard isDuplicateLogin else { return }
+
+    let popupModel = DefaultPopUpModel(
+      cancelText: "뒤로가기",
+      actionText: "현재 기기에서 로그인하기",
+      title: "다른 기기에서 로그인 중이에요!",
+      subtitle: "다른 기기에서 강제 로그아웃 후 현재 기기에서\nHous-를 사용해볼까요?"
+    )
+
+    presentPopUp(.duplicate(popupModel)) { actionType in
+      switch actionType {
+      case .action:
+        // TODO: - 
+        break
+      case .cancel:
+        break
+      }
+    }
+  }
   private func login(_ signInType: SignInType?) {
 
     guard let signInType = signInType else {
@@ -209,7 +238,7 @@ extension SignInViewController {
       return
     }
 
-    debugPrint(errorMessage)
+    Toast.show(message: errorMessage, controller: self)
     self.reactor?.action.onNext(.initial)
   }
 
