@@ -51,7 +51,6 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.trackTintColor = Colors.blueL2.color
     $0.progressViewStyle = .default
     $0.layer.cornerRadius = 8
-    $0.progress = 0.5
   }
   
   let myTodoBackgroundView = UIView().then {
@@ -112,12 +111,12 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   //MARK: Helpers
-  func setHomeTodoCell(titleText: String, progress: Float, myTodos: [String]) {
+  func setHomeTodoCell(titleText: String, progress: Float, myTodos: [String], myTodosTotalCount: Int) {
     emptyViewLabel.isHidden = !myTodos.isEmpty
     todoLabelStackView.isHidden = myTodos.isEmpty
     self.titleLabel.text = titleText
     self.progressView.progress = progress
-    self.todoCountLabel.text = "• \(myTodos.count)"
+    self.todoCountLabel.text = "• \(myTodosTotalCount)"
     
     todoLabelStackView.subviews.forEach { $0.removeFromSuperview() }
     myTodos.forEach { todoString in

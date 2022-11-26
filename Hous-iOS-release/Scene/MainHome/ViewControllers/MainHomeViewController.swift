@@ -172,7 +172,8 @@ class MainHomeViewController: LoadingBaseViewController {
       cell.setHomeTodoCell(
         titleText: "\(todos.userNickname)님의,\n\(todos.roomName) 하우스",
         progress: Float(todos.progress / 100),
-        myTodos: todos.myTodos
+        myTodos: todos.myTodos,
+        myTodosTotalCount: todos.myTodosCnt
       )
       
       cell.setDailyLottie(day: Weekend(rawValue: todos.dayOfWeek) ?? .sat)
