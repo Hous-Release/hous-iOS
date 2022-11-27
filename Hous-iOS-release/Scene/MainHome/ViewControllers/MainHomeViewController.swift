@@ -92,6 +92,7 @@ class MainHomeViewController: LoadingBaseViewController {
         switch model {
         case .homieProfiles(profiles: let dto):
           if dto.color == "GRAY" {
+            Toast.show(message: "아직 성향 테스트를 하지 않은 호미예요!", controller: self)
             break
           }
           let destinationViewController = MateProfileViewController(id: String(dto.homieID))
