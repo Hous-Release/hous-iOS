@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window.rootViewController = SplashViewController(reactor)
     window.backgroundColor = .white
     window.makeKeyAndVisible()
-    print("블라블라")
     self.window = window
   }
 
