@@ -35,6 +35,7 @@
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
 		77D994DD2933E1B1001872F0 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */; };
+		77D994DF2933E583001872F0 /* NotConnectedInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D994DE2933E583001872F0 /* NotConnectedInternetViewController.swift */; };
 		77EB720629253FBE00032776 /* AssigneeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720529253FBE00032776 /* AssigneeCell.swift */; };
 		77EB720829253FDF00032776 /* IndividualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720729253FDF00032776 /* IndividualCell.swift */; };
 		77EB720A29253FF600032776 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720929253FF600032776 /* DayCell.swift */; };
@@ -117,7 +118,6 @@
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
-		B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = B54D39F22913B10400DA3A95 /* RxKeyboard */; };
 		B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F52914197700DA3A95 /* AddRuleViewController.swift */; };
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
 		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
@@ -135,7 +135,6 @@
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
 		B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB728C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift */; };
-		B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B595FFBD28C9F48900F6B2E4 /* Then */; };
 		B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFC528CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift */; };
 		B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */; };
 		B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFD128CC7D0F00F6B2E4 /* MainHomeModel.swift */; };
@@ -150,7 +149,6 @@
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
-		B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5F9FB19291D3F090056C0B1 /* Kingfisher */; };
 		B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB472923DA0B0056C0B1 /* loading.json */; };
 		B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */; };
 		B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB51292CCB690056C0B1 /* thursday.json */; };
@@ -272,6 +270,7 @@
 		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		77D994DE2933E583001872F0 /* NotConnectedInternetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotConnectedInternetViewController.swift; sourceTree = "<group>"; };
 		77EB720529253FBE00032776 /* AssigneeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeCell.swift; sourceTree = "<group>"; };
 		77EB720729253FDF00032776 /* IndividualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCell.swift; sourceTree = "<group>"; };
 		77EB720929253FF600032776 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -480,11 +479,8 @@
 				770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */,
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
-				B5F9FB1A291D3F090056C0B1 /* Kingfisher in Frameworks */,
 				777085AC29040D5C0018240B /* AssetKit in Frameworks */,
-				B54D39F32913B10400DA3A95 /* RxKeyboard in Frameworks */,
 				770B959328EB0EFF00C8C945 /* UserInformation in Frameworks */,
-				B595FFBE28C9F48900F6B2E4 /* Then in Frameworks */,
 				77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,6 +629,7 @@
 			children = (
 				777C667C28A75039000BECEA /* BaseViewController.swift */,
 				B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */,
+				77D994DE2933E583001872F0 /* NotConnectedInternetViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1351,14 +1348,10 @@
 			packageProductDependencies = (
 				7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */,
 				77393DE028BFBD2D00D78C94 /* FirebaseWrapper */,
-				B595FFBD28C9F48900F6B2E4 /* Then */,
 				773F1E8E28D5944800AE7521 /* Network */,
 				770B959228EB0EFF00C8C945 /* UserInformation */,
 				777085AB29040D5C0018240B /* AssetKit */,
-				B54D39F22913B10400DA3A95 /* RxKeyboard */,
 				770B959E28F320C400C8C945 /* BottomSheetKit */,
-				B54D39F22913B10400DA3A95 /* RxKeyboard */,
-				B5F9FB19291D3F090056C0B1 /* Kingfisher */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -1628,6 +1621,7 @@
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B8555ABD291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
+				77D994DF2933E583001872F0 /* NotConnectedInternetViewController.swift in Sources */,
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */,
@@ -2329,21 +2323,6 @@
 		777085AB29040D5C0018240B /* AssetKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AssetKit;
-		};
-		B54D39F22913B10400DA3A95 /* RxKeyboard */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */;
-			productName = RxKeyboard;
-		};
-		B595FFBD28C9F48900F6B2E4 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
-		};
-		B5F9FB19291D3F090056C0B1 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
