@@ -34,6 +34,7 @@
 		777C667D28A75039000BECEA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* BaseViewController.swift */; };
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77AEF34228E200D2002A102B /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77AEF34128E200D2002A102B /* splashlottie.json */; };
+		77D994DD2933E1B1001872F0 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */; };
 		77EB720629253FBE00032776 /* AssigneeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720529253FBE00032776 /* AssigneeCell.swift */; };
 		77EB720829253FDF00032776 /* IndividualCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720729253FDF00032776 /* IndividualCell.swift */; };
 		77EB720A29253FF600032776 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB720929253FF600032776 /* DayCell.swift */; };
@@ -270,6 +271,7 @@
 		77AEF33E28E1FE9C002A102B /* SignInType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInType.swift; sourceTree = "<group>"; };
 		77AEF34128E200D2002A102B /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		77B1682728ACEDE000E1E512 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		77EB720529253FBE00032776 /* AssigneeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeCell.swift; sourceTree = "<group>"; };
 		77EB720729253FDF00032776 /* IndividualCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCell.swift; sourceTree = "<group>"; };
 		77EB720929253FF600032776 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -1179,6 +1181,7 @@
 				770B958A28EAF92600C8C945 /* UIViewController+Extension.swift */,
 				B5DCEBD028EF1C39009B065B /* ToastMessage.swift */,
 				B591488B290D21A700618F26 /* UIViewController+Rx.swift */,
+				77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1605,6 +1608,7 @@
 				B8D066CC28F7DF5300A99907 /* TodoRepository.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				77EB720C2925401600032776 /* TitleSupplementaryView.swift in Sources */,
+				77D994DD2933E1B1001872F0 /* UIApplication+Extension.swift in Sources */,
 				770B959B28F15E5200C8C945 /* AlertService.swift in Sources */,
 				B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,

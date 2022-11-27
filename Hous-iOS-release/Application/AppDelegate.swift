@@ -8,13 +8,23 @@
 @_exported import AssetKit
 
 import FirebaseWrapper
+import RxReachability
+import Reachability
+import RxSwift
 import UIKit
 import UserInformation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  var reachability: Reachability?
+  private var disposeBag = DisposeBag()
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+
+    startReachability()
+    reactionForNetwork()
 
     FirebaseConfigureService.Firebase.configure()
     MessagingService.Firebase.configure()
@@ -109,5 +119,27 @@ extension AppDelegate {
     }
 
     Keychain.shared.removeAllKeys()
+  }
+}
+
+// MARK: - reachability
+extension AppDelegate {
+  func startReachability() {
+    try? reachability = Reachability()
+    try? reachability?.startNotifier()
+  }
+
+  func reactionForNetwork() {
+    Reachability.rx.isDisconnected
+      .subscribe(onNext: {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .red
+        guard let topViewController = UIApplication.shared.keyWindowPresentedController else {
+          return
+        }
+        topViewController.present(vc, animated: true)
+
+      })
+      .disposed(by: disposeBag)
   }
 }
