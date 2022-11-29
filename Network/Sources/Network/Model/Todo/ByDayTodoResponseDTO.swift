@@ -16,7 +16,7 @@ public extension ByDayTodoDTO.Response {
         public let dayOfWeek: String
         public let ourTodosCnt: Int
         public let myTodos: [MyTodoByDayDTO]
-        public let ourTodos: [OurTodoBtDayDTO]
+        public let ourTodos: [OurTodoByDayDTO]
     }
 
     // MARK: - MyTodo
@@ -26,8 +26,9 @@ public extension ByDayTodoDTO.Response {
     }
 
     // MARK: - OurTodo
-    struct OurTodoBtDayDTO: Decodable {
+    struct OurTodoByDayDTO: Decodable {
         public let nicknames: [String]
+        public let todoId: Int
         public let todoName: String
     }
 }

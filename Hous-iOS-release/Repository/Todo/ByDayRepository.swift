@@ -9,6 +9,7 @@ import Foundation
 import Network
 import RxSwift
 import RxCocoa
+import BottomSheetKit
 
 public enum ByDayRepositoryEvent {
   case countTodoSection(ByDayTodoSection.Model)
@@ -16,6 +17,9 @@ public enum ByDayRepositoryEvent {
   case myTodosEmptySection(ByDayTodoSection.Model)
   case ourTodosByDaySection(ByDayTodoSection.Model)
   case ourTodosEmptySection(ByDayTodoSection.Model)
+
+  case todoSummary(TodoModel?)
+
   case sendError(HouseErrorModel?)
   case initial
 }
@@ -24,6 +28,7 @@ public protocol ByDayRepository {
   var event: PublishSubject<ByDayRepositoryEvent> { get }
   func fetchTodo(_: Int)
   func selectDaysOfWeek(_: Int)
+  func fetchTodoSummary(_: Int)
 }
 
 public final class ByDayRepositoryImp: BaseService, ByDayRepository {
@@ -53,6 +58,43 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
     guard let todos = todos else { return }
     self.event.onNext(.initial)
     onNextEvents(data: todos, row: row)
+  }
+
+  // member repository랑 중복됨
+  public func fetchTodoSummary(_ id: Int) {
+    NetworkService.shared.mainTodoRepository.getTodoSummary(id) { [weak self] res, err in
+
+      guard let self = self else { return }
+
+      guard let data = res?.data else {
+
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      var homies: [HomieCellModel] = []
+
+      data.selectedUsers.forEach {
+        let homie = HomieCellModel(
+          homieName: $0.nickname,
+          homieColor: HomieFactory.makeHomie(
+            type: HomieColor(rawValue: $0.color) ?? .GRAY).color
+        )
+        homies.append(homie)
+      }
+
+      let todoSummary = TodoModel(
+        homies: homies,
+        todoName: data.name,
+        days: data.dayOfWeeks)
+
+      self.event.onNext(.todoSummary(todoSummary))
+    }
   }
 }
 

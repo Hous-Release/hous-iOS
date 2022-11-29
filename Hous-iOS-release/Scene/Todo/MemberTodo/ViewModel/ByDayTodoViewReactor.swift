@@ -9,6 +9,7 @@ import Foundation
 
 import ReactorKit
 import Network
+import BottomSheetKit
 
 final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
@@ -21,6 +22,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   enum Action {
     case fetch
     case didTapDaysOfWeekCell(Int)
+    case didTapTodo(Int)
   }
 
   enum Mutation {
@@ -30,12 +32,16 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     case setMyTodosEmptySection(ByDayTodoSection.Model)
     case setOurTodosByDaySection(ByDayTodoSection.Model)
     case setOurTodosEmptySection(ByDayTodoSection.Model)
+
+    case setSelectedTodoSummary(TodoModel?)
+
     case setError(String?)
     case setInitial
   }
 
   struct State {
-    @Pulse var selectedDayIndexPathRow: Int?
+    @Pulse
+    var selectedDayIndexPathRow: Int?
     var countTodoSection = ByDayTodoSection.Model(model: .countTodo, items: [])
     var myTodosByDaySection = ByDayTodoSection.Model(
       model: .myTodo(num: 0),
@@ -45,6 +51,10 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       model: .ourTodo(num: 0),
       items: [])
     var ourTodosEmptySection = ByDayTodoSection.Model(model: .ourTodoEmpty, items: [])
+
+    @Pulse
+    var selectedTodoSummary: TodoModel? = nil
+
     var error: String? = nil
   }
 
@@ -62,6 +72,11 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
       provider.byDayRepository.selectDaysOfWeek(row)
       return .just(Mutation.setSelectedDayIndexPathRow(row))
+
+    case let .didTapTodo(id):
+
+      provider.byDayRepository.fetchTodoSummary(id)
+      return .empty()
     }
   }
 
@@ -83,6 +98,8 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       newState.ourTodosByDaySection = ourTodo
     case let .setOurTodosEmptySection(empty):
       newState.ourTodosEmptySection = empty
+    case let .setSelectedTodoSummary(info):
+      newState.selectedTodoSummary = info
     case let .setError(error):
       newState.error = error
     case .setInitial:
@@ -104,6 +121,8 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
         return .just(.setOurTodosByDaySection(ourTodo))
       case let .ourTodosEmptySection(empty):
         return .just(.setOurTodosEmptySection(empty))
+      case let .todoSummary(info):
+        return .just(.setSelectedTodoSummary(info))
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))

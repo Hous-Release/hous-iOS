@@ -9,13 +9,17 @@ import UIKit
 
 import RxDataSources
 import ReactorKit
+import RxCocoa
 import Network
+import BottomSheetKit
 
 class ByDayTodoViewController: UIViewController, ReactorKit.View {
   typealias Reactor = ByDayTodoViewReactor
 
   var mainView = ByDayTodoView()
   var disposeBag = DisposeBag()
+
+  private let tapTodo = PublishRelay<Int>()
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
@@ -57,6 +61,11 @@ extension ByDayTodoViewController {
       .map { Reactor.Action.didTapDaysOfWeekCell($0.row) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+
+    tapTodo
+      .map { Reactor.Action.didTapTodo($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
 
   private func bindState(_ reactor: Reactor) {
@@ -70,6 +79,11 @@ extension ByDayTodoViewController {
           animated: false,
           scrollPosition: [])
       })
+      .disposed(by: disposeBag)
+
+    reactor.pulse(\.$selectedTodoSummary)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.tappedTodo)
       .disposed(by: disposeBag)
   }
 }
@@ -112,7 +126,8 @@ extension ByDayTodoViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyTodoByDayCollectionViewCell.className, for: indexPath) as? MyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
-        cell.setCell(todos.todoName)
+        cell.setCell(todos.todoName, todos.todoId)
+        cell.delegate = self
         return cell
 
       case .myTodoEmpty:
@@ -126,7 +141,8 @@ extension ByDayTodoViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OurTodoByDayCollectionViewCell.className, for: indexPath) as? OurTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
-        cell.setCell(todos.todoName, todos.nicknames)
+        cell.setCell(todos.todoName, todos.todoId, todos.nicknames)
+        cell.delegate = self
         return cell
 
       case .ourTodoEmpty:
@@ -199,5 +215,26 @@ extension ByDayTodoViewController: UICollectionViewDelegateFlowLayout {
     } else {
       return CGSize(width: UIScreen.main.bounds.width, height: 40)
     }
+  }
+}
+
+extension ByDayTodoViewController: DidTapMyTodoByDayDelegate {
+  func didTapMyTodo(todoId: Int) {
+    tapTodo.accept(todoId)
+  }
+}
+
+extension ByDayTodoViewController: DidTapOurTodoByDayDelegate {
+
+  func didTapOurTodo(todoId: Int) {
+    tapTodo.accept(todoId)
+  }
+}
+
+extension ByDayTodoViewController {
+  private func tappedTodo(_ model: TodoModel?) {
+    guard let model = model else { return }
+
+    presentBottomSheet(.todoType(model))
   }
 }

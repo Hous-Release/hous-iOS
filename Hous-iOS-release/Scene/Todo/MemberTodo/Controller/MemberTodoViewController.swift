@@ -13,9 +13,6 @@ import RxCocoa
 import Network
 import BottomSheetKit
 
-public typealias MemberHeaderItem = DayOfWeekTodoDTO
-public typealias MemberTodoItemWithID = TodoInfoWithIdDTO
-
 final class MemberTodoViewController: UIViewController, ReactorKit.View {
   typealias Reactor = MemberTodoViewReactor
 
@@ -106,9 +103,7 @@ extension MemberTodoViewController {
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.selectedMember }
-      .distinctUntilChanged()
-      .compactMap { $0 }
-      .asDriver(onErrorJustReturn: [])
+      .asDriver(onErrorJustReturn: nil)
       .drive(onNext: self.setupSnapshot)
       .disposed(by: disposeBag)
 
@@ -173,7 +168,9 @@ extension MemberTodoViewController {
     }
   }
   // MARK: - Setup snapshots
-  private func setupSnapshot(_ memTodo: [MemberHeaderItem]) {
+  private func setupSnapshot(_ memTodo: MemberTodoModel?) {
+    guard let memTodo = memTodo else { return }
+
     var dataSourceSnapshot = NSDiffableDataSourceSnapshot<TodoByMemSection, TodoByMemListItem>()
     // Datasource snapshot에 section 추가
     dataSourceSnapshot.appendSections([.main, .totalNum])
@@ -183,14 +180,14 @@ extension MemberTodoViewController {
     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<TodoByMemListItem>()
 
     // totalNum CELL
-    let totalNum = memTodo.map { $0.dayOfWeekTodos.count }.reduce(0, +)
+    let totalNum = memTodo.totalTodoCnt
     let totalNumItem = TodoByMemListItem.totalNum(totalNum)
     sectionSnapshot.append([totalNumItem])
     dataSource.apply(sectionSnapshot, to: .totalNum, animatingDifferences: false)
 
     if totalNum != 0 {
       // header(요일) CELL + child(todo) CELL
-      for headerItem in memTodo {
+      for headerItem in memTodo.dayOfWeekTodos {
 
         // 헤더 리스트 아이템 생성 후 header로 추가
         let headerListItem = TodoByMemListItem.header(headerItem)
@@ -221,8 +218,8 @@ extension MemberTodoViewController {
     return totalNumCellRegistration
   }
 
-  private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem>  {
-    let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, MemberHeaderItem> {
+  private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, DayOfWeekTodoModel>  {
+    let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, DayOfWeekTodoModel> {
       (cell, indexPath, headerItem) in
 
       cell.update(with: headerItem)
@@ -233,8 +230,8 @@ extension MemberTodoViewController {
     return headerCellRegistration
   }
 
-  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, MemberTodoItemWithID> {
-    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, MemberTodoItemWithID> {
+  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, TodoInfoWithIdModel> {
+    let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, TodoInfoWithIdModel> {
       (cell, indexPath, todoItem) in
       cell.update(with: todoItem)
     }

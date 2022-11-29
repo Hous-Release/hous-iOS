@@ -13,21 +13,21 @@ private extension UIConfigurationStateCustomKey {
 }
 
 extension UIConfigurationState {
-  var dayOfWeekData: MemberHeaderItem? {
-    get { return self[.dayOfWeek] as? MemberHeaderItem }
+  var dayOfWeekData: DayOfWeekTodoModel? {
+    get { return self[.dayOfWeek] as? DayOfWeekTodoModel }
     set { self[.dayOfWeek] = newValue }
   }
 }
 
 class DayOfWeekHeaderListCell: UICollectionViewListCell {
-  private var dayOfWeekData: MemberHeaderItem?
+  private var dayOfWeekData: DayOfWeekTodoModel?
   private func defaultDayOfWeekConfiguration() -> UIListContentConfiguration {
     return .subtitleCell()
   }
 
   private lazy var dayOfWeeklistContentView = UIListContentView(configuration: defaultDayOfWeekConfiguration())
 
-  func update(with newDayOfWeekData: MemberHeaderItem) {
+  func update(with newDayOfWeekData: DayOfWeekTodoModel) {
     guard dayOfWeekData != newDayOfWeekData else {
       return
     }
@@ -55,7 +55,7 @@ extension DayOfWeekHeaderListCell {
     guard let headerItem = state.dayOfWeekData else { return }
     // MARK: - NSMutableAttributedString
     // 월요일 .4
-    let dayOfWeek = "\(headerItem.dayOfWeek)요일"
+    let dayOfWeek = headerItem.dayOfWeek
     let countOfTodo = " • \(String(headerItem.dayOfWeekTodos.count))"
     let headerText = dayOfWeek + countOfTodo
 
