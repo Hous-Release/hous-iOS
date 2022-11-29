@@ -17,14 +17,14 @@ private extension UIConfigurationStateCustomKey {
 }
 
 extension UIConfigurationState {
-  var todoByMemData: MemberTodoItemWithID? {
-    get { return self[.todoByMem] as? MemberTodoItemWithID }
+  var todoByMemData: TodoInfoWithIdModel? {
+    get { return self[.todoByMem] as? TodoInfoWithIdModel }
     set { self[.todoByMem] = newValue }
   }
 }
 
 class TodoByMemListCell: UICollectionViewListCell {
-  private var todoByMemData: MemberTodoItemWithID?
+  private var todoByMemData: TodoInfoWithIdModel?
   var delegate: DidTapMemTodoDelegate?
 
   private func defaultTodoByMemConfiguration() -> UIListContentConfiguration {
@@ -33,7 +33,7 @@ class TodoByMemListCell: UICollectionViewListCell {
 
   private lazy var todoByMemlistContentView = UIListContentView(configuration: defaultTodoByMemConfiguration())
 
-  func update(with newTodoByMemData: MemberTodoItemWithID) {
+  func update(with newTodoByMemData: TodoInfoWithIdModel) {
     guard todoByMemData != newTodoByMemData else {
       return
     }
@@ -74,7 +74,7 @@ extension TodoByMemListCell {
 
 
     if state.isSelected {
-      let todo = todoByMemData ?? MemberTodoItemWithID(todoId: 0, todoName: "")
+      let todo = todoByMemData ?? TodoInfoWithIdModel(todoId: 0, todoName: "")
       delegate?.didTapTodo(todoId: todo.todoId)
     }
   }

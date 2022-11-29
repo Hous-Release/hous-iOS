@@ -24,7 +24,7 @@ public struct ByDayTodoSection {
     case countTodo(num: Int)
     case myTodo(todos: ByDayTodoDTO.Response.MyTodoByDayDTO)
     case myTodoEmpty
-    case ourTodo(todos: ByDayTodoDTO.Response.OurTodoBtDayDTO)
+    case ourTodo(todos: ByDayTodoDTO.Response.OurTodoByDayDTO)
     case ourTodoEmpty
 
     public static func == (lhs: Self, rhs: Self) -> Bool {

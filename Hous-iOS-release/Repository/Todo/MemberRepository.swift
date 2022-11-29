@@ -13,7 +13,7 @@ import BottomSheetKit
 
 public enum MemberRepositoryEvent {
   case members(MemberSection.Model?)
-  case selectedMember([DayOfWeekTodoDTO]?)
+  case selectedMember(MemberTodoModel?)
 
   case todoSummary(TodoModel?)
 
@@ -29,7 +29,7 @@ public protocol MemberRepository {
 
 public final class MemberRepositoryImp: BaseService, MemberRepository {
   public var event = PublishSubject<MemberRepositoryEvent>()
-  public var todos: [[DayOfWeekTodoDTO]]?
+  public var todos: [MemberTodoModel]?
 
   public func fetchMember(_ row: Int) {
     NetworkService.shared.memberTodoRepository.getMemberTodosData { [weak self] res, err in
@@ -52,8 +52,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
         items: memberItems)))
 
       // MARK: - 구분선
-
-      let todos = data.map { self.parseMemberTodoWIthID($0.dayOfWeekTodos) }
+      let todos = self.parseMemberTodo(data)
       self.todos = todos
       let selectedMemTodo = todos[row]
       self.event.onNext(.selectedMember(selectedMemTodo))
@@ -113,28 +112,70 @@ extension MemberRepositoryImp {
     return membersDTO
   }
 
-  private func parseMemberTodoWIthID(_ data: [MemberTodoDTO.Response.DayOfWeekTodo]) -> [DayOfWeekTodoDTO] {
+  private func parseMemberTodoWIthID(_ data: [MemberTodoDTO.Response.DayOfWeekTodo]) -> [DayOfWeekTodoModel] {
 
-    var todoArray: [DayOfWeekTodoDTO] = []
+    var todoArray: [DayOfWeekTodoModel] = []
 
     data.forEach { dayOfWeekTodo in
 
-      var infoArray: [TodoInfoWithIdDTO] = []
+      var infoArray: [TodoInfoWithIdModel] = []
 
       dayOfWeekTodo.dayOfWeekTodos.forEach { todoInfo in
-        let infoDTO = TodoInfoWithIdDTO(
+        let infoDTO = TodoInfoWithIdModel(
           todoId: todoInfo.todoId,
           todoName: todoInfo.todoName)
 
         infoArray.append(infoDTO)
       }
 
-      let todoDTO = DayOfWeekTodoDTO(
+      let todoDTO = DayOfWeekTodoModel(
         dayOfWeek: dayOfWeekTodo.dayOfWeek,
         dayOfWeekTodos: infoArray)
       todoArray.append(todoDTO)
     }
 
     return todoArray
+  }
+
+  private func parseMemberTodo(
+    _ data: MemberTodoDTO.Response.MemberTodosResponseDTO
+  ) -> [MemberTodoModel] {
+
+    var memberTodoModel: [MemberTodoModel] = []
+
+    data.forEach { memberTodoDTO in
+      var dayOfWeekTodoModel: [DayOfWeekTodoModel] = []
+
+      memberTodoDTO.dayOfWeekTodos.forEach { dayOfWeekTodoDTO in
+        var infoModel: [TodoInfoWithIdModel] = []
+
+        dayOfWeekTodoDTO.dayOfWeekTodos.forEach { todoInfoDTO in
+          let info = TodoInfoWithIdModel(
+            todoId: todoInfoDTO.todoId,
+            todoName: todoInfoDTO.todoName)
+
+          infoModel.append(info)
+        }
+
+        let dayOfWeekTodo = DayOfWeekTodoModel(
+          dayOfWeek: "\(dayOfWeekTodoDTO.dayOfWeek)요일",
+          dayOfWeekTodos: infoModel)
+        dayOfWeekTodoModel.append(dayOfWeekTodo)
+      }
+
+      let memberTodo = MemberTodoModel(
+        userName: memberTodoDTO.userName,
+        color: HomieFactory.makeHomie(
+          type: HomieColor(
+            rawValue: memberTodoDTO.color
+          ) ?? .GRAY
+        ).color,
+        totalTodoCnt: memberTodoDTO.totalTodoCnt,
+        dayOfWeekTodos: dayOfWeekTodoModel)
+      memberTodoModel.append(memberTodo)
+
+    }
+
+    return memberTodoModel
   }
 }
