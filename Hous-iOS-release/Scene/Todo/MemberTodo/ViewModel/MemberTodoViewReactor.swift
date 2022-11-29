@@ -28,7 +28,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   enum Mutation {
     case setSelectedMemIndexPathRow(Int?)
     case setMembers(MemberSection.Model?)
-    case setSelectedMember([MemberHeaderItem]?)
+    case setSelectedMember(MemberTodoModel?)
 
     case setSelectedTodoSummary(TodoModel?)
 
@@ -42,7 +42,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       model: .members(num: 0),
       items: []
     )
-    var selectedMember: [MemberHeaderItem]?
+    var selectedMember: MemberTodoModel? = nil
 
     @Pulse
     var selectedTodoSummary: TodoModel? = nil

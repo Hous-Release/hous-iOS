@@ -36,7 +36,7 @@ public enum TodoByMemSection: Hashable {
 public enum TodoByMemListItem: Hashable {
 
   case totalNum(Int)
-  case header(MemberHeaderItem)
-  case todo(MemberTodoItemWithID)
+  case header(DayOfWeekTodoModel)
+  case todo(TodoInfoWithIdModel)
   case empty(String)
 }

@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol DidTapMyTodoByDayDelegate: AnyObject {
+  func didTapMyTodo(todoId: Int)
+}
+
 final class MyTodoByDayCollectionViewCell: UICollectionViewCell {
+
+  var id: Int?
+  var delegate: DidTapMyTodoByDayDelegate?
 
   private var dotView = UIView().then {
     $0.backgroundColor = Colors.g3.color
@@ -27,6 +34,15 @@ final class MyTodoByDayCollectionViewCell: UICollectionViewCell {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  override var isSelected: Bool {
+    didSet {
+      if isSelected {
+        guard let id = id else { return }
+        delegate?.didTapMyTodo(todoId: id)
+      }
+    }
   }
 }
 
@@ -48,7 +64,8 @@ extension MyTodoByDayCollectionViewCell {
     }
   }
 
-  func setCell(_ todoName: String) {
+  func setCell(_ todoName: String, _ todoId: Int) {
     myTodoLabel.text = todoName
+    self.id = todoId
   }
 }
