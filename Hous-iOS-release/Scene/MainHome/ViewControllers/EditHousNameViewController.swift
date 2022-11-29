@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import BottomSheetKit
 
-class EditHousNameViewController: UIViewController {
+class EditHousNameViewController: LoadingBaseViewController {
   
   //MARK: Var & Let
   private let saveButtonDidTapped = PublishSubject<String>()
@@ -82,6 +82,7 @@ class EditHousNameViewController: UIViewController {
       inValidTextLabel,
       textcountLabel
     ])
+    configLoadingLayout()
     
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -153,7 +154,7 @@ class EditHousNameViewController: UIViewController {
     
     let input = EditHousNameViewModel.Input(
       roomName: textField.rx.text.orEmpty.distinctUntilChanged().asDriver(onErrorJustReturn: ""),
-      saveButtonDidTapped: saveButtonDidTapped
+      saveButtonDidTapped: saveButtonDidTapped.do(onNext: { [weak self] _ in self?.showLoading() })
     )
     
     let output = self.viewModel.transform(input: input)
@@ -171,6 +172,7 @@ class EditHousNameViewController: UIViewController {
       .disposed(by: disposeBag)
     
     output.updatedRoom
+      .do(onNext: {[weak self] _ in self?.hideLoading() })
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.navigationController?.popViewController(animated: true)
