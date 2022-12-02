@@ -35,23 +35,14 @@ protocol MainTodoAPIProtocol {
     completion: @escaping (BaseResponseType<String>?, Error?
                           ) -> Void
   )
+  func deleteTodo(
+    _ todoId: Int,
+    completion: @escaping (BaseResponseType<String>?, Error?
+                          ) -> Void
+  )
 }
 
 public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIProtocol {
-
-  public func updateTodo(
-    _ id: Int? = nil,
-    _ dto: UpdateTodoDTO.ModifyTodo,
-    completion: @escaping (BaseResponseType<String>?, Error?
-    ) -> Void
-  ) {
-    fetchData(
-      target: .updateTodo(id, dto),
-      responseData: BaseResponseType<String>.self
-    ) { res, err in
-      completion(res, err)
-    }
-  }
 
   public func checkTodo(
     _ todoId: Int,
@@ -97,5 +88,32 @@ public final class MainTodoAPI: APIRequestLoader<MainTodoService>, MainTodoAPIPr
     ) { res, err in
         completion(res, err)
       }
+  }
+
+  public func updateTodo(
+    _ id: Int? = nil,
+    _ dto: UpdateTodoDTO.ModifyTodo,
+    completion: @escaping (BaseResponseType<String>?, Error?
+    ) -> Void
+  ) {
+    fetchData(
+      target: .updateTodo(id, dto),
+      responseData: BaseResponseType<String>.self
+    ) { res, err in
+      completion(res, err)
+    }
+  }
+
+  public func deleteTodo(
+    _ todoId: Int,
+    completion: @escaping (BaseResponseType<String>?, Error?
+    ) -> Void
+  ) {
+    fetchData(
+      target: .deleteTodo(todoId),
+      responseData: BaseResponseType<String>.self
+    ) { res, err in
+      completion(res, err)
+    }
   }
 }

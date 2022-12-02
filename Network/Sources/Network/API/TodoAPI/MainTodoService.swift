@@ -19,6 +19,7 @@ public enum MainTodoService {
     _ id: Int?,
     _ dto: UpdateTodoDTO.ModifyTodo
   )
+  case deleteTodo(_ todoId: Int)
 }
 
 extension MainTodoService: TargetType {
@@ -41,6 +42,8 @@ extension MainTodoService: TargetType {
         return "/todo"
       }
       return "/todo/\(id)"
+    case let .deleteTodo(todoId):
+      return "/todo/\(todoId)"
     }
   }
 
@@ -60,6 +63,8 @@ extension MainTodoService: TargetType {
         return .post
       }
       return .put
+    case .deleteTodo:
+      return .delete
     }
   }
 
@@ -75,6 +80,8 @@ extension MainTodoService: TargetType {
       return .requestPlain
     case .updateTodo(_ ,let dto):
       return .body(dto)
+    case .deleteTodo:
+      return .requestPlain
     }
   }
 }

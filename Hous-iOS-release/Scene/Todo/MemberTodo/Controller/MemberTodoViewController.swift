@@ -23,6 +23,8 @@ final class MemberTodoViewController: UIViewController, ReactorKit.View {
 
   // cell action
   private let tapTodo = PublishRelay<Int>()
+  // popup action
+  private let tapDelete = PublishRelay<Int>()
 
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
@@ -65,6 +67,11 @@ extension MemberTodoViewController {
 
     tapTodo
       .map { Reactor.Action.didTapTodo($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    tapDelete
+      .map { Reactor.Action.didTapDelete($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -257,6 +264,60 @@ extension MemberTodoViewController {
   private func tappedTodo(_ model: TodoModel?) {
     guard let model = model else { return }
 
-    presentBottomSheet(.todoType(model))
+    presentBottomSheet(.todoType(model)) { [weak self] actionType in
+
+      guard let self = self,
+            let todoId = self.reactor?.currentState.selectedTodoId else { return }
+
+      switch actionType {
+
+      case .modify:
+        self.presentModifyTodoBottomSheet(of: todoId)
+
+      case .delete:
+        self.presentedViewController?.dismiss(animated: true) {
+          self.presentDeletePopup(of: todoId)
+        }
+
+      default:
+        break
+      }
+    }
+  }
+
+  private func presentModifyTodoBottomSheet(of todoId: Int) {
+    let provider = ServiceProvider()
+    let updateReactor = UpdateTodoReactor(
+      provider: provider,
+      state: .init(
+        id: todoId,
+        isModifying: true,
+        todoHomies: []
+      )
+    )
+    let updateTodoVC = UpdateTodoViewController(updateReactor)
+    self.navigationController?.pushViewController(updateTodoVC, animated: true)
+  }
+
+  private func presentDeletePopup(of todoId: Int) {
+    presentPopUp(.defaultPopUp(
+      defaultPopUpModel: DefaultPopUpModel(
+        cancelText: "취소하기",
+        actionText: "삭제하기",
+        title: "안녕, to-do...",
+        subtitle: "to-do는 한 번 삭제하면 복구되지 않아요."
+      )
+    )) { [weak self] actionType in
+
+      guard let self = self else { return }
+
+      switch actionType {
+      case .action:
+        self.tapDelete.accept(todoId)
+      default:
+        break
+      }
+
+    }
   }
 }

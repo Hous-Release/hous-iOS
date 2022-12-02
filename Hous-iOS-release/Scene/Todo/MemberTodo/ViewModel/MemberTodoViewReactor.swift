@@ -23,6 +23,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case fetch
     case didTapMemberCell(Int)
     case didTapTodo(Int)
+    case didTapDelete(Int)
   }
 
   enum Mutation {
@@ -30,7 +31,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case setMembers(MemberSection.Model?)
     case setSelectedMember(MemberTodoModel?)
 
+    case setSelectedTodoId(Int?)
     case setSelectedTodoSummary(TodoModel?)
+
+    case setIsDeleteSuccess(Bool?)
 
     case setError(String?)
   }
@@ -44,8 +48,13 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     )
     var selectedMember: MemberTodoModel? = nil
 
+
+    var selectedTodoId: Int?
     @Pulse
     var selectedTodoSummary: TodoModel? = nil
+
+    @Pulse
+    var isDeleteSuccess: Bool?
 
     var error: String? = nil
   }
@@ -67,7 +76,12 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
 
     case let .didTapTodo(id):
 
-      provider.memberRepository.fetchTodoSummary(id)
+      provider.todoRepository.fetchTodoSummary(id)
+      return .just(.setSelectedTodoId(id))
+
+    case let .didTapDelete(id):
+
+      provider.todoRepository.deleteTodo(id)
       return .empty()
     }
   }
@@ -85,8 +99,14 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
         items: [])
     case let .setSelectedMember(data):
       newState.selectedMember = data
+
+    case let .setSelectedTodoId(id):
+      newState.selectedTodoId = id
     case let .setSelectedTodoSummary(info):
       newState.selectedTodoSummary = info
+    case let .setIsDeleteSuccess(flag):
+      newState.isDeleteSuccess = flag
+
     case let .setError(error):
       newState.error = error
     }
@@ -94,19 +114,46 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-    let serviceMutation = provider.memberRepository.event.flatMap { event -> Observable<Mutation> in
+
+    let memServiceMutation = provider.memberRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+
       switch event {
       case let .members(data):
         return .just(.setMembers(data))
       case let .selectedMember(data):
         return .just(.setSelectedMember(data))
-      case let .todoSummary(info):
-        return .just(.setSelectedTodoSummary(info))
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))
       }
     }
-    return Observable.merge(mutation, serviceMutation)
+
+    let bottomSheetServiceMutation =
+    provider.todoRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+      guard let self = self else { return .empty() }
+
+      switch event {
+
+      case let .todoSummary(info):
+        return .just(.setSelectedTodoSummary(info))
+
+      case let .isDeleteSuccess(isDeleted):
+        guard let isDeleted = isDeleted else { return .empty() }
+        if isDeleted {
+          let currentRow = self.currentState.selectedMemIndexPathRow ?? 0
+          self.provider.memberRepository.fetchMember(currentRow)
+        }
+        return .just(.setIsDeleteSuccess(isDeleted))
+
+      default:
+        return .empty()
+      }
+    }
+
+    return Observable.merge(
+      mutation,
+      memServiceMutation,
+      bottomSheetServiceMutation
+    )
   }
 }
