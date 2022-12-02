@@ -9,13 +9,10 @@ import UIKit
 import RxSwift
 import Network
 import Differentiator
-import BottomSheetKit
 
 public enum MemberRepositoryEvent {
   case members(MemberSection.Model?)
   case selectedMember(MemberTodoModel?)
-
-  case todoSummary(TodoModel?)
 
   case sendError(HouseErrorModel?)
 }
@@ -24,7 +21,6 @@ public protocol MemberRepository {
   var event: PublishSubject<MemberRepositoryEvent> { get }
   func fetchMember(_: Int)
   func selectMember(_: Int)
-  func fetchTodoSummary(_: Int)
 }
 
 public final class MemberRepositoryImp: BaseService, MemberRepository {
@@ -63,42 +59,6 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
     guard let todos = todos else { return }
     let selectedMemTodo = todos[row]
     self.event.onNext(.selectedMember(selectedMemTodo))
-  }
-
-  public func fetchTodoSummary(_ id: Int) {
-    NetworkService.shared.mainTodoRepository.getTodoSummary(id) { [weak self] res, err in
-
-      guard let self = self else { return }
-
-      guard let data = res?.data else {
-
-        let errorModel = HouseErrorModel(
-          success: res?.success,
-          status: res?.status,
-          message: res?.message
-        )
-        self.event.onNext(.sendError(errorModel))
-        return
-      }
-
-      var homies: [HomieCellModel] = []
-
-      data.selectedUsers.forEach {
-        let homie = HomieCellModel(
-          homieName: $0.nickname,
-          homieColor: HomieFactory.makeHomie(
-            type: HomieColor(rawValue: $0.color) ?? .GRAY).color
-        )
-        homies.append(homie)
-      }
-
-      let todoSummary = TodoModel(
-        homies: homies,
-        todoName: data.name,
-        days: data.dayOfWeeks)
-
-      self.event.onNext(.todoSummary(todoSummary))
-    }
   }
 }
 
