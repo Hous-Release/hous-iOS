@@ -49,6 +49,7 @@ final class HousTextField: UITextField {
     self.layer.addSublayer(defaultUnderlineLayer)
     self.placeholder = placeHolder
     self.text = text
+    self.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     setupViews()
     registerForNotifications()
   }
