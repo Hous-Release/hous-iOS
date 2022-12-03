@@ -16,6 +16,7 @@ class EditHousNameViewController: LoadingBaseViewController {
   private let saveButtonDidTapped = PublishSubject<String>()
   private let viewModel = EditHousNameViewModel()
   private let disposeBag = DisposeBag()
+  private let roomName: String
   
   
   //MARK: UI Components
@@ -38,25 +39,14 @@ class EditHousNameViewController: LoadingBaseViewController {
     $0.dynamicFont(fontSize: 12, weight: .medium)
   }
   
-  private let textField = UITextField().then {
-    $0.textAlignment = .center
-  }
-  
-  private let inValidTextLabel = UILabel().then {
-    $0.isHidden = true
-    $0.text = "방 이름은 8자 이내로 입력해주세요!"
-    $0.textColor = Colors.red.color
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-  }
-  
-  private let blueLine = UIView().then {
-    $0.backgroundColor = Colors.blue.color
-  }
-  
+  private lazy var textField = HousTextField(nil, roomName,
+                                             useMaxCount: true,
+                                             maxCount: 8,
+                                             exceedString: "방 이름은 8자 이내로 입력해주세요!")
   
   //MARK: Life Cycles
   init(roomName: String) {
-    textField.text = roomName
+    self.roomName = roomName
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -78,8 +68,6 @@ class EditHousNameViewController: LoadingBaseViewController {
       navigationBar,
       descriptionLabel,
       textField,
-      blueLine,
-      inValidTextLabel,
       textcountLabel
     ])
     configLoadingLayout()
@@ -98,24 +86,7 @@ class EditHousNameViewController: LoadingBaseViewController {
     textField.snp.makeConstraints { make in
       make.top.equalTo(descriptionLabel.snp.bottom).offset(32)
       make.centerX.equalTo(descriptionLabel)
-      make.leading.trailing.equalTo(blueLine)
-    }
-    
-    blueLine.snp.makeConstraints { make in
-      make.height.equalTo(2)
-      make.top.equalTo(textField.snp.bottom).offset(7)
       make.leading.trailing.equalToSuperview().inset(95)
-      make.centerX.equalTo(textField)
-    }
-    
-    inValidTextLabel.snp.makeConstraints { make in
-      make.top.equalTo(blueLine.snp.bottom).offset(8)
-      make.leading.equalTo(blueLine)
-    }
-    
-    textcountLabel.snp.makeConstraints { make in
-      make.top.equalTo(blueLine.snp.bottom).offset(7)
-      make.trailing.equalTo(blueLine)
     }
   }
   
@@ -163,7 +134,6 @@ class EditHousNameViewController: LoadingBaseViewController {
       .drive(onNext: { [weak self] isValidFlag in
         guard let self = self else { return }
         self.navigationBar.rightButton.isEnabled = isValidFlag
-        self.inValidTextLabel.isHidden = isValidFlag
       })
       .disposed(by: disposeBag)
     
