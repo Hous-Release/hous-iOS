@@ -87,9 +87,9 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   private let todoView = MyTodoView()
   
   private lazy var todoLabelStackView = UIStackView(arrangedSubviews: [todoView]).then {
+    $0.alignment = .leading
     $0.axis = .vertical
     $0.spacing = 10
-    $0.alignment = .center
   }
   
   //MARK: - Life Cycles
@@ -112,11 +112,11 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   //MARK: Helpers
-  func setHomeTodoCell(titleText: String, progress: Float, myTodos: [String], myTodosTotalCount: Int) {
+  func setHomeTodoCell(titleText: String, progress: Int, myTodos: [String], myTodosTotalCount: Int) {
     emptyViewLabel.isHidden = !myTodos.isEmpty
     todoLabelStackView.isHidden = myTodos.isEmpty
     self.titleLabel.text = titleText
-    self.progressView.progress = progress
+    self.progressView.progress = Float(progress) / 100.0
     self.todoCountLabel.text = "• \(myTodosTotalCount)"
     
     todoLabelStackView.subviews.forEach { $0.removeFromSuperview() }
