@@ -28,11 +28,11 @@ class AddRuleViewController: LoadingBaseViewController {
     $0.textColor = Colors.red.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
-  
-  private let ruleTextField = UITextField().then {
-    $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.placeholder = "Rules 입력"
+    
+  private lazy var ruleTextField = HousTextField("Rules 입력", nil).then {
+    $0.rightView = textCountLabel
+    $0.rightViewMode = .always
+    $0.clearButtonMode = .never
   }
   
   private let textCountLabel = UILabel().then {
@@ -43,9 +43,6 @@ class AddRuleViewController: LoadingBaseViewController {
     $0.dynamicFont(fontSize: 12, weight: .medium)
   }
   
-  private let blueLine = UIView().then {
-    $0.backgroundColor = Colors.blue.color
-  }
   
   private let plusButton = UIButton().then {
     $0.isUserInteractionEnabled = false
@@ -107,10 +104,8 @@ class AddRuleViewController: LoadingBaseViewController {
     
     view.addSubViews([
       navigationBar,
-      ruleTextField,
-      blueLine,
-      textCountLabel,
       plusButton,
+      ruleTextField,
       ruleTableView
     ])
     
@@ -123,31 +118,19 @@ class AddRuleViewController: LoadingBaseViewController {
     }
     
     plusButton.snp.makeConstraints { make in
-      make.centerY.equalTo(textCountLabel.snp.top).inset(11)
-      make.leading.equalTo(blueLine.snp.trailing).offset(9)
+      make.centerY.equalTo(ruleTextField.snp.top).inset(17)
+      make.leading.equalTo(ruleTextField.snp.trailing).offset(9)
+      make.trailing.equalToSuperview().inset(10)
       make.size.equalTo(44)
     }
     
     ruleTextField.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
       make.leading.equalToSuperview().offset(25)
-      make.trailing.lessThanOrEqualTo(textCountLabel.snp.leading)
-    }
-    
-    textCountLabel.snp.makeConstraints { make in
-      make.centerY.equalTo(ruleTextField)
-      make.trailing.equalTo(blueLine.snp.trailing).inset(7).priority(.high)
-    }
-    
-    blueLine.snp.makeConstraints { make in
-      make.top.equalTo(ruleTextField.snp.bottom).offset(7)
-      make.height.equalTo(2)
-      make.leading.equalToSuperview().inset(24)
-      make.trailing.equalToSuperview().inset(65)
     }
     
     ruleTableView.snp.makeConstraints { make in
-      make.top.equalTo(blueLine.snp.bottom).offset(19)
+      make.top.equalTo(ruleTextField.snp.bottom).offset(22)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
