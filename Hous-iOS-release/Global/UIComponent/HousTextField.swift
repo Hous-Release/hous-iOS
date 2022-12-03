@@ -36,6 +36,7 @@ final class HousTextField: UITextField {
 
   init(
     _ placeHolder: String? = nil,
+    _ text: String? = nil,
     useMaxCount: Bool = false,
     maxCount: Int? = nil,
     exceedString: String? = nil
@@ -47,6 +48,7 @@ final class HousTextField: UITextField {
     super.init(frame: .zero)
     self.layer.addSublayer(defaultUnderlineLayer)
     self.placeholder = placeHolder
+    self.text = text
     setupViews()
     registerForNotifications()
   }
@@ -79,7 +81,7 @@ final class HousTextField: UITextField {
     else {
       return
     }
-    maxCountLabel.text = "0/\(maxCount)"
+    maxCountLabel.text = "\(self.text?.count ?? 0)/\(maxCount)"
     exceedLabel.text = exceedString
   }
 
