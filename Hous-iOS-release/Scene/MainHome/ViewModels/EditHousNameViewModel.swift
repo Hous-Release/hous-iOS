@@ -36,7 +36,7 @@ final class EditHousNameViewModel: ViewModelType {
     
     let isValidText = input.roomName
       .map { str -> Bool in
-        return str.count <= 8
+        return str.count <= 8 && str.count > 0
       }
       .asDriver(onErrorJustReturn: false)
       
