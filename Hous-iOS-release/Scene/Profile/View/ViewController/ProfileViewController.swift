@@ -206,7 +206,7 @@ final class ProfileViewController: UIViewController {
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabSetting:
-      let destinationViewController = ProfileSettingViewController()
+      let destinationViewController = ProfileSettingViewController(isInRoom: true)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabEdit:
