@@ -39,6 +39,8 @@ public enum Images {
   public static let icCheckYesOnboardSetting = ImageAsset(name: "ic_check_yes_onboard_setting")
   public static let icStarOff = ImageAsset(name: "ic_star_off")
   public static let icStarOn = ImageAsset(name: "ic_star_on")
+  public static let resign = ImageAsset(name: "resign")
+  public static let icSettingGrey = ImageAsset(name: "ic_setting_grey")
   public static let illDone = ImageAsset(name: "ill_done")
   public static let illMakeroom = ImageAsset(name: "ill_makeroom")
   public static let illEnterroom = ImageAsset(name: "ill_enterroom")

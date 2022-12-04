@@ -45,6 +45,11 @@ extension EnterRoomViewController {
       .map { _ in Reactor.Action.didTapExistRoomButton }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+
+    mainView.navigationBarView.rightButton.rx.tap
+      .asDriver()
+      .drive(onNext: transferToResignView)
+      .disposed(by: disposeBag)
   }
 
   private func bindState(_ reactor: EnterRoomViewReactor) {
@@ -75,5 +80,12 @@ extension EnterRoomViewController {
         }
       })
       .disposed(by: disposeBag)
+  }
+}
+
+extension EnterRoomViewController {
+  private func transferToResignView() {
+
+    print("탈퇴뷰로 갈거지롱")
   }
 }

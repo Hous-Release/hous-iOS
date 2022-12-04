@@ -12,6 +12,17 @@ import Then
 
 class EnterRoomView: UIView {
 
+  enum Size {
+    static let navigationBarHeight = 64
+  }
+
+  let navigationBarView = NavBarWithBackButtonView(title: "", rightButtonText: "").then {
+    $0.backButton.isHidden = true
+    $0.rightButton.configuration?.image = Images.icSettingGrey.image
+  }
+
+  let contentView = UIView()
+
   let guideTitleLabel = UILabel().then {
     $0.text = "이제 하우스를 입장해볼까요?"
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
@@ -39,8 +50,20 @@ class EnterRoomView: UIView {
   }
 
   private func render() {
-    addSubViews([guideTitleLabel, stackView])
+    addSubViews([navigationBarView, contentView])
+    contentView.addSubViews([guideTitleLabel, stackView])
     stackView.addArrangedSubviews(newRoomView, existRoomView)
+
+    navigationBarView.snp.makeConstraints { make in
+      make.top.equalTo(safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(Size.navigationBarHeight)
+    }
+
+    contentView.snp.makeConstraints { make in
+      make.top.equalTo(navigationBarView.snp.bottom)
+      make.leading.trailing.bottom.equalToSuperview()
+    }
 
     guideTitleLabel.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
