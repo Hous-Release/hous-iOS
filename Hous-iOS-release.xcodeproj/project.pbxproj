@@ -1802,7 +1802,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
@@ -1836,7 +1836,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
@@ -1933,7 +1933,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
@@ -2030,7 +2030,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
@@ -2121,7 +2121,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
@@ -2212,7 +2212,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
