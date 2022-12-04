@@ -286,6 +286,8 @@ extension MemberTodoViewController {
   }
 
   private func presentModifyTodoBottomSheet(of todoId: Int) {
+    reactor?.action.onNext(.initial)
+
     let provider = ServiceProvider()
     let updateReactor = UpdateTodoReactor(
       provider: provider,
