@@ -24,6 +24,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     case didTapDaysOfWeekCell(Int)
     case didTapTodo(Int)
     case didTapDelete(Int)
+    case initial
   }
 
   enum Mutation {
@@ -89,6 +90,9 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     case let .didTapDelete(id):
 
       provider.todoRepository.deleteTodo(id)
+      return .just(.setInitial)
+
+    case .initial:
       return .just(.setInitial)
     }
   }

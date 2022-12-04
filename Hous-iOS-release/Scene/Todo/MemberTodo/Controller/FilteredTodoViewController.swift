@@ -143,6 +143,9 @@ extension FilteredTodoViewController {
 
   private func transferToAddTodoViewController(_ homies: [UpdateTodoHomieModel]) {
 
+    byDayTodoViewReactor.action.onNext(.initial)
+    memberTodoViewReactor.action.onNext(.initial)
+
     let state = UpdateTodoReactor.State(
       todoHomies: homies
     )

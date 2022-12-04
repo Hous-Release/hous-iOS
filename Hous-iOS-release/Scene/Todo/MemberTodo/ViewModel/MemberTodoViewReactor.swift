@@ -24,6 +24,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case didTapMemberCell(Int)
     case didTapTodo(Int)
     case didTapDelete(Int)
+    case initial
   }
 
   enum Mutation {
@@ -37,6 +38,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case setIsDeleteSuccess(Bool?)
 
     case setError(String?)
+    case setInitial
   }
 
   struct State {
@@ -82,7 +84,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case let .didTapDelete(id):
 
       provider.todoRepository.deleteTodo(id)
-      return .empty()
+      return .just(.setInitial)
+
+    case .initial:
+      return .just(.setInitial)
     }
   }
 
@@ -109,13 +114,15 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
 
     case let .setError(error):
       newState.error = error
+    case .setInitial:
+      newState = initialState
     }
     return newState
   }
 
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
 
-    let memServiceMutation = provider.memberRepository.event.flatMap { [weak self] event -> Observable<Mutation> in
+    let memServiceMutation = provider.memberRepository.event.flatMap { event -> Observable<Mutation> in
 
       switch event {
       case let .members(data):
