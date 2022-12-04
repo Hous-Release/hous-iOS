@@ -217,6 +217,11 @@
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
 		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
+		B880F5C4293C903E00E888BC /* ResignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5C3293C903E00E888BC /* ResignViewController.swift */; };
+		B880F5C6293C904400E888BC /* ResignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5C5293C904400E888BC /* ResignView.swift */; };
+		B880F5C8293C904A00E888BC /* ResignViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5C7293C904A00E888BC /* ResignViewReactor.swift */; };
+		B880F5CB293C93ED00E888BC /* ResignGuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */; };
+		B880F5CD293C95B700E888BC /* ResignInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */; };
 		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
 		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
 		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
@@ -457,6 +462,11 @@
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
 		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
+		B880F5C3293C903E00E888BC /* ResignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignViewController.swift; sourceTree = "<group>"; };
+		B880F5C5293C904400E888BC /* ResignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignView.swift; sourceTree = "<group>"; };
+		B880F5C7293C904A00E888BC /* ResignViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignViewReactor.swift; sourceTree = "<group>"; };
+		B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignGuideCollectionViewCell.swift; sourceTree = "<group>"; };
+		B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
 		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
@@ -1209,6 +1219,7 @@
 		B856701528C99FEC00B49984 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B880F5C2293C902F00E888BC /* Resign */,
 				B84EA6D828DD7F1200C92FCD /* EnterInfo */,
 				B84EA6D928DD7F1B00C92FCD /* Paging */,
 				B8B8A89628DF9163009FD784 /* EnterRoom */,
@@ -1250,6 +1261,26 @@
 				B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B880F5C2293C902F00E888BC /* Resign */ = {
+			isa = PBXGroup;
+			children = (
+				B880F5C9293C938B00E888BC /* Cell */,
+				B880F5C3293C903E00E888BC /* ResignViewController.swift */,
+				B880F5C5293C904400E888BC /* ResignView.swift */,
+				B880F5C7293C904A00E888BC /* ResignViewReactor.swift */,
+			);
+			path = Resign;
+			sourceTree = "<group>";
+		};
+		B880F5C9293C938B00E888BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */,
+				B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B8B56BA128E2E74C00FC99DA /* EnterRoomTextField */ = {
@@ -1514,6 +1545,7 @@
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
 				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,
 				B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */,
+				B880F5CD293C95B700E888BC /* ResignInputCollectionViewCell.swift in Sources */,
 				9BE0C27E29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
 				B8555AA02917D22D00E943AE /* ByDayTodoViewController.swift in Sources */,
@@ -1554,6 +1586,7 @@
 				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
+				B880F5C8293C904A00E888BC /* ResignViewReactor.swift in Sources */,
 				9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */,
 				9BF9AD7829201812006A0BDE /* ProfileTestInfoViewController.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
@@ -1607,6 +1640,7 @@
 				770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */,
 				9B959B0028FF1A3100EB3412 /* UIBezierPath+Extension.swift in Sources */,
 				B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */,
+				B880F5C6293C904400E888BC /* ResignView.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B8555ACB291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift in Sources */,
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
@@ -1632,6 +1666,7 @@
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */,
 				9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */,
+				B880F5C4293C903E00E888BC /* ResignViewController.swift in Sources */,
 				9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */,
 				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
@@ -1643,6 +1678,7 @@
 				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B8555ABD291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift in Sources */,
+				B880F5CB293C93ED00E888BC /* ResignGuideCollectionViewCell.swift in Sources */,
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
 				77D994DF2933E583001872F0 /* NotConnectedInternetViewController.swift in Sources */,
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
