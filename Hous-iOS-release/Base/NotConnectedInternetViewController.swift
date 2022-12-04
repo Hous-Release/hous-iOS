@@ -25,6 +25,7 @@ final class NotConnectedInternetViewController: UIViewController {
   private let imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.backgroundColor = .red
+    imageView.image = Images.notconnected.image
     return imageView
   }()
 
