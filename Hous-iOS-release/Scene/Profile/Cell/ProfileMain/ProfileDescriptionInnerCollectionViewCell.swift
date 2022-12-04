@@ -37,7 +37,7 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     $0.textAlignment = .left
   }
   
-  private var grayLineView = GrayLineView().then {
+  private var grayLineView = UIView().then {
     $0.backgroundColor = Colors.g1.color
   }
   
