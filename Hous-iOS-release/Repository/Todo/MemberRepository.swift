@@ -64,7 +64,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
 
 extension MemberRepositoryImp {
   private func parseMemberSection(_ data: MemberTodoDTO.Response.MemberTodosResponseDTO) -> [MemberDTO] {
-    let membersDTO: [MemberDTO] = data.map {
+    let membersDTO: [MemberDTO] = data.todos.map {
       MemberDTO(
         userName: $0.userName,
         color: $0.color)
@@ -103,7 +103,7 @@ extension MemberRepositoryImp {
 
     var memberTodoModel: [MemberTodoModel] = []
 
-    data.forEach { memberTodoDTO in
+    data.todos.forEach { memberTodoDTO in
       var dayOfWeekTodoModel: [DayOfWeekTodoModel] = []
 
       memberTodoDTO.dayOfWeekTodos.forEach { dayOfWeekTodoDTO in
