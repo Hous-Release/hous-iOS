@@ -100,7 +100,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
 
 extension ByDayRepositoryImp {
   private func onNextEvents(data: ByDayTodoDTO.Response.ByDayTodosResponseDTO, row: Int) {
-    let dataByDay = data[row]
+    let dataByDay = data.todos[row]
 
     let countTodoItem = ByDayTodoSection.Item.countTodo(num: dataByDay.ourTodosCnt)
     self.event.onNext(.countTodoSection(ByDayTodoSection.Model(model: .countTodo, items: [countTodoItem])))

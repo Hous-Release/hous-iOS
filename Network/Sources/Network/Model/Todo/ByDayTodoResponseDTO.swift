@@ -9,7 +9,11 @@ import Foundation
 
 public extension ByDayTodoDTO.Response {
 
-    typealias ByDayTodosResponseDTO = [ByDayTodoDTO]
+    // MARK: - [] + totalCount
+    struct ByDayTodosResponseDTO: Decodable {
+        public let todos: [ByDayTodoDTO]
+        public let totalRoomTodoCnt: Int
+    }
 
     // MARK: - Members + Todos
     struct ByDayTodoDTO: Decodable {
