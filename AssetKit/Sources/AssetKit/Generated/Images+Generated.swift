@@ -28,6 +28,7 @@ public enum Images {
   public static let icProfileNocheck = ImageAsset(name: "ic_profile_nocheck")
   public static let icTodoCheck = ImageAsset(name: "ic_todo_check")
   public static let icTodoNocheck = ImageAsset(name: "ic_todo_nocheck")
+  public static let notconnected = ImageAsset(name: "Notconnected")
   public static let icCheckNo = ImageAsset(name: "ic_check_no")
   public static let icCheckYes = ImageAsset(name: "ic_check_yes")
   public static let illOnboarding01 = ImageAsset(name: "ill_onboarding_01")
