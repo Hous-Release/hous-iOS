@@ -222,6 +222,7 @@
 		B880F5C8293C904A00E888BC /* ResignViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5C7293C904A00E888BC /* ResignViewReactor.swift */; };
 		B880F5CB293C93ED00E888BC /* ResignGuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */; };
 		B880F5CD293C95B700E888BC /* ResignInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */; };
+		B880F5CF293C9ED300E888BC /* UnderlinedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880F5CE293C9ED300E888BC /* UnderlinedTextView.swift */; };
 		B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */; };
 		B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */; };
 		B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */; };
@@ -467,6 +468,7 @@
 		B880F5C7293C904A00E888BC /* ResignViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignViewReactor.swift; sourceTree = "<group>"; };
 		B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignGuideCollectionViewCell.swift; sourceTree = "<group>"; };
 		B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		B880F5CE293C9ED300E888BC /* UnderlinedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextView.swift; sourceTree = "<group>"; };
 		B8B56B9E28E2DEBF00FC99DA /* EnterRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8B56BA228E2E76800FC99DA /* EnterRoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewController.swift; sourceTree = "<group>"; };
 		B8B56BA428E2E77600FC99DA /* CreateNewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewController.swift; sourceTree = "<group>"; };
@@ -1279,6 +1281,7 @@
 			children = (
 				B880F5CA293C93ED00E888BC /* ResignGuideCollectionViewCell.swift */,
 				B880F5CC293C95B700E888BC /* ResignInputCollectionViewCell.swift */,
+				B880F5CE293C9ED300E888BC /* UnderlinedTextView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1553,6 +1556,7 @@
 				B856701228C895E600B49984 /* HousTabBarViewController.swift in Sources */,
 				9BDBAD7A29241E1A0096FE38 /* MateProfileMainImageCollectionViewCell.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
+				B880F5CF293C9ED300E888BC /* UnderlinedTextView.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */,
 				9B2F46952923A918002D9BD2 /* ProfileEditViewModel.swift in Sources */,
