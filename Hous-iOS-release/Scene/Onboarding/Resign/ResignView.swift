@@ -9,20 +9,27 @@ import UIKit
 
 class ResignView: UIView {
 
-  let collectionView = UICollectionView().then {
+  enum Size {
+    static let navigationBarHeight = 64
+  }
+
+  let navigationBarView = NavBarWithBackButtonView(title: "회원 탈퇴", rightButtonText: "")
+
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
 
     var layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
+    //layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     $0.register(cell: ResignGuideCollectionViewCell.self)
-    $0.register(cell: MateProfileInfoCollectionViewCell.self)
+    $0.register(cell: ResignInputCollectionViewCell.self)
     $0.showsVerticalScrollIndicator = false
+    $0.keyboardDismissMode = .interactive
     $0.collectionViewLayout = layout
   }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()
-    setup()
   }
 
   required init?(coder: NSCoder) {
@@ -32,10 +39,17 @@ class ResignView: UIView {
 
 extension ResignView {
   private func render() {
+    addSubViews([navigationBarView, collectionView])
 
-  }
+    navigationBarView.snp.makeConstraints { make in
+      make.top.equalTo(safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(Size.navigationBarHeight)
+    }
 
-  private func setup() {
-
+    collectionView.snp.makeConstraints { make in
+      make.top.equalTo(navigationBarView.snp.bottom)
+      make.leading.trailing.bottom.equalToSuperview()
+    }
   }
 }
