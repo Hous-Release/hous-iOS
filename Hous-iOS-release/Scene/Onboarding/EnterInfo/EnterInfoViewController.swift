@@ -118,10 +118,7 @@ extension EnterInfoViewController {
 }
 
 extension EnterInfoViewController: NavBarWithBackButtonViewDelegate {
-  func backButtonDidTappedWithoutPopUp() {
-    print("back")
-  }
-  
+
   func backButtonDidTapped() {
     navigationController?.popViewController(animated: true)
   }

@@ -128,10 +128,7 @@ extension EnterRoomCodeViewController {
 }
 
 extension EnterRoomCodeViewController: NavBarWithBackButtonViewDelegate {
-  func backButtonDidTappedWithoutPopUp() {
-    print("back")
-  }
-  
+
   func backButtonDidTapped() {
     navigationController?.popViewController(animated: true)
   }

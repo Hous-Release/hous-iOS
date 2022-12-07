@@ -85,7 +85,8 @@ extension EnterRoomViewController {
 
 extension EnterRoomViewController {
   private func transferToResignView() {
-
-    print("탈퇴뷰로 갈거지롱")
+    let resignReactor = ResignViewReactor()
+    let resignVC = ResignViewController(resignReactor)
+    navigationController?.pushViewController(resignVC, animated: true)
   }
 }
