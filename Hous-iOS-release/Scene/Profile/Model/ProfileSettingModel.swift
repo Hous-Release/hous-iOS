@@ -10,8 +10,10 @@ import Foundation
 
 enum ProfileSettingActionControl {
   case didTabAlarmSetting
-  case didTabTerms
+  case didTabAgreement
   case didTabFeedBack
-  case didTabLogOut
+  case didTabLogout
   case didTabLeavingRoom
+  case didTabWithdraw
+  case didTabBack
 }

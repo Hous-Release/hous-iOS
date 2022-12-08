@@ -109,6 +109,7 @@
 		9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */; };
 		9BE0C284290823860028F13A /* ProfileDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C283290823860028F13A /* ProfileDetailModel.swift */; };
 		9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C28629082BFD0028F13A /* ProfileDetailNavigationView.swift */; };
+		9BE2D4762941C30E00C6D7F7 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2D4752941C30E00C6D7F7 /* UIDevice+Extension.swift */; };
 		9BF945FC290D4020008F2BFC /* NeumorphismBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */; };
 		9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FD290D4301008F2BFC /* ProfileDescriptionView.swift */; };
 		9BF94600290D441B008F2BFC /* ProfileRecommendTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF945FF290D441B008F2BFC /* ProfileRecommendTitleView.swift */; };
@@ -348,6 +349,7 @@
 		9BE0C27F290823120028F13A /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		9BE0C283290823860028F13A /* ProfileDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailModel.swift; sourceTree = "<group>"; };
 		9BE0C28629082BFD0028F13A /* ProfileDetailNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailNavigationView.swift; sourceTree = "<group>"; };
+		9BE2D4752941C30E00C6D7F7 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBox.swift; sourceTree = "<group>"; };
 		9BF945FD290D4301008F2BFC /* ProfileDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionView.swift; sourceTree = "<group>"; };
 		9BF945FF290D441B008F2BFC /* ProfileRecommendTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecommendTitleView.swift; sourceTree = "<group>"; };
@@ -1186,6 +1188,7 @@
 			isa = PBXGroup;
 			children = (
 				B856700F28C894D300B49984 /* UIStackView+Extension.swift */,
+				9BE2D4752941C30E00C6D7F7 /* UIDevice+Extension.swift */,
 				B856701328C8E56600B49984 /* CALayer+Extension.swift */,
 				B856702428C9CA2800B49984 /* UIButton+Extension.swift */,
 				B856702828CA087E00B49984 /* UITextField+Extension.swift */,
@@ -1506,6 +1509,7 @@
 				B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
 				77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */,
+				9BE2D4762941C30E00C6D7F7 /* UIDevice+Extension.swift in Sources */,
 				9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */,
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
 				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,

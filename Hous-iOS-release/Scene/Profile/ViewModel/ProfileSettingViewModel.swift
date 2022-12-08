@@ -17,13 +17,15 @@ final class ProfileSettingViewModel: ViewModelType {
   
   struct Input {
     let viewWillAppear: Signal<Void>
+    let actionDetected: PublishSubject<ProfileSettingActionControl>
   }
   
   struct Output {
-    let actionControl: PublishSubject<ProfileSettingActionControl>
+    let actionControl: Observable<ProfileSettingActionControl>
   }
   
   func transform(input: Input) -> Output {
+    let actionControl = input.actionDetected.asObservable()
     return Output(actionControl: actionControl)
   }
 }
