@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: LoadingBaseViewController {
   
   //MARK: RX Components
   
@@ -65,6 +65,7 @@ final class ProfileViewController: UIViewController {
     setup()
     bind()
     render()
+    configLoadingLayout()
   }
   
   //MARK: Setup UI
@@ -81,9 +82,11 @@ final class ProfileViewController: UIViewController {
     
     // input
     
-    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .map { _ in }
+    let viewWillAppear = rx.RxViewWillAppear
       .asSignal(onErrorJustReturn: ())
+      .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
     
     let actionDetected = PublishSubject<ProfileActionControl>()
     
@@ -100,6 +103,7 @@ final class ProfileViewController: UIViewController {
     
     output.profileModel
       .do {
+        self.hideLoading()
         self.data = $0
         self.isEmptyView = $0.isEmptyView
         countCell = $0.isEmptyView ? 3 : 5}
