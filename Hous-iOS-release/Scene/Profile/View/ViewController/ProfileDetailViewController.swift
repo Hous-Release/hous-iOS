@@ -17,7 +17,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
   let disposeBag = DisposeBag()
   var viewModel: ProfileDetailViewModel
   var color: PersonalityColor
-  var isFromTypeTest = false
+  var isFromTypeTest: Bool
   
   //MARK: UI Templetes
   
@@ -31,7 +31,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
   
   //MARK: UI Components
   
-  private let navigationBarView = ProfileDetailNavigationBarView()
+  private lazy var navigationBarView = ProfileDetailNavigationBarView(isFromTypeTest: self.isFromTypeTest)
   
   private let profileDetailCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -49,9 +49,10 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
   
   //MARK: Life Cycle
   
-  init(color: PersonalityColor) {
+  init(color: PersonalityColor, isFromTypeTest: Bool) {
     self.color = color
     self.viewModel = ProfileDetailViewModel(color: color)
+    self.isFromTypeTest = isFromTypeTest
     super.init(nibName: nil, bundle: nil)
   }
   
