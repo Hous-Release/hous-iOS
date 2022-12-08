@@ -176,9 +176,7 @@ final class MateProfileViewController: UIViewController {
     
     switch action {
     case .didTabDetail:
-      print("⭐️")
-      print(self.data.personalityColor)
-      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
+      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor, isFromTypeTest: false)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
       

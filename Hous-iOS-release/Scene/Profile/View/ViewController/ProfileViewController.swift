@@ -27,7 +27,7 @@ final class ProfileViewController: LoadingBaseViewController {
     static let screenWidth = UIScreen.main.bounds.width
     static let profileMainImageCellHeight = CGSize(width: Size.screenWidth, height: 254)
     static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 176)
-    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 250)
+    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 273)
     static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 150)
     static let profileRetryCellHeight = CGSize(width: Size.screenWidth, height: 139)
     static let profileEmptyCellHeight = CGSize(width: Size.screenWidth, height: 325)
@@ -218,8 +218,7 @@ final class ProfileViewController: LoadingBaseViewController {
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabDetail:
-      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
-      destinationViewController.isFromTypeTest = false
+      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor, isFromTypeTest: false)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabBadge:
