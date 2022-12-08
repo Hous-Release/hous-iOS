@@ -70,7 +70,13 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
       let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -2)
       let newMessage = descriptionMessage[start...end]
       
-      descriptionView.personalityDescriptionLabel.text = String(newMessage)
+      let attrString = NSMutableAttributedString(string: String(newMessage))
+      let paragraphStyle = NSMutableParagraphStyle()
+      paragraphStyle.lineSpacing = 4
+      paragraphStyle.alignment = .center
+      attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+      
+      descriptionView.personalityDescriptionLabel.attributedText = attrString
     }
     
     recommendRuleTitleView.recommendTitleLabel.text = data.recommendTitle
