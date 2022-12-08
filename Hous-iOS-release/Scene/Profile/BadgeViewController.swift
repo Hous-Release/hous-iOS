@@ -167,7 +167,7 @@ extension BadgeViewController: UICollectionViewDelegateFlowLayout {
     if section == 0 {
       return .zero
     }
-    return UIEdgeInsets(top: 39, left: 24, bottom: 0, right: 24)
+    return UIEdgeInsets(top: 39, left: 32, bottom: 0, right: 32)
   }
 }
 
@@ -184,10 +184,12 @@ extension BadgeViewController {
           guard let self = self else { return }
           
           var idx = 0
+          var before = 0
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == id {
               idx = index
-            } else {
+            } else if model.tapState == .representing {
+              before = index
               self.badgeWithStateModel[index].tapState = .none
             }
           }
@@ -195,8 +197,8 @@ extension BadgeViewController {
           let title = self.badgeWithStateModel[idx].title
           cell.setRepresntingBadgeCellData(viewModel: RepresentingBadgeViewModel(imageURL: urlString, title: title))
           
-          //MARK: - 이거보다 더 나은 방법이 있을까
-          self.badgeCollectionView.reloadSections(IndexSet(integer: 1))
+          let idPath = IndexPath(row: before, section: 1)
+          self.badgeCollectionView.reloadItems(at: [idPath])
         })
         .disposed(by: cell.disposeBag)
       
@@ -216,10 +218,14 @@ extension BadgeViewController {
           guard let self = self else { return }
           
           var idx = 0
+          var before = 0
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == viewModel.id {
               idx = index
-            } else {
+            } else if model.tapState == .representing {
+              return
+            } else if model.tapState == .selected {
+              before = index
               self.badgeWithStateModel[index].tapState = .none
             }
           }
@@ -237,7 +243,8 @@ extension BadgeViewController {
           }
           
           cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])
-          
+          let idPath = IndexPath(row: before, section: 1)
+          self.badgeCollectionView.reloadItems(at: [idPath])
         })
         .disposed(by: cell.disposeBag)
       
