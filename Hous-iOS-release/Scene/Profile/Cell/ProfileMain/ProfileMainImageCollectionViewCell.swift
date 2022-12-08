@@ -122,6 +122,8 @@ final class ProfileMainImageCollectionViewCell: UICollectionViewCell {
   private func animatedRender(data: ProfileModel) {
     if data.isEmptyView {
       self.backgroundColor = Colors.blueL2.color
+      self.alarmButton.setImage(Images.icAlarmEmpty.image, for: .normal)
+      self.settingButton.setImage(Images.icSettingEmpty.image, for: .normal)
       profileMainImage.removeFromSuperview()
       profileMainImage = AnimationView.init(name: "empty_profile")
       addSubview(profileMainImage)

@@ -71,7 +71,6 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
     configLoadingLayout()
     self.showLoading()
     bind()
-   
   }
   
   //MARK: Setup UI
