@@ -24,8 +24,8 @@ final class ProfileSettingListView: UIView {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
   }
   
-  private let forwardButton = UIButton().then {
-    $0.setImage(Images.icNext.image, for: .normal)
+  let forwardButtonImage = UIImageView().then {
+    $0.image = Images.icNext.image
   }
   
   override init(frame: CGRect) {
@@ -49,7 +49,7 @@ final class ProfileSettingListView: UIView {
   }
   
   private func render() {
-    self.addSubViews([listImage, listTextLabel, forwardButton])
+    self.addSubViews([listImage, listTextLabel, forwardButtonImage])
     
     listImage.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
@@ -61,7 +61,7 @@ final class ProfileSettingListView: UIView {
       make.leading.equalTo(listImage.snp.trailing).offset(12)
     }
     
-    forwardButton.snp.makeConstraints { make in
+    forwardButtonImage.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().offset(-16)
     }
