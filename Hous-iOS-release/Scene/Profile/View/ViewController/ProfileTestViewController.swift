@@ -166,10 +166,8 @@ final class ProfileTestViewController: LoadingBaseViewController {
     let output = viewModel.transform(input: input)
     
     output.profileTestData
-      .delay(.seconds(3), scheduler: MainScheduler.instance)
       .do(onNext: { _ in
           self.hideLoading()
-          print("⭐️Hide Loading⭐️")
         })
       .bind(to: testCollectionView.rx.items) {
             (collectionView: UICollectionView, index: Int, element: ProfileTestItemModel) in
