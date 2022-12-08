@@ -146,6 +146,16 @@ class DeleteRuleViewController: LoadingBaseViewController {
         }
         cell.selectionStyle = .none
         
+        cell.selectButton.rx.tap
+          .asDriver(onErrorJustReturn: ())
+          .drive(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            let ruleId = ruleWithIDViewModel.id
+            
+            cell.selectButton.isSelected.toggle()
+            self.selectedDict[ruleId] = cell.selectButton.isSelected
+          })
+          .disposed(by: cell.disposeBag)
         
       }
       .disposed(by: disposeBag)
