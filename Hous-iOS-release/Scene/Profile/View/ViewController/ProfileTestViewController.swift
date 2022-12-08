@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-final class ProfileTestViewController: UIViewController {
+final class ProfileTestViewController: LoadingBaseViewController {
   
   private var testIndex = 0
   
@@ -106,6 +106,8 @@ final class ProfileTestViewController: UIViewController {
     render()
     setTestCollectionView()
     configUI()
+    configLoadingLayout()
+    self.showLoading()
     bind()
   }
   
@@ -126,9 +128,9 @@ final class ProfileTestViewController: UIViewController {
     
     // input
     
-    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .map { _ in }
+    let viewWillAppear = rx.RxViewWillAppear
       .asSignal(onErrorJustReturn: ())
+  
     
     forwardButton.rx.tap
       .observe(on: MainScheduler.asyncInstance)
@@ -164,24 +166,29 @@ final class ProfileTestViewController: UIViewController {
     let output = viewModel.transform(input: input)
     
     output.profileTestData
+      .delay(.seconds(3), scheduler: MainScheduler.instance)
+      .do(onNext: { _ in
+          self.hideLoading()
+          print("⭐️Hide Loading⭐️")
+        })
       .bind(to: testCollectionView.rx.items) {
-        (collectionView: UICollectionView, index: Int, element: ProfileTestItemModel) in
-        let indexPath = IndexPath(row: index, section: 0)
-        guard let cell =
-                self.testCollectionView.dequeueReusableCell(withReuseIdentifier: TestCollectionViewCell.className , for: indexPath) as? TestCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
-        cell.cellIndex = indexPath.row
-        cell.transferToViewController(cellIndex: cell.cellIndex)
-        cell.bind(element, self.viewModel.selectedData)
-        cell.cellActionControlSubject
-          .asDriver(onErrorJustReturn: .none)
-          .drive(onNext: { [weak self] data in
-            guard let self = self else { return }
-            self.actionDetected.onNext(data)
-          })
-          .disposed(by: cell.disposeBag)
-        return cell
-      }
-      .disposed(by: disposeBag)
+            (collectionView: UICollectionView, index: Int, element: ProfileTestItemModel) in
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell =
+                    self.testCollectionView.dequeueReusableCell(withReuseIdentifier: TestCollectionViewCell.className , for: indexPath) as? TestCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+            cell.cellIndex = indexPath.row
+            cell.transferToViewController(cellIndex: cell.cellIndex)
+            cell.bind(element, self.viewModel.selectedData)
+            cell.cellActionControlSubject
+              .asDriver(onErrorJustReturn: .none)
+              .drive(onNext: { [weak self] data in
+                guard let self = self else { return }
+                self.actionDetected.onNext(data)
+              })
+              .disposed(by: cell.disposeBag)
+            return cell
+          }
+          .disposed(by: disposeBag)
     
     output.profileTestData
       .bind(onNext: { [weak self] data in
