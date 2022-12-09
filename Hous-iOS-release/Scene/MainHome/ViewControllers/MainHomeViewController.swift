@@ -130,15 +130,21 @@ class MainHomeViewController: LoadingBaseViewController {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainHomeRulesCollectionViewCell.className, for: indexPath) as? MainHomeRulesCollectionViewCell else { return UICollectionViewCell()
       }
       
-      cell.ourRulesArrowButton.rx.tap
-        .asDriver()
-        .drive(onNext: { [weak self] in
-          guard let self = self else { return }
-          let vc = OurRulesViewController(viewModel: RulesViewModel())
-          vc.view.backgroundColor = .white
-          self.navigationController?.pushViewController(vc, animated: true)
-        })
-        .disposed(by: cell.disposeBag)
+      Observable.merge(
+        cell.ourRulesBackgroundView.rx.tapGesture()
+          .when(.recognized)
+          .map{ _ in }
+          .asObservable(),
+        cell.ourRulesArrowButton.rx.tap.asObservable()
+      )
+      .asDriver(onErrorJustReturn: ())
+      .drive(onNext: { [weak self] in
+        guard let self = self else { return }
+        let vc = OurRulesViewController(viewModel: RulesViewModel())
+        vc.view.backgroundColor = .white
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
+      .disposed(by: cell.disposeBag)
       
       cell.setHomeRulesCell(ourRules: todos.ourRules)
 

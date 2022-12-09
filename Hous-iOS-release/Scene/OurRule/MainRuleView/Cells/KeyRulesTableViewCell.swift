@@ -29,7 +29,7 @@ class KeyRulesTableViewCell: UITableViewCell {
   }
   
   private let emptyNormalRulesLabel = UILabel().then {
-    $0.text = "다른 Rule도 추가해보세요!"
+    $0.text = "다른 Rules도 추가해보세요!"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g4.color
     $0.numberOfLines = 1

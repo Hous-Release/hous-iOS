@@ -112,6 +112,19 @@ class DeleteRuleViewController: LoadingBaseViewController {
       self.selectedDict[viewModel.id] = false
     }
     
+    rulesTableView.rx.itemSelected
+      .asDriver()
+      .drive(onNext: { [weak self] indexPath in
+        guard let self = self else { return }
+        let ruleWithIDViewModel = self.rules[indexPath.row]
+        let ruleId = ruleWithIDViewModel.id
+        
+        guard let cell = self.rulesTableView.cellForRow(at: indexPath) as? RulesTableViewCell else { return }
+        cell.selectButton.isSelected.toggle()
+        self.selectedDict[ruleId] = cell.selectButton.isSelected
+      })
+      .disposed(by: disposeBag)
+    
     observable
       .bind(to: rulesTableView.rx.items(cellIdentifier: RulesTableViewCell.className, cellType: RulesTableViewCell.self)) { [weak self] row, _, cell in
         guard let self = self else { return }

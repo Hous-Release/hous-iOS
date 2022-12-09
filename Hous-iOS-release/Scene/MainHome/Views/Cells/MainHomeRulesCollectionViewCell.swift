@@ -21,7 +21,7 @@ class MainHomeRulesCollectionViewCell: UICollectionViewCell {
     $0.setImage(Images.icMoreOurRules.image, for: .normal)
   }
   
-  private let ourRulesBackgroundView = UIView().then {
+  let ourRulesBackgroundView = UIView().then {
     $0.backgroundColor = Colors.blueL2.color
     $0.layer.cornerRadius = 8
   }

@@ -177,7 +177,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
       let badgeImageURL: String? = dto.representBadgeImage
       var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
       
-      typeScores = typeScores.map { $0 * 10 - 10 }
+      typeScores = typeScores.map { $0 * (15/2) - 5/2 }
       
       ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
     }

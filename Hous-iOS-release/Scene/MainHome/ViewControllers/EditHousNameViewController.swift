@@ -32,17 +32,12 @@ class EditHousNameViewController: LoadingBaseViewController {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
   
-  private let textcountLabel = UILabel().then {
-    $0.text = "0/8"
-    $0.textColor = Colors.g5.color
-    $0.font = Fonts.Montserrat.medium.font(size: 12)
-    $0.dynamicFont(fontSize: 12, weight: .medium)
-  }
-  
   private lazy var textField = HousTextField(nil, roomName,
                                              useMaxCount: true,
                                              maxCount: 8,
-                                             exceedString: "방 이름은 8자 이내로 입력해주세요!")
+                                             exceedString: "방 이름은 8자 이내로 입력해주세요!").then {
+    $0.textAlignment = .center
+  }
   
   //MARK: Life Cycles
   init(roomName: String) {
@@ -67,8 +62,7 @@ class EditHousNameViewController: LoadingBaseViewController {
     view.addSubViews([
       navigationBar,
       descriptionLabel,
-      textField,
-      textcountLabel
+      textField
     ])
     configLoadingLayout()
     
@@ -137,9 +131,6 @@ class EditHousNameViewController: LoadingBaseViewController {
       })
       .disposed(by: disposeBag)
     
-    output.textCountLabelText
-      .drive(textcountLabel.rx.text)
-      .disposed(by: disposeBag)
     
     output.updatedRoom
       .do(onNext: {[weak self] _ in self?.hideLoading() })
