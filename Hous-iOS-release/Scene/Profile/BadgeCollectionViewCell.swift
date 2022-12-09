@@ -26,16 +26,12 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     $0.backgroundColor = Colors.yellow.color
   }
   
-  private let checkView = UIImageView().then {
-    $0.image = Images.icCheckBadge.image
-  }
-  
   private let selectedLabel = UILabel().then {
     $0.textAlignment = .center
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textColor = Colors.white.color
-    $0.numberOfLines = 1
-    $0.text = "배지로 설정"
+    $0.numberOfLines = 2
+    $0.text = "터치해서\n대표로 확정"
   }
   
   private let representLabel = UILabel().then {
@@ -100,7 +96,6 @@ class BadgeCollectionViewCell: UICollectionViewCell {
     ])
     
     yelloBackgroundView.addSubViews([
-      checkView,
       selectedLabel
     ])
     
@@ -113,14 +108,8 @@ class BadgeCollectionViewCell: UICollectionViewCell {
       make.edges.equalToSuperview()
     }
     
-    checkView.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalToSuperview().offset(23)
-    }
-    
     selectedLabel.snp.makeConstraints { make in
-      make.centerX.equalTo(checkView)
-      make.top.equalTo(checkView.snp.bottom).offset(4)
+      make.center.equalToSuperview()
     }
     
     blurView.snp.makeConstraints { make in

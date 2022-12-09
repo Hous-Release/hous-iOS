@@ -12,7 +12,7 @@ final class ProfileRecommendRuleStackItemView : UIView {
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
-    static let imageSize = CGSize(width: 14, height: 14)
+    static let imageSize = CGSize(width: 12, height: 8)
   }
   
   let indexImageView = UIImageView().then {
@@ -21,7 +21,7 @@ final class ProfileRecommendRuleStackItemView : UIView {
   
   private let recommendRuleLabel = UILabel().then {
     $0.text = "default"
-    $0.textColor = .black
+    $0.textColor = Colors.g7.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textAlignment = .center
   }

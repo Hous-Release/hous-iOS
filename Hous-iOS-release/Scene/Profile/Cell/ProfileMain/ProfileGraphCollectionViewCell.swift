@@ -71,7 +71,7 @@ final class ProfileGraphCollectionViewCell: UICollectionViewCell {
       detailButton])
     
     personalityLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(5)
+      make.top.equalToSuperview().offset(28)
       make.leading.equalToSuperview().offset(32)
     }
     

@@ -324,7 +324,7 @@ final class ProfileEditViewController: UIViewController {
     let output = viewModel.transform(input: input)
     
     output.actionControl
-      .bind(onNext: {[weak self] in
+      .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.doNavigation(action: $0)
         self.textFieldModeControl(action: $0)

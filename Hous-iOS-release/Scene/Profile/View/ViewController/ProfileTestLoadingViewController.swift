@@ -90,11 +90,10 @@ final class ProfileTestLoadingViewController: UIViewController {
     let combinedObservable = Observable.combineLatest(output.dataLoaded, output.timeFlag)
     combinedObservable
       .bind(onNext: { [weak self] data in
-        let destinationViewController = ProfileDetailViewController(color: data.0)
+        let destinationViewController = ProfileDetailViewController(color: data.0, isFromTypeTest: true)
         destinationViewController.modalPresentationStyle = .fullScreen
         destinationViewController.modalTransitionStyle = .crossDissolve
         destinationViewController.view.backgroundColor = .white
-        destinationViewController.isFromTypeTest = true
         self?.present(destinationViewController, animated: true)
       })
       .disposed(by: disposeBag)
