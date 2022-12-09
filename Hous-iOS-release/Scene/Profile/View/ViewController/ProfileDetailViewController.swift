@@ -10,14 +10,14 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileDetailViewController: UIViewController, UICollectionViewDelegate {
+final class ProfileDetailViewController: LoadingBaseViewController, UICollectionViewDelegate {
   
   //MARK: RX Components
   
   let disposeBag = DisposeBag()
   var viewModel: ProfileDetailViewModel
   var color: PersonalityColor
-  var isFromTypeTest = false
+  var isFromTypeTest: Bool
   
   //MARK: UI Templetes
   
@@ -31,7 +31,7 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   
   //MARK: UI Components
   
-  private let navigationBarView = ProfileDetailNavigationBarView()
+  private lazy var navigationBarView = ProfileDetailNavigationBarView(isFromTypeTest: self.isFromTypeTest)
   
   private let profileDetailCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -49,9 +49,10 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   
   //MARK: Life Cycle
   
-  init(color: PersonalityColor) {
+  init(color: PersonalityColor, isFromTypeTest: Bool) {
     self.color = color
     self.viewModel = ProfileDetailViewModel(color: color)
+    self.isFromTypeTest = isFromTypeTest
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -67,8 +68,10 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    bind()
     render()
+    configLoadingLayout()
+    self.showLoading()
+    bind()
   }
   
   //MARK: Setup UI
@@ -85,9 +88,11 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
     
     // input
     
-    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .map { _ in }
+    let viewWillAppear = rx.RxViewWillAppear
       .asSignal(onErrorJustReturn: ())
+      .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
     
     let actionDetected = PublishSubject<ProfileDetailActionControl>()
     
@@ -108,6 +113,9 @@ final class ProfileDetailViewController: UIViewController, UICollectionViewDeleg
     let output = viewModel.transform(input: input)
     
     output.profileDetailModel
+      .do(onNext: { _ in
+          self.hideLoading()
+        })
       .map {[ProfileDetailModel](repeating: $0, count: 3)}
       .bind(to:profileDetailCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: ProfileDetailModel) in

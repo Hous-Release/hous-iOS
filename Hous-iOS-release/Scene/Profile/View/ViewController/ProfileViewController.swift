@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: LoadingBaseViewController {
   
   //MARK: RX Components
   
@@ -27,7 +27,7 @@ final class ProfileViewController: UIViewController {
     static let screenWidth = UIScreen.main.bounds.width
     static let profileMainImageCellHeight = CGSize(width: Size.screenWidth, height: 254)
     static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 176)
-    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 250)
+    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 273)
     static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 150)
     static let profileRetryCellHeight = CGSize(width: Size.screenWidth, height: 139)
     static let profileEmptyCellHeight = CGSize(width: Size.screenWidth, height: 325)
@@ -65,6 +65,7 @@ final class ProfileViewController: UIViewController {
     setup()
     bind()
     render()
+    configLoadingLayout()
   }
   
   //MARK: Setup UI
@@ -81,9 +82,11 @@ final class ProfileViewController: UIViewController {
     
     // input
     
-    let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .map { _ in }
+    let viewWillAppear = rx.RxViewWillAppear
       .asSignal(onErrorJustReturn: ())
+      .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
     
     let actionDetected = PublishSubject<ProfileActionControl>()
     
@@ -100,6 +103,7 @@ final class ProfileViewController: UIViewController {
     
     output.profileModel
       .do {
+        self.hideLoading()
         self.data = $0
         self.isEmptyView = $0.isEmptyView
         countCell = $0.isEmptyView ? 3 : 5}
@@ -206,7 +210,7 @@ final class ProfileViewController: UIViewController {
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabSetting:
-      let destinationViewController = ProfileSettingViewController()
+      let destinationViewController = ProfileSettingViewController(isInRoom: true)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabEdit:
@@ -214,8 +218,7 @@ final class ProfileViewController: UIViewController {
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabDetail:
-      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor)
-      destinationViewController.isFromTypeTest = false
+      let destinationViewController = ProfileDetailViewController(color: self.data.personalityColor, isFromTypeTest: false)
       destinationViewController.view.backgroundColor = .white
       navigationController?.pushViewController(destinationViewController, animated: true)
     case .didTabBadge:
