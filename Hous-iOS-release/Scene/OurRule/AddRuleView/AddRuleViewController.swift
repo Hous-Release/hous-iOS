@@ -193,6 +193,7 @@ class AddRuleViewController: LoadingBaseViewController {
     output.viewDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
+        self.ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.g5.color.cgColor)
         self.ruleTextField.endEditing(true)
       })
       .disposed(by: disposeBag)

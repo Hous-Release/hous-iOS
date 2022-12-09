@@ -171,7 +171,8 @@ final class HousTextField: UITextField {
     if useMaxCount && ((maxCount ?? 0) < text.count) {
       return
     }
-
+    
+    selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
     self.layer.addSublayer(selectedUnderlineLayer)
 
     let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
