@@ -18,12 +18,11 @@ class ResignView: UIView {
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
 
     var layout = UICollectionViewFlowLayout()
+    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     layout.scrollDirection = .vertical
-    //layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     $0.register(cell: ResignGuideCollectionViewCell.self)
     $0.register(cell: ResignInputCollectionViewCell.self)
     $0.showsVerticalScrollIndicator = false
-    $0.keyboardDismissMode = .interactive
     $0.collectionViewLayout = layout
   }
 
