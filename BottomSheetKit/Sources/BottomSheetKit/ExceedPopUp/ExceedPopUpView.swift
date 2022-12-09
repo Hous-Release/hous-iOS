@@ -18,7 +18,7 @@ internal final class ExceedPopUpView: UIView {
     static let verticalMargin: CGFloat = 28
     static let imageHorizontalMargin: CGFloat = 82
     static let horizontalMargin: CGFloat = 20
-    static let itemTopMargin: CGFloat = 16
+    static let itemTopMargin: CGFloat = 8
     static let buttonHeight: CGFloat = 42
   }
 
@@ -49,7 +49,7 @@ internal final class ExceedPopUpView: UIView {
     label.lineBreakMode = .byWordWrapping
     label.lineBreakStrategy = .hangulWordPriority
     label.textAlignment = .center
-    label.textColor = Colors.g5.color
+    label.textColor = Colors.g7.color
     label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     return label
   }()
