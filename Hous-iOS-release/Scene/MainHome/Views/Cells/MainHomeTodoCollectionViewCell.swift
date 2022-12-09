@@ -86,6 +86,10 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   
   private let todoView = MyTodoView()
   
+  private let emptyLabelBackgroundView = UIView().then {
+    $0.backgroundColor = .clear
+  }
+  
   private lazy var todoLabelStackView = UIStackView(arrangedSubviews: [todoView]).then {
     $0.alignment = .leading
     $0.axis = .vertical
@@ -143,8 +147,10 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
       todoTitleLabel,
       todoCountLabel,
       todoLabelStackView,
-      emptyViewLabel
+      emptyLabelBackgroundView
     ])
+    
+    emptyLabelBackgroundView.addSubview(emptyViewLabel)
     
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(28)
@@ -193,9 +199,13 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
       make.centerY.equalTo(todoTitleLabel)
     }
     
+    emptyLabelBackgroundView.snp.makeConstraints { make in
+      make.top.equalTo(todoTitleLabel.snp.bottom)
+      make.leading.trailing.bottom.equalToSuperview()
+    }
+    
     emptyViewLabel.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(todoTitleLabel.snp.bottom).offset(25)
+      make.center.equalToSuperview()
     }
     
     todoLabelStackView.snp.makeConstraints { make in
