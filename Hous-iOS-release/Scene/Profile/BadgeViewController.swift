@@ -239,7 +239,7 @@ extension BadgeViewController {
             self.badgeWithStateModel[idx].tapState = .representing
             self.selectedMainBadgeSubject.onNext(viewModel.id)
           case .representing:
-            break
+            return
           }
           
           cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])
