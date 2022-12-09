@@ -281,6 +281,10 @@ extension AddRuleViewController {
             let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
             let newString = String(text[text.startIndex..<maxIndex])
             ruleTextField.text = newString
+          } else if text.count == 0 {
+            ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.g5.color.cgColor)
+          } else {
+            ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.blue.color.cgColor)
           }
         }
       default:
