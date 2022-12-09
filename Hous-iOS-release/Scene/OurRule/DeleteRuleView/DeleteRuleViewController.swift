@@ -36,7 +36,7 @@ class DeleteRuleViewController: LoadingBaseViewController {
   
   private let disposeBag = DisposeBag()
   
-  private var selectedDict: [Int: Bool] = [:]
+  private var selectedDict: [RuleState] = []
   
   private var deleteButtonDidTapped = PublishSubject<[Int]>()
   
@@ -109,7 +109,7 @@ class DeleteRuleViewController: LoadingBaseViewController {
     
     rules.forEach { [weak self] viewModel in
       guard let self = self else { return }
-      self.selectedDict[viewModel.id] = false
+      self.selectedDict.append(RuleState(id: viewModel.id, isSelected: false))
     }
     
     rulesTableView.rx.itemSelected
@@ -118,10 +118,13 @@ class DeleteRuleViewController: LoadingBaseViewController {
         guard let self = self else { return }
         let ruleWithIDViewModel = self.rules[indexPath.row]
         let ruleId = ruleWithIDViewModel.id
-        
+
         guard let cell = self.rulesTableView.cellForRow(at: indexPath) as? RulesTableViewCell else { return }
-        cell.selectButton.isSelected.toggle()
-        self.selectedDict[ruleId] = cell.selectButton.isSelected
+
+        let state = self.selectedDict[indexPath.row].isSelected
+
+        cell.selectButton.isSelected = !state
+        self.selectedDict[indexPath.row].isSelected = cell.selectButton.isSelected
       })
       .disposed(by: disposeBag)
     
@@ -146,14 +149,17 @@ class DeleteRuleViewController: LoadingBaseViewController {
         }
         cell.selectionStyle = .none
         
+        cell.selectButton.isSelected = self.selectedDict[row].isSelected
+        
         cell.selectButton.rx.tap
           .asDriver(onErrorJustReturn: ())
           .drive(onNext: { [weak self] _ in
             guard let self = self else { return }
             let ruleId = ruleWithIDViewModel.id
             
-            cell.selectButton.isSelected.toggle()
-            self.selectedDict[ruleId] = cell.selectButton.isSelected
+            let state = self.selectedDict[row].isSelected
+            cell.selectButton.isSelected = !state
+            self.selectedDict[row].isSelected = cell.selectButton.isSelected
           })
           .disposed(by: cell.disposeBag)
         
@@ -211,9 +217,9 @@ class DeleteRuleViewController: LoadingBaseViewController {
           guard let self = self else { return }
           switch actionType {
           case .action:
-            let deletingRules = self.selectedDict.flatMap { (key, flag) -> [Int] in
+            let deletingRules = self.selectedDict.flatMap { ruleState -> [Int] in
               var deletingRules: [Int] = []
-              if flag { deletingRules.append(key) }
+              if ruleState.isSelected { deletingRules.append(ruleState.id) }
               return deletingRules
             }
             self.deleteButtonDidTapped.onNext(deletingRules)
@@ -232,4 +238,10 @@ extension DeleteRuleViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 52
   }
+}
+
+
+struct RuleState {
+  let id: Int
+  var isSelected: Bool
 }
