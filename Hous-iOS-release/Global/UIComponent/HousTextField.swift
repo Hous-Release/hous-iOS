@@ -226,6 +226,12 @@ extension HousTextField {
 
 }
 
+extension HousTextField {
+  func changeSelectedUnderlineLayerBackgrounColor(color: CGColor?) {
+    selectedUnderlineLayer.backgroundColor = color
+  }
+}
+
 
 fileprivate extension NSNotification.Name {
   static let change = Notification.Name("UITextFieldTextDidChangeNotification")
