@@ -8,8 +8,7 @@
 import UIKit
 
 protocol ResignInputCellDelegate {
-  func didTapTextField()
-  func didTapTextView()
+  func didTextViewChange(_ estimatedSize: CGSize, _ height: CGFloat)
 }
 
 class ResignInputCollectionViewCell: UICollectionViewCell {
@@ -24,10 +23,13 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
   ]
 
   enum Size {
+    static let screenWidth = UIScreen.main.bounds.width
     static let textfieldHeight = 36
     static let resignButtonHeight = 44
     static let resignCheckButtonHeight = 24
   }
+
+  let mainView = UIView()
 
   let titleLabel = UILabel().then {
     $0.text = "피드백 남기기"
@@ -39,7 +41,10 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
 
   let reasonPickerView = UIPickerView()
 
-  let reasonTextView = UnderlinedTextFieldStackView()
+  let reasonTextView = UnderlinedTextStackView(
+    placeholder: "의견 남기기",
+    maxStringNum: 20
+  )
 
   let resignCheckButton = UIButton(configuration: .plain()).then {
 
@@ -85,10 +90,16 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
 extension ResignInputCollectionViewCell {
 
   private func render() {
-    addSubViews([titleLabel, reasonTextField, reasonTextView, resignCheckButton, resignButton])
+    addSubView(mainView)
+    mainView.addSubViews([titleLabel, reasonTextField, reasonTextView, resignCheckButton, resignButton])
+
+    mainView.snp.makeConstraints { make in
+      make.width.equalTo(Size.screenWidth)
+      make.edges.equalToSuperview()
+    }
 
     titleLabel.snp.makeConstraints { make in
-      make.leading.equalToSuperview().offset(24)
+      make.leading.trailing.equalToSuperview().inset(24)
       make.top.equalToSuperview().offset(18)
     }
 
@@ -119,8 +130,8 @@ extension ResignInputCollectionViewCell {
 
   private func setup() {
 
+    reasonTextField.delegate = self
     reasonTextView.textView.delegate = self
-    reasonTextField.addTarget(self, action: #selector(tapTextField), for: .editingDidBegin)
 
     reasonTextField.inputView = reasonPickerView
     reasonPickerView.delegate = self
@@ -133,16 +144,14 @@ extension ResignInputCollectionViewCell {
     let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(tapDone))
     toolBar.setItems([cancel, flexible, barButton], animated: false)
     reasonTextField.inputAccessoryView = toolBar
+    reasonTextView.textView.inputAccessoryView = toolBar
   }
 
   @objc func tapDone() {
-      self.endEditing(true)
+    self.endEditing(true)
   }
   @objc func tapCancel() {
-      self.resignFirstResponder()
-  }
-  @objc func tapTextField() {
-    self.delegate?.didTapTextField()
+    self.resignFirstResponder()
   }
 }
 
@@ -168,6 +177,31 @@ extension ResignInputCollectionViewCell: UIPickerViewDelegate, UIPickerViewDataS
 extension ResignInputCollectionViewCell: UITextViewDelegate {
 
   func textViewDidBeginEditing(_ textView: UITextView) {
-    delegate?.didTapTextView()
+    reasonTextView.textViewSelected()
+    reasonTextView.textEmptyControl()
+  }
+
+  func textViewDidEndEditing(_ textView: UITextView) {
+    reasonTextView.textViewUnselected()
+  }
+
+  func textViewDidChange(_ textView: UITextView) {
+    let size = CGSize(width: Size.screenWidth - 48, height: CGFloat.infinity)
+    let estimatedSize = textView.sizeThatFits(size)
+
+    reasonTextView.textViewResize()
+    let height = reasonTextView.bounds.height
+    delegate?.didTextViewChange(estimatedSize, height)
+  }
+}
+
+extension ResignInputCollectionViewCell: UITextFieldDelegate {
+
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    reasonTextField.arrowImageView.transform = .init(rotationAngle: .pi)
+  }
+
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    reasonTextField.arrowImageView.transform = .init(rotationAngle: 0.0)
   }
 }

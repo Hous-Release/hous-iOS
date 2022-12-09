@@ -14,19 +14,24 @@ class ResignViewReactor: ReactorKit.Reactor {
     case didTapCheck
     case didTapResign
     case didSelectResignReason(String?)
+    case enterDetailReason(String?)
   }
 
   enum Mutation {
-    case setIsCheckButtonSelected(Bool)
+    case setIsResignButtonActivated(Bool)
     case setIsResignButtonClicked(Bool?)
     case setResignReason(String?)
+    case setDetailReason(String?)
+    case setNumOfText(String?)
   }
 
   struct State {
-    var isCheckButtonSelected: Bool = false
+    var isResignButtonActivated: Bool = false
     @Pulse
     var isResignButtonClicked: Bool?
     var resignReason: String?
+    var detailReason: String?
+    var numOfText: String?
   }
 
   let initialState = State()
@@ -35,11 +40,13 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     switch action {
     case .didTapCheck:
-      return .just(Mutation.setIsCheckButtonSelected(!currentState.isCheckButtonSelected))
+      return .just(Mutation.setIsResignButtonActivated(!currentState.isResignButtonActivated))
     case .didTapResign:
       return .empty()
     case let .didSelectResignReason(reason):
       return .just(Mutation.setResignReason(reason))
+    case let .enterDetailReason(reason):
+      return mutationOfDetailReason(reason)
     }
   }
 
@@ -49,14 +56,31 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     switch mutation {
 
-    case let .setIsCheckButtonSelected(flag):
-      newState.isCheckButtonSelected = flag
+    case let .setIsResignButtonActivated(flag):
+      newState.isResignButtonActivated = flag
     case let .setIsResignButtonClicked(flag):
       newState.isResignButtonClicked = flag
     case let .setResignReason(reason):
       newState.resignReason = reason
+    case let .setDetailReason(reason):
+      newState.detailReason = reason
+    case let .setNumOfText(numString):
+      newState.numOfText = numString
     }
 
     return newState
+  }
+}
+
+extension ResignViewReactor {
+  private func mutationOfDetailReason(_ text: String?) -> Observable<Mutation> {
+
+    guard let text = text else { return .empty() }
+    let textNumString = "\(text.count)/200"
+
+    return .concat([
+      .just(Mutation.setDetailReason(text)),
+      .just(Mutation.setNumOfText(textNumString))
+    ])
   }
 }

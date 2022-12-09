@@ -1,19 +1,19 @@
 //
-//  UnderlinedTextView.swift
+//  UnderlinedTextStackView.swift
 //  Hous-iOS-release
 //
-//  Created by 김지현 on 2022/12/04.
+//  Created by 김지현 on 2022/12/08.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-final class UnderlinedTextFieldStackView: UIStackView {
+final class UnderlinedTextStackView: UIStackView {
 
   private let underlineLayer = CALayer()
   private let animatedUnderlineLayer = CALayer()
-  let placeHolderString = "의견 남기기"
+  var placeHolderString = ""
   var isEmptyState = true
 
   private enum Size {
@@ -21,26 +21,30 @@ final class UnderlinedTextFieldStackView: UIStackView {
   }
 
   private let underlineView = UIView().then {
-    $0.layer.borderWidth = 1.5
-    $0.layer.borderColor = Colors.g3.color.cgColor
+    $0.backgroundColor = Colors.g3.color
   }
 
-  let textView = ProfileEditTextView().then {
+  let textView = UITextView().then {
     $0.font = Fonts.SpoqaHanSansNeo.regular.font(size: 14)
     $0.textColor = Colors.black.color
-    $0.returnKeyType = .done
+    $0.returnKeyType = .default
     $0.isScrollEnabled = false
+  }
+
+  let errorLabel = UILabel().then {
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.red.color
   }
 
   let numOfTextLabel = UILabel().then {
     $0.font = Fonts.Montserrat.medium.font(size: 12)
-    $0.textColor = Colors.black.color
+    $0.textColor = Colors.g5.color
     $0.textAlignment = .right
   }
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
+  init(placeholder: String, maxStringNum: Int) {
+    super.init(frame: .zero)
+    setup(placeholder, maxStringNum)
     render()
   }
 
@@ -49,11 +53,15 @@ final class UnderlinedTextFieldStackView: UIStackView {
   }
 
 
-  private func setup() {
+  private func setup(_ placeholder: String, _ maxStringNum: Int) {
     self.axis = .vertical
     self.alignment = .fill
     self.distribution = .fill
-    self.spacing = 8
+    self.spacing = 4
+
+    self.errorLabel.isHidden = true
+    self.placeHolderString = placeholder
+    self.numOfTextLabel.text = "0/\(String(maxStringNum))"
   }
 
   private func render() {
@@ -72,15 +80,25 @@ final class UnderlinedTextFieldStackView: UIStackView {
   }
 }
 
-extension UnderlinedTextFieldStackView {
+extension UnderlinedTextStackView {
   func textViewSelected() {
     if isEmptyState {
       textView.text = ""
       textView.textColor = Colors.black.color
     }
 
-    var frame = underlineView.bounds
-    frame.size.height = 1.5
+    let frame = underlineView.bounds
+    self.animatedUnderlineLayer.frame = frame
+    self.animatedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
+    underlineView.layer.addSublayer(animatedUnderlineLayer)
+
+    let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
+    animation.timingFunction = CAMediaTimingFunction(controlPoints: 0, -0.7, 0, 1.01)
+    animation.values = [0, 1]
+    animation.duration = 0.8
+    animation.keyTimes = [0, 0.8]
+
+    animatedUnderlineLayer.add(animation, forKey: "Selected")
   }
 
   func textViewUnselected() {
@@ -90,16 +108,14 @@ extension UnderlinedTextFieldStackView {
 
       isEmptyState = true
     }
-    self.underlineView.layer.borderWidth = 1.5
+    self.animatedUnderlineLayer.removeFromSuperlayer()
   }
 
   func textViewResize() {
-    let initialSize = CGSize(width: Size.screenWidth - 48, height: 30)
+    let initialSize = CGSize(width: Size.screenWidth - 48, height: CGFloat.infinity)
     let estimateSize = self.textView.sizeThatFits(initialSize)
-    self.textView.constraints.forEach { (constraint) in
-      if constraint.firstAttribute == .height {
-        constraint.constant = estimateSize.height
-      }
+    self.textView.snp.updateConstraints { make in
+      make.height.equalTo(estimateSize.height)
     }
   }
 
