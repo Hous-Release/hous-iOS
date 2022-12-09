@@ -16,11 +16,14 @@ class ResignViewController: UIViewController, ReactorKit.View {
   var disposeBag = DisposeBag()
   var mainView = ResignView()
 
+  private var textViewHeight: CGFloat = 62
   private var coveredByKeyboardHeight: CGFloat = 0
+  private let keyboardStart = UIScreen.main.bounds.height - 260
 
   private let tapCheckButton = PublishRelay<Void>()
   private let tapResignButton = PublishRelay<Void>()
   private let selectResignReason = PublishRelay<String?>()
+  private let enterDetailReason = PublishRelay<String?>()
 
   override func loadView() {
     super.loadView()
@@ -57,10 +60,34 @@ class ResignViewController: UIViewController, ReactorKit.View {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillHide),
-      name: UIResponder.keyboardWillHideNotification, object:nil)
+      name: UIResponder.keyboardWillHideNotification,
+      object:nil
+    )
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+  }
+
+  @objc func keyboardWillShow(notification: NSNotification) {
+
+    if let keyboardFrame: NSValue =
+        notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+      let keyboardRectangle = keyboardFrame.cgRectValue
+      let keyboardHeight = keyboardRectangle.height
+
+      UIView.animate(withDuration: 1) {
+        self.scrollToBottom()
+        self.view.window?.frame.origin.y -= keyboardHeight
+      }
+    }
   }
 
   @objc func keyboardWillHide(notification: NSNotification) {
+
     if self.view.window?.frame.origin.y != 0 {
       self.view.window?.frame.origin.y = 0
     }
@@ -70,7 +97,6 @@ class ResignViewController: UIViewController, ReactorKit.View {
 extension ResignViewController {
   func bind(reactor: Reactor) {
     bindAction(reactor)
-    bindState(reactor)
   }
 
   private func bindAction(_ reactor: Reactor) {
@@ -88,15 +114,12 @@ extension ResignViewController {
       .map { Reactor.Action.didSelectResignReason($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
+
+    enterDetailReason
+      .map { Reactor.Action.enterDetailReason($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
   }
-
-  private func bindState(_ reactor: Reactor) {
-
-  }
-}
-
-extension ResignViewController {
-
 }
 
 extension ResignViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -130,12 +153,7 @@ extension ResignViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
       // MARK: - inputCell input
       inputCell.resignCheckButton.rx.tap
-        .asDriver()
-        .drive(onNext: { [weak self] in
-          guard let self = self else { return }
-          self.tapCheckButton.accept($0)
-          inputCell.resignCheckButton.isSelected = !inputCell.resignCheckButton.isSelected
-        })
+        .bind(to: tapCheckButton)
         .disposed(by: disposeBag)
 
       inputCell.resignButton.rx.tap
@@ -147,58 +165,90 @@ extension ResignViewController: UICollectionViewDelegate, UICollectionViewDataSo
         .bind(to: selectResignReason)
         .disposed(by: disposeBag)
 
+      inputCell.reasonTextView.textView.rx.text
+        .distinctUntilChanged()
+        .bind(to: enterDetailReason)
+        .disposed(by: disposeBag)
+
+      // MARK: - inputCell output
+
+      reactor?.state.map { $0.numOfText }
+        .distinctUntilChanged()
+        .asDriver(onErrorJustReturn: "")
+        .drive(inputCell.reasonTextView.numOfTextLabel.rx.text)
+        .disposed(by: disposeBag)
+
+      reactor?.state.map { $0.isResignButtonActivated }
+        .distinctUntilChanged()
+        .asDriver(onErrorJustReturn: false)
+        .drive(onNext: { flag in
+          inputCell.resignCheckButton.isSelected = flag
+          inputCell.resignButton.isEnabled = true
+        })
+        .disposed(by: disposeBag)
+
       return inputCell
     }
   }
 }
 
-extension ResignViewController: UICollectionViewDelegateFlowLayout {
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-    if indexPath.section == 0 {
-      return CGSize(width: UIScreen.main.bounds.width, height: 416)
-
-    } else {
-      return CGSize(width: UIScreen.main.bounds.width, height: 350)
-      // 레퍼런스 참고해서 텍스트뷰 delegate 에서 높이 조정하기
-    }
-  }
-}
-
 extension ResignViewController: ResignInputCellDelegate {
-  func didTapTextField() {
 
-    coveredByKeyboardHeight = calculateTextFieldHeight()
-    let keyboardStart = UIScreen.main.bounds.height - 216
-    UIView.animate(withDuration: 1) {
-      self.view.window?.frame.origin.y -= (self.coveredByKeyboardHeight - keyboardStart)
+  func didTextViewChange(_ estimatedSize: CGSize,  _ height: CGFloat) {
+    if let layout = mainView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      layout.estimatedItemSize = CGSize(
+        width: view.frame.width,
+        height: estimatedSize.height)
+      mainView.collectionView.layoutIfNeeded()
+    }
+
+    if textViewHeight < height {
+      scrollToBottom()
+      textViewHeight = height
     }
   }
 
-  func didTapTextView() {
-    // 텍스트뷰 위치도 고려해야하고 windo frame 도 고려해야함
-    coveredByKeyboardHeight = calculateTextFieldHeight()
-    let keyboardStart = UIScreen.main.bounds.height - 216
-    UIView.animate(withDuration: 1) {
-      self.view.window?.frame.origin.y -= (self.coveredByKeyboardHeight - keyboardStart)
+  private func scrollToBottom() {
+    self.mainView.collectionView.setContentOffset(
+      CGPoint(
+        x: 0,
+        y: self.mainView.collectionView.contentSize.height - self.mainView.collectionView.bounds.height),
+      animated: true
+    )
+  }
+
+  // 밑에 두개 메서드 안쓰게 됨
+  private func animateViewForCoveredPart(_ bottom: CGFloat) {
+
+    coveredByKeyboardHeight = calculateCoveredHeight(bottom)
+    if coveredByKeyboardHeight > keyboardStart {
+      UIView.animate(withDuration: 1) {
+        self.view.window?.frame.origin.y -= (self.coveredByKeyboardHeight - self.keyboardStart)
+      }
     }
   }
 
-  private func calculateTextFieldHeight() -> CGFloat {
+  private func calculateCoveredHeight(_ bottomOfInputView: CGFloat) -> CGFloat {
+    // Cell 의 point
     let attributes = self.mainView.collectionView.layoutAttributesForItem(
       at: IndexPath(row: 0, section: 1)
     )
-    let cellCenterPoint = attributes?.center.y ?? 0
-    let collectionViewPoint = self.mainView.collectionView.frame.origin.y
-    let scrollOffset = self.mainView.collectionView.contentOffset.y
-    let coveredByKeyboardHeight = cellCenterPoint + collectionViewPoint - scrollOffset
+    let cellStartYPoint = attributes?.frame.minY ?? 0
 
-    print("attributescenter: \(cellCenterPoint), point: \(collectionViewPoint), scrollOffset: \(scrollOffset), offset: \(coveredByKeyboardHeight)")
+    // Collection View 의 point
+    let collectionViewPoint = self.mainView.collectionView.frame.origin.y
+    // Scroll 된 Offset
+    let scrollOffset = self.mainView.collectionView.contentOffset.y
+
+    let coveredByKeyboardHeight = (
+      cellStartYPoint +
+      collectionViewPoint +
+      bottomOfInputView + 20 -
+      scrollOffset
+    )
 
     return coveredByKeyboardHeight
   }
-
 
 }
 
