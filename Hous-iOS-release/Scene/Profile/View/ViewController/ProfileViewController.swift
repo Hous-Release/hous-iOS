@@ -83,11 +83,12 @@ final class ProfileViewController: LoadingBaseViewController {
     // input
     
     let viewWillAppear = rx.RxViewWillAppear
-      .asSignal(onErrorJustReturn: ())
       .do(onNext: { [weak self] _ in
         self?.showLoading()
       })
-    
+      .map { _ in }
+      .asSignal(onErrorJustReturn: ())
+      
     let actionDetected = PublishSubject<ProfileActionControl>()
     
     let input = ProfileViewModel.Input(

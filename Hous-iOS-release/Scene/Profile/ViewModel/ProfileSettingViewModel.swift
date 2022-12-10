@@ -29,3 +29,29 @@ final class ProfileSettingViewModel: ViewModelType {
     return Output(actionControl: actionControl)
   }
 }
+
+final class ProfileAlarmSettingViewModel: ViewModelType {
+  
+  private let disposeBag: DisposeBag = DisposeBag()
+  private let profileRepository = ProfileRepositoryImp()
+  private let actionControl = PublishSubject<ProfileAlarmSettingActionControl>()
+  let alarmSettingModelSubject = PublishSubject<AlarmSettingModel>()
+  
+  struct Input {
+    let viewWillAppear: Signal<Void>
+    let actionDetected: PublishSubject<ProfileAlarmSettingActionControl>
+  }
+  
+  struct Output {
+    let actionControl: Observable<ProfileAlarmSettingActionControl>
+    let alarmSettingModel: Observable<AlarmSettingModel>
+  }
+  
+  func transform(input: Input) -> Output {
+    let actionControl = input.actionDetected.asObservable()
+    
+    let alarmSettingModelObservable = self.alarmSettingModelSubject.asObservable()
+
+    return Output(actionControl: actionControl, alarmSettingModel: alarmSettingModelObservable)
+  }
+}
