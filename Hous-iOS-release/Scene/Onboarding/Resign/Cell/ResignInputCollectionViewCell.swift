@@ -198,10 +198,16 @@ extension ResignInputCollectionViewCell: UITextViewDelegate {
 extension ResignInputCollectionViewCell: UITextFieldDelegate {
 
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    reasonTextField.arrowImageView.transform = .init(rotationAngle: .pi)
+    UIView.animate(withDuration: 0.5) { [weak self] in
+      guard let self = self else { return }
+      self.reasonTextField.arrowImageView.transform = .init(rotationAngle: .pi)
+    }
   }
 
   func textFieldDidEndEditing(_ textField: UITextField) {
-    reasonTextField.arrowImageView.transform = .init(rotationAngle: 0.0)
+    UIView.animate(withDuration: 0.5) { [weak self] in
+      guard let self = self else { return }
+      self.reasonTextField.arrowImageView.transform = .init(rotationAngle: 0.0)
+    }
   }
 }
