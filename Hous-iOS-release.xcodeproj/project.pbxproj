@@ -217,6 +217,7 @@
 		B85C0B5E2940B11A00784FCB /* GrayBackgroundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */; };
 		B85C0B602941B5D600784FCB /* UnderlinedTextStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */; };
 		B85C0B6429447E4A00784FCB /* ResignReasonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6329447E4A00784FCB /* ResignReasonType.swift */; };
+		B85C0B67294486D000784FCB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B66294486D000784FCB /* UserRepository.swift */; };
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
 		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
@@ -465,6 +466,7 @@
 		B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayBackgroundTextField.swift; sourceTree = "<group>"; };
 		B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextStackView.swift; sourceTree = "<group>"; };
 		B85C0B6329447E4A00784FCB /* ResignReasonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignReasonType.swift; sourceTree = "<group>"; };
+		B85C0B66294486D000784FCB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
 		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B85C0B65294486B600784FCB /* User */,
 				B87FC01F2914F44700F8AA11 /* Onboarding */,
 				9B3BDBF7290E470A0054DF23 /* Profile */,
 				B8D066CA28F7DF4700A99907 /* Todo */,
@@ -1271,6 +1274,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B85C0B65294486B600784FCB /* User */ = {
+			isa = PBXGroup;
+			children = (
+				B85C0B66294486D000784FCB /* UserRepository.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1607,6 +1618,7 @@
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
 				B880F5C8293C904A00E888BC /* ResignViewReactor.swift in Sources */,
 				9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */,
+				B85C0B67294486D000784FCB /* UserRepository.swift in Sources */,
 				9BF9AD7829201812006A0BDE /* ProfileTestInfoViewController.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,

@@ -205,6 +205,12 @@ extension ResignViewController: UICollectionViewDelegate, UICollectionViewDataSo
         .drive(inputCell.resignButton.rx.isEnabled)
         .disposed(by: disposeBag)
 
+      reactor?.pulse(\.$isResignSuccess)
+        .compactMap { $0 }
+        .asDriver(onErrorJustReturn: false)
+        .drive(onNext: self.transferToSignIn)
+        .disposed(by: disposeBag)
+
       return inputCell
     }
   }
@@ -235,37 +241,16 @@ extension ResignViewController: ResignInputCellDelegate {
     )
   }
 
-  // 밑에 두개 메서드 안쓰게 됨
-  private func animateViewForCoveredPart(_ bottom: CGFloat) {
+  private func transferToSignIn(_ success: Bool) {
+    let serviceProvider = ServiceProvider()
+    let reactor = SignInReactor(provider: serviceProvider)
+    let loginVC = SignInViewController(reactor)
 
-    coveredByKeyboardHeight = calculateCoveredHeight(bottom)
-    if coveredByKeyboardHeight > keyboardStart {
-      UIView.animate(withDuration: 1) {
-        self.view.window?.frame.origin.y -= (self.coveredByKeyboardHeight - self.keyboardStart)
-      }
+    UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut) {
+      // 이거 딜레이 걸려면 어케해요
+      self.changeRootViewController(to: UINavigationController(rootViewController: loginVC))
     }
-  }
 
-  private func calculateCoveredHeight(_ bottomOfInputView: CGFloat) -> CGFloat {
-    // Cell 의 point
-    let attributes = self.mainView.collectionView.layoutAttributesForItem(
-      at: IndexPath(row: 0, section: 1)
-    )
-    let cellStartYPoint = attributes?.frame.minY ?? 0
-
-    // Collection View 의 point
-    let collectionViewPoint = self.mainView.collectionView.frame.origin.y
-    // Scroll 된 Offset
-    let scrollOffset = self.mainView.collectionView.contentOffset.y
-
-    let coveredByKeyboardHeight = (
-      cellStartYPoint +
-      collectionViewPoint +
-      bottomOfInputView + 20 -
-      scrollOffset
-    )
-
-    return coveredByKeyboardHeight
   }
 
 }
