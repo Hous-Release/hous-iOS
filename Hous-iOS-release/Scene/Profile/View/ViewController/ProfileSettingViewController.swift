@@ -85,6 +85,10 @@ final class ProfileSettingViewController: UIViewController {
     return button
   }()
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    self.setTabBarIsHidden(isHidden: true)
+  }
   
   override func viewDidLoad(){
     super.viewDidLoad()
@@ -195,6 +199,7 @@ final class ProfileSettingViewController: UIViewController {
     case .didTabLeavingRoom:
       break
     case .didTabBack:
+      setTabBarIsHidden(isHidden: false)
       self.navigationController?.popViewController(animated: true)
     }
   }
