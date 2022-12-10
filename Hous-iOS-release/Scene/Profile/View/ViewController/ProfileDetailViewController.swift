@@ -37,7 +37,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 28, right: 0)
     
     let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
     collectionView.register(cell: ProfileDetailImageCollectionViewCell.self)
@@ -63,6 +63,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     profileDetailCollectionView.reloadData()
+    self.setTabBarIsHidden(isHidden: true)
   }
   
   override func viewDidLoad() {
@@ -187,6 +188,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
         self.view.window?.rootViewController?.dismiss(animated: true)
         
       } else {
+        setTabBarIsHidden(isHidden: false)
         navigationController?.popViewController(animated: true)
       }
     case .none:
