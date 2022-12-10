@@ -190,20 +190,13 @@ final class ProfileSettingViewController: UIViewController {
     case .didTabLogout:
       break
     case .didTabWithdraw:
-      break
+      presentResignViewController()
     case .didTabLeavingRoom:
       break
     case .didTabBack:
       self.navigationController?.popViewController(animated: true)
     }
   }
-  
-  func presentAgreementURL() {
-    let agreementURL = NSURL(string: "https://sugared-lemming-812.notion.site/6d9d478df40b4a20811e0020c15af3bc")
-    let agreementSafariView: SFSafariViewController = SFSafariViewController(url: agreementURL! as URL)
-    self.present(agreementSafariView, animated: true)
-  }
-  
   
   private func render() {
     [alarmSetting, agreementInfo, feedback].forEach {
@@ -252,6 +245,21 @@ final class ProfileSettingViewController: UIViewController {
         make.leading.equalToSuperview().offset(24)
       }
     }
+  }
+}
+
+extension ProfileSettingViewController {
+  func presentAgreementURL() {
+    let agreementURL = NSURL(string: "https://sugared-lemming-812.notion.site/6d9d478df40b4a20811e0020c15af3bc")
+    let agreementSafariView: SFSafariViewController = SFSafariViewController(url: agreementURL! as URL)
+    self.present(agreementSafariView, animated: true)
+  }
+
+  private func presentResignViewController() {
+    let provider = ServiceProvider()
+    let reactor = ResignViewReactor(provider: provider)
+    let resignVC = ResignViewController(reactor)
+    navigationController?.pushViewController(resignVC, animated: true)
   }
 }
 

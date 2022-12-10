@@ -48,7 +48,7 @@ extension EnterRoomViewController {
 
     mainView.navigationBarView.rightButton.rx.tap
       .asDriver()
-      .drive(onNext: transferToResignView)
+      .drive(onNext: transferToSettingView)
       .disposed(by: disposeBag)
   }
 
@@ -84,10 +84,9 @@ extension EnterRoomViewController {
 }
 
 extension EnterRoomViewController {
-  private func transferToResignView() {
-    let provider = ServiceProvider()
-    let resignReactor = ResignViewReactor(provider: provider)
-    let resignVC = ResignViewController(resignReactor)
-    navigationController?.pushViewController(resignVC, animated: true)
-  }
+  private func transferToSettingView() {
+      let destinationViewController = ProfileSettingViewController(isInRoom: false)
+      destinationViewController.view.backgroundColor = Colors.white.color
+      navigationController?.pushViewController(destinationViewController, animated: true)
+    }
 }
