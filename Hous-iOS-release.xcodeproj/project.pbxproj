@@ -216,6 +216,7 @@
 		B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856702E28CA93F600B49984 /* UILabel+Extension.swift */; };
 		B85C0B5E2940B11A00784FCB /* GrayBackgroundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */; };
 		B85C0B602941B5D600784FCB /* UnderlinedTextStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */; };
+		B85C0B6429447E4A00784FCB /* ResignReasonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6329447E4A00784FCB /* ResignReasonType.swift */; };
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
 		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
@@ -463,6 +464,7 @@
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayBackgroundTextField.swift; sourceTree = "<group>"; };
 		B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextStackView.swift; sourceTree = "<group>"; };
+		B85C0B6329447E4A00784FCB /* ResignReasonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignReasonType.swift; sourceTree = "<group>"; };
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
 		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
@@ -1261,6 +1263,14 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
+		B85C0B6129447E3600784FCB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B85C0B6329447E4A00784FCB /* ResignReasonType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1282,7 @@
 		B880F5C2293C902F00E888BC /* Resign */ = {
 			isa = PBXGroup;
 			children = (
+				B85C0B6129447E3600784FCB /* Model */,
 				B880F5C9293C938B00E888BC /* Cell */,
 				B880F5C3293C903E00E888BC /* ResignViewController.swift */,
 				B880F5C5293C904400E888BC /* ResignView.swift */,
@@ -1680,6 +1691,7 @@
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				9BDBAD8029241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift in Sources */,
 				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,
+				B85C0B6429447E4A00784FCB /* ResignReasonType.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
 				9BE0C27A29081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift in Sources */,
 				9BE0C27C29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift in Sources */,
