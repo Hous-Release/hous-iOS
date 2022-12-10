@@ -18,20 +18,26 @@ class ResignViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
-    case setIsResignButtonActivated(Bool)
+    case setIsCheckButtonSelected(Bool?)
+    case setIsResignButtonActivated(Bool?)
     case setIsResignButtonClicked(Bool?)
     case setResignReason(String?)
     case setDetailReason(String?)
+    case setIsTextViewEmpty(Bool?)
     case setNumOfText(String?)
+    case setIsErrorLabelShow(Bool?)
   }
 
   struct State {
-    var isResignButtonActivated: Bool = false
+    var isCheckButtonSelected: Bool? = false
+    var isResignButtonActivated: Bool? = false
     @Pulse
     var isResignButtonClicked: Bool?
     var resignReason: String?
     var detailReason: String?
+    var isTextViewEmpty: Bool? = true
     var numOfText: String?
+    var isErrorLabelShow: Bool? = false
   }
 
   let initialState = State()
@@ -40,7 +46,14 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     switch action {
     case .didTapCheck:
-      return .just(Mutation.setIsResignButtonActivated(!currentState.isResignButtonActivated))
+      guard let isCheckButtonSelected = currentState.isCheckButtonSelected,
+            let isOverLimit = currentState.isErrorLabelShow else {
+        return .empty()
+      }
+      return .concat([
+        .just(Mutation.setIsCheckButtonSelected(!isCheckButtonSelected)),
+        mutationOfActivateResignButton(isOverLimit, !isCheckButtonSelected)
+      ])
     case .didTapResign:
       return .empty()
     case let .didSelectResignReason(reason):
@@ -56,6 +69,8 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     switch mutation {
 
+    case let .setIsCheckButtonSelected(flag):
+      newState.isCheckButtonSelected = flag
     case let .setIsResignButtonActivated(flag):
       newState.isResignButtonActivated = flag
     case let .setIsResignButtonClicked(flag):
@@ -64,8 +79,12 @@ class ResignViewReactor: ReactorKit.Reactor {
       newState.resignReason = reason
     case let .setDetailReason(reason):
       newState.detailReason = reason
+    case let .setIsTextViewEmpty(flag):
+      newState.isTextViewEmpty = flag
     case let .setNumOfText(numString):
       newState.numOfText = numString
+    case let .setIsErrorLabelShow(flag):
+      newState.isErrorLabelShow = flag
     }
 
     return newState
@@ -75,12 +94,31 @@ class ResignViewReactor: ReactorKit.Reactor {
 extension ResignViewReactor {
   private func mutationOfDetailReason(_ text: String?) -> Observable<Mutation> {
 
-    guard let text = text else { return .empty() }
-    let textNumString = "\(text.count)/200"
+    guard let text = text,
+          let isCheckButtonSelected = currentState.isCheckButtonSelected else {
+      return .empty()
+
+    }
+
+    var textNumString = "\(text.count)/200"
+    if text == "의견 남기기" {
+      textNumString = "0/200"
+    }
+    let isOverLimit = text.count > 200
 
     return .concat([
       .just(Mutation.setDetailReason(text)),
-      .just(Mutation.setNumOfText(textNumString))
+      .just(Mutation.setNumOfText(textNumString)),
+      .just(Mutation.setIsErrorLabelShow(isOverLimit)),
+      mutationOfActivateResignButton(isOverLimit, isCheckButtonSelected)
+    ])
+  }
+
+  private func mutationOfActivateResignButton(_ isOverLimit: Bool, _ isCheckButtonSelected: Bool) -> Observable<Mutation> {
+
+    let isResignButtonActivate = !isOverLimit && isCheckButtonSelected
+    return .concat([
+      .just(Mutation.setIsResignButtonActivated(isResignButtonActivate))
     ])
   }
 }

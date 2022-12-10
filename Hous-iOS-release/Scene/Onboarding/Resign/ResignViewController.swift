@@ -178,13 +178,31 @@ extension ResignViewController: UICollectionViewDelegate, UICollectionViewDataSo
         .drive(inputCell.reasonTextView.numOfTextLabel.rx.text)
         .disposed(by: disposeBag)
 
+      reactor?.state.map { $0.isErrorLabelShow }
+        .distinctUntilChanged()
+        .compactMap { $0 }
+        .asDriver(onErrorJustReturn: false)
+        .drive(onNext: { isLabelShow in
+          inputCell.reasonTextView.errorLabel.text = "200자 이상은 ‘호미나라 피드백’을 통해 보내주세요!"
+
+          isLabelShow ?
+          (inputCell.reasonTextView.errorLabel.isHidden = false) :
+          (inputCell.reasonTextView.errorLabel.isHidden = true)
+        })
+        .disposed(by: disposeBag)
+
+      reactor?.state.map { $0.isCheckButtonSelected }
+        .distinctUntilChanged()
+        .compactMap { $0 }
+        .asDriver(onErrorJustReturn: false)
+        .drive(inputCell.resignCheckButton.rx.isSelected)
+        .disposed(by: disposeBag)
+
       reactor?.state.map { $0.isResignButtonActivated }
         .distinctUntilChanged()
+        .compactMap { $0 }
         .asDriver(onErrorJustReturn: false)
-        .drive(onNext: { flag in
-          inputCell.resignCheckButton.isSelected = flag
-          inputCell.resignButton.isEnabled = true
-        })
+        .drive(inputCell.resignButton.rx.isEnabled)
         .disposed(by: disposeBag)
 
       return inputCell
