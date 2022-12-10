@@ -119,6 +119,7 @@ final class ProfileEditViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
+    self.setTabBarIsHidden(isHidden: true)
   }
   
   //MARK: Setup UI
@@ -529,6 +530,7 @@ final class ProfileEditViewController: UIViewController {
     switch action {
     case .didTabSave:
       profileRepository.putProfileEditInfo(data: viewModel.modifiedData)
+      setTabBarIsHidden(isHidden: false)
       self.navigationController?.popViewController(animated: true)
       
     case .didTabBack:
@@ -546,12 +548,14 @@ final class ProfileEditViewController: UIViewController {
           switch actionType {
           case .action:
             self?.view.endEditing(true)
+            self?.setTabBarIsHidden(isHidden: false)
             self?.navigationController?.popViewController(animated: true)
           case .cancel:
             break
           }
         }
       } else {
+        setTabBarIsHidden(isHidden: false)
         self.navigationController?.popViewController(animated: true)
       }
     default:
