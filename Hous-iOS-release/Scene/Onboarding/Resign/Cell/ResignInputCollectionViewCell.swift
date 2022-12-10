@@ -43,7 +43,8 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
 
   let reasonTextView = UnderlinedTextStackView(
     placeholder: "의견 남기기",
-    maxStringNum: 20
+    isTextViewEmpty: true,
+    maxStringNum: 200
   )
 
   let resignCheckButton = UIButton(configuration: .plain()).then {
@@ -73,7 +74,17 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
     attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     attrString.foregroundColor = Colors.white.color
     $0.configuration?.attributedTitle = attrString
-    $0.configuration?.baseBackgroundColor = Colors.red.color
+
+    $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .disabled:
+        btn.configuration?.baseBackgroundColor = Colors.g5.color
+      case .normal:
+        btn.configuration?.baseBackgroundColor = Colors.red.color
+      default:
+        break
+      }
+    }
   }
 
   override init(frame: CGRect) {
@@ -178,7 +189,6 @@ extension ResignInputCollectionViewCell: UITextViewDelegate {
 
   func textViewDidBeginEditing(_ textView: UITextView) {
     reasonTextView.textViewSelected()
-    reasonTextView.textEmptyControl()
   }
 
   func textViewDidEndEditing(_ textView: UITextView) {

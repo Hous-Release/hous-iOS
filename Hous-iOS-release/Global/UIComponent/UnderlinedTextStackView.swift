@@ -14,7 +14,17 @@ final class UnderlinedTextStackView: UIStackView {
   private let underlineLayer = CALayer()
   private let animatedUnderlineLayer = CALayer()
   var placeHolderString = ""
-  var isEmptyState = true
+  var isEmptyState = true {
+    didSet {
+      if isEmptyState {
+        textView.text = placeHolderString
+        textView.textColor = Colors.g5.color
+      } else {
+        textView.text = ""
+        textView.textColor = Colors.black.color
+      }
+    }
+  }
 
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
@@ -31,6 +41,8 @@ final class UnderlinedTextStackView: UIStackView {
     $0.isScrollEnabled = false
   }
 
+  let labelView = UIView()
+
   let errorLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textColor = Colors.red.color
@@ -42,9 +54,11 @@ final class UnderlinedTextStackView: UIStackView {
     $0.textAlignment = .right
   }
 
-  init(placeholder: String, maxStringNum: Int) {
+  init(placeholder: String,
+       isTextViewEmpty: Bool,
+       maxStringNum: Int) {
     super.init(frame: .zero)
-    setup(placeholder, maxStringNum)
+    setup(placeholder, isTextViewEmpty, maxStringNum)
     render()
   }
 
@@ -53,7 +67,7 @@ final class UnderlinedTextStackView: UIStackView {
   }
 
 
-  private func setup(_ placeholder: String, _ maxStringNum: Int) {
+  private func setup(_ placeholder: String, _ isTextViewEmpty: Bool, _ maxStringNum: Int) {
     self.axis = .vertical
     self.alignment = .fill
     self.distribution = .fill
@@ -61,11 +75,24 @@ final class UnderlinedTextStackView: UIStackView {
 
     self.errorLabel.isHidden = true
     self.placeHolderString = placeholder
+    self.isEmptyState = true
     self.numOfTextLabel.text = "0/\(String(maxStringNum))"
   }
 
   private func render() {
-    self.addArrangedSubviews(textView, underlineView, numOfTextLabel)
+    self.addArrangedSubviews(textView, underlineView, labelView)
+    labelView.addSubViews([errorLabel, numOfTextLabel])
+
+    errorLabel.snp.makeConstraints { make in
+      make.top.bottom.equalToSuperview()
+      make.leading.equalToSuperview().offset(2)
+    }
+
+    numOfTextLabel.snp.makeConstraints { make in
+      make.top.bottom.equalToSuperview()
+      make.trailing.equalToSuperview().inset(2)
+    }
+
     underlineView.snp.makeConstraints { make in
       make.height.equalTo(1.5)
     }
@@ -73,18 +100,14 @@ final class UnderlinedTextStackView: UIStackView {
     textView.snp.makeConstraints { make in
       make.height.equalTo(30)
     }
-
-    numOfTextLabel.snp.makeConstraints { make in
-      make.height.equalTo(18)
-    }
   }
 }
 
 extension UnderlinedTextStackView {
+
   func textViewSelected() {
     if isEmptyState {
-      textView.text = ""
-      textView.textColor = Colors.black.color
+      isEmptyState = false
     }
 
     let frame = underlineView.bounds
@@ -103,9 +126,6 @@ extension UnderlinedTextStackView {
 
   func textViewUnselected() {
     if textView.text.isEmpty {
-      textView.text = placeHolderString
-      textView.textColor = Colors.g5.color
-
       isEmptyState = true
     }
     self.animatedUnderlineLayer.removeFromSuperlayer()
@@ -116,14 +136,6 @@ extension UnderlinedTextStackView {
     let estimateSize = self.textView.sizeThatFits(initialSize)
     self.textView.snp.updateConstraints { make in
       make.height.equalTo(estimateSize.height)
-    }
-  }
-
-  func textEmptyControl() {
-    if textView.text.isEmpty {
-      isEmptyState = true
-    } else {
-      isEmptyState = false
     }
   }
 }
