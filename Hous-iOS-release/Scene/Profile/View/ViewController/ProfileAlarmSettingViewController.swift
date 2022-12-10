@@ -1,0 +1,162 @@
+//
+//  ProfileAlarmSettingViewController.swift
+//  Hous-iOS-release
+//
+//  Created by 이의진 on 2022/12/09.
+//
+
+
+import UIKit
+import RxSwift
+import RxCocoa
+import Then
+
+final class ProfileAlarmSettingViewController: LoadingBaseViewController {
+  
+  //MARK: RX Components
+  
+  let disposeBag = DisposeBag()
+  let viewModel = ProfileAlarmSettingViewModel()
+  let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
+  
+  var data: AlarmSettingModel = AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true)
+  
+  
+  //MARK: UI Templetes
+  
+  private enum Size {
+    static let screenWidth = UIScreen.main.bounds.width
+    static let oneOptionCellHeight = CGSize(width: Size.screenWidth, height: 67)
+    static let twoOptionCellHeight = CGSize(width: Size.screenWidth, height: 169)
+    static let threeOptionCellHeight = CGSize(width: Size.screenWidth, height: 210)
+  }
+  
+  //MARK: UI Components
+  
+  private let navigationBarView = ProfileSettingNavigationBarView()
+  
+  private let alarmSettingCollectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.minimumLineSpacing = 0
+    layout.scrollDirection = .vertical
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.register(cell:AlarmSettingFirstCollectionViewCell.self)
+    collectionView.register(cell:AlarmSettingCollectionViewCell.self)
+    collectionView.showsVerticalScrollIndicator = false
+    return collectionView
+  }()
+  
+  //MARK: Life Cycle
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    alarmSettingCollectionView.reloadData()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind()
+    render()
+    configLoadingLayout()
+  }
+  
+  //MARK: Setup UI
+  
+  private func setup() {
+    alarmSettingCollectionView.backgroundColor = .white
+    alarmSettingCollectionView.delegate = self
+    navigationController?.navigationBar.isHidden = true
+  }
+  
+  //MARK: Bind
+  
+  private func bind() {
+    
+    let viewWillAppear = rx.RxViewWillAppear
+      .do(onNext: { [weak self] _ in
+        self?.showLoading()
+      })
+      .map { _ in }
+      .asSignal(onErrorJustReturn: ())
+    
+    
+    
+    let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
+    
+    let input = ProfileAlarmSettingViewModel.Input(
+      viewWillAppear: viewWillAppear,
+      actionDetected: actionDetected
+    )
+    
+    // output
+    
+    let output = viewModel.transform(input: input)
+    
+    output.alarmSettingModel
+      .debug("⚡️")
+      .do(onNext: {
+        self.hideLoading()
+        self.data = $0
+      })
+      .map {
+        [AlarmSettingModel](repeating: $0, count: 6)
+      }
+      .bind(to:alarmSettingCollectionView.rx.items) {
+        (collectionView: UICollectionView, index: Int, element: AlarmSettingModel) in
+        let indexPath = IndexPath(row: index, section: 0)
+        let cellTypes: [AlarmSettingCellType] = [.newRules, .newTodo, .todayTodo, .notDoneTodo, .badgeAlarm]
+        if indexPath.row == 0 {
+          guard let cell =
+                  self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingFirstCollectionViewCell.className, for: indexPath) as? AlarmSettingFirstCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+          cell.bind(data: element)
+          return cell
+        } else {
+          guard let cell =
+                  self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCollectionViewCell.className, for: indexPath) as? AlarmSettingCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+          cell.bind(data: element, cellType: cellTypes[index - 1])
+          return cell
+        }
+      }
+      .disposed(by: disposeBag)
+    
+    viewModel.alarmSettingModelSubject.onNext(AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true))
+  }
+  
+  
+  //MARK: Render
+  
+  private func render() {
+    view.addSubViews([navigationBarView, alarmSettingCollectionView])
+    
+    navigationBarView.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(60)
+    }
+    
+    alarmSettingCollectionView.snp.makeConstraints { make in
+      make.top.equalTo(navigationBarView.snp.bottom)
+      make.leading.trailing.equalToSuperview()
+      make.bottom.equalToSuperview()
+    }
+  }
+  
+}
+
+extension ProfileAlarmSettingViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    switch indexPath.row {
+    case 0:
+      return Size.oneOptionCellHeight
+    case 1, 5:
+      return Size.twoOptionCellHeight
+    case 2, 3, 4:
+      return Size.threeOptionCellHeight
+    default:
+      return CGSize(width: 0, height: 0)
+    }
+  }
+}
