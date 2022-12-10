@@ -15,11 +15,13 @@ class ResignInputCollectionViewCell: UICollectionViewCell {
 
   var delegate: ResignInputCellDelegate?
 
-  let reasonArray: [String] = [
-    "사유 선택하기",
-    "공동생활이 끝나서",
-    "이용이 불편하고 장애가 많아서",
-    "사용 빈도가 낮아서"
+  let reasonArray: [ResignReasonType] = [
+    ResignReasonType.no,
+    ResignReasonType.doneLivingTogether,
+    ResignReasonType.inconvenientToUse,
+    ResignReasonType.lowUsage,
+    ResignReasonType.contentsUnsatisfactory,
+    ResignReasonType.etc
   ]
 
   enum Size {
@@ -177,11 +179,11 @@ extension ResignInputCollectionViewCell: UIPickerViewDelegate, UIPickerViewDataS
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return reasonArray[row]
+    return reasonArray[row].rawValue
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    reasonTextField.text = reasonArray[row]
+    reasonTextField.text = reasonArray[row].rawValue
   }
 }
 
