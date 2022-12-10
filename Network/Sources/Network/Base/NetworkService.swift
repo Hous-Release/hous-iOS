@@ -21,4 +21,5 @@ final public class NetworkService {
   public let roomRepository = RoomAPI(isLogging: true)
   public let profileRepository = ProfileAPI(isLogging: true)
   public let ruleRepository = RuleAPI(isLogging: true)
+  public let userRepository = UserAPI(isLogging: true)
 }
