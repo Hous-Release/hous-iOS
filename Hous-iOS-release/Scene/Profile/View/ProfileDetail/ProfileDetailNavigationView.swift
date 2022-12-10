@@ -48,7 +48,7 @@ final class ProfileDetailNavigationBarView: UIView {
     transferToViewController()
   }
   
-  private func setup(){
+  private func setup() {
     self.backgroundColor = .white
   }
   
