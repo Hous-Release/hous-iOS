@@ -329,20 +329,22 @@ extension UpdateTodoViewController {
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
 
-    // TODO: - 경고문구가 뭔지 모르겠어요
     todoTextField = HousTextField(
-      "to-do",
+      "to-do 입력",
       useMaxCount: true,
       maxCount: 15,
-      exceedString: "어쩔티비"
+      exceedString: "to-do는 15글자 이내로 입력해주세요!"
     )
     todoTextField.returnKeyType = .done
 
     actionButton = UIButton()
+    actionButton.isEnabled = false
     actionButton.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     actionButton.setTitleColor(Colors.white.color, for: .normal)
-    actionButton.backgroundColor = Colors.blue.color
-    actionButton.layer.cornerRadius = 5
+    actionButton.setBackgroundColor(Colors.blue.color, for: .normal)
+    actionButton.setBackgroundColor(Colors.g4.color, for: .disabled)
+    actionButton.layer.cornerRadius = 8
+    actionButton.clipsToBounds = true
   }
 
   /// - Tag: CreateFullLayout
