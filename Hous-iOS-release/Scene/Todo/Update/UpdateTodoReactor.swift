@@ -39,7 +39,7 @@ public final class UpdateTodoReactor: Reactor {
     case setIndividual(IndexPath)
     case setDay([UpdateTodoHomieModel.Day], Int)
     case setBack(Bool)
-    case sendError(String?)
+    case sendError(HouseErrorModel?)
   }
 
   public struct State {
@@ -55,7 +55,7 @@ public final class UpdateTodoReactor: Reactor {
     @Pulse
     var isBack: Bool = false
     @Pulse
-    var errorMessage: String? = nil
+    var errorModel: HouseErrorModel? = nil
     @Pulse
     var isTappableButton: Bool = false
   }
@@ -139,7 +139,7 @@ public final class UpdateTodoReactor: Reactor {
     case .setBack(let backFlag):
       newState.isBack = backFlag
     case .sendError(let errorMessage):
-      newState.errorMessage = errorMessage
+      newState.errorModel = errorMessage
     }
     return newState
   }
@@ -162,7 +162,8 @@ public extension UpdateTodoReactor {
       case .isSuccess(let isSuccess):
         return .just(.setBack(isSuccess))
       case .sendError(let sendError):
-        return .just(.sendError(sendError?.message))
+
+        return .just(.sendError(sendError))
 
       default:
         return .empty()
