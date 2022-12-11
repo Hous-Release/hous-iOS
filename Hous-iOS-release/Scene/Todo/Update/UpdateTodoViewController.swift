@@ -6,6 +6,7 @@
 //
 
 import AssetKit
+import BottomSheetKit
 import ReactorKit
 import RxCocoa
 import RxSwift
@@ -71,6 +72,10 @@ final class UpdateTodoViewController: UIViewController, View {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupNavigationBar()
+  }
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    resetNavigation()
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -161,7 +166,6 @@ extension UpdateTodoViewController {
   func bindPushNotificationState(_ reactor: Reactor) {
     reactor.state.map(\.isPushNotification)
       .distinctUntilChanged()
-    // TODO: - bind로 유아이 바꾸기
       .bind(to: navigationBar.rightButton.rx.isSelected)
       .disposed(by: disposeBag)
   }
@@ -306,6 +310,10 @@ extension UpdateTodoViewController {
     }
   }
 
+  private func resetNavigation() {
+    navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+  }
+
   private func setupNavigationBar() {
     guard let reactor = reactor else {
       return
@@ -321,9 +329,11 @@ extension UpdateTodoViewController {
     :
     "추가하기"
 
+    navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     navigationBar.rightButton.setImage(Images.icAlarmoff.image, for: .normal)
     navigationBar.rightButton.setImage(Images.icAlarmon.image, for: .selected)
     navigationBar.rightButton.backgroundColor = Colors.white.color
+    navigationBar.delegate = self
     navigationBar.title = navTitle
     actionButton.setTitle(buttonTilte, for: .normal)
   }
@@ -604,5 +614,41 @@ extension UpdateTodoViewController: UICollectionViewDelegate {
 extension UpdateTodoViewController: DidTapDayDelegate {
   func didTapDay(days: [UpdateTodoHomieModel.Day], to id: Int) {
     tapDay.accept((days, id))
+  }
+}
+extension UpdateTodoViewController: NavBarWithBackButtonViewDelegate {
+  func backButtonDidTapped() {
+
+    guard let isModify = reactor?.currentState.isModifying else { return }
+
+    var model: DefaultPopUpModel
+
+    if isModify {
+      model = DefaultPopUpModel(
+        cancelText: "계속 작성하기",
+        actionText: "나가기",
+        title: "수정사항이 저장되지 않았어요!",
+        subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+      )
+    }
+
+    else {
+      model = DefaultPopUpModel(
+        cancelText: "계속 작성하기",
+        actionText: "나가기",
+        title: "앗 잠깐! 이대로 나가면\nto-do가 추가되지 않아요!",
+        subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+      )
+    }
+
+    let popupType = PopUpType.defaultPopUp(defaultPopUpModel: model)
+    presentPopUp(popupType) { action in
+      switch action {
+      case .action:
+        self.navigationController?.popViewController(animated: true)
+      case .cancel:
+        return
+      }
+    }
   }
 }
