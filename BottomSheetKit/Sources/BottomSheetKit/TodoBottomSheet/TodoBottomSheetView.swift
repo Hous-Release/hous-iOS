@@ -239,7 +239,7 @@ extension TodoBottomSheetView {
 
     collectionView.isPrefetchingEnabled = false
     collectionView.backgroundColor = Colors.white.color
-    collectionView.isScrollEnabled = false
+    collectionView.isScrollEnabled = true
   }
 
   private func configureCollectionViewLayout() -> UICollectionViewLayout {
@@ -289,6 +289,7 @@ extension TodoBottomSheetView {
     group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: .fixed(2), trailing: nil, bottom: .fixed(2))
 
     let section = NSCollectionLayoutSection(group: group)
+    section.orthogonalScrollingBehavior = .continuous
     section.contentInsets = NSDirectionalEdgeInsets(
       top: Constants.verticalMargin,
       leading: Constants.horizontalMargin,
