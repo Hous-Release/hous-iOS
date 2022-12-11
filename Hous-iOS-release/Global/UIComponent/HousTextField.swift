@@ -117,7 +117,7 @@ final class HousTextField: UITextField {
 
 
   @objc
-  private func change() {
+  func change() {
     guard
       let maxCount = maxCount,
       let text = self.text
