@@ -45,7 +45,7 @@ public final class UpdateTodoReactor: Reactor {
   public struct State {
     var id: Int? = nil
     var isModifying: Bool = false
-    var isPushNotification: Bool = false
+    var isPushNotification: Bool = true
     var todo: String? = nil
     var todoHomies: [UpdateTodoHomieModel]
     @Pulse
