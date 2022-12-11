@@ -269,16 +269,21 @@ extension TodoBottomSheetView {
   private func createSection() -> NSCollectionLayoutSection {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .estimated(1),
-      heightDimension: .estimated(1)
+      heightDimension: .fractionalHeight(1)
     )
 
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: nil, trailing: .fixed(4), bottom: nil)
+    item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+      leading: .fixed(8),
+      top: nil,
+      trailing: .fixed(8),
+      bottom: nil
+    )
 
     let groupSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(1)
+      widthDimension: .estimated(1),
+      heightDimension: .absolute(26)
     )
 
     let group = NSCollectionLayoutGroup.horizontal(
@@ -286,7 +291,12 @@ extension TodoBottomSheetView {
       subitems: [item]
     )
 
-    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: .fixed(2), trailing: nil, bottom: .fixed(2))
+    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+      leading: nil,
+      top: nil,
+      trailing: nil,
+      bottom: nil
+    )
 
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .continuous
