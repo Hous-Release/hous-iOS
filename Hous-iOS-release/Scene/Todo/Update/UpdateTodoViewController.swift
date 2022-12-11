@@ -365,7 +365,7 @@ extension UpdateTodoViewController {
 
       switch sectionKind {
       case .assignee:
-        section = self.createSection()
+        section = self.createAssigneeSection()
 
       case .individual:
 
@@ -390,7 +390,7 @@ extension UpdateTodoViewController {
     return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
   }
 
-  private func createSection() -> NSCollectionLayoutSection {
+  private func createAssigneeSection() -> NSCollectionLayoutSection {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .estimated(1),
       heightDimension: .estimated(1)
@@ -406,7 +406,7 @@ extension UpdateTodoViewController {
     )
 
     let groupSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
+      widthDimension: .estimated(1),
       heightDimension: .estimated(1)
     )
 
@@ -424,21 +424,22 @@ extension UpdateTodoViewController {
 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(
-      top: Constants.verticalMargin / 2,
+      top: 0,
       leading: Constants.horizontalMargin,
-      bottom: Constants.verticalMargin,
+      bottom: Constants.verticalMargin / 2,
       trailing: Constants.horizontalMargin
     )
 
     let headerFooterSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(44)
+      heightDimension: .absolute(44)
     )
     let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
         layoutSize: headerFooterSize,
         elementKind: UICollectionView.elementKindSectionHeader, alignment: .top
     )
     section.boundarySupplementaryItems = [sectionHeader]
+    section.orthogonalScrollingBehavior = .continuous
     return section
   }
 
@@ -569,7 +570,7 @@ extension UpdateTodoViewController {
 
       self.individualSectionSnapShot = snapShot
     }
-    dataSource.apply(snapShot, to: .individual, animatingDifferences: true)
+    dataSource.apply(snapShot, to: .individual, animatingDifferences: false)
   }
 
   private func applyInitialSnapshots() {
