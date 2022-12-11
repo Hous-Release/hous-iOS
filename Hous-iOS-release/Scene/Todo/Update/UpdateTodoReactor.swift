@@ -52,11 +52,12 @@ public final class UpdateTodoReactor: Reactor {
     var didTappedIndividual: IndexPath? = nil
     @Pulse
     var didTappedDay: ([UpdateTodoHomieModel.Day], Int)? = nil
-
     @Pulse
     var isBack: Bool = false
     @Pulse
     var errorMessage: String? = nil
+    @Pulse
+    var isTappableButton: Bool = false
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
@@ -106,10 +107,31 @@ public final class UpdateTodoReactor: Reactor {
     switch mutation {
     case .setNotification(let notification):
       newState.isPushNotification = notification
+
     case .setTodo(let todo):
       newState.todo = todo
+      var isSelectedDays = false
+      for homie in currentState.todoHomies {
+        if !homie.selectedDay.isEmpty {
+          isSelectedDays = true
+          break
+        }
+      }
+      newState.isTappableButton = (isSelectedDays && todo != "" && todo != nil)
+
     case .setHomies(let homies):
       newState.todoHomies = homies
+      var isSelectedDays = false
+      for homie in homies {
+        if !homie.selectedDay.isEmpty {
+          isSelectedDays = true
+          break
+        }
+      }
+      newState.isTappableButton = (isSelectedDays
+                                   && currentState.todo != ""
+                                   && currentState.todo != nil)
+
     case .setIndividual(let indexPath):
       newState.didTappedIndividual = indexPath
     case .setDay(let days, let id):

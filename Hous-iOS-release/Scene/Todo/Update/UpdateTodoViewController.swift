@@ -154,6 +154,7 @@ extension UpdateTodoViewController {
     bindDidTapIndividualState(reactor)
     bindDidTapDayState(reactor)
     bindBackState(reactor)
+    bindActionButtonState(reactor)
     bindErrorState(reactor)
   }
 
@@ -193,6 +194,11 @@ extension UpdateTodoViewController {
     reactor.pulse(\.$isBack)
       .asDriver(onErrorJustReturn: false)
       .drive(onNext: self.back)
+      .disposed(by: disposeBag)
+  }
+  func bindActionButtonState(_ reactor: Reactor) {
+    reactor.pulse(\.$isTappableButton)
+      .bind(to: actionButton.rx.isEnabled)
       .disposed(by: disposeBag)
   }
   func bindErrorState(_ reactor: Reactor) {
