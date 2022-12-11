@@ -50,6 +50,8 @@ enum HTTPHeaderField: String {
   case authentication = "Authorization"
   case contentType = "Content-Type"
   case acceptType = "Accept"
+  case housOSType = "HousOsType"
+  case housVersion = "HousVersion"
 }
 
 public enum ContentType: String {
@@ -70,6 +72,8 @@ extension TargetType {
 
     var urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
     urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+    urlRequest.addValue("iOS", forHTTPHeaderField: HTTPHeaderField.housOSType.rawValue)
+    urlRequest.addValue("1.0.0", forHTTPHeaderField: HTTPHeaderField.housVersion.rawValue)
 
     switch parameters {
 
