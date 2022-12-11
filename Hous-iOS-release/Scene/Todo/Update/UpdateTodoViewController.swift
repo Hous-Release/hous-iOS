@@ -172,7 +172,8 @@ extension UpdateTodoViewController {
   func bindTodoState(_ reactor: Reactor) {
     reactor.state.map(\.todo)
       .distinctUntilChanged()
-      .bind(to: self.todoTextField.rx.text)
+      .asDriver(onErrorJustReturn: nil)
+      .drive(onNext: self.todo)
       .disposed(by: disposeBag)
   }
   func bindHomiesState(_ reactor: Reactor) {
@@ -220,6 +221,11 @@ extension UpdateTodoViewController {
       return
     }
     Toast.show(message: errorMessage, controller: self)
+  }
+
+  private func todo(_ todo: String?) {
+    todoTextField.text = todo
+    todoTextField.change()
   }
 
   private func back(_ backFlag: Bool) {
