@@ -127,34 +127,48 @@ final class HousTextField: UITextField {
 
     maxCountLabel.text = "\(text.count)/\(maxCount)"
     isExceed(text.count)
+    textFieldIsEmpty(text.count)
+  }
 
+  private func textFieldIsEmpty(_ count: Int) {
+
+    if count == 0 {
+      selectedUnderlineLayer.removeFromSuperlayer()
+      isValidate = false
+    }
+    else {
+      self.layer.addSublayer(selectedUnderlineLayer)
+      isValidate = true
+    }
   }
 
   private func isExceed(_ count: Int) {
     guard let maxCount = maxCount else {
       return
     }
+    guard count != 0 else {
+      return
+    }
 
-    if count > maxCount || count == 0 {
+    if count > maxCount {
       maxCountLabel.textColor = Colors.red.color
       exceedLabel.isHidden = false
-      selectedUnderlineLayer.backgroundColor = Colors.red.color.cgColor
       isValidate = false
     } else {
       maxCountLabel.textColor = Colors.g5.color
       exceedLabel.isHidden = true
-      selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
       isValidate = true
     }
 
   }
 
+  // MARK: - 얼라인 때문에 사용 안함
   @objc
   private func beginEdit() {
 
     guard let text = text else { return }
 
-    if useMaxCount && (maxCount ?? 0)  < text.count {
+    if useMaxCount && ((maxCount ?? 0) < text.count) {
       return
     }
 
@@ -168,6 +182,7 @@ final class HousTextField: UITextField {
     selectedUnderlineLayer.add(animation, forKey: "Selected")
   }
 
+  // MARK: - 얼라인 때문에 사용 안함
   @objc
   private func endEdit() {
     guard let text = text else { return }
@@ -176,7 +191,7 @@ final class HousTextField: UITextField {
       isExceed(text.count)
       return
     }
-    selectedUnderlineLayer.removeFromSuperlayer()
+//    selectedUnderlineLayer.removeFromSuperlayer()
   }
 }
 
@@ -189,20 +204,21 @@ extension HousTextField {
       name: .change,
       object: self
     )
+    // MARK: - 얼라인 때문에 사용 안함
 
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(beginEdit),
-      name: .beginEdit,
-      object: self
-    )
+//    NotificationCenter.default.addObserver(
+//      self,
+//      selector: #selector(beginEdit),
+//      name: .beginEdit,
+//      object: self
+//    )
 
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(endEdit),
-      name: .endEdit,
-      object: self
-    )
+//    NotificationCenter.default.addObserver(
+//      self,
+//      selector: #selector(endEdit),
+//      name: .endEdit,
+//      object: self
+//    )
 
   }
 
