@@ -331,7 +331,7 @@ extension UpdateTodoViewController {
 
     // TODO: - 경고문구가 뭔지 모르겠어요
     todoTextField = HousTextField(
-      "Todo 입력",
+      "to-do",
       useMaxCount: true,
       maxCount: 15,
       exceedString: "어쩔티비"
