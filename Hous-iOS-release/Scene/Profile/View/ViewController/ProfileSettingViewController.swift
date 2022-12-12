@@ -176,6 +176,7 @@ final class ProfileSettingViewController: UIViewController {
     let output = viewModel.transform(input: input)
     
     output.actionControl
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.doNavigation(action: $0)

@@ -13,12 +13,13 @@ import RxCocoa
 
 final class AlarmSettingFirstCollectionViewCell: UICollectionViewCell {
   
-//  var settingData: AlarmSettingModel
+  var disposeBag = DisposeBag()
+  let cellActionControlSubject = PublishSubject<ProfileAlarmSettingActionControl>()
   
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
   }
-    
+  
   private let cellTitleLabel = UILabel().then {
     $0.text = "알림 받기"
     $0.textColor = Colors.black.color
@@ -33,14 +34,34 @@ final class AlarmSettingFirstCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     configUI()
     render()
+    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.disposeBag = DisposeBag()
+    transferToViewController()
+  }
+  
   private func configUI() {
     self.backgroundColor = .white
+  }
+  
+  private func transferToViewController() {
+    self.pushNotificationSwitch.rx.isOn
+      .skip(1)
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] isOn in
+        guard let self = self else { return }
+        let cellType: AlarmSettingCellType = .pushAlarm
+        let rawValue = isOn ? 1 : 0
+        self.cellActionControlSubject.onNext(.didTabButton(cellType: cellType, rawValue: rawValue))
+      })
+      .disposed(by: disposeBag)
   }
   
   private func render() {

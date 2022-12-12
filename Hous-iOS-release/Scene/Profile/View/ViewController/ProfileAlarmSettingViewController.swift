@@ -15,12 +15,9 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
   
   //MARK: RX Components
   
-  let disposeBag = DisposeBag()
-  let viewModel = ProfileAlarmSettingViewModel()
-  let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
-  
-  var data: AlarmSettingModel = AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true)
-  
+  private let disposeBag = DisposeBag()
+  private let viewModel = ProfileAlarmSettingViewModel()
+  private let temporarilySetCellSubject = PublishSubject<Void>()
   
   //MARK: UI Templetes
   
@@ -66,13 +63,14 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
   //MARK: Setup UI
   
   private func setup() {
+    self.view.backgroundColor = .white
     alarmSettingCollectionView.backgroundColor = .white
     alarmSettingCollectionView.delegate = self
     navigationController?.navigationBar.isHidden = true
   }
   
   //MARK: Bind
-  
+
   private func bind() {
     
     let viewWillAppear = rx.RxViewWillAppear
@@ -86,6 +84,13 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
     
     let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
     
+    navigationBarView.navigationBackButton.rx.tap
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { _ in
+        actionDetected.onNext(.didTabBack)
+      })
+      .disposed(by: disposeBag)
+    
     let input = ProfileAlarmSettingViewModel.Input(
       viewWillAppear: viewWillAppear,
       actionDetected: actionDetected
@@ -94,16 +99,16 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
     // output
     
     let output = viewModel.transform(input: input)
+
     
     output.alarmSettingModel
-      .debug("⚡️")
-      .do(onNext: {
+      .do(onNext: { _ in
         self.hideLoading()
-        self.data = $0
       })
       .map {
         [AlarmSettingModel](repeating: $0, count: 6)
       }
+      .observe(on: MainScheduler.asyncInstance)
       .bind(to:alarmSettingCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: AlarmSettingModel) in
         let indexPath = IndexPath(row: index, section: 0)
@@ -112,19 +117,72 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
           guard let cell =
                   self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingFirstCollectionViewCell.className, for: indexPath) as? AlarmSettingFirstCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(data: element)
+          
+          cell.cellActionControlSubject
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         } else {
           guard let cell =
                   self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCollectionViewCell.className, for: indexPath) as? AlarmSettingCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(data: element, cellType: cellTypes[index - 1])
+          
+          cell.cellActionControl
+            .asDriver(onErrorJustReturn: .none)
+            .drive(onNext: { data in
+              actionDetected.onNext(data)
+            })
+            .disposed(by: cell.disposeBag)
+          
+          self.temporarilySetCellSubject
+            .bind(onNext: { [weak self] in
+              guard let self = self else { return }
+              cell.bind(data: self.viewModel.currentData, cellType: cellTypes[index - 1])
+            })
+            .disposed(by: cell.disposeBag)
+          
           return cell
         }
       }
       .disposed(by: disposeBag)
     
+    output.actionControl
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.doNavigation(action: $0)
+        self.temporarilySetCell(action: $0)
+      })
+      .disposed(by: disposeBag)
+    
     viewModel.alarmSettingModelSubject.onNext(AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true))
   }
   
+  //MARK: Methods
+  
+  private func doNavigation(action: ProfileAlarmSettingActionControl) {
+    switch action {
+    case .didTabBack:
+      self.navigationController?.popViewController(animated: true)
+    default:
+      break
+    }
+  }
+  
+  private func temporarilySetCell(action: ProfileAlarmSettingActionControl) {
+    switch action {
+    case .temporarilySetCellForSwitchAnimation:
+      self.temporarilySetCellSubject.onNext(())
+    default:
+      break
+    }
+  
+  }
+  
+
   
   //MARK: Render
   
