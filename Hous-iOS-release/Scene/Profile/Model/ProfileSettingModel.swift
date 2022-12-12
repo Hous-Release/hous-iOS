@@ -19,14 +19,18 @@ enum ProfileSettingActionControl {
 }
 
 enum ProfileAlarmSettingActionControl {
-  case settingInfoChange
+  case settingInfoChanged(data: AlarmSettingModel)
   case didTabBack
+  case didTabButton(cellType: AlarmSettingCellType, rawValue: Int)
+  case temporarilySetCellForSwitchAnimation
+  case none
 }
 
 enum TodoNotificationMode {
   case allTodo
   case onlyInCharge
   case alarmOff
+  case none
 }
 
 public struct AlarmSettingModel {
@@ -50,4 +54,10 @@ enum AlarmSettingCellType {
   case todayTodo
   case notDoneTodo
   case badgeAlarm
+  case pushAlarm
+  case none
+}
+
+public struct AlarmSettingCellData {
+  static var data = AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true)
 }

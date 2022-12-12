@@ -11,8 +11,10 @@ import RxCocoa
 
 final class AlarmSettingListView: UIView {
   
-  private let disposeBag: DisposeBag = DisposeBag()
+  let disposeBag: DisposeBag = DisposeBag()
   let viewActionControlSubject = PublishSubject<ProfileAlarmSettingActionControl>()
+  var cellType: AlarmSettingCellType = .none
+  var rawValue: Int = -1
   
   let settingNameLabel = UILabel().then {
     $0.textColor = Colors.g7.color
@@ -27,6 +29,7 @@ final class AlarmSettingListView: UIView {
     setup()
     transferToViewController()
   }
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -44,10 +47,13 @@ final class AlarmSettingListView: UIView {
     switch buttonState {
     case .enableSelected:
       self.radioButton.setImage(Images.icSettingRadioOn.image, for: .normal)
+      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
     case .disableSelected:
       self.radioButton.setImage(Images.icSettingRadioDisable.image, for: .normal)
+      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
     case .unselected:
       self.radioButton.setImage(Images.icSettingRadioOff.image, for: .normal)
+      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
     }
   }
   
@@ -71,8 +77,10 @@ final class AlarmSettingListView: UIView {
   
   private func transferToViewController() {
     self.radioButton.rx.tap
-      .bind{ [weak self] in
-        self?.viewActionControlSubject.onNext(.settingInfoChange)
+      .observe(on: MainScheduler.asyncInstance)
+      .bind { [weak self] in
+        guard let self = self else { return }
+        self.viewActionControlSubject.onNext(.didTabButton(cellType: self.cellType, rawValue: self.rawValue))
       }
       .disposed(by: disposeBag)
   }
@@ -80,8 +88,9 @@ final class AlarmSettingListView: UIView {
 
 final class AlarmSettingCollectionViewCell: UICollectionViewCell {
   
-//  var settingData: AlarmSettingModel
   var cellType: AlarmSettingCellType = .badgeAlarm
+  let cellActionControl = PublishSubject<ProfileAlarmSettingActionControl>()
+  var disposeBag = DisposeBag()
   
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
@@ -117,14 +126,51 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     configUI()
     render()
+    transferToViewController()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.disposeBag = DisposeBag()
+    transferToViewController()
+  }
+  
   private func configUI() {
     self.backgroundColor = .white
+  }
+  
+  private func transferToViewController() {
+    self.firstOption.viewActionControlSubject
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] data in
+        self?.cellActionControl.onNext(data)
+      })
+      .disposed(by: disposeBag)
+    
+    self.secondOption.viewActionControlSubject
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(onNext: { [weak self] data in
+        self?.cellActionControl.onNext(data)
+      })
+      .disposed(by: disposeBag)
+    
+    switch self.cellType {
+    case .newTodo, .todayTodo, .notDoneTodo:
+      self.thirdOption.viewActionControlSubject
+        .observe(on: MainScheduler.asyncInstance)
+        .bind(onNext: { [weak self] data in
+          self?.cellActionControl.onNext(data)
+        })
+        .disposed(by: disposeBag)
+    
+    default:
+      break
+    }
+    
   }
   
   private func render() {
@@ -154,6 +200,8 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
   }
   
   func bind(data: AlarmSettingModel, cellType: AlarmSettingCellType) {
+    settingListStackView.removeFullyAllArrangedSubviews()
+    self.cellType = cellType
     switch cellType {
     case .newRules:
       cellTitleLabel.text = "새로운 Rules 추가"
@@ -163,6 +211,11 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       
       firstOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.isNewRulesNotification)
       secondOption.changeButtonState(isEnable: data.isPushNotification, isSelected: !data.isNewRulesNotification)
+      
+      firstOption.cellType = cellType
+      firstOption.rawValue = 0
+      secondOption.cellType = cellType
+      secondOption.rawValue = 1
       
       [firstOption, secondOption].forEach {
         settingListStackView.addArrangedSubview($0)
@@ -178,7 +231,14 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       firstOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.newTodoNotification == .allTodo ? true : false)
       secondOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.newTodoNotification == .onlyInCharge ? true : false)
       thirdOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.newTodoNotification == .alarmOff ? true : false)
-      
+
+      firstOption.cellType = cellType
+      firstOption.rawValue = 0
+      secondOption.cellType = cellType
+      secondOption.rawValue = 1
+      thirdOption.cellType = cellType
+      thirdOption.rawValue = 2
+
       [firstOption, secondOption, thirdOption].forEach {
         settingListStackView.addArrangedSubview($0)
       }
@@ -193,6 +253,13 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       firstOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.todayTodoNotification == .allTodo ? true : false)
       secondOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.todayTodoNotification == .onlyInCharge ? true : false)
       thirdOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.todayTodoNotification == .alarmOff ? true : false)
+      
+      firstOption.cellType = cellType
+      firstOption.rawValue = 0
+      secondOption.cellType = cellType
+      secondOption.rawValue = 1
+      thirdOption.cellType = cellType
+      thirdOption.rawValue = 2
       
       [firstOption, secondOption, thirdOption].forEach {
         settingListStackView.addArrangedSubview($0)
@@ -209,6 +276,13 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       secondOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.notDoneTodoNotification == .onlyInCharge ? true : false)
       thirdOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.notDoneTodoNotification == .alarmOff ? true : false)
       
+      firstOption.cellType = cellType
+      firstOption.rawValue = 0
+      secondOption.cellType = cellType
+      secondOption.rawValue = 1
+      thirdOption.cellType = cellType
+      thirdOption.rawValue = 2
+      
       [firstOption, secondOption, thirdOption].forEach {
         settingListStackView.addArrangedSubview($0)
       }
@@ -222,9 +296,17 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       firstOption.changeButtonState(isEnable: data.isPushNotification, isSelected: data.isBadgeNotification)
       secondOption.changeButtonState(isEnable: data.isPushNotification, isSelected: !data.isBadgeNotification)
       
+      firstOption.cellType = cellType
+      firstOption.rawValue = 0
+      secondOption.cellType = cellType
+      secondOption.rawValue = 1
+      
       [firstOption, secondOption].forEach {
         settingListStackView.addArrangedSubview($0)
       }
+      
+    default:
+      break
     }
   }
 }
