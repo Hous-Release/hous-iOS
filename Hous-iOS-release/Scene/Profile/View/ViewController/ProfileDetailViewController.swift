@@ -91,9 +91,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
     
     let viewWillAppear = rx.RxViewWillAppear
       .asSignal(onErrorJustReturn: ())
-      .do(onNext: { [weak self] _ in
-        self?.showLoading()
-      })
+      
     
     let actionDetected = PublishSubject<ProfileDetailActionControl>()
     

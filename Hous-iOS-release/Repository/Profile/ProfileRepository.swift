@@ -12,33 +12,117 @@ import RxCocoa
 
 public enum ProfileRepositoryEvent {
   case getProfile(ProfileModel)
-  case putProfile
-  case deleteProfile
+  case getAlarmSettingInfo(AlarmSettingModel)
   case getHomieProfile(ProfileModel)
-  case putRepresentingBadge
-  case getBadges
-  case postFeedBackBadge
-  case getNotifications
   case getProfileTest([ProfileTestItemModel])
-  case putProfileTestSave(PersonalityColor)
   case getProfileTestResult(ProfileDetailModel)
-  case patchPushAlarm
+  case putProfile
+  case putRepresentingBadge
+  case putProfileTestSave(PersonalityColor)
+  case patchAlarmSetting
+  case deleteProfile
   case sendError(HouseErrorModel?)
 }
 
 public protocol ProfileRepository {
   static var event: PublishSubject<ProfileRepositoryEvent> { get }
+  func getAlarmSettingInfo()
   func getProfileTest()
   func getProfile()
   func getHomieProfile(id: String)
   func getProfileTestResult(color: PersonalityColor)
   func putProfileEditInfo(data: ProfileEditModel)
   func putProfileTest(data: ProfileTestSaveModel)
+  func patchAlarmSetting(data: AlarmSettingModel, cellType: AlarmSettingCellType)
 }
 
 public final class ProfileRepositoryImp: ProfileRepository {
   
   public static var event = PublishSubject<ProfileRepositoryEvent>()
+  
+  public func getAlarmSettingInfo() {
+    
+    //MARK: Get Data
+    
+    NetworkService.shared.profileRepository.getAlarmSettingInfo { res, err in
+      guard let dto = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      
+      //MARK: From DTO to Model
+      
+      let isPushNotification = dto.isPushNotification
+      let isNewRulesNotification: Bool = {
+        switch dto.rulesPushStatus {
+        case "ON":
+          return true
+        case "OFF":
+          return false
+        default:
+          return false
+        }
+      }()
+      
+      let newTodoNotification: TodoNotificationMode = {
+        switch dto.newTodoPushStatus {
+        case "ON_ALL":
+          return .allTodo
+        case "ON_MY":
+          return .onlyInCharge
+        case "OFF":
+          return .alarmOff
+        default:
+          return.none
+        }
+      }()
+      
+      let todayTodoNotification: TodoNotificationMode = {
+        switch dto.todayTodoPushStatus {
+        case "ON_ALL":
+          return .allTodo
+        case "ON_MY":
+          return .onlyInCharge
+        case "OFF":
+          return .alarmOff
+        default:
+          return.none
+        }
+      }()
+      
+      let notDoneTodoNotification: TodoNotificationMode = {
+        switch dto.remindTodoPushStatus {
+        case "ON_ALL":
+          return .allTodo
+        case "ON_MY":
+          return .onlyInCharge
+        case "OFF":
+          return .alarmOff
+        default:
+          return.none
+        }
+      }()
+      
+      let isBadgeNotification: Bool = {
+        switch dto.badgePushStatus {
+        case "ON":
+          return true
+        case "OFF":
+          return false
+        default:
+          return false
+        }
+      }()
+      
+      let alarmSettingInfo = AlarmSettingModel(isPushNotification: isPushNotification, isNewRulesNotification: isNewRulesNotification, newTodoNotification: newTodoNotification, todayTodoNotification: todayTodoNotification, notDoneTodoNotification: notDoneTodoNotification, isBadgeNotification: isBadgeNotification)
+      
+      ProfileRepositoryImp.event.onNext(.getAlarmSettingInfo(alarmSettingInfo))
+    }
+  }
   
   public func getProfileTest() {
     
@@ -338,6 +422,90 @@ public final class ProfileRepositoryImp: ProfileRepository {
         }
       }
       ProfileRepositoryImp.event.onNext(.putProfileTestSave(personalityColor))
+    }
+  }
+  
+  public func patchAlarmSetting(data: AlarmSettingModel, cellType: AlarmSettingCellType) {
+    
+    //MARK: From Model To DTO
+    
+    var isPushNotification: Bool? = nil
+    var rulesPushStatus: String? = nil
+    var newTodoPushStatus: String? = nil
+    var todayTodoPushStatus: String? = nil
+    var remindTodoPushStatus: String? = nil
+    var badgePushStatus: String? = nil
+    
+    switch cellType {
+    case .pushAlarm:
+      isPushNotification = data.isPushNotification
+    case .newRules:
+      rulesPushStatus = {
+        return data.isNewRulesNotification ? "ON" : "OFF"
+      }()
+    case .newTodo:
+      newTodoPushStatus = {
+        switch data.newTodoNotification {
+        case .allTodo:
+          return "ON_ALL"
+        case .onlyInCharge:
+          return "ON_MY"
+        case .alarmOff:
+          return "OFF"
+        default:
+          return "ON_ALL"
+        }
+      }()
+    case .todayTodo:
+      todayTodoPushStatus = {
+        switch data.todayTodoNotification {
+        case .allTodo:
+          return "ON_ALL"
+        case .onlyInCharge:
+          return "ON_MY"
+        case .alarmOff:
+          return "OFF"
+        default:
+          return "ON_ALL"
+        }
+      }()
+    case .notDoneTodo:
+      remindTodoPushStatus = {
+        switch data.notDoneTodoNotification {
+        case .allTodo:
+          return "ON_ALL"
+        case .onlyInCharge:
+          return "ON_MY"
+        case .alarmOff:
+          return "OFF"
+        default:
+          return "ON_ALL"
+        }
+      }()
+      
+    case .badgeAlarm:
+      badgePushStatus = {
+        return data.isBadgeNotification ? "ON" : "OFF"
+      }()
+      
+    default:
+      break
+    }
+
+    let dto = ProfileDTO.Request.SaveAlarmSettingRequestDTO(isPushNotification: isPushNotification, rulesPushStatus: rulesPushStatus, newTodoPushStatus: newTodoPushStatus, todayTodoPushStatus: todayTodoPushStatus, remindTodoPushStatus: remindTodoPushStatus, badgePushStatus: badgePushStatus)
+    
+    //MARK: Patch Data
+    
+    NetworkService.shared.profileRepository.patchAlarmSettingInfo(dto) { res, err in
+      if (res?.status != 200) {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? ""
+        )
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
     }
   }
 }

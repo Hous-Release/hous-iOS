@@ -9,7 +9,26 @@ import Foundation
 
 public extension ProfileDTO.Request {
 
-    //MARK: ProfilePutEdit
+    struct SaveAlarmSettingRequestDTO: Codable {
+        public let badgePushStatus: String?
+        public let isPushNotification: Bool?
+        public let newTodoPushStatus, remindTodoPushStatus, rulesPushStatus, todayTodoPushStatus: String?
+        
+        public init(
+            isPushNotification: Bool?,
+            rulesPushStatus: String?,
+            newTodoPushStatus: String?,
+            todayTodoPushStatus: String?,
+            remindTodoPushStatus: String?,
+            badgePushStatus: String?) {
+                self.isPushNotification = isPushNotification
+                self.rulesPushStatus = rulesPushStatus
+                self.newTodoPushStatus = newTodoPushStatus
+                self.todayTodoPushStatus = todayTodoPushStatus
+                self.remindTodoPushStatus = remindTodoPushStatus
+                self.badgePushStatus = badgePushStatus
+            }
+    }
     
     struct ProfileEditRequestDTO: Codable {
         public let birthday: String

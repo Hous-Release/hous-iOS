@@ -10,6 +10,12 @@ import RxSwift
 
 protocol ProfileAPIProtocol {
     
+    func patchAlarmSettingInfo(_ alarmSettingRequestDTO: ProfileDTO.Request.SaveAlarmSettingRequestDTO, completion: @escaping (BaseResponseType<ProfileDTO.Response.SaveAlarmSettingResponseDTO>?, Error?) -> Void)
+    
+    func getAlarmSettingInfo(completion: @escaping
+                             (BaseResponseType<ProfileDTO.Response.getAlarmSettingResponseDTO>?, Error?) -> Void
+    )
+    
     func putProfileTest(_ profileTestRequestDTO: ProfileDTO.Request.ProfileTestSaveRequestDTO, completion: @escaping (BaseResponseType<ProfileDTO.Response.ProfileTestSaveResponseDTO>?, Error?) -> Void)
     
     func getProfileTest(completion: @escaping
@@ -38,6 +44,12 @@ protocol ProfileAPIProtocol {
 }
 
 public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProtocol {
+    public func getAlarmSettingInfo(completion: @escaping (BaseResponseType<ProfileDTO.Response.getAlarmSettingResponseDTO>?, Error?) -> Void) {
+        fetchData(target: .getAlarmSettingInfo, responseData: BaseResponseType<ProfileDTO.Response.getAlarmSettingResponseDTO>.self, isWithInterceptor: true) {res, err in
+            completion(res, err)
+        }
+    }
+    
     
     public func getProfileTest(completion: @escaping (BaseResponseType<[ProfileDTO.Response.ProfileTestResponseDTO]>?, Error?) -> Void) {
         fetchData(target: .getProfileTest, responseData: BaseResponseType<[ProfileDTO.Response.ProfileTestResponseDTO]>.self, isWithInterceptor: true) {res, err in
@@ -108,6 +120,12 @@ public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProto
             }
             
             return Disposables.create()
+        }
+    }
+    
+    public func patchAlarmSettingInfo(_ alarmSettingRequestDTO: ProfileDTO.Request.SaveAlarmSettingRequestDTO, completion: @escaping (BaseResponseType<ProfileDTO.Response.SaveAlarmSettingResponseDTO>?, Error?) -> Void) {
+        fetchData(target: .patchAlarmSetting(alarmSettingRequestDTO), responseData: BaseResponseType<ProfileDTO.Response.SaveAlarmSettingResponseDTO>.self, isWithInterceptor: true) { res, err in
+            completion(res, err)
         }
     }
     
