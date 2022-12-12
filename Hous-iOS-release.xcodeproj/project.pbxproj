@@ -221,6 +221,10 @@
 		B85C0B602941B5D600784FCB /* UnderlinedTextStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */; };
 		B85C0B6429447E4A00784FCB /* ResignReasonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6329447E4A00784FCB /* ResignReasonType.swift */; };
 		B85C0B67294486D000784FCB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B66294486D000784FCB /* UserRepository.swift */; };
+		B85C0B6A29471D0700784FCB /* ProfileLeaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6929471D0700784FCB /* ProfileLeaveViewController.swift */; };
+		B85C0B6C29471D0E00784FCB /* ProfileLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */; };
+		B85C0B6E29471D1700784FCB /* ProfileLeaveViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6D29471D1700784FCB /* ProfileLeaveViewReactor.swift */; };
+		B85C0B7129472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */; };
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
 		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
@@ -473,6 +477,10 @@
 		B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextStackView.swift; sourceTree = "<group>"; };
 		B85C0B6329447E4A00784FCB /* ResignReasonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignReasonType.swift; sourceTree = "<group>"; };
 		B85C0B66294486D000784FCB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		B85C0B6929471D0700784FCB /* ProfileLeaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveViewController.swift; sourceTree = "<group>"; };
+		B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveView.swift; sourceTree = "<group>"; };
+		B85C0B6D29471D1700784FCB /* ProfileLeaveViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveViewReactor.swift; sourceTree = "<group>"; };
+		B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveGuideCollectionViewCell.swift; sourceTree = "<group>"; };
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
 		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
@@ -811,6 +819,7 @@
 		9B98853828E3FF370013CCB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B85C0B6829471C2100784FCB /* ProfileLeave */,
 				9B9E999D293CE5CB00537785 /* ProfileSetting */,
 				9BF9AD72291FBA50006A0BDE /* ProfileTest */,
 				9B83200C2919406C001EBDFE /* ProfileEdit */,
@@ -1299,6 +1308,25 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		B85C0B6829471C2100784FCB /* ProfileLeave */ = {
+			isa = PBXGroup;
+			children = (
+				B85C0B6F29472B2600784FCB /* Cell */,
+				B85C0B6929471D0700784FCB /* ProfileLeaveViewController.swift */,
+				B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */,
+				B85C0B6D29471D1700784FCB /* ProfileLeaveViewReactor.swift */,
+			);
+			path = ProfileLeave;
+			sourceTree = "<group>";
+		};
+		B85C0B6F29472B2600784FCB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +1658,7 @@
 				9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
 				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
+				B85C0B6E29471D1700784FCB /* ProfileLeaveViewReactor.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
@@ -1717,6 +1746,7 @@
 				9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */,
 				B880F5C4293C903E00E888BC /* ResignViewController.swift in Sources */,
 				9BF94602290D44AF008F2BFC /* ProfileRecommendRuleView.swift in Sources */,
+				B85C0B6C29471D0E00784FCB /* ProfileLeaveView.swift in Sources */,
 				7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */,
 				B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */,
 				9BDBAD8029241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift in Sources */,
@@ -1742,6 +1772,7 @@
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */,
+				B85C0B7129472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift in Sources */,
 				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */,
@@ -1751,6 +1782,7 @@
 				9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */,
 				B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */,
 				9BDBAD7C29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift in Sources */,
+				B85C0B6A29471D0700784FCB /* ProfileLeaveViewController.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
