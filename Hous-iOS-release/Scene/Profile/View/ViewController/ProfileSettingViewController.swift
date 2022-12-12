@@ -198,7 +198,7 @@ final class ProfileSettingViewController: UIViewController {
     case .didTabWithdraw:
       presentResignViewController()
     case .didTabLeavingRoom:
-      break
+      presentLeaveViewController()
     case .didTabBack:
       setTabBarIsHidden(isHidden: false)
       self.navigationController?.popViewController(animated: true)
@@ -267,6 +267,13 @@ extension ProfileSettingViewController {
     let reactor = ResignViewReactor(provider: provider)
     let resignVC = ResignViewController(reactor)
     navigationController?.pushViewController(resignVC, animated: true)
+  }
+
+  private func presentLeaveViewController() {
+    let provider = ServiceProvider()
+    let reactor = ProfileLeaveViewReactor(provider: provider)
+    let leaveVC = ProfileLeaveViewController(reactor)
+    navigationController?.pushViewController(leaveVC, animated: true)
   }
 }
 
