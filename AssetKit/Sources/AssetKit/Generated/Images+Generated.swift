@@ -140,6 +140,7 @@ public enum Images {
   public static let icRight = ImageAsset(name: "ic_right")
   public static let icRightOn = ImageAsset(name: "ic_right_on")
   public static let illTeststart = ImageAsset(name: "illTeststart")
+  public static let bottomGradient = ImageAsset(name: "bottom_gradient")
   public static let icAlarmSetting = ImageAsset(name: "ic_alarm_setting")
   public static let icFeedback = ImageAsset(name: "ic_feedback")
   public static let icInfo = ImageAsset(name: "ic_info")
