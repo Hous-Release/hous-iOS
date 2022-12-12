@@ -33,13 +33,31 @@ enum TodoNotificationMode {
   case none
 }
 
-public struct AlarmSettingModel {
+public struct AlarmSettingModel: Equatable {
   var isPushNotification: Bool
   var isNewRulesNotification: Bool
   var newTodoNotification: TodoNotificationMode
   var todayTodoNotification: TodoNotificationMode
   var notDoneTodoNotification: TodoNotificationMode
   var isBadgeNotification: Bool
+  
+  init() {
+    self.isPushNotification = false
+    self.isNewRulesNotification = false
+    self.newTodoNotification = .none
+    self.todayTodoNotification = .none
+    self.notDoneTodoNotification = .none
+    self.isBadgeNotification = false
+  }
+  
+  init(isPushNotification: Bool, isNewRulesNotification: Bool, newTodoNotification: TodoNotificationMode, todayTodoNotification: TodoNotificationMode, notDoneTodoNotification: TodoNotificationMode, isBadgeNotification: Bool) {
+    self.isPushNotification = isPushNotification
+    self.isNewRulesNotification = isNewRulesNotification
+    self.newTodoNotification = newTodoNotification
+    self.todayTodoNotification = todayTodoNotification
+    self.notDoneTodoNotification = notDoneTodoNotification
+    self.isBadgeNotification = isBadgeNotification
+  }
 }
 
 enum AlarmSettingButtonState {
@@ -48,7 +66,7 @@ enum AlarmSettingButtonState {
   case unselected
 }
 
-enum AlarmSettingCellType {
+public enum AlarmSettingCellType {
   case newRules
   case newTodo
   case todayTodo
@@ -58,6 +76,3 @@ enum AlarmSettingCellType {
   case none
 }
 
-public struct AlarmSettingCellData {
-  static var data = AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true)
-}

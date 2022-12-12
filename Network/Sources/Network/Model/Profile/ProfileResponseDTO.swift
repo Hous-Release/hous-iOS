@@ -10,7 +10,7 @@ import Foundation
 
 public extension ProfileDTO.Response {
     
-    //MARK: ProfileGet
+    // MARK: ProfileGet
     struct ProfileGetResponseDTO : Codable {
         public let birthday: String?
         public let birthdayPublic: Bool
@@ -23,6 +23,20 @@ public extension ProfileDTO.Response {
         public let clean, introversion, light, noise, smell: Double
     }
     
+    // MARK: Get Alarm Setting Info
+    struct getAlarmSettingResponseDTO: Codable {
+        public let badgePushStatus: String
+        public let isPushNotification: Bool
+        public let newTodoPushStatus, remindTodoPushStatus, rulesPushStatus, todayTodoPushStatus: String
+    }
+    
+    // MARK: Save Alarm Setting Info
+    struct SaveAlarmSettingResponseDTO: Codable {
+        public let data: String
+        public let message: String
+        public let status: Int
+        public let success: Bool
+    }
     
     // MARK: - GET Badge
     struct getBadgesResponseDTO: Decodable {

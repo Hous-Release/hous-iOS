@@ -55,9 +55,10 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    bind()
     render()
     configLoadingLayout()
+    self.showLoading()
+    bind()
   }
   
   //MARK: Setup UI
@@ -73,15 +74,11 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
 
   private func bind() {
     
+    // input
+    
     let viewWillAppear = rx.RxViewWillAppear
-      .do(onNext: { [weak self] _ in
-        self?.showLoading()
-      })
-      .map { _ in }
       .asSignal(onErrorJustReturn: ())
-    
-    
-    
+        
     let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
     
     navigationBarView.navigationBackButton.rx.tap
@@ -157,8 +154,6 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
         self.temporarilySetCell(action: $0)
       })
       .disposed(by: disposeBag)
-    
-    viewModel.alarmSettingModelSubject.onNext(AlarmSettingModel(isPushNotification: true, isNewRulesNotification: true, newTodoNotification: .allTodo, todayTodoNotification: .allTodo, notDoneTodoNotification: .allTodo, isBadgeNotification: true))
   }
   
   //MARK: Methods
@@ -179,7 +174,6 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
     default:
       break
     }
-  
   }
   
 
@@ -201,7 +195,6 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
       make.bottom.equalToSuperview()
     }
   }
-  
 }
 
 extension ProfileAlarmSettingViewController: UICollectionViewDelegateFlowLayout {
