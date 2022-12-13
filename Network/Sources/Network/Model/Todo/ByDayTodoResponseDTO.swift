@@ -35,4 +35,14 @@ public extension ByDayTodoDTO.Response {
         public let todoId: Int
         public let todoName: String
     }
+
+    struct OnlyMyTodoDTO: Decodable {
+        public let myTodos: [OnlyMyTodoDetailDTO]
+        public let myTodosCnt: Int
+    }
+
+    struct OnlyMyTodoDetailDTO: Decodable {
+        public let dayOfWeeks: String
+        public let todoName: String
+    }
 }

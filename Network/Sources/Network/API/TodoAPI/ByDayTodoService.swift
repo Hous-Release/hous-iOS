@@ -10,6 +10,7 @@ import Alamofire
 
 public enum ByDayTodoService {
   case getDaysOfWeekTodos
+  case getOnlyMyTodo
 }
 
 extension ByDayTodoService: TargetType {
@@ -21,6 +22,8 @@ extension ByDayTodoService: TargetType {
     switch self {
     case .getDaysOfWeekTodos:
       return "todos/day"
+    case .getOnlyMyTodo:
+        return "todos/me"
     }
   }
 
@@ -28,12 +31,16 @@ extension ByDayTodoService: TargetType {
     switch self {
     case .getDaysOfWeekTodos:
       return .get
+    case .getOnlyMyTodo:
+      return .get
     }
   }
 
   public var parameters: RequestParams {
     switch self {
     case .getDaysOfWeekTodos:
+      return .requestPlain
+    case .getOnlyMyTodo:
       return .requestPlain
     }
   }

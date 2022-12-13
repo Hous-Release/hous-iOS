@@ -20,4 +20,12 @@ public final class ByDayTodoAPI: APIRequestLoader<ByDayTodoService>, ByDayTodoAP
             completion(res, err)
         }
     }
+
+    public func getOnlyMyTodoData(completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.OnlyMyTodoDTO>?, Error?) -> Void) {
+        fetchData(target: .getOnlyMyTodo,
+                  responseData: BaseResponseType<ByDayTodoDTO.Response.OnlyMyTodoDTO>.self,
+                  isWithInterceptor: true) { res, err in
+            completion(res, err)
+        }
+    }
 }

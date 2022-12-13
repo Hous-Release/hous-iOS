@@ -1,15 +1,15 @@
 //
-//  ByDayTodoSection.swift
+//  ProfileLeaveSection.swift
 //  Hous-iOS-release
 //
-//  Created by 김지현 on 2022/11/10.
+//  Created by 김지현 on 2022/12/13.
 //
 
 import Foundation
 import RxDataSources
 import Network
 
-public struct MyOurTodoSection {
+public struct OnlyMyTodoSection {
   public typealias Model = SectionModel<Section, Item>
 
   public enum Section: Equatable {
@@ -17,22 +17,17 @@ public struct MyOurTodoSection {
     case countTodo
     case myTodo(num: Int)
     case myTodoEmpty
-    case ourTodo(num: Int)
-    case ourTodoEmpty
   }
 
   public enum Item: Equatable {
     case guide
     case countTodo(num: Int)
-    case myTodo(todos: ByDayTodoDTO.Response.MyTodoByDayDTO)
+    case myTodo(todos: ByDayTodoDTO.Response.OnlyMyTodoDetailDTO)
     case myTodoEmpty
-    case ourTodo(todos: ByDayTodoDTO.Response.OurTodoByDayDTO)
-    case ourTodoEmpty
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {
-            case (.myTodo(_), .myTodo(_)),
-                 (.ourTodo(_), .ourTodo(_)):
+            case (.myTodo(_), .myTodo(_)):
                 return true
             default:
                 return false
