@@ -225,6 +225,8 @@
 		B85C0B6C29471D0E00784FCB /* ProfileLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */; };
 		B85C0B6E29471D1700784FCB /* ProfileLeaveViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B6D29471D1700784FCB /* ProfileLeaveViewReactor.swift */; };
 		B85C0B7129472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */; };
+		B85C0B742948773900784FCB /* ProfileLeaveSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B732948773900784FCB /* ProfileLeaveSection.swift */; };
+		B85C0B762948E0F100784FCB /* ProfileLeaveRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C0B752948E0F100784FCB /* ProfileLeaveRepository.swift */; };
 		B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */; };
 		B85DAB3E2910FA8B00C79011 /* TotalTodoNumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */; };
 		B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */; };
@@ -481,6 +483,8 @@
 		B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveView.swift; sourceTree = "<group>"; };
 		B85C0B6D29471D1700784FCB /* ProfileLeaveViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveViewReactor.swift; sourceTree = "<group>"; };
 		B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveGuideCollectionViewCell.swift; sourceTree = "<group>"; };
+		B85C0B732948773900784FCB /* ProfileLeaveSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveSection.swift; sourceTree = "<group>"; };
+		B85C0B752948E0F100784FCB /* ProfileLeaveRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLeaveRepository.swift; sourceTree = "<group>"; };
 		B85DAB3B290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekHeaderListCell.swift; sourceTree = "<group>"; };
 		B85DAB3D2910FA8B00C79011 /* TotalTodoNumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTodoNumListCell.swift; sourceTree = "<group>"; };
 		B87FC0242915026300F8AA11 /* EnterRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomRepository.swift; sourceTree = "<group>"; };
@@ -1311,6 +1315,7 @@
 		B85C0B6829471C2100784FCB /* ProfileLeave */ = {
 			isa = PBXGroup;
 			children = (
+				B85C0B722948771C00784FCB /* Model */,
 				B85C0B6F29472B2600784FCB /* Cell */,
 				B85C0B6929471D0700784FCB /* ProfileLeaveViewController.swift */,
 				B85C0B6B29471D0E00784FCB /* ProfileLeaveView.swift */,
@@ -1325,6 +1330,14 @@
 				B85C0B7029472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B85C0B722948771C00784FCB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B85C0B732948773900784FCB /* ProfileLeaveSection.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
@@ -1385,6 +1398,7 @@
 				B8D066CB28F7DF5300A99907 /* TodoRepository.swift */,
 				B8FF4D91290515770087AD40 /* MemberRepository.swift */,
 				B8555AC2291CCAA700E943AE /* ByDayRepository.swift */,
+				B85C0B752948E0F100784FCB /* ProfileLeaveRepository.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -1596,6 +1610,7 @@
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */,
 				B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */,
+				B85C0B762948E0F100784FCB /* ProfileLeaveRepository.swift in Sources */,
 				B8B56BA528E2E77600FC99DA /* CreateNewRoomViewController.swift in Sources */,
 				9B2F46972923BBBF002D9BD2 /* ProfileTestViewModel.swift in Sources */,
 				B856702528C9CA2800B49984 /* UIButton+Extension.swift in Sources */,
@@ -1642,6 +1657,7 @@
 				B856701D28C9A28A00B49984 /* NavigationBarView.swift in Sources */,
 				9B4EE80629444463002F97C2 /* AlarmSettingFirstCollectionViewCell.swift in Sources */,
 				B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */,
+				B85C0B742948773900784FCB /* ProfileLeaveSection.swift in Sources */,
 				9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,

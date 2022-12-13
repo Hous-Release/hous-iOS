@@ -120,7 +120,7 @@ extension ByDayTodoViewController {
         .disposed(by: disposeBag)
 
     // MARK: - Cell
-    let todoDataSource = RxCollectionViewSectionedReloadDataSource<ByDayTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
+    let todoDataSource = RxCollectionViewSectionedReloadDataSource<MyOurTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
 
       switch item {
       case let .countTodo(num):
@@ -159,6 +159,9 @@ extension ByDayTodoViewController {
         }
         cell.setCell(.ourTodo)
         return cell
+
+      default:
+        return UICollectionViewCell()
       }
     })
 

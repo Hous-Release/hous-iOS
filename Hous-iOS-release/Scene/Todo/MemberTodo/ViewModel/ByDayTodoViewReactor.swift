@@ -29,11 +29,11 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
   enum Mutation {
     case setSelectedDayIndexPathRow(Int?)
-    case setCountTodoSection(ByDayTodoSection.Model)
-    case setMyTodosByDaySection(ByDayTodoSection.Model)
-    case setMyTodosEmptySection(ByDayTodoSection.Model)
-    case setOurTodosByDaySection(ByDayTodoSection.Model)
-    case setOurTodosEmptySection(ByDayTodoSection.Model)
+    case setCountTodoSection(MyOurTodoSection.Model)
+    case setMyTodosByDaySection(MyOurTodoSection.Model)
+    case setMyTodosEmptySection(MyOurTodoSection.Model)
+    case setOurTodosByDaySection(MyOurTodoSection.Model)
+    case setOurTodosEmptySection(MyOurTodoSection.Model)
 
     case setSelectedTodoId(Int?)
     case setSelectedTodoSummary(TodoModel?)
@@ -47,15 +47,15 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   struct State {
     @Pulse
     var selectedDayIndexPathRow: Int?
-    var countTodoSection = ByDayTodoSection.Model(model: .countTodo, items: [])
-    var myTodosByDaySection = ByDayTodoSection.Model(
+    var countTodoSection = MyOurTodoSection.Model(model: .countTodo, items: [])
+    var myTodosByDaySection = MyOurTodoSection.Model(
       model: .myTodo(num: 0),
       items: [])
-    var myTodosEmptySection = ByDayTodoSection.Model(model: .myTodoEmpty, items: [])
-    var ourTodosByDaySection = ByDayTodoSection.Model(
+    var myTodosEmptySection = MyOurTodoSection.Model(model: .myTodoEmpty, items: [])
+    var ourTodosByDaySection = MyOurTodoSection.Model(
       model: .ourTodo(num: 0),
       items: [])
-    var ourTodosEmptySection = ByDayTodoSection.Model(model: .ourTodoEmpty, items: [])
+    var ourTodosEmptySection = MyOurTodoSection.Model(model: .ourTodoEmpty, items: [])
 
     var selectedTodoId: Int?
     @Pulse

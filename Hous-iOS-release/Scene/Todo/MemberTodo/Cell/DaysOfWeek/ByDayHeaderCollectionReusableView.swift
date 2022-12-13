@@ -33,15 +33,15 @@ extension ByDayHeaderCollectionReusableView {
     }
   }
 
-  func setHeader(_ sectionType: ByDayTodoSection.Section) {
+  func setHeader(_ sectionType: MyOurTodoSection.Section) {
     var title = ""
     switch sectionType {
-    case .countTodo, .myTodoEmpty, .ourTodoEmpty:
-      title = ""
     case .myTodo:
       title = "My to-do"
     case .ourTodo:
       title = "Our to-do"
+    default:
+      title = ""
     }
     titleLabel.text = title
   }

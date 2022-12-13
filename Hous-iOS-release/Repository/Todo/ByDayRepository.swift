@@ -12,11 +12,11 @@ import RxCocoa
 import BottomSheetKit
 
 public enum ByDayRepositoryEvent {
-  case countTodoSection(ByDayTodoSection.Model)
-  case myTodosByDaySection(ByDayTodoSection.Model)
-  case myTodosEmptySection(ByDayTodoSection.Model)
-  case ourTodosByDaySection(ByDayTodoSection.Model)
-  case ourTodosEmptySection(ByDayTodoSection.Model)
+  case countTodoSection(MyOurTodoSection.Model)
+  case myTodosByDaySection(MyOurTodoSection.Model)
+  case myTodosEmptySection(MyOurTodoSection.Model)
+  case ourTodosByDaySection(MyOurTodoSection.Model)
+  case ourTodosEmptySection(MyOurTodoSection.Model)
 
   case todoSummary(TodoModel?)
 
@@ -102,18 +102,18 @@ extension ByDayRepositoryImp {
   private func onNextEvents(data: ByDayTodoDTO.Response.ByDayTodosResponseDTO, row: Int) {
     let dataByDay = data.todos[row]
 
-    let countTodoItem = ByDayTodoSection.Item.countTodo(num: dataByDay.ourTodosCnt)
-    self.event.onNext(.countTodoSection(ByDayTodoSection.Model(model: .countTodo, items: [countTodoItem])))
+    let countTodoItem = MyOurTodoSection.Item.countTodo(num: dataByDay.ourTodosCnt)
+    self.event.onNext(.countTodoSection(MyOurTodoSection.Model(model: .countTodo, items: [countTodoItem])))
 
     if dataByDay.myTodos.count == 0 {
       self.event.onNext(.myTodosEmptySection(
-        ByDayTodoSection.Model(
+        MyOurTodoSection.Model(
           model: .myTodoEmpty,
-          items: [ByDayTodoSection.Item.myTodoEmpty])))
+          items: [MyOurTodoSection.Item.myTodoEmpty])))
     } else {
-      let myTodoItems = dataByDay.myTodos.map { ByDayTodoSection.Item.myTodo(todos: $0) }
+      let myTodoItems = dataByDay.myTodos.map { MyOurTodoSection.Item.myTodo(todos: $0) }
       self.event.onNext(.myTodosByDaySection(
-        ByDayTodoSection.Model(
+        MyOurTodoSection.Model(
           model: .myTodo(num: dataByDay.myTodos.count),
           items: myTodoItems)
       ))
@@ -121,13 +121,13 @@ extension ByDayRepositoryImp {
 
     if dataByDay.ourTodos.count == 0 {
       self.event.onNext(.ourTodosEmptySection(
-        ByDayTodoSection.Model(
+        MyOurTodoSection.Model(
           model: .ourTodoEmpty,
-          items: [ByDayTodoSection.Item.ourTodoEmpty])))
+          items: [MyOurTodoSection.Item.ourTodoEmpty])))
     } else {
-      let ourTodoItems = dataByDay.ourTodos.map { ByDayTodoSection.Item.ourTodo(todos: $0) }
+      let ourTodoItems = dataByDay.ourTodos.map { MyOurTodoSection.Item.ourTodo(todos: $0) }
       self.event.onNext(.ourTodosByDaySection(
-        ByDayTodoSection.Model(
+        MyOurTodoSection.Model(
           model: .ourTodo(num: dataByDay.ourTodos.count),
           items: ourTodoItems)
         ))
