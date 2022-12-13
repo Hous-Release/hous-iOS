@@ -24,7 +24,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let imageCellSize = CGSize(width: Size.screenWidth, height: 380)
-    static let textCellSize = CGSize(width: Size.screenWidth, height: 320)
+    static let textCellSize = CGSize(width: Size.screenWidth, height: 300)
     static let textSmallCellSize = CGSize(width: Size.screenWidth, height: 300)
     static let recommendCellSize = CGSize(width: Size.screenWidth, height: 240)
   }
@@ -37,7 +37,7 @@ final class ProfileDetailViewController: LoadingBaseViewController, UICollection
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 28, right: 0)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 18, right: 0)
     
     let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
     collectionView.register(cell: ProfileDetailImageCollectionViewCell.self)
