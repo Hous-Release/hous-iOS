@@ -35,7 +35,9 @@ final class ProfileRecommendRuleStackItemView : UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
+  override var intrinsicContentSize: CGSize {
+    return CGSize(width: UIView.noIntrinsicMetric, height: recommendRuleLabel.intrinsicContentSize.height)
+  }
   private func render(){
     self.addSubViews([indexImageView, recommendRuleLabel])
     
@@ -66,7 +68,7 @@ final class ProfileRecommendRuleView : UIView {
   }
   
   let recommendRuleStackView = UIStackView().then {
-    $0.distribution = .fillProportionally
+    $0.distribution = .equalSpacing
     $0.alignment = .center
     $0.spacing = 6
     $0.axis = .vertical
@@ -103,9 +105,9 @@ final class ProfileRecommendRuleView : UIView {
     self.addSubViews([recommendRuleStackView])
     
     recommendRuleStackView.snp.makeConstraints {make in
-      make.top.equalToSuperview()
+      make.top.equalToSuperview().offset(3)
       make.centerX.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-16)
+//      make.bottom.equalToSuperview().offset(-32)
     }
   }
   
