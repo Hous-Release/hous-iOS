@@ -87,7 +87,7 @@ final class MateProfileGraphCollectionViewCell: UICollectionViewCell {
     addSubview(profileGraphBoxView)
     
     profileGraphBoxView.snp.makeConstraints { make in
-      make.top.equalTo(personalityLabel.snp.bottom).offset(22)
+      make.top.equalTo(personalityLabel.snp.bottom).offset(32)
       make.leading.trailing.equalToSuperview()
     }
   }
