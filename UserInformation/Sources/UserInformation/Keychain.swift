@@ -12,7 +12,6 @@ public final class Keychain {
   public static var shared = Keychain()
   private init() { }
   private let keychain: KeychainWrapper = KeychainWrapper.standard
-
   private var accessTokenKey = "accessTokenKey"
   private let refreshTokenKey = "refreshTokenKey"
   private let fcmTokenKey = "FCMTokenKey"

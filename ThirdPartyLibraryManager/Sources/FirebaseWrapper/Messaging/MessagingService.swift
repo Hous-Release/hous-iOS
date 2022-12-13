@@ -20,16 +20,12 @@ protocol FirebaseMessagingServicable {
 }
 
 public class MessagingService: NSObject {
-
     public var tokenHandler: ((String) -> Void)?
 }
 
 final class FirebaseMessagingService: NSObject { }
 
 extension FirebaseMessagingService: FirebaseMessagingServicable {
-
-
-
     func configure() {
         Messaging.messaging().delegate = self
     }
