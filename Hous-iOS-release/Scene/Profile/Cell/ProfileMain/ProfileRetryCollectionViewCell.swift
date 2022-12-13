@@ -69,7 +69,7 @@ final class ProfileRetryCollectionViewCell: UICollectionViewCell {
       retryButton])
     
     retryTitleLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(32)
+      make.top.equalToSuperview().offset(22)
       make.centerX.equalToSuperview()
     }
     

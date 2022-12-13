@@ -27,8 +27,8 @@ final class MateProfileViewController: UIViewController {
     static let screenWidth = UIScreen.main.bounds.width
     static let profileMainImageCellHeight = CGSize(width: Size.screenWidth, height: 254)
     static let profileInfoCellHeight = CGSize(width: Size.screenWidth, height: 162)
-    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 250)
-    static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 150)
+    static let profileGraphCellHeight = CGSize(width: Size.screenWidth, height: 260)
+    static let profileAttributeInfoCellHeight = CGSize(width: Size.screenWidth, height: 180)
     static let profileRetryCellHeight = CGSize(width: Size.screenWidth, height: 139)
   }
   
@@ -38,7 +38,7 @@ final class MateProfileViewController: UIViewController {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.scrollDirection = .vertical
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
     
     let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
     collectionView.register(cell: MateProfileMainImageCollectionViewCell.self)
