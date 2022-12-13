@@ -27,6 +27,7 @@ public extension UIViewController {
 
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
+
       present(vc, animated: true)
 
     case .copyCode(let copyCodePopUpModel):
