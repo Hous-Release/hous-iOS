@@ -62,6 +62,14 @@ final class MateProfileDescriptionInnerCollectionViewCell: UICollectionViewCell 
   
   private func configUI() {
     self.backgroundColor = .white
+    
+    let attrString = NSMutableAttributedString(string: self.attributeDescription.text ?? "")
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = 3
+    paragraphStyle.alignment = .left
+    attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+    
+    attributeDescription.attributedText = attrString
   }
   
   private func render() {
