@@ -127,6 +127,7 @@ public enum Images {
   public static let icSettingEmpty = ImageAsset(name: "ic_setting_empty")
   public static let icShow = ImageAsset(name: "ic_show")
   public static let icShowOn = ImageAsset(name: "ic_show_on")
+  public static let illByebye = ImageAsset(name: "ill_byebye")
   public static let illNocharacter = ImageAsset(name: "ill_nocharacter")
   public static let noBadge = ImageAsset(name: "no_badge")
   public static let badgeLock = ImageAsset(name: "badge_lock")

@@ -21,9 +21,8 @@ class ProfileLeaveGuideCollectionViewCell: UICollectionViewCell {
   }
 
   let imageView = UIImageView().then {
-    $0.image = Images.resign.image
-    $0.makeRounded(cornerRadius: 8)
-    $0.clipsToBounds = true
+    $0.image = Images.illByebye.image
+    $0.contentMode = .scaleAspectFit
   }
 
   let labelsView = UIView()
@@ -94,6 +93,7 @@ extension ProfileLeaveGuideCollectionViewCell {
     alarmBackgroundView.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom).offset(24)
       make.leading.trailing.equalToSuperview()
+      make.height.equalTo(38)
     }
 
     alarmLabel.snp.makeConstraints { make in
@@ -101,7 +101,7 @@ extension ProfileLeaveGuideCollectionViewCell {
     }
 
     guideLabel.snp.makeConstraints { make in
-      make.top.equalTo(alarmBackgroundView.snp.bottom).offset(12)
+      make.top.equalTo(alarmBackgroundView.snp.bottom).offset(6)
       make.leading.trailing.bottom.equalToSuperview()
     }
 

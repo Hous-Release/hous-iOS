@@ -13,14 +13,18 @@ class ProfileLeaveView: UIView {
     static let navigationBarHeight = 64
     static let leaveButtonHeight = 44
     static let gradientViewHeight = 143
+    static let todoItemSize = CGSize(width: UIScreen.main.bounds.width, height: 30)
   }
 
   let navigationBarView = NavBarWithBackButtonView(title: "방 퇴사하기", rightButtonText: "")
 
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+  let collectionView = UICollectionView(
+    frame: .zero,
+    collectionViewLayout: UICollectionViewLayout()).then {
 
     var layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
+      layout.itemSize = Size.todoItemSize
     $0.register(cell: ProfileLeaveGuideCollectionViewCell.self)
     
     $0.register(cell: CountTodoByDayCollectionViewCell.self)
