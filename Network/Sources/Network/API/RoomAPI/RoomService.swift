@@ -10,6 +10,7 @@ import Alamofire
 
 public enum RoomService {
   case updateRoomName(_ dto: RoomDTO.Request.updateRoomNameRequestDTO)
+  case leaveRoom
 }
 
 extension RoomService: TargetType {
@@ -21,6 +22,8 @@ extension RoomService: TargetType {
     switch self {
     case .updateRoomName:
       return "/room/name"
+    case .leaveRoom:
+      return "/room/leave"
     }
   }
   
@@ -28,6 +31,8 @@ extension RoomService: TargetType {
     switch self {
     case .updateRoomName:
       return .put
+    case .leaveRoom:
+      return .delete
     }
   }
   
@@ -35,6 +40,8 @@ extension RoomService: TargetType {
     switch self {
     case let .updateRoomName(dto):
       return .body(dto)
+    case let .leaveRoom:
+      return .requestPlain
     }
   }
 }

@@ -19,6 +19,7 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
 
   enum Action {
     case fetch
+    case didTapLeaveRoom
     case initial
   }
 
@@ -27,6 +28,7 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
     case setCountTodoSection(OnlyMyTodoSection.Model)
     case setMyTodoSection(OnlyMyTodoSection.Model)
     case setMyTodoEmptySection(OnlyMyTodoSection.Model)
+    case setIsLeaveRoomSuccess(Bool?)
     case setInitial
     case setError(String?)
   }
@@ -40,6 +42,8 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
     var myTodoEmptySection = OnlyMyTodoSection.Model(
       model: .myTodoEmpty,
       items: [])
+    @Pulse
+    var isLeaveRoomSuccess: Bool?
     var error: String? = nil
   }
 
@@ -50,6 +54,9 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
     switch action {
     case .fetch:
       provider.profileLeaveRepository.fetchOnlyMyTodo()
+      return .empty()
+    case .didTapLeaveRoom:
+      provider.profileLeaveRepository.leaveRoom()
       return .empty()
     case .initial:
       return .just(.setInitial)
@@ -69,6 +76,8 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
       newState.myTodoSection = myTodo
     case let .setMyTodoEmptySection(empty):
       newState.myTodoEmptySection = empty
+    case let .setIsLeaveRoomSuccess(flag):
+      newState.isLeaveRoomSuccess = flag
     case .setInitial:
       newState = initialState
     case let .setError(error):
@@ -90,6 +99,8 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
         return .just(.setMyTodoSection(myTodo))
       case let .myTodosEmptySection(empty):
         return .just(.setMyTodoEmptySection(empty))
+      case let .setIsLeaveRoomSuccess(flag):
+        return .just(.setIsLeaveRoomSuccess(flag))
 
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }

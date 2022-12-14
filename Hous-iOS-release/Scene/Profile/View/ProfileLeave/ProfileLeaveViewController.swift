@@ -43,6 +43,7 @@ class ProfileLeaveViewController: UIViewController, ReactorKit.View {
 
   func bind(reactor: Reactor) {
     bindAction(reactor)
+    bindState(reactor)
     bindCollectionView(reactor)
   }
 }
@@ -51,6 +52,11 @@ extension ProfileLeaveViewController {
   private func bindAction(_ reactor: Reactor) {
     rx.viewWillAppear
       .map { _ in Reactor.Action.fetch }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    mainView.leaveButton.rx.tap
+      .map { Reactor.Action.didTapLeaveRoom }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -126,6 +132,27 @@ extension ProfileLeaveViewController {
     .bind(to: self.mainView.collectionView.rx.items(dataSource: dataSource))
     .disposed(by: disposeBag)
   }
+
+  private func bindState(_ reactor: Reactor) {
+
+    reactor.pulse(\.$isLeaveRoomSuccess)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: transferToEnterRoom)
+      .disposed(by: disposeBag)
+  }
+
+}
+
+extension ProfileLeaveViewController {
+
+  private func transferToEnterRoom(_ isSuccess: Bool) {
+    if isSuccess {
+      let enterRoomVC = EnterRoomViewController()
+      changeRootViewController(to: UINavigationController(rootViewController: enterRoomVC))
+    }
+  }
+
 }
 
 extension ProfileLeaveViewController: UICollectionViewDelegateFlowLayout {
