@@ -150,6 +150,9 @@ public enum Images {
   public static let icSettingRadioDisable = ImageAsset(name: "ic_setting_radio_disable")
   public static let icSettingRadioOff = ImageAsset(name: "ic_setting_radio_off")
   public static let icSettingRadioOn = ImageAsset(name: "ic_setting_radio_on")
+  public static let icNotiBadge = ImageAsset(name: "ic_noti_Badge")
+  public static let icNotiRules = ImageAsset(name: "ic_noti_rules")
+  public static let icNotiTodo = ImageAsset(name: "ic_noti_todo")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

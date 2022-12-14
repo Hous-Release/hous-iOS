@@ -23,14 +23,16 @@ final class ProfileAlarmSettingViewController: LoadingBaseViewController {
   
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
-    static let oneOptionCellHeight = CGSize(width: Size.screenWidth, height: 67)
-    static let twoOptionCellHeight = CGSize(width: Size.screenWidth, height: 169)
-    static let threeOptionCellHeight = CGSize(width: Size.screenWidth, height: 210)
+    static let oneOptionCellSize = CGSize(width: Size.screenWidth, height: 67)
+    static let twoOptionCellSize = CGSize(width: Size.screenWidth, height: 169)
+    static let threeOptionCellSize = CGSize(width: Size.screenWidth, height: 210)
   }
   
   //MARK: UI Components
   
-  private let navigationBarView = ProfileSettingNavigationBarView()
+  private let navigationBarView = ProfileNavigationBarView().then {
+    $0.titleName.text = "설정"
+  }
   
   private let alarmSettingCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -201,11 +203,11 @@ extension ProfileAlarmSettingViewController: UICollectionViewDelegateFlowLayout 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     switch indexPath.row {
     case 0:
-      return Size.oneOptionCellHeight
+      return Size.oneOptionCellSize
     case 1, 5:
-      return Size.twoOptionCellHeight
+      return Size.twoOptionCellSize
     case 2, 3, 4:
-      return Size.threeOptionCellHeight
+      return Size.threeOptionCellSize
     default:
       return CGSize(width: 0, height: 0)
     }

@@ -63,6 +63,9 @@
 		9B3BDBF9290E471A0054DF23 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */; };
 		9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B454E4D2900055F00F5A319 /* profileRedlottie.json */; };
 		9B4EE80629444463002F97C2 /* AlarmSettingFirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EE80529444463002F97C2 /* AlarmSettingFirstCollectionViewCell.swift */; };
+		9B4EE80829490709002F97C2 /* ProfileAlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EE80729490709002F97C2 /* ProfileAlarmViewModel.swift */; };
+		9B4EE80A29490747002F97C2 /* ProfileAlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EE80929490747002F97C2 /* ProfileAlarmModel.swift */; };
+		9B4EE80D29491348002F97C2 /* AlarmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EE80C29491348002F97C2 /* AlarmCollectionViewCell.swift */; };
 		9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */; };
 		9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */; };
 		9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */; };
@@ -88,7 +91,7 @@
 		9B98853E28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B98853D28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift */; };
 		9B9E999A293CE33D00537785 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E9999293CE33D00537785 /* ProfileSettingViewModel.swift */; };
 		9B9E999C293CE3C400537785 /* ProfileSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E999B293CE3C400537785 /* ProfileSettingModel.swift */; };
-		9B9E999F293CE67800537785 /* ProfileSettingNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E999E293CE67800537785 /* ProfileSettingNavigationView.swift */; };
+		9B9E999F293CE67800537785 /* ProfileNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E999E293CE67800537785 /* ProfileNavigationView.swift */; };
 		9B9E99A1293CFAEA00537785 /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E99A0293CFAEA00537785 /* ProfileSettingListView.swift */; };
 		9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */; };
 		9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */; };
@@ -321,6 +324,9 @@
 		9B3BDBF8290E471A0054DF23 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		9B454E4D2900055F00F5A319 /* profileRedlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileRedlottie.json; sourceTree = "<group>"; };
 		9B4EE80529444463002F97C2 /* AlarmSettingFirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingFirstCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B4EE80729490709002F97C2 /* ProfileAlarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmViewModel.swift; sourceTree = "<group>"; };
+		9B4EE80929490747002F97C2 /* ProfileAlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmModel.swift; sourceTree = "<group>"; };
+		9B4EE80C29491348002F97C2 /* AlarmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B6DD14A2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestLoadingViewController.swift; sourceTree = "<group>"; };
 		9B6DD14C292A4BBC0038BFD7 /* test_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_lottie.json; sourceTree = "<group>"; };
 		9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_profile.json; sourceTree = "<group>"; };
@@ -346,7 +352,7 @@
 		9B98853D28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B9E9999293CE33D00537785 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		9B9E999B293CE3C400537785 /* ProfileSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingModel.swift; sourceTree = "<group>"; };
-		9B9E999E293CE67800537785 /* ProfileSettingNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingNavigationView.swift; sourceTree = "<group>"; };
+		9B9E999E293CE67800537785 /* ProfileNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigationView.swift; sourceTree = "<group>"; };
 		9B9E99A0293CFAEA00537785 /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
 		9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmViewController.swift; sourceTree = "<group>"; };
@@ -792,6 +798,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		9B4EE80B29491336002F97C2 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				9B4EE80C29491348002F97C2 /* AlarmCollectionViewCell.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
 		9B6DD14929290D590038BFD7 /* ProfileTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +857,7 @@
 				9B2F46962923BBBF002D9BD2 /* ProfileTestViewModel.swift */,
 				9B6DD150292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift */,
 				9B9E9999293CE33D00537785 /* ProfileSettingViewModel.swift */,
+				9B4EE80729490709002F97C2 /* ProfileAlarmViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -851,6 +866,7 @@
 			isa = PBXGroup;
 			children = (
 				9B98853628E3E9700013CCB9 /* ProfileModel.swift */,
+				9B4EE80929490747002F97C2 /* ProfileAlarmModel.swift */,
 				9B9E999B293CE3C400537785 /* ProfileSettingModel.swift */,
 				9B83200A29193515001EBDFE /* ProfileEditModel.swift */,
 				9BE0C283290823860028F13A /* ProfileDetailModel.swift */,
@@ -862,6 +878,7 @@
 		9B98853C28E3FF6B0013CCB9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				9B4EE80B29491336002F97C2 /* Alarm */,
 				9B70663B2943640A003539D7 /* Setting */,
 				9B6DD14929290D590038BFD7 /* ProfileTest */,
 				9BE0C27729081B670028F13A /* ProfileDetail */,
@@ -873,7 +890,7 @@
 		9B9E999D293CE5CB00537785 /* ProfileSetting */ = {
 			isa = PBXGroup;
 			children = (
-				9B9E999E293CE67800537785 /* ProfileSettingNavigationView.swift */,
+				9B9E999E293CE67800537785 /* ProfileNavigationView.swift */,
 				9B9E99A0293CFAEA00537785 /* ProfileSettingListView.swift */,
 			);
 			path = ProfileSetting;
@@ -1607,6 +1624,7 @@
 				B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
+				9B4EE80A29490747002F97C2 /* ProfileAlarmModel.swift in Sources */,
 				B856701028C894D300B49984 /* UIStackView+Extension.swift in Sources */,
 				B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */,
 				B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */,
@@ -1715,7 +1733,7 @@
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
 				B8D066DC28FA95A600A99907 /* MemberTodoView.swift in Sources */,
-				9B9E999F293CE67800537785 /* ProfileSettingNavigationView.swift in Sources */,
+				9B9E999F293CE67800537785 /* ProfileNavigationView.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
 				7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
@@ -1769,6 +1787,7 @@
 				B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */,
 				B85C0B6429447E4A00784FCB /* ResignReasonType.swift in Sources */,
 				B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */,
+				9B4EE80D29491348002F97C2 /* AlarmCollectionViewCell.swift in Sources */,
 				9BE0C27A29081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift in Sources */,
 				9BE0C27C29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift in Sources */,
 				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
@@ -1797,6 +1816,7 @@
 				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */,
 				B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */,
+				9B4EE80829490709002F97C2 /* ProfileAlarmViewModel.swift in Sources */,
 				9BDBAD7C29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift in Sources */,
 				B85C0B6A29471D0700784FCB /* ProfileLeaveViewController.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,

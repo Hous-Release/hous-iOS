@@ -29,7 +29,9 @@ final class ProfileSettingViewController: UIViewController {
   
   //MARK: UI Components
   
-  private let navigationBarView = ProfileSettingNavigationBarView()
+  private let navigationBarView = ProfileNavigationBarView().then {
+    $0.titleName.text = "설정"
+  }
   
   private let settingListStackView = UIStackView().then {
     $0.alignment = .fill

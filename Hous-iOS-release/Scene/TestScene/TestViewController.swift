@@ -144,7 +144,7 @@ extension TestViewController {
     )
     let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 
-    presentPopUp(popUpType) { [weak self] actionType in
+    presentPopUp(popUpType) { actionType in
       switch actionType {
       case .action:
         break
@@ -169,7 +169,7 @@ extension TestViewController {
 
     let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
 
-    presentPopUp(popUpType) { [weak self] actionType in
+    presentPopUp(popUpType) { actionType in
       switch actionType {
       case .action:
         break
@@ -189,7 +189,7 @@ extension TestViewController {
     )
     let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)
 
-    presentPopUp(popUpType) { [weak self] actionType in
+    presentPopUp(popUpType) { actionType in
       switch actionType {
       case .action:
         break
@@ -204,7 +204,7 @@ extension TestViewController {
     let popModel = ImagePopUpModel(image: .test, actionText: "참여하기", text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd", titleText: "Rules 개수 초과")
     let popUpType = PopUpType.exceed(exceedModel: popModel)
 
-    presentPopUp(popUpType) { [weak self] actionType in
+    presentPopUp(popUpType) {  actionType in
       switch actionType {
       case .action:
         break
@@ -226,7 +226,7 @@ extension TestViewController {
 
     let popUpType = PopUpType.duplicate(popUpModel)
 
-    presentPopUp(popUpType) { [weak self] actionType in
+    presentPopUp(popUpType) { actionType in
       switch actionType {
       case .action:
         break
@@ -239,7 +239,7 @@ extension TestViewController {
   private func didTapButton6() {
     let bottomSheetType = BottomSheetType.defaultType
 
-    presentBottomSheet(bottomSheetType) { [weak self] actionType in
+    presentBottomSheet(bottomSheetType) { actionType in
 
       switch actionType {
       case .add:
@@ -263,7 +263,7 @@ extension TestViewController {
     let model = TodoModel(homies: homies, todoName: todoName, days: "")
     let bottomSheetType = BottomSheetType.todoType(model)
 
-    presentBottomSheet(bottomSheetType) { [weak self] actionType in
+    presentBottomSheet(bottomSheetType) { actionType in
 
       switch actionType {
       case .add:
