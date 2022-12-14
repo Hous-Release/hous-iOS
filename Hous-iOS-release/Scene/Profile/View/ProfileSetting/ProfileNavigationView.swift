@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class ProfileSettingNavigationBarView: UIView {
+final class ProfileNavigationBarView: UIView {
   
   private let disposeBag: DisposeBag = DisposeBag()
   
@@ -17,8 +17,7 @@ final class ProfileSettingNavigationBarView: UIView {
     $0.setImage(Images.icBack.image, for: .normal)
   }
   
-  private let titleName = UILabel().then {
-    $0.text = "설정"
+  let titleName = UILabel().then {
     $0.textColor = Colors.black.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 17)
     $0.textAlignment = .center
