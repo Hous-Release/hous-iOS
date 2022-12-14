@@ -15,12 +15,15 @@ public enum ProfileLeaveRepositoryEvent {
   case myTodosByDaySection(OnlyMyTodoSection.Model)
   case myTodosEmptySection(OnlyMyTodoSection.Model)
 
+  case setIsLeaveRoomSuccess(Bool?)
+
   case sendError(HouseErrorModel?)
 }
 
 public protocol ProfileLeaveRepository {
   var event: PublishSubject<ProfileLeaveRepositoryEvent> { get }
   func fetchOnlyMyTodo()
+  func leaveRoom()
 }
 
 public final class ProfileLeaveRepositoryImp: BaseService, ProfileLeaveRepository {
@@ -46,6 +49,29 @@ public final class ProfileLeaveRepositoryImp: BaseService, ProfileLeaveRepositor
     }
   }
 
+  public func leaveRoom() {
+    NetworkService.shared.roomRepository.leaveRoom { [weak self] res, err in
+
+      guard let self = self else { return }
+      guard
+        let isSuccess = res?.success,
+        isSuccess
+      else {
+        let errorModel = HouseErrorModel(
+          success: res?.success,
+          status: res?.status,
+          message: res?.message
+        )
+        self.event.onNext(.setIsLeaveRoomSuccess(false))
+        self.event.onNext(.sendError(errorModel))
+        return
+      }
+
+      self.event.onNext(.setIsLeaveRoomSuccess(true))
+
+    }
+  }
+
 }
 
 extension ProfileLeaveRepositoryImp {
@@ -66,7 +92,7 @@ extension ProfileLeaveRepositoryImp {
         OnlyMyTodoSection.Model(
           model: .myTodoEmpty,
           items: [OnlyMyTodoSection.Item.myTodoEmpty])))
-      print("아니 왜 슈발 안되는건데 안되는건데 안되는건데 안되는건데 안되는건데 안되는건데")
+
     } else {
       let myTodoItems = data.myTodos.map { OnlyMyTodoSection.Item.myTodo(todos: $0) }
       self.event.onNext(.myTodosByDaySection(
