@@ -47,8 +47,8 @@ class MainHomeProfileCollectionViewCell: UICollectionViewCell {
     nameLabelBackgroundView.snp.makeConstraints { make in
       make.leading.equalToSuperview()
       make.top.equalToSuperview()
-      make.trailing.greaterThanOrEqualToSuperview().inset(94)
-      make.bottom.greaterThanOrEqualToSuperview().inset(63)
+      make.trailing.greaterThanOrEqualToSuperview().inset(100)
+      make.bottom.greaterThanOrEqualToSuperview().inset(72)
     }
     
     homieNameLabel.snp.makeConstraints { make in
