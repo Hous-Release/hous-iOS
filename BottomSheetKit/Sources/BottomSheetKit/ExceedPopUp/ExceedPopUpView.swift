@@ -39,7 +39,7 @@ internal final class ExceedPopUpView: UIView {
 
   private let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = .red
+    imageView.backgroundColor = .white
     return imageView
   }()
 

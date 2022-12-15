@@ -7,6 +7,7 @@
 
 
 import Alamofire
+import BottomSheetKit
 import Lottie
 import ReactorKit
 import RxCocoa
@@ -150,11 +151,44 @@ extension SplashViewController {
   func bindShwoAlertByServerErrorFlagState(_ reactor: Reactor) {
     reactor.state.map(\.shwoAlertByServerErrorMessage)
       .compactMap { $0 }
-      .distinctUntilChanged()
       .asDriver(onErrorJustReturn: nil)
-      .drive(onNext: { _ in
-        print("Error Alert 구현하기")
-      })
+      .drive(onNext: self.showError)
       .disposed(by: disposeBag)
+  }
+}
+
+  // MARK: - Method
+extension SplashViewController {
+  func showError(_ model: HouseErrorModel?) {
+    guard
+      let model = model,
+      let status = model.status,
+      let message = model.message
+    else { return }
+
+    if status == 426 {
+      let imagePopUpModel = ImagePopUpModel(
+        image: .needUpdate,
+        actionText: "좋아요!",
+        text: "새로운 Hous-가 나왔어요!\nHous-와 함께 즐거운\n공동생활을 계속해 봐요!",
+        titleText: "업데이트 해주세요!"
+      )
+
+      let type = PopUpType.needUpdate(imagePopUpModel)
+      presentPopUp(type) { action in
+        switch action {
+        case .action:
+          if let url = URL(string: "itms-apps://itunes.apple.com/app/id1659976144") {
+            UIApplication.shared.open(url)
+          }
+        case .cancel:
+          return
+        }
+      }
+    }
+
+    else {
+      Toast.show(message: message, controller: self)
+    }
   }
 }
