@@ -23,13 +23,13 @@ final class OurTodoByDayCollectionViewCell: UICollectionViewCell {
 
   private var ourTodoLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.textColor = Colors.black.color
+    $0.textColor = Colors.g5.color
     $0.text = "블라블라블라"
   }
 
   private var assigneeLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    $0.textColor = Colors.black.color
+    $0.textColor = Colors.g3.color
     $0.text = "최인영, 최소현"
     $0.textAlignment = .right
   }
