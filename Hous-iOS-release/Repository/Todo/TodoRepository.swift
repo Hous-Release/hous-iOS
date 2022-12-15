@@ -29,6 +29,8 @@ public enum TodoRepositoryEvent {
   case todoSummary(TodoModel?)
   case isDeleteSuccess(Bool?)
 
+  case isLoadingHidden(Bool?)
+
   case sendError(HouseErrorModel?)
 }
 
@@ -52,6 +54,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
   public var event = PublishSubject<TodoRepositoryEvent>()
 
   public func fetchTodo() {
+
     NetworkService.shared.mainTodoRepository.getTodosData { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
@@ -92,6 +95,8 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           TodoMainSection.Model(model: .ourTodo(num: data.ourTodosCnt), items: ourTodoItems)
         ))
       }
+
+      self.event.onNext(.isLoadingHidden(true))
     }
   }
 
@@ -261,6 +266,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       }
 
       self.event.onNext(.isDeleteSuccess(true))
+      self.event.onNext(.isLoadingHidden(true))
     }
   }
 }

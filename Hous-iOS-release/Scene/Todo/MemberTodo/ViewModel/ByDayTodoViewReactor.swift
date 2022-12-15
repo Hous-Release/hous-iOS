@@ -28,6 +28,9 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
+
+    case setIsLoadingHidden(Bool?)
+
     case setSelectedDayIndexPathRow(Int?)
     case setCountTodoSection(MyOurTodoSection.Model)
     case setMyTodosByDaySection(MyOurTodoSection.Model)
@@ -45,6 +48,10 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   }
 
   struct State {
+
+    @Pulse
+    var isLoadingHidden: Bool?
+
     @Pulse
     var selectedDayIndexPathRow: Int?
     var countTodoSection = MyOurTodoSection.Model(model: .countTodo, items: [])
@@ -75,7 +82,7 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       
       let currentRow = currentState.selectedDayIndexPathRow ?? 0
       provider.byDayRepository.fetchTodo(currentRow)
-      return .empty()
+      return .just(.setIsLoadingHidden(false))
 
     case let .didTapDaysOfWeekCell(row):
 
@@ -102,6 +109,9 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
+
+    case let .setIsLoadingHidden(flag):
+      newState.isLoadingHidden = flag
 
     case let .setSelectedDayIndexPathRow(row):
       newState.selectedDayIndexPathRow = row
@@ -135,6 +145,10 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
     let byDayServiceMutation = provider.byDayRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
+
+      case let .isLoadingHidden(flag):
+        return .just(.setIsLoadingHidden(flag))
+
       case let .countTodoSection(cnt):
         return .just(.setCountTodoSection(cnt))
       case let .myTodosByDaySection(myTodo):
@@ -160,6 +174,9 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       guard let self = self else { return .empty() }
 
       switch event {
+
+      case let .isLoadingHidden(flag):
+        return .just(.setIsLoadingHidden(flag))
 
       case let .todoSummary(info):
         return .just(.setSelectedTodoSummary(info))

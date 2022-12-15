@@ -28,6 +28,8 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
+    case setIsLoadingHidden(Bool?)
+
     case setSelectedMemIndexPathRow(Int?)
     case setMembers(MemberSection.Model?)
     case setSelectedMember(MemberTodoModel?)
@@ -42,6 +44,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
   }
 
   struct State {
+
+    @Pulse
+    var isLoadingHidden: Bool?
+
     @Pulse
     var selectedMemIndexPathRow: Int?
     var membersSection = MemberSection.Model(
@@ -69,7 +75,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
 
       let currentRow = currentState.selectedMemIndexPathRow ?? 0
       provider.memberRepository.fetchMember(currentRow)
-      return .empty()
+      return .just(.setIsLoadingHidden(false))
 
     case let .didTapMemberCell(row):
       
@@ -84,7 +90,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     case let .didTapDelete(id):
 
       provider.todoRepository.deleteTodo(id)
-      return .just(.setInitial)
+      return .concat([
+        .just(.setInitial),
+        .just(.setIsLoadingHidden(false))
+      ])
 
     case .initial:
       return .just(.setInitial)
@@ -96,6 +105,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     var newState = state
 
     switch mutation {
+
+    case let .setIsLoadingHidden(flag):
+      newState.isLoadingHidden = flag
+
     case let .setSelectedMemIndexPathRow(row):
       newState.selectedMemIndexPathRow = row
     case let .setMembers(data):
@@ -125,6 +138,10 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
     let memServiceMutation = provider.memberRepository.event.flatMap { event -> Observable<Mutation> in
 
       switch event {
+
+      case let .isLoadingHidden(flag):
+        return .just(.setIsLoadingHidden(flag))
+
       case let .members(data):
         return .just(.setMembers(data))
       case let .selectedMember(data):
@@ -140,6 +157,9 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       guard let self = self else { return .empty() }
 
       switch event {
+
+      case let .isLoadingHidden(flag):
+        return .just(.setIsLoadingHidden(flag))
 
       case let .todoSummary(info):
         return .just(.setSelectedTodoSummary(info))

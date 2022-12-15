@@ -13,7 +13,7 @@ import RxCocoa
 import Network
 import BottomSheetKit
 
-class ByDayTodoViewController: UIViewController, ReactorKit.View {
+class ByDayTodoViewController: LoadingBaseViewController, ReactorKit.View {
   typealias Reactor = ByDayTodoViewReactor
 
   var mainView = ByDayTodoView()
@@ -27,7 +27,7 @@ class ByDayTodoViewController: UIViewController, ReactorKit.View {
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
     self.reactor = reactor
-    setTabBarIsHidden(isHidden: true)
+    self.configLoadingLayout()
   }
 
   required init?(coder: NSCoder) {
@@ -78,6 +78,12 @@ extension ByDayTodoViewController {
 
   private func bindState(_ reactor: Reactor) {
 
+    reactor.pulse(\.$isLoadingHidden)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: operateLoadingIsHidden)
+      .disposed(by: disposeBag)
+
     reactor.pulse(\.$selectedDayIndexPathRow)
       .compactMap { $0 }
       .subscribe(onNext: { [weak self] row in
@@ -93,6 +99,12 @@ extension ByDayTodoViewController {
       .asDriver(onErrorJustReturn: nil)
       .drive(onNext: self.tappedTodo)
       .disposed(by: disposeBag)
+  }
+}
+
+extension ByDayTodoViewController {
+  private func operateLoadingIsHidden(_ isHidden: Bool) {
+    isHidden ? self.hideLoading() : self.showLoading()
   }
 }
 

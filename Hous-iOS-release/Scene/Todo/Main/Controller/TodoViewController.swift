@@ -15,7 +15,7 @@ import RxDataSources
 import ReactorKit
 
 //MARK: - Controller
-final class TodoViewController: UIViewController, View {
+final class TodoViewController: LoadingBaseViewController, View {
   typealias Reactor = TodoViewReactor
 
   private enum Size {
@@ -43,12 +43,13 @@ final class TodoViewController: UIViewController, View {
     let serviceProvider = ServiceProvider()
     reactor = TodoViewReactor(provider: serviceProvider)
     navigationController?.navigationBar.isHidden = true
+    configLoadingLayout()
   }
 
   func bind(reactor: Reactor) {
     bindAction(reactor)
-    bindState(reactor)
     bindCollectionView(reactor)
+    bindState(reactor)
   }
 }
 
@@ -57,15 +58,22 @@ extension TodoViewController {
     rx.viewWillAppear
       .map { _ in Reactor.Action.fetch }
       .bind(to: reactor.action)
-      .disposed(by: disposeBag)
+        .disposed(by: disposeBag)
 
-    mainView.viewAllButton.rx.tap
-      .map { _ in Reactor.Action.didTapViewAll }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
+        mainView.viewAllButton.rx.tap
+        .map { _ in Reactor.Action.didTapViewAll }
+        .bind(to: reactor.action)
+        .disposed(by: disposeBag)
   }
 
   private func bindState(_ reactor: Reactor) {
+
+    reactor.pulse(\.$isLoadingHidden)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: operateLoadingIsHidden)
+      .disposed(by: disposeBag)
+
     reactor.state.map { $0.date }
       .bind(to: mainView.dateLabel.rx.text)
       .disposed(by: disposeBag)
@@ -100,6 +108,12 @@ extension TodoViewController {
         }
       })
       .disposed(by: disposeBag)
+  }
+}
+
+extension TodoViewController {
+  private func operateLoadingIsHidden(_ isHidden: Bool) {
+    isHidden ? self.hideLoading() : self.showLoading()
   }
 }
 

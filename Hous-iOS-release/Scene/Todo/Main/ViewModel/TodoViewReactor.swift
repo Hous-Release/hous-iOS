@@ -17,6 +17,8 @@ final class TodoViewReactor: Reactor {
   }
 
   enum Mutation {
+    case setIsLoadingHidden(Bool?)
+
     case setDate(String)
     case setDayOfWeek(String)
     case setProgressType(ProgressType)
@@ -31,6 +33,10 @@ final class TodoViewReactor: Reactor {
   }
 
   struct State {
+
+    @Pulse
+    var isLoadingHidden: Bool?
+
     var date: String = ""
     var dayOfWeek: String = ""
     @Pulse var progressType: ProgressType?
@@ -63,8 +69,9 @@ final class TodoViewReactor: Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      provider.todoRepository.fetchTodo()
-      return .empty()
+      self.provider.todoRepository.fetchTodo()
+      return .just(.setIsLoadingHidden(false))
+
     case .didTapViewAll:
       return .just(.setViewAllFlag(true))
     }
@@ -75,6 +82,9 @@ final class TodoViewReactor: Reactor {
     var newState = state
 
     switch mutation {
+
+    case let .setIsLoadingHidden(flag):
+      newState.isLoadingHidden = flag
 
     case let .setDate(date):
       newState.date = date
@@ -126,6 +136,9 @@ final class TodoViewReactor: Reactor {
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
         return .just(.setError(errorModel.message))
+
+      case let .isLoadingHidden(flag):
+        return .just(.setIsLoadingHidden(flag))
 
       default:
         return .empty()
