@@ -16,34 +16,9 @@ public protocol TargetType: URLRequestConvertible {
   var contentType: ContentType { get }
 }
 
-enum Configuration {
-  enum Error: Swift.Error {
-    case missingKey, invalidValue
-  }
-
-  static func value<T>(for key: String) throws -> T where T: LosslessStringConvertible {
-    guard let object = Bundle.main.object(forInfoDictionaryKey: key) else {
-      throw Error.missingKey
-    }
-
-    switch object {
-    case let value as T:
-      return value
-    case let string as String:
-      guard let value = T(string) else { fallthrough }
-      return value
-    default:
-      throw Error.invalidValue
-    }
-  }
-}
-
 public enum API {
-
   static var apiBaseURL: String {
-    // TODO: -
-//    return try! "https://" + Configuration.value(for: "API_BASE_URL")
-      return "http://43.200.122.252/v1"
+    return try! "http://" + Configuration.value(for: "API_BASE_URL")
   }
 }
 
@@ -74,7 +49,10 @@ extension TargetType {
     var urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
     urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
     urlRequest.addValue("iOS", forHTTPHeaderField: HTTPHeaderField.housOSType.rawValue)
-    urlRequest.addValue("1.0.0", forHTTPHeaderField: HTTPHeaderField.housVersion.rawValue)
+    guard let version = Bundle.main.object(forInfoDictionaryKey: "MARKETING_VERSION") else {
+      fatalError("There is Not Version")
+    }
+    urlRequest.addValue(version as! String, forHTTPHeaderField: HTTPHeaderField.housVersion.rawValue)
 
     switch parameters {
 

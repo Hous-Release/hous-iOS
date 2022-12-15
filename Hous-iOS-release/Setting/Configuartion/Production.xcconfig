@@ -13,3 +13,7 @@ APP_BUNDLE_ID = com.hous.Hous-iOS-release
 APP_NAME = Hous
 OTHER_LDFLAGS = -ObjC
 CFBundleDisplayName = Hous
+API_BASE_URL = 43.200.122.252/v1
+
+// Version
+MARKETING_VERSION = 1.0.0
