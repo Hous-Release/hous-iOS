@@ -193,7 +193,6 @@ class AddRuleViewController: LoadingBaseViewController {
     output.viewDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.g5.color.cgColor)
         self.ruleTextField.endEditing(true)
       })
       .disposed(by: disposeBag)
@@ -282,10 +281,6 @@ extension AddRuleViewController {
             let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
             let newString = String(text[text.startIndex..<maxIndex])
             ruleTextField.text = newString
-          } else if text.count == 0 {
-            ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.g5.color.cgColor)
-          } else {
-            ruleTextField.changeSelectedUnderlineLayerBackgrounColor(color: Colors.blue.color.cgColor)
           }
         }
       default:
