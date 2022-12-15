@@ -20,6 +20,8 @@ public enum ByDayRepositoryEvent {
 
   case todoSummary(TodoModel?)
 
+  case isLoadingHidden(Bool?)
+
   case sendError(HouseErrorModel?)
   case initial
 }
@@ -51,6 +53,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
 
       self.todos = data
       self.onNextEvents(data: data, row: row)
+      self.event.onNext(.isLoadingHidden(true))
     }
   }
 

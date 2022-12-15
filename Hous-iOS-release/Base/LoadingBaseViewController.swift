@@ -21,12 +21,14 @@ class LoadingBaseViewController: UIViewController {
   }
   
   func showLoading() {
+    print("show ----------------------------------------------------------------------")
     DispatchQueue.main.async {
       self.loadingBackgroundView.isHidden = false
     }
   }
   
   func hideLoading() {
+    print("hide ----------------------------------------------------------------------")
     DispatchQueue.main.async {
       self.loadingBackgroundView.isHidden = true
     }

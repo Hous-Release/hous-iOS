@@ -13,7 +13,7 @@ import RxCocoa
 import Network
 import BottomSheetKit
 
-final class MemberTodoViewController: UIViewController, ReactorKit.View {
+final class MemberTodoViewController: LoadingBaseViewController, ReactorKit.View {
   typealias Reactor = MemberTodoViewReactor
 
   var mainView = MemberTodoView()
@@ -29,6 +29,7 @@ final class MemberTodoViewController: UIViewController, ReactorKit.View {
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
     self.reactor = reactor
+    self.configLoadingLayout()
     makeDataSource()
   }
 
@@ -92,6 +93,12 @@ extension MemberTodoViewController {
       }
     }
 
+    reactor.pulse(\.$isLoadingHidden)
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: operateLoadingIsHidden)
+      .disposed(by: disposeBag)
+
     reactor.pulse(\.$selectedMemIndexPathRow)
       .compactMap { $0 }
       .subscribe(onNext: { [weak self] row in
@@ -118,6 +125,12 @@ extension MemberTodoViewController {
       .asDriver(onErrorJustReturn: nil)
       .drive(onNext: self.tappedTodo)
       .disposed(by: disposeBag)
+  }
+}
+
+extension MemberTodoViewController {
+  private func operateLoadingIsHidden(_ isHidden: Bool) {
+    isHidden ? self.hideLoading() : self.showLoading()
   }
 }
 

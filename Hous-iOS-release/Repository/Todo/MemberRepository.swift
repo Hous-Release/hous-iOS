@@ -14,6 +14,8 @@ public enum MemberRepositoryEvent {
   case members(MemberSection.Model?)
   case selectedMember(MemberTodoModel?)
 
+  case isLoadingHidden(Bool?)
+
   case sendError(HouseErrorModel?)
 }
 
@@ -52,6 +54,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
       self.todos = todos
       let selectedMemTodo = todos[row]
       self.event.onNext(.selectedMember(selectedMemTodo))
+      self.event.onNext(.isLoadingHidden(true))
     }
   }
 
