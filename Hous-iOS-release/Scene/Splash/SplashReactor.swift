@@ -29,14 +29,14 @@ final class SplashReactor: Reactor {
     case setIsJoiningRoom(Bool)
     case setIsOnboardingFlow(Bool)
     case setIsLoginFlow(Bool)
-    case setShwoAlertByServerError(String?)
+    case setShwoAlertByServerError(HouseErrorModel?)
   }
 
   struct State {
     var isJoiningRoom: Bool? = nil
     var isOnboardingFlow: Bool? = nil
     var isLoginFlow: Bool? = nil
-    var shwoAlertByServerErrorMessage: String? = nil
+    var shwoAlertByServerErrorMessage: HouseErrorModel? = nil
   }
 
   func mutate(action: Action) -> Observable<Mutation> {
@@ -113,7 +113,7 @@ extension SplashReactor {
         }
 
         else {
-          return .just(.setShwoAlertByServerError(errorModel.message))
+          return .just(.setShwoAlertByServerError(errorModel))
         }
 
       }

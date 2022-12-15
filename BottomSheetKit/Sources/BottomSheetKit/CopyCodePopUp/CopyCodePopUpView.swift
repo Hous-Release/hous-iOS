@@ -38,7 +38,7 @@ internal final class CopyCodePopUpView: UIView {
 
   private let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = .red
+    imageView.backgroundColor = .white
     return imageView
   }()
 
