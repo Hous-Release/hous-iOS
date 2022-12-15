@@ -82,7 +82,16 @@ final class HousTextField: UITextField {
     else {
       return
     }
-    maxCountLabel.text = "\(self.text?.count ?? 0)/\(maxCount)"
+    
+    if let text = self.text {
+      if text.count > 0 {
+        self.layer.addSublayer(selectedUnderlineLayer)
+        maxCountLabel.text = "\(text.count)/\(maxCount)"
+      }
+    } else {
+      maxCountLabel.text = "0/\(maxCount)"
+    }
+    
     exceedLabel.text = exceedString
   }
 
