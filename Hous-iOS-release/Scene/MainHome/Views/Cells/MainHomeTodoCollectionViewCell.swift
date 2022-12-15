@@ -93,7 +93,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   private lazy var todoLabelStackView = UIStackView(arrangedSubviews: [todoView]).then {
     $0.alignment = .leading
     $0.axis = .vertical
-    $0.spacing = 10
+    $0.spacing = 6
   }
   
   //MARK: - Life Cycles
@@ -209,7 +209,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     }
     
     todoLabelStackView.snp.makeConstraints { make in
-      make.top.equalTo(todoTitleLabel.snp.bottom).offset(8)
+      make.top.equalTo(todoTitleLabel.snp.bottom).offset(12)
       make.leading.equalTo(todoTitleLabel)
     }
   }
