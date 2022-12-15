@@ -103,7 +103,7 @@ extension EnterRoomCodeViewController {
     guard let host = reactor?.currentState.roomHostNickname else { return }
 
     let enterRoomModel = ImagePopUpModel(
-      image: .exceed,
+      image: .welcome,
       actionText: "참여하기",
       text: host)
     let popUpType = PopUpType.enterRoom(enterRoomModel: enterRoomModel)

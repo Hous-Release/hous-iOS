@@ -52,7 +52,6 @@ extension EnterInfoViewController {
     mainView.nicknameTextfield.rx.text
       .orEmpty
       .distinctUntilChanged()
-      .debug("bindAction")
       .map { Reactor.Action.enterNickname($0) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -66,6 +65,7 @@ extension EnterInfoViewController {
     mainView.checkBirthDayButton.rx.tap
       .map { Reactor.Action.checkBirthdayPublic(
         self.mainView.checkBirthDayButton.isSelected) }
+      .debug("\(self.mainView.checkBirthDayButton.isSelected)")
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 

@@ -45,7 +45,7 @@ public enum PopUpImage {
       // TODO: 해당하는 이미지 넣기
       uiImageView.image = Images.illLimit.image
     case .welcome:
-      uiImageView.image = Images.illDone.image
+      uiImageView.image = Images.illGo.image
 
     case .needUpdate:
       uiImageView.image = Images.invalidName.image
