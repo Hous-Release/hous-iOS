@@ -75,4 +75,23 @@ platform :ios do
     	skip_waiting_for_build_processing: true
     )
   end
+
+  desc "Push a new release build to TestFlight"
+  lane :production do
+    increment_build_number({
+      xcodeproj: "./Hous-iOS-release.xcodeproj",
+      build_number: latest_testflight_build_number(app_identifier: "com.hous.Hous-iOS-release") + 1
+    })
+    build_app(
+        scheme: "Hous-iOS-release",
+        output_directory: "./ipa"
+    )
+    upload_to_app_store(
+        submit_for_review: false,
+        automatic_release: false,
+        force: true,
+        skip_screenshots: true,
+        skip_metadata: true
+    )
+  end
 end

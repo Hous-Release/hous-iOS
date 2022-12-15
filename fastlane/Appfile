@@ -36,7 +36,7 @@ for_platform :ios do
       app_identifier 'com.hous.Hous-iOS-release'
     end
 
-    for_lane :prod do
+    for_lane :production do
         app_identifier 'com.hous.Hous-iOS-release'
     end
 
