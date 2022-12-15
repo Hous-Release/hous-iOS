@@ -35,8 +35,8 @@ final class PagingCell: UICollectionViewCell {
 
   var secondTitle = UILabel().then {
     $0.text = "Welcome to\nYour Hous-\n\n우리의 Hous-를 위한 How is-\n반가워요, 호미들!"
-    $0.dynamicFontSpoqaHanSansNeo(fontSize: 16, weight: .medium)
-    $0.textColor = Colors.black.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+    $0.textColor = Colors.g7.color
     $0.numberOfLines = 6
     $0.lineBreakMode = .byWordWrapping
     $0.lineBreakStrategy = .hangulWordPriority

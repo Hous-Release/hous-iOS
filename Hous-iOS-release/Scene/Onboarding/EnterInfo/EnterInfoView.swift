@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import Then
 
 class EnterInfoView: UIView {
 
@@ -55,32 +56,30 @@ class EnterInfoView: UIView {
     return UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 216))
   }()
 
-  var checkBirthDayButton: UIButton = {
-    var button = UIButton()
-    button.setImage(Images.icCheckNo.image, for: .normal)
-    button.setImage(Images.icCheckYes.image, for: .selected)
-    button.isSelected = false
-    return button
-  }()
+  var checkBirthDayButton = UIButton(configuration: .plain()).then {
 
-  private let guideLabel: UILabel = {
-    var label = UILabel()
-    label.textColor = Colors.g5.color
-    label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    label.text = "생년월일 호미들에게 공개"
-    return label
-  }()
+  var attrString = AttributedString("생일 정보 비공개")
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    attrString.foregroundColor = Colors.g5.color
+    $0.configuration?.attributedTitle = attrString
+    $0.configuration?.baseBackgroundColor = Colors.white.color
 
-  var nextButton: UIButton = {
-    var button = UIButton()
-    button.setTitle("다음으로", for: .normal)
-    button.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
-    button.titleLabel?.textColor = Colors.white.color
-    button.setBackgroundColor(Colors.g4.color, for: .disabled)
-    button.setBackgroundColor(Colors.blue.color, for: .normal)
-    button.isEnabled = false
-    return button
-  }()
+  $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = Images.icCheckNo.image
+      case .selected:
+        btn.configuration?.image = Images.icCheckYes.image
+      default:
+        break
+      }
+    }
+    $0.configuration?.imagePadding = 8
+  }
+
+  var nextButton = NextButton().then {
+    $0.isEnabled = false
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -111,7 +110,7 @@ class EnterInfoView: UIView {
     addSubViews([navigationBar, contentView, nextButton])
     contentView.addSubViews([nicknameLabel, nicknameTextfield,
                              birthdayLabel, birthdayTextfield,
-                            checkBirthDayButton, guideLabel])
+                            checkBirthDayButton])
 
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(safeAreaLayoutGuide)
@@ -147,14 +146,8 @@ class EnterInfoView: UIView {
     }
 
     checkBirthDayButton.snp.makeConstraints { make in
-      make.top.equalTo(birthdayTextfield.snp.bottom)
-      make.size.equalTo(44)
+      make.top.equalTo(birthdayTextfield.snp.bottom).offset(4)
       make.leading.equalToSuperview().offset(12)
-    }
-
-    guideLabel.snp.makeConstraints { make in
-      make.centerY.equalTo(checkBirthDayButton.snp.centerY)
-      make.leading.equalTo(checkBirthDayButton.snp.trailing)
       make.bottom.equalToSuperview()
     }
 

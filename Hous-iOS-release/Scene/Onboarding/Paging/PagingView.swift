@@ -13,8 +13,11 @@ import Then
 final class PagingView: UIView {
 
   var navigationBar = NavBarWithBackButtonView(title: "", rightButtonText: "건너뛰기").then {
-    $0.rightButton.setTitleColor(Colors.g4.color, for: .normal)
-    $0.rightButton.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+
+    var  attrString = AttributedString("건너뛰기")
+    attrString.foregroundColor = Colors.g4.color
+    $0.rightButton.configuration?.attributedTitle = attrString
+
     $0.rightButton.isHidden = false
     $0.backButton.isHidden = true
   }
@@ -39,12 +42,7 @@ final class PagingView: UIView {
     $0.pageIndicatorTintColor = Colors.g3.color
     $0.currentPageIndicatorTintColor = Colors.blue.color
   }
-  var nextButton = UIButton().then {
-    $0.setTitle("다음으로", for: .normal)
-    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
-    $0.titleLabel?.textColor = Colors.white.color
-    $0.setBackgroundColor(Colors.g4.color, for: .disabled)
-    $0.setBackgroundColor(Colors.blue.color, for: .normal)
+  var nextButton = NextButton().then {
     $0.isHidden = true
   }
 
