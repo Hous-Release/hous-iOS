@@ -85,6 +85,20 @@ public extension UIViewController {
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
+
+    case .needUpdate(let popupModel):
+
+      let view = NeedUpdatePopUpView(popupModel)
+      let popUpAction = NeedUpdatePopUpAction(view: view)
+      let vc = NeedUpdatePopUpViewController(popUpAction: popUpAction)
+
+      popUpAction.completeAction = { actionType in
+        completion?(actionType)
+      }
+
+      vc.modalTransitionStyle = .crossDissolve
+      vc.modalPresentationStyle = .overFullScreen
+      present(vc, animated: true)
     }
   }
   func presentBottomSheet(

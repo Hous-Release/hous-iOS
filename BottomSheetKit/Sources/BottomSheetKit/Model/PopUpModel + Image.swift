@@ -33,18 +33,23 @@ public enum PopUpImage {
   case test
   case exceed
   case welcome
+  case needUpdate
   case url(String)
 
   func setImage(to uiImageView: UIImageView) {
     switch self {
-      // TODO: - 
+      // TODO: -
     case .test:
       uiImageView.image = Images.badgeLock.image
     case .exceed:
       // TODO: 해당하는 이미지 넣기
       uiImageView.image = Images.illLimit.image
     case .welcome:
-        uiImageView.image = Images.illDone.image
+      uiImageView.image = Images.illDone.image
+
+    case .needUpdate:
+      uiImageView.image = Images.invalidName.image
+
     case .url(let string):
       // TODO: - 킹피셔
       break
