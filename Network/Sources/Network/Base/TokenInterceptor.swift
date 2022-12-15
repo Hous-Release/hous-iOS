@@ -15,8 +15,6 @@ internal final class TokenInterceptor: RequestInterceptor, RequestRetrier {
 
     let value = Keychain.shared.getAccessToken() ?? ""
     urlRequest.setValue("Bearer \(value)", forHTTPHeaderField: "Authorization")
-
-
     completion(.success(urlRequest))
   }
 
