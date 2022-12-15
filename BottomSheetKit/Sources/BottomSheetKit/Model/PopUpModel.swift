@@ -22,4 +22,5 @@ public enum PopUpType {
   case enterRoom(enterRoomModel: ImagePopUpModel)
   case exceed(exceedModel: ImagePopUpModel)
   case duplicate(_ model: DefaultPopUpModel)
+  case needUpdate(_ model: ImagePopUpModel)
 }
