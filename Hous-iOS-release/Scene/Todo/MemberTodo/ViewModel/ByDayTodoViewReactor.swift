@@ -97,7 +97,10 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
     case let .didTapDelete(id):
 
       provider.todoRepository.deleteTodo(id)
-      return .just(.setInitial)
+      return .concat([
+        .just(.setInitial),
+        .just(.setIsLoadingHidden(false))
+      ])
 
     case .initial:
       return .just(.setInitial)
