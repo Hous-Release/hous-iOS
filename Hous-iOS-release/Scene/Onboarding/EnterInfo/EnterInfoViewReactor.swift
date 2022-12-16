@@ -47,7 +47,7 @@ final class EnterInfoViewReactor: Reactor {
     //var oAuthToken: String?
     var nickname: String?
     var birthday: String?
-    var isBirthdayPublic: Bool?
+    var isBirthdayPublic: Bool? = true
     var isNextButtonEnable: Bool = false
     var nextFlag: Bool?
 
@@ -156,7 +156,6 @@ extension EnterInfoViewReactor {
   private func limitMaxLength(of nickname: String) -> Observable<Mutation> {
 
     let limitedText = nickname.prefix(3)
-
     return .just(.setNickname(String(limitedText)))
   }
 
