@@ -21,7 +21,6 @@ public enum ProfileRepositoryEvent {
   case putRepresentingBadge
   case putProfileTestSave(PersonalityColor)
   case patchAlarmSetting
-  case deleteProfile
   case sendError(HouseErrorModel?)
 }
 
@@ -41,7 +40,7 @@ public protocol ProfileRepository {
 public final class ProfileRepositoryImp: ProfileRepository {
   
   public static var event = PublishSubject<ProfileRepositoryEvent>()
-  
+
   public func getAlarmSettingInfo() {
     
     //MARK: Get Data

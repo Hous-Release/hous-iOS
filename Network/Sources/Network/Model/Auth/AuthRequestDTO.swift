@@ -6,6 +6,7 @@
 //
 
 public extension AuthDTO.Request {
+    
   struct LoginRequestDTO: Encodable {
 
     public let fcmToken: String

@@ -11,6 +11,7 @@ import RxCocoa
 import Then
 import MessageUI
 import SafariServices
+import BottomSheetKit
 
 final class ProfileSettingViewController: UIViewController {
   
@@ -19,6 +20,7 @@ final class ProfileSettingViewController: UIViewController {
   let disposeBag = DisposeBag()
   let viewModel = ProfileSettingViewModel()
   let actionDetected = PublishSubject<ProfileSettingActionControl>()
+  let provider = ServiceProvider()
   var isInRoom = true
   
   //MARK: UI Templetes
@@ -196,7 +198,7 @@ final class ProfileSettingViewController: UIViewController {
     case .didTabFeedBack:
       presentMailSheet()
     case .didTabLogout:
-      break
+      doLogout()
     case .didTabWithdraw:
       presentResignViewController()
     case .didTabLeavingRoom:
@@ -258,6 +260,33 @@ final class ProfileSettingViewController: UIViewController {
 }
 
 extension ProfileSettingViewController {
+  
+  private func doLogout() {
+    let logoutButtonPopUpModel = DefaultPopUpModel(
+      cancelText: "취소하기",
+      actionText: "로그아웃",
+      title: "정말 로그아웃 하시겠어요?",
+      subtitle: "재로그인 시 현재 방을 계속 사용하실 수 있어요."
+    )
+    
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: logoutButtonPopUpModel)
+    
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        let serviceProvider = ServiceProvider()
+        let reactor = SignInReactor(provider: serviceProvider)
+        let signInViewController = SignInViewController(reactor)
+        self?.provider.authRepository.logout()
+        self?.view.window?.rootViewController = signInViewController
+        self?.view.window?.makeKeyAndVisible()
+        self?.view.window?.rootViewController?.dismiss(animated: true)
+      case .cancel:
+        break
+      }
+    }
+  }
+  
   func presentAgreementURL() {
     let agreementURL = NSURL(string: "https://sugared-lemming-812.notion.site/6d9d478df40b4a20811e0020c15af3bc")
     let agreementSafariView: SFSafariViewController = SFSafariViewController(url: agreementURL! as URL)

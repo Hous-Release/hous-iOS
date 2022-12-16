@@ -129,6 +129,9 @@ final class EnterInfoViewReactor: Reactor {
 
     let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
+      case .logout:
+        return .empty()
+        
       case .isJoiningRoom(_):
         return .empty()
 

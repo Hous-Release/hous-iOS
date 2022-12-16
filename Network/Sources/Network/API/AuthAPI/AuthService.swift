@@ -13,6 +13,7 @@ public enum AuthService {
   case refresh(_ dto: Token)
   case signup(_ dto: AuthDTO.Request.SignupRequestDTO)
   case forceLogin(_ dto: AuthDTO.Request.LoginRequestDTO)
+  case logout
 }
 
 extension AuthService: TargetType {
@@ -30,6 +31,8 @@ extension AuthService: TargetType {
       return "auth/signup"
     case .forceLogin:
       return "auth/login/force"
+    case .logout:
+      return "auth/logout"
     }
   }
 
@@ -42,6 +45,8 @@ extension AuthService: TargetType {
     case .signup:
       return .post
     case .forceLogin:
+      return .post
+    case .logout:
       return .post
     }
   }
@@ -56,6 +61,8 @@ extension AuthService: TargetType {
       return .body(dto)
     case let .forceLogin(dto):
       return .body(dto)
+    case .logout:
+      return .requestPlain
     }
   }
 }
