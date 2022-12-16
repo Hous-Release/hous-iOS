@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class AlarmCollectionViewCell: UICollectionViewCell {
+final class AlarmTableViewCell: UITableViewCell {
   
   var disposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileAlarmActionControl>()
@@ -40,8 +40,8 @@ final class AlarmCollectionViewCell: UICollectionViewCell {
   }
   
   
-  override init(frame: CGRect){
-    super.init(frame: frame)
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     configUI()
     render()
     transferToViewController()
