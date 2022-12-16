@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 public enum ProfileService {
+    case getAlarmInfo(_ data: ProfileDTO.Request.GetAlarmRequestDTO)
     case getProfile
     case getProfileTestResult(_ data: ProfileDTO.Request.ProfileTestResultDTO)
     case getHomieProfile(_ id: String)
@@ -40,6 +41,8 @@ extension ProfileService: TargetType {
             return "/user/badges"
         case .getAlarmSettingInfo:
             return "/user/push"
+        case .getAlarmInfo:
+            return "/user/notifications"
             
         case .updateRepresentBadge(let id):
             return "/user/badge/\(id)/represent"
@@ -55,7 +58,7 @@ extension ProfileService: TargetType {
     
     public var method: HTTPMethod {
         switch self {
-        case .getProfile, .getBadges, .getHomieProfile, .getProfileTestResult, .getProfileTest, .getAlarmSettingInfo:
+        case .getProfile, .getBadges, .getHomieProfile, .getProfileTestResult, .getProfileTest, .getAlarmSettingInfo, .getAlarmInfo:
             return .get
             
         case .putProfileEdit, .updateRepresentBadge, .putProfileTest:
@@ -81,6 +84,9 @@ extension ProfileService: TargetType {
             return .body(dto)
             
         case let .getProfileTestResult(dto):
+            return .query(dto)
+            
+        case let .getAlarmInfo(dto):
             return .query(dto)
         }
     }

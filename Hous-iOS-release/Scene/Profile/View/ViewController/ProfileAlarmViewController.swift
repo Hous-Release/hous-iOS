@@ -100,9 +100,6 @@ final class ProfileAlarmViewController: LoadingBaseViewController {
       .do(onNext: { _ in
         self.hideLoading()
       })
-      .map {
-        [AlarmModel](repeating: $0, count: 4)
-      }
       .observe(on: MainScheduler.asyncInstance)
       .bind(to:alarmCollectionView.rx.items) {
         (collectionView: UICollectionView, index: Int, element: AlarmModel) in
@@ -123,7 +120,6 @@ final class ProfileAlarmViewController: LoadingBaseViewController {
       })
       .disposed(by: disposeBag)
     
-    viewModel.alarmModelSubject.onNext(AlarmModel(content: "Hello", createdAt: "지금", isRead: false, notificationId: 1, type: .todo))
   }
   
   //MARK: Methods
