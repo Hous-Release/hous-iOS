@@ -49,7 +49,7 @@ class ProfileLeaveView: UIView {
 
   let leaveButton = UIButton(configuration: .filled()).then {
 
-    var attrString = AttributedString("회원 탈퇴하기")
+    var attrString = AttributedString("방 퇴사하기")
     attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     attrString.foregroundColor = Colors.white.color
     $0.configuration?.attributedTitle = attrString
