@@ -87,6 +87,18 @@ final class ProfileAlarmViewController: LoadingBaseViewController {
       })
       .disposed(by: disposeBag)
     
+    alarmCollectionView.rx.contentOffset
+      .map{$0.y}
+      .bind(onNext: { [weak self] position in
+        guard let self = self else { return }
+        // 좌변 : 매 시점 보이는 화면의 상단부 y좌표 + 보이는 화면의 Height = 보이는 화면의 하단부 y좌표
+        // 우변 : 전체 CollectionView Contents Height - threshold (여기선 10개 셀 남았을 때 작동)
+        if position + self.alarmCollectionView.frame.size.height > self.alarmCollectionView.contentSize.height - Size.cellSize.height * 10 {
+          actionDetected.onNext(.willFetchNewData)
+        }
+      })
+      .disposed(by: disposeBag)
+    
     let input = ProfileAlarmViewModel.Input(
       viewWillAppear: viewWillAppear,
       actionDetected: actionDetected
@@ -124,6 +136,17 @@ final class ProfileAlarmViewController: LoadingBaseViewController {
   
   //MARK: Methods
   
+//  private func spinnerControl(isSpinnerOn: Bool) {
+//    if isSpinnerOn {
+//      let footerView = UIView(frame: CGRect(x: 0, y: 0, width: Size.screenWidth, height: 100))
+//      let spinner = UIActivityIndicatorView()
+//      spinner.center = footerView.center
+//      footerView.addSubview(spinner)
+//      spinner.startAnimating()
+//      
+//    }
+//  }
+  
   private func doNavigation(action: ProfileAlarmActionControl) {
     switch action {
     case .didTabBack:
@@ -158,3 +181,12 @@ extension ProfileAlarmViewController: UICollectionViewDelegateFlowLayout {
     return Size.cellSize
   }
 }
+
+//extension ProfileAlarmViewController: UIScrollViewDelegate {
+//  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//    let position = scrollView.contentOffset.y
+//    if position > alarmCollectionView.contentSize.height - 100 - scrollView.frame.size.height {
+//      print("⭐️")
+//    }
+//  }
+//}

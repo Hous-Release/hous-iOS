@@ -9,7 +9,7 @@ import UIKit
 
 public enum ProfileAlarmActionControl {
   case didTabBack
-  case didTabAlarmCell
+  case willFetchNewData
 }
 
 public struct AlarmModel {
