@@ -54,6 +54,7 @@ extension DaysOfWeekCollectionViewCell {
     }
     dayButton.configuration?.cornerStyle = .capsule
     dayButton.isUserInteractionEnabled = false
+    dayButton.configuration?.titleAlignment = .center
     triangleView.backgroundColor = .clear
     triangleView.isHidden = true
   }

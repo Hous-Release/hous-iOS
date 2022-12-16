@@ -25,19 +25,19 @@ class ResignViewReactor: ReactorKit.Reactor {
   }
 
   enum Mutation {
-    case setIsCheckButtonSelected(Bool?)
+    case setIsCheckButtonSelected(Bool)
     case setIsResignButtonActivated(Bool?)
     case setIsResignSuccess(Bool?)
     case setResignReason(String?)
     case setDetailReason(String?)
     case setIsTextViewEmpty(Bool?)
     case setNumOfText(String?)
-    case setIsErrorLabelShow(Bool?)
+    case setIsErrorLabelShow(Bool)
     case setError(String?)
   }
 
   struct State {
-    var isCheckButtonSelected: Bool? = false
+    var isCheckButtonSelected: Bool = false
     var isResignButtonActivated: Bool? = false
     @Pulse
     var isResignSuccess: Bool?
@@ -45,7 +45,7 @@ class ResignViewReactor: ReactorKit.Reactor {
     var detailReason: String?
     var isTextViewEmpty: Bool? = true
     var numOfText: String?
-    var isErrorLabelShow: Bool? = false
+    var isErrorLabelShow: Bool = false
 
     var error: String? = nil
   }
@@ -56,13 +56,9 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     switch action {
     case .didTapCheck:
-      guard let isCheckButtonSelected = currentState.isCheckButtonSelected,
-            let isOverLimit = currentState.isErrorLabelShow else {
-        return .empty()
-      }
       return .concat([
-        .just(Mutation.setIsCheckButtonSelected(!isCheckButtonSelected)),
-        mutationOfActivateResignButton(isOverLimit, !isCheckButtonSelected)
+        .just(Mutation.setIsCheckButtonSelected(!currentState.isCheckButtonSelected)),
+        mutationOfActivateResignButton(!currentState.isCheckButtonSelected)
       ])
 
     case .didTapResign:
@@ -81,7 +77,10 @@ class ResignViewReactor: ReactorKit.Reactor {
       return .empty()
 
     case let .didSelectResignReason(reason):
-      return .just(Mutation.setResignReason(reason))
+      return .concat([
+        .just(Mutation.setResignReason(reason)),
+        mutationOfActivateResignButton(currentState.isCheckButtonSelected)
+      ])
 
     case let .enterDetailReason(reason):
       return mutationOfDetailReason(reason)
@@ -138,10 +137,7 @@ class ResignViewReactor: ReactorKit.Reactor {
 extension ResignViewReactor {
   private func mutationOfDetailReason(_ text: String?) -> Observable<Mutation> {
 
-    guard let text = text,
-          let isCheckButtonSelected = currentState.isCheckButtonSelected else {
-      return .empty()
-    }
+    guard let text = text else { return .empty() }
 
     var textNumString = "\(text.count)/200"
     if text == "의견 남기기" {
@@ -153,13 +149,17 @@ extension ResignViewReactor {
       .just(Mutation.setDetailReason(text)),
       .just(Mutation.setNumOfText(textNumString)),
       .just(Mutation.setIsErrorLabelShow(isOverLimit)),
-      mutationOfActivateResignButton(isOverLimit, isCheckButtonSelected)
+      mutationOfActivateResignButton(currentState.isCheckButtonSelected)
     ])
   }
 
-  private func mutationOfActivateResignButton(_ isOverLimit: Bool, _ isCheckButtonSelected: Bool) -> Observable<Mutation> {
+  private func mutationOfActivateResignButton(_ isCheckButtonSelected: Bool) -> Observable<Mutation> {
 
-    let isResignButtonActivate = !isOverLimit && isCheckButtonSelected
+    let isResignButtonActivate =
+      !currentState.isErrorLabelShow &&
+      isCheckButtonSelected &&
+      currentState.resignReason != ""
+
     return .concat([
       .just(Mutation.setIsResignButtonActivated(isResignButtonActivate))
     ])

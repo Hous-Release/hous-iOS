@@ -42,7 +42,7 @@ extension EmptyTodoByDayCollectionViewCell {
   func setCell(_ type: EmptyTodoByDayType) {
     switch type {
     case .myTodo:
-      guideLabel.font = Fonts.SpoqaHanSansNeo.regular.font(size: 14)
+      guideLabel.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
       guideLabel.text = "아직 담당하는 to-do가 없어요!"
     case .ourTodo:
       guideLabel.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
