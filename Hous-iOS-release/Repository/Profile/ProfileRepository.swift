@@ -214,6 +214,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
         
         return alarmModelList
       }
+
       
       ProfileRepositoryImp.event.onNext(.getAlarmInfo((alarmModelList, dto.nextCursor)))
       
