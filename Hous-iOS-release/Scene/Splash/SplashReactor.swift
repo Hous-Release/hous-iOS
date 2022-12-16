@@ -78,6 +78,9 @@ extension SplashReactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
+      case .logout:
+        return .empty()
+        
       case .isJoiningRoom(let isJoiningRoom):
         return .just(.setIsJoiningRoom(isJoiningRoom))
 

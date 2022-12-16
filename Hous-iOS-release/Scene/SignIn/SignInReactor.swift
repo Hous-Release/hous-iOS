@@ -130,6 +130,9 @@ final class SignInReactor: Reactor {
   func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
     let serviceMutation = provider.authRepository.event.flatMap { event -> Observable<Mutation> in
       switch event {
+      case .logout:
+        return .empty()
+        
       case .isJoiningRoom(let isJoingingRoom):
         return .just(.setIsJoingingRoom(isJoingingRoom))
 
