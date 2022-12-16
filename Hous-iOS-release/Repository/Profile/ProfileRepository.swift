@@ -12,6 +12,7 @@ import RxCocoa
 
 public enum ProfileRepositoryEvent {
   case getProfile(ProfileModel)
+  case getAlarmInfo(([AlarmModel],Int))
   case getAlarmSettingInfo(AlarmSettingModel)
   case getHomieProfile(ProfileModel)
   case getProfileTest([ProfileTestItemModel])
@@ -31,6 +32,7 @@ public protocol ProfileRepository {
   func getProfile()
   func getHomieProfile(id: String)
   func getProfileTestResult(color: PersonalityColor)
+  func getAlarmInfo(lastNotificationId: Int, size: Int)
   func putProfileEditInfo(data: ProfileEditModel)
   func putProfileTest(data: ProfileTestSaveModel)
   func patchAlarmSetting(data: AlarmSettingModel, cellType: AlarmSettingCellType)
@@ -157,11 +159,74 @@ public final class ProfileRepositoryImp: ProfileRepository {
     }
   }
   
+  public func getAlarmInfo(lastNotificationId: Int, size: Int) {
+    
+    //MARK: RequestDTO Query param Set and Get Data
+    
+    var requestDTO: ProfileDTO.Request.GetAlarmRequestDTO {
+      return ProfileDTO.Request.GetAlarmRequestDTO(lastNotificationId: lastNotificationId, size: size)
+    }
+    
+    NetworkService.shared.profileRepository.getAlarmInfo(dto: requestDTO) { res, err in
+      guard let dto = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? "")
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+      
+      //MARK: From DTO to Model
+      
+      var alarmModelList: [AlarmModel] {
+        var contentList: [String] = []
+        dto.contents.forEach { contentList.append($0.content) }
+        
+        var createdAtList: [String] = []
+        dto.contents.forEach { createdAtList.append($0.createdAt)}
+        
+        var notificationIdList: [Int] = []
+        dto.contents.forEach { notificationIdList.append($0.notificationId)}
+        
+        var typeList: [NotificationType] = []
+        dto.contents.forEach {
+          switch $0.type {
+          case "RULE":
+            typeList.append(.rules)
+          case "BADGE":
+            typeList.append(.badge)
+          case "TODO":
+            typeList.append(.todo)
+          default:
+            print("🥲 AlarmList Type Loading Error")
+            break
+          }
+        }
+        
+        var isReadList: [Bool] = []
+                dto.contents.forEach { isReadList.append($0.isRead)}
+        
+        var alarmModelList: [AlarmModel] = []
+        
+        for index in 0..<contentList.count {
+          alarmModelList.append(AlarmModel(content: contentList[index], createdAt: createdAtList[index], isRead: isReadList[index], notificationId: notificationIdList[index], type: typeList[index]))
+        }
+        
+        return alarmModelList
+      }
+      
+      ProfileRepositoryImp.event.onNext(.getAlarmInfo((alarmModelList, dto.nextCursor)))
+      
+    }
+    
+  }
+  
   
   public func getProfileTestResult(color: PersonalityColor) {
     
-    //MARK: Request Query param Set and Get Data
-    var requestDTO : ProfileDTO.Request.ProfileTestResultDTO {
+    //MARK: RequestDTO Query param Set and Get Data
+    var requestDTO: ProfileDTO.Request.ProfileTestResultDTO {
       switch color {
       case .red:
         return ProfileDTO.Request.ProfileTestResultDTO(color: "RED")

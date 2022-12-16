@@ -56,6 +56,16 @@ public extension ProfileDTO.Request {
         }
     }
     
+    struct GetAlarmRequestDTO: Encodable {
+        public let lastNotificationId: Int
+        public let size: Int
+        
+        public init(lastNotificationId: Int, size: Int) {
+            self.lastNotificationId = lastNotificationId
+            self.size = size
+        }
+    }
+    
     struct ProfileTestResultDTO: Encodable {
         public var color: String
         

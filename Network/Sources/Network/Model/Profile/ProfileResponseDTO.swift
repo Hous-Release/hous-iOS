@@ -10,7 +10,20 @@ import Foundation
 
 public extension ProfileDTO.Response {
     
-    // MARK: ProfileGet
+    // MARK: Get Alarm
+    struct GetAlarmResponseDTO: Codable {
+        public let contents: [GetAlarmContent]
+        public let nextCursor, totalElements: Int
+    }
+    
+    struct GetAlarmContent: Codable {
+        public let content, createdAt: String
+        public let isRead: Bool
+        public let notificationId: Int
+        public let type: String
+    }
+    
+    // MARK: Get Profile
     struct ProfileGetResponseDTO : Codable {
         public let birthday: String?
         public let birthdayPublic: Bool
@@ -24,7 +37,7 @@ public extension ProfileDTO.Response {
     }
     
     // MARK: Get Alarm Setting Info
-    struct getAlarmSettingResponseDTO: Codable {
+    struct GetAlarmSettingResponseDTO: Codable {
         public let badgePushStatus: String
         public let isPushNotification: Bool
         public let newTodoPushStatus, remindTodoPushStatus, rulesPushStatus, todayTodoPushStatus: String
