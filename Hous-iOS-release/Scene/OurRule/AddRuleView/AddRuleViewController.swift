@@ -229,7 +229,7 @@ class AddRuleViewController: LoadingBaseViewController {
           self.rulesSubject.onNext(self.rules)
           
           self.ruleTextField.text = ""
-          self.ruleTextField.endEditing(true)
+//          self.ruleTextField.endEditing(true)
           self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
         }
@@ -277,11 +277,17 @@ extension AddRuleViewController {
       switch textField {
       case ruleTextField:
         if let text = ruleTextField.text {
+          
           if text.count > maxCount {
             let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
             let newString = String(text[text.startIndex..<maxIndex])
             ruleTextField.text = newString
+          } else {
+            ruleTextField.changeLayerColor(color: Colors.blue.color.cgColor)
           }
+          
+        } else {
+          ruleTextField.changeLayerColor(color: Colors.g4.color.cgColor)
         }
       default:
         return
