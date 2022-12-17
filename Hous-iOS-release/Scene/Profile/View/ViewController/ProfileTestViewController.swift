@@ -41,12 +41,20 @@ final class ProfileTestViewController: LoadingBaseViewController {
   
   //MARK: UI Components
   
-  private lazy var backwardButton = UIButton().then {
-    $0.setImage(Images.icLeft.image, for: .normal)
-    $0.setImage(Images.icLeftOn.image, for: .selected)
-    $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+  private lazy var backwardButton = UIButton(configuration: .plain()).then {
+    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
     $0.isEnabled = false
     $0.alpha = 0
+    $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = Images.icLeft.image
+      case .highlighted:
+        btn.configuration?.image = Images.icLeftOn.image
+      default:
+        break
+      }
+    }
   }
   
   private let testCountLabel = UILabel().then {
@@ -54,12 +62,20 @@ final class ProfileTestViewController: LoadingBaseViewController {
     $0.textColor = Colors.black.color
   }
   
-  private lazy var forwardButton = UIButton().then {
-    $0.setImage(Images.icRight.image, for: .normal)
-    $0.setImage(Images.icRightOn.image, for: .selected)
-    $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+  private lazy var forwardButton = UIButton(configuration: .plain()).then {
+    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
     $0.isEnabled = false
     $0.alpha = 0
+    $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = Images.icRight.image
+      case .highlighted:
+        btn.configuration?.image = Images.icRightOn.image
+      default:
+        break
+      }
+    }
   }
   
   private lazy var testNavigationStackView = UIStackView(arrangedSubviews: [backwardButton, testCountLabel, forwardButton]).then {
