@@ -241,3 +241,11 @@ fileprivate extension NSNotification.Name {
   static let beginEdit = Notification.Name("UITextFieldTextDidBeginEditingNotification")
   static let endEdit = Notification.Name("UITextFieldTextDidEndEditingNotification")
 }
+
+
+extension HousTextField {
+  func changeLayerColor(color: CGColor) {
+    self.layer.addSublayer(selectedUnderlineLayer)
+    selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
+  }
+}
