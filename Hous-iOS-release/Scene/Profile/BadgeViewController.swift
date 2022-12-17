@@ -247,7 +247,7 @@ extension BadgeViewController {
           guard let self = self else { return }
           
           var idx = 0
-          var before = 0
+          var before: Int?
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == viewModel.id {
               idx = index
@@ -272,8 +272,11 @@ extension BadgeViewController {
           }
           
           cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])
-          let idPath = IndexPath(row: before, section: 1)
-          self.badgeCollectionView.reloadItems(at: [idPath])
+          if let before = before {
+            let idPath = IndexPath(row: before, section: 1)
+            self.badgeCollectionView.reloadItems(at: [idPath])
+          }
+          
         })
         .disposed(by: cell.disposeBag)
       
