@@ -21,7 +21,7 @@ final class AlarmSettingListView: UIView {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
   
-  private let radioButton = UIButton()
+  private let radioButton = UIButton(configuration: .plain())
   
   override init(frame:CGRect) {
     super.init(frame: frame)
@@ -46,14 +46,14 @@ final class AlarmSettingListView: UIView {
     
     switch buttonState {
     case .enableSelected:
-      self.radioButton.setImage(Images.icSettingRadioOn.image, for: .normal)
-      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
+      self.radioButton.configuration?.image = Images.icSettingRadioOn.image
+      self.radioButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 0)
     case .disableSelected:
-      self.radioButton.setImage(Images.icSettingRadioDisable.image, for: .normal)
-      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
+      self.radioButton.configuration?.image = Images.icSettingRadioDisable.image
+      self.radioButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 0)
     case .unselected:
-      self.radioButton.setImage(Images.icSettingRadioOff.image, for: .normal)
-      self.radioButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 0)
+      self.radioButton.configuration?.image = Images.icSettingRadioOff.image
+      self.radioButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 0)
     }
   }
   

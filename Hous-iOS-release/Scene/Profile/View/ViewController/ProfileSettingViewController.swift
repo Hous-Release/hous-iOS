@@ -55,19 +55,33 @@ final class ProfileSettingViewController: UIViewController {
     $0.alignment = .leading
     $0.distribution = .equalSpacing
     $0.axis = .vertical
-    $0.spacing = 5
+    $0.spacing = 6
   }
   
-  private let logoutButton = UIButton().then {
-    $0.setTitle("로그아웃", for: .normal)
-    $0.setTitleColor(Colors.black.color, for: .normal)
-    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+  private let logoutButton = UIButton(configuration: .plain()).then {
+    var attrString = AttributedString("로그아웃")
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    attrString.foregroundColor = Colors.black.color
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = NSTextAlignment.left
+    attrString.paragraphStyle = paragraphStyle
+  
+    $0.configuration?.attributedTitle = attrString
+    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 0)
   }
   
-  private lazy var leavingRoomButton = UIButton().then {
-    $0.setTitle("방 퇴사하기", for: .normal)
-    $0.setTitleColor(Colors.red.color, for: .normal)
-    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+  private lazy var leavingRoomButton = UIButton(configuration: .plain()).then {
+    var attrString = AttributedString("방 퇴사하기")
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    attrString.foregroundColor = Colors.red.color
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = NSTextAlignment.left
+    attrString.paragraphStyle = paragraphStyle
+  
+    $0.configuration?.attributedTitle = attrString
+    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 0)
   }
   
   private lazy var withdrawInfoLabel = UILabel().then {
