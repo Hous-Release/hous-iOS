@@ -113,7 +113,7 @@ final class ProfileAlarmViewController: LoadingBaseViewController {
         (tableView: UITableView, index: Int, element: AlarmModel) in
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.alarmTableView.dequeueReusableCell(withIdentifier: AlarmTableViewCell.className, for: indexPath) as? AlarmTableViewCell else { print("Cell Loading ERROR!"); return UITableViewCell()}
-        
+        cell.selectionStyle = .none
         cell.bind(data: element)
         
         return cell
