@@ -205,7 +205,8 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     }
     
     emptyViewLabel.snp.makeConstraints { make in
-      make.center.equalToSuperview()
+      make.centerX.equalToSuperview()
+      make.centerY.equalToSuperview().multipliedBy(0.8)
     }
     
     todoLabelStackView.snp.makeConstraints { make in
