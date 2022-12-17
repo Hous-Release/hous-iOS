@@ -17,10 +17,20 @@ class ProfileEditTextField: UITextField {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
   
-  var birthdayPublicButton = UIButton().then {
-    $0.setImage(Images.icShow.image, for: .normal)
-    $0.setImage(Images.icShowOn.image, for: .selected)
-    $0.adjustsImageWhenHighlighted = false
+  var birthdayPublicButton = UIButton(configuration: .plain()).then {
+    $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.image = Images.icShow.image
+      case .selected:
+        btn.configuration?.baseBackgroundColor = .clear
+        btn.configuration?.image = Images.icShowOn.image
+      case .highlighted:
+        btn.configuration?.image = btn.isSelected ? Images.icShowOn.image : Images.icShow.image
+      default:
+        break
+      }
+    }
   }
   
   override func layoutSubviews() {
