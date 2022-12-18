@@ -42,7 +42,7 @@ final class PagingView: UIView {
     $0.pageIndicatorTintColor = Colors.g3.color
     $0.currentPageIndicatorTintColor = Colors.blue.color
   }
-  var nextButton = NextButton().then {
+  var nextButton = NextButton("다음으로").then {
     $0.isHidden = true
   }
 

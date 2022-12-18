@@ -84,7 +84,7 @@ class EnterInfoView: UIView {
     $0.configuration?.imagePadding = 8
   }
 
-  var nextButton = NextButton().then {
+  var nextButton = NextButton("다음으로").then {
     $0.isEnabled = false
   }
 
