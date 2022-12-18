@@ -29,7 +29,7 @@ class EnterInfoView: UIView {
 
   var nicknameTextfield: UnderlinedTextField = {
     var textfield = UnderlinedTextField()
-    textfield.placeholder = "Hous-에서 사용할 이름을 입력해주세요."
+    textfield.placeholder = "Hous-에서 사용할 이름을 입력해 주세요."
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -37,7 +37,7 @@ class EnterInfoView: UIView {
   }()
 
   var nicknameErrorLabel = UILabel().then {
-    $0.text = "*닉네임은 3자 이하로 설정해주세요"
+    $0.text = "*닉네임은 3자 이하로 설정해 주세요"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textColor = Colors.red.color
     $0.isHidden = true

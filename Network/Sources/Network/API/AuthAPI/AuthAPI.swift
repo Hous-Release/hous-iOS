@@ -39,7 +39,7 @@ public final class AuthAPI: APIRequestLoader<AuthService>, AuthAPIProtocol {
     fetchData(
       target: .logout,
       responseData: BaseResponseType<AuthDTO.Response.LoginResponseDTO>.self,
-      isWithInterceptor: false
+      isWithInterceptor: true
     ) { res, err in
         completion(res, err)
       }

@@ -24,7 +24,7 @@ class EnterRoomView: UIView {
   let contentView = UIView()
 
   let guideTitleLabel = UILabel().then {
-    $0.text = "이제 하우스를 입장해볼까요?"
+    $0.text = "이제 하우스에 입장해볼까요?"
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
     $0.textColor = Colors.black.color
   }

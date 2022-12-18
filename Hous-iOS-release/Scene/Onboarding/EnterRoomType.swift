@@ -50,9 +50,9 @@ enum EnterRoomType {
   var textFieldSubTitleText: String {
     switch self {
     case .new:
-      return "멤버들이 확인할 수 있도록 방 이름을 설정해주세요."
+      return "멤버들이 확인할 수 있도록 방 이름을 설정해 주세요."
     case .exist:
-      return "초대코드를 입력해야 방에 들어갈 수 있어요."
+      return "초대코드를 입력하면 방에 들어갈 수 있어요."
     }
   }
 
@@ -61,7 +61,7 @@ enum EnterRoomType {
     case .new:
       return "방 이름 설정"
     case .exist:
-      return "방 코드 설정"
+      return "방 초대코드"
     }
   }
 

@@ -171,7 +171,7 @@ extension SplashViewController {
         image: .needUpdate,
         actionText: "좋아요!",
         text: "새로운 Hous-가 나왔어요!\nHous-와 함께 즐거운\n공동생활을 계속해 봐요!",
-        titleText: "업데이트 해주세요!"
+        titleText: "업데이가 필요해요!"
       )
 
       let type = PopUpType.needUpdate(imagePopUpModel)
