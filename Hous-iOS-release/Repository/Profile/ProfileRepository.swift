@@ -335,9 +335,18 @@ public final class ProfileRepositoryImp: ProfileRepository {
       
       let userName = dto.nickname
       let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
-      let userJob = dto.job
-      let mbti = dto.mbti
-      let statusMessage = dto.introduction
+      var userJob = dto.job
+      if userJob == "" {
+        userJob = nil
+      }
+      var mbti = dto.mbti
+      if mbti == "" {
+        mbti = nil
+      }
+      var statusMessage = dto.introduction
+      if statusMessage == "" {
+        statusMessage = nil
+      }
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
       var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
@@ -393,9 +402,18 @@ public final class ProfileRepositoryImp: ProfileRepository {
       
       let userName = dto.nickname
       let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
-      let userJob = dto.job
-      let mbti = dto.mbti
-      let statusMessage = dto.introduction
+      var userJob = dto.job
+      if userJob == "" {
+        userJob = nil
+      }
+      var mbti = dto.mbti
+      if mbti == "" {
+        mbti = nil
+      }
+      var statusMessage = dto.introduction
+      if statusMessage == "" {
+        statusMessage = nil
+      }
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
       var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
@@ -417,13 +435,13 @@ public final class ProfileRepositoryImp: ProfileRepository {
     
     let birthday = dateFormatter.string(from: data.birthday)
     
-    let introduction = (data.statusMessage != "") ? data.statusMessage : nil
+    let introduction = data.statusMessage
     
     let isPublic = data.birthdayPublic
     
-    let job = (data.job != "") ? data.job : nil
+    let job = data.job
     
-    let mbti = (data.mbti != "") ? data.mbti : nil
+    let mbti = data.mbti
     
     let nickname = data.name
     
