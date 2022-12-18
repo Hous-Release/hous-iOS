@@ -65,7 +65,8 @@ final class EnterInfoViewReactor: Reactor {
       let birthday = currentState.birthday ?? ""
       return .concat([
         examineNickLength(of: nickname),
-        validateNextButton(nickname, birthday)
+        validateNextButton(nickname, birthday),
+        .just(.setNickname(nickname))
       ])
 
     case let .enterBirthday(birthday):

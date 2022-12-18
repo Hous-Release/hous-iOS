@@ -143,6 +143,8 @@ extension ResignInputCollectionViewCell {
 
   private func setup() {
 
+    reasonTextField.tintColor = .clear
+
     reasonTextField.delegate = self
     reasonTextView.textView.delegate = self
 
@@ -203,7 +205,7 @@ extension ResignInputCollectionViewCell: UITextViewDelegate {
 
     reasonTextView.textViewResize()
     let height = reasonTextView.bounds.height
-    delegate?.didTextViewChange(estimatedSize, height)
+    //delegate?.didTextViewChange(estimatedSize, height)
   }
 }
 
@@ -222,4 +224,10 @@ extension ResignInputCollectionViewCell: UITextFieldDelegate {
       self.reasonTextField.arrowImageView.transform = .init(rotationAngle: 0.0)
     }
   }
+
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    return false
+  }
+
+
 }

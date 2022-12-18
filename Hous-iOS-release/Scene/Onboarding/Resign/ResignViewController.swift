@@ -16,6 +16,7 @@ class ResignViewController: UIViewController, ReactorKit.View {
   var disposeBag = DisposeBag()
   var mainView = ResignView()
 
+  private var isKeyboardShown: Bool = false
   private var textViewHeight: CGFloat = 62
   private var coveredByKeyboardHeight: CGFloat = 0
   private let keyboardStart = UIScreen.main.bounds.height - 260
@@ -79,10 +80,14 @@ class ResignViewController: UIViewController, ReactorKit.View {
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
 
-      UIView.animate(withDuration: 1) {
-        self.scrollToBottom()
-        self.view.window?.frame.origin.y -= keyboardHeight
+      if !isKeyboardShown {
+        UIView.animate(withDuration: 1) {
+          self.scrollToBottom()
+          self.view.window?.frame.origin.y -= keyboardHeight
+        }
       }
+
+      isKeyboardShown = true
     }
   }
 
@@ -91,6 +96,7 @@ class ResignViewController: UIViewController, ReactorKit.View {
     if self.view.window?.frame.origin.y != 0 {
       self.view.window?.frame.origin.y = 0
     }
+    isKeyboardShown = false
   }
 }
 

@@ -37,13 +37,7 @@ class EnterRoomTextFieldView: UIView {
     $0.isHidden = true
   }
 
-  var enterRoomButton = UIButton().then {
-    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
-    $0.titleLabel?.textColor = Colors.white.color
-    $0.setBackgroundColor(Colors.g4.color, for: .disabled)
-    $0.setBackgroundColor(Colors.blue.color, for: .normal)
-    $0.isEnabled = false
-  }
+  var enterRoomButton = NextButton("")
 
   init(roomType: EnterRoomType) {
     super.init(frame: .zero)
@@ -99,7 +93,8 @@ class EnterRoomTextFieldView: UIView {
     titleLabel.text = roomType.textFieldTitleText
     subTitleLabel.text = roomType.textFieldSubTitleText
     textField.placeholder = roomType.textFieldPlaceholderText
-    enterRoomButton.setTitle(roomType.textFieldViewButtonText, for: .normal)
+    textField.returnKeyType = .done
+    enterRoomButton.setAttrTitle(roomType.textFieldViewButtonText)
   }
 
 }

@@ -63,10 +63,11 @@ class ResignViewReactor: ReactorKit.Reactor {
 
     case .didTapResign:
       guard let comment = currentState.detailReason,
-            let feedbackType = currentState.resignReason,
-            let serverCode = ResignReasonType(rawValue: feedbackType)?.description else {
+            let feedbackType = currentState.resignReason else {
         return .empty()
       }
+
+      let serverCode = ResignReasonType(rawValue: feedbackType)?.description ?? "NO"
 
       let dto = UserDTO.Request.DeleteUserRequestDTO(
         comment: comment,
@@ -77,10 +78,7 @@ class ResignViewReactor: ReactorKit.Reactor {
       return .empty()
 
     case let .didSelectResignReason(reason):
-      return .concat([
-        .just(Mutation.setResignReason(reason)),
-        mutationOfActivateResignButton(currentState.isCheckButtonSelected)
-      ])
+      return .just(Mutation.setResignReason(reason))
 
     case let .enterDetailReason(reason):
       return mutationOfDetailReason(reason)
@@ -157,8 +155,7 @@ extension ResignViewReactor {
 
     let isResignButtonActivate =
       !currentState.isErrorLabelShow &&
-      isCheckButtonSelected &&
-      currentState.resignReason != ""
+      isCheckButtonSelected
 
     return .concat([
       .just(Mutation.setIsResignButtonActivated(isResignButtonActivate))
