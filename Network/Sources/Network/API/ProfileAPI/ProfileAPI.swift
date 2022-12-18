@@ -10,6 +10,8 @@ import RxSwift
 
 protocol ProfileAPIProtocol {
   
+  func postFeedbackBadge(completion: @escaping (BaseResponseType<ProfileDTO.Response.VoidDTO>?, Error?) -> Void) 
+  
   func getAlarmInfo(dto: ProfileDTO.Request.GetAlarmRequestDTO, completion: @escaping
                     (BaseResponseType<ProfileDTO.Response.GetAlarmResponseDTO>?, Error?) -> Void
   )
@@ -48,6 +50,17 @@ protocol ProfileAPIProtocol {
 }
 
 public final class ProfileAPI: APIRequestLoader<ProfileService>, ProfileAPIProtocol {
+  
+  public func postFeedbackBadge(completion: @escaping (BaseResponseType<ProfileDTO.Response.VoidDTO>?, Error?) -> Void) {
+    fetchData(
+      target: .postFeedback,
+      responseData: BaseResponseType<ProfileDTO.Response.VoidDTO>.self,
+      isWithInterceptor: true
+    ) { res, err in
+        completion(res, err)
+      }
+  }
+  
   public func getAlarmInfo(dto: ProfileDTO.Request.GetAlarmRequestDTO, completion: @escaping (BaseResponseType<ProfileDTO.Response.GetAlarmResponseDTO>?, Error?) -> Void) {
     fetchData(target: .getAlarmInfo(dto), responseData: BaseResponseType<ProfileDTO.Response.GetAlarmResponseDTO>.self, isWithInterceptor: true) {res, err in
       completion(res, err)
