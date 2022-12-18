@@ -36,6 +36,7 @@ class EditHousNameViewController: LoadingBaseViewController {
                                              useMaxCount: true,
                                              maxCount: 8,
                                              exceedString: "방 이름은 8자 이내로 입력해주세요!").then {
+    $0.placeholder = "우리 집 별명"
     $0.textAlignment = .center
   }
   
