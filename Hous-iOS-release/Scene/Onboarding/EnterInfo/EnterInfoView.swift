@@ -36,6 +36,13 @@ class EnterInfoView: UIView {
     return textfield
   }()
 
+  var nicknameErrorLabel = UILabel().then {
+    $0.text = "*닉네임은 3자 이하로 설정해주세요"
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.red.color
+    $0.isHidden = true
+  }
+
   private let birthdayLabel: UILabel = {
     var label = UILabel()
     label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
@@ -108,7 +115,7 @@ class EnterInfoView: UIView {
   private func render() {
 
     addSubViews([navigationBar, contentView, nextButton])
-    contentView.addSubViews([nicknameLabel, nicknameTextfield,
+    contentView.addSubViews([nicknameLabel, nicknameTextfield, nicknameErrorLabel,
                              birthdayLabel, birthdayTextfield,
                             checkBirthDayButton])
 
@@ -134,9 +141,14 @@ class EnterInfoView: UIView {
       make.height.equalTo(38)
     }
 
+    nicknameErrorLabel.snp.makeConstraints { make in
+      make.leading.equalTo(nicknameTextfield.snp.leading)
+      make.top.equalTo(nicknameTextfield.snp.bottom).offset(6)
+    }
+
     birthdayLabel.snp.makeConstraints { make in
       make.leading.equalTo(nicknameLabel.snp.leading)
-      make.top.equalTo(nicknameTextfield.snp.bottom).offset(40)
+      make.top.equalTo(nicknameErrorLabel.snp.bottom).offset(40)
     }
 
     birthdayTextfield.snp.makeConstraints { make in

@@ -70,9 +70,9 @@ class EnterRoomView: UIView {
     }
 
     stackView.snp.makeConstraints { make in
-      make.top.equalTo(guideTitleLabel.snp.bottom).offset(64)
+      make.top.equalTo(guideTitleLabel.snp.bottom).offset(32)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.centerY.equalToSuperview().multipliedBy(1.1)
+      make.centerY.equalToSuperview()
     }
   }
 }
