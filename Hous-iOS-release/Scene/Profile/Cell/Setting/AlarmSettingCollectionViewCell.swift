@@ -205,7 +205,7 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
     switch cellType {
     case .newRules:
       cellTitleLabel.text = "새로운 Rules 추가"
-      cellSubTitleLabel.text = "추가된 Our Rules를 알려줘요!"
+      cellSubTitleLabel.text = "추가된 우리 집 Rules를 알려줘요!"
       firstOption.settingNameLabel.text = "알림 받기"
       secondOption.settingNameLabel.text = "해제"
       
@@ -223,7 +223,7 @@ final class AlarmSettingCollectionViewCell: UICollectionViewCell {
       
     case .newTodo:
       cellTitleLabel.text = "새로운 to-do 추가"
-      cellSubTitleLabel.text = "추가된 My 혹은 Our to-do를 알려줘요!"
+      cellSubTitleLabel.text = "추가된 My to-do, Our to-do를 알려줘요!"
       firstOption.settingNameLabel.text = "모든 to-do 알림 받기"
       secondOption.settingNameLabel.text = "내가 담당자일 때만 알람 받기"
       thirdOption.settingNameLabel.text = "해제"

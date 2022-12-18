@@ -70,7 +70,7 @@ final class ProfileRecommendRuleView : UIView {
   let recommendRuleStackView = UIStackView().then {
     $0.distribution = .equalSpacing
     $0.alignment = .center
-    $0.spacing = 6
+    $0.spacing = 7
     $0.axis = .vertical
   }
   

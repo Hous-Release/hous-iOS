@@ -318,7 +318,7 @@ final class ProfileTestViewController: LoadingBaseViewController {
       cancelText: "계속하기",
       actionText: "그만두기",
       title: "테스트를 완료하지 않았어요\n여기서 그만둘까요?",
-      subtitle: "나중에 다시 할 수 있어요.")
+      subtitle: "그만둔 테스트는 나중에 다시 시작할 수 있어요.")
     
     let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: quitTestPopUpModel)
     

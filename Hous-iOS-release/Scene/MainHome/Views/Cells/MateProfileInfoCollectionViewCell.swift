@@ -122,7 +122,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   
   func bind(_ data: ProfileModel) {
     
-    self.statusMessage.text = data.statusMessage ?? "아직 소개가 작성되지 않았어요."
+    self.statusMessage.text = data.statusMessage ?? "아직 소개가 작성되지 않았어요!"
     
     let attrString = NSMutableAttributedString(string: self.statusMessage.text ?? "")
     let paragraphStyle = NSMutableParagraphStyle()
