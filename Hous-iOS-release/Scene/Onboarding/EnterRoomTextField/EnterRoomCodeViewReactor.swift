@@ -40,8 +40,8 @@ final class EnterRoomCodeViewReactor: Reactor {
     case setRoomHostNickname(String?)
     case setRoomId(Int?)
     case setPresentPopupFlag(Bool?)
-    case setEnterRoomFlag(Bool?)
-    case setError(String?)
+    case setEnterRoomFlag(Bool?) 
+    case setError(Int?)
     case setInitial
   }
 
@@ -54,7 +54,7 @@ final class EnterRoomCodeViewReactor: Reactor {
     var roomId: Int?
     @Pulse var presentPopupFlag: Bool?
     @Pulse var enterRoomFlag: Bool?
-    var error: String? = nil
+    var error: Int? = nil
   }
 
   let initialState = State()
@@ -118,7 +118,7 @@ extension EnterRoomCodeViewReactor {
         return self.validateRoom(id)
       case let .sendError(errorModel):
         guard let errorModel = errorModel else { return .empty() }
-        return .just(.setError(errorModel.message))
+        return .just(.setError(errorModel.status))
       }
     }
     return Observable.merge(mutation, serviceMutation)
