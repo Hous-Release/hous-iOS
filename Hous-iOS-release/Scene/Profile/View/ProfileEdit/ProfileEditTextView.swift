@@ -15,6 +15,8 @@ final class ProfileEditTextViewObject: UIStackView {
   private let animatedUnderlineLayer = CALayer()
   let placeHolderString = "자기소개"
   var isEmptyState = true
+  var isFloatingErrorMessage: Bool = false
+  
   
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
@@ -58,6 +60,7 @@ final class ProfileEditTextViewObject: UIStackView {
     
     textView.snp.makeConstraints { make in
       make.height.equalTo(30)
+      make.leading.trailing.equalTo(underlineView)
     }
     
     
@@ -72,7 +75,9 @@ extension ProfileEditTextViewObject {
       textView.text = ""
       textView.textColor = Colors.black.color
     }
-    
+  }
+  
+  func textViewFilled() {
     var frame = underlineView.bounds
     frame.size.height = 2
     
@@ -104,7 +109,9 @@ extension ProfileEditTextViewObject {
       
       isEmptyState = true
     }
-    
+  }
+  
+  func textViewEmpty() {
     self.underlineLayer.removeFromSuperlayer()
     self.animatedUnderlineLayer.removeFromSuperlayer()
     self.underlineView.layer.borderWidth = 2
@@ -151,7 +158,7 @@ class ProfileEditTextView: UITextView {
   
   override init(frame: CGRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
-    self.textContainerInset = UIEdgeInsets(top: 0, left: 7, bottom: 10, right: 7)
+    self.textContainerInset = UIEdgeInsets(top: 0, left: -2, bottom: 10, right: 0)
     self.backgroundColor = .white
   }
   
@@ -160,20 +167,4 @@ class ProfileEditTextView: UITextView {
   }
 }
 
-extension ProfileEditTextView {
-  func invalidDataOn(attributeName: String, count: Int) {
-    self.addSubview(invalidMessageLabel)
-    
-    invalidMessageLabel.snp.makeConstraints { make in
-      make.leading.equalTo(self.snp.leading).offset(12)
-      make.top.equalTo(self.snp.bottom).offset(16)
-    }
-    
-    invalidMessageLabel.text = "\(attributeName) \(count)자 이내로 입력해주세요!"
-    
-  }
-  
-  func invalidDataOff() {
-    invalidMessageLabel.removeFromSuperview()
-  }
-}
+
