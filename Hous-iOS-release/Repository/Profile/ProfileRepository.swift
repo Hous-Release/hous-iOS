@@ -26,6 +26,7 @@ public enum ProfileRepositoryEvent {
 
 public protocol ProfileRepository {
   static var event: PublishSubject<ProfileRepositoryEvent> { get }
+  func postFeedbackBadge()
   func getAlarmSettingInfo()
   func getProfileTest()
   func getProfile()
@@ -40,6 +41,21 @@ public protocol ProfileRepository {
 public final class ProfileRepositoryImp: ProfileRepository {
   
   public static var event = PublishSubject<ProfileRepositoryEvent>()
+  
+  public func postFeedbackBadge() {
+    NetworkService.shared.profileRepository.postFeedbackBadge { res, err in
+      guard let _ = res?.data else {
+        let errorModel = HouseErrorModel(
+          success: res?.success ?? false,
+          status: res?.status ?? -1,
+          message: res?.message ?? ""
+        )
+        
+        ProfileRepositoryImp.event.onNext(.sendError(errorModel))
+        return
+      }
+    }
+  }
 
   public func getAlarmSettingInfo() {
     
