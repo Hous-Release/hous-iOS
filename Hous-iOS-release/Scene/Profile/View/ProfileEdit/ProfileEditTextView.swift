@@ -30,7 +30,6 @@ final class ProfileEditTextViewObject: UIStackView {
   let textView = ProfileEditTextView().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     $0.textColor = Colors.black.color
-    $0.returnKeyType = .done
     $0.isScrollEnabled = false
   }
   
@@ -48,7 +47,7 @@ final class ProfileEditTextViewObject: UIStackView {
   private func setup() {
     self.axis = .vertical
     self.alignment = .fill
-    self.distribution = .fill
+    self.distribution = .equalSpacing
     self.spacing = 0
   }
   
@@ -81,25 +80,28 @@ extension ProfileEditTextViewObject {
     var frame = underlineView.bounds
     frame.size.height = 2
     
+    self.underlineView.layer.borderColor = Colors.blue.color.cgColor
 
-    self.underlineLayer.frame = frame
-    self.underlineLayer.backgroundColor = Colors.g3.color.cgColor
-    self.underlineView.layer.addSublayer(underlineLayer)
-    
-    self.underlineView.layer.borderWidth = 0
-
-
-
-    self.animatedUnderlineLayer.frame = frame
-    self.animatedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
-    underlineView.layer.addSublayer(animatedUnderlineLayer)
-    
-    let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
-    animation.timingFunction = CAMediaTimingFunction(controlPoints: 0, -0.7, 0, 1.01)
-    animation.values = [0, 1]
-    animation.duration = 0.8
-    animation.keyTimes = [0, 0.8]
-//    animatedUnderlineLayer.add(animation, forKey: "Selected")
+//    self.underlineLayer.frame = frame
+//    self.underlineLayer.backgroundColor = Colors.g3.color.cgColor
+////    self.underlineView.layer.addSublayer(underlineLayer)
+//
+//    self.underlineView.layer.borderWidth = 0
+//
+//
+//
+//    self.animatedUnderlineLayer.frame = frame
+//    self.animatedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
+////    self.animatedUnderlineLayer.borderWidth = 2
+////    underlineView.layer.addSublayer(animatedUnderlineLayer)
+//
+//
+//    let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
+//    animation.timingFunction = CAMediaTimingFunction(controlPoints: 0, -0.7, 0, 1.01)
+//    animation.values = [0, 1]
+//    animation.duration = 0.8
+//    animation.keyTimes = [0, 0.8]
+////    animatedUnderlineLayer.add(animation, forKey: "Selected")
   }
   
   func textViewUnselected() {
@@ -112,9 +114,9 @@ extension ProfileEditTextViewObject {
   }
   
   func textViewEmpty() {
-    self.underlineLayer.removeFromSuperlayer()
-    self.animatedUnderlineLayer.removeFromSuperlayer()
-    self.underlineView.layer.borderWidth = 2
+//    self.underlineLayer.removeFromSuperlayer()
+//    self.animatedUnderlineLayer.removeFromSuperlayer()
+    self.underlineView.layer.borderColor = Colors.g3.color.cgColor
   }
   
   func textViewResize() {
