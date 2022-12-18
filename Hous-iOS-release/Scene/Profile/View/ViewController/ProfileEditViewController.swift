@@ -40,12 +40,13 @@ final class ProfileEditViewController: UIViewController {
     $0.alignment = .fill
     $0.distribution = .equalSpacing
     $0.axis = .vertical
-    $0.spacing = 30
+    $0.spacing = 2
   }
   
   private var nameTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "닉네임"
+    let attrPlaceholder = NSAttributedString(string: "닉네임", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
+    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -55,7 +56,8 @@ final class ProfileEditViewController: UIViewController {
   
   private var birthdayTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "생년월일"
+    let attrPlaceholder = NSAttributedString(string: "생년월일", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
+    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -64,7 +66,8 @@ final class ProfileEditViewController: UIViewController {
   
   private var mbtiTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "MBTI"
+    let attrPlaceholder = NSAttributedString(string: "MBTI", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
+    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -74,7 +77,8 @@ final class ProfileEditViewController: UIViewController {
   
   private var jobTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    textfield.placeholder = "직업"
+    let attrPlaceholder = NSAttributedString(string: "직업", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
+    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
@@ -131,6 +135,14 @@ final class ProfileEditViewController: UIViewController {
     birthdayTextField.birthdayPublicButton.isSelected = data.birthdayPublic
     mbtiTextField.text = data.mbti
     jobTextField.text = data.userJob
+    
+    [nameTextField, birthdayTextField, mbtiTextField, jobTextField].forEach {
+      if $0.text!.isEmpty {
+        $0.textFieldEmpty()
+      } else {
+        $0.textFieldFilled()
+      }
+    }
     if (data.statusMessage == nil) {
       statusTextView.isEmptyState = true
       statusTextView.textView.text = statusTextView.placeHolderString
@@ -141,6 +153,12 @@ final class ProfileEditViewController: UIViewController {
       statusTextView.textView.text = data.statusMessage
       statusTextCountLabel.text = "\(String(describing: data.statusMessage!.count))/40"
       statusTextView.textViewResize()
+    }
+    
+    if statusTextView.isEmptyState {
+      statusTextView.textViewEmpty()
+    } else {
+      statusTextView.textViewFilled()
     }
   }
   
@@ -339,7 +357,9 @@ final class ProfileEditViewController: UIViewController {
     output.isModifiedObservable
       .bind(onNext: {[weak self] isModified in
         guard let self = self else { return }
-        self.navigationBar.saveButton.isEnabled = isModified
+        if self.isAllOptionValid() {
+          self.navigationBar.saveButton.isEnabled = isModified
+        }
       })
       .disposed(by: disposeBag)
     
@@ -362,11 +382,10 @@ final class ProfileEditViewController: UIViewController {
     profileEditStackView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.height.equalTo(200)
     }
     
     statusTextView.snp.makeConstraints { make in
-      make.top.equalTo(profileEditStackView.snp.bottom).offset(38)
+      make.top.equalTo(profileEditStackView.snp.bottom).offset(30)
       make.leading.trailing.equalToSuperview().inset(24)
     }
     
@@ -378,28 +397,57 @@ final class ProfileEditViewController: UIViewController {
   
   //MARK: TextField Methods
   
+  private func isAllOptionValid() -> Bool {
+    for textField in [nameTextField, birthdayTextField, mbtiTextField, jobTextField] {
+      if textField.isFloatingErrorMessage {
+        return false
+      }
+    }
+    
+    return statusTextView.isFloatingErrorMessage ? false : true
+  }
+  
   private func textFieldModeControl(action: ProfileEditActionControl) {
     switch action {
-    case .nameTextFieldSelected:
-      nameTextField.textFieldSelected()
-    case .nameTextFieldUnselected:
-      nameTextField.textFieldUnselected()
-    case .birthdayTextFieldSelected:
-      birthdayTextField.textFieldSelected()
-    case .birthdayTextFieldUnselected:
-      birthdayTextField.textFieldUnselected()
-    case .mbtiTextFieldSelected:
-      mbtiTextField.textFieldSelected()
-    case .mbtiTextFieldUnselected:
-      mbtiTextField.textFieldUnselected()
-    case .jobTextFieldSelected:
-      jobTextField.textFieldSelected()
-    case .jobTextFieldUnselected:
-      jobTextField.textFieldUnselected()
+    case .nameTextFieldSelected, .nameTextFieldUnselected:
+      if nameTextField.text!.isEmpty {
+        nameTextField.textFieldEmpty()
+      } else {
+        nameTextField.textFieldFilled()
+      }
+    case .birthdayTextFieldSelected, .birthdayTextFieldUnselected:
+      if birthdayTextField.text!.isEmpty {
+        birthdayTextField.textFieldEmpty()
+      } else {
+        birthdayTextField.textFieldFilled()
+      }
+      
+    case .mbtiTextFieldSelected, .mbtiTextFieldUnselected:
+      if mbtiTextField.text!.isEmpty {
+        mbtiTextField.textFieldEmpty()
+      } else {
+        mbtiTextField.textFieldFilled()
+      }
+    case .jobTextFieldSelected, .jobTextFieldUnselected:
+      if jobTextField.text!.isEmpty {
+        jobTextField.textFieldEmpty()
+      } else {
+        jobTextField.textFieldFilled()
+      }
     case .statusTextViewSelected:
       statusTextView.textViewSelected()
+      if statusTextView.isEmptyState {
+        statusTextView.textViewEmpty()
+      } else {
+        statusTextView.textViewFilled()
+      }
     case .statusTextViewUnselected:
       statusTextView.textViewUnselected()
+      if statusTextView.isEmptyState {
+        statusTextView.textViewEmpty()
+      } else {
+        statusTextView.textViewFilled()
+      }
     default:
       return
     }
@@ -453,34 +501,51 @@ final class ProfileEditViewController: UIViewController {
     }
     
     guard let textField = textField else {
+      if statusTextView.textView.text.isEmpty {
+        statusTextView.textViewEmpty()
+      } else {
+        statusTextView.textViewFilled()
+      }
       if text.count > maxCount {
         self.view.addSubview(statusTextInvalidMessageLabel)
+        statusTextView.isFloatingErrorMessage = true
         
         statusTextInvalidMessageLabel.snp.makeConstraints { make in
-          make.leading.equalTo(statusTextView.snp.leading).offset(12)
-          make.top.equalTo(statusTextView.snp.bottom).offset(16)
+          make.leading.equalTo(statusTextView.snp.leading).offset(4)
+          make.top.equalTo(statusTextView.snp.bottom).offset(8)
         }
         
         statusTextInvalidMessageLabel.text = "\(attributeName) \(maxCount)자 이내로 입력해주세요!"
+      
         navigationBar.saveButton.isEnabled = false
+      
       } else {
         statusTextInvalidMessageLabel.removeFromSuperview()
-        if viewModel.isModifiedData {
+        statusTextView.isFloatingErrorMessage = false
+        if viewModel.isModifiedData && isAllOptionValid(){
           navigationBar.saveButton.isEnabled = true
         }
       }
       return
     }
     
+    if textField.text!.isEmpty {
+      textField.textFieldEmpty()
+    } else {
+      textField.textFieldFilled()
+    }
+    
     if text.count > maxCount {
       textField.invalidDataOn(attributeName: attributeName, count: maxCount)
+      
       navigationBar.saveButton.isEnabled = false
+    
     }
     else if text.count == 0 && textField == nameTextField {
       navigationBar.saveButton.isEnabled = false
     } else {
       textField.invalidDataOff()
-      if viewModel.isModifiedData {
+      if viewModel.isModifiedData && isAllOptionValid(){
         navigationBar.saveButton.isEnabled = true
       }
     }
@@ -506,7 +571,7 @@ final class ProfileEditViewController: UIViewController {
   }
   
   private func saveButtonControl(isModified: Bool) {
-    if isModified {
+    if isModified && isAllOptionValid() {
       navigationBar.saveButton.isEnabled = true
     } else {
       navigationBar.saveButton.isEnabled = false
