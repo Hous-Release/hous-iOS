@@ -79,13 +79,21 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .fetch:
-      
-      let currentRow = currentState.selectedDayIndexPathRow ?? 0
+
+      var currentRow: Int = 0
+      if currentState.selectedDayIndexPathRow == nil {
+        currentRow = calTodayToIndex()
+      } else {
+        currentRow = currentState.selectedDayIndexPathRow ?? 0
+      }
+
       provider.byDayRepository.fetchTodo(currentRow)
-      return .just(.setIsLoadingHidden(false))
+      return .concat([
+        .just(.setIsLoadingHidden(false)),
+        .just(Mutation.setSelectedDayIndexPathRow(currentRow))
+      ])
 
     case let .didTapDaysOfWeekCell(row):
-
       provider.byDayRepository.selectDaysOfWeek(row)
       return .just(Mutation.setSelectedDayIndexPathRow(row))
 
@@ -202,5 +210,20 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
       byDayServiceMutation,
       bottomSheetServiceMutation
     )
+  }
+}
+
+extension ByDayTodoViewReactor {
+  private func calTodayToIndex() -> Int {
+    let cal = Calendar(identifier: .gregorian)
+    let now = Date()
+    let comps = cal.dateComponents([.weekday], from: now)
+    guard let weekday = comps.weekday else { return 0 }
+    switch weekday {
+    case 1:
+      return 6
+    default:
+      return weekday - 2
+    }
   }
 }

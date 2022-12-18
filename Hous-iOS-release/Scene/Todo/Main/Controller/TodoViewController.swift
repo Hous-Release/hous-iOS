@@ -101,13 +101,17 @@ extension TodoViewController {
       .disposed(by: disposeBag)
 
     reactor.pulse(\.$enterViewAllFlag)
-      .withUnretained(self)
-      .subscribe(onNext: { owner, flag in
-        if flag == true {
-          owner.navigationController?.pushViewController(FilteredTodoViewController(), animated: true)
-        }
-      })
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: transferViewAllTodo)
       .disposed(by: disposeBag)
+  }
+}
+
+extension TodoViewController {
+  private func transferViewAllTodo(_ flag: Bool) {
+    navigationController?.pushViewController(FilteredTodoViewController(), animated: true)
+    //self.reactor?.action.onNext(.initial)
   }
 }
 
