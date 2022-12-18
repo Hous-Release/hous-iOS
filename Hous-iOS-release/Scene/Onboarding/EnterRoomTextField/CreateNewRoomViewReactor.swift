@@ -147,7 +147,7 @@ extension CreateNewRoomViewReactor {
 
   private func limitCount(of roomName: String) -> Observable<Mutation> {
     if roomName.count > 8 {
-      let message = "방 이름은 8글자 미만으로 설정해주세요"
+      let message = "방 이름은 8글자 미만으로 설정해 주세요"
       return .concat([
         .just(.setIsErrorMessageHidden(false)),
         .just(.setErrorMessage(message))

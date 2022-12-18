@@ -20,7 +20,7 @@ final class PagingViewReactor: Reactor {
 
   enum Mutation {
     case setPagingContents([PagingContent])
-    case setSkip
+    case setSkipped(Bool)
     case setNext
     case setNextHidden(Int)
   }
@@ -38,12 +38,18 @@ final class PagingViewReactor: Reactor {
     switch action {
     case .viewWillAppear:
       return .just(Mutation.setPagingContents(PagingContent.sampleData))
+
     case .skipDidTap:
-      return .just(Mutation.setSkip)
+      return .just(Mutation.setSkipped(true))
+
     case .nextDidTap:
       return .just(Mutation.setNext)
+
     case let .didEndScroll(currentPage):
-      return .just(Mutation.setNextHidden(currentPage))
+      return .concat([
+        .just(Mutation.setNextHidden(currentPage)),
+        changeSkipStatus(currentPage)
+      ])
     }
   }
 
@@ -54,15 +60,31 @@ final class PagingViewReactor: Reactor {
     switch mutation {
     case let .setPagingContents(content):
       newState.pagingContents = content
-    case .setSkip:
-      newState.skip = !currentState.skip
-      newState.isNextButtonHidden = false
+
+    case let .setSkipped(isSkipped):
+      newState.skip = isSkipped
+      if isSkipped {
+        newState.isNextButtonHidden = false
+      }
+
     case .setNext:
       newState.next = !currentState.next
+
     case let .setNextHidden(currentPage):
       let state = currentPage == 3 ? false : true
       newState.isNextButtonHidden = state
     }
     return newState
+  }
+}
+
+extension PagingViewReactor {
+  private func changeSkipStatus(_ currentPage: Int) -> Observable<Mutation> {
+
+    if currentPage != 3 {
+      return .just(Mutation.setSkipped(false))
+    } else{
+      return .empty()
+    }
   }
 }

@@ -39,6 +39,7 @@ final class EnterInfoViewReactor: Reactor {
     case setIsNextButtonEnable(Bool)
     case setIsBirthdayPublic(Bool?)
     case setNextFlag(Bool?)
+    case setIsErrorLabelHidden(Bool)
     case setError(String?)
   }
 
@@ -49,6 +50,7 @@ final class EnterInfoViewReactor: Reactor {
     var birthday: String?
     var isBirthdayPublic: Bool? = true
     var isNextButtonEnable: Bool = false
+    var isErrorLabelHidden: Bool = true
     var nextFlag: Bool?
 
     var error: String? = nil
@@ -62,8 +64,9 @@ final class EnterInfoViewReactor: Reactor {
     case let .enterNickname(nickname):
       let birthday = currentState.birthday ?? ""
       return .concat([
-        limitMaxLength(of: nickname),
-        validateNextButton(nickname, birthday)
+        examineNickLength(of: nickname),
+        validateNextButton(nickname, birthday),
+        .just(.setNickname(nickname))
       ])
 
     case let .enterBirthday(birthday):
@@ -118,6 +121,9 @@ final class EnterInfoViewReactor: Reactor {
     case let .setNextFlag(flag):
       newState.nextFlag = flag
 
+    case let .setIsErrorLabelHidden(flag):
+      newState.isErrorLabelHidden = flag
+
     case let .setError(error):
       newState.error = error
     }
@@ -156,14 +162,16 @@ final class EnterInfoViewReactor: Reactor {
 
 extension EnterInfoViewReactor {
 
-  private func limitMaxLength(of nickname: String) -> Observable<Mutation> {
+  private func examineNickLength(of nickname: String) -> Observable<Mutation> {
 
-    let limitedText = nickname.prefix(3)
-    return .just(.setNickname(String(limitedText)))
+    return nickname.count > 3 ? .just(.setIsErrorLabelHidden(false)) : .just(.setIsErrorLabelHidden(true))
   }
 
   private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Mutation> {
-    let validation = nickname.count > 0 && birthday != ""
+    let validation = nickname.count > 0 &&
+                     nickname.count <= 3 &&
+                     birthday != ""
+
     return .just(Mutation.setIsNextButtonEnable(validation))
   }
 

@@ -117,9 +117,6 @@ extension ByDayTodoViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DaysOfWeekCollectionViewCell.className, for: IndexPath(row: row, section: 0)) as? DaysOfWeekCollectionViewCell else { return UICollectionViewCell() }
 
         cell.setCell(item)
-        if row == 0 {
-          collectionView.selectItem(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: [])
-        }
         return cell
       }
       .disposed(by: disposeBag)

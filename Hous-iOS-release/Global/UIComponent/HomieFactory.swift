@@ -69,10 +69,10 @@ struct GreenHomie: HomieProtocol {
 struct GrayHomie: HomieProtocol {
   var color = Colors.g4.color
   var profileBackgroundImage = Images.profileNone.image
-  var todoMemberChosenImage = Images.icGreenChosen.image
-  var todoMemberUnchosenImage = Images.icGreenUnchosen.image
-  var todoUpdateMemberSelectedImage = Images.icGreenYes.image
-  var todoUpdateMemberUnSelectedImage = Images.icGreenNo.image
+  var todoMemberChosenImage = Images.icGreyChosen.image
+  var todoMemberUnchosenImage = Images.icGreyUnchosen.image
+  var todoUpdateMemberSelectedImage = Images.icGrayYes.image
+  var todoUpdateMemberUnSelectedImage = Images.icGrayNo.image
 }
 
 struct HomieFactory {

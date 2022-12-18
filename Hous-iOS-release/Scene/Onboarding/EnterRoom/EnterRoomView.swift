@@ -24,7 +24,7 @@ class EnterRoomView: UIView {
   let contentView = UIView()
 
   let guideTitleLabel = UILabel().then {
-    $0.text = "이제 하우스를 입장해볼까요?"
+    $0.text = "이제 하우스에 입장해볼까요?"
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
     $0.textColor = Colors.black.color
   }
@@ -70,9 +70,9 @@ class EnterRoomView: UIView {
     }
 
     stackView.snp.makeConstraints { make in
-      make.top.equalTo(guideTitleLabel.snp.bottom).offset(64)
+      make.top.equalTo(guideTitleLabel.snp.bottom).offset(32)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.centerY.equalToSuperview().multipliedBy(1.1)
+      make.centerY.equalToSuperview()
     }
   }
 }

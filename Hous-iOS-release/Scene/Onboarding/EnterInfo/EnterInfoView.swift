@@ -29,12 +29,19 @@ class EnterInfoView: UIView {
 
   var nicknameTextfield: UnderlinedTextField = {
     var textfield = UnderlinedTextField()
-    textfield.placeholder = "Hous-에서 사용할 이름을 입력해주세요."
+    textfield.placeholder = "Hous-에서 사용할 이름을 입력해 주세요."
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
     return textfield
   }()
+
+  var nicknameErrorLabel = UILabel().then {
+    $0.text = "*닉네임은 3자 이하로 설정해 주세요"
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+    $0.textColor = Colors.red.color
+    $0.isHidden = true
+  }
 
   private let birthdayLabel: UILabel = {
     var label = UILabel()
@@ -77,7 +84,7 @@ class EnterInfoView: UIView {
     $0.configuration?.imagePadding = 8
   }
 
-  var nextButton = NextButton().then {
+  var nextButton = NextButton("다음으로").then {
     $0.isEnabled = false
   }
 
@@ -108,7 +115,7 @@ class EnterInfoView: UIView {
   private func render() {
 
     addSubViews([navigationBar, contentView, nextButton])
-    contentView.addSubViews([nicknameLabel, nicknameTextfield,
+    contentView.addSubViews([nicknameLabel, nicknameTextfield, nicknameErrorLabel,
                              birthdayLabel, birthdayTextfield,
                             checkBirthDayButton])
 
@@ -134,9 +141,14 @@ class EnterInfoView: UIView {
       make.height.equalTo(38)
     }
 
+    nicknameErrorLabel.snp.makeConstraints { make in
+      make.leading.equalTo(nicknameTextfield.snp.leading)
+      make.top.equalTo(nicknameTextfield.snp.bottom).offset(6)
+    }
+
     birthdayLabel.snp.makeConstraints { make in
       make.leading.equalTo(nicknameLabel.snp.leading)
-      make.top.equalTo(nicknameTextfield.snp.bottom).offset(40)
+      make.top.equalTo(nicknameErrorLabel.snp.bottom).offset(40)
     }
 
     birthdayTextfield.snp.makeConstraints { make in

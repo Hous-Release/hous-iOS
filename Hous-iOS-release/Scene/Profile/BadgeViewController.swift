@@ -22,7 +22,12 @@ class BadgeViewController: LoadingBaseViewController {
     return navBar
   }()
   
+  private lazy var backgroundView = UIView().then {
+    $0.backgroundColor = Colors.g7.color
+  }
+  
   private let badgeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+    $0.backgroundColor = .clear
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
     $0.collectionViewLayout = layout
@@ -79,6 +84,23 @@ class BadgeViewController: LoadingBaseViewController {
       .setDelegate(self)
       .disposed(by: disposeBag)
     
+    badgeCollectionView.rx.contentOffset
+      .map{ $0.y }
+      .bind(onNext: { [weak self] yPos in
+        guard let self = self else { return }
+        
+        if yPos <= 0 {
+          self.backgroundView.isHidden = false
+          self.backgroundView.snp.updateConstraints { make in
+            make.height.equalTo(abs(yPos))
+          }
+        } else {
+          self.backgroundView.isHidden = true
+        }
+        
+      })
+      .disposed(by: disposeBag)
+    
     
     badgeCollectionView.register(RepresentingBadgeCollectionViewCell.self, forCellWithReuseIdentifier: RepresentingBadgeCollectionViewCell.className)
     
@@ -87,11 +109,18 @@ class BadgeViewController: LoadingBaseViewController {
   
   private func configUI() {
     view.addSubViews([
+      backgroundView,
       badgeCollectionView,
       navigationBar
     ])
     
     configLoadingLayout()
+    
+    backgroundView.snp.makeConstraints { make in
+      make.top.equalTo(badgeCollectionView.snp.top)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(170)
+    }
     
     badgeCollectionView.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
@@ -218,7 +247,7 @@ extension BadgeViewController {
           guard let self = self else { return }
           
           var idx = 0
-          var before = 0
+          var before: Int?
           self.badgeWithStateModel.enumerated().forEach { (index, model) in
             if model.id == viewModel.id {
               idx = index
@@ -243,8 +272,11 @@ extension BadgeViewController {
           }
           
           cell.setRoomBadgeCellData(viewModel: self.badgeWithStateModel[idx])
-          let idPath = IndexPath(row: before, section: 1)
-          self.badgeCollectionView.reloadItems(at: [idPath])
+          if let before = before {
+            let idPath = IndexPath(row: before, section: 1)
+            self.badgeCollectionView.reloadItems(at: [idPath])
+          }
+          
         })
         .disposed(by: cell.disposeBag)
       

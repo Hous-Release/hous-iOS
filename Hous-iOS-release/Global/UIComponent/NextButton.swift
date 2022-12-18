@@ -9,19 +9,19 @@ import UIKit
 
 class NextButton: UIButton {
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
+  init(_ title: String) {
+    super.init(frame: .zero)
+    setup(title)
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setup() {
+  private func setup(_ title: String) {
     self.configuration = .bordered()
 
-    var attrString = AttributedString("다음으로")
+    var attrString = AttributedString(title)
     attrString.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
     attrString.foregroundColor = Colors.white.color
     configuration?.attributedTitle = attrString
@@ -40,5 +40,12 @@ class NextButton: UIButton {
         break
       }
     }
+  }
+
+  func setAttrTitle(_ title: String) {
+    var attrString = AttributedString(title)
+    attrString.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
+    attrString.foregroundColor = Colors.white.color
+    configuration?.attributedTitle = attrString
   }
 }

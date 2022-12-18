@@ -14,7 +14,7 @@ import RxSwift
 class OurRulesViewController: LoadingBaseViewController {
   
   private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "우리 집 Rules")
+    let navBar = NavBarWithBackButtonView(title: "Rules 수정")
     navBar.setRightButtonImage(image: Images.frame1.image)
     return navBar
   }()

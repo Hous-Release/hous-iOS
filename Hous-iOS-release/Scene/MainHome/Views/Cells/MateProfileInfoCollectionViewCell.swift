@@ -131,6 +131,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
     
     statusMessage.attributedText = attrString
+
     
     if data.badgeImageURL != nil {
       badgeView.kf.setImage(with: URL(string: data.badgeImageURL!))

@@ -138,6 +138,7 @@
 		B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */; };
 		B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */; };
 		B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */; };
+		B5689CBB294F3F48006D20F5 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5689CBA294F3F48006D20F5 /* monday.json */; };
 		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
@@ -169,7 +170,6 @@
 		B5F9FB5B292CCB6A0056C0B1 /* wednesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB54292CCB690056C0B1 /* wednesday.json */; };
 		B5F9FB5C292CCB6A0056C0B1 /* tuesday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB55292CCB6A0056C0B1 /* tuesday.json */; };
 		B5F9FB5D292CCB6A0056C0B1 /* birthday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB56292CCB6A0056C0B1 /* birthday.json */; };
-		B5F9FB5E292CCB6A0056C0B1 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB57292CCB6A0056C0B1 /* monday.json */; };
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
@@ -401,6 +401,7 @@
 		B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentingBadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B5689CBA294F3F48006D20F5 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
 		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
@@ -431,7 +432,6 @@
 		B5F9FB54292CCB690056C0B1 /* wednesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wednesday.json; sourceTree = "<group>"; };
 		B5F9FB55292CCB6A0056C0B1 /* tuesday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tuesday.json; sourceTree = "<group>"; };
 		B5F9FB56292CCB6A0056C0B1 /* birthday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = birthday.json; sourceTree = "<group>"; };
-		B5F9FB57292CCB6A0056C0B1 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
 		B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCellReactor.swift; sourceTree = "<group>"; };
 		B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByMemListCell.swift; sourceTree = "<group>"; };
 		B8249A5429116E69008005DE /* MemEmptyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemEmptyListCell.swift; sourceTree = "<group>"; };
@@ -705,8 +705,8 @@
 				9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */,
 				B5F9FB56292CCB6A0056C0B1 /* birthday.json */,
 				B5F9FB53292CCB690056C0B1 /* friday.json */,
-				B5F9FB57292CCB6A0056C0B1 /* monday.json */,
 				B5F9FB51292CCB690056C0B1 /* thursday.json */,
+				B5689CBA294F3F48006D20F5 /* monday.json */,
 				B5F9FB55292CCB6A0056C0B1 /* tuesday.json */,
 				B5F9FB54292CCB690056C0B1 /* wednesday.json */,
 				B5F9FB52292CCB690056C0B1 /* weekend.json */,
@@ -1579,12 +1579,12 @@
 				9B2F469B2923FB80002D9BD2 /* tri_yes.json in Resources */,
 				B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */,
 				77AEF34228E200D2002A102B /* splashlottie.json in Resources */,
+				B5689CBB294F3F48006D20F5 /* monday.json in Resources */,
 				9B6DD14F292A4D3D0038BFD7 /* empty_profile.json in Resources */,
 				9B2F469E2923FB8D002D9BD2 /* cir_no.json in Resources */,
 				9B2F46A62923FBA3002D9BD2 /* pen_yes.json in Resources */,
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */,
-				B5F9FB5E292CCB6A0056C0B1 /* monday.json in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
 				9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */,
 				9B2F46A32923FB95002D9BD2 /* hex_yes.json in Resources */,

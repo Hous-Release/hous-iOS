@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     let serviceProvider = ServiceProvider()
     let reactor = SplashReactor(provider: serviceProvider)
-    window.rootViewController = SplashViewController(reactor)
+    //window.rootViewController = SplashViewController(reactor)
+    window.rootViewController = PagingViewController()
     window.backgroundColor = .white
     window.makeKeyAndVisible()
     self.window = window

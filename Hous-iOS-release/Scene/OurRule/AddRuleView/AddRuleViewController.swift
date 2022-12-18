@@ -174,7 +174,7 @@ class AddRuleViewController: LoadingBaseViewController {
           cancelText: "계속 작성하기",
           actionText: "나가기",
           title: "앗, 잠깐! 이대로 나가면\nRules가 추가되지 않아요!",
-          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+          subtitle: "Rules 추가를 취소하려면 나가기 버튼을 눌러주세요."
         )
         let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 
@@ -229,7 +229,7 @@ class AddRuleViewController: LoadingBaseViewController {
           self.rulesSubject.onNext(self.rules)
           
           self.ruleTextField.text = ""
-          self.ruleTextField.endEditing(true)
+//          self.ruleTextField.endEditing(true)
           self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
         }
@@ -277,11 +277,17 @@ extension AddRuleViewController {
       switch textField {
       case ruleTextField:
         if let text = ruleTextField.text {
+          
           if text.count > maxCount {
             let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
             let newString = String(text[text.startIndex..<maxIndex])
             ruleTextField.text = newString
+          } else {
+            ruleTextField.changeLayerColor(color: Colors.blue.color.cgColor)
           }
+          
+        } else {
+          ruleTextField.changeLayerColor(color: Colors.g4.color.cgColor)
         }
       default:
         return
