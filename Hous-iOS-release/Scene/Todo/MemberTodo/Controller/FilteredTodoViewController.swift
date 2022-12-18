@@ -24,7 +24,7 @@ final class FilteredTodoViewController: UIViewController, ReactorKit.View {
 
   var disposeBag = DisposeBag()
 
-  var viewType: FilteringType = .member {
+  var viewType: FilteringType = .byDay {
     didSet {
       var attrString = AttributedString()
 
@@ -180,7 +180,7 @@ extension FilteredTodoViewController {
     navigationController?.navigationBar.isHidden = true
     navigationBar.delegate = self
     view.backgroundColor = Colors.white.color
-    viewType = .member
+    viewType = .byDay
   }
 
   private func render() {
