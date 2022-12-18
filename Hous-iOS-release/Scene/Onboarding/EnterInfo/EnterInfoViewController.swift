@@ -76,11 +76,6 @@ extension EnterInfoViewController {
 
   private func bindState(_ reactor: EnterInfoViewReactor) {
 
-    reactor.state.map { $0.nickname }
-      .asDriver(onErrorJustReturn: "")
-      .drive(mainView.nicknameTextfield.rx.text)
-      .disposed(by: disposeBag)
-
     reactor.state.map { $0.isBirthdayPublic }
       .distinctUntilChanged()
       .compactMap { $0 }
@@ -96,6 +91,12 @@ extension EnterInfoViewController {
     reactor.state.map { $0.isNextButtonEnable }
       .distinctUntilChanged()
       .bind(to: mainView.nextButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+
+    reactor.state.map { $0.isErrorLabelHidden }
+      .distinctUntilChanged()
+      .asDriver(onErrorJustReturn: true)
+      .drive(mainView.nicknameErrorLabel.rx.isHidden)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.nextFlag }
