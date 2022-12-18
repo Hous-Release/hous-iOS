@@ -87,7 +87,7 @@ extension EnterRoomCodeViewController {
     reactor.pulse(\.$presentPopupFlag)
       .compactMap { $0 }
       .asDriver(onErrorJustReturn: false)
-      .drive(onNext: presentPopupView)
+      .drive(onNext: presentEnterPopupView)
       .disposed(by: disposeBag)
 
     reactor.pulse(\.$enterRoomFlag)
@@ -95,11 +95,25 @@ extension EnterRoomCodeViewController {
       .asDriver(onErrorJustReturn: false)
       .drive(onNext: enterExistRoom)
       .disposed(by: disposeBag)
+
+    reactor.state.map { $0.error }
+      .compactMap { $0 }
+      .asDriver(onErrorJustReturn: 400)
+      .drive(onNext: errorHandling)
+      .disposed(by: disposeBag)
   }
 }
 
 extension EnterRoomCodeViewController {
-  private func presentPopupView(_ flag: Bool) {
+
+  private func errorHandling(_ statusCode: Int) {
+
+    if statusCode == 403 {
+      Toast.show(message: "해당 방의 정원인 16명을 초과했습니다.", controller: self)
+    }
+  }
+
+  private func presentEnterPopupView(_ flag: Bool) {
     guard let host = reactor?.currentState.roomHostNickname else { return }
 
     let enterRoomModel = ImagePopUpModel(
