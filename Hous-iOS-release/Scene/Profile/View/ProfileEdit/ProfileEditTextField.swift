@@ -10,6 +10,7 @@ import Then
 
 class ProfileEditTextField: UITextField {
   
+  var isFloatingErrorMessage: Bool = false
   let underlineLayer = CALayer()
   let animatedunderlineLayer = CALayer()
   private let invalidMessageLabel = UILabel().then {
@@ -18,6 +19,7 @@ class ProfileEditTextField: UITextField {
   }
   
   var birthdayPublicButton = UIButton(configuration: .plain()).then {
+    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 0, bottom: 0, trailing: 0)
     $0.configurationUpdateHandler = { btn in
       switch btn.state {
       case .normal:
@@ -33,16 +35,27 @@ class ProfileEditTextField: UITextField {
     }
   }
   
+  override var intrinsicContentSize: CGSize {
+    return isFloatingErrorMessage ? CGSize(width: UIView.noIntrinsicMetric, height: 70) : CGSize(width: UIView.noIntrinsicMetric, height: 59)
+  }
+  
+  override open func textRect(forBounds bounds: CGRect) -> CGRect {
+    return isFloatingErrorMessage ? bounds.inset(by: UIEdgeInsets(top: 12, left: 4, bottom: 0, right: 0)) : bounds.inset(by: UIEdgeInsets(top: 24, left: 4, bottom: 0, right: 0))
+  }
+  
+  override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+    return isFloatingErrorMessage ? bounds.inset(by: UIEdgeInsets(top: 12, left: 4, bottom: 0, right: 0)) : bounds.inset(by: UIEdgeInsets(top: 24, left: 4, bottom: 0, right: 0))
+  }
+  
   override func layoutSubviews() {
     super.layoutSubviews()
     setupUnderlineLayer()
   }
   
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.layer.addSublayer(underlineLayer)
-    self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
-    self.leftViewMode = .always
     self.rightView = birthdayPublicButton
     self.rightViewMode = .always
   }
@@ -53,7 +66,7 @@ class ProfileEditTextField: UITextField {
   
   func setupUnderlineLayer() {
     var frame = self.bounds
-    frame.origin.y = frame.size.height + 8
+    frame.origin.y = self.isFloatingErrorMessage ? frame.size.height - 11 : frame.size.height
     frame.size.height = 2
     
     underlineLayer.frame = frame
@@ -65,7 +78,7 @@ class ProfileEditTextField: UITextField {
 }
 
 extension ProfileEditTextField {
-  func textFieldSelected() {
+  func textFieldFilled() {
     self.layer.addSublayer(animatedunderlineLayer)
     
     let animation = CAKeyframeAnimation(keyPath: "transform.scale.x")
@@ -73,28 +86,35 @@ extension ProfileEditTextField {
     animation.values = [0, 1]
     animation.duration = 0.8
     animation.keyTimes = [0, 0.8]
-//    animatedunderlineLayer.add(animation, forKey: "Selected")
+    //    animatedunderlineLayer.add(animation, forKey: "Selected")
   }
   
-  func textFieldUnselected() {
+  func textFieldEmpty() {
     let animatedunderlineLayer = self.animatedunderlineLayer
     animatedunderlineLayer.removeFromSuperlayer()
   }
   
   func invalidDataOn(attributeName: String, count: Int) {
     self.addSubview(invalidMessageLabel)
+    self.isFloatingErrorMessage = true
+    
     
     invalidMessageLabel.snp.makeConstraints { make in
-      make.leading.equalTo(self.snp.leading).offset(12)
-      make.top.equalTo(self.snp.bottom).offset(16)
+      make.leading.equalToSuperview().offset(4)
+      make.top.equalTo(self.snp.bottom)
+      
     }
     
     invalidMessageLabel.text = "\(attributeName) \(count)자 이내로 입력해주세요!"
+    
+    self.reloadInputViews()
     
   }
   
   func invalidDataOff() {
     invalidMessageLabel.removeFromSuperview()
+    self.isFloatingErrorMessage = false
+    self.reloadInputViews()
   }
   
 }
