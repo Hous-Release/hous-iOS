@@ -27,7 +27,7 @@ final class ProfileDescriptionCollectionViewCell: UICollectionViewCell {
     layout.minimumLineSpacing = 24
     layout.scrollDirection = .horizontal
     layout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-    layout.itemSize = CGSize(width: 136, height: 92)
+    layout.itemSize = CGSize(width: 170, height: 92)
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.register(cell: ProfileDescriptionInnerCollectionViewCell.self)

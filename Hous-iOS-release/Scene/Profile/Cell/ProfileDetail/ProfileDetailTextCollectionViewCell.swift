@@ -53,7 +53,7 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
     
     recommendRuleView.snp.makeConstraints {make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(recommendRuleTitleView.snp.bottom)
+      make.top.equalTo(recommendRuleTitleView.snp.bottom).offset(10)
       make.width.height.equalTo(Size.recommendRuleViewSIze)
     }
   }
