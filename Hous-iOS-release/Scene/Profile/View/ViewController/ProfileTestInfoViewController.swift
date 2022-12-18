@@ -38,7 +38,7 @@ class ProfileTestInfoViewController: UIViewController {
   }
   
   private let testDescriptionLabel = UILabel().then {
-    $0.text = "지금부터 15개의 질문에 답변해주세요:) \n 솔직한 답변은 서로를 배려할 수 있는 \n 좋은 기회가 될거에요!"
+    $0.text = "지금부터 15개의 질문에 답변해주세요 :) \n 솔직한 답변은 서로를 배려할 수 있는 \n 좋은 기회가 될거에요!"
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.g6.color
     $0.numberOfLines = 3

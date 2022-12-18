@@ -91,7 +91,7 @@ final class ProfileDescriptionInnerCollectionViewCell: UICollectionViewCell {
     grayLineView.snp.makeConstraints { make in
       make.top.equalTo(attributeName.snp.bottom).offset(4)
       make.leading.equalToSuperview()
-      make.width.equalTo(118)
+      make.width.equalToSuperview().offset(-15)
       make.height.equalTo(2)
     }
   }

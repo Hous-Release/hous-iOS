@@ -281,7 +281,7 @@ extension ProfileSettingViewController {
       cancelText: "취소하기",
       actionText: "로그아웃",
       title: "정말 로그아웃 하시겠어요?",
-      subtitle: "재로그인 시 현재 방을 계속 사용하실 수 있어요."
+      subtitle: "다시 로그인하면 현재 방을 계속 사용할 수 있어요."
     )
     
     let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: logoutButtonPopUpModel)
