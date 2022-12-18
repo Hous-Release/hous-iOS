@@ -123,7 +123,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           color: HomieColor(rawValue: $0.color) ?? .GRAY,
           selectedDay: $0.dayOfWeeks.map { self.asDay($0) },
           onboardingID: $0.onboardingID,
-          isExpanded: false
+          isExpanded: $0.dayOfWeeks.isEmpty ? false : true
         )
       }
 
