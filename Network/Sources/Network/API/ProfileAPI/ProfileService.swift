@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 public enum ProfileService {
+  case postFeedback
   case getAlarmInfo(_ data: ProfileDTO.Request.GetAlarmRequestDTO)
   case getProfile
   case getProfileTestResult(_ data: ProfileDTO.Request.ProfileTestResultDTO)
@@ -52,6 +53,9 @@ extension ProfileService: TargetType {
       return "/user"
     case .patchAlarmSetting:
       return "/user/push"
+      
+    case .postFeedback:
+      return "/user/feedback"
     }
     
   }
@@ -66,12 +70,15 @@ extension ProfileService: TargetType {
       
     case .patchAlarmSetting:
       return .patch
+      
+    case .postFeedback:
+      return .post
     }
   }
   
   public var parameters: RequestParams {
     switch self {
-    case .getProfile, .getBadges, .updateRepresentBadge, .getHomieProfile, .getProfileTest, .getAlarmSettingInfo:
+    case .getProfile, .getBadges, .updateRepresentBadge, .getHomieProfile, .getProfileTest, .getAlarmSettingInfo, .postFeedback:
       return .requestPlain
       
     case let .putProfileEdit(dto):

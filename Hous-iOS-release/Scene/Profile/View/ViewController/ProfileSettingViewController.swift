@@ -22,6 +22,7 @@ final class ProfileSettingViewController: UIViewController {
   let actionDetected = PublishSubject<ProfileSettingActionControl>()
   let provider = ServiceProvider()
   var isInRoom = true
+  let profileRepository = ProfileRepositoryImp()
   
   //MARK: UI Templetes
   
@@ -356,7 +357,6 @@ extension ProfileSettingViewController: MFMailComposeViewControllerDelegate {
     }
   }
   
-  
   private func currentAppVersion() -> String {
     if let info: [String: Any] = Bundle.main.infoDictionary,
        let currentVersion: String
@@ -367,6 +367,19 @@ extension ProfileSettingViewController: MFMailComposeViewControllerDelegate {
   }
   
   func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    switch result {
+    case .saved:
+      Toast.show(message: "피드백 메일이 임시 저장되었어요!", controller: self)
+    case .failed:
+      Toast.show(message: "피드백 메일이 전송에 실패했어요!", controller: self)
+    case .sent:
+      Toast.show(message: "피드백 메일이 정상적으로 보내졌어요!", controller: self)
+      profileRepository.postFeedbackBadge()
+    case .cancelled:
+      Toast.show(message: "피드백 전송을 취소했어요!", controller: self)
+    @unknown default:
+      fatalError()
+    }
     controller.dismiss(animated: true, completion: nil)
   }
 }

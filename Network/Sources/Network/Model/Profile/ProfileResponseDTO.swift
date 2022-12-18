@@ -10,6 +10,10 @@ import Foundation
 
 public extension ProfileDTO.Response {
   
+  struct VoidDTO: Codable {
+    
+  }
+  
   // MARK: Get Alarm
   struct GetAlarmResponseDTO: Codable {
     public let contents: [GetAlarmContent]
