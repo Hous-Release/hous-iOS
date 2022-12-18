@@ -124,6 +124,14 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     self.statusMessage.text = data.statusMessage ?? "아직 소개가 작성되지 않았어요."
     
+    let attrString = NSMutableAttributedString(string: self.statusMessage.text ?? "")
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = 3
+    paragraphStyle.alignment = .left
+    attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+    
+    statusMessage.attributedText = attrString
+    
     if data.badgeImageURL != nil {
       badgeView.kf.setImage(with: URL(string: data.badgeImageURL!))
       badgeLabel.text = data.badgeLabel
