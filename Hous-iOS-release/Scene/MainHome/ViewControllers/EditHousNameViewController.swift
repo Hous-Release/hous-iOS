@@ -21,13 +21,13 @@ class EditHousNameViewController: LoadingBaseViewController {
   
   //MARK: UI Components
   private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "우리 집 별명 바꾸기")
+    let navBar = NavBarWithBackButtonView(title: "우리 집 별명 수정")
     navBar.setRightButtonText(text: "저장")
     return navBar
   }()
   
   private let descriptionLabel = UILabel().then {
-    $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요!"
+    $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요."
     $0.textColor = Colors.g5.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
@@ -99,10 +99,10 @@ class EditHousNameViewController: LoadingBaseViewController {
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
         let defaultPopUpModel = DefaultPopUpModel(
-          cancelText: "돌아가기",
+          cancelText: "계속 수정하기",
           actionText: "나가기",
           title: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
-          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+          subtitle: "수정을 취소하려면 나가기 버튼을 눌러주세요."
         )
         let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 

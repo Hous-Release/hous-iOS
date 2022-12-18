@@ -244,7 +244,7 @@ class EditRuleViewController: LoadingBaseViewController {
           cancelText: "계속 수정하기",
           actionText: "나가기",
           title: "수정사항이 저장되지 않았어요!",
-          subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+          subtitle: "Rules 수정을 취소하려면 나가기 버튼을 눌러주세요."
         )
         let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 

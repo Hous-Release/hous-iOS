@@ -162,9 +162,9 @@ extension TestViewController {
       actionText: "창여코드 복사하기",
                                                 text:
 """
-방 생성이 완료 되었습니다.
+방 생성이 완료되었습니다.
 참여 코드를 복사해서
-룸메이트에게 공유해보세요!
+룸메이트에게 공유해 보세요!
 """)
 
     let popUpType = PopUpType.copyCode(copyPopUpModel: copyCodePopUpModel)
@@ -221,7 +221,7 @@ extension TestViewController {
       cancelText: "취소하기",
       actionText: "현재 기기에서 로그인하기",
       title: "다른 기기에서 로그인 중이에요!",
-      subtitle: "다른 기기에서 강제 로그아웃 후 현재 기기에서\nHous-를 사용해볼까요?"
+      subtitle: "다른 기기에서 강제 로그아웃 후\n현재 기기에서 Hous-를 사용해볼까요?"
     )
 
     let popUpType = PopUpType.duplicate(popUpModel)

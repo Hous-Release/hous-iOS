@@ -40,7 +40,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
   
   private let progressLabel = UILabel().then {
-    $0.text = "오늘 우리의 to-do 진행률"
+    $0.text = "오늘의 Our to-do 진행률"
     $0.textColor = Colors.g5.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textAlignment = .left

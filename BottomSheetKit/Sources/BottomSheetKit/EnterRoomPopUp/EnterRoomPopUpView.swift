@@ -76,7 +76,7 @@ internal final class EnterRoomPopUpView: UIView {
     label.textColor = Colors.g5.color
     label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     label.textAlignment = .center
-    label.text = "초대한 방에 참여할까요?"
+    label.text = "생성한 방에 참여할까요?"
     return label
   }()
 

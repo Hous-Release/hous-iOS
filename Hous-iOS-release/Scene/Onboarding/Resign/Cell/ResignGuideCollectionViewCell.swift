@@ -37,7 +37,7 @@ class ResignGuideCollectionViewCell: UICollectionViewCell {
   }
 
   let guideLabel = UILabel().then {
-    $0.text = "회원을 탈퇴하면 탈퇴 신청 즉시\n회원의 개인정보는 삭제되며 복구될 수 없습니다.\n\n회원님께서 불편하셨던 점이나 불만사항을\n알려주시면 적극 반영해서 고객님의 불편함을\n해결해 드리도록 노력하는 Hous-가 되겠습니다."
+    $0.text = "회원을 탈퇴하면 탈퇴 신청 즉시\n회원님의 개인정보는 삭제되며 복구될 수 없습니다.\n\n회원님께서 불편하셨던 점이나 불만사항을\n알려주시면 적극 반영해서 고객님의 불편함을\n해결해 드리도록 노력하는 Hous-가 되겠습니다."
     $0.textColor = Colors.g4.color
     $0.numberOfLines = 6
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)

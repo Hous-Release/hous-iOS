@@ -650,7 +650,7 @@ extension UpdateTodoViewController: NavBarWithBackButtonViewDelegate {
         cancelText: "계속 작성하기",
         actionText: "나가기",
         title: "수정사항이 저장되지 않았어요!",
-        subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        subtitle: "to-do 수정을 취소하려면 나가기 버튼을 눌러주세요."
       )
     }
 
@@ -659,7 +659,7 @@ extension UpdateTodoViewController: NavBarWithBackButtonViewDelegate {
         cancelText: "계속 작성하기",
         actionText: "나가기",
         title: "앗 잠깐! 이대로 나가면\nto-do가 추가되지 않아요!",
-        subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+        subtitle: "to-do 추가를 취소하려면 나가기 버튼을 눌러주세요."
       )
     }
 
