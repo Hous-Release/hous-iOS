@@ -29,6 +29,7 @@ class ResignView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     render()
+    setup()
   }
 
   required init?(coder: NSCoder) {
