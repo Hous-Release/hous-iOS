@@ -53,6 +53,7 @@ class ResignViewController: UIViewController, ReactorKit.View {
     navigationController?.navigationBar.isHidden = true
     mainView.collectionView.delegate = self
     mainView.collectionView.dataSource = self
+    mainView.collectionView.layoutIfNeeded()
     mainView.navigationBarView.delegate = self
     setKeyboardObserver()
   }
