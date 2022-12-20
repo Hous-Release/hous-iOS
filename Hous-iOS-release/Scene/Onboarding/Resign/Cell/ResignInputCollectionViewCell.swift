@@ -114,6 +114,7 @@ extension ResignInputCollectionViewCell {
     titleLabel.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(24)
       make.top.equalToSuperview().offset(18)
+      make.height.equalTo(22)
     }
 
     reasonTextField.snp.makeConstraints { make in
@@ -205,7 +206,7 @@ extension ResignInputCollectionViewCell: UITextViewDelegate {
 
     reasonTextView.textViewResize()
     let height = reasonTextView.bounds.height
-    //delegate?.didTextViewChange(estimatedSize, height)
+    delegate?.didTextViewChange(estimatedSize, height)
   }
 }
 
