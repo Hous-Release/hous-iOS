@@ -18,7 +18,7 @@ class ResignView: UIView {
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
 
     var layout = UICollectionViewFlowLayout()
-    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+    //layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     layout.scrollDirection = .vertical
     $0.register(cell: ResignGuideCollectionViewCell.self)
     $0.register(cell: ResignInputCollectionViewCell.self)
@@ -49,6 +49,12 @@ extension ResignView {
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(navigationBarView.snp.bottom)
       make.leading.trailing.bottom.equalToSuperview()
+    }
+  }
+
+  private func setup() {
+    if let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }
   }
 }
