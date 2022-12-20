@@ -75,6 +75,7 @@ extension ResignGuideCollectionViewCell {
     stackView.snp.makeConstraints { make in
       make.trailing.leading.equalToSuperview().inset(24)
       make.top.bottom.equalToSuperview()
+      make.height.equalTo(416)
     }
 
     separateView.snp.makeConstraints { make in
