@@ -9,6 +9,12 @@ import UIKit
 
 class ResignGuideCollectionViewCell: UICollectionViewCell {
 
+  enum Size {
+    static let screenWidth = UIScreen.main.bounds.width
+  }
+
+  let mainView = UIView()
+
   let stackView = UIStackView().then {
     $0.axis = .vertical
     $0.alignment = .fill
@@ -62,7 +68,13 @@ extension ResignGuideCollectionViewCell {
 
   private func render() {
 
-    addSubView(stackView)
+    addSubView(mainView)
+    mainView.addSubView(stackView)
+
+    mainView.snp.makeConstraints { make in
+      make.width.equalTo(Size.screenWidth)
+      make.edges.equalToSuperview()
+    }
 
     stackView.addArrangedSubviews(
       titleLabel,
@@ -75,7 +87,6 @@ extension ResignGuideCollectionViewCell {
     stackView.snp.makeConstraints { make in
       make.trailing.leading.equalToSuperview().inset(24)
       make.top.bottom.equalToSuperview()
-      make.height.equalTo(416)
     }
 
     separateView.snp.makeConstraints { make in
