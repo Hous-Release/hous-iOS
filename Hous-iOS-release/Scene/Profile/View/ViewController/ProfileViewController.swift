@@ -57,6 +57,7 @@ final class ProfileViewController: LoadingBaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: false)
     profileCollectionView.reloadData()
   }
   
@@ -71,6 +72,7 @@ final class ProfileViewController: LoadingBaseViewController {
   //MARK: Setup UI
   
   private func setup() {
+    navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     profileCollectionView.backgroundColor = .white
     profileCollectionView.delegate = self
     navigationController?.navigationBar.isHidden = true
