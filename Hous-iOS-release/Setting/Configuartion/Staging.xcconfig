@@ -8,11 +8,12 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+// Target name
 PRODUCT_NAME = $(inherited)(Staging)
 APP_BUNDLE_ID = com.hous.Hous-iOS-release.staging
-APP_NAME = Hous(Staging)
+APP_NAME = Hous-(Staging)
 OTHER_LDFLAGS = -ObjC
-CFBundleDisplayName = Hous(Staging)
+CFBundleDisplayName = Hous-(Staging)
 API_BASE_URL = 43.200.122.252/v1
 
 // Version
