@@ -97,7 +97,7 @@ final class ProfileTestLoadingViewController: UIViewController {
         self?.present(destinationViewController, animated: true)
       })
       .disposed(by: disposeBag)
-    print(self.profileTestSaveData)
+//    print(self.profileTestSaveData)
     self.profileRepository.putProfileTest(data: self.profileTestSaveData)
     viewModel.timeStart.onNext(())
   }

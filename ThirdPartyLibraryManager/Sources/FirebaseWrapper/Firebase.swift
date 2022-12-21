@@ -24,8 +24,6 @@ final class FirebaseConfigure: FirebaseConfiguarable {
       return
     }
 
-    print("BundleID ==", bundleID)
-
     if bundleID == "com.hous.Hous-iOS-release" {
 
       filePath = Bundle.module.path(
