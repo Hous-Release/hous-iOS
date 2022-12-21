@@ -89,7 +89,8 @@ let package = Package(
                 .target(name: "FirebaseMessaging"),
             ],
             resources: [
-                .process("Resource")
+//                .process("Resource/"),
+                .copy("Resource/")
             ]
         ),
     ]
