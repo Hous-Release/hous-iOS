@@ -221,6 +221,8 @@ final class ProfileSettingViewController: UIViewController {
     case .didTabBack:
       setTabBarIsHidden(isHidden: false)
       self.navigationController?.popViewController(animated: true)
+    case .didTabLicense:
+      presentLicenseURL()
     }
   }
   
@@ -300,6 +302,12 @@ extension ProfileSettingViewController {
         break
       }
     }
+  }
+  
+  func presentLicenseURL() {
+    let licenseURL = NSURL(string: "https://sugared-lemming-812.notion.site/iOS-f772bcb865e14f2c9053c1fe482da499")
+    let licenseSafariView: SFSafariViewController = SFSafariViewController(url: licenseURL! as URL)
+    self.present(licenseSafariView, animated: true)
   }
   
   func presentAgreementURL() {

@@ -16,6 +16,7 @@ enum ProfileSettingActionControl {
   case didTabLeavingRoom
   case didTabWithdraw
   case didTabBack
+  case didTabLicense
 }
 
 enum ProfileAlarmSettingActionControl {
