@@ -126,28 +126,38 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
     case let .setSelectedDayIndexPathRow(row):
       newState.selectedDayIndexPathRow = row
+
     case let .setCountTodoSection(cnt):
       newState.countTodoSection = cnt
+
     case let .setMyTodosByDaySection(myTodo):
       newState.myTodosByDaySection = myTodo
+
     case let .setMyTodosEmptySection(empty):
       newState.myTodosEmptySection = empty
+
     case let .setOurTodosByDaySection(ourTodo):
       newState.ourTodosByDaySection = ourTodo
+
     case let .setOurTodosEmptySection(empty):
       newState.ourTodosEmptySection = empty
 
     case let .setSelectedTodoId(id):
       newState.selectedTodoId = id
+
     case let .setSelectedTodoSummary(info):
       newState.selectedTodoSummary = info
+
     case let .setIsDeleteSuccess(flag):
       newState.isDeleteSuccess = flag
 
     case let .setError(error):
       newState.error = error
     case .setInitial:
+
+      let currentSelectedDayIndexPathRow = currentState.selectedDayIndexPathRow
       newState = initialState
+      newState.selectedDayIndexPathRow = currentSelectedDayIndexPathRow
     }
     return newState
   }
