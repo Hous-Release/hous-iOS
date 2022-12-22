@@ -151,6 +151,7 @@ public enum Images {
   public static let bottomGradient = ImageAsset(name: "bottom_gradient")
   public static let icAlarmSetting = ImageAsset(name: "ic_alarm_setting")
   public static let icFeedback = ImageAsset(name: "ic_feedback")
+  public static let icFolder = ImageAsset(name: "ic_folder")
   public static let icInfo = ImageAsset(name: "ic_info")
   public static let icNext = ImageAsset(name: "ic_next")
   public static let icSettingRadioDisable = ImageAsset(name: "ic_setting_radio_disable")
