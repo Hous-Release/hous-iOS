@@ -10,6 +10,7 @@
 import FirebaseWrapper
 import RxReachability
 import Reachability
+import RxCocoa
 import RxSwift
 import UIKit
 import UserInformation
@@ -17,11 +18,11 @@ import UserInformation
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  let reachabilityRelay = PublishRelay<Void>()
   var reachability: Reachability?
   private var disposeBag = DisposeBag()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
 
     startReachability()
     reactionForNetwork()
@@ -127,16 +128,42 @@ extension AppDelegate {
   }
 
   func reactionForNetwork() {
-    Reachability.rx.isDisconnected
+    reachabilityRelay
       .subscribe(onNext: {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
-        guard let topViewController = UIApplication.shared.keyWindowPresentedController else {
-          return
+        if self.reachability?.connection == .unavailable {
+          self.presentNotConnectedViewController()
         }
-        topViewController.present(vc, animated: true)
+      })
+      .disposed(by: disposeBag)
 
+    Reachability.rx.reachabilityChanged
+      .subscribe(onNext: { reachabilityChanged in
+        if reachabilityChanged.connection == .unavailable {
+          self.presentNotConnectedViewController()
+        }
       })
       .disposed(by: disposeBag)
   }
+
+  private func presentNotConnectedViewController() {
+    let vc = NotConnectedInternetViewController()
+    vc.modalPresentationStyle = .fullScreen
+
+    guard let topViewController = UIApplication.shared.keyWindowPresentedController else {
+      return
+    }
+    topViewController.present(vc, animated: true)
+  }
+}
+
+private var isConnectedToVpn: Bool {
+  if let settings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? Dictionary<String, Any>,
+     let scopes = settings["__SCOPED__"] as? [String:Any] {
+    for (key, _) in scopes {
+      if key.contains("tap") || key.contains("tun") || key.contains("ppp") || key.contains("ipsec") || key.contains("ipsec0") {
+        return true
+      }
+    }
+  }
+  return false
 }
