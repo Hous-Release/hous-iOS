@@ -62,12 +62,17 @@ class ResignViewReactor: ReactorKit.Reactor {
       ])
 
     case .didTapResign:
-      guard let comment = currentState.detailReason,
+      guard var comment = currentState.detailReason,
             let feedbackType = currentState.resignReason else {
         return .empty()
       }
 
       let serverCode = ResignReasonType(rawValue: feedbackType)?.description ?? "NO"
+
+      if comment == "의견 남기기" && (currentState.numOfText ?? "").first == "0" {
+        comment = ""
+      }
+
 
       let dto = UserDTO.Request.DeleteUserRequestDTO(
         comment: comment,
