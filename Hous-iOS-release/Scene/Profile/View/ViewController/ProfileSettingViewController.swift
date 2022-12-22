@@ -46,6 +46,8 @@ final class ProfileSettingViewController: UIViewController {
   
   private let agreementInfo = ProfileSettingListView(image: Images.icInfo.image, text: "개인정보 및 약관")
   
+  private let licenseInfo = ProfileSettingListView(image: Images.icFolder.image, text: "오픈소스 라이브러리")
+  
   private let feedback = ProfileSettingListView(image: Images.icFeedback.image, text: "호미나라 피드백 보내기")
   
   private var grayLineView = UIView().then {
@@ -146,6 +148,13 @@ final class ProfileSettingViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
+    licenseInfo.rx.tapGesture()
+      .bind(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.actionDetected.onNext(.didTabLicense)
+      })
+      .disposed(by: disposeBag)
+    
     feedback.rx.tapGesture()
       .bind(onNext: { [weak self] _ in
         guard let self = self else { return }
@@ -227,7 +236,7 @@ final class ProfileSettingViewController: UIViewController {
   }
   
   private func render() {
-    [alarmSetting, agreementInfo, feedback].forEach {
+    [alarmSetting, agreementInfo, licenseInfo, feedback].forEach {
       settingListStackView.addArrangedSubview($0)
     }
     
@@ -244,7 +253,7 @@ final class ProfileSettingViewController: UIViewController {
     settingListStackView.snp.makeConstraints { make in
       make.top.equalTo(navigationBarView.snp.bottom).offset(7)
       make.leading.trailing.equalToSuperview()
-      make.height.equalTo(160)
+      make.height.equalTo(200)
     }
     
     grayLineView.snp.makeConstraints { make in
