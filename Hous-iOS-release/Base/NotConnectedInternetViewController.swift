@@ -7,6 +7,8 @@
 
 import AssetKit
 import SnapKit
+import Reachability
+import RxReachability
 import UIKit
 
 
@@ -65,10 +67,15 @@ final class NotConnectedInternetViewController: UIViewController {
   }
   @objc
   private func didTapRetryButton() {
-    self.dismiss(animated: true)
+    self.dismiss(animated: true) {
+      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+      appDelegate.reachabilityRelay.accept(())
+    }
   }
 
   private func setupViews() {
+    view.backgroundColor = .white
     view.addSubView(imageView)
     view.addSubView(titleLabel)
     view.addSubView(subtitleLabel)
