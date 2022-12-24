@@ -62,11 +62,11 @@ extension EnterInfoViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
-    mainView.checkBirthDayButton.rx.tap
-      .map { Reactor.Action.checkBirthdayPublic(
-        !self.mainView.checkBirthDayButton.isSelected) }
-      .bind(to: reactor.action)
-      .disposed(by: disposeBag)
+//    mainView.checkBirthDayButton.rx.tap
+//      .map { Reactor.Action.checkBirthdayPublic(
+//        !self.mainView.checkBirthDayButton.isSelected) }
+//      .bind(to: reactor.action)
+//      .disposed(by: disposeBag)
 
     mainView.nextButton.rx.tap
       .map { Reactor.Action.tapNext }
@@ -76,12 +76,12 @@ extension EnterInfoViewController {
 
   private func bindState(_ reactor: EnterInfoViewReactor) {
 
-    reactor.state.map { $0.isBirthdayPublic }
-      .distinctUntilChanged()
-      .compactMap { $0 }
-      .map { !$0 }
-      .bind(to: mainView.checkBirthDayButton.rx.isSelected)
-      .disposed(by: disposeBag)
+//    reactor.state.map { $0.isBirthdayPublic }
+//      .distinctUntilChanged()
+//      .compactMap { $0 }
+//      .map { !$0 }
+//      .bind(to: mainView.checkBirthDayButton.rx.isSelected)
+//      .disposed(by: disposeBag)
 
     reactor.state.map { $0.birthday }
       .distinctUntilChanged()

@@ -68,26 +68,26 @@ class EnterInfoView: UIView {
     return datePicker
   }()
 
-  var checkBirthDayButton = UIButton(configuration: .plain()).then {
-
-  var attrString = AttributedString("생일 정보 비공개")
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    attrString.foregroundColor = Colors.g5.color
-    $0.configuration?.attributedTitle = attrString
-    $0.configuration?.baseBackgroundColor = Colors.white.color
-
-  $0.configurationUpdateHandler = { btn in
-      switch btn.state {
-      case .normal:
-        btn.configuration?.image = Images.icCheckNo.image
-      case .selected:
-        btn.configuration?.image = Images.icCheckYes.image
-      default:
-        break
-      }
-    }
-    $0.configuration?.imagePadding = 8
-  }
+//  var checkBirthDayButton = UIButton(configuration: .plain()).then {
+//
+//  var attrString = AttributedString("생일 정보 비공개")
+//    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
+//    attrString.foregroundColor = Colors.g5.color
+//    $0.configuration?.attributedTitle = attrString
+//    $0.configuration?.baseBackgroundColor = Colors.white.color
+//
+//  $0.configurationUpdateHandler = { btn in
+//      switch btn.state {
+//      case .normal:
+//        btn.configuration?.image = Images.icCheckNo.image
+//      case .selected:
+//        btn.configuration?.image = Images.icCheckYes.image
+//      default:
+//        break
+//      }
+//    }
+//    $0.configuration?.imagePadding = 8
+//  }
 
   var nextButton = NextButton("다음으로").then {
     $0.isEnabled = false
@@ -111,7 +111,7 @@ class EnterInfoView: UIView {
     toolBar.sizeToFit()
 
     let doneButton = UIBarButtonItem(
-      title: "Done",
+      title: "저장",
       style: .plain,
       target: self,
       action: #selector(setDate)
@@ -124,7 +124,7 @@ class EnterInfoView: UIView {
     )
 
     let cancelButton = UIBarButtonItem(
-      title: "Cancel",
+      title: "생일 정보 삭제",
       style: .plain, target: self,
       action: #selector(didTapCancel)
     )
@@ -149,9 +149,13 @@ class EnterInfoView: UIView {
   private func render() {
 
     addSubViews([navigationBar, contentView, nextButton])
-    contentView.addSubViews([nicknameLabel, nicknameTextfield, nicknameErrorLabel,
-                             birthdayLabel, birthdayTextfield,
-                            checkBirthDayButton])
+    contentView.addSubViews([
+      nicknameLabel,
+      nicknameTextfield,
+      nicknameErrorLabel,
+      birthdayLabel,
+      birthdayTextfield
+    ])
 
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(safeAreaLayoutGuide)
@@ -160,7 +164,7 @@ class EnterInfoView: UIView {
     }
 
     contentView.snp.makeConstraints { make in
-      make.leading.trailing.equalToSuperview()
+      make.leading.trailing.bottom.equalToSuperview()
       make.top.equalTo(navigationBar.snp.bottom).offset(50)
     }
 
@@ -191,11 +195,11 @@ class EnterInfoView: UIView {
       make.height.equalTo(38)
     }
 
-    checkBirthDayButton.snp.makeConstraints { make in
-      make.top.equalTo(birthdayTextfield.snp.bottom).offset(4)
-      make.leading.equalToSuperview().offset(12)
-      make.bottom.equalToSuperview()
-    }
+//    checkBirthDayButton.snp.makeConstraints { make in
+//      make.top.equalTo(birthdayTextfield.snp.bottom).offset(4)
+//      make.leading.equalToSuperview().offset(12)
+//      make.bottom.equalToSuperview()
+//    }
 
     nextButton.snp.makeConstraints { make in
       make.leading.trailing.bottom.equalToSuperview()

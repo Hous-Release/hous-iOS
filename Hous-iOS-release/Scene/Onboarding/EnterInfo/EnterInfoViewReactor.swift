@@ -80,15 +80,25 @@ final class EnterInfoViewReactor: Reactor {
       return .just(Mutation.setIsBirthdayPublic(!flag))
 
     case .tapNext:
-      guard let birthday = currentState.birthday,
-            let nickname = currentState.nickname,
-            let isPublic = currentState.isBirthdayPublic,
-            let type = self.type,
-            let token = self.token
+      guard
+        let nickname = currentState.nickname,
+        let type = self.type,
+        let token = self.token
+
       else { return .empty() }
 
+      let birthday = (currentState.birthday == nil) || currentState.birthday == "" ?
+      ""
+      :
+      (currentState.birthday ?? "").replacingOccurrences(of: " / ", with: "-")
+
+      let isPublic = (currentState.birthday == nil) || currentState.birthday == "" ?
+      false
+      :
+      true
+
       let signupRequestDTO = AuthDTO.Request.SignupRequestDTO(
-        birthday: birthday.replacingOccurrences(of: " / ", with: "-"),
+        birthday: birthday,
         fcmToken: Keychain.shared.getFCMToken() ?? "",
         isPublic: isPublic,
         nickname: nickname,
@@ -169,8 +179,7 @@ extension EnterInfoViewReactor {
 
   private func validateNextButton(_ nickname: String, _ birthday: String) -> Observable<Mutation> {
     let validation = nickname.count > 0 &&
-                     nickname.count <= 3 &&
-                     birthday != ""
+                     nickname.count <= 3
 
     return .just(Mutation.setIsNextButtonEnable(validation))
   }
