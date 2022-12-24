@@ -60,7 +60,12 @@ class EnterInfoView: UIView {
   }()
 
   let datePicker: UIDatePicker = {
-    return UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 216))
+    let datePicker = UIDatePicker(
+      frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 216)
+    )
+    datePicker.datePickerMode = .date
+    datePicker.preferredDatePickerStyle = .wheels
+    return datePicker
   }()
 
   var checkBirthDayButton = UIButton(configuration: .plain()).then {
@@ -99,8 +104,34 @@ class EnterInfoView: UIView {
   }
 
   private func setUp() {
-    birthdayTextfield.setDatePicker(target: self, selector: #selector(setDate), datePicker: datePicker)
-    datePicker.addTarget(self, action: #selector(handleDatePickerTap), for: .editingDidBegin)
+
+    let toolBar = UIToolbar()
+    toolBar.barStyle = .default
+    toolBar.isTranslucent = true
+    toolBar.sizeToFit()
+
+    let doneButton = UIBarButtonItem(
+      title: "Done",
+      style: .plain,
+      target: self,
+      action: #selector(setDate)
+    )
+
+    let spaceButton = UIBarButtonItem(
+      barButtonSystemItem: .flexibleSpace,
+      target: nil,
+      action: nil
+    )
+
+    let cancelButton = UIBarButtonItem(
+      title: "Cancel",
+      style: .plain, target: self,
+      action: #selector(didTapCancel)
+    )
+    toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+
+    birthdayTextfield.inputView = datePicker
+    birthdayTextfield.inputAccessoryView = toolBar
     nicknameTextfield.rightView?.isHidden = true
     birthdayTextfield.rightView?.isHidden = true
   }
@@ -108,8 +139,11 @@ class EnterInfoView: UIView {
   @objc func setDate() {
       self.endEditing(true)
   }
-  @objc func handleDatePickerTap() {
-    datePicker.resignFirstResponder()
+
+  @objc
+  func didTapCancel() {
+    birthdayTextfield.text = nil
+    self.endEditing(true)
   }
 
   private func render() {
