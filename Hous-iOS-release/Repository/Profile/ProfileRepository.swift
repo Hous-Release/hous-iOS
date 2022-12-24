@@ -331,7 +331,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
       dateFormatter.timeZone = TimeZone(abbreviation: "KST")
       dateFormatter.dateFormat = "yyyy.MM.dd"
       
-      let birthday = dateFormatter.date(from: dto.birthday ?? "")
+      let birthday = (dto.birthday != "") ? dateFormatter.date(from: dto.birthday ?? "") : nil
       
       let userName = dto.nickname
       let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1

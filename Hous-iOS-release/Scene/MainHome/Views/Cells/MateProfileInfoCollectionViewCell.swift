@@ -53,7 +53,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     $0.textColor = Colors.g6.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
-    
+  
   //MARK: Initializer
   
   override init(frame: CGRect) {
@@ -67,7 +67,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-   override func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
     transferToViewController()
@@ -82,11 +82,11 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
   private func render() {
     
     addSubViews([
-     statusMessage,
-     tagGuideStackView,
-     grayLineView,
-     badgeView,
-     badgeLabel])
+      statusMessage,
+      tagGuideStackView,
+      grayLineView,
+      badgeView,
+      badgeLabel])
     
     tagGuideStackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(29)
@@ -142,15 +142,17 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     var hashTags: [String] = []
     
-    hashTags.append(String(data.userAge ?? -1) + "세")
+    if data.birthday != nil {
+      hashTags.append(String(data.userAge ?? -1) + "세")
+    }
     
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.timeZone = TimeZone(abbreviation: "KST")
     dateFormatter.dateFormat = "MM.dd"
     
-    if (data.birthdayPublic) {
-      hashTags.append(dateFormatter.string(from: data.birthday ?? Date()))
+    if (data.birthdayPublic && data.birthday != nil) {
+      hashTags.append(dateFormatter.string(from: data.birthday!))
     }
     
     if let mbti = data.mbti {
