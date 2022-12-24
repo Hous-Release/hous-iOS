@@ -43,7 +43,7 @@ final class SignInViewController: UIViewController, ReactorKit.View {
 
   private let appleLoginButton: UIButton = {
     let button = UIButton()
-    button.setTitle("애플로그인", for: .normal)
+    button.setTitle("Apple로 계속하기", for: .normal)
     button.backgroundColor = Colors.black.color
     button.setTitleColor(Colors.white.color, for: .normal)
     button.titleLabel?.font = Fonts.SpoqaHanSansNeo.bold.font(size: 16)
