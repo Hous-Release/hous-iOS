@@ -161,21 +161,56 @@ final class ProfileEditViewController: UIViewController {
       statusTextView.textViewFilled()
     }
   }
+
   
   private func setup() {
     self.view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
     birthdayTextField.delegate = self
-    birthdayTextField.setDatePicker(target: self, selector: #selector(setDate), datePicker: datePicker)
+    setUpBirthDayTextField()
   }
-  
-  @objc func setDate() {
+  private func setUpBirthDayTextField() {
+
+    let toolBar = UIToolbar()
+    toolBar.barStyle = .default
+    toolBar.isTranslucent = true
+    toolBar.sizeToFit()
+
+    let doneButton = UIBarButtonItem(
+      title: "저장",
+      style: .plain,
+      target: self,
+      action: #selector(setDate)
+    )
+
+    let spaceButton = UIBarButtonItem(
+      barButtonSystemItem: .flexibleSpace,
+      target: nil,
+      action: nil
+    )
+
+    let cancelButton = UIBarButtonItem(
+      title: "생일 정보 삭제",
+      style: .plain, target: self,
+      action: #selector(didTapCancel)
+    )
+
+    toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+
+    birthdayTextField.inputView = datePicker
+    birthdayTextField.inputAccessoryView = toolBar
+  }
+
+  @objc private func didTapCancel() {
+    birthdayTextField.endEditing(true)
+    birthdayTextFieldSet(date: nil)
+    self.actionDetected.onNext(.birthdayTextFieldEdited(date: nil))
+  }
+
+  @objc private func setDate() {
     birthdayTextField.endEditing(true)
     birthdayTextFieldSet(date: datePicker.date)
     self.actionDetected.onNext(.birthdayTextFieldEdited(date: datePicker.date))
-  }
-  @objc func handleDatePickerTap() {
-    datePicker.resignFirstResponder()
   }
   
   //MARK: Bind
@@ -454,13 +489,15 @@ final class ProfileEditViewController: UIViewController {
   }
   
   private func birthdayTextFieldSet(date: Date?) {
-    if (date == nil) {
-      birthdayTextField.text = nil
-    }
+
+//    if (date == nil) {
+//      birthdayTextField.text = nil
+//    }
+
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy/MM/dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
-    birthdayTextField.text = dateFormatter.string(from: date ?? Date())
+    birthdayTextField.text = date.dateToString()
     let attributedString = NSMutableAttributedString(string: birthdayTextField.text ?? "")
     attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length))
     birthdayTextField.attributedText = attributedString

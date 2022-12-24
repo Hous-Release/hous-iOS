@@ -9,7 +9,7 @@ import Foundation
 
 public struct ProfileEditModel: Equatable {
   var name: String
-  var birthday: Date
+  var birthday: Date?
   var mbti: String
   var job: String
   var statusMessage: String
@@ -28,7 +28,7 @@ enum ProfileEditActionControl {
   
   case birthdayTextFieldSelected
   case birthdayTextFieldUnselected
-  case birthdayTextFieldEdited(date: Date)
+  case birthdayTextFieldEdited(date: Date?)
   case birthdayPublicEdited(isPublic: Bool)
   
   case mbtiTextFieldSelected
