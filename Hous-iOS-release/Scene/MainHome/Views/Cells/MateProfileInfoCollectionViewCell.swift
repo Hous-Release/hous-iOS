@@ -163,7 +163,7 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     if hashTags.count == 0 {
       let tag = BasePaddingLabel(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)).then {
-        $0.text = ""
+        $0.text = "아직 정보가 없어요"
         $0.textColor = .white
         $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
         $0.backgroundColor = .white

@@ -46,43 +46,43 @@ final class ProfileEditViewController: UIViewController {
   private var nameTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
     let attrPlaceholder = NSAttributedString(string: "닉네임", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
-    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
     textfield.rightView?.isHidden = true
+    textfield.attributedPlaceholder = attrPlaceholder
     return textfield
   }()
   
   private var birthdayTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
-    let attrPlaceholder = NSAttributedString(string: "생년월일", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
-    textfield.attributedPlaceholder = attrPlaceholder
+    let attrPlaceholder = NSAttributedString(string: "생년월일", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color, NSAttributedString.Key.font : Fonts.SpoqaHanSansNeo.medium.font(size: 16)])
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
+    textfield.attributedPlaceholder = attrPlaceholder
     return textfield
   }()
   
   private var mbtiTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
     let attrPlaceholder = NSAttributedString(string: "MBTI", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
-    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
     textfield.rightView?.isHidden = true
+    textfield.attributedPlaceholder = attrPlaceholder
     return textfield
   }()
   
   private var jobTextField: ProfileEditTextField = {
     var textfield = ProfileEditTextField()
     let attrPlaceholder = NSAttributedString(string: "직업", attributes: [NSAttributedString.Key.foregroundColor : Colors.g5.color])
-    textfield.attributedPlaceholder = attrPlaceholder
     textfield.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
     textfield.rightView?.isHidden = true
+    textfield.attributedPlaceholder = attrPlaceholder
     return textfield
   }()
   
@@ -497,7 +497,7 @@ final class ProfileEditViewController: UIViewController {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy/MM/dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
-    birthdayTextField.text = date.dateToString()
+    birthdayTextField.text = (date != nil) ? dateFormatter.string(from: date!) : nil
     let attributedString = NSMutableAttributedString(string: birthdayTextField.text ?? "")
     attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length))
     birthdayTextField.attributedText = attributedString
