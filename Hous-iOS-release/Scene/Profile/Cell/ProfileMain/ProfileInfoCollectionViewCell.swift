@@ -150,15 +150,17 @@ final class ProfileInfoCollectionViewCell: UICollectionViewCell {
     
     var hashTags: [String] = []
     
-    hashTags.append(String(data.userAge ?? -1) + "세")
+    if data.birthday != nil {
+      hashTags.append(String(data.userAge ?? -1) + "세")
+    }
     
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.timeZone = TimeZone(abbreviation: "KST")
     dateFormatter.dateFormat = "MM.dd"
     
-    if (data.birthdayPublic) {
-      hashTags.append(dateFormatter.string(from: data.birthday ?? Date()))
+    if (data.birthdayPublic && data.birthday != nil) {
+      hashTags.append(dateFormatter.string(from: data.birthday!))
     }
     
     if let mbti = data.mbti {
