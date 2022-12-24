@@ -433,7 +433,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
     
-    let birthday = dateFormatter.string(from: data.birthday)
+    let birthday = data.birthday.dateToString()
     
     let introduction = data.statusMessage
     
@@ -608,6 +608,3 @@ public final class ProfileRepositoryImp: ProfileRepository {
     }
   }
 }
-
-
-
