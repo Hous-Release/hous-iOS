@@ -19,7 +19,6 @@ final class ProfileEditViewModel: ViewModelType {
   
   init(data: ProfileModel) {
     let dateComponents = DateComponents(timeZone: TimeZone(identifier: "ko-KR"), year: 1800, month: 6, day: 3)
-    let defaultDate = Calendar.current.date(from: dateComponents)
     originalData = ProfileEditModel(
       name: data.userName ?? "",
       birthday: data.birthday,
