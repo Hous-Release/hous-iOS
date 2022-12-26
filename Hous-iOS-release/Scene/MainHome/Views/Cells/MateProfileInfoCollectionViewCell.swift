@@ -142,16 +142,13 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     var hashTags: [String] = []
     
-    if data.birthday != nil {
-      hashTags.append(String(data.userAge ?? -1) + "세")
-    }
-    
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
     dateFormatter.timeZone = TimeZone(abbreviation: "KST")
     dateFormatter.dateFormat = "MM.dd"
     
-    if (data.birthdayPublic && data.birthday != nil) {
+    if data.birthday != nil {
+      hashTags.append(String(data.userAge ?? -1) + "세")
       hashTags.append(dateFormatter.string(from: data.birthday!))
     }
     
@@ -165,11 +162,13 @@ final class MateProfileInfoCollectionViewCell: UICollectionViewCell {
     
     if hashTags.count == 0 {
       let tag = BasePaddingLabel(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)).then {
-        $0.text = "아직 정보가 없어요"
-        $0.textColor = .white
+        $0.text = "아직 정보가 없어요!"
+        $0.textColor = Colors.g6.color
         $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 20
+        $0.layer.borderColor = Colors.g6.color.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 13
         $0.layer.masksToBounds = true
       }
       tags.append(tag)

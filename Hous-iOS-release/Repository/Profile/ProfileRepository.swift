@@ -437,7 +437,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
     
     let introduction = data.statusMessage
     
-    let isPublic = data.birthdayPublic
+    let isPublic = (birthday == "") ? false : true
     
     let job = data.job
     

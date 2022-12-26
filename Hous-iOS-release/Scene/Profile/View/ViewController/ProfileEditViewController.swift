@@ -60,6 +60,7 @@ final class ProfileEditViewController: UIViewController {
     textfield.font = Fonts.Montserrat.medium.font(size: 16)
     textfield.textColor = Colors.black.color
     textfield.returnKeyType = .done
+    textfield.rightView?.isHidden = true
     textfield.attributedPlaceholder = attrPlaceholder
     return textfield
   }()
