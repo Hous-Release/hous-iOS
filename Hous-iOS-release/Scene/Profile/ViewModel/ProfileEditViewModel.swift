@@ -22,7 +22,7 @@ final class ProfileEditViewModel: ViewModelType {
     let defaultDate = Calendar.current.date(from: dateComponents)
     originalData = ProfileEditModel(
       name: data.userName ?? "",
-      birthday: data.birthday ?? defaultDate!,
+      birthday: data.birthday,
       mbti: data.mbti ?? "",
       job: data.userJob ?? "",
       statusMessage: data.statusMessage ?? "",
