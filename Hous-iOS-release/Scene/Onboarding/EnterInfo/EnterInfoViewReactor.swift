@@ -27,6 +27,7 @@ final class EnterInfoViewReactor: Reactor {
     //case viewWillAppear
     case enterNickname(String)
     case enterBirthday(Date?)
+    case deleteBirthday(String)
     case checkBirthdayPublic(Bool)
     case tapNext
   }
@@ -75,6 +76,9 @@ final class EnterInfoViewReactor: Reactor {
         formatToString(of: birthday),
         validateNextButton(nickname, toString(birthday))
       ])
+
+    case let .deleteBirthday(emptyString):
+      return .just(.setBirthday(emptyString))
 
     case let .checkBirthdayPublic(flag):
       return .just(Mutation.setIsBirthdayPublic(!flag))
