@@ -10,7 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
+protocol EnterInfoViewDelegate {
+  func deleteBirthDay()
+}
+
 class EnterInfoView: UIView {
+
+  var delegate: EnterInfoViewDelegate?
 
   var navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "회원 정보 입력")
@@ -23,7 +29,8 @@ class EnterInfoView: UIView {
     var label = UILabel()
     label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     label.textColor = Colors.black.color
-    label.text = "닉네임"
+    label.text = "닉네임 *"
+    label.applyColor(to: "*", with: Colors.red.color)
     return label
   }()
 
@@ -67,27 +74,6 @@ class EnterInfoView: UIView {
     datePicker.preferredDatePickerStyle = .wheels
     return datePicker
   }()
-
-//  var checkBirthDayButton = UIButton(configuration: .plain()).then {
-//
-//  var attrString = AttributedString("생일 정보 비공개")
-//    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-//    attrString.foregroundColor = Colors.g5.color
-//    $0.configuration?.attributedTitle = attrString
-//    $0.configuration?.baseBackgroundColor = Colors.white.color
-//
-//  $0.configurationUpdateHandler = { btn in
-//      switch btn.state {
-//      case .normal:
-//        btn.configuration?.image = Images.icCheckNo.image
-//      case .selected:
-//        btn.configuration?.image = Images.icCheckYes.image
-//      default:
-//        break
-//      }
-//    }
-//    $0.configuration?.imagePadding = 8
-//  }
 
   var nextButton = NextButton("다음으로").then {
     $0.isEnabled = false
@@ -142,8 +128,9 @@ class EnterInfoView: UIView {
 
   @objc
   func didTapCancel() {
-    birthdayTextfield.text = nil
+    birthdayTextfield.text = ""
     self.endEditing(true)
+    delegate?.deleteBirthDay()
   }
 
   private func render() {
@@ -194,12 +181,6 @@ class EnterInfoView: UIView {
       make.top.equalTo(birthdayLabel.snp.bottom).offset(10)
       make.height.equalTo(38)
     }
-
-//    checkBirthDayButton.snp.makeConstraints { make in
-//      make.top.equalTo(birthdayTextfield.snp.bottom).offset(4)
-//      make.leading.equalToSuperview().offset(12)
-//      make.bottom.equalToSuperview()
-//    }
 
     nextButton.snp.makeConstraints { make in
       make.leading.trailing.bottom.equalToSuperview()

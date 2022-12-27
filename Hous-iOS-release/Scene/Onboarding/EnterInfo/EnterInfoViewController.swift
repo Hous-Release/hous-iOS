@@ -16,6 +16,8 @@ class EnterInfoViewController: UIViewController, View {
   var disposeBag = DisposeBag()
   let mainView = EnterInfoView()
 
+  private let didDeleteBDay = PublishRelay<String>()
+
   override func loadView() {
     super.loadView()
     view = mainView
@@ -39,6 +41,7 @@ class EnterInfoViewController: UIViewController, View {
     view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBar.delegate = self
+    mainView.delegate = self
   }
 
   func bind(reactor: EnterInfoViewReactor) {
@@ -62,11 +65,10 @@ extension EnterInfoViewController {
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
-//    mainView.checkBirthDayButton.rx.tap
-//      .map { Reactor.Action.checkBirthdayPublic(
-//        !self.mainView.checkBirthDayButton.isSelected) }
-//      .bind(to: reactor.action)
-//      .disposed(by: disposeBag)
+    didDeleteBDay
+      .map { Reactor.Action.deleteBirthday($0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
 
     mainView.nextButton.rx.tap
       .map { Reactor.Action.tapNext }
@@ -75,13 +77,6 @@ extension EnterInfoViewController {
   }
 
   private func bindState(_ reactor: EnterInfoViewReactor) {
-
-//    reactor.state.map { $0.isBirthdayPublic }
-//      .distinctUntilChanged()
-//      .compactMap { $0 }
-//      .map { !$0 }
-//      .bind(to: mainView.checkBirthDayButton.rx.isSelected)
-//      .disposed(by: disposeBag)
 
     reactor.state.map { $0.birthday }
       .distinctUntilChanged()
@@ -105,6 +100,13 @@ extension EnterInfoViewController {
       .asDriver(onErrorJustReturn: false)
       .drive(onNext: transferToEnterRoom)
       .disposed(by: disposeBag)
+  }
+}
+
+extension EnterInfoViewController: EnterInfoViewDelegate {
+
+  func deleteBirthDay() {
+    didDeleteBDay.accept("")
   }
 }
 
