@@ -115,7 +115,7 @@ extension SplashViewController {
 extension SplashViewController {
   func bindViewWillAppearAction(_ reactor: Reactor) {
     rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-      .delay(.seconds(3), scheduler: MainScheduler.instance)
+      .delay(.seconds(2), scheduler: MainScheduler.instance)
       .map { _ in Reactor.Action.viewWillAppear }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
