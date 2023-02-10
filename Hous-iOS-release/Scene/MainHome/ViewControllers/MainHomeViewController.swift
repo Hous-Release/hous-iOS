@@ -69,9 +69,6 @@ class MainHomeViewController: LoadingBaseViewController {
   private func configUI() {
     view.backgroundColor = .systemBackground
     navigationController?.navigationBar.isHidden = true
-    // swipe pop action 막기
-    navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    
     view.addSubview(collectionView)
     
     configLoadingLayout()
