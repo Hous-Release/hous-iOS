@@ -30,14 +30,17 @@ class AddRuleViewModel: ViewModelType {
     let plusButtonDidTapped: Driver<Void>
     let isEnableStatusOfSaveButton: Driver<Bool>
     let textCountLabelText: Driver<String>
+    let isEnteringRule: Driver<Bool>
   }
   
   func transform(input: Input) -> Output {
     let savedCompleted = input.saveButtonDidTapped
       .flatMap { ruleNames -> Observable<Int> in
-        return NetworkService.shared.ruleRepository.createRules(RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames))
+        return NetworkService.shared.ruleRepository.createRules(
+          RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames)
+        )
       }
-      .asDriver(onErrorJustReturn: 200)
+      .asDriver(onErrorJustReturn: 400)
     
     let isEnableStatusOfSaveButton = input.textFieldEdit.map { string in
       return string.trimmingCharacters(in: .whitespaces).count != 0
@@ -46,7 +49,6 @@ class AddRuleViewModel: ViewModelType {
     
     let textCount = input.textFieldEdit.map({ [weak self] str -> String in
       guard let self = self else { return "" }
-      
       var strCount = str.count
       if strCount > 20 {
         strCount = 20
@@ -54,6 +56,10 @@ class AddRuleViewModel: ViewModelType {
       return "\(strCount)/\(self.maxCount)"
     })
       .asDriver(onErrorJustReturn: "0/\(maxCount)")
+
+    let isEnteringRule = input.textFieldEdit
+      .map { $0.count > 0 }
+      .asDriver(onErrorJustReturn: false)
     
     return Output(
       navBackButtonDidTapped: input.navBackButtonDidTapped.asDriver(onErrorJustReturn: ()),
@@ -61,7 +67,8 @@ class AddRuleViewModel: ViewModelType {
       savedCompleted: savedCompleted,
       plusButtonDidTapped: input.plusButtonDidTapped.asDriver(onErrorJustReturn: ()),
       isEnableStatusOfSaveButton: isEnableStatusOfSaveButton,
-      textCountLabelText: textCount
+      textCountLabelText: textCount,
+      isEnteringRule: isEnteringRule
     )
   }
   
