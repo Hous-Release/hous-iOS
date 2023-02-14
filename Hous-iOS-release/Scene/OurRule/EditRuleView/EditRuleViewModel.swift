@@ -12,23 +12,21 @@ import Network
 
 
 final class EditRuleViewModel: ViewModelType {
-  
+
   struct Input {
     let backButtonDidTap: Observable<Void>
     let saveButtonDidTap: Observable<[RuleWithIdViewModel]>
   }
-  
+
   struct Output {
-//    let isEmptyView: Driver<Bool>
+    //    let isEmptyView: Driver<Bool>
     let saveCompleted: Driver<Void>
     let moveToRuleMainView: Driver<Void>
   }
   
-  
-  
+
   func transform(input: Input) -> Output {
-    
-    
+
     let ruleDTO = input.saveButtonDidTap
       .map { ruleViewModels -> [RuleDTO.Request.Rule] in
         var ruleDTO: [RuleDTO.Request.Rule] = []
@@ -39,19 +37,21 @@ final class EditRuleViewModel: ViewModelType {
         }
         return ruleDTO
       }
-    
+
     let ruleDriver = ruleDTO.flatMap { dto in
-      NetworkService.shared.ruleRepository.updateRules(RuleDTO.Request.updateRulesRequestDTO(rules: dto))
+      NetworkService.shared.ruleRepository.updateRules(
+        RuleDTO.Request.updateRulesRequestDTO(rules: dto)
+      )
     }
       .asDriver(onErrorJustReturn: ())
-    
+
     let moveToRuleMainView = input.backButtonDidTap
       .asDriver(onErrorJustReturn: ())
-      
+
     return Output(
       saveCompleted: ruleDriver,
       moveToRuleMainView: moveToRuleMainView
     )
-    
+
   }
 }
