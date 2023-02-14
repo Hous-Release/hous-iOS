@@ -91,6 +91,12 @@ class AddRuleViewController: LoadingBaseViewController {
   }
   
   //MARK: - Custom Methods
+
+  private func showQuitPopUp() { }
+
+  private func showExceedPopup() { }
+
+
   private func setTableView() {
     ruleTableView.register(EditRuleTableViewCell.self, forCellReuseIdentifier: EditRuleTableViewCell.className)
   }
@@ -186,7 +192,7 @@ class AddRuleViewController: LoadingBaseViewController {
             break
           }
         }
-        
+
       })
       .disposed(by: disposeBag)
     
@@ -225,7 +231,7 @@ class AddRuleViewController: LoadingBaseViewController {
         } else {
           self.rules.append(text)
           self.newRules.append(text)
-          
+
           self.rulesSubject.onNext(self.rules)
           
           self.ruleTextField.text = ""
