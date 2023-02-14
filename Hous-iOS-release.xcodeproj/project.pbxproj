@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77015F0B299B7635009DB17A /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77015F0A299B7635009DB17A /* splashlottie.json */; };
 		77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77067FF728DDD9200082A7E7 /* AuthRepository.swift */; };
 		7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706800D28E043A40082A7E7 /* SignInViewController.swift */; };
 		7706801228E043C80082A7E7 /* OAuthable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706801028E043C80082A7E7 /* OAuthable.swift */; };
@@ -47,7 +48,6 @@
 		77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7213292541CF00032776 /* UpdateTodoReactor.swift */; };
 		77EB72162925489500032776 /* HousTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB72152925489500032776 /* HousTextField.swift */; };
 		77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB7219292A1AE200032776 /* FilteredTodoReactor.swift */; };
-		77F64F0C299630CB001ADA15 /* splashlottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 77F64F0B299630CB001ADA15 /* splashlottie.json */; };
 		9B091DFE28E363A900C144BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B091DFD28E363A900C144BA /* ProfileViewModel.swift */; };
 		9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */; };
 		9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */; };
@@ -267,6 +267,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77015F0A299B7635009DB17A /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		7702A0F228BD245E00DA7712 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
 		77067FF728DDD9200082A7E7 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-release.entitlements"; sourceTree = "<group>"; };
@@ -312,7 +313,6 @@
 		77EB7213292541CF00032776 /* UpdateTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoReactor.swift; sourceTree = "<group>"; };
 		77EB72152925489500032776 /* HousTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTextField.swift; sourceTree = "<group>"; };
 		77EB7219292A1AE200032776 /* FilteredTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoReactor.swift; sourceTree = "<group>"; };
-		77F64F0B299630CB001ADA15 /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
 		9B091DFD28E363A900C144BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9B296EF9291657E800C51080 /* ProfileEmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B2F469229237403002D9BD2 /* ProfileTestInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoNavigationView.swift; sourceTree = "<group>"; };
@@ -706,7 +706,7 @@
 		77AEF34028E2009E002A102B /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				77F64F0B299630CB001ADA15 /* splashlottie.json */,
+				77015F0A299B7635009DB17A /* splashlottie.json */,
 				9B6DD14E292A4D3C0038BFD7 /* empty_profile.json */,
 				B5F9FB56292CCB6A0056C0B1 /* birthday.json */,
 				B5F9FB53292CCB690056C0B1 /* friday.json */,
@@ -1591,7 +1591,7 @@
 				777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */,
 				B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */,
 				777C666A28A74A63000BECEA /* Assets.xcassets in Resources */,
-				77F64F0C299630CB001ADA15 /* splashlottie.json in Resources */,
+				77015F0B299B7635009DB17A /* splashlottie.json in Resources */,
 				9B6DD14D292A4BBC0038BFD7 /* test_lottie.json in Resources */,
 				9B2F46A32923FB95002D9BD2 /* hex_yes.json in Resources */,
 				B5F9FB5D292CCB6A0056C0B1 /* birthday.json in Resources */,
