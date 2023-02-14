@@ -12,16 +12,17 @@ import RxGesture
 import BottomSheetKit
 import Kingfisher
 
-class AddRuleViewController: LoadingBaseViewController {
-  
+final class AddRuleViewController: LoadingBaseViewController {
+
   //MARK: - UI Components
+
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "새로운 Rules 추가")
     navBar.setRightButtonText(text: "저장")
     navBar.rightButton.isEnabled = false
     return navBar
   }()
-  
+
   private let inValidTextLabel = UILabel().then {
     $0.isHidden = true
     $0.text = "방 이름은 8자 이내로 입력해주세요!"
@@ -34,7 +35,7 @@ class AddRuleViewController: LoadingBaseViewController {
     $0.rightViewMode = .always
     $0.clearButtonMode = .never
   }
-  
+
   private let textCountLabel = UILabel().then {
     $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     $0.text = "0/20"
@@ -42,45 +43,45 @@ class AddRuleViewController: LoadingBaseViewController {
     $0.font = Fonts.Montserrat.medium.font(size: 12)
     $0.dynamicFont(fontSize: 12, weight: .medium)
   }
-  
-  
+
   private let plusButton = UIButton().then {
     $0.isUserInteractionEnabled = false
     $0.setImage(Images.icAdd.image, for: .normal)
   }
-  
+
   private let ruleTableView = UITableView().then {
     $0.showsVerticalScrollIndicator = false
   }
-  
+
   //MARK: - var & let
   private let maxCount = 20
-  
+
   private let viewModel: AddRuleViewModel
-  
+
   private let disposeBag = DisposeBag()
-  
+
   private lazy var rulesSubject = BehaviorSubject(value: self.rules)
-  
+
   private var newRulesSubject = PublishSubject<[String]>()
-  
+
   private var newRules: [String] = []
-  
+
   private var tabBarHeight: CGFloat = 83
-  
+
   private var rules: [String]
-  
+
   //MARK: - Lifecycle
+
   init(rules: [String], viewModel: AddRuleViewModel) {
     self.rules = rules
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configUI()
@@ -89,8 +90,17 @@ class AddRuleViewController: LoadingBaseViewController {
     configButtonAction()
     setNoti()
   }
-  
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    setupBackInitialStatus()
+  }
+
   //MARK: - Custom Methods
+
+  private func setupBackInitialStatus() {
+    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+  }
 
   private func showQuitPopUp() {
     let defaultPopUpModel = DefaultPopUpModel(
@@ -131,56 +141,62 @@ class AddRuleViewController: LoadingBaseViewController {
     }
   }
 
-
   private func setTableView() {
-    ruleTableView.register(EditRuleTableViewCell.self, forCellReuseIdentifier: EditRuleTableViewCell.className)
+    ruleTableView.register(
+      EditRuleTableViewCell.self,
+      forCellReuseIdentifier: EditRuleTableViewCell.className
+    )
   }
-  
+
   private func setNoti() {
-    NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: nil)
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(textFieldDidChange),
+      name: UITextField.textDidChangeNotification, object: nil
+    )
   }
-  
+
   private func configUI() {
     navigationBar.updateRightButtonSnapKit()
-    
+
     view.addSubViews([
       navigationBar,
       plusButton,
       ruleTextField,
       ruleTableView
     ])
-    
+
     configLoadingLayout()
-    
+
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(60)
     }
-    
+
     plusButton.snp.makeConstraints { make in
       make.centerY.equalTo(ruleTextField.snp.top).inset(17)
       make.leading.equalTo(ruleTextField.snp.trailing).offset(9)
       make.trailing.equalToSuperview().inset(10)
       make.size.equalTo(44)
     }
-    
+
     ruleTextField.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
       make.leading.equalToSuperview().offset(25)
     }
-    
+
     ruleTableView.snp.makeConstraints { make in
       make.top.equalTo(ruleTextField.snp.bottom).offset(22)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
-    
+
   }
   
   //MARK: - Rx
   private func bind() {
-    
+
     rulesSubject
       .asObservable()
       .bind(to: ruleTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { row, ruleName, cell in
@@ -188,11 +204,11 @@ class AddRuleViewController: LoadingBaseViewController {
         cell.isUserInteractionEnabled = false
       }
       .disposed(by: disposeBag)
-    
+
     ruleTableView.rx
       .setDelegate(self)
       .disposed(by: disposeBag)
-    
+
     let input = AddRuleViewModel.Input(
       navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
       viewDidTapped: view.rx.tapGesture().asObservable(),
@@ -206,11 +222,16 @@ class AddRuleViewController: LoadingBaseViewController {
     )
 
     let output = viewModel.transform(input: input)
-    
+
     output.navBackButtonDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.showQuitPopUp()
+
+        if self.newRules.count != 0 || (self.ruleTextField.text?.count ?? 0) > 0 {
+          self.showQuitPopUp()
+          return
+        }
+        self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
 
@@ -232,12 +253,13 @@ class AddRuleViewController: LoadingBaseViewController {
         } else {
           self.rules.append(text)
           self.newRules.append(text)
-
           self.rulesSubject.onNext(self.rules)
 
           self.ruleTextField.text = ""
           self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
+
+          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
       })
       .disposed(by: disposeBag)
@@ -248,15 +270,29 @@ class AddRuleViewController: LoadingBaseViewController {
 
     output.savedCompleted
       .do(onNext: { [weak self] _ in self?.hideLoading() })
-        .drive(onNext: { [weak self] _ in
-          self?.navigationController?.popViewController(animated: true)
-        })
-        .disposed(by: disposeBag)
+      .drive(onNext: { [weak self] _ in
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
 
-        output.textCountLabelText
-        .drive(textCountLabel.rx.text)
-        .disposed(by: disposeBag)
+    output.textCountLabelText
+      .drive(textCountLabel.rx.text)
+      .disposed(by: disposeBag)
+
+    output.isEnteringRule
+      .drive(onNext: { [weak self] isEnteringRule in
+
+        if isEnteringRule {
+          self?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
+
+        if !isEnteringRule {
+          self?.navigationController?.interactivePopGestureRecognizer?.isEnabled = self?
+            .newRules.count == 0
+        }
+      })
+      .disposed(by: disposeBag)
+    }
 
   private func configButtonAction() {
     navigationBar.rightButton.rx.tap
@@ -299,5 +335,5 @@ extension AddRuleViewController {
       }
     }
   }
-  
+
 }
