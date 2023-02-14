@@ -28,7 +28,7 @@ class AddRuleViewController: LoadingBaseViewController {
     $0.textColor = Colors.red.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
-    
+
   private lazy var ruleTextField = HousTextField("Rules 입력", nil).then {
     $0.rightView = textCountLabel
     $0.rightViewMode = .always
@@ -92,9 +92,44 @@ class AddRuleViewController: LoadingBaseViewController {
   
   //MARK: - Custom Methods
 
-  private func showQuitPopUp() { }
+  private func showQuitPopUp() {
+    let defaultPopUpModel = DefaultPopUpModel(
+      cancelText: "계속 작성하기",
+      actionText: "나가기",
+      title: "앗, 잠깐! 이대로 나가면\nRules가 추가되지 않아요!",
+      subtitle: "Rules 추가를 취소하려면 나가기 버튼을 눌러주세요."
+    )
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
 
-  private func showExceedPopup() { }
+    self.presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.navigationController?.popViewController(animated: true)
+      case .cancel:
+        break
+      }
+    }
+  }
+
+  private func showExceedPopup() {
+    let popModel = ImagePopUpModel(
+      image: .exceed,
+      actionText: "알겠어요!",
+      text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
+      titleText: "Rules 개수 초과"
+    )
+
+    let popUpType = PopUpType.exceed(exceedModel: popModel)
+
+    self.presentPopUp(popUpType) { actionType in
+      switch actionType {
+      case .action:
+        break
+      case .cancel:
+        break
+      }
+    }
+  }
 
 
   private func setTableView() {
@@ -169,96 +204,60 @@ class AddRuleViewController: LoadingBaseViewController {
         .distinctUntilChanged()
         .asObservable()
     )
-    
-    
+
     let output = viewModel.transform(input: input)
     
     output.navBackButtonDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let defaultPopUpModel = DefaultPopUpModel(
-          cancelText: "계속 작성하기",
-          actionText: "나가기",
-          title: "앗, 잠깐! 이대로 나가면\nRules가 추가되지 않아요!",
-          subtitle: "Rules 추가를 취소하려면 나가기 버튼을 눌러주세요."
-        )
-        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
-
-        self.presentPopUp(popUpType) { [weak self] actionType in
-          switch actionType {
-          case .action:
-            self?.navigationController?.popViewController(animated: true)
-          case .cancel:
-            break
-          }
-        }
-
+        self.showQuitPopUp()
       })
       .disposed(by: disposeBag)
-    
+
     output.viewDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.ruleTextField.endEditing(true)
       })
       .disposed(by: disposeBag)
-    
+
     output.plusButtonDidTapped
       .drive(onNext: { [weak self] _ in
         guard let self = self,
               let text = self.ruleTextField.text
         else { return }
-        
+
         if self.rules.count >= 30 {
-          let popModel = ImagePopUpModel(
-            image: .exceed,
-            actionText: "알겠어요!",
-            text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
-            titleText: "Rules 개수 초과"
-          )
-
-          let popUpType = PopUpType.exceed(exceedModel: popModel)
-
-          self.presentPopUp(popUpType) { actionType in
-            switch actionType {
-            case .action:
-              break
-            case .cancel:
-              break
-            }
-          }
-          
+          self.showExceedPopup()
         } else {
           self.rules.append(text)
           self.newRules.append(text)
 
           self.rulesSubject.onNext(self.rules)
-          
+
           self.ruleTextField.text = ""
-//          self.ruleTextField.endEditing(true)
           self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
         }
-        
       })
       .disposed(by: disposeBag)
-    
+
     output.isEnableStatusOfSaveButton
       .drive(plusButton.rx.isUserInteractionEnabled)
       .disposed(by: disposeBag)
-    
+
     output.savedCompleted
       .do(onNext: { [weak self] _ in self?.hideLoading() })
-      .drive(onNext: { [weak self] _ in
-        self?.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
-        
-    output.textCountLabelText
+        .drive(onNext: { [weak self] _ in
+          self?.navigationController?.popViewController(animated: true)
+        })
+        .disposed(by: disposeBag)
+
+        output.textCountLabelText
         .drive(textCountLabel.rx.text)
         .disposed(by: disposeBag)
-  }
-  
+        }
+
   private func configButtonAction() {
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
