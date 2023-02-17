@@ -12,6 +12,7 @@ import Network
 public final class UpdateTodoReactor: Reactor {
   private let provider: ServiceProvider
   public let initialState: State
+  public var fetchedInitalTodo: String?
 
   public init(
     provider: ServiceProvider,
@@ -153,6 +154,9 @@ public extension UpdateTodoReactor {
 
       switch event {
       case .getModifyingTodo(let state):
+
+        self.fetchedInitalTodo = state.todo
+
         return Observable.concat([
           .just(.setNotification(state.isPushNotification)),
           .just(.setTodo(state.todo)),
