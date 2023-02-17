@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class LoadingBaseViewController: UIViewController {
+class BaseViewController: UIViewController {
   
   let loadingBackgroundView = UIView().then {
     $0.isHidden = true

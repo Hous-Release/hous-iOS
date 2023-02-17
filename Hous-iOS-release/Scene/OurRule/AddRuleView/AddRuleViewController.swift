@@ -12,7 +12,7 @@ import RxGesture
 import BottomSheetKit
 import Kingfisher
 
-final class AddRuleViewController: LoadingBaseViewController {
+final class AddRuleViewController: BaseViewController {
 
   //MARK: - UI Components
 

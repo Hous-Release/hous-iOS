@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import BottomSheetKit
 
-class EditHousNameViewController: LoadingBaseViewController {
+class EditHousNameViewController: BaseViewController {
   
   //MARK: Var & Let
   private let saveButtonDidTapped = PublishSubject<String>()

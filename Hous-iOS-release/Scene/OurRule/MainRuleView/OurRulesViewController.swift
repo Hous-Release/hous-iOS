@@ -11,7 +11,7 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-class OurRulesViewController: LoadingBaseViewController {
+class OurRulesViewController: BaseViewController {
   
   private let navigationBar: NavBarWithBackButtonView = {
     let navBar = NavBarWithBackButtonView(title: "우리 집 Rules")

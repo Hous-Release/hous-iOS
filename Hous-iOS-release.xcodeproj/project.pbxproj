@@ -165,7 +165,7 @@
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB472923DA0B0056C0B1 /* loading.json */; };
-		B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */; };
+		B5F9FB4C2923F1920056C0B1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* BaseViewController.swift */; };
 		B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB51292CCB690056C0B1 /* thursday.json */; };
 		B5F9FB59292CCB6A0056C0B1 /* weekend.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB52292CCB690056C0B1 /* weekend.json */; };
 		B5F9FB5A292CCB6A0056C0B1 /* friday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB53292CCB690056C0B1 /* friday.json */; };
@@ -429,7 +429,7 @@
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
 		B5F9FB472923DA0B0056C0B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBaseViewController.swift; sourceTree = "<group>"; };
+		B5F9FB4B2923F1920056C0B1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B5F9FB51292CCB690056C0B1 /* thursday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thursday.json; sourceTree = "<group>"; };
 		B5F9FB52292CCB690056C0B1 /* weekend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weekend.json; sourceTree = "<group>"; };
 		B5F9FB53292CCB690056C0B1 /* friday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = friday.json; sourceTree = "<group>"; };
@@ -689,7 +689,7 @@
 			isa = PBXGroup;
 			children = (
 				777C667C28A75039000BECEA /* OldBaseViewController.swift */,
-				B5F9FB4B2923F1920056C0B1 /* LoadingBaseViewController.swift */,
+				B5F9FB4B2923F1920056C0B1 /* BaseViewController.swift */,
 				77D994DE2933E583001872F0 /* NotConnectedInternetViewController.swift */,
 			);
 			path = Base;
@@ -1728,7 +1728,7 @@
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,
-				B5F9FB4C2923F1920056C0B1 /* LoadingBaseViewController.swift in Sources */,
+				B5F9FB4C2923F1920056C0B1 /* BaseViewController.swift in Sources */,
 				B87FC0252915026300F8AA11 /* EnterRoomRepository.swift in Sources */,
 				B84EA6DD28DD817300C92FCD /* PagingCell.swift in Sources */,
 				B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */,
