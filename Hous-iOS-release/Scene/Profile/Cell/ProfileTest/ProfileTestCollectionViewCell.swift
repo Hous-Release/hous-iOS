@@ -82,12 +82,12 @@ class TestCollectionViewCell: UICollectionViewCell {
     let handler: UIButton.ConfigurationUpdateHandler = { button in
       switch button.state {
       case .selected:
-        button.configuration?.baseBackgroundColor = Colors.redL1.color
-        button.configuration?.attributedTitle?.foregroundColor = Colors.red.color
+        button.configuration?.baseBackgroundColor = Colors.blueEdit.color
+        button.configuration?.attributedTitle?.foregroundColor = Colors.blue.color
         
       default:
         button.configuration?.baseBackgroundColor = Colors.g1.color
-        button.configuration?.attributedTitle?.foregroundColor = Colors.black.color
+        button.configuration?.attributedTitle?.foregroundColor = Colors.g7.color
       }
     }
 

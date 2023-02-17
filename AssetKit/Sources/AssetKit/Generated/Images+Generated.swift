@@ -143,6 +143,8 @@ public enum Images {
   public static let icCheckBadge = ImageAsset(name: "ic_check_badge")
   public static let lockBg = ImageAsset(name: "lock_bg")
   public static let star = ImageAsset(name: "star")
+  public static let icLeftBlue = ImageAsset(name: "icLeftBlue")
+  public static let icRightBlue = ImageAsset(name: "icRightBlue")
   public static let icLeft = ImageAsset(name: "ic_left")
   public static let icLeftOn = ImageAsset(name: "ic_left_on")
   public static let icRight = ImageAsset(name: "ic_right")
