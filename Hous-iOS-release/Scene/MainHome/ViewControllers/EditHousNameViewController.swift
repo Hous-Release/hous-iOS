@@ -17,6 +17,7 @@ class EditHousNameViewController: BaseViewController {
   private let viewModel = EditHousNameViewModel()
   private let disposeBag = DisposeBag()
   private let roomName: String
+  private let initialRoomName: String?
   
   
   //MARK: UI Components
@@ -43,6 +44,7 @@ class EditHousNameViewController: BaseViewController {
   //MARK: Life Cycles
   init(roomName: String) {
     self.roomName = roomName
+    self.initialRoomName = roomName
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -55,6 +57,34 @@ class EditHousNameViewController: BaseViewController {
     configureButtonAction()
     configUI()
     bindUI()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+
+  private func showQuitPopUp() {
+    let defaultPopUpModel = DefaultPopUpModel(
+      cancelText: "계속 수정하기",
+      actionText: "나가기",
+      title: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
+      subtitle: "수정을 취소하려면 나가기 버튼을 눌러주세요."
+    )
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+    self.presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.navigationController?.popViewController(animated: true)
+      case .cancel:
+        break
+      }
+    }
   }
     
   private func configUI() {
@@ -92,27 +122,17 @@ class EditHousNameViewController: BaseViewController {
       }
       .disposed(by: disposeBag)
   }
+
   
   private func bindUI() {
     navigationBar.backButton.rx.tap
       .asDriver()
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let defaultPopUpModel = DefaultPopUpModel(
-          cancelText: "계속 수정하기",
-          actionText: "나가기",
-          title: "앗, 잠깐! 이대로 나가면\n우리 집 별명이 저장되지 않아요!",
-          subtitle: "수정을 취소하려면 나가기 버튼을 눌러주세요."
-        )
-        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
-
-        self.presentPopUp(popUpType) { [weak self] actionType in
-          switch actionType {
-          case .action:
-            self?.navigationController?.popViewController(animated: true)
-          case .cancel:
-            break
-          }
+        if self.textField.text == self.initialRoomName {
+          self.navigationController?.popViewController(animated: true)
+        } else {
+          self.showQuitPopUp()
         }
       })
       .disposed(by: disposeBag)
@@ -139,5 +159,16 @@ class EditHousNameViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
+  }
+}
+extension EditHousNameViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    if textField.text != initialRoomName {
+      showQuitPopUp()
+      return false
+    }
+
+    return true
   }
 }
