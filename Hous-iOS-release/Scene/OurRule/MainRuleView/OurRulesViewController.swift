@@ -86,7 +86,6 @@ class OurRulesViewController: BaseViewController {
       navigationBar,
       rulesTableView
     ])
-    configLoadingLayout()
     
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)

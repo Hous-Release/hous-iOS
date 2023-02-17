@@ -65,8 +65,7 @@ class EditHousNameViewController: BaseViewController {
       descriptionLabel,
       textField
     ])
-    configLoadingLayout()
-    
+
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()

@@ -113,9 +113,7 @@ class BadgeViewController: BaseViewController {
       badgeCollectionView,
       navigationBar
     ])
-    
-    configLoadingLayout()
-    
+
     backgroundView.snp.makeConstraints { make in
       make.top.equalTo(badgeCollectionView.snp.top)
       make.leading.trailing.equalToSuperview()

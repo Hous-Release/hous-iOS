@@ -29,7 +29,6 @@ final class MemberTodoViewController: BaseViewController, ReactorKit.View {
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
     self.reactor = reactor
-    self.configLoadingLayout()
     makeDataSource()
   }
 
