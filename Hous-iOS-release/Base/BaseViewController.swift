@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
   // MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationController?.delegate = self
   }
 
   func showLoading() {
@@ -29,3 +30,16 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: LoadingPresentable { }
+
+extension BaseViewController: UINavigationControllerDelegate {
+
+  func navigationController(
+    _ navigationController: UINavigationController,
+    didShow viewController: UIViewController,
+    animated: Bool
+  ) {
+    navigationController
+      .interactivePopGestureRecognizer?
+      .isEnabled = navigationController.viewControllers.count > 1
+  }
+}
