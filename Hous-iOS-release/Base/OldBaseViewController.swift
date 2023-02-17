@@ -8,7 +8,7 @@
 import UIKit
 
 
-class BaseViewController: UIViewController {
+class OldBaseViewController: UIViewController {
 
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -98,7 +98,7 @@ class BaseViewController: UIViewController {
 
 
 // MARK: - Private
-extension BaseViewController: UIGestureRecognizerDelegate {
+extension OldBaseViewController: UIGestureRecognizerDelegate {
   func gestureRecognizer(
     _ gestureRecognizer: UIGestureRecognizer,
     shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
