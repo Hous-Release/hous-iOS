@@ -98,6 +98,7 @@ final class AddRuleViewController: BaseViewController {
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
 
   //MARK: - Custom Methods

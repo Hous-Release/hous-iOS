@@ -67,6 +67,37 @@ final class EditRuleViewController: BaseViewController {
     bind()
     configButtonAction()
   }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+
+
+  private func showQuitPopUp() {
+    let defaultPopUpModel = DefaultPopUpModel(
+      cancelText: "계속 수정하기",
+      actionText: "나가기",
+      title: "수정사항이 저장되지 않았어요!",
+      subtitle: "Rules 수정을 취소하려면 나가기 버튼을 눌러주세요."
+    )
+
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+    self.presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.navigationController?.popViewController(animated: true)
+      case .cancel:
+        break
+      }
+    }
+  }
   
   private func setTableView() {
     rulesTableView.register(
@@ -242,22 +273,7 @@ final class EditRuleViewController: BaseViewController {
     output.moveToRuleMainView
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
-        let defaultPopUpModel = DefaultPopUpModel(
-          cancelText: "계속 수정하기",
-          actionText: "나가기",
-          title: "수정사항이 저장되지 않았어요!",
-          subtitle: "Rules 수정을 취소하려면 나가기 버튼을 눌러주세요."
-        )
-        let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
-
-        self.presentPopUp(popUpType) { [weak self] actionType in
-          switch actionType {
-          case .action:
-            self?.navigationController?.popViewController(animated: true)
-          case .cancel:
-            break
-          }
-        }
+        self.showQuitPopUp()
       })
       .disposed(by: disposeBag)
 
@@ -291,6 +307,16 @@ extension EditRuleViewController: UITableViewDelegate {
     _ tableView: UITableView,
     shouldIndentWhileEditingRowAt indexPath: IndexPath
   ) -> Bool {
+    return false
+  }
+}
+
+  // MARK: - 교체 예정
+extension EditRuleViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    showQuitPopUp()
+
     return false
   }
 }
