@@ -19,5 +19,16 @@ extension Optional where Wrapped == Date {
 
     return dateFormatter.string(from: date)
   }
+  func dateToString2() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy/MM/dd"
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+
+    guard let date = self else {
+      return ""
+    }
+
+    return dateFormatter.string(from: date)
+  }
 
 }

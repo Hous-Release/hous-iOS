@@ -19,6 +19,7 @@ final class ProfileEditViewController: UIViewController {
   let disposeBag = DisposeBag()
   let viewModel: ProfileEditViewModel
   let actionDetected = PublishSubject<ProfileEditActionControl>()
+  private let initialData: ProfileModel
   
   //MARK: Network
   
@@ -104,6 +105,8 @@ final class ProfileEditViewController: UIViewController {
   
   init(data: ProfileModel) {
     self.viewModel = ProfileEditViewModel(data: data)
+    self.initialData = data
+
     super.init(nibName: nil, bundle: nil)
     setInitialData(data: data)
   }
@@ -125,6 +128,48 @@ final class ProfileEditViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     self.setTabBarIsHidden(isHidden: true)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+
+  private func judgeIsChaging() -> Bool {
+    if
+      nameTextField.text != (initialData.userName ?? "") ||
+        mbtiTextField.text != (initialData.mbti ?? "") ||
+        jobTextField.text != (initialData.userJob ?? "") ||
+        birthdayTextField.text != (initialData.birthday.dateToString2()) ||
+        statusTextView.textView.text != (initialData.statusMessage ?? "자기소개") {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  private func showQuitPopUp() {
+    let backButtonPopUpModel = DefaultPopUpModel(
+      cancelText: "계속 수정하기",
+      actionText: "나가기",
+      title: "수정사항이 저장되지 않았어요!",
+      subtitle: "프로필 수정을 취소하려면 나가기 버튼을 눌러주세요."
+    )
+
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: backButtonPopUpModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.view.endEditing(true)
+        self?.setTabBarIsHidden(isHidden: false)
+        self?.navigationController?.popViewController(animated: true)
+      case .cancel:
+        break
+      }
+    }
   }
   
   //MARK: Setup UI
@@ -637,25 +682,13 @@ final class ProfileEditViewController: UIViewController {
       self.navigationController?.popViewController(animated: true)
       
     case .didTabBack:
-      let backButtonPopUpModel = DefaultPopUpModel(
-        cancelText: "계속 수정하기",
-        actionText: "나가기",
-        title: "수정사항이 저장되지 않았어요!",
-        subtitle: "프로필 수정을 취소하려면 나가기 버튼을 눌러주세요."
-      )
-      
-      let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: backButtonPopUpModel)
-      
-      presentPopUp(popUpType) { [weak self] actionType in
-        switch actionType {
-        case .action:
-          self?.view.endEditing(true)
-          self?.setTabBarIsHidden(isHidden: false)
-          self?.navigationController?.popViewController(animated: true)
-        case .cancel:
-          break
-        }
+
+      if judgeIsChaging() {
+        showQuitPopUp()
+      } else {
+        navigationController?.popViewController(animated: true)
       }
+
     default:
       return
     }
@@ -674,5 +707,16 @@ final class ProfileEditViewController: UIViewController {
 extension ProfileEditViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return false
+  }
+}
+
+extension ProfileEditViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    if judgeIsChaging() {
+      showQuitPopUp()
+      return false
+    }
+    return true
   }
 }
