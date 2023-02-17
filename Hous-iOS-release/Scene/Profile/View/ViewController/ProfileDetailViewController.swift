@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileDetailViewController: LoadingBaseViewController, UICollectionViewDelegate {
+final class ProfileDetailViewController: BaseViewController, UICollectionViewDelegate {
   
   //MARK: RX Components
   

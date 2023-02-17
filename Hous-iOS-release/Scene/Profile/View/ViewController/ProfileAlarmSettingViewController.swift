@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Then
 
-final class ProfileAlarmSettingViewController: LoadingBaseViewController {
+final class ProfileAlarmSettingViewController: BaseViewController {
   
   //MARK: RX Components
   

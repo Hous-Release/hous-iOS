@@ -15,7 +15,7 @@ import Network
 import RxGesture
 import BottomSheetKit
 
-class MainHomeViewController: LoadingBaseViewController {
+class MainHomeViewController: BaseViewController {
   
   private enum MainHomeSection: Int {
     case todos

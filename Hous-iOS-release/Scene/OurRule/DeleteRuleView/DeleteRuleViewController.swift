@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import BottomSheetKit
 
-class DeleteRuleViewController: LoadingBaseViewController {
+class DeleteRuleViewController: BaseViewController {
   //MARK: - UI Components
   
   private let navigationBar: NavBarWithBackButtonView = {
