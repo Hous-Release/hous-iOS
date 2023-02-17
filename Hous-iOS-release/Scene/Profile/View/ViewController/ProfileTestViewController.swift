@@ -48,9 +48,11 @@ final class ProfileTestViewController: BaseViewController {
     $0.configurationUpdateHandler = { btn in
       switch btn.state {
       case .normal:
-        btn.configuration?.image = Images.icLeft.image
+        btn.configuration?.image = Images.icLeftBlue.image
       case .highlighted:
-        btn.configuration?.image = Images.icLeftOn.image
+        // MARK: - 이미지 달라고 하기
+        break
+//        btn.configuration?.image = Images.icLeftOn.image
       default:
         break
       }
@@ -59,7 +61,7 @@ final class ProfileTestViewController: BaseViewController {
   
   private let testCountLabel = UILabel().then {
     $0.font = Fonts.Montserrat.bold.font(size: 16)
-    $0.textColor = Colors.black.color
+    $0.textColor = Colors.g6.color
   }
   
   private lazy var forwardButton = UIButton(configuration: .plain()).then {
@@ -69,9 +71,10 @@ final class ProfileTestViewController: BaseViewController {
     $0.configurationUpdateHandler = { btn in
       switch btn.state {
       case .normal:
-        btn.configuration?.image = Images.icRight.image
+        btn.configuration?.image = Images.icRightBlue.image
       case .highlighted:
-        btn.configuration?.image = Images.icRightOn.image
+        break
+//        btn.configuration?.image = Images.icRightOn.image
       default:
         break
       }
