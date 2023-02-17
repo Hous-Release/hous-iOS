@@ -66,7 +66,6 @@ final class ProfileViewController: BaseViewController {
     setup()
     bind()
     render()
-    configLoadingLayout()
   }
   
   //MARK: Setup UI

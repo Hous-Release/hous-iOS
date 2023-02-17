@@ -122,7 +122,6 @@ final class ProfileTestViewController: BaseViewController {
     render()
     setTestCollectionView()
     configUI()
-    configLoadingLayout()
     self.showLoading()
     bind()
   }

@@ -43,7 +43,6 @@ final class TodoViewController: BaseViewController, View {
     let serviceProvider = ServiceProvider()
     reactor = TodoViewReactor(provider: serviceProvider)
     navigationController?.navigationBar.isHidden = true
-    configLoadingLayout()
   }
 
   func bind(reactor: Reactor) {

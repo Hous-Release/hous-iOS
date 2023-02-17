@@ -27,7 +27,6 @@ class ByDayTodoViewController: BaseViewController, ReactorKit.View {
   init(_ reactor: Reactor) {
     super.init(nibName: nil, bundle: nil)
     self.reactor = reactor
-    self.configLoadingLayout()
   }
 
   required init?(coder: NSCoder) {

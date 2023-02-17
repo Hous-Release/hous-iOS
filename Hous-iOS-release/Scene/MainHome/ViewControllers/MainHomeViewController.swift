@@ -70,9 +70,7 @@ class MainHomeViewController: BaseViewController {
     view.backgroundColor = .systemBackground
     navigationController?.navigationBar.isHidden = true
     view.addSubview(collectionView)
-    
-    configLoadingLayout()
-    
+
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()

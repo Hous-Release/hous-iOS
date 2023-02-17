@@ -19,7 +19,6 @@ final class EditRuleViewModel: ViewModelType {
   }
 
   struct Output {
-    //    let isEmptyView: Driver<Bool>
     let saveCompleted: Driver<Void>
     let moveToRuleMainView: Driver<Void>
   }

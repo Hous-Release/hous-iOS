@@ -51,7 +51,6 @@ final class ProfileAlarmViewController: BaseViewController {
     super.viewDidLoad()
     setup()
     render()
-    configLoadingLayout()
     self.showLoading()
     bind()
   }
