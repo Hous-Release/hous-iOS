@@ -9,10 +9,10 @@ import UIKit
 import Lottie
 
 class BaseViewController: UIViewController {
+
   // MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.delegate = self
   }
 
   func showLoading() {
@@ -29,4 +29,3 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: LoadingPresentable { }
-extension BaseViewController: UINavigationControllerDelegate { }

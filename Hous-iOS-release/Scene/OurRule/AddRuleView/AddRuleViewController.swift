@@ -91,9 +91,13 @@ final class AddRuleViewController: BaseViewController {
     setNoti()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+  }
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    setupBackInitialStatus()
   }
 
   //MARK: - Custom Methods
@@ -229,6 +233,7 @@ final class AddRuleViewController: BaseViewController {
           self.showQuitPopUp()
           return
         }
+
         self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
@@ -256,8 +261,6 @@ final class AddRuleViewController: BaseViewController {
           self.ruleTextField.text = ""
           self.navigationBar.rightButton.isEnabled = true
           self.ruleTableView.reloadData()
-
-          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
       })
       .disposed(by: disposeBag)
@@ -275,20 +278,6 @@ final class AddRuleViewController: BaseViewController {
 
     output.textCountLabelText
       .drive(textCountLabel.rx.text)
-      .disposed(by: disposeBag)
-
-    output.isEnteringRule
-      .drive(onNext: { [weak self] isEnteringRule in
-
-        if isEnteringRule {
-          self?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        }
-
-        if !isEnteringRule {
-          self?.navigationController?.interactivePopGestureRecognizer?.isEnabled = self?
-            .newRules.count == 0
-        }
-      })
       .disposed(by: disposeBag)
     }
 
@@ -333,5 +322,27 @@ extension AddRuleViewController {
       }
     }
   }
-
 }
+extension AddRuleViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    if ruleTextField.text?.count ?? 0 > 0 || !(newRules.isEmpty) {
+      showQuitPopUp()
+      return false
+    }
+    return true
+  }
+}
+
+//extension AddRuleViewController: UINavigationControllerDelegate {
+//
+//  func navigationController(
+//    _ navigationController: UINavigationController,
+//    didShow viewController: UIViewController,
+//    animated: Bool
+//  ) {
+//    navigationController
+//      .interactivePopGestureRecognizer?
+//      .isEnabled = navigationController.viewControllers.count > 1
+//  }
+//}
