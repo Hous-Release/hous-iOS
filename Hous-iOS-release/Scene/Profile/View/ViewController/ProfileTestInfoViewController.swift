@@ -155,34 +155,14 @@ class ProfileTestInfoViewController: UIViewController {
     }
   }
 }
-  
-  //MARK: Objective-C Methods
-  extension ProfileTestInfoViewController {
-    @objc private func startProfileTest() {
-      let profileTest = ProfileTestViewController()
-      profileTest.modalTransitionStyle = .crossDissolve
-      profileTest.modalPresentationStyle = .fullScreen
-      
-      present(profileTest, animated: true)
-    }
+
+//MARK: Objective-C Methods
+extension ProfileTestInfoViewController {
+  @objc private func startProfileTest() {
+    let profileTest = ProfileTestViewController()
+    profileTest.modalTransitionStyle = .crossDissolve
+    profileTest.modalPresentationStyle = .fullScreen
+
+    present(profileTest, animated: true)
   }
-  
-  //MARK: Network
-  //extension ProfileTestInfoViewController {
-  //  private func getProfileTest() {
-  //    ProfileTestAPIService.shared.requestGetTypeTest { result in
-  //
-  //      if let responseResult = NetworkResultFactory.makeResult(resultType: result)
-  //          as? Success<TypeTestsDTO> {
-  //        guard let response = responseResult.response else { return }
-  //
-  //        self.profileTestData = response.typeTests
-  //
-  //      } else {
-  //        let responseResult = NetworkResultFactory.makeResult(resultType: result)
-  //        responseResult.resultMethod()
-  //      }
-  //
-  //    }
-  //  }
-  //}
+}
