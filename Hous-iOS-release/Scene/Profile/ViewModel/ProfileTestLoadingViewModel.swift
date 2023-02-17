@@ -44,7 +44,7 @@ final class ProfileTestLoadingViewModel: ViewModelType {
       .disposed(by: disposeBag)
     
     self.timeStart
-      .delay(DispatchTimeInterval.seconds(2), scheduler: MainScheduler.instance)
+      .delay(DispatchTimeInterval.seconds(1), scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self] in
         self?.timeFlag.onNext(true)
       })
