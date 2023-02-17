@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class UpdateTodoViewController: UIViewController, View {
+final class UpdateTodoViewController: BaseViewController, View {
 
   typealias Reactor = UpdateTodoReactor
 
@@ -52,6 +52,7 @@ final class UpdateTodoViewController: UIViewController, View {
     _ reactor: Reactor
   ) {
     super.init(nibName: nil, bundle: nil)
+    showLoading()
     setupView()
     setupLayout()
     configureDataSource()
@@ -224,6 +225,9 @@ extension UpdateTodoViewController {
     else {
       return
     }
+
+    hideLoading()
+
     if status == 403 {
       let popupImage = PopUpImage.exceed
       let popupModel = ImagePopUpModel(
@@ -247,11 +251,15 @@ extension UpdateTodoViewController {
   private func back(_ backFlag: Bool) {
     if backFlag {
       navigationController?.popViewController(animated: true)
+
+    } else {
+      hideLoading()
     }
   }
 
   private func tappedUpdate() {
-    self.reactor?.action.onNext(.didTapUpdate)
+    showLoading()
+    reactor?.action.onNext(.didTapUpdate)
   }
 
   private func tappedDayCell(_ tuple: (days: [UpdateTodoHomieModel.Day], id: Int)?) {
