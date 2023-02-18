@@ -31,6 +31,7 @@ final class MateProfileMainImageCollectionViewCell: UICollectionViewCell {
   
   
   private let navigationBackButton = UIButton().then {
+    // MARK: - 여기 좀 고쳐주세요 G6 백버튼만 넣으면 됨.
     $0.setImage(Images.icBack.image, for: .normal)
   }
   
