@@ -15,6 +15,7 @@ class RulesTableViewCell: UITableViewCell {
   }
   
   let selectButton = UIButton().then {
+    $0.isUserInteractionEnabled = false
     $0.isHidden = true
     $0.setImage(Images.icDot4.image, for: .normal)
     $0.setImage(Images.icCheck2.image, for: .selected)
