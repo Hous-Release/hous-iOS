@@ -12,11 +12,11 @@ import BottomSheetKit
 class DeleteRuleViewController: BaseViewController {
   //MARK: - UI Components
   
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "Rules 삭제")
-    navBar.setRightButtonText(text: "삭제")
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "Rules 삭제",
+    rightButtonText: "삭제").then {
+      $0.rightButton.setTitleColor(Colors.red.color, for: .normal)
+    }
   
   private let ruleEmptyViewLabel = UILabel().then {
     $0.isHidden = true
@@ -74,7 +74,6 @@ class DeleteRuleViewController: BaseViewController {
   }
   
   private func configUI() {
-    navigationBar.updateRightButtonSnapKit()
     
     view.addSubViews([
       navigationBar,

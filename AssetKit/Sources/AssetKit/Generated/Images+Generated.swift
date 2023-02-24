@@ -77,6 +77,8 @@ public enum Images {
   public static let illPen = ImageAsset(name: "ill_pen")
   public static let illSqu = ImageAsset(name: "ill_squ")
   public static let illTri = ImageAsset(name: "ill_tri")
+  public static let btnDaily = ImageAsset(name: "btn_daily")
+  public static let btnMember = ImageAsset(name: "btn_member")
   public static let icDoneInfo = ImageAsset(name: "ic_done_info")
   public static let icDoneMy = ImageAsset(name: "ic_done_my")
   public static let icDoneOur = ImageAsset(name: "ic_done_our")

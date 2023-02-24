@@ -16,12 +16,11 @@ final class AddRuleViewController: BaseViewController {
 
   //MARK: - UI Components
 
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "새로운 Rules 추가")
-    navBar.setRightButtonText(text: "저장")
-    navBar.rightButton.isEnabled = false
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "새로운 Rules 추가",
+    rightButtonText: "저장").then {
+    $0.rightButton.isEnabled = false
+  }
 
   private let inValidTextLabel = UILabel().then {
     $0.isHidden = true
@@ -162,7 +161,6 @@ final class AddRuleViewController: BaseViewController {
   }
 
   private func configUI() {
-    navigationBar.updateRightButtonSnapKit()
 
     view.addSubViews([
       navigationBar,

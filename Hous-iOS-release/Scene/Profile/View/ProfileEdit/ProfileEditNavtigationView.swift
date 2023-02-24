@@ -48,9 +48,9 @@ final class ProfileEditNavigationBarView: UIView {
     self.addSubViews([navigationBackButton, titleName, saveButton])
     
     navigationBackButton.snp.makeConstraints {make in
+      make.size.equalTo(24)
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(24)
-//      make.width.height.equalTo(24)
     }
     
     titleName.snp.makeConstraints { make in
@@ -59,6 +59,7 @@ final class ProfileEditNavigationBarView: UIView {
     }
     
     saveButton.snp.makeConstraints { make in
+      make.size.greaterThanOrEqualTo(24)
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().inset(24)
     }

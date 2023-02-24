@@ -14,13 +14,12 @@ import RxGesture
 
 class BadgeViewController: BaseViewController {
   
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "내 배지")
-    navBar.backgroundColor = Colors.g7.color
-    navBar.setBackButtonColor(color: Colors.white.color)
-    navBar.setTitleLabelTextColor(color: Colors.white.color)
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "내 배지").then {
+    $0.backgroundColor = Colors.g7.color
+    $0.setBackButtonColor(color: Colors.white.color)
+    $0.setTitleLabelTextColor(color: Colors.white.color)
+  }
   
   private lazy var backgroundView = UIView().then {
     $0.backgroundColor = Colors.g7.color
