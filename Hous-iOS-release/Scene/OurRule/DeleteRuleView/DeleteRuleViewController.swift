@@ -15,7 +15,7 @@ class DeleteRuleViewController: BaseViewController {
   private let navigationBar = NavBarWithBackButtonView(
     title: "Rules 삭제",
     rightButtonText: "삭제").then {
-      $0.rightButton.setTitleColor(Colors.red.color, for: .normal)
+      $0.setRightButtonTextColor(color: Colors.red.color)
     }
   
   private let ruleEmptyViewLabel = UILabel().then {
@@ -35,7 +35,7 @@ class DeleteRuleViewController: BaseViewController {
   private let rules: [RuleWithIdViewModel]
   
   private let disposeBag = DisposeBag()
-  
+
   private var selectedDict: [RuleState] = []
   
   private var deleteButtonDidTapped = PublishSubject<[Int]>()
@@ -64,12 +64,16 @@ class DeleteRuleViewController: BaseViewController {
   }
   
   private func setEmptyView() {
-    if rules.isEmpty {
-      ruleEmptyViewLabel.isHidden = false
-      navigationBar.rightButton.isEnabled = false
-    } else {
-      ruleEmptyViewLabel.isHidden = true
+    rules.isEmpty ? (ruleEmptyViewLabel.isHidden = false) : (ruleEmptyViewLabel.isHidden = true)
+  }
+
+  private func setRemoveButtonStatus(to isEnabled: Bool) {
+    if isEnabled {
       navigationBar.rightButton.isEnabled = true
+      navigationBar.setRightButtonTextColor(color: Colors.red.color)
+    } else {
+      navigationBar.rightButton.isEnabled = false
+      navigationBar.setRightButtonTextColor(color: Colors.g4.color)
     }
   }
   
@@ -97,8 +101,9 @@ class DeleteRuleViewController: BaseViewController {
       make.top.equalTo(navigationBar.snp.bottom).offset(48)
       make.centerX.equalToSuperview()
     }
-    
+
     setEmptyView()
+    setRemoveButtonStatus(to: false)
   }
   
   private func bindTableView() {
@@ -122,6 +127,17 @@ class DeleteRuleViewController: BaseViewController {
 
         cell.selectButton.isSelected = !state
         self.selectedDict[indexPath.row].isSelected = cell.selectButton.isSelected
+
+        var isExistSelected = false
+        for rule in self.selectedDict {
+          if rule.isSelected {
+            isExistSelected = true
+            break
+          }
+        }
+
+        self.setRemoveButtonStatus(to: isExistSelected)
+
       })
       .disposed(by: disposeBag)
     
