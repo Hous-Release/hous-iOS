@@ -13,7 +13,9 @@ class ResignView: UIView {
     static let navigationBarHeight = 64
   }
 
-  let navigationBarView = NavBarWithBackButtonView(title: "회원 탈퇴", rightButtonText: "")
+  let navigationBarView = NavBarWithBackButtonView(
+    title: "회원 탈퇴",
+    rightButtonText: "")
 
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
 

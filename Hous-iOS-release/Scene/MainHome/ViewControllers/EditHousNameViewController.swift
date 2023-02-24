@@ -21,11 +21,9 @@ class EditHousNameViewController: BaseViewController {
   
   
   //MARK: UI Components
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "우리 집 별명 수정")
-    navBar.setRightButtonText(text: "저장")
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "우리 집 별명 수정",
+    rightButtonText: "저장")
   
   private let descriptionLabel = UILabel().then {
     $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요."

@@ -17,11 +17,9 @@ final class EditRuleViewController: BaseViewController {
 
   //MARK: - UI Components
 
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "Rules 수정")
-    navBar.setRightButtonText(text: "저장")
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "Rules 수정",
+    rightButtonText: "저장")
 
   private let rulesTableView = UITableView().then {
     $0.showsVerticalScrollIndicator = false
@@ -119,7 +117,6 @@ final class EditRuleViewController: BaseViewController {
   }
   
   private func configUI() {
-    navigationBar.updateRightButtonSnapKit()
 
     self.view.addSubViews([
       navigationBar,

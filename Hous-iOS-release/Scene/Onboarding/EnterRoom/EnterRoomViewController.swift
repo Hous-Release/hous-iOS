@@ -23,6 +23,10 @@ class EnterRoomViewController: UIViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     reactor = EnterRoomViewReactor()
+    configUI()
+  }
+
+  private func configUI() {
     navigationController?.navigationBar.isHidden = true
   }
 

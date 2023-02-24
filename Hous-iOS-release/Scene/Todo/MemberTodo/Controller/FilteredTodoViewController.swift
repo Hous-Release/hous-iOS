@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxDataSources
 import ReactorKit
+import AssetKit
 
 // Todo: FilteredTodoViewController - containerVC / memberTodoViewController & dayOfWeekViewController - contentsVC
 
@@ -21,41 +22,38 @@ enum FilteringType {
 final class FilteredTodoViewController: UIViewController, ReactorKit.View {
 
   typealias Reactor = FilteredTodoReactor
-
   var disposeBag = DisposeBag()
-
-  var viewType: FilteringType = .byDay {
-    didSet {
-      var attrString = AttributedString()
-
-      if viewType == .member {
-        attrString = AttributedString("요일별 보기")
-        removeChildVC(byDayTodoViewController)
-        addChildVC(memberTodoViewController)
-        navigationBar.title = "멤버별 보기"
-      } else if viewType == .byDay {
-        attrString = AttributedString("멤버별 보기")
-        removeChildVC(memberTodoViewController)
-        addChildVC(byDayTodoViewController)
-        navigationBar.title = "요일별 보기"
-      }
-      attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-      attrString.foregroundColor = Colors.g5.color
-      navigationBar.rightButton.configuration?.attributedTitle = attrString
-    }
-  }
 
   enum Size {
     static let navigationBarHeight = 64
     static let floatingButtonSize = 60
   }
 
-  var navigationBar = NavBarWithBackButtonView(title: "멤버별 보기", rightButtonText: "요일별 보기").then {
+  var viewType: FilteringType = .byDay {
+    didSet {
+
+      if viewType == .member {
+
+        navigationBar.title = "멤버별 보기"
+        navigationBar.rightButtonImage = Images.btnDaily.image
+
+        removeChildVC(byDayTodoViewController)
+        addChildVC(memberTodoViewController)
+
+      } else if viewType == .byDay {
+
+        navigationBar.title = "요일별 보기"
+        navigationBar.rightButtonImage = Images.btnMember.image
+
+        removeChildVC(memberTodoViewController)
+        addChildVC(byDayTodoViewController)
+      }
+    }
+  }
+
+  var navigationBar = NavBarWithBackButtonView(title: "요일별 보기").then {
     $0.backgroundColor = Colors.g1.color
-    $0.rightButton.configuration?.imagePadding = 2
-    $0.rightButton.configuration?.imagePlacement = .trailing
-    $0.rightButton.configuration?.image = Images.icChange.image
-    $0.rightButton.configuration?.baseForegroundColor = Colors.g5.color
+    $0.rightButtonImage = Images.btnMember.image
   }
   private var contentsView = UIView()
 

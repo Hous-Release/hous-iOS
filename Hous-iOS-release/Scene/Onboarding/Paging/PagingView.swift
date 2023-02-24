@@ -12,12 +12,11 @@ import Then
 
 final class PagingView: UIView {
 
-  var navigationBar = NavBarWithBackButtonView(title: "", rightButtonText: "건너뛰기").then {
+  var navigationBar = NavBarWithBackButtonView(
+    title: "",
+    rightButtonText: "건너뛰기").then {
 
-    var  attrString = AttributedString("건너뛰기")
-    attrString.foregroundColor = Colors.g4.color
-    $0.rightButton.configuration?.attributedTitle = attrString
-
+    $0.rightButton.setTitleColor(Colors.g4.color, for: .normal)
     $0.rightButton.isHidden = false
     $0.backButton.isHidden = true
   }

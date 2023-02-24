@@ -13,11 +13,9 @@ import RxSwift
 
 class OurRulesViewController: BaseViewController {
   
-  private let navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "우리 집 Rules")
-    navBar.setRightButtonImage(image: Images.frame1.image)
-    return navBar
-  }()
+  private let navigationBar = NavBarWithBackButtonView(
+    title: "우리 집 Rules",
+    rightButtonImage: Images.frame1.image)
   
   private let rulesTableView = UITableView().then {
     $0.estimatedRowHeight = 150
@@ -80,7 +78,6 @@ class OurRulesViewController: BaseViewController {
   }
   
   private func configUI() {
-    navigationBar.updateRightButtonSnapKit()
     
     self.view.addSubViews([
       navigationBar,

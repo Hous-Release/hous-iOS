@@ -14,51 +14,65 @@ protocol NavBarWithBackButtonViewDelegate: AnyObject {
 
 class NavBarWithBackButtonView: UIView {
 
-  lazy var backButton: UIButton = {
-    var button = UIButton()
-    button.setImage(Images.icBack.image, for: .normal)
-    button.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
-    return button
-  }()
+  lazy var backButton = UIButton().then {
+    $0.setImage(Images.icBack.image, for: .normal)
+    $0.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
+  }
   
   weak var delegate: NavBarWithBackButtonViewDelegate?
 
-  private var titleLabel: UILabel = {
-    var label = UILabel()
-    label.textColor = Colors.black.color
-    label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    label.textAlignment = .center
-    return label
-  }()
-
-  lazy var rightButton = UIButton(configuration: UIButton.Configuration.plain())
-
-  var title: String {
-    didSet { self.titleLabel.text = title}
+  private var titleLabel = UILabel().then {
+    $0.textColor = Colors.black.color
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    $0.textAlignment = .center
   }
-  var rightButtonText: String
-  
-  //TODO: rightButtonText 설정 setter 메서드 따로 빼기
-  init(title: String, rightButtonText: String = "") {
-    self.title = title
-    self.rightButtonText = rightButtonText
-    super.init(frame: .zero)
 
-    var  attrString = AttributedString(rightButtonText)
-    attrString.foregroundColor = Colors.blue.color
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    rightButton.configuration?.attributedTitle = attrString
-    rightButton.configuration?.baseBackgroundColor = .white
-    self.titleLabel.text = title
+  lazy var rightButton = UIButton().then {
+    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+    $0.setTitleColor(Colors.blue.color, for: .normal)
+    $0.titleLabel?.textAlignment = .right
+  }
+
+  var title: String = "" {
+    didSet {
+      titleLabel.text = title
+    }
+  }
+  var rightButtonText: String = "" {
+    didSet {
+      rightButton.setTitle(rightButtonText, for: .normal)
+      rightButton.setImage(nil, for: .normal)
+    }
+  }
+  var rightButtonImage: UIImage? {
+    didSet {
+      rightButton.setTitle("", for: .normal)
+      rightButton.setImage(rightButtonImage, for: .normal)
+    }
+  }
+
+  init(title: String = "",
+       rightButtonText: String = "",
+       rightButtonImage: UIImage? = nil
+  ) {
+    super.init(frame: .zero)
+    configUI(title, rightButtonText, rightButtonImage)
     render()
+
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  func setRightButtonImage(image: UIImage) {
-    rightButton.setImage(image, for: .normal)
+
+  private func configUI(
+    _ title: String,
+    _ rightButtonText: String,
+    _ rightButtonImage: UIImage?
+  ) {
+    titleLabel.text = title
+    rightButton.setTitle(rightButtonText, for: .normal)
+    rightButton.setImage(rightButtonImage, for: .normal)
   }
 
   private func render() {
@@ -68,9 +82,9 @@ class NavBarWithBackButtonView: UIView {
     addSubViews([backButton, titleLabel, rightButton])
 
     backButton.snp.makeConstraints { make in
-      make.size.equalTo(44)
+      make.size.equalTo(24)
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(4)
+      make.leading.equalToSuperview().offset(24)
     }
 
     titleLabel.snp.makeConstraints { make in
@@ -78,22 +92,10 @@ class NavBarWithBackButtonView: UIView {
     }
 
     rightButton.snp.makeConstraints { make in
-      make.size.greaterThanOrEqualTo(44)
+      make.size.greaterThanOrEqualTo(24)
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().inset(24)
     }
-  }
-  
-  func updateRightButtonSnapKit() {
-    rightButton.snp.remakeConstraints { make in
-      make.size.greaterThanOrEqualTo(44)
-      make.trailing.equalToSuperview().inset(4)
-      make.centerY.equalTo(titleLabel)
-    }
-  }
-  
-  func setRightButtonText(text: String) {
-    rightButton.setTitle(text, for: .normal)
   }
   
   func setTitleLabelTextColor(color: UIColor) {

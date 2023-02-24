@@ -16,9 +16,10 @@ class EnterRoomView: UIView {
     static let navigationBarHeight = 64
   }
 
-  let navigationBarView = NavBarWithBackButtonView(title: "", rightButtonText: "").then {
+  let navigationBarView = NavBarWithBackButtonView(
+    rightButtonImage: Images.icSettingGrey.image
+  ).then {
     $0.backButton.isHidden = true
-    $0.rightButton.configuration?.image = Images.icSettingGrey.image
   }
 
   let contentView = UIView()

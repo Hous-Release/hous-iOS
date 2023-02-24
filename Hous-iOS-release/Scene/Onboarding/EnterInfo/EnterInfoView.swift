@@ -18,10 +18,7 @@ class EnterInfoView: UIView {
 
   var delegate: EnterInfoViewDelegate?
 
-  var navigationBar: NavBarWithBackButtonView = {
-    let navBar = NavBarWithBackButtonView(title: "회원 정보 입력")
-    return navBar
-  }()
+  var navigationBar = NavBarWithBackButtonView(title: "회원 정보 입력")
 
   private let contentView = UIView()
 
