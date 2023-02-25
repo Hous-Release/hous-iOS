@@ -144,7 +144,7 @@ final class EditRuleViewController: BaseViewController {
     setEmptyView()
   }
 
-  //MARK: - Bind
+  // MARK: - Bind
   private func bind() {
     let observable = Observable.just(self.editViewRules)
 
