@@ -15,7 +15,7 @@
 
 default_platform(:ios)
 
-ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "ycmp-rrjw-swbl-pnrs"
+ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "aqup-vknu-uckk-mswf"
 
 platform :ios do
   
