@@ -17,4 +17,4 @@ CFBundleDisplayName = Hous-(Dev)
 API_BASE_URL = 43.200.122.252/v1
 
 // Version
-MARKETING_VERSION = 1.0.0
+MARKETING_VERSION = 1.0.6
