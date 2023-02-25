@@ -134,6 +134,7 @@
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
+		B541F32C29A9C7A500F81DFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B541F32B29A9C7A500F81DFE /* .swiftlint.yml */; };
 		B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F52914197700DA3A95 /* AddRuleViewController.swift */; };
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
 		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
@@ -401,6 +402,7 @@
 		B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewController.swift; sourceTree = "<group>"; };
 		B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
+		B541F32B29A9C7A500F81DFE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B54D39F52914197700DA3A95 /* AddRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewController.swift; sourceTree = "<group>"; };
 		B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewModel.swift; sourceTree = "<group>"; };
 		B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewController.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
+				B541F32B29A9C7A500F81DFE /* .swiftlint.yml */,
 				777085A82903F1980018240B /* AssetKit */,
 				770B959D28F2F65500C8C945 /* BottomSheetKit */,
 				770B959128EB0DFF00C8C945 /* UserInformation */,
@@ -1511,6 +1514,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 777C667128A74A63000BECEA /* Build configuration list for PBXNativeTarget "Hous-iOS-release" */;
 			buildPhases = (
+				B541F32A29A9C6A200F81DFE /* SwiftLint Script */,
 				777C665928A74A62000BECEA /* Sources */,
 				777C665A28A74A62000BECEA /* Frameworks */,
 				777C665B28A74A62000BECEA /* Resources */,
@@ -1585,6 +1589,7 @@
 				B5F9FB5B292CCB6A0056C0B1 /* wednesday.json in Resources */,
 				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				B5F9FB5C292CCB6A0056C0B1 /* tuesday.json in Resources */,
+				B541F32C29A9C7A500F81DFE /* .swiftlint.yml in Resources */,
 				B5F9FB59292CCB6A0056C0B1 /* weekend.json in Resources */,
 				9B454E4E2900055F00F5A319 /* profileRedlottie.json in Resources */,
 				9B2F46A22923FB95002D9BD2 /* hex_no.json in Resources */,
@@ -1625,6 +1630,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "PATH=/opt/homebrew/bin:$PATH\nswiftgen config run --config \"$SRCROOT/AssetKit/Sources/AssetKit/Script/swiftgen.yml\"\n";
+		};
+		B541F32A29A9C6A200F81DFE /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
