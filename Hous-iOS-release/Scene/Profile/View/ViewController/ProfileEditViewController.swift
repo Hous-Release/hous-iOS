@@ -259,7 +259,7 @@ final class ProfileEditViewController: UIViewController {
     self.actionDetected.onNext(.birthdayTextFieldEdited(date: datePicker.date))
   }
   
-  //MARK: Bind
+  // MARK: Bind
   
   private func bind() {
     
@@ -270,7 +270,7 @@ final class ProfileEditViewController: UIViewController {
       .asSignal(onErrorJustReturn: ())
     
     nameTextField.rx.controlEvent(.editingDidBegin)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.nameTextFieldSelected)
@@ -278,7 +278,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     nameTextField.rx.controlEvent(.editingDidEnd)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.nameTextFieldUnselected)
@@ -286,7 +286,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     nameTextField.rx.text.orEmpty
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] text in
         guard let self = self else { return }
         self.actionDetected.onNext(.nameTextFieldEdited(text: text))
@@ -294,7 +294,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     birthdayTextField.rx.controlEvent(.editingDidBegin)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.birthdayTextFieldSelected)
@@ -302,7 +302,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     birthdayTextField.rx.controlEvent(.editingDidEnd)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.birthdayTextFieldUnselected)
@@ -310,7 +310,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     birthdayTextField.birthdayPublicButton.rx.tap
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.birthdayPublicEdited(isPublic: !self.birthdayTextField.birthdayPublicButton.isSelected))
@@ -318,7 +318,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     mbtiTextField.rx.controlEvent(.editingDidBegin)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.mbtiTextFieldSelected)
@@ -326,7 +326,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     mbtiTextField.rx.controlEvent(.editingDidEnd)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: {[weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.mbtiTextFieldUnselected)
@@ -334,7 +334,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     mbtiTextField.rx.text.orEmpty
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] text in
         guard let self = self else { return }
         self.actionDetected.onNext(.mbtiTextFieldEdited(text: text))
@@ -342,7 +342,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     jobTextField.rx.controlEvent(.editingDidBegin)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.jobTextFieldSelected)
@@ -350,7 +350,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     jobTextField.rx.controlEvent(.editingDidEnd)
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.jobTextFieldUnselected)
@@ -358,7 +358,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     jobTextField.rx.text.orEmpty
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] text in
         guard let self = self else { return }
         self.actionDetected.onNext(.jobTextFieldEdited(text: text))
@@ -366,7 +366,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     statusTextView.textView.rx.didBeginEditing
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.statusTextViewSelected)
@@ -374,7 +374,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     statusTextView.textView.rx.didEndEditing
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.statusTextViewUnselected)
@@ -391,7 +391,7 @@ final class ProfileEditViewController: UIViewController {
       .disposed(by: disposeBag)
     
     navigationBar.saveButton.rx.tap
-      .observe(on:MainScheduler.asyncInstance)
+      .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
         self.actionDetected.onNext(.didTabSave)
@@ -447,7 +447,7 @@ final class ProfileEditViewController: UIViewController {
   }
   
   
-  //MARK: Render
+  // MARK: Render
   
   private func render() {
     [nameTextField, birthdayTextField, mbtiTextField, jobTextField].forEach {profileEditStackView.addArrangedSubview($0)}
@@ -476,7 +476,7 @@ final class ProfileEditViewController: UIViewController {
     }
   }
   
-  //MARK: TextField Methods
+  // MARK: TextField Methods
   
   private func isAllOptionValid() -> Bool {
     for textField in [nameTextField, birthdayTextField, mbtiTextField, jobTextField] {

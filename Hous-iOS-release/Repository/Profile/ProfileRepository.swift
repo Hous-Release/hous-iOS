@@ -59,7 +59,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
 
   public func getAlarmSettingInfo() {
     
-    //MARK: Get Data
+    // MARK: Get Data
     
     NetworkService.shared.profileRepository.getAlarmSettingInfo { res, err in
       guard let dto = res?.data else {

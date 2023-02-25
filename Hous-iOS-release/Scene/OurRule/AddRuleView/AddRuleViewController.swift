@@ -14,7 +14,7 @@ import Kingfisher
 
 final class AddRuleViewController: BaseViewController {
 
-  //MARK: - UI Components
+  // MARK: - UI Components
 
   private let navigationBar = NavBarWithBackButtonView(
     title: "새로운 Rules 추가",
@@ -52,7 +52,7 @@ final class AddRuleViewController: BaseViewController {
     $0.showsVerticalScrollIndicator = false
   }
 
-  //MARK: - var & let
+  // MARK: - var & let
   private let maxCount = 20
 
   private let viewModel: AddRuleViewModel
@@ -69,7 +69,7 @@ final class AddRuleViewController: BaseViewController {
 
   private var rules: [String]
 
-  //MARK: - Lifecycle
+  // MARK: - Lifecycle
 
   init(rules: [String], viewModel: AddRuleViewModel) {
     self.rules = rules
@@ -100,7 +100,7 @@ final class AddRuleViewController: BaseViewController {
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
 
-  //MARK: - Custom Methods
+  // MARK: - Custom Methods
 
   private func setupBackInitialStatus() {
     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -332,16 +332,3 @@ extension AddRuleViewController: UIGestureRecognizerDelegate {
     return true
   }
 }
-
-//extension AddRuleViewController: UINavigationControllerDelegate {
-//
-//  func navigationController(
-//    _ navigationController: UINavigationController,
-//    didShow viewController: UIViewController,
-//    animated: Bool
-//  ) {
-//    navigationController
-//      .interactivePopGestureRecognizer?
-//      .isEnabled = navigationController.viewControllers.count > 1
-//  }
-//}

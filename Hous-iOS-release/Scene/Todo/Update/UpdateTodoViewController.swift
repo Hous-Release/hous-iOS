@@ -681,8 +681,7 @@ extension UpdateTodoViewController: DidTapDayDelegate {
 extension UpdateTodoViewController: NavBarWithBackButtonViewDelegate {
   func backButtonDidTapped() {
     guard let isModify = reactor?.currentState.isModifying else { return }
-
-
+    
     if isModify {
       if todoTextField.text != reactor?.fetchedInitalTodo {
         showQuitPopUp(isModify: isModify)
