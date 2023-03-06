@@ -18,7 +18,6 @@ final class SignInReactor: Reactor {
     self.provider = provider
   }
 
-
   enum Action {
     case didTapSignIn(SignInType)
     case login(accessToken: String?, error: Error?)
@@ -38,7 +37,7 @@ final class SignInReactor: Reactor {
 
   struct State {
     var signinType: SignInType?
-    var error: String? = nil
+    var error: String?
     var isJoingingRoom: Bool?
     var oauthToken: String?
     var enterInformationFlag: Bool?
@@ -132,7 +131,7 @@ final class SignInReactor: Reactor {
       switch event {
       case .logout:
         return .empty()
-        
+
       case .isJoiningRoom(let isJoingingRoom):
         return .just(.setIsJoingingRoom(isJoingingRoom))
 

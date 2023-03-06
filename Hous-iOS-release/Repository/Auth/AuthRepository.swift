@@ -10,7 +10,6 @@ import Network
 import RxSwift
 import RxCocoa
 
-
 public enum AuthRepositoryEvent {
   case isJoiningRoom(Bool)
   case updateAccessToken(String)
@@ -30,28 +29,26 @@ public protocol AuthRepository {
 }
 public final class AuthRepositoryImp: BaseService, AuthRepository {
   public var event = PublishSubject<AuthRepositoryEvent>()
-  
+
   public func logout() {
-    
-    NetworkService.shared.authRepository.logout { [weak self] res, err in
+    NetworkService.shared.authRepository.logout { [weak self] res, _ in
       guard let self = self else { return }
-      guard let _ = res?.data else {
+      guard res?.data != nil else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
           status: res?.status ?? -1,
           message: res?.message ?? ""
         )
-        
+
         self.event.onNext(.sendError(errorModel))
         return
       }
     }
   }
-  
 
   public func forceLogin(_ dto: AuthDTO.Request.LoginRequestDTO) {
 
-    NetworkService.shared.authRepository.forceLogin(dto) { [weak self] res, err in
+    NetworkService.shared.authRepository.forceLogin(dto) { [weak self] res, _ in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -74,7 +71,7 @@ public final class AuthRepositoryImp: BaseService, AuthRepository {
 
   public func login(_ dto: AuthDTO.Request.LoginRequestDTO) {
 
-    NetworkService.shared.authRepository.login(dto) { [weak self] res, err in
+    NetworkService.shared.authRepository.login(dto) { [weak self] res, _ in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -99,7 +96,7 @@ public final class AuthRepositoryImp: BaseService, AuthRepository {
 
     let dto = Token(accessToken: accessToken, refreshToken: refreshToken)
 
-    NetworkService.shared.authRepository.refresh(dto) { [weak self] res, err in
+    NetworkService.shared.authRepository.refresh(dto) { [weak self] res, _ in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -122,7 +119,7 @@ public final class AuthRepositoryImp: BaseService, AuthRepository {
 
   public func signup(_ dto: AuthDTO.Request.SignupRequestDTO) {
 
-    NetworkService.shared.authRepository.signup(dto) { [weak self] res, err in
+    NetworkService.shared.authRepository.signup(dto) { [weak self] res, _ in
 
       guard let self = self else { return }
       guard let data = res?.data else {
@@ -144,4 +141,3 @@ public final class AuthRepositoryImp: BaseService, AuthRepository {
   }
 
 }
-

@@ -8,7 +8,6 @@
 import AssetKit
 import UIKit
 
-
 final class HousTextField: UITextField {
 
   private let defaultUnderlineLayer = CALayer()
@@ -68,7 +67,6 @@ final class HousTextField: UITextField {
     setupLayerPosition()
   }
 
-
   private func setupViews() {
     selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
     defaultUnderlineLayer.backgroundColor = Colors.g4.color.cgColor
@@ -82,7 +80,6 @@ final class HousTextField: UITextField {
     else {
       return
     }
-    
     if let text = self.text {
       if text.count > 0 {
         self.layer.addSublayer(selectedUnderlineLayer)
@@ -124,7 +121,6 @@ final class HousTextField: UITextField {
     selectedUnderlineLayer.frame = frame
   }
 
-
   @objc
   func change() {
     guard
@@ -144,8 +140,7 @@ final class HousTextField: UITextField {
     if count == 0 {
       selectedUnderlineLayer.removeFromSuperlayer()
       isValidate = false
-    }
-    else {
+    } else {
       self.layer.addSublayer(selectedUnderlineLayer)
       isValidate = true
     }
@@ -180,7 +175,6 @@ final class HousTextField: UITextField {
     if useMaxCount && ((maxCount ?? 0) < text.count) {
       return
     }
-    
     selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
     self.layer.addSublayer(selectedUnderlineLayer)
 
@@ -232,8 +226,6 @@ extension HousTextField {
 
   }
 
-  
-
 }
 
 fileprivate extension NSNotification.Name {
@@ -241,7 +233,6 @@ fileprivate extension NSNotification.Name {
   static let beginEdit = Notification.Name("UITextFieldTextDidBeginEditingNotification")
   static let endEdit = Notification.Name("UITextFieldTextDidEndEditingNotification")
 }
-
 
 extension HousTextField {
   func changeLayerColor(color: CGColor) {

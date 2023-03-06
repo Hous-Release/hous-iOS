@@ -11,7 +11,6 @@ import Reachability
 import RxReachability
 import UIKit
 
-
 final class NotConnectedInternetViewController: UIViewController {
 
   private struct Constant {
@@ -59,7 +58,6 @@ final class NotConnectedInternetViewController: UIViewController {
     button.addTarget(self, action: #selector(didTapRetryButton), for: .touchUpInside)
     return button
   }()
-
 
   override func viewDidLoad() {
     super.viewDidLoad()

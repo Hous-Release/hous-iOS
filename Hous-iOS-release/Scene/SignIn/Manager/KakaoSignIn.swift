@@ -29,7 +29,7 @@ extension KakaoOAuthManager: KakaoOAuthable {
 extension KakaoOAuthManager: OAuthable {
 
   public func login() {
-    if (UserApi.isKakaoTalkLoginAvailable()) {
+    if UserApi.isKakaoTalkLoginAvailable() {
       UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
         if let error = error {
           debugPrint(error)
@@ -61,16 +61,16 @@ extension KakaoOAuthManager: OAuthable {
 
   }
 
-  public var onSuccess: ((String, String?) -> ())? {
+  public var onSuccess: ((String, String?) -> Void)? {
     get {
       return _onSuccess
     }
-    set(value){
+    set(value) {
       _onSuccess = value
     }
   }
 
-  public var onFailure: ((Error) -> ())? {
+  public var onFailure: ((Error) -> Void)? {
     get {
       return _onFailure
     }

@@ -36,7 +36,6 @@ final class UpdateTodoViewController: BaseViewController, View {
 
   private var actionButton: UIButton!
 
-
   internal var disposeBag: DisposeBag = DisposeBag()
   private var dataSource: DataSource! = nil
   private var allSnapShot = SnapShot()
@@ -45,7 +44,7 @@ final class UpdateTodoViewController: BaseViewController, View {
 
   // MARK: Cell Action Relay
 
-  private let tapIndividual = PublishRelay<(_ : IndexPath)>()
+  private let tapIndividual = PublishRelay<(_: IndexPath)>()
   private let tapDay = PublishRelay<([UpdateTodoHomieModel.Day], id: Int)>()
 
   init(
@@ -228,9 +227,7 @@ extension UpdateTodoViewController {
         title: "수정사항이 저장되지 않았어요!",
         subtitle: "to-do 수정을 취소하려면 나가기 버튼을 눌러주세요."
       )
-    }
-
-    else {
+    } else {
       model = DefaultPopUpModel(
         cancelText: "계속 작성하기",
         actionText: "나가기",
@@ -270,8 +267,7 @@ extension UpdateTodoViewController {
         titleText: "to-do 개수 초과"
       )
       presentPopUp(.exceed(exceedModel: popupModel))
-    }
-    else {
+    } else {
       Toast.show(message: errorMessage, controller: self)
     }
   }
@@ -308,9 +304,7 @@ extension UpdateTodoViewController {
           var newHomie = item.homie
           newHomie?.selectedDay = tuple.days
           return newHomie
-        }
-
-        else {
+        } else {
           return item.homie
         }
       }
@@ -334,9 +328,8 @@ extension UpdateTodoViewController {
     individualSectionSnapShot.delete([item])
 
     let updateItems = individualSectionSnapShot.items
-      .filter{ $0.hasChild }
+      .filter { $0.hasChild }
       .compactMap { $0.homie }
-
 
     DispatchQueue.main.async { [weak self] in
       self?.reactor?.action.onNext(Reactor.Action.updateHomie(updateItems))
@@ -429,7 +422,8 @@ extension UpdateTodoViewController {
   private func createLayout() -> UICollectionViewLayout {
 
     let sectionProvider = { [weak self] (
-      sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment
+      sectionIndex: Int,
+      layoutEnvironment: NSCollectionLayoutEnvironment
     ) -> NSCollectionLayoutSection? in
 
       guard
@@ -525,13 +519,13 @@ extension UpdateTodoViewController {
 
     return SupplementaryRegistration<TitleSupplementaryView>(
       elementKind: UICollectionView.elementKindSectionHeader
-    ) { supplementaryView, elementKind, indexPath in
+    ) { supplementaryView, _, _ in
       supplementaryView.label.text = "담당자"
     }
   }
 
   private func createAssigneeRegistration() -> CellRegistration<AssigneeCell, ITEM> {
-    return CellRegistration<AssigneeCell, ITEM> { (cell, indexPath, item) in
+    return CellRegistration<AssigneeCell, ITEM> { (cell, _, item) in
       guard
         let item = item.homie
       else {
@@ -542,7 +536,7 @@ extension UpdateTodoViewController {
   }
 
   private func createIndividualRegistration() -> CellRegistration<IndividualCell, ITEM> {
-    return CellRegistration<IndividualCell, ITEM> { (cell, indexPath, item) in
+    return CellRegistration<IndividualCell, ITEM> { (cell, _, item) in
       guard
         let item = item.homie
       else {
@@ -552,7 +546,7 @@ extension UpdateTodoViewController {
     }
   }
   private func createDayRegistration() -> CellRegistration<DayCell, ITEM> {
-    return CellRegistration<DayCell, ITEM> { (cell, indexPath, item) in
+    return CellRegistration<DayCell, ITEM> { (cell, _, item) in
       guard
         let item = item.homie
       else {
@@ -595,8 +589,7 @@ extension UpdateTodoViewController {
             for: indexPath,
             item: item
           )
-        }
-        else {
+        } else {
           return collectionView.dequeueConfiguredReusableCell(
             using: dayRegistration,
             for: indexPath,
@@ -605,7 +598,7 @@ extension UpdateTodoViewController {
         }
       }
     }
-    dataSource.supplementaryViewProvider = { (view, kind, index) in
+    dataSource.supplementaryViewProvider = { (_, _, index) in
       return self.collectionView.dequeueConfiguredReusableSupplementary(
         using: headerRegistration,
         for: index
@@ -641,10 +634,11 @@ extension UpdateTodoViewController {
       let childItem = ITEM(homie: homie, hasChild: false)
       snapShot.append([childItem], to: rootItem)
 
-      homie.isExpanded ?
-      snapShot.expand([rootItem])
-      :
-      snapShot.collapse([rootItem])
+      if homie.isExpanded {
+        snapShot.expand([rootItem])
+      } else {
+        snapShot.collapse([rootItem])
+      }
 
       self.individualSectionSnapShot = snapShot
     }
@@ -681,7 +675,7 @@ extension UpdateTodoViewController: DidTapDayDelegate {
 extension UpdateTodoViewController: NavBarWithBackButtonViewDelegate {
   func backButtonDidTapped() {
     guard let isModify = reactor?.currentState.isModifying else { return }
-    
+
     if isModify {
       if todoTextField.text != reactor?.fetchedInitalTodo {
         showQuitPopUp(isModify: isModify)

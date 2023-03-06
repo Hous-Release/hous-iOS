@@ -56,7 +56,6 @@ final class IndividualCell: UICollectionViewCell {
     colorButton.isSelected = model.isExpanded
   }
 
-
   private func setupViews() {
     contentView.backgroundColor = Colors.white.color
     contentView.addSubview(containerView)

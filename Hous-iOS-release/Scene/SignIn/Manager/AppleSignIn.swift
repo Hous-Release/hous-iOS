@@ -25,16 +25,16 @@ extension AppleOAuthManager: AppleOAuthable {
 
 extension AppleOAuthManager: OAuthable {
 
-  public var onSuccess: ((String, String?) -> ())? {
+  public var onSuccess: ((String, String?) -> Void)? {
     get {
       return _onSuccess
     }
-    set(value){
+    set(value) {
       _onSuccess = value
     }
   }
 
-  public var onFailure: ((Error) -> ())? {
+  public var onFailure: ((Error) -> Void)? {
     get {
       return _onFailure
     }
@@ -60,7 +60,10 @@ extension AppleOAuthManager: ASAuthorizationControllerPresentationContextProvidi
 }
 
 extension AppleOAuthManager: ASAuthorizationControllerDelegate {
-  public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+  public func authorizationController(
+    controller: ASAuthorizationController,
+    didCompleteWithAuthorization authorization: ASAuthorization
+  ) {
     guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
       return
     }
@@ -71,7 +74,10 @@ extension AppleOAuthManager: ASAuthorizationControllerDelegate {
 
     onSuccess?(identityToken, authorizeCode)
   }
-  public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+  public func authorizationController(
+    controller: ASAuthorizationController,
+    didCompleteWithError error: Error
+  ) {
     onFailure?(error)
   }
 }

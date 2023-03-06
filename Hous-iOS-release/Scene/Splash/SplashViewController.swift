@@ -5,7 +5,6 @@
 //  Created by 김호세 on 2022/08/13.
 //
 
-
 import Alamofire
 import BottomSheetKit
 import Lottie
@@ -17,13 +16,11 @@ import UIKit
 
 final class SplashViewController: UIViewController, ReactorKit.View {
 
-
   private let lottieView: AnimationView = {
     let view = AnimationView(name: "splashlottie")
     view.contentMode = .scaleAspectFit
     return view
   }()
-
 
   typealias Reactor = SplashReactor
   internal var disposeBag = DisposeBag()
@@ -57,9 +54,7 @@ final class SplashViewController: UIViewController, ReactorKit.View {
     }
   }
   func transferForSuccess(_ isJoiningRoom: Bool) {
-    
     let tvc = HousTabbarViewController()
-    
     let enterRoomVC = EnterRoomViewController()
 
     if isJoiningRoom {
@@ -101,7 +96,6 @@ extension SplashViewController {
     bindViewWillAppearAction(reactor)
   }
 
-
   func bindState(_ reactor: Reactor) {
     bindIsJoiningRoomState(reactor)
     bindIsLoginFlowState(reactor)
@@ -110,7 +104,6 @@ extension SplashViewController {
   }
 
 }
-
 
 extension SplashViewController {
   func bindViewWillAppearAction(_ reactor: Reactor) {
@@ -185,9 +178,7 @@ extension SplashViewController {
           return
         }
       }
-    }
-
-    else {
+    } else {
       Toast.show(message: message, controller: self)
     }
   }

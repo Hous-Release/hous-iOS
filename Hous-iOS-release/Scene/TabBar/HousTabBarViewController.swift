@@ -21,7 +21,7 @@ class HousTabbarViewController: UITabBarController {
 
   public let backgroundView: UIView = {
     let view = UIView()
-    view.layer.applySketchShadow(color: Colors.black.color, alpha: 0.05, x: 0, y: -4, blur: 10, spread: 0)
+    view.layer.applySketchShadow(color: Colors.black.color, alpha: 0.05, xPosition: 0, yPosition: -4, blur: 10, spread: 0)
     view.layer.cornerRadius = 20
     return view
   }()
@@ -96,7 +96,6 @@ class HousTabbarViewController: UITabBarController {
     else {
       return
     }
-    
     mainVC.todoBackgroundViewDidTap
       .withUnretained(self)
       .subscribe(onNext: { (owner, _) in

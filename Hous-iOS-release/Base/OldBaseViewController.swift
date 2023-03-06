@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class OldBaseViewController: UIViewController {
 
   init() {
@@ -93,9 +92,7 @@ class OldBaseViewController: UIViewController {
   @objc func didCancel() {
     dismiss(animated: true, completion: nil)
   }
-  
 }
-
 
 // MARK: - Private
 extension OldBaseViewController: UIGestureRecognizerDelegate {

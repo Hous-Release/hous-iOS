@@ -87,4 +87,3 @@ final internal class AssigneeCell: UICollectionViewCell {
   }
 
 }
-

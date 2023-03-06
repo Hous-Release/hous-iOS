@@ -53,7 +53,6 @@ final class SignInViewController: UIViewController, ReactorKit.View {
     return button
   }()
 
-
   private let appleLoginManager = AppleOAuthManager()
   private let kakaoLoginManager = KakaoOAuthManager()
   private var signInRelay = PublishRelay<(String?, Error?)>()
@@ -110,7 +109,6 @@ extension SignInViewController {
   }
 }
 
-
 // MARK: - Bind Action
 extension SignInViewController {
 
@@ -122,13 +120,13 @@ extension SignInViewController {
 
   private func bindDidTapKakaoAction(_ reactor: Reactor) {
     kakaoLoginButton.rx.tap
-      .map { _ in Reactor.Action.didTapSignIn(.Kakao)}
+      .map { _ in Reactor.Action.didTapSignIn(.kakao)}
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
   private func bindDidTapAppleAction(_ reactor: Reactor) {
     appleLoginButton.rx.tap
-      .map { _ in Reactor.Action.didTapSignIn(.Apple)}
+      .map { _ in Reactor.Action.didTapSignIn(.apple)}
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -222,16 +220,14 @@ extension SignInViewController {
 
     switch signInType {
 
-    case .Apple:
+    case .apple:
       appleLoginManager.login()
 
-    case .Kakao:
+    case .kakao:
       kakaoLoginManager.login()
 
     }
   }
-
-  // TODO: Error PopupView로 추후 체인지
 
   private func handlingError(_ errorMessage: String?) {
     guard let errorMessage = errorMessage else {
@@ -241,7 +237,6 @@ extension SignInViewController {
     Toast.show(message: errorMessage, controller: self)
     self.reactor?.action.onNext(.initial)
   }
-
 
   private func transferForSuccess(_ isJoiningRoom: Bool) {
 
@@ -286,7 +281,7 @@ extension SignInViewController {
 
     appleLoginManager.configure(in: self)
 
-    appleLoginManager.onSuccess = { [weak self] identifyToken, accessToken in
+    appleLoginManager.onSuccess = { [weak self] identifyToken, _ in
       self?.signInRelay.accept((identifyToken, nil))
     }
 

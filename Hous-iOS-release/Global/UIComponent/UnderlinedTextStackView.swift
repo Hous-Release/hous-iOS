@@ -66,7 +66,6 @@ final class UnderlinedTextStackView: UIStackView {
     fatalError("init(coder:) has not been implemented")
   }
 
-
   private func setup(_ placeholder: String, _ isTextViewEmpty: Bool, _ maxStringNum: Int) {
     self.axis = .vertical
     self.alignment = .fill

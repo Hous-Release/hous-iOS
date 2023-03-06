@@ -1,5 +1,8 @@
 disabled_rules: # 실행에서 제외할 규칙들
 - cyclomatic_complexity # 복잡한 함수 X 리팩토링하면서 이 규칙은 나중에 활성해도 좋을듯
+- closure_parameter_position # closure 인자 한줄에 변수 때문에 길어져서 적용 불가능
+- function_body_length # 함수길이 40자 이상
+- file_length # Code line 400줄 이상
 
 
 excluded:
@@ -22,17 +25,17 @@ excluded:
 - Hous-iOS-release/Scene/Profile/Model/ProfileModel.swift
 - Hous-iOS-release/Scene/Profile/Model/ProfileDetailModel.swift
 - Hous-iOS-release/Scene/Profile/BadgeViewModel.swift
-- Hous-iOS-release/Scene/SignIn/Enum/SignInType.swift
-- Hous-iOS-release/Scene/Todo/Update/Model/TodoHomieModel.swift
 - Hous-iOS-release/Scene/MainHome/MateProfileModel.swift
 - Hous-iOS-release/Scene/MainHome/ViewControllers/MateProfileViewController.swift
 - Hous-iOS-release/Scene/MainHome/ViewControllers/MainHomeViewController.swift
+- Hous-iOS-release/Scene/Todo/MemberTodo/Controller/ByDayTodoViewController.swift
+- Hous-iOS-release/Repository/Profile/ProfileRepository.swift
+
+# Extenstion
 - Hous-iOS-release/Extension/CALayer+Extension.swift
 - Hous-iOS-release/Extension/UIBezierPath+Extension.swift
 - Hous-iOS-release/Extension/UIViewController+Rx.swift
 - Hous-iOS-release/Extension/UIView+Extension.swift
-- Hous-iOS-release/Scene/Todo/MemberTodo/Controller/ByDayTodoViewController.swift
-- Hous-iOS-release/Repository/Profile/ProfileRepository.swift
 
 - "AssetKit"
 - "BottomSheetKit"
