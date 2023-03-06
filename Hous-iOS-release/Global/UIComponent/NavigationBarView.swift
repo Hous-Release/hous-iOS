@@ -116,4 +116,3 @@ extension NavBarWithBackButtonView {
     self.delegate?.backButtonDidTapped()
   }
 }
-

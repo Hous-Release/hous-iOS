@@ -12,7 +12,6 @@ extension UIViewController {
   func changeRootViewController(to rootVC: UIViewController) {
     self.view.window?.rootViewController?.dismiss(animated: false) {
 
-      //let nvc = UINavigationController(rootViewController: rootVC)
       rootVC.modalPresentationStyle = .fullScreen
 
       guard
@@ -23,7 +22,7 @@ extension UIViewController {
       sceneDelegate.window?.makeKeyAndVisible()
     }
   }
-  
+
   func setTabBarIsHidden(isHidden: Bool) {
     if let tvc = navigationController?.tabBarController as? HousTabbarViewController {
       tvc.backgroundView.isHidden = isHidden

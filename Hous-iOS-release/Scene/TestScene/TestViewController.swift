@@ -12,7 +12,6 @@ import UIKit
 
 final class TestViewController: UIViewController {
 
-
   private lazy var defaultButton: UIButton = {
     let button = UIButton()
     button.setTitle("default", for: .normal)
@@ -135,7 +134,6 @@ extension TestViewController {
   @objc
   private func didTapButton() {
 
-
     let defaultPopUpModel = DefaultPopUpModel(
       cancelText: "취소하기",
       actionText: "액션하기",
@@ -201,7 +199,12 @@ extension TestViewController {
   }
   @objc
   private func didTapButton4() {
-    let popModel = ImagePopUpModel(image: .test, actionText: "참여하기", text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd", titleText: "Rules 개수 초과")
+    let popModel = ImagePopUpModel(
+      image: .test,
+      actionText: "참여하기",
+      text: "김호세sdfdsfsdfsdfsdf\nsdfsdfsdfsd",
+      titleText: "Rules 개수 초과"
+    )
     let popUpType = PopUpType.exceed(exceedModel: popModel)
 
     presentPopUp(popUpType) {  actionType in
@@ -259,7 +262,7 @@ extension TestViewController {
 
     let homies = TestViewController.generateMock()
     let todoName = "유메니 보쿠라데 호오 핫테 키타루베키 히노 타메니 요루오 코에"
-    //let days :[Days] = [.fri, .fri, .mon, .sat, .sun, .tue, .thu, .mon]
+    // let days: [Days] = [.fri, .fri, .mon, .sat, .sun, .tue, .thu, .mon]
     let model = TodoModel(homies: homies, todoName: todoName, days: "")
     let bottomSheetType = BottomSheetType.todoType(model)
 
@@ -282,7 +285,6 @@ extension TestViewController {
 extension TestViewController {
   static func generateMock() -> [HomieCellModel] {
 
-
     return [
       HomieCellModel(homieName: "민재쿤", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
       HomieCellModel(homieName: "김민재", homieColor: HomieFactory.makeHomie(type: .BLUE).color),
@@ -304,7 +306,5 @@ extension TestViewController {
       HomieCellModel(homieName: "김호세3", homieColor: HomieFactory.makeHomie(type: .PURPLE).color)
 
     ]
-
-
   }
 }

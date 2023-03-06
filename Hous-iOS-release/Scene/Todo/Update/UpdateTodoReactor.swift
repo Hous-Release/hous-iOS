@@ -44,19 +44,19 @@ public final class UpdateTodoReactor: Reactor {
   }
 
   public struct State {
-    var id: Int? = nil
+    var id: Int?
     var isModifying: Bool = false
     var isPushNotification: Bool = true
-    var todo: String? = nil
+    var todo: String?
     var todoHomies: [UpdateTodoHomieModel]
     @Pulse
-    var didTappedIndividual: IndexPath? = nil
+    var didTappedIndividual: IndexPath?
     @Pulse
-    var didTappedDay: ([UpdateTodoHomieModel.Day], Int)? = nil
+    var didTappedDay: ([UpdateTodoHomieModel.Day], Int)?
     @Pulse
     var isBack: Bool = false
     @Pulse
-    var errorModel: HouseErrorModel? = nil
+    var errorModel: HouseErrorModel?
     @Pulse
     var isTappableButton: Bool = false
   }
@@ -66,9 +66,7 @@ public final class UpdateTodoReactor: Reactor {
     case .fetch:
       if initialState.isModifying {
         provider.todoRepository.fetchModifyingTodo(initialState.id ?? -1)
-      }
-
-      else {
+      } else {
         return Observable.concat([
           .just(.setTodo(initialState.todo)),
           .just(.setHomies(initialState.todoHomies))
@@ -112,22 +110,23 @@ public final class UpdateTodoReactor: Reactor {
     case .setTodo(let todo):
       newState.todo = todo
       var isSelectedDays = false
-      for homie in currentState.todoHomies {
-        if !homie.selectedDay.isEmpty {
+      for homie in currentState.todoHomies where !homie.selectedDay.isEmpty {
+//        if !homie.selectedDay.isEmpty {
           isSelectedDays = true
           break
-        }
+//        }
+
       }
       newState.isTappableButton = (isSelectedDays && todo != "" && todo != nil)
 
     case .setHomies(let homies):
       newState.todoHomies = homies
       var isSelectedDays = false
-      for homie in homies {
-        if !homie.selectedDay.isEmpty {
+      for homie in homies where !homie.selectedDay.isEmpty {
+//        if !homie.selectedDay.isEmpty {
           isSelectedDays = true
           break
-        }
+//        }
       }
       newState.isTappableButton = (isSelectedDays
                                    && currentState.todo != ""

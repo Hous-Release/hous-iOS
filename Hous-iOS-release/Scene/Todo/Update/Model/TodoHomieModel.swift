@@ -11,7 +11,7 @@ import UIKit
 // MARK: - TodoUser에 대응함.
 public struct UpdateTodoHomieModel: Hashable {
   public enum Day: Int, Hashable, CaseIterable, CustomStringConvertible, Comparable {
-    case mon, tue ,wed ,thu ,fri ,sat ,sun
+    case mon, tue, wed, thu, fri, sat, sun
   }
 
   let name: String
@@ -20,23 +20,6 @@ public struct UpdateTodoHomieModel: Hashable {
   let onboardingID: Int
   var isExpanded: Bool
   private let identifier = UUID()
-}
-
-extension UpdateTodoHomieModel {
-  static func generateMock(n: Int) -> [Self] {
-    var result: [UpdateTodoHomieModel] = []
-    for i in 0 ..< n {
-      let item = UpdateTodoHomieModel(
-        name: "호세\(i)",
-        color: HomieColor.allCases[i % 6],
-        selectedDay: [],
-        onboardingID: i,
-        isExpanded: false
-      )
-      result.append(item)
-    }
-    return result
-  }
 }
 
 extension UpdateTodoHomieModel.Day {

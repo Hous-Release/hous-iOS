@@ -7,13 +7,11 @@
 
 import Foundation
 
-public typealias Success = ((String, String?) -> ())
-public typealias Failure = ((Error) -> ())
+public typealias Success = ((String, String?) -> Void)
+public typealias Failure = ((Error) -> Void)
 
 public protocol OAuthable {
   func login()
   var onSuccess: Success? { get set }
   var onFailure: Failure? { get set }
 }
-
-

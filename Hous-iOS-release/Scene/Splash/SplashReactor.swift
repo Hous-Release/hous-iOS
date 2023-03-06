@@ -10,7 +10,6 @@ import RxSwift
 import ReactorKit
 import UserInformation
 
-
 final class SplashReactor: Reactor {
 
   let initialState: State = State()
@@ -33,10 +32,10 @@ final class SplashReactor: Reactor {
   }
 
   struct State {
-    var isJoiningRoom: Bool? = nil
-    var isOnboardingFlow: Bool? = nil
-    var isLoginFlow: Bool? = nil
-    var shwoAlertByServerErrorMessage: HouseErrorModel? = nil
+    var isJoiningRoom: Bool?
+    var isOnboardingFlow: Bool?
+    var isLoginFlow: Bool?
+    var shwoAlertByServerErrorMessage: HouseErrorModel?
   }
 
   func mutate(action: Action) -> Observable<Mutation> {
@@ -69,8 +68,6 @@ final class SplashReactor: Reactor {
 
     return newState
   }
-
-
 }
 
 extension SplashReactor {
@@ -80,7 +77,7 @@ extension SplashReactor {
       switch event {
       case .logout:
         return .empty()
-        
+
       case .isJoiningRoom(let isJoiningRoom):
         return .just(.setIsJoiningRoom(isJoiningRoom))
 
@@ -113,9 +110,7 @@ extension SplashReactor {
 
         if status == 401 || status == 404 {
           return .just(.setIsLoginFlow(true))
-        }
-
-        else {
+        } else {
           return .just(.setShwoAlertByServerError(errorModel))
         }
 

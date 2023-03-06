@@ -39,4 +39,3 @@ extension TitleSupplementaryView {
     label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
 }
-

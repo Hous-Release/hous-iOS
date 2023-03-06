@@ -17,7 +17,6 @@ final class FilteredTodoReactor: Reactor {
     self.provider = provider
   }
 
-
   enum Action {
     case viewWillAppear
     case didTapPlusButton
