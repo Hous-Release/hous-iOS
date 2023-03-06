@@ -1,21 +1,42 @@
 disabled_rules: # 실행에서 제외할 규칙들
-- trailing_whitespace # 라인 뒤에 공백 없어야함
-- identifier_name # https://realm.github.io/SwiftLint/identifier_name.html
-- type_name # https://realm.github.io/SwiftLint/type_name.html
-- shorthand_operator # https://realm.github.io/SwiftLint/shorthand_operator.html
-- line_length # https://realm.github.io/SwiftLint/line_length.html
-- function_body_length # 함수 길이
-- type_body_length # https://realm.github.io/SwiftLint/type_body_length.html
 - cyclomatic_complexity # 복잡한 함수 X 리팩토링하면서 이 규칙은 나중에 활성해도 좋을듯
 
 
 excluded:
 - Hous-iOS-release/Application/AppDelegate.swift
 - Hous-iOS-release/Application/SceneDelegate.swift
+
+- Hous-iOS-release/Global/UIComponent/GraphBackgroundView.swift
+- Hous-iOS-release/Global/UIComponent/GraphView.swift
+- Hous-iOS-release/Scene/OurRule/MainRuleView/Cells/KeyRulesTableViewCell.swift
+- Hous-iOS-release/Scene/Profile/BadgeViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileEditViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileTestViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileAlarmViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileAlarmSettingViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileDetailViewController.swift
+- Hous-iOS-release/Scene/Profile/View/ProfileDetail/ProfileRecommendRuleView.swift
+- Hous-iOS-release/Scene/Profile/View/ProfileMain/ProfileGraphBoxView.swift
+- Hous-iOS-release/Scene/Profile/Model/ProfileSettingModel.swift
+- Hous-iOS-release/Scene/Profile/Model/ProfileModel.swift
+- Hous-iOS-release/Scene/Profile/Model/ProfileDetailModel.swift
+- Hous-iOS-release/Scene/Profile/BadgeViewModel.swift
+- Hous-iOS-release/Scene/SignIn/Enum/SignInType.swift
+- Hous-iOS-release/Scene/Todo/Update/Model/TodoHomieModel.swift
+- Hous-iOS-release/Scene/MainHome/MateProfileModel.swift
+- Hous-iOS-release/Scene/MainHome/ViewControllers/MateProfileViewController.swift
+- Hous-iOS-release/Scene/MainHome/ViewControllers/MainHomeViewController.swift
+- Hous-iOS-release/Extension/CALayer+Extension.swift
+- Hous-iOS-release/Extension/UIBezierPath+Extension.swift
+- Hous-iOS-release/Extension/UIViewController+Rx.swift
+- Hous-iOS-release/Extension/UIView+Extension.swift
+- Hous-iOS-release/Scene/Todo/MemberTodo/Controller/ByDayTodoViewController.swift
+- Hous-iOS-release/Repository/Profile/ProfileRepository.swift
+
 - "AssetKit"
 - "BottomSheetKit"
 - "UserInformation"
 - "Network"
 - "ThirdPartyLibraryManager"
 
-force_cast: warning # 강제 캐스팅 경고
