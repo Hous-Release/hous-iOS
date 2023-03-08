@@ -41,22 +41,20 @@ extension UIView {
         closure?(subview)
     }
 
-
     func addSubViews<T: UIView>(_ subviews: [T], completionHandler closure: (([T]) -> Void)? = nil) {
         subviews.forEach { addSubview($0) }
         closure?(subviews)
     }
 
-
     /// UIView 의 모서리가 둥근 정도를 설정하는 메서드
-    func makeRounded(cornerRadius : CGFloat?) {
-        if let cornerRadius_ = cornerRadius {
-            self.layer.cornerRadius = cornerRadius_
-        }  else {
+    func makeRounded(cornerRadius: CGFloat?) {
+        if let cornerRadius = cornerRadius {
+            self.layer.cornerRadius = cornerRadius
+        } else {
             // cornerRadius 가 nil 일 경우의 default
             self.layer.cornerRadius = self.layer.frame.height / 2
         }
-        
+
 //      self.clipsToBounds = true
         self.layer.masksToBounds = false
     }
@@ -69,7 +67,7 @@ extension UIView {
         mask.path = path.cgPath
         layer.mask = mask
     }
-  
+
   /// UIView의 특정 모서리만 해당 cornerRadius로 설정하는 메서드
   func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
           clipsToBounds = true

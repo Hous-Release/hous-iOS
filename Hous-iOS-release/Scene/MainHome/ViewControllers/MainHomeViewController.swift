@@ -189,7 +189,7 @@ class MainHomeViewController: BaseViewController {
   //MARK: Helpers
   private func bind() {
     let viewWillAppear =
-    rx.RxViewWillAppear
+    rx.rxViewWillAppear
       .asSignal()
       .do(onNext: { [weak self] _ in
         self?.showLoading()

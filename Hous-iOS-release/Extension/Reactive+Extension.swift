@@ -13,4 +13,3 @@ extension Reactive where Base: UIViewController {
     return sentMessage(#selector(UIViewController.viewWillAppear(_:)))
   }
 }
-

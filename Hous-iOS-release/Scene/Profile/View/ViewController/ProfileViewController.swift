@@ -83,7 +83,7 @@ final class ProfileViewController: BaseViewController {
     
     // input
     
-    let viewWillAppear = rx.RxViewWillAppear
+    let viewWillAppear = rx.rxViewWillAppear
       .do(onNext: { [weak self] _ in
         self?.showLoading()
       })

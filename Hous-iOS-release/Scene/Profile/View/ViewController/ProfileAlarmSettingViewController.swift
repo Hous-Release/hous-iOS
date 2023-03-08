@@ -77,7 +77,7 @@ final class ProfileAlarmSettingViewController: BaseViewController {
     
     // input
     
-    let viewWillAppear = rx.RxViewWillAppear
+    let viewWillAppear = rx.rxViewWillAppear
       .asSignal(onErrorJustReturn: ())
         
     let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
