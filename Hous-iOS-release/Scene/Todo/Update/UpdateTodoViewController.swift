@@ -209,7 +209,7 @@ extension UpdateTodoViewController {
   func bindErrorState(_ reactor: Reactor) {
     reactor.pulse(\.$errorModel)
       .asDriver(onErrorJustReturn: nil)
-      .drive(onNext: self.showErrorToast)
+      .drive(onNext: self.handleError)
       .disposed(by: disposeBag)
   }
 }
@@ -244,31 +244,6 @@ extension UpdateTodoViewController {
       case .cancel:
         return
       }
-    }
-  }
-
-  private func showErrorToast(_ errorModel: HouseErrorModel?) {
-    guard
-      let errorModel = errorModel,
-      let status = errorModel.status,
-      let errorMessage = errorModel.message
-    else {
-      return
-    }
-
-    hideLoading()
-
-    if status == 403 {
-      let popupImage = PopUpImage.exceed
-      let popupModel = ImagePopUpModel(
-        image: popupImage,
-        actionText: "알겠어요!",
-        text: "우리 집  to-do 가 너무 많아요!\n필요하지 않은 to-do를 삭제하고\n다시 시도해주세요~",
-        titleText: "to-do 개수 초과"
-      )
-      presentPopUp(.exceed(exceedModel: popupModel))
-    } else {
-      Toast.show(message: errorMessage, controller: self)
     }
   }
 
@@ -712,5 +687,33 @@ extension UpdateTodoViewController: UIGestureRecognizerDelegate {
     }
     return true
 
+  }
+}
+
+extension UpdateTodoViewController: ErrorHandler {
+
+  func handleError(_ error: HouseErrorModel?) {
+    guard
+      let errorModel = error,
+      let status = errorModel.status,
+      let errorMessage = errorModel.message
+    else {
+      return
+    }
+
+    hideLoading()
+
+    if status == 403 {
+      let popupImage = PopUpImage.exceed
+      let popupModel = ImagePopUpModel(
+        image: popupImage,
+        actionText: "알겠어요!",
+        text: "우리 집  to-do 가 너무 많아요!\n필요하지 않은 to-do를 삭제하고\n다시 시도해주세요~",
+        titleText: "to-do 개수 초과"
+      )
+      presentPopUp(.exceed(exceedModel: popupModel))
+    } else {
+      Toast.show(message: errorMessage, controller: self)
+    }
   }
 }

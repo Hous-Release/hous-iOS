@@ -134,18 +134,19 @@ extension SplashViewController {
     reactor.state.map(\.shwoAlertByServerErrorMessage)
       .compactMap { $0 }
       .asDriver(onErrorJustReturn: nil)
-      .drive(onNext: self.showError)
+      .drive(onNext: self.handleError)
       .disposed(by: disposeBag)
   }
 }
 
   // MARK: - Method
-extension SplashViewController {
-  func showError(_ model: HouseErrorModel?) {
+extension SplashViewController: ErrorHandler {
+  func handleError(_ error: HouseErrorModel?) {
     guard
-      let model = model,
+      let model = error,
       let status = model.status,
       let message = model.message
+
     else { return }
 
     if status == 426 {

@@ -12,12 +12,11 @@ protocol ErrorHandler {
   func handleError(_ error: HouseErrorModel?)
 }
 
-extension ErrorHandler where Self: UIViewController {
+extension ErrorHandler where Self: BaseViewController {
 
   func handleError(_ error: HouseErrorModel?) {
     guard
       let errorModel = error,
-//      let status = errorModel.status,
       let errorMessage = errorModel.message
     else {
       return
