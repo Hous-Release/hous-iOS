@@ -76,7 +76,7 @@ struct GrayHomie: HomieProtocol {
 }
 
 struct HomieFactory {
-  
+
   static func makeHomie(type: HomieColor) -> HomieProtocol {
     switch type {
     case .YELLOW:

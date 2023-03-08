@@ -9,7 +9,6 @@ import AssetKit
 import SnapKit
 import UIKit
 
-
 final internal class AssigneeCell: UICollectionViewCell {
 
   private struct Constants {

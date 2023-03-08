@@ -40,7 +40,7 @@ extension RoomService: TargetType {
     switch self {
     case let .updateRoomName(dto):
       return .body(dto)
-    case let .leaveRoom:
+    case .leaveRoom:
       return .requestPlain
     }
   }

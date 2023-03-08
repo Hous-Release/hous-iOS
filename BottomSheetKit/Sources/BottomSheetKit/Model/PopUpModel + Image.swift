@@ -50,7 +50,7 @@ public enum PopUpImage {
     case .needUpdate:
       uiImageView.image = Images.invalidName.image
 
-    case .url(let string):
+    case .url( _):
       // TODO: - 킹피셔
       break
     }

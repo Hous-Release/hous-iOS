@@ -20,6 +20,8 @@
 		770B959928F15AFE00C8C945 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959828F15AFE00C8C945 /* BaseService.swift */; };
 		770B959B28F15E5200C8C945 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770B959A28F15E5200C8C945 /* AlertService.swift */; };
 		770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */ = {isa = PBXBuildFile; productRef = 770B959E28F320C400C8C945 /* BottomSheetKit */; };
+		770D770329B8692F002E60A2 /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700228C88C6100B49984 /* MainHomeViewController.swift */; };
+		770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
@@ -33,6 +35,8 @@
 		777C666D28A74A63000BECEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777C666B28A74A63000BECEA /* LaunchScreen.storyboard */; };
 		777C667528A74C32000BECEA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667428A74C32000BECEA /* SplashViewController.swift */; };
 		777C667D28A75039000BECEA /* OldBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C667C28A75039000BECEA /* OldBaseViewController.swift */; };
+		77A9CFF429B86BC50043C05B /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */; };
+		77A9CFF529B86BCD0043C05B /* ProfileTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E22904160D00B7D517 /* ProfileTestViewController.swift */; };
 		77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AEF33E28E1FE9C002A102B /* SignInType.swift */; };
 		77C1281F29B85BF00033A7F3 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1281E29B85BF00033A7F3 /* ErrorHandler.swift */; };
 		77C67C4B299F7DE60011C837 /* LoadingPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C67C4A299F7DE60011C837 /* LoadingPresentable.swift */; };
@@ -102,8 +106,6 @@
 		9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DA2903927400B7D517 /* ProfileSettingViewController.swift */; };
 		9BBE13DD2903A8A600B7D517 /* ProfileAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DC2903A8A600B7D517 /* ProfileAlarmViewController.swift */; };
 		9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13DE29040FB700B7D517 /* ProfileEditViewController.swift */; };
-		9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E02904102300B7D517 /* ProfileDetailViewController.swift */; };
-		9BBE13E32904160D00B7D517 /* ProfileTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE13E22904160D00B7D517 /* ProfileTestViewController.swift */; };
 		9BDBAD7429240C2B0096FE38 /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7329240C2B0096FE38 /* MateProfileViewController.swift */; };
 		9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7529240C3C0096FE38 /* MateProfileViewModel.swift */; };
 		9BDBAD782924175C0096FE38 /* MateProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD772924175C0096FE38 /* MateProfileModel.swift */; };
@@ -131,7 +133,6 @@
 		9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */; };
 		9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */; };
 		9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */; };
-		9BF9AD7829201812006A0BDE /* ProfileTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */; };
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
@@ -189,7 +190,6 @@
 		B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B228D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift */; };
 		B84EA6B528D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B428D61B7300C92FCD /* MyTodoCollectionViewCellReactor.swift */; };
 		B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6B728D61BB400C92FCD /* TodoViewReactor.swift */; };
-		B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */ = {isa = PBXBuildFile; fileRef = B84EA6BC28D61C0E00C92FCD /* TodoMainDTO.json */; };
 		B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6BE28D61C3300C92FCD /* TodoMainSection.swift */; };
 		B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C028D61DEA00C92FCD /* NSObject+Extension.swift */; };
 		B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6C428D61E1400C92FCD /* UICollectionVIew+Extension.swift */; };
@@ -212,7 +212,6 @@
 		B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */; };
 		B8555ACB291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555ACA291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift */; };
 		B8566877294B3BFB00F74E95 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566876294B3BFB00F74E95 /* NextButton.swift */; };
-		B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700228C88C6100B49984 /* MainHomeViewController.swift */; };
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
 		B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700A28C88D7800B49984 /* HousTabBarItem.swift */; };
@@ -1583,14 +1582,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				9B2F46AB2923FBAD002D9BD2 /* squ_no.json in Resources */,
 				9B2F46A72923FBA3002D9BD2 /* pen_no.json in Resources */,
 				9B2F46AA2923FBAD002D9BD2 /* squ_yes.json in Resources */,
 				9BDBAD8A292574530096FE38 /* tri_no.json in Resources */,
 				9B2F469F2923FB8D002D9BD2 /* cir_yes.json in Resources */,
 				B5F9FB5B292CCB6A0056C0B1 /* wednesday.json in Resources */,
-				B84EA6BD28D61C0E00C92FCD /* TodoMainDTO.json in Resources */,
 				B5F9FB5C292CCB6A0056C0B1 /* tuesday.json in Resources */,
 				B541F32C29A9C7A500F81DFE /* .swiftlint.yml in Resources */,
 				B5F9FB59292CCB6A0056C0B1 /* weekend.json in Resources */,
@@ -1712,7 +1709,6 @@
 				9B2F46952923A918002D9BD2 /* ProfileEditViewModel.swift in Sources */,
 				B856700D28C893B000B49984 /* HousTabBar.swift in Sources */,
 				B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */,
-				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				77EB720E2925406000032776 /* UpdateTodoDataSource.swift in Sources */,
 				9B296EFA291657E800C51080 /* ProfileEmptyCollectionViewCell.swift in Sources */,
 				77AEF33F28E1FE9C002A102B /* SignInType.swift in Sources */,
@@ -1739,16 +1735,15 @@
 				77C1281F29B85BF00033A7F3 /* ErrorHandler.swift in Sources */,
 				9BF945FE290D4301008F2BFC /* ProfileDescriptionView.swift in Sources */,
 				B856702728C9DF1200B49984 /* EnterInfoViewReactor.swift in Sources */,
-				B856700328C88C6100B49984 /* MainHomeViewController.swift in Sources */,
 				B85C0B6E29471D1700784FCB /* ProfileLeaveViewReactor.swift in Sources */,
 				B595FFC628CB45DA00F6B2E4 /* MainHomeProfileCollectionViewCell.swift in Sources */,
 				B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */,
 				B595FFB828C9EA9500F6B2E4 /* MainHomeTodoCollectionViewCell.swift in Sources */,
 				9BE0C280290823120028F13A /* ProfileDetailViewModel.swift in Sources */,
 				B880F5C8293C904A00E888BC /* ResignViewReactor.swift in Sources */,
+				77A9CFF429B86BC50043C05B /* ProfileDetailViewController.swift in Sources */,
 				9B83200B29193515001EBDFE /* ProfileEditModel.swift in Sources */,
 				B85C0B67294486D000784FCB /* UserRepository.swift in Sources */,
-				9BF9AD7829201812006A0BDE /* ProfileTestInfoViewController.swift in Sources */,
 				770B959928F15AFE00C8C945 /* BaseService.swift in Sources */,
 				B8B56BAB28E4155F00FC99DA /* EnterRoomType.swift in Sources */,
 				B8555AA22917D23500E943AE /* ByDayTodoViewReactor.swift in Sources */,
@@ -1768,11 +1763,9 @@
 				B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */,
 				B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */,
 				B84EA6AF28D61AF500C92FCD /* OurTodoCollectionViewCell.swift in Sources */,
-				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
 				777085B029040DE00018240B /* TestViewController.swift in Sources */,
 				9BE0C284290823860028F13A /* ProfileDetailModel.swift in Sources */,
 				9BDBAD86292566420096FE38 /* MateProfileNameView.swift in Sources */,
-				9BBE13E12904102300B7D517 /* ProfileDetailViewController.swift in Sources */,
 				9B959AFC28FF110D00EB3412 /* ProfileGraphCollectionViewCell.swift in Sources */,
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				9BDBAD7E29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift in Sources */,
@@ -1789,6 +1782,7 @@
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
 				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
+				770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
 				77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */,
@@ -1804,8 +1798,6 @@
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
 				B8555ACB291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift in Sources */,
 				B84EA6C528D61E1400C92FCD /* UICollectionVIew+Extension.swift in Sources */,
-				9BBE13E32904160D00B7D517 /* ProfileTestViewController.swift in Sources */,
-				9BBE13E32904160D00B7D517 /* ProfileTestViewController.swift in Sources */,
 				9B959AFE28FF192500EB3412 /* GraphView.swift in Sources */,
 				9B98853E28E3FF810013CCB9 /* ProfileMainImageCollectionViewCell.swift in Sources */,
 				9B9E99A1293CFAEA00537785 /* ProfileSettingListView.swift in Sources */,
@@ -1845,6 +1837,7 @@
 				7706801728E047DE0082A7E7 /* KakaoSignIn.swift in Sources */,
 				77D994DF2933E583001872F0 /* NotConnectedInternetViewController.swift in Sources */,
 				B8FF4D9429051D7B0087AD40 /* MemberTodoSection.swift in Sources */,
+				770D770329B8692F002E60A2 /* MainHomeViewController.swift in Sources */,
 				77C67C4B299F7DE60011C837 /* LoadingPresentable.swift in Sources */,
 				77CCB4FC2957484B002FC9CB /* Date+Extension.swift in Sources */,
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
@@ -1871,6 +1864,7 @@
 				9BDBAD7C29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift in Sources */,
 				B85C0B6A29471D0700784FCB /* ProfileLeaveViewController.swift in Sources */,
 				B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */,
+				77A9CFF529B86BCD0043C05B /* ProfileTestViewController.swift in Sources */,
 				777C667528A74C32000BECEA /* SplashViewController.swift in Sources */,
 				B84EA6CA28D61E4400C92FCD /* MockParser.swift in Sources */,
 				B84EA6A828D61A6D00C92FCD /* TodoPopupView.swift in Sources */,

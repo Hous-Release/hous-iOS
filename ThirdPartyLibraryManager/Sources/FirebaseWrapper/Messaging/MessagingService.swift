@@ -77,7 +77,7 @@ public extension MessagingService {
 }
 extension FirebaseMessagingService: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        guard let fcmToken = fcmToken else {
+      guard fcmToken != nil else {
             return
         }
     }
