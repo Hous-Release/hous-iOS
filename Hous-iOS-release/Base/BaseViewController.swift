@@ -30,6 +30,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: LoadingPresentable { }
+extension BaseViewController: ErrorHandler { }
 
 extension BaseViewController: UINavigationControllerDelegate {
 
