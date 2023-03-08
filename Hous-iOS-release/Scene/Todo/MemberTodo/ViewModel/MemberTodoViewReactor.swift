@@ -54,17 +54,16 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       model: .members(num: 0),
       items: []
     )
-    var selectedMember: MemberTodoModel? = nil
-
+    var selectedMember: MemberTodoModel?
 
     var selectedTodoId: Int?
     @Pulse
-    var selectedTodoSummary: TodoModel? = nil
+    var selectedTodoSummary: TodoModel?
 
     @Pulse
     var isDeleteSuccess: Bool?
 
-    var error: String? = nil
+    var error: String?
   }
 
   let initialState = State()
@@ -78,7 +77,7 @@ final class MemberTodoViewReactor: ReactorKit.Reactor {
       return .just(.setIsLoadingHidden(false))
 
     case let .didTapMemberCell(row):
-      
+
       provider.memberRepository.selectMember(row)
       return .just(Mutation.setSelectedMemIndexPathRow(row))
 

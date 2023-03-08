@@ -5,13 +5,13 @@
 ////  Created by 김지현 on 2022/10/15.
 ////
 //
-//import UIKit
+// import UIKit
 //
-//import SnapKit
-//import Then
+// import SnapKit
+// import Then
 //
 //
-//final class FilteredTodoView: UIView {
+// final class FilteredTodoView: UIView {
 //
 //  var viewType: FilteringType = .member {
 //    didSet {
@@ -54,9 +54,9 @@
 //  required init(coder: NSCoder) {
 //    fatalError("init(coder:) has not been implemented")
 //  }
-//}
+// }
 //
-//extension FilteredTodoView {
+// extension FilteredTodoView {
 //
 //  private func render() {
 //    addSubViews([navigationBar, contentsView])
@@ -72,4 +72,4 @@
 //      make.leading.trailing.bottom.equalToSuperview()
 //    }
 //  }
-//}
+// }

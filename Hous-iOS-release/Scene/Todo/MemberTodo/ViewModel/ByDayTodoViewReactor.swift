@@ -66,12 +66,12 @@ final class ByDayTodoViewReactor: ReactorKit.Reactor {
 
     var selectedTodoId: Int?
     @Pulse
-    var selectedTodoSummary: TodoModel? = nil
+    var selectedTodoSummary: TodoModel?
 
     @Pulse
     var isDeleteSuccess: Bool?
 
-    var error: String? = nil
+    var error: String?
   }
 
   let initialState = State()

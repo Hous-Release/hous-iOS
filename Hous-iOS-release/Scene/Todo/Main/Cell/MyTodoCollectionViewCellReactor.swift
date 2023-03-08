@@ -25,7 +25,7 @@ final class MyTodoCollectionViewCellReactor: Reactor {
 
   struct State {
     var isChecked: Bool = true
-    var error: String? = nil
+    var error: String?
   }
 
   let initialState = State()
@@ -35,7 +35,7 @@ final class MyTodoCollectionViewCellReactor: Reactor {
     case let .check(todoId, isChecked):
       let newCheckStatus = !isChecked
       var errObservable: Observable<Mutation> = .empty()
-      NetworkService.shared.mainTodoRepository.checkTodo(todoId, newCheckStatus) { res, err in
+      NetworkService.shared.mainTodoRepository.checkTodo(todoId, newCheckStatus) { res, _ in
         guard let res = res else { return }
 
         guard res.success else {

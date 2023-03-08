@@ -72,7 +72,6 @@ extension TodoByMemListCell {
     background.backgroundColor = .clear
     self.backgroundConfiguration = background
 
-
     if state.isSelected {
       let todo = todoByMemData ?? TodoInfoWithIdModel(todoId: 0, todoName: "")
       delegate?.didTapTodo(todoId: todo.todoId)

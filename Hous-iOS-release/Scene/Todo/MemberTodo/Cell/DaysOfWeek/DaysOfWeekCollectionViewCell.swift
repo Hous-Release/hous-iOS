@@ -29,8 +29,7 @@ final class DaysOfWeekCollectionViewCell: UICollectionViewCell {
       if isSelected {
         triangleView.isHidden = false
         dayButton.isSelected = true
-      }
-      else {
+      } else {
         triangleView.isHidden = true
         dayButton.isSelected = false
       }

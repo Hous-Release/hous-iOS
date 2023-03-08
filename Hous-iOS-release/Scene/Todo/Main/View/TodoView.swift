@@ -44,10 +44,10 @@ final class TodoView: UIView {
     config.baseBackgroundColor = Colors.blueL2.color
     config.titleAlignment = .center
     let titleAttributes: [NSAttributedString.Key: Any] = [
-      .font: Fonts.Montserrat.semiBold.font(size: 14),
+      .font: Fonts.Montserrat.semiBold.font(size: 14)
     ]
     let subtitleAttributes: [NSAttributedString.Key: Any] = [
-      .font: Fonts.SpoqaHanSansNeo.bold.font(size: 12),
+      .font: Fonts.SpoqaHanSansNeo.bold.font(size: 12)
     ]
     config.attributedTitle = AttributedString("to-do", attributes: AttributeContainer(titleAttributes))
     config.attributedSubtitle = AttributedString("전체보기", attributes: AttributeContainer(subtitleAttributes))

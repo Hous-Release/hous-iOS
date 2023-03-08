@@ -32,8 +32,7 @@ final class MemberCollectionViewCell: UICollectionViewCell, ReactorKit.View {
       if isSelected {
         triangleView.isHidden = false
         checkButton.isSelected = true
-      }
-      else {
+      } else {
         triangleView.isHidden = true
         checkButton.isSelected = false
       }

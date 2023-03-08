@@ -18,7 +18,7 @@ enum FilteringType {
   case member, byDay
 }
 
-//MARK: - Controller
+// MARK: - Controller
 final class FilteredTodoViewController: UIViewController, ReactorKit.View {
 
   typealias Reactor = FilteredTodoReactor
@@ -153,23 +153,23 @@ extension FilteredTodoViewController {
       state: state
     )
 
-    let vc = UpdateTodoViewController(reactor)
-    navigationController?.pushViewController(vc, animated: true)
+    let viewController = UpdateTodoViewController(reactor)
+    navigationController?.pushViewController(viewController, animated: true)
   }
 
-  private func addChildVC(_ vc: UIViewController) {
-    addChild(vc)
-    contentsView.addSubView(vc.view)
-    vc.view.snp.makeConstraints { make in
+  private func addChildVC(_ viewController: UIViewController) {
+    addChild(viewController)
+    contentsView.addSubView(viewController.view)
+    viewController.view.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    vc.didMove(toParent: self)
+    viewController.didMove(toParent: self)
   }
 
-  private func removeChildVC(_ vc: UIViewController) {
-    vc.willMove(toParent: nil)
-    vc.view.removeFromSuperview()
-    vc.removeFromParent()
+  private func removeChildVC(_ viewController: UIViewController) {
+    viewController.willMove(toParent: nil)
+    viewController.view.removeFromSuperview()
+    viewController.removeFromParent()
   }
 }
 
