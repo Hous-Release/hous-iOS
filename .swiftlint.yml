@@ -9,33 +9,39 @@ excluded:
 - Hous-iOS-release/Application/AppDelegate.swift
 - Hous-iOS-release/Application/SceneDelegate.swift
 
+# Repository
+- Hous-iOS-release/Repository/User
+- Hous-iOS-release/Repository/Onboarding
+- Hous-iOS-release/Repository/Profile
+- Hous-iOS-release/Repository/Todo
+
+# Global
 - Hous-iOS-release/Global/UIComponent/GraphBackgroundView.swift
 - Hous-iOS-release/Global/UIComponent/GraphView.swift
-- Hous-iOS-release/Scene/OurRule/MainRuleView/Cells/KeyRulesTableViewCell.swift
-- Hous-iOS-release/Scene/Profile/BadgeViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileEditViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileTestViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileAlarmViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileAlarmSettingViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ViewController/ProfileDetailViewController.swift
-- Hous-iOS-release/Scene/Profile/View/ProfileDetail/ProfileRecommendRuleView.swift
-- Hous-iOS-release/Scene/Profile/View/ProfileMain/ProfileGraphBoxView.swift
-- Hous-iOS-release/Scene/Profile/Model/ProfileSettingModel.swift
-- Hous-iOS-release/Scene/Profile/Model/ProfileModel.swift
-- Hous-iOS-release/Scene/Profile/Model/ProfileDetailModel.swift
-- Hous-iOS-release/Scene/Profile/BadgeViewModel.swift
-- Hous-iOS-release/Scene/MainHome/MateProfileModel.swift
-- Hous-iOS-release/Scene/MainHome/ViewControllers/MateProfileViewController.swift
-- Hous-iOS-release/Scene/MainHome/ViewControllers/MainHomeViewController.swift
-- Hous-iOS-release/Scene/Todo/MemberTodo/Controller/ByDayTodoViewController.swift
-- Hous-iOS-release/Repository/Profile/ProfileRepository.swift
+- Hous-iOS-release/Global/UIComponent/QuitPopUpViewController.swift
 
 # Extenstion
 - Hous-iOS-release/Extension/CALayer+Extension.swift
 - Hous-iOS-release/Extension/UIBezierPath+Extension.swift
 - Hous-iOS-release/Extension/UIViewController+Rx.swift
 - Hous-iOS-release/Extension/UIView+Extension.swift
+- Hous-iOS-release/Extension/UIStackView+Extension.swift
+- Hous-iOS-release/Extension/UITableView+Extension.swift
+- Hous-iOS-release/Extension/ToastMessage.swift
+- Hous-iOS-release/Extension/Reactive+Extension.swift
+- Hous-iOS-release/Extension/UIDevice+Extension.swift
+- Hous-iOS-release/Extension/UILabel+Extension.swift
+
+
+
+- Hous-iOS-release/Scene/OurRule
+- Hous-iOS-release/Scene/Onboarding
+- Hous-iOS-release/Scene/MainHome
+- Hous-iOS-release/Scene/Todo
+- Hous-iOS-release/Scene/Profile
+- Hous-iOS-release/Scene/TabBar
+
+
 
 - "AssetKit"
 - "BottomSheetKit"

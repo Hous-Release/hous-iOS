@@ -113,7 +113,14 @@ extension ByDayTodoViewController {
     Observable.of(["월", "화", "수", "목", "금", "토", "일"])
       .bind(to: mainView.daysOfWeekCollectionview.rx.items) {
         (collectionView, row, item) -> UICollectionViewCell in
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DaysOfWeekCollectionViewCell.className, for: IndexPath(row: row, section: 0)) as? DaysOfWeekCollectionViewCell else { return UICollectionViewCell() }
+        guard
+          let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: DaysOfWeekCollectionViewCell.className,
+            for: IndexPath(row: row, section: 0)
+          ) as? DaysOfWeekCollectionViewCell
+        else {
+          return UICollectionViewCell()
+        }
 
         cell.setCell(item)
         return cell

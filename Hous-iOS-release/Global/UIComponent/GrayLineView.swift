@@ -7,6 +7,4 @@
 
 import UIKit
 
-class GrayLineView: UIView {
-  
-}
+class GrayLineView: UIView { }

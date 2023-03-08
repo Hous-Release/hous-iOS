@@ -119,7 +119,7 @@ class DeleteRuleViewController: BaseViewController {
       .drive(onNext: { [weak self] indexPath in
         guard let self = self else { return }
         let ruleWithIDViewModel = self.rules[indexPath.row]
-        let ruleId = ruleWithIDViewModel.id
+        _ = ruleWithIDViewModel.id
 
         guard let cell = self.rulesTableView.cellForRow(at: indexPath) as? RulesTableViewCell else { return }
 
@@ -168,7 +168,7 @@ class DeleteRuleViewController: BaseViewController {
           .asDriver(onErrorJustReturn: ())
           .drive(onNext: { [weak self] _ in
             guard let self = self else { return }
-            let ruleId = ruleWithIDViewModel.id
+            let _ = ruleWithIDViewModel.id
             
             let state = self.selectedDict[row].isSelected
             cell.selectButton.isSelected = !state

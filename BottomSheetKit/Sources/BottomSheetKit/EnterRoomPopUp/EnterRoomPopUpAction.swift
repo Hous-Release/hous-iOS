@@ -14,7 +14,6 @@ class EnterRoomPopUpAction: PopUpAction {
 
   init(view: EnterRoomPopUpView) { self.view = view }
 
-
   func sendAction() {
     completeAction?(.action)
   }

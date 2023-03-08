@@ -18,7 +18,10 @@ final class ProfileEditViewModel: ViewModelType {
   var isModifiedData = false
   
   init(data: ProfileModel) {
-    let dateComponents = DateComponents(timeZone: TimeZone(identifier: "ko-KR"), year: 1800, month: 6, day: 3)
+    let _ = DateComponents(
+      timeZone: TimeZone(identifier: "ko-KR"),
+      year: 1800, month: 6, day: 3
+    )
     originalData = ProfileEditModel(
       name: data.userName ?? "",
       birthday: data.birthday,

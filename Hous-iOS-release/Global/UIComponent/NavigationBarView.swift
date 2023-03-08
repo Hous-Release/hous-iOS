@@ -18,7 +18,7 @@ class NavBarWithBackButtonView: UIView {
     $0.setImage(Images.icBack.image, for: .normal)
     $0.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
   }
-  
+
   weak var delegate: NavBarWithBackButtonViewDelegate?
 
   private var titleLabel = UILabel().then {
@@ -97,7 +97,7 @@ class NavBarWithBackButtonView: UIView {
       make.trailing.equalToSuperview().inset(24)
     }
   }
-  
+
   func setTitleLabelTextColor(color: UIColor) {
     titleLabel.textColor = color
   }
@@ -105,7 +105,7 @@ class NavBarWithBackButtonView: UIView {
   func setRightButtonTextColor(color: UIColor) {
     rightButton.setTitleColor(color, for: .normal)
   }
-  
+
   func setBackButtonColor(color: UIColor) {
     backButton.tintColor = color
   }
