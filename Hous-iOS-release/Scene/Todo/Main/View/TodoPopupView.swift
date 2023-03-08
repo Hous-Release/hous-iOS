@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import Then
 
-
 final class TriangleView: UIView {
 
   var color: UIColor = Colors.blue.color

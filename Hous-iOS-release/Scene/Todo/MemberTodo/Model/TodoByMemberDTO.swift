@@ -33,7 +33,7 @@ public struct TodoInfoWithIdModel {
 }
 
 extension TodoInfoWithIdModel: Hashable {
-  public static func ==(lhs: TodoInfoWithIdModel, rhs: TodoInfoWithIdModel) -> Bool {
+  public static func == (lhs: TodoInfoWithIdModel, rhs: TodoInfoWithIdModel) -> Bool {
     return lhs.uuid == rhs.uuid
   }
 

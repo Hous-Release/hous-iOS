@@ -14,7 +14,7 @@ import RxCocoa
 import RxDataSources
 import ReactorKit
 
-//MARK: - Controller
+// MARK: - Controller
 final class TodoViewController: BaseViewController, View {
   typealias Reactor = TodoViewReactor
 
@@ -110,13 +110,13 @@ extension TodoViewController {
 extension TodoViewController {
   private func transferViewAllTodo(_ flag: Bool) {
     navigationController?.pushViewController(FilteredTodoViewController(), animated: true)
-    //self.reactor?.action.onNext(.initial)
+    // self.reactor?.action.onNext(.initial)
   }
 }
 
 extension TodoViewController {
   private func operateLoadingIsHidden(_ isHidden: Bool) {
-    isHidden ? self.hideLoading() : self.showLoading()
+    if isHidden { self.hideLoading() } else { self.showLoading() }
   }
 }
 
@@ -128,10 +128,13 @@ extension TodoViewController {
       .disposed(by: disposeBag)
 
     // MARK: - Cell
-    let dataSource = RxCollectionViewSectionedReloadDataSource<TodoMainSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
+    let dataSource = RxCollectionViewSectionedReloadDataSource<TodoMainSection.Model>(
+      configureCell: { _, collectionView, indexPath, item in
       switch item {
       case .myTodo(let todos):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyTodoCollectionViewCell.className, for: indexPath) as? MyTodoCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MyTodoCollectionViewCell.className,
+          for: indexPath) as? MyTodoCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.cellCheckSubject
@@ -142,21 +145,27 @@ extension TodoViewController {
         return cell
 
       case .myTodoEmpty:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className,
+          for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(.myTodo)
         return cell
 
       case .ourTodo(let todos):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OurTodoCollectionViewCell.className, for: indexPath) as? OurTodoCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: OurTodoCollectionViewCell.className,
+          for: indexPath) as? OurTodoCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(todos.status, todos.todoName, todos.nicknames)
         return cell
 
       case .ourTodoEmpty:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className,
+          for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(.ourTodo)
@@ -165,7 +174,8 @@ extension TodoViewController {
     })
 
     // MARK: - Header & Footer
-    dataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
+    dataSource.configureSupplementaryView = {
+      (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
 
       switch kind {
       case UICollectionView.elementKindSectionHeader:
@@ -242,7 +252,7 @@ extension TodoViewController {
     let scrollOffset = self.mainView.todoCollectionView.contentOffset.y
     let attributesCenter = attributes?.center ?? CGPoint(x: 0, y: 0)
     let currentTodoCount = reactor?.currentState.ourTodosSection.items.count
-    //print("point: \(point), scrollOffset : \(scrollOffset), attributesCenter: \(attributesCenter.y)")
+    // print("point: \(point), scrollOffset : \(scrollOffset), attributesCenter: \(attributesCenter.y)")
     let boxOffset = attributesCenter.y + point - scrollOffset
     return currentTodoCount == 0 ? boxOffset - 15 : boxOffset
   }
@@ -250,7 +260,11 @@ extension TodoViewController {
 
 extension TodoViewController: UICollectionViewDelegateFlowLayout {
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath) -> CGSize {
+
     if indexPath.section == 1 || indexPath.section == 3 {
       return CGSize(width: UIScreen.main.bounds.width, height: Size.emptyItemHeight)
     } else {
@@ -258,7 +272,10 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForHeaderInSection section: Int) -> CGSize {
 
     let headerSize = CGSize(width: UIScreen.main.bounds.width, height: Size.headerItemHeight)
     // ourTodo 개수 0일 땐 empty header 사용
@@ -273,7 +290,10 @@ extension TodoViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForFooterInSection section: Int) -> CGSize {
     if section == 0 || section == 2 {
       return .zero
     } else {

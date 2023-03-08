@@ -37,7 +37,7 @@ excluded:
 - Hous-iOS-release/Scene/OurRule
 - Hous-iOS-release/Scene/Onboarding
 - Hous-iOS-release/Scene/MainHome
-- Hous-iOS-release/Scene/Todo
+
 - Hous-iOS-release/Scene/Profile
 - Hous-iOS-release/Scene/TabBar
 

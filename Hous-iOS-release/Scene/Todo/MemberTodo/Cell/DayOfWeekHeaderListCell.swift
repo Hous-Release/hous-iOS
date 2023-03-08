@@ -70,7 +70,7 @@ extension DayOfWeekHeaderListCell {
       .foregroundColor: Colors.blueL1.color
     ], range: (headerText as NSString).range(of: countOfTodo))
 
-    //content.attributedText
+    // content.attributedText
     content.attributedText = mutableAttributedString
     dayOfWeeklistContentView.configuration = content
   }
@@ -87,7 +87,7 @@ extension DayOfWeekHeaderListCell {
     dayOfWeeklistContentView.translatesAutoresizingMaskIntoConstraints = false
     dayOfWeeklistContentView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
-      //make.height.equalTo(44)
+      // make.height.equalTo(44)
     }
   }
 }

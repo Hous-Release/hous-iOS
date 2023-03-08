@@ -103,7 +103,7 @@ extension ByDayTodoViewController {
 
 extension ByDayTodoViewController {
   private func operateLoadingIsHidden(_ isHidden: Bool) {
-    isHidden ? self.hideLoading() : self.showLoading()
+    if isHidden { self.hideLoading() } else { self.showLoading() }
   }
 }
 
@@ -135,18 +135,24 @@ extension ByDayTodoViewController {
         .disposed(by: disposeBag)
 
     // MARK: - Cell
-    let todoDataSource = RxCollectionViewSectionedReloadDataSource<MyOurTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
+    let todoDataSource = RxCollectionViewSectionedReloadDataSource<MyOurTodoSection.Model>(
+      configureCell: { _, collectionView, indexPath, item in
 
       switch item {
       case let .countTodo(num):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountTodoByDayCollectionViewCell.className, for: indexPath) as? CountTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: CountTodoByDayCollectionViewCell.className,
+          for: indexPath
+        ) as? CountTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(num)
         return cell
 
       case let .myTodo(todos):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyTodoByDayCollectionViewCell.className, for: indexPath) as? MyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MyTodoByDayCollectionViewCell.className,
+          for: indexPath) as? MyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(todos.todoName, todos.todoId)
@@ -154,14 +160,18 @@ extension ByDayTodoViewController {
         return cell
 
       case .myTodoEmpty:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className,
+          for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(.myTodo)
         return cell
 
       case let .ourTodo(todos):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OurTodoByDayCollectionViewCell.className, for: indexPath) as? OurTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: OurTodoByDayCollectionViewCell.className,
+          for: indexPath) as? OurTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(todos.todoName, todos.todoId, todos.nicknames)
@@ -169,7 +179,9 @@ extension ByDayTodoViewController {
         return cell
 
       case .ourTodoEmpty:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className,
+          for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(.ourTodo)
@@ -181,7 +193,8 @@ extension ByDayTodoViewController {
     })
 
     // MARK: - Header & Footer
-    todoDataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
+    todoDataSource.configureSupplementaryView = {
+      (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
 
       switch kind {
       case UICollectionView.elementKindSectionHeader:
@@ -219,7 +232,11 @@ extension ByDayTodoViewController {
 
 extension ByDayTodoViewController: UICollectionViewDelegateFlowLayout {
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath) -> CGSize {
+
     if indexPath.section == 0 || indexPath.section == 2 || indexPath.section == 4 {
       return CGSize(width: UIScreen.main.bounds.width, height: 54)
     } else {
@@ -227,7 +244,11 @@ extension ByDayTodoViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForHeaderInSection section: Int) -> CGSize {
+
     if section == 0 || section == 2 || section == 4 {
       return .zero
     } else {
@@ -235,8 +256,12 @@ extension ByDayTodoViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForFooterInSection section: Int) -> CGSize {
     if section == 0 || section == 1 || section == 3 {
+
       return .zero
     } else {
       return CGSize(width: UIScreen.main.bounds.width, height: 40)

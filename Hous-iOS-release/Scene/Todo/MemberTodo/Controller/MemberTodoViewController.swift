@@ -78,10 +78,15 @@ extension MemberTodoViewController {
 
   private func bindState(_ reactor: Reactor) {
 
-    let dataSource = RxCollectionViewSectionedReloadDataSource<MemberSection.Model> { dataSource, collectionView, indexPath, item in
+    let dataSource = RxCollectionViewSectionedReloadDataSource<MemberSection.Model> {
+      _, collectionView, indexPath, item in
+
       switch item {
       case .members(let member):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MemberCollectionViewCell.className,
+          for: indexPath) as? MemberCollectionViewCell else {
+
           return UICollectionViewCell()
         }
         cell.bind(reactor: MemberCollectionViewCellReactor(state: member))
@@ -129,7 +134,7 @@ extension MemberTodoViewController {
 
 extension MemberTodoViewController {
   private func operateLoadingIsHidden(_ isHidden: Bool) {
-    isHidden ? self.hideLoading() : self.showLoading()
+    if isHidden { self.hideLoading() } else { self.showLoading() }
   }
 }
 
@@ -142,7 +147,8 @@ extension MemberTodoViewController {
     let todoCell = todoCellRegistration()
     let emptyCell = emptyCellRegistration()
 
-    dataSource = UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>(collectionView: mainView.todoCollectionView) {
+    dataSource = UICollectionViewDiffableDataSource<TodoByMemSection, TodoByMemListItem>(
+      collectionView: mainView.todoCollectionView) {
       (collectionView, indexPath, todoByMemItem) -> UICollectionViewCell? in
 
       switch todoByMemItem {
@@ -229,37 +235,41 @@ extension MemberTodoViewController {
 // MARK: - Cell registration
 extension MemberTodoViewController {
 
-  private func totalNumCellRegistration() -> UICollectionView.CellRegistration<TotalTodoNumListCell, Int> {
+  private func totalNumCellRegistration()
+  -> UICollectionView.CellRegistration<TotalTodoNumListCell, Int> {
     let totalNumCellRegistration = UICollectionView.CellRegistration<TotalTodoNumListCell, Int> {
-      (cell, indexPath, totalNum) in
+      (cell, _, totalNum) in
       cell.update(with: totalNum)
     }
     return totalNumCellRegistration
   }
 
-  private func headerCellRegistration() -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, DayOfWeekTodoModel>  {
+  private func headerCellRegistration()
+  -> UICollectionView.CellRegistration<DayOfWeekHeaderListCell, DayOfWeekTodoModel> {
     let headerCellRegistration = UICollectionView.CellRegistration<DayOfWeekHeaderListCell, DayOfWeekTodoModel> {
-      (cell, indexPath, headerItem) in
+      (cell, _, headerItem) in
 
       cell.update(with: headerItem)
       // disclosure accessory
       let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .header)
-      cell.accessories = [.outlineDisclosure(options:headerDisclosureOption)]
+      cell.accessories = [.outlineDisclosure(options: headerDisclosureOption)]
     }
     return headerCellRegistration
   }
 
-  private func todoCellRegistration() -> UICollectionView.CellRegistration<TodoByMemListCell, TodoInfoWithIdModel> {
+  private func todoCellRegistration()
+  -> UICollectionView.CellRegistration<TodoByMemListCell, TodoInfoWithIdModel> {
     let todoCellRegistration = UICollectionView.CellRegistration<TodoByMemListCell, TodoInfoWithIdModel> {
-      (cell, indexPath, todoItem) in
+      (cell, _, todoItem) in
       cell.update(with: todoItem)
     }
     return todoCellRegistration
   }
 
-  private func emptyCellRegistration() -> UICollectionView.CellRegistration<MemEmptyListCell, String> {
+  private func emptyCellRegistration()
+  -> UICollectionView.CellRegistration<MemEmptyListCell, String> {
     let emptyCellRegistration = UICollectionView.CellRegistration<MemEmptyListCell, String> {
-      (cell, indexPath, emptyItem) in
+      (cell, _, emptyItem) in
       cell.update(with: emptyItem)
     }
     return emptyCellRegistration

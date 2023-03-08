@@ -56,7 +56,7 @@ final class TodoViewReactor: Reactor {
     var ourTodosEmptySection = TodoMainSection.Model(
       model: .ourTodoEmpty,
       items: [])
-    var error: String? = nil
+    var error: String?
     @Pulse var enterViewAllFlag: Bool?
   }
 
