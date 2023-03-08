@@ -134,7 +134,7 @@ class BadgeViewController: BaseViewController {
   
   private func bind() {
     let input = BadgeViewModel.Input(
-      viewWillAppear: rx.RxViewWillAppear.asObservable()
+      viewWillAppear: rx.rxViewWillAppear.asObservable()
         .do(onNext: { [weak self] _ in self?.showLoading() }),
       backButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
       selectedMainBadge: selectedMainBadgeSubject

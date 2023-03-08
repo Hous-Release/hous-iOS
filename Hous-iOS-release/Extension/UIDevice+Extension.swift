@@ -11,7 +11,7 @@ extension UIDevice {
   public var modelName: String {
     return UIDevice.getModelName()
   }
-  
+
   private static func getModelName() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
@@ -20,7 +20,7 @@ extension UIDevice {
       guard let value = element.value as? Int8, value != 0 else { return identifier }
       return identifier + String(UnicodeScalar(UInt8(value)))
     }
-    
+
     switch model {
       // Simulator
     case "i386", "x86_64":                          return "Simulator"
@@ -30,7 +30,7 @@ extension UIDevice {
     case "iPod5,1", "iPod7,1":                      return "iPod Touch"
       // iPad
     case "iPad1,1":                                 return "iPad"
-    case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "iPad 2"
+    case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return "iPad 2"
     case "iPad2,5", "iPad2,6", "iPad2,7":           return "iPad Mini"
     case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad 3"
     case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad 4"

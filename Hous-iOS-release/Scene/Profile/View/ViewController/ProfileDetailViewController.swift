@@ -88,7 +88,7 @@ final class ProfileDetailViewController: BaseViewController, UICollectionViewDel
     
     // input
     
-    let viewWillAppear = rx.RxViewWillAppear
+    let viewWillAppear = rx.rxViewWillAppear
       .asSignal(onErrorJustReturn: ())
       
     

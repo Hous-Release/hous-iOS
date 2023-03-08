@@ -98,7 +98,7 @@ class OurRulesViewController: BaseViewController {
   }
   
   private func bind() {
-    rx.RxViewWillAppear
+    rx.rxViewWillAppear
       .asObservable()
       .do(onNext: { [weak self] _ in self?.showLoading() })
       .bind(to: viewModel.viewWillAppearSubject)
