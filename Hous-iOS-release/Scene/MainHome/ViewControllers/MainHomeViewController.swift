@@ -21,12 +21,6 @@ protocol MainHomeViewControllerDelegate: AnyObject {
 
 class MainHomeViewController: BaseViewController {
 
-  private enum MainHomeSection: Int {
-    case todos
-    case ourRules
-    case homiesProfiles
-  }
-
   // MARK: - Vars & Lets
   private let viewModel: MainHomeViewModel
   private let disposeBag = DisposeBag()
@@ -162,9 +156,9 @@ class MainHomeViewController: BaseViewController {
       .asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in
         guard let self = self else { return }
-        let vc = OurRulesViewController(viewModel: RulesViewModel())
-        vc.view.backgroundColor = .white
-        self.navigationController?.pushViewController(vc, animated: true)
+        let viewController = OurRulesViewController(viewModel: RulesViewModel())
+        viewController.view.backgroundColor = .white
+        self.navigationController?.pushViewController(viewController, animated: true)
       })
       .disposed(by: cell.disposeBag)
 
@@ -189,8 +183,11 @@ class MainHomeViewController: BaseViewController {
 
       cell.editButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] in
-          self?.delegate?.editHousName(initname: todos.roomName)
-//          self?.navigationController?.pushViewController(EditHousNameViewController(roomName: todos.roomName), animated: true)
+//          self?.delegate?.editHousName(initname: todos.roomName)
+           self?.navigationController?.pushViewController(
+                     EditHousNameViewController(roomName: todos.roomName),
+            animated: true
+           )
         })
         .disposed(by: cell.disposeBag)
 
@@ -233,7 +230,8 @@ class MainHomeViewController: BaseViewController {
     let output = viewModel.transform(input: input)
 
     let dataSource =
-    RxCollectionViewSectionedReloadDataSource<MainHomeSectionModel.Model> { [weak self] _, collectionView, indexPath, item in
+    RxCollectionViewSectionedReloadDataSource<MainHomeSectionModel.Model> {
+      [weak self] _, collectionView, indexPath, item in
       guard let self = self else { return UICollectionViewCell() }
       return self.configureCollectionViewCell(
         collectionView: collectionView,
@@ -245,7 +243,11 @@ class MainHomeViewController: BaseViewController {
     dataSource.configureSupplementaryView = { (_, collectionView, kind, indexPath) -> UICollectionReusableView in
       switch kind {
       case UICollectionView.elementKindSectionHeader:
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeHeaderCollectionReusableView.className, for: indexPath) as? HomeHeaderCollectionReusableView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+                  ofKind: kind,
+                  withReuseIdentifier: HomeHeaderCollectionReusableView.className,
+                  for: indexPath) as? HomeHeaderCollectionReusableView
+        else { return UICollectionReusableView() }
 
         if indexPath.section == MainHomeSection.homiesProfiles.rawValue {
           header.setSubTitleLabel(string: "Homies")
@@ -253,7 +255,11 @@ class MainHomeViewController: BaseViewController {
 
         return header
       case UICollectionView.elementKindSectionFooter:
-        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SeperatorLineCollectionReusableView.className, for: indexPath) as? SeperatorLineCollectionReusableView else { return UICollectionReusableView() }
+        guard let footer = collectionView.dequeueReusableSupplementaryView(
+          ofKind: kind,
+          withReuseIdentifier: SeperatorLineCollectionReusableView.className,
+          for: indexPath) as? SeperatorLineCollectionReusableView
+        else { return UICollectionReusableView() }
 
         return footer
       default:
@@ -270,9 +276,7 @@ class MainHomeViewController: BaseViewController {
     output.roomCode
       .drive(onNext: { str in
         UIPasteboard.general.string = str
-        if let _ = UIPasteboard.general.string {
-          Toast.show(message: "초대코드가 복사되었습니다", controller: self)
-        }
+        Toast.show(message: "초대코드가 복사되었습니다", controller: self)
       })
       .disposed(by: disposeBag)
 
@@ -315,14 +319,6 @@ class MainHomeViewController: BaseViewController {
         let activityViewController = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
 
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.assignToContact]
-
-        activityViewController.completionWithItemsHandler = { (_, success, _, _) in
-          if success {
-            // 성공했을 때 작업
-          } else {
-            // 실패했을 때 작업
-          }
-        }
         self.present(activityViewController, animated: true)
       })
       .disposed(by: disposeBag)
@@ -333,7 +329,11 @@ class MainHomeViewController: BaseViewController {
 
 extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForHeaderInSection section: Int
+  ) -> CGSize {
     if section == MainHomeSection.homiesProfiles.rawValue {
       return CGSize(width: view.frame.size.width, height: 50)
     }
@@ -341,7 +341,11 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     return .zero
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    referenceSizeForFooterInSection section: Int
+  ) -> CGSize {
     switch section {
     case MainHomeSection.todos.rawValue:
       return CGSize(width: UIScreen.main.bounds.width, height: 1)
@@ -354,7 +358,11 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
 
     switch indexPath.section {
     case MainHomeSection.todos.rawValue:
@@ -381,23 +389,41 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
 
     if section == MainHomeSection.homiesProfiles.rawValue { return 12 }
     return 0
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
     if section == MainHomeSection.homiesProfiles.rawValue { return 17 }
     return 0
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
     if section == MainHomeSection.homiesProfiles.rawValue {
       return UIEdgeInsets(top: 16, left: 24, bottom: 24, right: 24)
     }
     return UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
   }
+}
+
+enum MainHomeSection: Int {
+  case todos
+  case ourRules
+  case homiesProfiles
 }
 
 enum Weekend: String {

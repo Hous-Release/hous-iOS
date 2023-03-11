@@ -15,7 +15,7 @@ import BottomSheetKit
 
 final class EditRuleViewController: BaseViewController {
 
-  //MARK: - UI Components
+  // MARK: - UI Components
 
   private let navigationBar = NavBarWithBackButtonView(
     title: "Rules 수정",
@@ -34,7 +34,7 @@ final class EditRuleViewController: BaseViewController {
     $0.textColor = Colors.g5.color
   }
 
-  //MARK: - Var & lets
+  // MARK: - Var & lets
 
   private let disposeBag = DisposeBag()
 
@@ -57,7 +57,7 @@ final class EditRuleViewController: BaseViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setTableView()
@@ -75,7 +75,6 @@ final class EditRuleViewController: BaseViewController {
     super.viewWillDisappear(animated)
     navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
-
 
   private func showQuitPopUp() {
     let defaultPopUpModel = DefaultPopUpModel(
@@ -96,7 +95,7 @@ final class EditRuleViewController: BaseViewController {
       }
     }
   }
-  
+
   private func setTableView() {
     rulesTableView.register(
       EditRuleTableViewCell.self,
@@ -105,7 +104,7 @@ final class EditRuleViewController: BaseViewController {
 
     rulesTableView.rx.setDelegate(self).disposed(by: disposeBag)
   }
-  
+
   private func setEmptyView() {
     if editViewRules.isEmpty {
       ruleEmptyViewLabel.isHidden = false
@@ -115,7 +114,7 @@ final class EditRuleViewController: BaseViewController {
       navigationBar.rightButton.isEnabled = true
     }
   }
-  
+
   private func configUI() {
 
     self.view.addSubViews([
@@ -149,7 +148,10 @@ final class EditRuleViewController: BaseViewController {
     let observable = Observable.just(self.editViewRules)
 
     observable
-      .bind(to: rulesTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { [weak self] row, _, cell in
+      .bind(to: rulesTableView.rx.items(
+        cellIdentifier: EditRuleTableViewCell.className,
+        cellType: EditRuleTableViewCell.self)
+      ) { [weak self] row, _, cell in
         guard let self = self else { return }
 
         let viewModel = self.editViewRules[row]
@@ -169,7 +171,7 @@ final class EditRuleViewController: BaseViewController {
           .drive(onNext: { _ in
 
             let editBlueColor = Colors.blueEdit.color
-            
+
             if cell.backgroundColor == existing {
               if row < 3 {
                 cell.backgroundColor = editBlueColor
@@ -211,7 +213,7 @@ final class EditRuleViewController: BaseViewController {
 
     rulesTableView.rx.itemMoved
       .map { $0 }
-      .subscribe (onNext: { [weak self] event in
+      .subscribe(onNext: { [weak self] event in
         guard let self = self else { return }
         self.editViewRules.swapAt(event.sourceIndex.row, event.destinationIndex.row)
         self.rulesTableView.reloadData()
@@ -288,7 +290,7 @@ final class EditRuleViewController: BaseViewController {
 
 // Hiding Delete Button in TableView edit mode
 extension EditRuleViewController: UITableViewDelegate {
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 52
   }

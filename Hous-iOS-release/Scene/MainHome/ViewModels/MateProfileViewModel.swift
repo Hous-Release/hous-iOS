@@ -10,27 +10,26 @@ import RxSwift
 import RxCocoa
 
 final class MateProfileViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let profileRepository = ProfileRepositoryImp()
   private var profileModel = ProfileModel()
   private let profileModelSubject = PublishSubject<ProfileModel>()
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<MateActionControl>
     let id: String
   }
-  
+
   struct Output {
     let profileModel: Observable<ProfileModel>
     let actionControl: Observable<MateActionControl>
   }
-  
-  
+
   init() {
     ProfileRepositoryImp.event
-      .subscribe (onNext:{ [weak self] event in
+      .subscribe(onNext: { [weak self] event in
       guard let self = self else { return }
       switch event {
       case let .getHomieProfile(profileModel):
@@ -45,23 +44,21 @@ final class MateProfileViewModel: ViewModelType {
     })
     .disposed(by: disposeBag)
   }
-  
+
   func transform(input: Input) -> Output {
-    
+
     // Data
     self.profileRepository.getHomieProfile(id: input.id)
     self.profileModelSubject.onNext(self.profileModel)
-    
+
     // Action
-    
+
     let actionControl = input.actionDetected.asObservable()
-    
+
     return Output(
       profileModel: self.profileModelSubject.asObservable(),
       actionControl: actionControl
     )
   }
-  
-  
-}
 
+}

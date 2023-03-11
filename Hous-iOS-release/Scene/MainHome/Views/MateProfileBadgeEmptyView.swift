@@ -8,13 +8,13 @@
 import UIKit
 
 final class MateProfileBadgeEmptyView: UIView {
-  
-  var personalityColor : PersonalityColor = .none
-  
+
+  var personalityColor: PersonalityColor = .none
+
   override func draw(_ rect: CGRect) {
     let path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 52, height: 52))
     var backgroundColor = UIColor()
-    
+
     switch personalityColor {
     case .red:
       backgroundColor = Colors.redB1.color
@@ -32,17 +32,16 @@ final class MateProfileBadgeEmptyView: UIView {
 
     backgroundColor.setFill()
     path.fill()
-    
+
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.backgroundColor = Colors.white.color
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  
 }

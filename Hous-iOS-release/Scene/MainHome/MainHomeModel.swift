@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct MainHomeModel {
   let userNickname: String
   let roomName: String
