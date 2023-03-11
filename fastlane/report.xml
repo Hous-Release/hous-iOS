@@ -5,27 +5,27 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000219">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000283">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to ios renew_codesign lane" time="9.5e-05">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios sync_codesign lane" time="7.9e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: match" time="38.308667">
+      <testcase classname="fastlane.lanes" name="2: match" time="1.634582">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: Switch to ios renew_codesign lane" time="0.00027">
+      <testcase classname="fastlane.lanes" name="3: Switch to ios sync_codesign lane" time="9.2e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: match" time="47.054298">
+      <testcase classname="fastlane.lanes" name="4: match" time="1.617217">
         
       </testcase>
     
