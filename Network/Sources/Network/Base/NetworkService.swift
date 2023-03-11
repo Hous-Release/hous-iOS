@@ -13,13 +13,13 @@ final public class NetworkService {
   private init() { }
 
   public let authRepository = AuthAPI(isLogging: true)
-  public let onboardingRepository = OnboardingAPI(isLogging: true)
   public let mainHomeRepository = MainHomeAPI(isLogging: true)
+  public let roomRepository = RoomAPI(isLogging: true)
+  public let ruleRepository = RuleAPI(isLogging: true)
+  public let profileRepository = ProfileAPI(isLogging: true)
+  public let userRepository = UserAPI(isLogging: true)
+
   public let mainTodoRepository = MainTodoAPI(isLogging: true)
   public let memberTodoRepository = MemberTodoAPI(isLogging: true)
   public let byDayTodoRepository = ByDayTodoAPI(isLogging: true)
-  public let roomRepository = RoomAPI(isLogging: true)
-  public let profileRepository = ProfileAPI(isLogging: true)
-  public let ruleRepository = RuleAPI(isLogging: true)
-  public let userRepository = UserAPI(isLogging: true)
 }
