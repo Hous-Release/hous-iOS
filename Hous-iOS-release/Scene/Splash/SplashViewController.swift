@@ -14,7 +14,15 @@ import RxSwift
 import SnapKit
 import UIKit
 
+protocol SplashViewControllerDelegate: AnyObject {
+  func transferForSuccess(_ isJoiningRoom: Bool)
+  func transferOnboarding(_ isOnboardingFlow: Bool)
+  func transferLogin(_ isLoginFlow: Bool)
+}
+
 final class SplashViewController: UIViewController, ReactorKit.View {
+
+  weak var delegate: SplashViewControllerDelegate? // coordinator라고도 씀. 근데 사실상 Delegate pattern
 
   private let lottieView: AnimationView = {
     let view = AnimationView(name: "splashlottie")
@@ -53,36 +61,17 @@ final class SplashViewController: UIViewController, ReactorKit.View {
       make.bottom.equalToSuperview()
     }
   }
+
   func transferForSuccess(_ isJoiningRoom: Bool) {
-    let tvc = HousTabbarViewController()
-    let enterRoomVC = EnterRoomViewController()
-
-    if isJoiningRoom {
-      changeRootViewController(to: tvc)
-      return
-    }
-
-    if !isJoiningRoom {
-      changeRootViewController(to: UINavigationController(rootViewController: enterRoomVC))
-      return
-    }
-
+    delegate?.transferForSuccess(isJoiningRoom)
   }
 
   func transferOnboarding(_ isOnboardingFlow: Bool) {
-    guard isOnboardingFlow else { return }
-
-    let onboardingVC = PagingViewController()
-    changeRootViewController(to: onboardingVC)
+    delegate?.transferOnboarding(isOnboardingFlow)
   }
 
   func transferLogin(_ isLoginFlow: Bool) {
-    guard isLoginFlow else { return }
-
-    let serviceProvider = ServiceProvider()
-    let reactor = SignInReactor(provider: serviceProvider)
-    let loginVC = SignInViewController(reactor)
-    changeRootViewController(to: UINavigationController(rootViewController: loginVC))
+    delegate?.transferLogin(isLoginFlow)
   }
 }
 

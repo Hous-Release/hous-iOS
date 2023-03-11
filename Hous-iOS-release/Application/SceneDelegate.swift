@@ -11,16 +11,20 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
+  var coordinator: MainCoordinator?
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    let navController = UINavigationController()
+    coordinator = MainCoordinator(navigationController: navController)
+
+    coordinator?.start()
+
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
-    let serviceProvider = ServiceProvider()
-    let reactor = SplashReactor(provider: serviceProvider)
-    window.rootViewController = SplashViewController(reactor)
+    window.rootViewController = navController
     window.backgroundColor = .white
-    window.makeKeyAndVisible()
     self.window = window
+    window.makeKeyAndVisible()
   }
 
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

@@ -137,6 +137,8 @@
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
 		B541F32C29A9C7A500F81DFE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B541F32B29A9C7A500F81DFE /* .swiftlint.yml */; };
+		B541F39A29B8B40300F81DFE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541F39929B8B40300F81DFE /* Coordinator.swift */; };
+		B541F3A029B8BC1900F81DFE /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541F39F29B8BC1900F81DFE /* MainCoordinator.swift */; };
 		B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F52914197700DA3A95 /* AddRuleViewController.swift */; };
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
 		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
@@ -165,6 +167,7 @@
 		B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */; };
 		B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */; };
+		B5BC4A7C29B8C5CC0078317D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */; };
 		B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */; };
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
@@ -404,6 +407,8 @@
 		B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
 		B541F32B29A9C7A500F81DFE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B541F39929B8B40300F81DFE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		B541F39F29B8BC1900F81DFE /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		B54D39F52914197700DA3A95 /* AddRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewController.swift; sourceTree = "<group>"; };
 		B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleViewModel.swift; sourceTree = "<group>"; };
 		B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRuleViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +436,7 @@
 		B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewController.swift; sourceTree = "<group>"; };
 		B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewModel.swift; sourceTree = "<group>"; };
 		B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeSection.swift; sourceTree = "<group>"; };
+		B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomieFactory.swift; sourceTree = "<group>"; };
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
@@ -1095,6 +1101,7 @@
 			children = (
 				B595FFCB28CC77F400F6B2E4 /* ViewModelType.swift */,
 				7757A3E328E737520068B13C /* HouseErrorModel.swift */,
+				B541F39929B8B40300F81DFE /* Coordinator.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1311,6 +1318,8 @@
 			children = (
 				B595FFF328D5AD0200F6B2E4 /* Protocols */,
 				B856701B28C9A26000B49984 /* UIComponent */,
+				B541F39F29B8BC1900F81DFE /* MainCoordinator.swift */,
+				B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1718,6 +1727,7 @@
 				9B4EE80629444463002F97C2 /* AlarmSettingFirstCollectionViewCell.swift in Sources */,
 				B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */,
 				B85C0B742948773900784FCB /* ProfileLeaveSection.swift in Sources */,
+				B5BC4A7C29B8C5CC0078317D /* HomeCoordinator.swift in Sources */,
 				9BF94604290D6C6C008F2BFC /* ProfileRecommendBoxView.swift in Sources */,
 				9B959AFA28FEF64400EB3412 /* GrayLineView.swift in Sources */,
 				9B98853728E3E9700013CCB9 /* ProfileModel.swift in Sources */,
@@ -1845,6 +1855,7 @@
 				9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */,
 				9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
+				B541F39A29B8B40300F81DFE /* Coordinator.swift in Sources */,
 				B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */,
 				77EB7210292540D600032776 /* TodoHomieModel.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
@@ -1856,6 +1867,7 @@
 				B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */,
 				B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */,
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
+				B541F3A029B8BC1900F81DFE /* MainCoordinator.swift in Sources */,
 				9B6DD151292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift in Sources */,
 				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */,
@@ -2035,6 +2047,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 83LNUYN53Q;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 83LNUYN53Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hous-iOS-release/Setting/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
@@ -2052,6 +2065,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hous.Hous-iOS-release.development";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.hous.Hous-iOS-release.development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

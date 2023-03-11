@@ -11,7 +11,12 @@ import RxSwift
 import SnapKit
 
 class HousTabbarViewController: UITabBarController {
-  
+
+  // 각 탭바에 대한 별도 Coordinator 선언해준 뒤
+  //  let home = HomeCoordinator()
+  //  let todo = TodoCoordinator()
+  // let profile = ProfileCoordinator()
+
   var firstCreatedSubject = PublishSubject<String>()
 
   internal let housTabBar: HousTabBar = {
@@ -32,6 +37,8 @@ class HousTabbarViewController: UITabBarController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    // 아래와 같이 작성 가능
+    //    viewControllers = [home.navigationController, todo.navigationController, profile.navigationController]
     render()
     setUp()
     bind()
@@ -70,18 +77,18 @@ class HousTabbarViewController: UITabBarController {
       .bind { [weak self] in
         guard let nvc = self?.viewControllers?[$0] as? UINavigationController else { return }
         nvc.popToRootViewController(animated: false)
-        
+
         self?.selectTabWith(index: $0)
-        
+
       }
       .disposed(by: disposeBag)
-    
+
     guard let mainNVC = self.viewControllers?[0] as? UINavigationController,
           let mainVC = mainNVC.viewControllers[0] as? MainHomeViewController
     else {
       return
     }
-    
+
     firstCreatedSubject
       .observe(on: MainScheduler.asyncInstance)
       .subscribe(onNext: { roomCode in
@@ -89,7 +96,7 @@ class HousTabbarViewController: UITabBarController {
       })
       .disposed(by: disposeBag)
   }
-  
+
   private func setChangeTabBarIndex() {
     guard let mainNVC = self.viewControllers?[0] as? UINavigationController,
           let mainVC = mainNVC.viewControllers[0] as? MainHomeViewController
