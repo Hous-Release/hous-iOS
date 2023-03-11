@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import Network
 
-
 final class EditRuleViewModel: ViewModelType {
 
   struct Input {
@@ -22,7 +21,6 @@ final class EditRuleViewModel: ViewModelType {
     let saveCompleted: Driver<Void>
     let moveToRuleMainView: Driver<Void>
   }
-  
 
   func transform(input: Input) -> Output {
 

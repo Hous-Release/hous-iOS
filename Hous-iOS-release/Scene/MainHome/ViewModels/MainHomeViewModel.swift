@@ -15,31 +15,31 @@ typealias HomeModel = MainHomeSectionModel.Model
 typealias HomeItem = MainHomeSectionModel.Item
 
 final class MainHomeViewModel: ViewModelType {
-  
+
   private let disposeBag = DisposeBag()
-  
-  //MARK: - Input
+
+  // MARK: - Input
   struct Input {
     let viewWillAppear: Signal<Void>
     let copyButtonDidTapped: PublishRelay<Void>
   }
-  
-  //MARK: - Output
+
+  // MARK: - Output
   struct Output {
     var sections: Driver<[HomeModel]>
     var roomCode: Driver<String>
   }
-    
+
   private var sections = BehaviorRelay<[HomeModel]>(value: [])
   private var roomCodeRelay = PublishRelay<String>()
   private var roomCode = ""
-    
+
   func transform(input: Input) -> Output {
-    
+
     input.viewWillAppear
       .emit { [weak self] _ in
         guard let self = self else { return }
-        NetworkService.shared.mainHomeRepository.getHomeData { res, error in
+        NetworkService.shared.mainHomeRepository.getHomeData { res, _ in
 
           guard
             let data = res,
@@ -68,28 +68,26 @@ final class MainHomeViewModel: ViewModelType {
             model: .homieProfiles,
             items: profileItems
           )
-          
+
           self.roomCode = model.roomCode
           self.sections.accept([myTodoSectionModel, ourRulesSectionModel, homieProfilesSectionModel])
         }
       }
       .disposed(by: disposeBag)
-    
+
     input.copyButtonDidTapped
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.roomCodeRelay.accept(self.roomCode)
       })
       .disposed(by: disposeBag)
-      
-    
+
     return Output(
       sections: sections.asDriver(),
       roomCode: roomCodeRelay.asDriver(onErrorJustReturn: "")
     )
   }
-  
-    
+
   //  func toDomain() -> MainHomeModel {
   //
   //    let homieList = self.homies.map({ dto in

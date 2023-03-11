@@ -11,22 +11,21 @@ import RxCocoa
 import Network
 import RxDataSources
 
-
 final class RulesViewModel {
-  
-  //MARK: - Inputs
+
+  // MARK: - Inputs
   let viewWillAppearSubject = PublishRelay<Void>()
   let backButtonDidTapped = PublishRelay<Void>()
   let moreButtonDidTapped = PublishRelay<Void>()
-  
-  //MARK: - Outputs
+
+  // MARK: - Outputs
   var rules: Observable<[SectionOfRules]>
   var popViewController: Observable<Void>
   var presentBottomSheet: Observable<Void>
   var ruleWithIds: Observable<[RuleWithIdViewModel]>
-  
+
   private let disposeBag = DisposeBag()
-  
+
   init() {
     let viewWillAppear = self.viewWillAppearSubject
       .asObservable()
@@ -34,9 +33,9 @@ final class RulesViewModel {
         NetworkService.shared.ruleRepository.getRulesName()
       }
       .share()
-      
+
     let defaultViewItem = viewWillAppear.map { res -> [TableViewItem] in
-        
+
         if res.isEmpty {
           return [TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: [], rulesTotalCount: 0))]
         }
@@ -44,9 +43,9 @@ final class RulesViewModel {
         var items: [TableViewItem] = []
         var arr: [String] = []
         var isOnlyKeyRule = false
-      
+
         res.enumerated().forEach { (idx, rule) in
-          
+
           if res.count < 3 {
             arr.append(rule.name)
             isOnlyKeyRule = true
@@ -55,43 +54,47 @@ final class RulesViewModel {
               arr.append(rule.name)
             } else if idx == 2 {
               arr.append(rule.name)
-              let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount))
+              let item = TableViewItem.keyRules(
+                viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount)
+              )
               items.append(item)
-              
+
             } else {
               let item = TableViewItem.rule(viewModel: RuleViewModel(rule: rule))
               items.append(item)
             }
           }
         }
-      
+
         if isOnlyKeyRule {
-          let item = TableViewItem.keyRules(viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount))
+          let item = TableViewItem.keyRules(
+            viewModel: KeyRuleViewModel(rules: arr, rulesTotalCount: rulesTotalCount)
+          )
           items.append(item)
         }
-        
+
         return items
       }
       .map { [SectionOfRules(model: .main, items: $0)] }
-        
+
     let ruleWithIdItems = viewWillAppear.map { res -> [RuleWithIdViewModel] in
-            
+
       let items = res.map { rule in
         RuleWithIdViewModel(id: rule.id, name: rule.name)
       }
 
       return items
     }
-    
+
     rules = Observable.merge(defaultViewItem)
     ruleWithIds = Observable.merge(ruleWithIdItems)
-    
+
     popViewController = backButtonDidTapped.asObservable()
     presentBottomSheet = moreButtonDidTapped.asObservable()
   }
 }
 
-//MARK: - OnlyNameRuleViewModel
+// MARK: - OnlyNameRuleViewModel
 struct RuleViewModel {
   var name: String
 }
@@ -102,7 +105,7 @@ extension RuleViewModel {
   }
 }
 
-//MARK: - RuleWithIdViewModel
+// MARK: - RuleWithIdViewModel
 struct RuleWithIdViewModel {
   let id: Int
   var name: String
@@ -118,9 +121,9 @@ extension RuleWithIdViewModel {
   }
 }
 
-//MARK: - TableView Section Model
+// MARK: - TableView Section Model
 
-//MARK: - KeyRuleViewModel
+// MARK: - KeyRuleViewModel
 struct KeyRuleViewModel {
   let rulesTotalCount: Int
   let names: [String]
@@ -144,5 +147,3 @@ enum TableViewItem {
   case rule(viewModel: RuleViewModel)
   case editRule(viewModel: RuleWithIdViewModel)
 }
-
-

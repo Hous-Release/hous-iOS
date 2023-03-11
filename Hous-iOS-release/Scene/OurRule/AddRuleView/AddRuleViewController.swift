@@ -194,13 +194,16 @@ final class AddRuleViewController: BaseViewController {
     }
 
   }
-  
-  //MARK: - Rx
+
+  // MARK: - Rx
   private func bind() {
 
     rulesSubject
       .asObservable()
-      .bind(to: ruleTableView.rx.items(cellIdentifier: EditRuleTableViewCell.className, cellType: EditRuleTableViewCell.self)) { row, ruleName, cell in
+      .bind(to: ruleTableView.rx.items(
+        cellIdentifier: EditRuleTableViewCell.className,
+        cellType: EditRuleTableViewCell.self)
+      ) { _, ruleName, cell in
         cell.setTextFieldData(rule: ruleName)
         cell.isUserInteractionEnabled = false
       }
@@ -288,7 +291,7 @@ final class AddRuleViewController: BaseViewController {
       })
       .disposed(by: disposeBag)
   }
-  
+
 }
 
 extension AddRuleViewController: UITableViewDelegate {
@@ -298,13 +301,13 @@ extension AddRuleViewController: UITableViewDelegate {
 }
 
 extension AddRuleViewController {
-  
+
   @objc func textFieldDidChange(noti: NSNotification) {
     if let textField = noti.object as? UITextField {
       switch textField {
       case ruleTextField:
         if let text = ruleTextField.text {
-          
+
           if text.count > maxCount {
             let maxIndex = text.index(text.startIndex, offsetBy: maxCount)
             let newString = String(text[text.startIndex..<maxIndex])
@@ -312,7 +315,7 @@ extension AddRuleViewController {
           } else {
             ruleTextField.changeLayerColor(color: Colors.blue.color.cgColor)
           }
-          
+
         } else {
           ruleTextField.changeLayerColor(color: Colors.g4.color.cgColor)
         }

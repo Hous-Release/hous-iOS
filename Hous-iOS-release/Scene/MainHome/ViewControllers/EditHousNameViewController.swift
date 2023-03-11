@@ -11,26 +11,25 @@ import RxRelay
 import BottomSheetKit
 
 class EditHousNameViewController: BaseViewController {
-  
-  //MARK: Var & Let
+
+  // MARK: Var & Let
   private let saveButtonDidTapped = PublishSubject<String>()
   private let viewModel = EditHousNameViewModel()
   private let disposeBag = DisposeBag()
   private let roomName: String
   private let initialRoomName: String?
-  
-  
-  //MARK: UI Components
+
+  // MARK: UI Components
   private let navigationBar = NavBarWithBackButtonView(
     title: "우리 집 별명 수정",
     rightButtonText: "저장")
-  
+
   private let descriptionLabel = UILabel().then {
     $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요."
     $0.textColor = Colors.g5.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
-  
+
   private lazy var textField = HousTextField(nil, roomName,
                                              useMaxCount: true,
                                              maxCount: 8,
@@ -38,18 +37,18 @@ class EditHousNameViewController: BaseViewController {
     $0.placeholder = "우리 집 별명"
     $0.textAlignment = .center
   }
-  
-  //MARK: Life Cycles
+
+  // MARK: Life Cycles
   init(roomName: String) {
     self.roomName = roomName
     self.initialRoomName = roomName
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configureButtonAction()
@@ -84,10 +83,10 @@ class EditHousNameViewController: BaseViewController {
       }
     }
   }
-    
+
   private func configUI() {
     self.view.backgroundColor = .systemBackground
-    
+
     view.addSubViews([
       navigationBar,
       descriptionLabel,
@@ -99,19 +98,19 @@ class EditHousNameViewController: BaseViewController {
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(60)
     }
-    
+
     descriptionLabel.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom).offset(80)
       make.centerX.equalToSuperview()
     }
-    
+
     textField.snp.makeConstraints { make in
       make.top.equalTo(descriptionLabel.snp.bottom).offset(32)
       make.centerX.equalTo(descriptionLabel)
       make.leading.trailing.equalToSuperview().inset(95)
     }
   }
-  
+
   private func configureButtonAction() {
     navigationBar.rightButton.rx.tap
       .bind {
@@ -121,7 +120,6 @@ class EditHousNameViewController: BaseViewController {
       .disposed(by: disposeBag)
   }
 
-  
   private func bindUI() {
     navigationBar.backButton.rx.tap
       .asDriver()
@@ -134,22 +132,21 @@ class EditHousNameViewController: BaseViewController {
         }
       })
       .disposed(by: disposeBag)
-    
+
     let input = EditHousNameViewModel.Input(
       roomName: textField.rx.text.orEmpty.distinctUntilChanged().asDriver(onErrorJustReturn: ""),
       saveButtonDidTapped: saveButtonDidTapped.do(onNext: { [weak self] _ in self?.showLoading() })
     )
-    
+
     let output = self.viewModel.transform(input: input)
-    
+
     output.isValidText
       .drive(onNext: { [weak self] isValidFlag in
         guard let self = self else { return }
         self.navigationBar.rightButton.isEnabled = isValidFlag
       })
       .disposed(by: disposeBag)
-    
-    
+
     output.updatedRoom
       .do(onNext: {[weak self] _ in self?.hideLoading() })
       .drive(onNext: { [weak self] _ in

@@ -113,7 +113,7 @@
 		9BDBAD7C29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7B29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift */; };
 		9BDBAD7E29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7D29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift */; };
 		9BDBAD8029241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD7F29241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift */; };
-		9BDBAD8229241E640096FE38 /* MateProfileDescriptionInnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD8129241E640096FE38 /* MateProfileDescriptionInnerCollectionViewCell.swift */; };
+		9BDBAD8229241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD8129241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift */; };
 		9BDBAD8429242A020096FE38 /* MateProfileBadgeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD8329242A020096FE38 /* MateProfileBadgeEmptyView.swift */; };
 		9BDBAD86292566420096FE38 /* MateProfileNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBAD85292566420096FE38 /* MateProfileNameView.swift */; };
 		9BDBAD8A292574530096FE38 /* tri_no.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BDBAD89292574530096FE38 /* tri_no.json */; };
@@ -382,7 +382,7 @@
 		9BDBAD7B29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BDBAD7D29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileGraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BDBAD7F29241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
-		9BDBAD8129241E640096FE38 /* MateProfileDescriptionInnerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileDescriptionInnerCollectionViewCell.swift; sourceTree = "<group>"; };
+		9BDBAD8129241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileDescInnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BDBAD8329242A020096FE38 /* MateProfileBadgeEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileBadgeEmptyView.swift; sourceTree = "<group>"; };
 		9BDBAD85292566420096FE38 /* MateProfileNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileNameView.swift; sourceTree = "<group>"; };
 		9BDBAD89292574530096FE38 /* tri_no.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tri_no.json; sourceTree = "<group>"; };
@@ -1091,7 +1091,7 @@
 				9BDBAD7B29241E2B0096FE38 /* MateProfileInfoCollectionViewCell.swift */,
 				9BDBAD7D29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift */,
 				9BDBAD7F29241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift */,
-				9BDBAD8129241E640096FE38 /* MateProfileDescriptionInnerCollectionViewCell.swift */,
+				9BDBAD8129241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1816,7 +1816,7 @@
 				9BBE13DB2903927400B7D517 /* ProfileSettingViewController.swift in Sources */,
 				9B959AF628FECA9D00EB3412 /* ProfileInfoCollectionViewCell.swift in Sources */,
 				9B2F469329237403002D9BD2 /* ProfileTestInfoNavigationView.swift in Sources */,
-				9BDBAD8229241E640096FE38 /* MateProfileDescriptionInnerCollectionViewCell.swift in Sources */,
+				9BDBAD8229241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift in Sources */,
 				B8D066CC28F7DF5300A99907 /* TodoRepository.swift in Sources */,
 				B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */,
 				77EB720C2925401600032776 /* TitleSupplementaryView.swift in Sources */,

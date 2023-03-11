@@ -17,7 +17,7 @@ public struct MateProfileModel: Encodable, Equatable {
   var userJob: String?
   var mbti: String?
   var userAge: Int?
-  
+
   init() {
     personalityColor = .red
     userName = "default"
@@ -31,8 +31,20 @@ public struct MateProfileModel: Encodable, Equatable {
     birthdayPublic = false
     mbti = ""
   }
-  
-  init(personalityColor: PersonalityColor, userName: String?, userAge: Int?, statusMessage: String?, badgeImageURL: String?, badgeLabel: String?, typeScores: [Double], isEmptyView: Bool, birthday: Date?, birthdayPublic: Bool, userJob: String?, mbti: String?) {
+
+  init(
+    personalityColor: PersonalityColor,
+    userName: String?,
+    userAge: Int?,
+    statusMessage: String?,
+    badgeImageURL: String?,
+    badgeLabel: String?,
+    typeScores: [Double],
+    isEmptyView: Bool,
+    birthday: Date?,
+    birthdayPublic: Bool,
+    userJob: String?,
+    mbti: String?) {
     self.personalityColor = personalityColor
     self.userName = userName
     self.userAge = userAge
@@ -54,5 +66,3 @@ enum MateActionControl {
   case network
   case none
 }
-
-
