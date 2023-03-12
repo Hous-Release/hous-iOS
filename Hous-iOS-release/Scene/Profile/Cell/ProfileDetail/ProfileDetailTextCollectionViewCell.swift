@@ -8,81 +8,83 @@
 import UIKit
 
 final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
-  
-  private enum Size{
+
+  private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
     static let recommendRuleTitleViewSize = CGSize(width: Size.screenWidth - 48, height: 34)
     static let recommendRuleViewSIze = CGSize(width: Size.screenWidth - 48, height: 86)
   }
-  
+
   private let descriptionView = ProfileDescriptionView()
-  
+
   private let recommendRuleTitleView = ProfileRecommendTitleView()
-  
+
   private let recommendRuleView = ProfileRecommendRuleView()
-  
-  override init(frame: CGRect){
+
+  override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
     render()
   }
-  
-  required init?(coder: NSCoder){
+
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  private func configUI(){
+
+  private func configUI() {
     self.backgroundColor = .white
   }
-  
+
   private func render() {
     self.addSubViews([descriptionView, recommendRuleTitleView, recommendRuleView])
-    
+
     descriptionView.snp.makeConstraints {make in
       make.centerX.equalToSuperview()
       make.top.equalToSuperview()
       make.width.equalTo(Size.screenWidth - 48)
     }
-    
+
     recommendRuleTitleView.snp.makeConstraints {make in
       make.centerX.equalToSuperview()
       make.top.equalTo(descriptionView.snp.bottom).offset(8)
       make.width.height.equalTo(Size.recommendRuleTitleViewSize)
     }
-    
+
     recommendRuleView.snp.makeConstraints {make in
       make.centerX.equalToSuperview()
       make.top.equalTo(recommendRuleTitleView.snp.bottom).offset(10)
       make.width.height.equalTo(Size.recommendRuleViewSIze)
     }
   }
-  
+
   func bind(_ data: ProfileDetailModel) {
     descriptionView.personalityTitleLabel.text = data.title
     var descriptionMessage: String = ""
     for message in data.description {
       descriptionMessage += (message + "\n")
     }
-    
+
     if descriptionMessage.count > 2 {
       let start = descriptionMessage.startIndex
       let end = descriptionMessage.index(descriptionMessage.endIndex, offsetBy: -2)
       let newMessage = descriptionMessage[start...end]
-      
+
       let attrString = NSMutableAttributedString(string: String(newMessage))
       let paragraphStyle = NSMutableParagraphStyle()
       paragraphStyle.lineSpacing = 4
       paragraphStyle.alignment = .center
-      attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-      
+      attrString.addAttribute(.paragraphStyle,
+                              value: paragraphStyle, range: NSRange(location: 0, length: attrString.length))
+
       descriptionView.personalityDescriptionLabel.attributedText = attrString
     }
-    
+
     recommendRuleTitleView.recommendTitleLabel.text = data.recommendTitle
-    
-    guard let recommendRuleStackItems =  recommendRuleView.recommendRuleStackView.arrangedSubviews as? [ProfileRecommendRuleStackItemView] else { return }
-    
+
+    guard let recommendRuleStackItems =  recommendRuleView.recommendRuleStackView.arrangedSubviews
+            as? [ProfileRecommendRuleStackItemView] else { return }
+
     switch data.personalityType {
     case .red:
       descriptionView.personalityTitleLabel.textColor = Colors.red.color
@@ -117,11 +119,10 @@ final class ProfileDetailTextCollectionViewCell: UICollectionViewCell {
     case .none:
       recommendRuleTitleView.recommendTitleLabel.textColor = Colors.g1.color
     }
-    
+
     recommendRuleView.recommendRuleList = data.recommendTodo
     recommendRuleView.reloadRuleData()
-    
-  }
-  
-}
 
+  }
+
+}

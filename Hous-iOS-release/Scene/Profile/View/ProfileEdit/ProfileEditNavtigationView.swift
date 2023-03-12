@@ -10,11 +10,11 @@ import RxSwift
 import RxCocoa
 
 final class ProfileEditNavigationBarView: UIView {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
-  
+
   let navigationBackButton = ProfileEditBackButton()
-  
+
   let saveButton = UIButton().then {
     $0.setTitle("저장", for: .normal)
     $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
@@ -22,7 +22,7 @@ final class ProfileEditNavigationBarView: UIView {
     $0.setTitleColor(Colors.blue.color, for: .normal)
     $0.isEnabled = false
   }
-  
+
   private let titleName = UILabel().then {
     $0.text = "프로필 수정"
     $0.textColor = Colors.black.color
@@ -35,29 +35,29 @@ final class ProfileEditNavigationBarView: UIView {
     render()
     setup()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  private func setup(){
+
+  private func setup() {
     self.backgroundColor = .white
   }
-  
+
   private func render() {
     self.addSubViews([navigationBackButton, titleName, saveButton])
-    
+
     navigationBackButton.snp.makeConstraints {make in
       make.size.equalTo(24)
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(24)
     }
-    
+
     titleName.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
       make.centerY.equalTo(navigationBackButton.snp.centerY).offset(2)
     }
-    
+
     saveButton.snp.makeConstraints { make in
       make.size.greaterThanOrEqualTo(24)
       make.centerY.equalToSuperview()
@@ -65,7 +65,3 @@ final class ProfileEditNavigationBarView: UIView {
     }
   }
 }
-
-
-
-

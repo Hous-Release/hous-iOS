@@ -5,28 +5,27 @@
 //  Created by 이의진 on 2022/11/23.
 //
 
-
 import Foundation
 import RxSwift
 import RxCocoa
 
 final class ProfileTestLoadingViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let dataLoaded = PublishSubject<PersonalityColor>()
   let timeStart = PublishSubject<Void>()
   let timeFlag = PublishSubject<Bool>()
   private let profileRepository = ProfileRepositoryImp()
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
   }
-  
+
   struct Output {
     let dataLoaded: PublishSubject<PersonalityColor>
     let timeFlag: PublishSubject<Bool>
   }
-  
+
   init() {
     ProfileRepositoryImp.event
       .subscribe(onNext: { [weak self] event in
@@ -42,7 +41,7 @@ final class ProfileTestLoadingViewModel: ViewModelType {
         }
       })
       .disposed(by: disposeBag)
-    
+
     self.timeStart
       .delay(DispatchTimeInterval.seconds(1), scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self] in
@@ -50,12 +49,10 @@ final class ProfileTestLoadingViewModel: ViewModelType {
       })
       .disposed(by: disposeBag)
   }
-  
+
   func transform(input: Input) -> Output {
     return Output(
       dataLoaded: dataLoaded, timeFlag: timeFlag
     )
   }
 }
-
-

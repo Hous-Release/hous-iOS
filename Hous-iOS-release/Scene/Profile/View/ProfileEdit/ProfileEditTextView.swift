@@ -10,59 +10,56 @@ import SnapKit
 import Then
 
 final class ProfileEditTextViewObject: UIStackView {
-  
+
   private let underlineLayer = CALayer()
   private let animatedUnderlineLayer = CALayer()
   let placeHolderString = "자기소개"
   var isEmptyState = true
   var isFloatingErrorMessage: Bool = false
-  
-  
+
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
   }
-  
+
   private let underlineView = UIView().then {
     $0.layer.borderWidth = 2
     $0.layer.borderColor = Colors.g3.color.cgColor
   }
-  
+
   let textView = ProfileEditTextView().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
     $0.textColor = Colors.black.color
     $0.isScrollEnabled = false
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
     render()
   }
-  
+
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  
+
   private func setup() {
     self.axis = .vertical
     self.alignment = .fill
     self.distribution = .equalSpacing
     self.spacing = 0
   }
-  
+
   private func render() {
     self.addArrangedSubviews(textView, underlineView)
     underlineView.snp.makeConstraints { make in
       make.height.equalTo(2)
     }
-    
+
     textView.snp.makeConstraints { make in
       make.height.equalTo(30)
       make.leading.trailing.equalTo(underlineView)
     }
-    
-    
+
     var frame = underlineView.bounds
     frame.size.height = 2
   }
@@ -75,11 +72,11 @@ extension ProfileEditTextViewObject {
       textView.textColor = Colors.black.color
     }
   }
-  
+
   func textViewFilled() {
     var frame = underlineView.bounds
     frame.size.height = 2
-    
+
     self.underlineView.layer.borderColor = Colors.blue.color.cgColor
 
 //    self.underlineLayer.frame = frame
@@ -103,22 +100,22 @@ extension ProfileEditTextViewObject {
 //    animation.keyTimes = [0, 0.8]
 ////    animatedUnderlineLayer.add(animation, forKey: "Selected")
   }
-  
+
   func textViewUnselected() {
     if textView.text.isEmpty {
       textView.text = placeHolderString
       textView.textColor = Colors.g5.color
-      
+
       isEmptyState = true
     }
   }
-  
+
   func textViewEmpty() {
 //    self.underlineLayer.removeFromSuperlayer()
 //    self.animatedUnderlineLayer.removeFromSuperlayer()
     self.underlineView.layer.borderColor = Colors.g3.color.cgColor
   }
-  
+
   func textViewResize() {
     let initialSize = CGSize(width: Size.screenWidth - 48, height: 30)
     let estimateSize = self.textView.sizeThatFits(initialSize)
@@ -128,7 +125,7 @@ extension ProfileEditTextViewObject {
       }
     }
   }
-  
+
   func textEmptyControl() {
     if textView.text.isEmpty {
       isEmptyState = true
@@ -139,34 +136,31 @@ extension ProfileEditTextViewObject {
 }
 
 class ProfileEditTextView: UITextView {
-  
+
   let underlineView = UIView().then {
     $0.backgroundColor = Colors.g3.color
   }
-  
+
   let animatedUnderlineView = UIView().then {
     $0.backgroundColor = Colors.blue.color
   }
-  
+
   private let invalidMessageLabel = UILabel().then {
     $0.textColor = Colors.red.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
-  
-  
+
   override func layoutSubviews() {
     super.layoutSubviews()
   }
-  
+
   override init(frame: CGRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
     self.textContainerInset = UIEdgeInsets(top: 0, left: -2, bottom: 10, right: 0)
     self.backgroundColor = .white
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }
-
-

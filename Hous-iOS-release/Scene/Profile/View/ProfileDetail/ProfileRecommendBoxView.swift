@@ -20,72 +20,73 @@ final class ProfileRecommendBoxView: UIView {
     static let screenHeight = UIScreen.main.bounds.height
     static let imageSize = CGSize(width: 120, height: 120)
   }
-  
+
   let titleLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     $0.textColor = Colors.g5.color
   }
-  
+
   let personalityLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     $0.textColor = Colors.black.color
   }
-  
+
   let personalityImageView = UIImageView().then {
     $0.image = nil
   }
-  
-  private let neumorphismBox = NeumorphismBox(shadowColor: Colors.black.color.cgColor, shadowOpacity: 0.05, shadowRadius: 3)
-  
-  convenience init(personalityName: String, imageURL: String, cellType : CellType) {
+
+  private let neumorphismBox = NeumorphismBox(shadowColor: Colors.black.color.cgColor,
+                                              shadowOpacity: 0.05, shadowRadius: 3)
+
+  convenience init(personalityName: String, imageURL: String, cellType: CellType) {
     self.init(frame: .zero)
     configUI(personalityName: personalityName, imageURL: imageURL, cellType: cellType)
     render()
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  private func configUI(personalityName: String, imageURL: String, cellType: CellType){
+
+  private func configUI(personalityName: String, imageURL: String, cellType: CellType) {
     self.layer.cornerRadius = 20
     self.layer.masksToBounds = true
-    
+
     titleLabel.text = cellType.rawValue
-    
+
     personalityLabel.text = personalityName
-    
+
     personalityImageView.kf.setImage(with: URL(string: imageURL))
   }
-  
-  private func render(){
+
+  private func render() {
     self.addSubViews([neumorphismBox, titleLabel, personalityLabel, personalityImageView])
-    
+
     titleLabel.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalToSuperview().offset(24)
     }
-    
+
     personalityLabel.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalTo(titleLabel.snp.bottom).offset(2)
     }
-    
+
     personalityImageView.snp.makeConstraints { make in
       make.width.height.equalTo(Size.imageSize)
       make.centerX.equalToSuperview()
       make.top.equalTo(personalityLabel.snp.bottom)
     }
-    
+
     neumorphismBox.snp.makeConstraints { make in
       make.center.equalToSuperview()
       make.width.equalTo(Size.screenWidth / 2 - 40)
       make.height.equalToSuperview().inset(8)
     }
-  
+
   }
 }

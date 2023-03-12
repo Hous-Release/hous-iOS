@@ -38,7 +38,7 @@ class ProfileLeaveViewController: UIViewController, ReactorKit.View {
   private func setup() {
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBarView.delegate = self
-    //setTabBarIsHidden(isHidden: true)
+    // setTabBarIsHidden(isHidden: true)
   }
 
   func bind(reactor: Reactor) {
@@ -67,31 +67,41 @@ extension ProfileLeaveViewController {
       .disposed(by: disposeBag)
 
     // MARK: - Cell
-    let dataSource = RxCollectionViewSectionedReloadDataSource<OnlyMyTodoSection.Model> (configureCell: { dataSource, collectionView, indexPath, item in
+    let dataSource = RxCollectionViewSectionedReloadDataSource<OnlyMyTodoSection.Model>(
+      configureCell: { _, collectionView, indexPath, item in
 
       switch item {
       case .guide:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileLeaveGuideCollectionViewCell.className, for: indexPath) as? ProfileLeaveGuideCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: ProfileLeaveGuideCollectionViewCell.className, for: indexPath)
+                as? ProfileLeaveGuideCollectionViewCell else {
           return UICollectionViewCell()
         }
         return cell
 
       case let .countTodo(num):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountTodoByDayCollectionViewCell.className, for: indexPath) as? CountTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: CountTodoByDayCollectionViewCell.className, for: indexPath)
+                as? CountTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(num)
         return cell
 
       case let .myTodo(todos):
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyTodoByDayCollectionViewCell.className, for: indexPath) as? MyTodoByDayCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MyTodoByDayCollectionViewCell.className, for: indexPath)
+                as? MyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCellWithDayOfWeek(todos.todoName, todos.dayOfWeeks)
         return cell
 
       case .myTodoEmpty:
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath) as? EmptyTodoByDayCollectionViewCell else {
+
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EmptyTodoByDayCollectionViewCell.className, for: indexPath)
+                as? EmptyTodoByDayCollectionViewCell else {
           return UICollectionViewCell()
         }
         cell.setCell(.myTodo)
@@ -100,7 +110,7 @@ extension ProfileLeaveViewController {
     })
 
     // MARK: - Header & Footer
-    dataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
+    dataSource.configureSupplementaryView = { (_, collectionView, kind, indexPath) -> UICollectionReusableView in
 
       switch kind {
       case UICollectionView.elementKindSectionHeader:
@@ -157,7 +167,9 @@ extension ProfileLeaveViewController {
 
 extension ProfileLeaveViewController: UICollectionViewDelegateFlowLayout {
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
     if indexPath.section == 0 {
       return CGSize(width: UIScreen.main.bounds.width, height: 394)
     } else if indexPath.section == 2 {
@@ -167,7 +179,9 @@ extension ProfileLeaveViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      referenceSizeForHeaderInSection section: Int) -> CGSize {
     if section == 2 {
       return CGSize(width: UIScreen.main.bounds.width, height: 48)
     } else {
@@ -175,7 +189,9 @@ extension ProfileLeaveViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      referenceSizeForFooterInSection section: Int) -> CGSize {
     if section == 3 {
       return CGSize(width: UIScreen.main.bounds.width, height: 143)
     } else {

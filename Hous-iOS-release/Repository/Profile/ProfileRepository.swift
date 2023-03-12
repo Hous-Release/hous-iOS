@@ -12,7 +12,7 @@ import RxCocoa
 
 public enum ProfileRepositoryEvent {
   case getProfile(ProfileModel)
-  case getAlarmInfo(([AlarmModel],Int))
+  case getAlarmInfo(([AlarmModel], Int))
   case getAlarmSettingInfo(AlarmSettingModel)
   case getHomieProfile(ProfileModel)
   case getProfileTest([ProfileTestItemModel])
@@ -39,18 +39,21 @@ public protocol ProfileRepository {
 }
 
 public final class ProfileRepositoryImp: ProfileRepository {
-  
+
   public static var event = PublishSubject<ProfileRepositoryEvent>()
-  
+
+}
+
+extension ProfileRepositoryImp {
+
   public func postFeedbackBadge() {
-    NetworkService.shared.profileRepository.postFeedbackBadge { res, err in
-      guard let _ = res?.data else {
+    NetworkService.shared.profileRepository.postFeedbackBadge { res, _ in
+      if res?.data == nil {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
           status: res?.status ?? -1,
           message: res?.message ?? ""
         )
-        
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
@@ -58,10 +61,10 @@ public final class ProfileRepositoryImp: ProfileRepository {
   }
 
   public func getAlarmSettingInfo() {
-    
+
     // MARK: Get Data
-    
-    NetworkService.shared.profileRepository.getAlarmSettingInfo { res, err in
+
+    NetworkService.shared.profileRepository.getAlarmSettingInfo { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -70,9 +73,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
-      //MARK: From DTO to Model
-      
+
+      // MARK: From DTO to Model
+
       let isPushNotification = dto.isPushNotification
       let isNewRulesNotification: Bool = {
         switch dto.rulesPushStatus {
@@ -84,7 +87,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return false
         }
       }()
-      
+
       let newTodoNotification: TodoNotificationMode = {
         switch dto.newTodoPushStatus {
         case "ON_ALL":
@@ -97,7 +100,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return.none
         }
       }()
-      
+
       let todayTodoNotification: TodoNotificationMode = {
         switch dto.todayTodoPushStatus {
         case "ON_ALL":
@@ -110,7 +113,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return.none
         }
       }()
-      
+
       let notDoneTodoNotification: TodoNotificationMode = {
         switch dto.remindTodoPushStatus {
         case "ON_ALL":
@@ -123,7 +126,7 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return.none
         }
       }()
-      
+
       let isBadgeNotification: Bool = {
         switch dto.badgePushStatus {
         case "ON":
@@ -134,18 +137,24 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return false
         }
       }()
-      
-      let alarmSettingInfo = AlarmSettingModel(isPushNotification: isPushNotification, isNewRulesNotification: isNewRulesNotification, newTodoNotification: newTodoNotification, todayTodoNotification: todayTodoNotification, notDoneTodoNotification: notDoneTodoNotification, isBadgeNotification: isBadgeNotification)
-      
+
+      let alarmSettingInfo = AlarmSettingModel(
+        isPushNotification: isPushNotification,
+        isNewRulesNotification: isNewRulesNotification,
+        newTodoNotification: newTodoNotification,
+        todayTodoNotification: todayTodoNotification,
+        notDoneTodoNotification: notDoneTodoNotification,
+        isBadgeNotification: isBadgeNotification)
+
       ProfileRepositoryImp.event.onNext(.getAlarmSettingInfo(alarmSettingInfo))
     }
   }
-  
+
   public func getProfileTest() {
-    
-    //MARK: Get Data
-    
-    NetworkService.shared.profileRepository.getProfileTest { res, err in
+
+    // MARK: Get Data
+
+    NetworkService.shared.profileRepository.getProfileTest { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -154,11 +163,11 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
+
       var profileTestItemModels: [ProfileTestItemModel] = []
-      
-      //MARK: From DTO to Model
-      
+
+      // MARK: From DTO to Model
+
       dto.forEach {
         profileTestItemModels.append(ProfileTestItemModel(
           question: $0.question,
@@ -168,21 +177,21 @@ public final class ProfileRepositoryImp: ProfileRepository {
           answers: $0.answers)
         )
       }
-      
+
       ProfileRepositoryImp.event.onNext(.getProfileTest(profileTestItemModels))
-      
+
     }
   }
-  
+
   public func getAlarmInfo(lastNotificationId: Int, size: Int) {
-    
-    //MARK: RequestDTO Query param Set and Get Data
-    
+
+    // MARK: RequestDTO Query param Set and Get Data
+
     var requestDTO: ProfileDTO.Request.GetAlarmRequestDTO {
       return ProfileDTO.Request.GetAlarmRequestDTO(lastNotificationId: lastNotificationId, size: size)
     }
-    
-    NetworkService.shared.profileRepository.getAlarmInfo(dto: requestDTO) { res, err in
+
+    NetworkService.shared.profileRepository.getAlarmInfo(dto: requestDTO) { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -191,19 +200,19 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
-      //MARK: From DTO to Model
-      
+
+      // MARK: From DTO to Model
+
       var alarmModelList: [AlarmModel] {
         var contentList: [String] = []
         dto.contents.forEach { contentList.append($0.content) }
-        
+
         var createdAtList: [String] = []
         dto.contents.forEach { createdAtList.append($0.createdAt)}
-        
+
         var notificationIdList: [Int] = []
         dto.contents.forEach { notificationIdList.append($0.notificationId)}
-        
+
         var typeList: [NotificationType] = []
         dto.contents.forEach {
           switch $0.type {
@@ -215,33 +224,35 @@ public final class ProfileRepositoryImp: ProfileRepository {
             typeList.append(.todo)
           default:
             print("🥲 AlarmList Type Loading Error")
-            break
           }
         }
-        
+
         var isReadList: [Bool] = []
                 dto.contents.forEach { isReadList.append($0.isRead)}
-        
+
         var alarmModelList: [AlarmModel] = []
-        
+
         for index in 0..<contentList.count {
-          alarmModelList.append(AlarmModel(content: contentList[index], createdAt: createdAtList[index], isRead: isReadList[index], notificationId: notificationIdList[index], type: typeList[index]))
+          alarmModelList.append(AlarmModel(
+            content: contentList[index],
+            createdAt: createdAtList[index],
+            isRead: isReadList[index],
+            notificationId: notificationIdList[index],
+            type: typeList[index]))
         }
-        
+
         return alarmModelList
       }
 
-      
       ProfileRepositoryImp.event.onNext(.getAlarmInfo((alarmModelList, dto.nextCursor)))
-      
+
     }
-    
+
   }
-  
-  
+
   public func getProfileTestResult(color: PersonalityColor) {
-    
-    //MARK: RequestDTO Query param Set and Get Data
+
+    // MARK: RequestDTO Query param Set and Get Data
     var requestDTO: ProfileDTO.Request.ProfileTestResultDTO {
       switch color {
       case .red:
@@ -258,8 +269,8 @@ public final class ProfileRepositoryImp: ProfileRepository {
         return ProfileDTO.Request.ProfileTestResultDTO(color: "GRAY")
       }
     }
-    
-    NetworkService.shared.profileRepository.getProfileTestResultInfo(dto: requestDTO) { res, err in
+
+    NetworkService.shared.profileRepository.getProfileTestResultInfo(dto: requestDTO) { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -268,8 +279,8 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
-      //MARK: From DTO To Model
+
+      // MARK: From DTO To Model
       var personalityType: PersonalityColor
       switch dto.color {
       case "RED":
@@ -285,16 +296,26 @@ public final class ProfileRepositoryImp: ProfileRepository {
       default:
         personalityType = .none
       }
-      
-      ProfileRepositoryImp.event.onNext(.getProfileTestResult(ProfileDetailModel(personalityType: personalityType, badPersonalityImageURL: dto.badPersonalityImageURL, badPersonalityName: dto.badPersonalityName, goodPersonalityImageURL: dto.goodPersonalityImageURL, goodPersonalityName: dto.goodPersonalityName, imageURL: dto.imageURL, name: dto.name, recommendTitle: dto.recommendTitle, recommendTodo: dto.recommendTodo, title: dto.title, description: dto.dataDescription)))
+
+      ProfileRepositoryImp.event.onNext(.getProfileTestResult(
+        ProfileDetailModel(personalityType: personalityType,
+                           badPersonalityImageURL: dto.badPersonalityImageURL,
+                           badPersonalityName: dto.badPersonalityName,
+                           goodPersonalityImageURL: dto.goodPersonalityImageURL,
+                           goodPersonalityName: dto.goodPersonalityName,
+                           imageURL: dto.imageURL, name: dto.name,
+                           recommendTitle: dto.recommendTitle,
+                           recommendTodo: dto.recommendTodo,
+                           title: dto.title,
+                           description: dto.dataDescription)))
     }
   }
-  
+
   public func getProfile() {
-    
-    //MARK: Get Data
-    
-    NetworkService.shared.profileRepository.getProfileInfo { res, err in
+
+    // MARK: Get Data
+
+    NetworkService.shared.profileRepository.getProfileInfo { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -303,9 +324,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
-      //MARK: From DTO To Model
-      
+
+      // MARK: From DTO To Model
+
       var personalityColor: PersonalityColor
       var isEmptyView = false
       switch dto.personalityColor {
@@ -323,16 +344,16 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityColor = .none
         isEmptyView = true
       }
-      
+
       let birthdayPublic = dto.birthdayPublic
-      
+
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "ko_KR")
       dateFormatter.timeZone = TimeZone(abbreviation: "KST")
       dateFormatter.dateFormat = "yyyy.MM.dd"
-      
+
       let birthday = (dto.birthday != "") ? dateFormatter.date(from: dto.birthday ?? "") : nil
-      
+
       let userName = dto.nickname
       let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
       var userJob = dto.job
@@ -349,19 +370,32 @@ public final class ProfileRepositoryImp: ProfileRepository {
       }
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
-      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
-      
+      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell,
+                        dto.testScore!.introversion, dto.testScore!.clean]
+
       typeScores = typeScores.map { $0 * (15/2) - 5/2 }
-      
-      ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+
+      ProfileRepositoryImp.event.onNext(.getProfile(ProfileModel(
+        personalityColor: personalityColor,
+        userName: userName,
+        userAge: userAge,
+        statusMessage: statusMessage,
+        badgeImageURL: badgeImageURL,
+        badgeLabel: badgeLabel,
+        typeScores: typeScores,
+        isEmptyView: isEmptyView,
+        birthday: birthday,
+        birthdayPublic: birthdayPublic,
+        userJob: userJob,
+        mbti: mbti)))
     }
   }
-  
+
   public func getHomieProfile(id: String) {
-    
-    //MARK: Get Data
-    
-    NetworkService.shared.profileRepository.getHomieProfileInfo(id: id) { res, err in
+
+    // MARK: Get Data
+
+    NetworkService.shared.profileRepository.getHomieProfileInfo(id: id) { res, _ in
       guard let dto = res?.data else {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
@@ -370,9 +404,9 @@ public final class ProfileRepositoryImp: ProfileRepository {
         ProfileRepositoryImp.event.onNext(.sendError(errorModel))
         return
       }
-      
-      //MARK: From DTO To Model
-      
+
+      // MARK: From DTO To Model
+
       var personalityColor: PersonalityColor
       var isEmptyView = false
       switch dto.personalityColor {
@@ -390,16 +424,16 @@ public final class ProfileRepositoryImp: ProfileRepository {
         personalityColor = .none
         isEmptyView = true
       }
-      
+
       let birthdayPublic = dto.birthdayPublic
-      
+
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "ko_KR")
       dateFormatter.timeZone = TimeZone(abbreviation: "KST")
       dateFormatter.dateFormat = "yyyy.MM.dd"
-      
+
       let birthday = dateFormatter.date(from: dto.birthday ?? "")
-      
+
       let userName = dto.nickname
       let userAge = Int(dto.age.filter {$0.isNumber}) ?? -1
       var userJob = dto.job
@@ -416,42 +450,49 @@ public final class ProfileRepositoryImp: ProfileRepository {
       }
       let badgeLabel: String? = dto.representBadge
       let badgeImageURL: String? = dto.representBadgeImage
-      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell, dto.testScore!.introversion, dto.testScore!.clean]
-      
+      var typeScores = [dto.testScore!.light, dto.testScore!.noise, dto.testScore!.smell,
+                        dto.testScore!.introversion, dto.testScore!.clean]
+
       typeScores = typeScores.map { $0 * 10 - 10 }
-      
-      ProfileRepositoryImp.event.onNext(.getHomieProfile(ProfileModel(personalityColor: personalityColor, userName: userName, userAge: userAge, statusMessage: statusMessage, badgeImageURL: badgeImageURL, badgeLabel: badgeLabel, typeScores: typeScores, isEmptyView: isEmptyView, birthday: birthday, birthdayPublic: birthdayPublic, userJob: userJob, mbti: mbti)))
+
+      ProfileRepositoryImp.event.onNext(.getHomieProfile(ProfileModel(
+        personalityColor: personalityColor, userName: userName,
+        userAge: userAge, statusMessage: statusMessage,
+        badgeImageURL: badgeImageURL, badgeLabel: badgeLabel,
+        typeScores: typeScores, isEmptyView: isEmptyView,
+        birthday: birthday, birthdayPublic: birthdayPublic,
+        userJob: userJob, mbti: mbti)))
     }
   }
-  
-  
+
   public func putProfileEditInfo(data: ProfileEditModel) {
-    
-    //MARK: From Model To DTO
-    
+
+    // MARK: From Model To DTO
+
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     dateFormatter.locale = Locale(identifier: "ko_KR")
-    
+
     let birthday = data.birthday.dateToString()
-    
+
     let introduction = data.statusMessage
-    
+
     let isPublic = (birthday == "") ? false : true
-    
+
     let job = data.job
-    
+
     let mbti = data.mbti
-    
+
     let nickname = data.name
-    
-    let dto = ProfileDTO.Request.ProfileEditRequestDTO(birthday: birthday, introduction: introduction, isPublic: isPublic, job: job, mbti: mbti, nickname: nickname)
-    
-    
-    //MARK: Put Data
-    
-    NetworkService.shared.profileRepository.putProfileEditInfo(dto) { res, err in
-      if (res?.status != 200) {
+
+    let dto = ProfileDTO.Request.ProfileEditRequestDTO(
+      birthday: birthday, introduction: introduction,
+      isPublic: isPublic, job: job, mbti: mbti, nickname: nickname)
+
+    // MARK: Put Data
+
+    NetworkService.shared.profileRepository.putProfileEditInfo(dto) { res, _ in
+      if res?.status != 200 {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
           status: res?.status ?? -1,
@@ -463,17 +504,17 @@ public final class ProfileRepositoryImp: ProfileRepository {
       ProfileRepositoryImp.event.onNext(.putProfile)
     }
   }
-  
+
   public func putProfileTest(data: ProfileTestSaveModel) {
-    
-    //MARK: From Model To DTO
-    
+
+    // MARK: From Model To DTO
+
     var clean: Int = 0
     var introversion: Int = 0
     var light: Int = 0
     var noise: Int = 0
     var smell: Int = 0
-    
+
     for (questionType, score) in zip(data.questionType, data.selectedData) {
       switch questionType {
       case "CLEAN":
@@ -490,12 +531,14 @@ public final class ProfileRepositoryImp: ProfileRepository {
         print("QuestionTypeError")
       }
     }
-    let dto = ProfileDTO.Request.ProfileTestSaveRequestDTO(clean: clean, introversion: introversion, light: light, noise: noise, smell: smell)
-    
-    //MARK: Put Data
-    
-    NetworkService.shared.profileRepository.putProfileTest(dto) { res, err in
-      if (res?.status != 200) {
+    let dto = ProfileDTO.Request.ProfileTestSaveRequestDTO(
+      clean: clean, introversion: introversion,
+      light: light, noise: noise, smell: smell)
+
+    // MARK: Put Data
+
+    NetworkService.shared.profileRepository.putProfileTest(dto) { res, _ in
+      if res?.status != 200 {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
           status: res?.status ?? -1,
@@ -523,18 +566,18 @@ public final class ProfileRepositoryImp: ProfileRepository {
       ProfileRepositoryImp.event.onNext(.putProfileTestSave(personalityColor))
     }
   }
-  
+
   public func patchAlarmSetting(data: AlarmSettingModel, cellType: AlarmSettingCellType) {
-    
-    //MARK: From Model To DTO
-    
-    var isPushNotification: Bool? = nil
-    var rulesPushStatus: String? = nil
-    var newTodoPushStatus: String? = nil
-    var todayTodoPushStatus: String? = nil
-    var remindTodoPushStatus: String? = nil
-    var badgePushStatus: String? = nil
-    
+
+    // MARK: From Model To DTO
+
+    var isPushNotification: Bool?
+    var rulesPushStatus: String?
+    var newTodoPushStatus: String?
+    var todayTodoPushStatus: String?
+    var remindTodoPushStatus: String?
+    var badgePushStatus: String?
+
     switch cellType {
     case .pushAlarm:
       isPushNotification = data.isPushNotification
@@ -581,22 +624,25 @@ public final class ProfileRepositoryImp: ProfileRepository {
           return "ON_ALL"
         }
       }()
-      
+
     case .badgeAlarm:
       badgePushStatus = {
         return data.isBadgeNotification ? "ON" : "OFF"
       }()
-      
+
     default:
       break
     }
 
-    let dto = ProfileDTO.Request.SaveAlarmSettingRequestDTO(isPushNotification: isPushNotification, rulesPushStatus: rulesPushStatus, newTodoPushStatus: newTodoPushStatus, todayTodoPushStatus: todayTodoPushStatus, remindTodoPushStatus: remindTodoPushStatus, badgePushStatus: badgePushStatus)
-    
-    //MARK: Patch Data
-    
-    NetworkService.shared.profileRepository.patchAlarmSettingInfo(dto) { res, err in
-      if (res?.status != 200) {
+    let dto = ProfileDTO.Request.SaveAlarmSettingRequestDTO(
+      isPushNotification: isPushNotification, rulesPushStatus: rulesPushStatus,
+      newTodoPushStatus: newTodoPushStatus, todayTodoPushStatus: todayTodoPushStatus,
+      remindTodoPushStatus: remindTodoPushStatus, badgePushStatus: badgePushStatus)
+
+    // MARK: Patch Data
+
+    NetworkService.shared.profileRepository.patchAlarmSettingInfo(dto) { res, _ in
+      if res?.status != 200 {
         let errorModel = HouseErrorModel(
           success: res?.success ?? false,
           status: res?.status ?? -1,
