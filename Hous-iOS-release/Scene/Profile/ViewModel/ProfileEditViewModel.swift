@@ -10,15 +10,15 @@ import RxSwift
 import RxCocoa
 
 final class ProfileEditViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let profileData = ProfileModel()
   private let originalData: ProfileEditModel
   var modifiedData: ProfileEditModel
   var isModifiedData = false
-  
+
   init(data: ProfileModel) {
-    let _ = DateComponents(
+    _ = DateComponents(
       timeZone: TimeZone(identifier: "ko-KR"),
       year: 1800, month: 6, day: 3
     )
@@ -32,24 +32,23 @@ final class ProfileEditViewModel: ViewModelType {
     )
     modifiedData = originalData
   }
-  
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<ProfileEditActionControl>
   }
-  
+
   struct Output {
     let actionControl: Observable<ProfileEditActionControl>
     let isModifiedObservable: Observable<Bool>
   }
-  
+
   func transform(input: Input) -> Output {
-    
+
     let actionControl = input.actionDetected.asObservable()
     let isModified = PublishSubject<Bool>()
     let isModifiedObservable = isModified.asObservable()
-    
+
     actionControl
       .bind(onNext: { [weak self] action in
         guard let self = self else { return }
@@ -69,7 +68,7 @@ final class ProfileEditViewModel: ViewModelType {
         default:
           break
         }
-        if (self.modifiedData == self.originalData) {
+        if self.modifiedData == self.originalData {
           isModified.onNext(false)
           self.isModifiedData = false
         } else {
@@ -78,12 +77,11 @@ final class ProfileEditViewModel: ViewModelType {
         }
       })
       .disposed(by: disposeBag)
-    
+
     return Output(
       actionControl: actionControl,
       isModifiedObservable: isModifiedObservable
     )
   }
-  
-  
+
 }

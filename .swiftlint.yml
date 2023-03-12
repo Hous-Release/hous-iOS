@@ -12,12 +12,12 @@ excluded:
 # Repository
 - Hous-iOS-release/Repository/User
 - Hous-iOS-release/Repository/Onboarding
-- Hous-iOS-release/Repository/Profile
+#- Hous-iOS-release/Repository/Profile
 - Hous-iOS-release/Repository/Todo
 
 # Global
-- Hous-iOS-release/Global/UIComponent/GraphBackgroundView.swift
-- Hous-iOS-release/Global/UIComponent/GraphView.swift
+#- Hous-iOS-release/Global/UIComponent/GraphBackgroundView.swift
+#- Hous-iOS-release/Global/UIComponent/GraphView.swift
 - Hous-iOS-release/Global/UIComponent/QuitPopUpViewController.swift
 
 # Extenstion
@@ -36,7 +36,7 @@ excluded:
 
 - Hous-iOS-release/Scene/Onboarding
 
-- Hous-iOS-release/Scene/Profile
+#- Hous-iOS-release/Scene/Profile
 - Hous-iOS-release/Scene/TabBar
 
 

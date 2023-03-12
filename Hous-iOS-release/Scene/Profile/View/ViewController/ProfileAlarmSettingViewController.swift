@@ -5,55 +5,54 @@
 //  Created by 이의진 on 2022/12/09.
 //
 
-
 import UIKit
 import RxSwift
 import RxCocoa
 import Then
 
 final class ProfileAlarmSettingViewController: BaseViewController {
-  
-  //MARK: RX Components
-  
+
+  // MARK: RX Components
+
   private let disposeBag = DisposeBag()
   private let viewModel = ProfileAlarmSettingViewModel()
   private let temporarilySetCellSubject = PublishSubject<Void>()
-  
-  //MARK: UI Templetes
-  
+
+  // MARK: UI Templetes
+
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let oneOptionCellSize = CGSize(width: Size.screenWidth, height: 67)
     static let twoOptionCellSize = CGSize(width: Size.screenWidth, height: 169)
     static let threeOptionCellSize = CGSize(width: Size.screenWidth, height: 210)
   }
-  
-  //MARK: UI Components
-  
+
+  // MARK: UI Components
+
   private let navigationBarView = ProfileNavigationBarView().then {
     $0.titleName.text = "설정"
   }
-  
+
   private let alarmSettingCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.scrollDirection = .vertical
     layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    
+
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.register(cell:AlarmSettingFirstCollectionViewCell.self)
-    collectionView.register(cell:AlarmSettingCollectionViewCell.self)
+    collectionView.register(cell: AlarmSettingFirstCollectionViewCell.self)
+    collectionView.register(cell: AlarmSettingCollectionViewCell.self)
     collectionView.showsVerticalScrollIndicator = false
     return collectionView
   }()
-  
-  //MARK: Life Cycle
-  
+
+  // MARK: Life Cycle
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     alarmSettingCollectionView.reloadData()
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -61,44 +60,43 @@ final class ProfileAlarmSettingViewController: BaseViewController {
     self.showLoading()
     bind()
   }
-  
-  //MARK: Setup UI
-  
+
+  // MARK: Setup UI
+
   private func setup() {
     self.view.backgroundColor = .white
     alarmSettingCollectionView.backgroundColor = .white
     alarmSettingCollectionView.delegate = self
     navigationController?.navigationBar.isHidden = true
   }
-  
-  //MARK: Bind
+
+  // MARK: Bind
 
   private func bind() {
-    
+
     // input
-    
+
     let viewWillAppear = rx.rxViewWillAppear
       .asSignal(onErrorJustReturn: ())
-        
+
     let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
-    
+
     navigationBarView.navigationBackButton.rx.tap
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { _ in
         actionDetected.onNext(.didTabBack)
       })
       .disposed(by: disposeBag)
-    
+
     let input = ProfileAlarmSettingViewModel.Input(
       viewWillAppear: viewWillAppear,
       actionDetected: actionDetected
     )
-    
+
     // output
-    
+
     let output = viewModel.transform(input: input)
 
-    
     output.alarmSettingModel
       .do(onNext: { _ in
         self.hideLoading()
@@ -107,15 +105,18 @@ final class ProfileAlarmSettingViewController: BaseViewController {
         [AlarmSettingModel](repeating: $0, count: 6)
       }
       .observe(on: MainScheduler.asyncInstance)
-      .bind(to:alarmSettingCollectionView.rx.items) {
-        (collectionView: UICollectionView, index: Int, element: AlarmSettingModel) in
+      .bind(to: alarmSettingCollectionView.rx.items) {
+        (_: UICollectionView, index: Int, element: AlarmSettingModel) in
         let indexPath = IndexPath(row: index, section: 0)
         let cellTypes: [AlarmSettingCellType] = [.newRules, .newTodo, .todayTodo, .notDoneTodo, .badgeAlarm]
         if indexPath.row == 0 {
           guard let cell =
-                  self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingFirstCollectionViewCell.className, for: indexPath) as? AlarmSettingFirstCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+                  self.alarmSettingCollectionView.dequeueReusableCell(
+                    withReuseIdentifier: AlarmSettingFirstCollectionViewCell.className,
+                    for: indexPath) as? AlarmSettingFirstCollectionViewCell
+          else { print("Cell Loading ERROR!"); return UICollectionViewCell() }
           cell.bind(data: element)
-          
+
           cell.cellActionControlSubject
             .asDriver(onErrorJustReturn: .none)
             .drive(onNext: { data in
@@ -125,28 +126,31 @@ final class ProfileAlarmSettingViewController: BaseViewController {
           return cell
         } else {
           guard let cell =
-                  self.alarmSettingCollectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCollectionViewCell.className, for: indexPath) as? AlarmSettingCollectionViewCell else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
+                  self.alarmSettingCollectionView.dequeueReusableCell(
+                    withReuseIdentifier: AlarmSettingCollectionViewCell.className,
+                    for: indexPath) as? AlarmSettingCollectionViewCell
+          else { print("Cell Loading ERROR!"); return UICollectionViewCell()}
           cell.bind(data: element, cellType: cellTypes[index - 1])
-          
+
           cell.cellActionControl
             .asDriver(onErrorJustReturn: .none)
             .drive(onNext: { data in
               actionDetected.onNext(data)
             })
             .disposed(by: cell.disposeBag)
-          
+
           self.temporarilySetCellSubject
             .bind(onNext: { [weak self] in
               guard let self = self else { return }
               cell.bind(data: self.viewModel.currentData, cellType: cellTypes[index - 1])
             })
             .disposed(by: cell.disposeBag)
-          
+
           return cell
         }
       }
       .disposed(by: disposeBag)
-    
+
     output.actionControl
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
@@ -156,9 +160,9 @@ final class ProfileAlarmSettingViewController: BaseViewController {
       })
       .disposed(by: disposeBag)
   }
-  
-  //MARK: Methods
-  
+
+  // MARK: Methods
+
   private func doNavigation(action: ProfileAlarmSettingActionControl) {
     switch action {
     case .didTabBack:
@@ -167,7 +171,7 @@ final class ProfileAlarmSettingViewController: BaseViewController {
       break
     }
   }
-  
+
   private func temporarilySetCell(action: ProfileAlarmSettingActionControl) {
     switch action {
     case .temporarilySetCellForSwitchAnimation:
@@ -176,20 +180,18 @@ final class ProfileAlarmSettingViewController: BaseViewController {
       break
     }
   }
-  
 
-  
-  //MARK: Render
-  
+  // MARK: Render
+
   private func render() {
     view.addSubViews([navigationBarView, alarmSettingCollectionView])
-    
+
     navigationBarView.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(60)
     }
-    
+
     alarmSettingCollectionView.snp.makeConstraints { make in
       make.top.equalTo(navigationBarView.snp.bottom)
       make.leading.trailing.equalToSuperview()
@@ -199,7 +201,9 @@ final class ProfileAlarmSettingViewController: BaseViewController {
 }
 
 extension ProfileAlarmSettingViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
     switch indexPath.row {
     case 0:
       return Size.oneOptionCellSize

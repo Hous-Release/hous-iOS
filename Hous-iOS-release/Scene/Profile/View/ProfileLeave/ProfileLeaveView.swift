@@ -26,7 +26,7 @@ class ProfileLeaveView: UIView {
     layout.scrollDirection = .vertical
       layout.itemSize = Size.todoItemSize
     $0.register(cell: ProfileLeaveGuideCollectionViewCell.self)
-    
+
     $0.register(cell: CountTodoByDayCollectionViewCell.self)
     $0.register(cell: MyTodoByDayCollectionViewCell.self)
     $0.register(cell: EmptyTodoByDayCollectionViewCell.self)

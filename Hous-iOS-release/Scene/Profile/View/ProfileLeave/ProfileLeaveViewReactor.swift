@@ -44,7 +44,7 @@ class ProfileLeaveViewReactor: ReactorKit.Reactor {
       items: [])
     @Pulse
     var isLeaveRoomSuccess: Bool?
-    var error: String? = nil
+    var error: String?
   }
 
   let initialState = State()

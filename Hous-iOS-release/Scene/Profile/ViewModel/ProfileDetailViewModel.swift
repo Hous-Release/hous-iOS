@@ -10,23 +10,23 @@ import RxSwift
 import RxCocoa
 
 final class ProfileDetailViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private var profileDetailModel = ProfileDetailModel()
   private var profileDetailModelSubject = PublishSubject<ProfileDetailModel>()
   private let profileRepository = ProfileRepositoryImp()
   private var color: PersonalityColor
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<ProfileDetailActionControl>
   }
-  
+
   struct Output {
     let profileDetailModel: Observable<ProfileDetailModel>
     let actionControl: Observable<ProfileDetailActionControl>
   }
-  
+
   init(color: PersonalityColor) {
     self.color = color
     ProfileRepositoryImp.event
@@ -45,25 +45,23 @@ final class ProfileDetailViewModel: ViewModelType {
       })
       .disposed(by: disposeBag)
   }
-  
-  
+
   func transform(input: Input) -> Output {
-    
+
     // Data
     self.profileRepository.getProfileTestResult(color: self.color)
     self.profileDetailModelSubject.onNext(self.profileDetailModel)
-    
+
     let profileDetailModelObservable = profileDetailModelSubject.asObservable()
-    
+
     // Action
-    
+
     let actionControl = input.actionDetected.asObservable()
-    
+
     return Output(
       profileDetailModel: profileDetailModelObservable,
       actionControl: actionControl
     )
   }
-  
-  
+
 }

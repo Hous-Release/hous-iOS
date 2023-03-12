@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ProfileSettingActionControl {
   case didTabAlarmSetting
   case didTabAgreement
@@ -41,7 +40,7 @@ public struct AlarmSettingModel: Equatable {
   var todayTodoNotification: TodoNotificationMode
   var notDoneTodoNotification: TodoNotificationMode
   var isBadgeNotification: Bool
-  
+
   init() {
     self.isPushNotification = false
     self.isNewRulesNotification = false
@@ -50,8 +49,12 @@ public struct AlarmSettingModel: Equatable {
     self.notDoneTodoNotification = .none
     self.isBadgeNotification = false
   }
-  
-  init(isPushNotification: Bool, isNewRulesNotification: Bool, newTodoNotification: TodoNotificationMode, todayTodoNotification: TodoNotificationMode, notDoneTodoNotification: TodoNotificationMode, isBadgeNotification: Bool) {
+
+  init(isPushNotification: Bool, isNewRulesNotification: Bool,
+       newTodoNotification: TodoNotificationMode,
+       todayTodoNotification: TodoNotificationMode,
+       notDoneTodoNotification: TodoNotificationMode,
+       isBadgeNotification: Bool) {
     self.isPushNotification = isPushNotification
     self.isNewRulesNotification = isNewRulesNotification
     self.newTodoNotification = newTodoNotification
@@ -76,4 +79,3 @@ public enum AlarmSettingCellType {
   case pushAlarm
   case none
 }
-

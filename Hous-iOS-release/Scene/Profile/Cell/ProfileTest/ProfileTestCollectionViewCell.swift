@@ -15,18 +15,17 @@ protocol TestCollectionViewCellDelegate: AnyObject {
 }
 
 class TestCollectionViewCell: UICollectionViewCell {
-  
+
   var cellIndex: Int = -1
   var disposeBag: DisposeBag = DisposeBag()
   let cellActionControlSubject = PublishSubject<ProfileTestActionControl>()
 
   weak var delegate: TestCollectionViewCellDelegate?
-  
+
   private enum Size {
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
   }
-  
 
   private let testTitleLabel = UILabel().then {
     $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
@@ -62,7 +61,7 @@ class TestCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     render()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -71,7 +70,7 @@ class TestCollectionViewCell: UICollectionViewCell {
     super.prepareForReuse()
     disposeBag = DisposeBag()
   }
-  
+
   private func setOptionButton(sender: UIButton, optionText: String) {
     var configuration = UIButton.Configuration.filled()
     configuration.automaticallyUpdateForSelection = false
@@ -84,7 +83,7 @@ class TestCollectionViewCell: UICollectionViewCell {
       case .selected:
         button.configuration?.baseBackgroundColor = Colors.blueEdit.color
         button.configuration?.attributedTitle?.foregroundColor = Colors.blue.color
-        
+
       default:
         button.configuration?.baseBackgroundColor = Colors.g1.color
         button.configuration?.attributedTitle?.foregroundColor = Colors.g7.color
@@ -124,7 +123,7 @@ class TestCollectionViewCell: UICollectionViewCell {
       make.bottom.equalToSuperview().offset(-45)
     }
   }
-  
+
   func transferToViewController(cellIndex: Int) {
     self.optionButton1.rx.tap
       .bind(onNext: { [weak self] in
@@ -135,7 +134,7 @@ class TestCollectionViewCell: UICollectionViewCell {
         self.optionButton3.isSelected = false
       })
       .disposed(by: disposeBag)
-    
+
     self.optionButton2.rx.tap
       .bind(onNext: { [weak self] in
         guard let self = self else { return }
@@ -145,7 +144,7 @@ class TestCollectionViewCell: UICollectionViewCell {
         self.optionButton3.isSelected = false
       })
       .disposed(by: disposeBag)
-    
+
     self.optionButton3.rx.tap
       .bind(onNext: { [weak self] in
         guard let self = self else { return }

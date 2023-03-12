@@ -10,20 +10,20 @@ import RxSwift
 import RxCocoa
 
 final class ProfileSettingViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let profileRepository = ProfileRepositoryImp()
   private let actionControl = PublishSubject<ProfileSettingActionControl>()
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<ProfileSettingActionControl>
   }
-  
+
   struct Output {
     let actionControl: Observable<ProfileSettingActionControl>
   }
-  
+
   func transform(input: Input) -> Output {
     let actionControl = input.actionDetected.asObservable()
     return Output(actionControl: actionControl)
@@ -31,23 +31,22 @@ final class ProfileSettingViewModel: ViewModelType {
 }
 
 final class ProfileAlarmSettingViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let profileRepository = ProfileRepositoryImp()
   let alarmSettingModelSubject = PublishSubject<AlarmSettingModel>()
   var currentData = AlarmSettingModel()
 
-  
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<ProfileAlarmSettingActionControl>
   }
-  
+
   struct Output {
     let actionControl: Observable<ProfileAlarmSettingActionControl>
     let alarmSettingModel: Observable<AlarmSettingModel>
   }
-  
+
   init() {
     ProfileRepositoryImp.event
       .subscribe(onNext: { [weak self] event in
@@ -65,16 +64,16 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
       })
       .disposed(by: disposeBag)
   }
-  
+
   func transform(input: Input) -> Output {
     // Data
     self.profileRepository.getAlarmSettingInfo()
-    
+
     // Action
-    
+
     let actionControl = input.actionDetected.asObservable()
     let alarmSettingModelObservable = self.alarmSettingModelSubject.asObservable()
-    
+
     input.actionDetected
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] action in
@@ -102,7 +101,7 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
         }
       })
       .disposed(by: disposeBag)
-    
+
     alarmSettingModelObservable
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] data in
@@ -112,21 +111,19 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
 
     return Output(actionControl: actionControl, alarmSettingModel: alarmSettingModelObservable)
   }
-  
+
   private func updateCurrentData(cellType: AlarmSettingCellType, rawValue: Int) {
     switch cellType {
     case .pushAlarm:
       self.currentData.isPushNotification = {
-        if rawValue == 0 { return false }
-        else { return true }
+        if rawValue == 0 { return false } else { return true }
       }()
-      
+
     case .newRules:
       self.currentData.isNewRulesNotification = {
-        if rawValue == 1 { return false }
-        else { return true }
+        if rawValue == 1 { return false } else { return true }
       }()
-      
+
     case .newTodo:
       self.currentData.newTodoNotification = {
         switch rawValue {
@@ -140,7 +137,7 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
           return .none
         }
       }()
-      
+
     case .todayTodo:
       self.currentData.todayTodoNotification = {
         switch rawValue {
@@ -154,7 +151,7 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
           return .none
         }
       }()
-      
+
     case .notDoneTodo:
       self.currentData.notDoneTodoNotification = {
         switch rawValue {
@@ -168,13 +165,12 @@ final class ProfileAlarmSettingViewModel: ViewModelType {
           return .none
         }
       }()
-      
+
     case .badgeAlarm:
       self.currentData.isBadgeNotification = {
-        if rawValue == 1 { return false }
-        else { return true }
+        if rawValue == 1 { return false } else { return true }
       }()
-      
+
     default:
       break
     }

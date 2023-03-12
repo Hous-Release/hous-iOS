@@ -5,33 +5,32 @@
 //  Created by 이의진 on 2022/09/28.
 //
 
-//Reference Link  : https://mildwhale.github.io/2020-04-16-mvvm-with-input-output/
+// Reference Link  : https://mildwhale.github.io/2020-04-16-mvvm-with-input-output/
 
 import Foundation
 import RxSwift
 import RxCocoa
 
 final class ProfileViewModel: ViewModelType {
-  
+
   private let disposeBag: DisposeBag = DisposeBag()
   private let profileRepository = ProfileRepositoryImp()
   private var profileModel = ProfileModel()
   private let profileModelSubject = PublishSubject<ProfileModel>()
-  
+
   struct Input {
     let viewWillAppear: Signal<Void>
     let actionDetected: PublishSubject<ProfileActionControl>
   }
-  
+
   struct Output {
     let profileModel: Observable<ProfileModel>
     let actionControl: Observable<ProfileActionControl>
   }
-  
-  
+
   init() {
     ProfileRepositoryImp.event
-      .subscribe (onNext:{ [weak self] event in
+      .subscribe(onNext: { [weak self] event in
       guard let self = self else { return }
       switch event {
       case let .getProfile(profileModel):
@@ -48,31 +47,29 @@ final class ProfileViewModel: ViewModelType {
     })
     .disposed(by: disposeBag)
   }
-  
+
   func transform(input: Input) -> Output {
-    
+
     // Data
     self.profileRepository.getProfile()
     self.profileModelSubject.onNext(self.profileModel)
-    
+
     // Action
-    
+
     let actionControl = input.actionDetected.asObservable()
-    
+
     // viewWillAppear
-    
+
     input.viewWillAppear.asObservable()
       .bind(onNext: { [weak self] in
         self?.profileRepository.getProfile()
       })
       .disposed(by: disposeBag)
-    
+
     return Output(
       profileModel: self.profileModelSubject.asObservable(),
       actionControl: actionControl
     )
   }
-  
-  
-}
 
+}

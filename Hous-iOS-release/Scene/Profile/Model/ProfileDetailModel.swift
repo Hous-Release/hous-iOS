@@ -19,7 +19,7 @@ public struct ProfileDetailModel {
   var recommendTodo: [String]
   var title: String
   var description: [String]
-  
+
   init() {
     personalityType = .none
     badPersonalityName = ""
@@ -33,11 +33,11 @@ public struct ProfileDetailModel {
     title = ""
     description = []
   }
-  
-  
-  
-  init(personalityType: PersonalityColor, badPersonalityImageURL: String, badPersonalityName: String, goodPersonalityImageURL: String, goodPersonalityName: String, imageURL: String, name: String, recommendTitle: String, recommendTodo: [String], title: String, description: [String]) {
-    
+
+  init(personalityType: PersonalityColor, badPersonalityImageURL: String, badPersonalityName: String,
+       goodPersonalityImageURL: String, goodPersonalityName: String, imageURL: String, name: String,
+       recommendTitle: String, recommendTodo: [String], title: String, description: [String]) {
+
     self.personalityType = personalityType
     self.badPersonalityImageURL = badPersonalityImageURL
     self.badPersonalityName = badPersonalityName
@@ -56,5 +56,3 @@ enum ProfileDetailActionControl {
   case didTabBack
   case none
 }
-
-
