@@ -30,7 +30,7 @@ public final class ProfileLeaveRepositoryImp: BaseService, ProfileLeaveRepositor
   public var event = PublishSubject<ProfileLeaveRepositoryEvent>()
 
   public func fetchOnlyMyTodo() {
-    NetworkService.shared.byDayTodoRepository.getOnlyMyTodoData { [weak self] res, err in
+    NetworkService.shared.todoRepository.getOnlyMyTodoData { [weak self] res, err in
 
       guard let self = self else { return }
 
