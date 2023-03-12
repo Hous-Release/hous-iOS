@@ -39,7 +39,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
 
   public func fetchTodo(_ row: Int) {
 
-    NetworkService.shared.byDayTodoRepository.getDaysOfWeekTodosData { [weak self] res, err in
+    NetworkService.shared.todoRepository.getDaysOfWeekTodosData { [weak self] res, err in
 
       guard let self = self else { return }
       guard let data = res?.data else {
@@ -65,7 +65,7 @@ public final class ByDayRepositoryImp: BaseService, ByDayRepository {
 
   // member repository랑 중복됨
   public func fetchTodoSummary(_ id: Int) {
-    NetworkService.shared.mainTodoRepository.getTodoSummary(id) { [weak self] res, err in
+    NetworkService.shared.todoRepository.getTodoSummary(id) { [weak self] res, err in
 
       guard let self = self else { return }
 

@@ -30,7 +30,7 @@ public final class MemberRepositoryImp: BaseService, MemberRepository {
   public var todos: [MemberTodoModel]?
 
   public func fetchMember(_ row: Int) {
-    NetworkService.shared.memberTodoRepository.getMemberTodosData { [weak self] res, err in
+    NetworkService.shared.todoRepository.getMemberTodosData { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(

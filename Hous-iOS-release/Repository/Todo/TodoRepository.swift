@@ -55,7 +55,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
 
   public func fetchTodo() {
 
-    NetworkService.shared.mainTodoRepository.getTodosData { [weak self] res, err in
+    NetworkService.shared.todoRepository.getTodosData { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -101,7 +101,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
   }
 
   public func fetchModifyingTodo(_ id: Int) {
-    NetworkService.shared.memberTodoRepository.getModifyingTodo(
+    NetworkService.shared.todoRepository.getModifyingTodo(
       todoID: id
     ) { [weak self] res, err in
       guard let self = self else { return }
@@ -140,7 +140,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
   }
 
   public func fetchHomie() {
-    NetworkService.shared.mainTodoRepository.getAssignees { [weak self] res, err in
+    NetworkService.shared.todoRepository.getAssignees { [weak self] res, err in
       guard let self = self else { return }
       guard let data = res?.data else {
         let errorModel = HouseErrorModel(
@@ -192,7 +192,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
       todoUsers: homiesDTO
     )
 
-    NetworkService.shared.mainTodoRepository.updateTodo(id, dto) { [weak self] res, err in
+    NetworkService.shared.todoRepository.updateTodo(id, dto) { [weak self] res, err in
       guard let self = self else { return }
       guard
         let isSuccess = res?.success,
@@ -216,7 +216,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
 
   // MARK: - bottomsheet 기능 member & byday
   public func fetchTodoSummary(_ id: Int) {
-    NetworkService.shared.mainTodoRepository.getTodoSummary(id) { [weak self] res, err in
+    NetworkService.shared.todoRepository.getTodoSummary(id) { [weak self] res, err in
 
       guard let self = self else { return }
 
@@ -252,7 +252,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
   }
 
   public func deleteTodo(_ id: Int) {
-    NetworkService.shared.mainTodoRepository.deleteTodo(id) { res, err in
+    NetworkService.shared.todoRepository.deleteTodo(id) { res, err in
       guard let res = res else { return }
 
       guard res.success else {
