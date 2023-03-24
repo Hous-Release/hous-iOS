@@ -180,8 +180,7 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
 
       cell.myTodoBackgroundView.rx.tapGesture()
         .when(.recognized)
-        .asDriver(onErrorJustReturn: UITapGestureRecognizer.init())
-        .drive(onNext: { [weak self] _ in
+        .subscribe(onNext: { [weak self] _ in
           guard let self = self else { return }
           self.todoBackgroundViewDidTap.onNext(())
         })

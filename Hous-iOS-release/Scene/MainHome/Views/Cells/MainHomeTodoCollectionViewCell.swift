@@ -64,7 +64,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     $0.textColor = Colors.g5.color
   }
 
-  private var dailyLottie = AnimationView().then {
+  private var dailyLottie = AnimationView(configuration: .init(renderingEngine: .coreAnimation)).then {
     $0.loopMode = .loop
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
