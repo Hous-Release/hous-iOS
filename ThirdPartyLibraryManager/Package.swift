@@ -90,7 +90,8 @@ let package = Package(
             ],
             resources: [
 //                .process("Resource/"),
-                .copy("Resource/")
+                .copy("Resource/Development"),
+                .copy("Resource/Production")
             ]
         ),
     ]

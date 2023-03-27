@@ -612,6 +612,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		773BABB629D1753700ABAACD /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		777085AD29040DC50018240B /* TestScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +655,7 @@
 		777C665F28A74A62000BECEA /* Hous-iOS-release */ = {
 			isa = PBXGroup;
 			children = (
+				773BABB629D1753700ABAACD /* Test */,
 				770B959428F159CE00C8C945 /* Services */,
 				77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */,
 				77067FF528DDD9010082A7E7 /* Repository */,
