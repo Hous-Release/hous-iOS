@@ -15,7 +15,7 @@ import RxDataSources
 import ReactorKit
 
 // MARK: - Controller
-final class TodoViewController: BaseViewController, View {
+final class TodoViewController: BaseViewController, View, LoadingPresentable {
   typealias Reactor = TodoViewReactor
 
   private enum Size {

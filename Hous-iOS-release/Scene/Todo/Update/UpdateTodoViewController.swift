@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class UpdateTodoViewController: BaseViewController, View {
+final class UpdateTodoViewController: BaseViewController, View, LoadingPresentable {
 
   typealias Reactor = UpdateTodoReactor
 

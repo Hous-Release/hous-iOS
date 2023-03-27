@@ -13,7 +13,7 @@ import RxCocoa
 import Network
 import BottomSheetKit
 
-final class MemberTodoViewController: BaseViewController, ReactorKit.View {
+final class MemberTodoViewController: BaseViewController, ReactorKit.View, LoadingPresentable {
   typealias Reactor = MemberTodoViewReactor
 
   var mainView = MemberTodoView()

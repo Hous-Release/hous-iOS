@@ -21,7 +21,7 @@ public struct MemberSection {
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
       switch (lhs, rhs) {
-      case (.members(_), .members(_)):
+      case (.members, .members):
         return true
       }
     }

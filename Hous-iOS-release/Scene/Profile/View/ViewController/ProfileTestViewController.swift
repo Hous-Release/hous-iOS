@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-final class ProfileTestViewController: BaseViewController {
+final class ProfileTestViewController: BaseViewController, LoadingPresentable {
 
   private var testIndex = 0
 

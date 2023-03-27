@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileViewController: BaseViewController {
+final class ProfileViewController: BaseViewController, LoadingPresentable {
 
   // MARK: RX Components
 

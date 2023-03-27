@@ -13,7 +13,7 @@ import RxKeyboard
 import Network
 import BottomSheetKit
 
-final class EditRuleViewController: BaseViewController {
+final class EditRuleViewController: BaseViewController, LoadingPresentable {
 
   // MARK: - UI Components
 

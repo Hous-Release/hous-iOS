@@ -26,8 +26,8 @@ public struct TodoMainSection {
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
             switch (lhs, rhs) {
-            case (.myTodo(_), .myTodo(_)),
-                 (.ourTodo(_), .ourTodo(_)):
+            case (.myTodo, .myTodo),
+                 (.ourTodo, .ourTodo):
                 return true
             default:
                 return false

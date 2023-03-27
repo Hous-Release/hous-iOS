@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Then
 
-final class ProfileAlarmViewController: BaseViewController {
+final class ProfileAlarmViewController: BaseViewController, LoadingPresentable {
 
   // MARK: RX Components
 

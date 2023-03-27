@@ -15,21 +15,7 @@ class BaseViewController: UIViewController {
     super.viewDidLoad()
     self.navigationController?.delegate = self
   }
-
-  func showLoading() {
-    DispatchQueue.main.async {
-      self.presentLoading()
-    }
-  }
-
-  func hideLoading() {
-    DispatchQueue.main.async {
-      self.dismissLoading()
-    }
-  }
 }
-
-extension BaseViewController: LoadingPresentable { }
 
 extension BaseViewController: UINavigationControllerDelegate {
 

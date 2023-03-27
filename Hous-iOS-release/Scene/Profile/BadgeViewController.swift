@@ -11,7 +11,7 @@ import RxCocoa
 import RxDataSources
 import RxGesture
 
-class BadgeViewController: BaseViewController {
+class BadgeViewController: BaseViewController, LoadingPresentable {
 
   private let navigationBar = NavBarWithBackButtonView(
     title: "내 배지").then {

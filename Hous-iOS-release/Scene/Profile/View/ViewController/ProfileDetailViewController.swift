@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class ProfileDetailViewController: BaseViewController, UICollectionViewDelegate {
+final class ProfileDetailViewController: BaseViewController, LoadingPresentable {
 
   // MARK: RX Components
 
@@ -201,10 +201,8 @@ final class ProfileDetailViewController: BaseViewController, UICollectionViewDel
   }
 }
 
-extension ProfileDetailViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+extension ProfileDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     switch indexPath.row {
     case 0:
       return Size.imageCellSize

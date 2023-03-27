@@ -8,12 +8,12 @@
 import UIKit
 
 protocol LoadingPresentable {
-  func presentLoading()
-  func dismissLoading()
+  func showLoading()
+  func hideLoading()
 }
 
-extension LoadingPresentable where Self: UIViewController {
-  func presentLoading() {
+extension LoadingPresentable where Self: BaseViewController {
+  func showLoading() {
     if let loadingView = findLoadingView() {
       loadingView.startAnimating()
     } else {
@@ -29,7 +29,7 @@ extension LoadingPresentable where Self: UIViewController {
     }
   }
 
-  func dismissLoading() {
+  func hideLoading() {
     findLoadingView()?.stopAnimating()
     findLoadingView()?.removeFromSuperview()
   }

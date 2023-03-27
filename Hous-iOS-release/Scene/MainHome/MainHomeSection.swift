@@ -25,9 +25,9 @@ struct MainHomeSectionModel {
 
     static func == (lhs: MainHomeSectionModel.Item, rhs: MainHomeSectionModel.Item) -> Bool {
       switch (lhs, rhs) {
-      case (.myTodos(_), .myTodos(_)),
-        (.ourTodos(_), .ourTodos(_)),
-        (.homieProfiles(_), .homieProfiles(_)):
+      case (.myTodos, .myTodos),
+        (.ourTodos, .ourTodos),
+        (.homieProfiles, .homieProfiles):
         return true
       default:
         return false

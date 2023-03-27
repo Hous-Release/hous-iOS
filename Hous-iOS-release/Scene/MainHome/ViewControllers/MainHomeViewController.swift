@@ -19,7 +19,13 @@ protocol MainHomeViewControllerDelegate: AnyObject {
   func editHousName(initname: String)
 }
 
-class MainHomeViewController: BaseViewController {
+class MainHomeViewController: BaseViewController, LoadingPresentable {
+
+  private enum MainHomeSection: Int {
+    case todos
+    case ourRules
+    case homiesProfiles
+  }
 
   // MARK: - Vars & Lets
   private let viewModel: MainHomeViewModel
