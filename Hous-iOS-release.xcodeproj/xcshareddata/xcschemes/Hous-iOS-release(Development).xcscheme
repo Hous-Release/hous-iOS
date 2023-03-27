@@ -28,6 +28,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "773BABBC29D17B4B00ABAACD"
+               BuildableName = "Hous-iOS-releaseUITests.xctest"
+               BlueprintName = "Hous-iOS-releaseUITests"
+               ReferencedContainer = "container:Hous-iOS-release.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

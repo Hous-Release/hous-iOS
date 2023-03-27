@@ -39,11 +39,12 @@ excluded:
 #- Hous-iOS-release/Scene/Profile
 - Hous-iOS-release/Scene/TabBar
 
+- Hous-iOS-releaseUITests/
 
 
-- "AssetKit"
-- "BottomSheetKit"
-- "UserInformation"
-- "Network"
-- "ThirdPartyLibraryManager"
+- AssetKit
+- BottomSheetKit
+- UserInformation
+- Network
+- ThirdPartyLibraryManager
 
