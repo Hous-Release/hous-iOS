@@ -564,7 +564,6 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B85E881329BCB5F300C9A8AD /* Room */,
 				B85C0B65294486B600784FCB /* User */,
 				B87FC01F2914F44700F8AA11 /* Onboarding */,
 				9B3BDBF7290E470A0054DF23 /* Profile */,
@@ -1380,13 +1379,6 @@
 				B85C0B732948773900784FCB /* ProfileLeaveSection.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		B85E881329BCB5F300C9A8AD /* Room */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Room;
 			sourceTree = "<group>";
 		};
 		B87FC01F2914F44700F8AA11 /* Onboarding */ = {
