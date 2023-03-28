@@ -29,13 +29,24 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "773BABBC29D17B4B00ABAACD"
                BuildableName = "Hous-iOS-releaseUITests.xctest"
                BlueprintName = "Hous-iOS-releaseUITests"
+               ReferencedContainer = "container:Hous-iOS-release.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7725815529D2B24900E9FC0E"
+               BuildableName = "Hous-iOS-releaseTests.xctest"
+               BlueprintName = "Hous-iOS-releaseTests"
                ReferencedContainer = "container:Hous-iOS-release.xcodeproj">
             </BuildableReference>
          </TestableReference>

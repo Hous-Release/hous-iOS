@@ -39,6 +39,17 @@
                ReferencedContainer = "container:Hous-iOS-release.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7725815529D2B24900E9FC0E"
+               BuildableName = "Hous-iOS-releaseTests.xctest"
+               BlueprintName = "Hous-iOS-releaseTests"
+               ReferencedContainer = "container:Hous-iOS-release.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
