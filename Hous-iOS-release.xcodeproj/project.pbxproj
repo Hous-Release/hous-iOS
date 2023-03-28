@@ -24,6 +24,7 @@
 		770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */; };
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		7725815929D2B24900E9FC0E /* Hous_iOS_releaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7725815829D2B24900E9FC0E /* Hous_iOS_releaseTests.swift */; };
+		7725816629D2B48200E9FC0E /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773BABC029D17B4B00ABAACD /* Hous_iOS_releaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773BABBF29D17B4B00ABAACD /* Hous_iOS_releaseUITests.swift */; };
 		773BABC229D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773BABC129D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift */; };
@@ -574,6 +575,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7725816629D2B48200E9FC0E /* ThirdPartyLibraryManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +661,13 @@
 			path = "Hous-iOS-releaseTests";
 			sourceTree = "<group>";
 		};
+		7725816429D2B48200E9FC0E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		773BABB629D1753700ABAACD /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,6 +706,7 @@
 				7725815729D2B24900E9FC0E /* Hous-iOS-releaseTests */,
 				777C665E28A74A62000BECEA /* Products */,
 				B84EA6D028D620BF00C92FCD /* Recovered References */,
+				7725816429D2B48200E9FC0E /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1595,6 +1605,9 @@
 				7725815B29D2B24900E9FC0E /* PBXTargetDependency */,
 			);
 			name = "Hous-iOS-releaseTests";
+			packageProductDependencies = (
+				7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */,
+			);
 			productName = "Hous-iOS-releaseTests";
 			productReference = 7725815629D2B24900E9FC0E /* Hous-iOS-releaseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -3564,6 +3577,10 @@
 			productName = BottomSheetKit;
 		};
 		7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThirdPartyLibraryManager;
+		};
+		7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThirdPartyLibraryManager;
 		};
