@@ -6,3 +6,8 @@
 project.xcworkspace/
 xcuserdata/
 ipa/
+
+#untracked
+ThirdPartyLibraryManager/Sources/FirebaseWrapper/Resource
+Setting/Configuartion
+fastlane/
