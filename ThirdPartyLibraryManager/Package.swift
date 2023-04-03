@@ -12,6 +12,7 @@ let package = Package(
     products: [
         .library(
             name: "ThirdPartyLibraryManager",
+            type: .dynamic,
             targets: ["ThirdPartyLibraryManager"]),
         .library(
             name: "FirebaseWrapper",
