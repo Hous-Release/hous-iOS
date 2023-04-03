@@ -156,4 +156,35 @@ final class Hous_iOS_releaseTests: XCTestCase {
     XCTAssertEqual(reactor.stub.actions.last, .fetch)
     XCTAssertEqual(reactor.stub.actions.last, .didTapUpdate)
   }
+
+  func testAction_updateHomie() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+
+    var new = todoHomies
+
+    new![0].selectedDay = [.sun]
+
+
+
+    scheduler
+      .createHotObservable([
+        .next(100, .updateHomie(new!))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+
+    let response = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+      reactor.state.map(\.todoHomies[0].selectedDay)
+    }
+
+    XCTAssertEqual(response.events.compactMap(\.value.element), [
+      [],
+      [.sun]
+    ])
+  }
 }
