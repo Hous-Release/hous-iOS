@@ -210,7 +210,7 @@ final class Hous_iOS_releaseTests: XCTestCase {
   }
 
   func testAction_didTapAlarm() {
-    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+    let reactor = UpdateTodoReactor(provider: service, state: .init(id: 0, todoHomies: todoHomies))
 
     let scheduler = TestScheduler(initialClock: 0)
     let disposeBag = DisposeBag()
@@ -232,5 +232,43 @@ final class Hous_iOS_releaseTests: XCTestCase {
       true,
       false
     ])
+  }
+
+  func test_IsTappableButton() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let vc = UpdateTodoViewController(reactor)
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+    todoHomies[0].selectedDay = [.mon, .fri]
+    todoHomies[0].isExpanded = true
+
+    scheduler
+      .createHotObservable([
+        .next(300, .didTapDays([.mon, .fri], id: 0)),
+        .next(350, .updateHomie(todoHomies)),
+        .next(500, .enterTodo("커피 그만 마시기")),
+        .next(600, .enterTodo("")),
+        .next(1000, .enterTodo("쓰레기 버리기"))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+
+    let response = scheduler.start(created: 0, subscribed: 0, disposed: 1500) {
+      reactor.pulse(\.$isTappableButton)
+    }
+
+    XCTAssertEqual(response.events.compactMap(\.value.element), [
+      false,
+      false,
+      true,
+      false,
+      true
+    ])
+
+    vc.view.asImage()
   }
 }
