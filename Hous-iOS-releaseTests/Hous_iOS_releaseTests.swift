@@ -118,4 +118,32 @@ final class Hous_iOS_releaseTests: XCTestCase {
     ])
 
   }
+
+  // MARK: - Tuple은 Equtable이 구현될 수 없어서 - 값을 같이 테스트할 수가 없음
+  // -
+  func testAction_didTapDay() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+    scheduler
+      .createHotObservable([
+        .next(100, .didTapDays([.mon, .sun], id: 9)),
+        .next(500, .didTapDays([.wed, .sat], id: 9))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+
+    let daysResponse = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+      reactor.state.map(\.didTappedDay?.0)
+    }
+    XCTAssertEqual(daysResponse.events.compactMap(\.value.element), [
+      nil,
+      [UpdateTodoHomieModel.Day.mon, UpdateTodoHomieModel.Day.sun],
+      [UpdateTodoHomieModel.Day.wed, UpdateTodoHomieModel.Day.sat],
+    ])
+
+  }
 }
