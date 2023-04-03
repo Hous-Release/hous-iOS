@@ -163,12 +163,8 @@ final class Hous_iOS_releaseTests: XCTestCase {
     let scheduler = TestScheduler(initialClock: 0)
     let disposeBag = DisposeBag()
 
-
     var new = todoHomies
-
     new![0].selectedDay = [.sun]
-
-
 
     scheduler
       .createHotObservable([
@@ -185,6 +181,31 @@ final class Hous_iOS_releaseTests: XCTestCase {
     XCTAssertEqual(response.events.compactMap(\.value.element), [
       [],
       [.sun]
+    ])
+  }
+
+  func testAction_back() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+
+    scheduler
+      .createHotObservable([
+        .next(100, .back(true))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+
+    let response = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+      reactor.pulse(\.$isBack)
+    }
+
+    XCTAssertEqual(response.events.compactMap(\.value.element), [
+      false,
+      true
     ])
   }
 }
