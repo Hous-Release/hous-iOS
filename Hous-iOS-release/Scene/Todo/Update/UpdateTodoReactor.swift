@@ -22,7 +22,7 @@ public final class UpdateTodoReactor: Reactor {
     self.provider = provider
   }
 
-  public enum Action {
+  public enum Action: Equatable {
     case fetch
     case enterTodo(String?)
     case didTapHomie(IndexPath)
