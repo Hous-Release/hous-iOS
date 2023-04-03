@@ -42,6 +42,8 @@ let package = Package(
                 "Alamofire",
                 .product(name: "RxSwift", package: "Rxswift"),
                 .product(name: "RxCocoa", package: "Rxswift"),
+                .product(name: "RxTest", package: "Rxswift"),
+                .product(name: "RxBlocking", package: "Rxswift"),
                 .product(name: "RxGesture", package: "RxGesture"),
                 .product(name: "RxDataSources", package: "RxDataSources"),
                 .product(name: "SnapKit", package: "SnapKit"),
