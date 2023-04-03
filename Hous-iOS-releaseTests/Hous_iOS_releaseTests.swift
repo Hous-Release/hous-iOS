@@ -90,4 +90,32 @@ final class Hous_iOS_releaseTests: XCTestCase {
     ])
 
   }
+
+  func testAction_didTapHomie() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+    scheduler
+      .createHotObservable([
+        .next(100, .didTapHomie(IndexPath(item: 0, section: 0))),
+        .next(200, .didTapHomie(IndexPath(item: 0, section: 1)))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+
+    let response = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+      reactor.state.map(\.didTappedIndividual)
+    }
+
+
+    XCTAssertEqual(response.events.compactMap(\.value.element), [
+      nil,
+      IndexPath(item: 0, section: 0),
+      IndexPath(item: 0, section: 1)
+    ])
+
+  }
 }
