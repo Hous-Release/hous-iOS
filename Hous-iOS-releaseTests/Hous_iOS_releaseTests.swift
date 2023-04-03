@@ -58,4 +58,36 @@ final class Hous_iOS_releaseTests: XCTestCase {
     XCTAssertEqual(reactor.currentState.isPushNotification, true)
     XCTAssertEqual(reactor.currentState.todoHomies[0].name, "김호세0")
   }
+
+  func testAction_enterTodo() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let scheduler = TestScheduler(initialClock: 0)
+    let disposeBag = DisposeBag()
+
+    scheduler
+      .createHotObservable([
+        .next(100, .enterTodo("쓰레")),
+        .next(200, .enterTodo("쓰레기")),
+        .next(500, .enterTodo("쓰레기 버리기")),
+        .next(700, .enterTodo(""))
+      ])
+      .subscribe(reactor.action)
+      .disposed(by: disposeBag)
+
+    let todoResponse = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+
+      reactor.state.map(\.todo)
+    }
+
+
+    XCTAssertEqual(todoResponse.events.compactMap(\.value.element), [
+      nil,
+      "쓰레",
+      "쓰레기",
+      "쓰레기 버리기",
+      ""
+    ])
+
+  }
 }
