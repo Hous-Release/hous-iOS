@@ -146,4 +146,14 @@ final class Hous_iOS_releaseTests: XCTestCase {
     ])
 
   }
+
+  func testAction_didTapUpdate() {
+    let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    reactor.isStubEnabled = true
+    reactor.action.onNext(.didTapUpdate)
+
+    XCTAssertEqual(reactor.stub.actions.last, .fetch)
+    XCTAssertEqual(reactor.stub.actions.last, .didTapUpdate)
+  }
 }
