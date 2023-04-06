@@ -18,6 +18,7 @@ let package = Package(
             name: "FirebaseWrapper",
             targets: ["FirebaseWrapper"]
         ),
+        .library(name: "ReactiveTest", targets: ["ReactiveTest"])
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", exact: "5.6.1"),
@@ -42,8 +43,6 @@ let package = Package(
                 "Alamofire",
                 .product(name: "RxSwift", package: "Rxswift"),
                 .product(name: "RxCocoa", package: "Rxswift"),
-                .product(name: "RxTest", package: "Rxswift"),
-                .product(name: "RxBlocking", package: "Rxswift"),
                 .product(name: "RxGesture", package: "RxGesture"),
                 .product(name: "RxDataSources", package: "RxDataSources"),
                 .product(name: "SnapKit", package: "SnapKit"),
@@ -60,6 +59,14 @@ let package = Package(
                 .product(name: "RxReachability", package: "RxReachability"),
             ]
         ),
+        .target(
+            name: "ReactiveTest",
+            dependencies: [
+              .product(name: "RxTest", package: "Rxswift"),
+              .product(name: "RxBlocking", package: "Rxswift")
+            ]
+        ),
+
         .binaryTarget(name: "FBLPromises", path: "./Vender/FirebaseAnalytics/FBLPromises.xcframework"),
         .binaryTarget(name: "FirebaseAnalytics", path: "./Vender/FirebaseAnalytics/FirebaseAnalytics.xcframework"),
         .binaryTarget(name: "FirebaseAnalyticsSwift", path: "./Vender/FirebaseAnalytics/FirebaseAnalyticsSwift.xcframework"),

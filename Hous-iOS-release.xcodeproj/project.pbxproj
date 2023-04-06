@@ -25,9 +25,11 @@
 		7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; };
 		7725815929D2B24900E9FC0E /* Hous_iOS_releaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7725815829D2B24900E9FC0E /* Hous_iOS_releaseTests.swift */; };
 		7725816629D2B48200E9FC0E /* ThirdPartyLibraryManager in Frameworks */ = {isa = PBXBuildFile; productRef = 7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */; };
+		772B38B329DB22D0001B1005 /* ReactiveTest in Frameworks */ = {isa = PBXBuildFile; productRef = 772B38B229DB22D0001B1005 /* ReactiveTest */; };
 		77393DE128BFBD2D00D78C94 /* FirebaseWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 77393DE028BFBD2D00D78C94 /* FirebaseWrapper */; };
 		773BABC029D17B4B00ABAACD /* Hous_iOS_releaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773BABBF29D17B4B00ABAACD /* Hous_iOS_releaseUITests.swift */; };
 		773BABC229D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773BABC129D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift */; };
+		773D2DBB29DB1F6200517665 /* ThirdPartyLibraryManager in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7717A84C28BBB89700C449CC /* ThirdPartyLibraryManager */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
 		7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E128E734E20068B13C /* SplashReactor.swift */; };
 		7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E328E737520068B13C /* HouseErrorModel.swift */; };
@@ -292,6 +294,20 @@
 			remoteInfo = "Hous-iOS-release";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		773D2DBC29DB1F6200517665 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				773D2DBB29DB1F6200517665 /* ThirdPartyLibraryManager in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		77015F0A299B7635009DB17A /* splashlottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashlottie.json; sourceTree = "<group>"; };
@@ -576,6 +592,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7725816629D2B48200E9FC0E /* ThirdPartyLibraryManager in Frameworks */,
+				772B38B329DB22D0001B1005 /* ReactiveTest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1624,7 @@
 			name = "Hous-iOS-releaseTests";
 			packageProductDependencies = (
 				7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */,
+				772B38B229DB22D0001B1005 /* ReactiveTest */,
 			);
 			productName = "Hous-iOS-releaseTests";
 			productReference = 7725815629D2B24900E9FC0E /* Hous-iOS-releaseTests.xctest */;
@@ -1639,6 +1657,7 @@
 				777C665A28A74A62000BECEA /* Frameworks */,
 				777C665B28A74A62000BECEA /* Resources */,
 				777085AA2903FEE50018240B /* Generate Asset In AssetKit */,
+				773D2DBC29DB1F6200517665 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3583,6 +3602,10 @@
 		7725816529D2B48200E9FC0E /* ThirdPartyLibraryManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThirdPartyLibraryManager;
+		};
+		772B38B229DB22D0001B1005 /* ReactiveTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ReactiveTest;
 		};
 		77393DE028BFBD2D00D78C94 /* FirebaseWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
