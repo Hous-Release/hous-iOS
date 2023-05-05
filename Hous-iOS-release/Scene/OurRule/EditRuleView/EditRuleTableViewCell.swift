@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class EditRuleTableViewCell: UITableViewCell {
+final class EditRuleTableViewCell: UITableViewCell {
 
   private let maxCount = 20
 

@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class MainHomeRulesCollectionViewCell: UICollectionViewCell {
+final class MainHomeRulesCollectionViewCell: UICollectionViewCell {
 
   private let ourRulesTitleLabel = UILabel().then {
     $0.text = "Our Rules"

@@ -12,12 +12,14 @@ import Network
 struct MainHomeSectionModel {
   typealias Model = SectionModel<Section, Item>
 
+  @frozen
   enum Section: Equatable {
     case myTodos
     case ourTodos
     case homieProfiles
   }
 
+  @frozen
   enum Item: Equatable {
     case myTodos(todos: MainHomeDTO.Response.MainHomeResponseDTO)
     case ourTodos(todos: MainHomeDTO.Response.MainHomeResponseDTO)

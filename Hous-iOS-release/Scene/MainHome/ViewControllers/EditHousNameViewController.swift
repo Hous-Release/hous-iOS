@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import BottomSheetKit
 
-class EditHousNameViewController: BaseViewController, LoadingPresentable {
+final class EditHousNameViewController: BaseViewController {
 
   // MARK: Var & Let
 

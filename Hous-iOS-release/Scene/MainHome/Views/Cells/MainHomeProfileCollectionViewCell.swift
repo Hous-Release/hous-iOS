@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainHomeProfileCollectionViewCell: UICollectionViewCell {
+final class MainHomeProfileCollectionViewCell: UICollectionViewCell {
   // MARK: - Vars & Lets
   // MARK: - UI Components
   private let profileBackgroundImageView = UIImageView().then {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OurRulesView: UIView {
+final class OurRulesView: UIView {
 
   private let numberLabel = UILabel().then {
     $0.textAlignment = .center

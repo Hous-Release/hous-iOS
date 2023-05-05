@@ -138,10 +138,12 @@ extension KeyRuleViewModel {
 
 typealias SectionOfRules = SectionModel<TableViewSection, TableViewItem>
 
+@frozen
 enum TableViewSection {
   case main
 }
 
+@frozen
 enum TableViewItem {
   case keyRules(viewModel: KeyRuleViewModel)
   case rule(viewModel: RuleViewModel)

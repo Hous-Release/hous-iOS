@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Network
 
-class AddRuleViewModel: ViewModelType {
+final class AddRuleViewModel: ViewModelType {
 
   private let maxCount = 20
 

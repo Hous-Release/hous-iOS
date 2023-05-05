@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import Lottie
 
-class MainHomeTodoCollectionViewCell: UICollectionViewCell {
+final class MainHomeTodoCollectionViewCell: UICollectionViewCell {
 
   // MARK: - Vars & Lets
 

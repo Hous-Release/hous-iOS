@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyTodoView: UIView {
+final class MyTodoView: UIView {
 
   private let dotView = UIView().then {
     $0.backgroundColor = Colors.blue.color

@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class RulesTableViewCell: UITableViewCell {
+final class RulesTableViewCell: UITableViewCell {
 
   private let dotView = UIView().then {
     $0.backgroundColor = Colors.g3.color

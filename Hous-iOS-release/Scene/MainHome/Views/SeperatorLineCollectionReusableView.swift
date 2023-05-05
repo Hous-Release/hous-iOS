@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SeperatorLineCollectionReusableView: UICollectionReusableView {
+final class SeperatorLineCollectionReusableView: UICollectionReusableView {
 
   private let seperatorLineView = UIView().then {
     $0.backgroundColor = Colors.g2.color

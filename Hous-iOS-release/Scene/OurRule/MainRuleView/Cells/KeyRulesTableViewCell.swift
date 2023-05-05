@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeyRulesTableViewCell: UITableViewCell {
+final class KeyRulesTableViewCell: UITableViewCell {
 
   private let keyRulesBackgroundView = UIView().then {
     $0.backgroundColor = Colors.blueL2.color

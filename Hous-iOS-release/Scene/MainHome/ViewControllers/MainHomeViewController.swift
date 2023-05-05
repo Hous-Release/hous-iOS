@@ -19,7 +19,8 @@ protocol MainHomeViewControllerDelegate: AnyObject {
   func editHousName(initname: String)
 }
 
-class MainHomeViewController: BaseViewController, LoadingPresentable {
+
+final class MainHomeViewController: BaseViewController, LoadingPresentable {
 
   private enum MainHomeSection: Int {
     case todos

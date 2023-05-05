@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class HomeHeaderCollectionReusableView: UICollectionReusableView {
+final class HomeHeaderCollectionReusableView: UICollectionReusableView {
 
   let subtitleLabel = UILabel().then {
     $0.font = Fonts.Montserrat.semiBold.font(size: 18)

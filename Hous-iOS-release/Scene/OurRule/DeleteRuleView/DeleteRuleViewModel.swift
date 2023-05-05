@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Network
 
-class DeleteRuleViewModel: ViewModelType {
+final class DeleteRuleViewModel: ViewModelType {
   struct Input {
     let deleteButtonDidTapped: Observable<[Int]>
     let navBackButtonDidTapped: Observable<Void>
