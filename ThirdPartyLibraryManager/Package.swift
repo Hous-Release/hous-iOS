@@ -33,7 +33,7 @@ let package = Package(
         .package(url: "https://github.com/airbnb/lottie-ios", revision: "3cf8ade4f14cb67fd06ee760e9b579eeb9ea31fb"),
         .package(url: "https://github.com/RxSwiftCommunity/RxFlow.git", revision: "d8d4e53d05239f1ec1bd8bec173907868afa0fa1"),
         .package(url: "https://github.com/RxSwiftCommunity/RxKeyboard.git", exact: "2.0.0"),
-        .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master"),
+        .package(url: "https://github.com/onevcat/Kingfisher.git", exact: "7.5.0"),
         .package(url: "https://github.com/RxSwiftCommunity/RxReachability", .upToNextMajor(from: "1.2.1")),
     ],
     targets: [

@@ -1709,9 +1709,6 @@
 			);
 			mainGroup = 777C665428A74A62000BECEA;
 			packageReferences = (
-				B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */,
-				B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
-				B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 777C665E28A74A62000BECEA /* Products */;
 			projectDirPath = "";
@@ -3558,33 +3555,6 @@
 			defaultConfigurationName = "Release(Production)";
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B54D39F12913B10400DA3A95 /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		B595FFBC28C9F48900F6B2E4 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		B5F9FB18291D3F090056C0B1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		770B959228EB0EFF00C8C945 /* UserInformation */ = {
