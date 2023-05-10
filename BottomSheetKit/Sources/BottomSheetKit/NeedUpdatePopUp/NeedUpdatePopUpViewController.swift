@@ -21,7 +21,7 @@ internal final class NeedUpdatePopUpViewController: UIViewController {
 
   private let rootView: UIView = {
     let view = UIView()
-    view.backgroundColor = .black.withAlphaComponent(0.7)
+    view.backgroundColor = .black.withAlphaComponent(0.5)
     return view
   }()
 
