@@ -17,7 +17,7 @@ class OurRulesViewController: BaseViewController, LoadingPresentable {
     title: "우리 집 Rules",
     rightButtonImage: Images.frame1.image)
 
-  private let searchBar = SearchBar()
+  private let searchBar = HousSearchBar()
 
   private let rulesTableView = UITableView().then {
     $0.estimatedRowHeight = 150

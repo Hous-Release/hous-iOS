@@ -9,7 +9,7 @@ import UIKit
 
 import AssetKit
 
-final class SearchBar: UISearchBar {
+final class HousSearchBar: UISearchBar {
 
   override init(frame: CGRect) {
     super.init(frame: frame)

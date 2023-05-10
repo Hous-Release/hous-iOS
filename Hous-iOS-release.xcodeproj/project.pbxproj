@@ -178,7 +178,7 @@
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
-		B5F22DDF2A0B9D31006F5552 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */; };
+		B5F22DDF2A0B9D31006F5552 /* HousSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */; };
 		B5F22DE12A0B9D4F006F5552 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE02A0B9D4F006F5552 /* BaseView.swift */; };
 		B5F22DE52A0BAA1D006F5552 /* FilledHousTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */; };
 		B5F22DE72A0BAA57006F5552 /* HousLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE62A0BAA57006F5552 /* HousLabel.swift */; };
@@ -488,7 +488,7 @@
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
-		B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousSearchBar.swift; sourceTree = "<group>"; };
 		B5F22DE02A0B9D4F006F5552 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledHousTextField.swift; sourceTree = "<group>"; };
 		B5F22DE62A0BAA57006F5552 /* HousLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousLabel.swift; sourceTree = "<group>"; };
@@ -1440,7 +1440,7 @@
 				B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */,
 				B8566876294B3BFB00F74E95 /* NextButton.swift */,
 				77C67C4C299F85660011C837 /* LoadingView.swift */,
-				B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */,
+				B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */,
 				B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */,
 				B5F22DE62A0BAA57006F5552 /* HousLabel.swift */,
 			);
@@ -1868,7 +1868,7 @@
 				B84EA6DB28DD815E00C92FCD /* PagingViewController.swift in Sources */,
 				B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */,
 				9BBE13DF29040FB700B7D517 /* ProfileEditViewController.swift in Sources */,
-				B5F22DDF2A0B9D31006F5552 /* SearchBar.swift in Sources */,
+				B5F22DDF2A0B9D31006F5552 /* HousSearchBar.swift in Sources */,
 				B84EA6B328D61B3300C92FCD /* TodoHeaderCollectionReusableView.swift in Sources */,
 				77EB72162925489500032776 /* HousTextField.swift in Sources */,
 				B85C0B5E2940B11A00784FCB /* GrayBackgroundTextField.swift in Sources */,
