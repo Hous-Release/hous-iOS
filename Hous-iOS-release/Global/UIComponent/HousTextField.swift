@@ -228,12 +228,6 @@ extension HousTextField {
 
 }
 
-fileprivate extension NSNotification.Name {
-  static let change = Notification.Name("UITextFieldTextDidChangeNotification")
-  static let beginEdit = Notification.Name("UITextFieldTextDidBeginEditingNotification")
-  static let endEdit = Notification.Name("UITextFieldTextDidEndEditingNotification")
-}
-
 extension HousTextField {
   func changeLayerColor(color: CGColor) {
     self.layer.addSublayer(selectedUnderlineLayer)
