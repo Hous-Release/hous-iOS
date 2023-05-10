@@ -7,14 +7,24 @@
 
 import UIKit
 
-class HousLabel: UIView {
+import AssetKit
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+final class HousLabel: UILabel {
 
+  init(text: String, font: UIFont, textColor: UIColor) {
+    super.init(frame: .zero)
+    setStyle(text: text, font: font, textColor: textColor)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setStyle(text: String,
+                        font: UIFont,
+                        textColor: UIColor) {
+    self.text = text
+    self.font = font
+    self.textColor = textColor
+  }
 }
