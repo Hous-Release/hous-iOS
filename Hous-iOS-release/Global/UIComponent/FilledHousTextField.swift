@@ -11,7 +11,7 @@ import AssetKit
 
 final class FilledHousTextField: UITextField {
 
-  private let maxCount: Int?
+  private let maxCount: Int
 
   private let baseRightView = UIView()
 
@@ -21,7 +21,7 @@ final class FilledHousTextField: UITextField {
     textColor: Colors.g5.color
   )
 
-  init(maxCount: Int? = nil) {
+  init(maxCount: Int) {
     self.maxCount = maxCount
     super.init(frame: .zero)
     setLayout()
@@ -65,9 +65,7 @@ private extension FilledHousTextField {
 
   @objc
   func change() {
-    guard let text = self.text,
-          let maxCount = maxCount
-    else { return }
+    guard let text = self.text else { return }
     textCountLabel.text = "\(text.count)/\(maxCount)"
     if text.count <= maxCount {
       textCountLabel.textColor = Colors.g5.color
