@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension NSNotification.Name {
+  static let change = Notification.Name("UITextFieldTextDidChangeNotification")
+  static let beginEdit = Notification.Name("UITextFieldTextDidBeginEditingNotification")
+  static let endEdit = Notification.Name("UITextFieldTextDidEndEditingNotification")
+}

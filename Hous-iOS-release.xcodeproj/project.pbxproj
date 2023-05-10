@@ -180,7 +180,9 @@
 		B5F1BBA528DF29FC00DB915D /* OurRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */; };
 		B5F22DDF2A0B9D31006F5552 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */; };
 		B5F22DE12A0B9D4F006F5552 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE02A0B9D4F006F5552 /* BaseView.swift */; };
+		B5F22DE52A0BAA1D006F5552 /* FilledHousTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */; };
 		B5F22DE72A0BAA57006F5552 /* HousLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE62A0BAA57006F5552 /* HousLabel.swift */; };
+		B5F22DE92A0BBBDE006F5552 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F22DE82A0BBBDE006F5552 /* Notification+Extension.swift */; };
 		B5F9FB482923DA0B0056C0B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB472923DA0B0056C0B1 /* loading.json */; };
 		B5F9FB4C2923F1920056C0B1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9FB4B2923F1920056C0B1 /* BaseViewController.swift */; };
 		B5F9FB58292CCB6A0056C0B1 /* thursday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5F9FB51292CCB690056C0B1 /* thursday.json */; };
@@ -488,7 +490,9 @@
 		B5F1BBA428DF29FC00DB915D /* OurRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesView.swift; sourceTree = "<group>"; };
 		B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		B5F22DE02A0B9D4F006F5552 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledHousTextField.swift; sourceTree = "<group>"; };
 		B5F22DE62A0BAA57006F5552 /* HousLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousLabel.swift; sourceTree = "<group>"; };
+		B5F22DE82A0BBBDE006F5552 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		B5F9FB472923DA0B0056C0B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		B5F9FB4B2923F1920056C0B1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B5F9FB51292CCB690056C0B1 /* thursday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thursday.json; sourceTree = "<group>"; };
@@ -1390,6 +1394,7 @@
 				77D994DC2933E1B1001872F0 /* UIApplication+Extension.swift */,
 				77CCB4FB2957484B002FC9CB /* Date+Extension.swift */,
 				77CCB4FD295749B5002FC9CB /* Optional+Exntension.swift */,
+				B5F22DE82A0BBBDE006F5552 /* Notification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1436,6 +1441,7 @@
 				B8566876294B3BFB00F74E95 /* NextButton.swift */,
 				77C67C4C299F85660011C837 /* LoadingView.swift */,
 				B5F22DDE2A0B9D31006F5552 /* SearchBar.swift */,
+				B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */,
 				B5F22DE62A0BAA57006F5552 /* HousLabel.swift */,
 			);
 			path = UIComponent;
@@ -1969,6 +1975,7 @@
 				7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */,
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
+				B5F22DE52A0BAA1D006F5552 /* FilledHousTextField.swift in Sources */,
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
 				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
@@ -2020,6 +2027,7 @@
 				9B4EE80D29491348002F97C2 /* AlarmTableViewCell.swift in Sources */,
 				9BE0C27A29081BF50028F13A /* ProfileDetailImageCollectionViewCell.swift in Sources */,
 				9BE0C27C29081C560028F13A /* ProfileDetailTextCollectionViewCell.swift in Sources */,
+				B5F22DE92A0BBBDE006F5552 /* Notification+Extension.swift in Sources */,
 				B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */,
 				777C666328A74A62000BECEA /* SceneDelegate.swift in Sources */,
 				B8555ABD291BA2D700E943AE /* OurTodoByDayCollectionViewCell.swift in Sources */,

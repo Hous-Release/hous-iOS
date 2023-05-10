@@ -17,6 +17,8 @@ class OurRulesViewController: BaseViewController, LoadingPresentable {
     title: "우리 집 Rules",
     rightButtonImage: Images.frame1.image)
 
+  private let searchBar = SearchBar()
+
   private let rulesTableView = UITableView().then {
     $0.estimatedRowHeight = 150
     $0.rowHeight = UITableView.automaticDimension
@@ -83,6 +85,7 @@ class OurRulesViewController: BaseViewController, LoadingPresentable {
 
     self.view.addSubViews([
       navigationBar,
+      searchBar,
       rulesTableView
     ])
 
@@ -92,8 +95,14 @@ class OurRulesViewController: BaseViewController, LoadingPresentable {
       make.height.equalTo(60)
     }
 
-    rulesTableView.snp.makeConstraints { make in
+    searchBar.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
+      make.leading.trailing.equalToSuperview().inset(24)
+      make.height.equalTo(46)
+    }
+
+    rulesTableView.snp.makeConstraints { make in
+      make.top.equalTo(searchBar.snp.bottom).offset(20)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
