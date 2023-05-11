@@ -7,20 +7,13 @@
 
 import UIKit
 
-class BaseView: UIView {
+protocol BaseViewProtocol: UIView {
+    func setLayout()
+    func setStyle()
+}
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setStyle()
-    setLayout()
+extension BaseViewProtocol {
+  func setStyle() {
+    self.backgroundColor = Colors.white.color
   }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  func setStyle() {}
-
-  /// Constraints (계층 및 제약조건) 설정 메서드
-  func setLayout() {}
 }
