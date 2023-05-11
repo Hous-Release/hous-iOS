@@ -69,8 +69,10 @@ private extension FilledHousTextField {
     textCountLabel.text = "\(text.count)/\(maxCount)"
     if text.count <= maxCount {
       textCountLabel.textColor = Colors.g5.color
+      self.backgroundColor = Colors.blueL2.color
       return
     }
+    self.backgroundColor = Colors.g1.color
     textCountLabel.textColor = Colors.red.color
   }
 }
