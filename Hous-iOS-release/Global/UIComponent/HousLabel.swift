@@ -11,7 +11,7 @@ import AssetKit
 
 final class HousLabel: UILabel {
 
-  init(text: String, font: UIFont, textColor: UIColor) {
+  init(text: String?, font: UIFont, textColor: UIColor) {
     super.init(frame: .zero)
     setStyle(text: text, font: font, textColor: textColor)
   }
@@ -20,7 +20,7 @@ final class HousLabel: UILabel {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setStyle(text: String,
+  private func setStyle(text: String?,
                         font: UIFont,
                         textColor: UIColor) {
     self.text = text
