@@ -13,6 +13,12 @@ enum NavigationBar {
   }
 }
 
+enum SearchBar {
+  enum Rule {
+    static let placeholder = "검색하기"
+  }
+}
+
 enum OurRule {
   enum MainView {
     static let new = "new !"
