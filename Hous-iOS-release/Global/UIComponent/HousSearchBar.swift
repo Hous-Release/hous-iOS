@@ -14,14 +14,17 @@ final class HousSearchBar: UISearchBar {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setStyle()
+    setLayout()
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setStyle() {
-    self.placeholder = "검색하기"
+}
+
+private extension HousSearchBar {
+  func setStyle() {
     self.searchTextField.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     self.searchTextField.attributedPlaceholder = NSAttributedString(
       string: "검색하기", attributes: [
@@ -30,4 +33,11 @@ final class HousSearchBar: UISearchBar {
     self.searchTextField.leftView?.tintColor = Colors.blue.color
     self.layer.cornerRadius = 8
   }
+
+  func setLayout() {
+    self.snp.makeConstraints { make in
+      make.height.equalTo(ScreenUtils.getHeight(46))
+    }
+  }
+
 }

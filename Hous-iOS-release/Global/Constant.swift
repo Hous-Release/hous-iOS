@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum NavigationBar {
+  enum Title {
+    static let ruleMainTitle = "우리 집 Rules"
+  }
+}
+
 enum OurRule {
   enum MainView {
     static let new = "new !"
