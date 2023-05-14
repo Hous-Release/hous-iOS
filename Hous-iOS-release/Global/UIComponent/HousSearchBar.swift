@@ -9,7 +9,13 @@ import UIKit
 
 import AssetKit
 
-final class HousSearchBar: UISearchBar {
+final class HousSearchBar: UITextField {
+
+  private let imageContainerView = UIView()
+
+  private let searchIconImageView = UIImageView(image: Images.icSearch.image).then {
+    $0.contentMode = .scaleAspectFit
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -25,18 +31,31 @@ final class HousSearchBar: UISearchBar {
 
 private extension HousSearchBar {
   func setStyle() {
-    self.searchTextField.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    self.searchTextField.attributedPlaceholder = NSAttributedString(
+    self.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
+    self.attributedPlaceholder = NSAttributedString(
       string: "검색하기", attributes: [
       NSAttributedString.Key.foregroundColor: Colors.g5.color])
-    self.searchTextField.backgroundColor = Colors.blueL2.color
-    self.searchTextField.leftView?.tintColor = Colors.blue.color
+    self.backgroundColor = Colors.blueL2.color
+    self.leftView = imageContainerView
+    self.leftViewMode = .always
+    self.clearButtonMode = .whileEditing
     self.layer.cornerRadius = 8
+    self.layer.borderColor = nil
+    self.layer.borderWidth = 0
   }
 
   func setLayout() {
     self.snp.makeConstraints { make in
       make.height.equalTo(ScreenUtils.getHeight(46))
+    }
+
+    imageContainerView.addSubview(searchIconImageView)
+
+    searchIconImageView.snp.makeConstraints { make in
+      make.size.equalTo(ScreenUtils.getWidth(24))
+      make.centerY.equalToSuperview()
+      make.leading.equalToSuperview().inset(16)
+      make.trailing.equalToSuperview().inset(11)
     }
   }
 
