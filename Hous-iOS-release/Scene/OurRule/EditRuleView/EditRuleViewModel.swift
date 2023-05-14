@@ -14,7 +14,7 @@ final class EditRuleViewModel: ViewModelType {
 
   struct Input {
     let backButtonDidTap: Observable<Void>
-    let saveButtonDidTap: Observable<[RuleWithIdViewModel]>
+    let saveButtonDidTap: Observable<[HousRule]>
   }
 
   struct Output {

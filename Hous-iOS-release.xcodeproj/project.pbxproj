@@ -139,6 +139,9 @@
 		9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */; };
 		9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */; };
 		9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */; };
+		B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D8C2A0EAF440097D147 /* Constant.swift */; };
+		B5265D912A0EB48C0097D147 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D902A0EB48C0097D147 /* RulesViewController.swift */; };
+		B5265D942A0EB7FA0097D147 /* HousRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D932A0EB7FA0097D147 /* HousRule.swift */; };
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
 		B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */; };
 		B53F0FC12911738B004F1872 /* EditRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */; };
@@ -154,7 +157,8 @@
 		B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */; };
 		B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */; };
 		B5689CBB294F3F48006D20F5 /* monday.json in Resources */ = {isa = PBXBuildFile; fileRef = B5689CBA294F3F48006D20F5 /* monday.json */; };
-		B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914855290968AD00618F26 /* OurRulesViewController.swift */; };
+		B58FF3852A0EC5C600EB4E38 /* RuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58FF3842A0EC5C600EB4E38 /* RuleCollectionViewCell.swift */; };
+		B58FF3882A0ECCA700EB4E38 /* RuleRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58FF3872A0ECCA700EB4E38 /* RuleRespository.swift */; };
 		B591485A290AB68000618F26 /* KeyRulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */; };
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
 		B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914884290BC2D200618F26 /* RulesViewModel.swift */; };
@@ -451,6 +455,9 @@
 		9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestModel.swift; sourceTree = "<group>"; };
 		9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoViewController.swift; sourceTree = "<group>"; };
+		B5265D8C2A0EAF440097D147 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B5265D902A0EB48C0097D147 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		B5265D932A0EB7FA0097D147 /* HousRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousRule.swift; sourceTree = "<group>"; };
 		B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewController.swift; sourceTree = "<group>"; };
 		B53F0FBD29102885004F1872 /* EditRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B53F0FC02911738B004F1872 /* EditRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewModel.swift; sourceTree = "<group>"; };
@@ -466,7 +473,8 @@
 		B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B5689CBA294F3F48006D20F5 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
-		B5914855290968AD00618F26 /* OurRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurRulesViewController.swift; sourceTree = "<group>"; };
+		B58FF3842A0EC5C600EB4E38 /* RuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCollectionViewCell.swift; sourceTree = "<group>"; };
+		B58FF3872A0ECCA700EB4E38 /* RuleRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleRespository.swift; sourceTree = "<group>"; };
 		B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRulesTableViewCell.swift; sourceTree = "<group>"; };
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
 		B5914884290BC2D200618F26 /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
@@ -635,6 +643,7 @@
 		77067FF528DDD9010082A7E7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B58FF3862A0ECBF000EB4E38 /* Rule */,
 				B85C0B65294486B600784FCB /* User */,
 				B87FC01F2914F44700F8AA11 /* Onboarding */,
 				9B3BDBF7290E470A0054DF23 /* Profile */,
@@ -1091,14 +1100,23 @@
 			path = ProfileTest;
 			sourceTree = "<group>";
 		};
-		B53F0FB92910166A004F1872 /* MainRuleView */ = {
+		B5265D922A0EB7E30097D147 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B5914858290AB66B00618F26 /* Cells */,
-				B5914855290968AD00618F26 /* OurRulesViewController.swift */,
-				B5914884290BC2D200618F26 /* RulesViewModel.swift */,
+				B5265D932A0EB7FA0097D147 /* HousRule.swift */,
 			);
-			path = MainRuleView;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B53F0FB92910166A004F1872 /* MainRule */ = {
+			isa = PBXGroup;
+			children = (
+				B5265D922A0EB7E30097D147 /* Model */,
+				B5914858290AB66B00618F26 /* Cells */,
+				B5914884290BC2D200618F26 /* RulesViewModel.swift */,
+				B5265D902A0EB48C0097D147 /* RulesViewController.swift */,
+			);
+			path = MainRule;
 			sourceTree = "<group>";
 		};
 		B53F0FBA2910167E004F1872 /* EditRuleView */ = {
@@ -1129,13 +1147,21 @@
 			path = DeleteRuleView;
 			sourceTree = "<group>";
 		};
+		B58FF3862A0ECBF000EB4E38 /* Rule */ = {
+			isa = PBXGroup;
+			children = (
+				B58FF3872A0ECCA700EB4E38 /* RuleRespository.swift */,
+			);
+			path = Rule;
+			sourceTree = "<group>";
+		};
 		B59148542909688200618F26 /* OurRule */ = {
 			isa = PBXGroup;
 			children = (
 				B54D39FA29153C5300DA3A95 /* DeleteRuleView */,
 				B54D39F42914193100DA3A95 /* AddRuleView */,
 				B53F0FBA2910167E004F1872 /* EditRuleView */,
-				B53F0FB92910166A004F1872 /* MainRuleView */,
+				B53F0FB92910166A004F1872 /* MainRule */,
 			);
 			path = OurRule;
 			sourceTree = "<group>";
@@ -1145,6 +1171,7 @@
 			children = (
 				B5914859290AB68000618F26 /* KeyRulesTableViewCell.swift */,
 				B591485B290AB69300618F26 /* RulesTableViewCell.swift */,
+				B58FF3842A0EC5C600EB4E38 /* RuleCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1423,6 +1450,7 @@
 				B856701B28C9A26000B49984 /* UIComponent */,
 				B541F39F29B8BC1900F81DFE /* MainCoordinator.swift */,
 				B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */,
+				B5265D8C2A0EAF440097D147 /* Constant.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1888,6 +1916,7 @@
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
 				77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */,
 				9BE2D4762941C30E00C6D7F7 /* UIDevice+Extension.swift in Sources */,
+				B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */,
 				9B83201029196B09001EBDFE /* ProfileEditTextField.swift in Sources */,
 				B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */,
 				B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */,
@@ -1971,6 +2000,8 @@
 				B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */,
 				9BDBAD7E29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift in Sources */,
 				77067FF828DDD9200082A7E7 /* AuthRepository.swift in Sources */,
+				B58FF3882A0ECCA700EB4E38 /* RuleRespository.swift in Sources */,
+				B5265D912A0EB48C0097D147 /* RulesViewController.swift in Sources */,
 				B84EA6C728D61E2100C92FCD /* Reactive+Extension.swift in Sources */,
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
@@ -1995,6 +2026,7 @@
 				7706801528E045120082A7E7 /* SignInReactor.swift in Sources */,
 				770B959728F159F600C8C945 /* ServicesProvider.swift in Sources */,
 				9B959B0028FF1A3100EB3412 /* UIBezierPath+Extension.swift in Sources */,
+				B5265D942A0EB7FA0097D147 /* HousRule.swift in Sources */,
 				B84EA6E328DF431B00C92FCD /* PagingViewContents.swift in Sources */,
 				B880F5C6293C904400E888BC /* ResignView.swift in Sources */,
 				B84EA6B828D61BB400C92FCD /* TodoViewReactor.swift in Sources */,
@@ -2046,6 +2078,7 @@
 				B856702928CA087E00B49984 /* UITextField+Extension.swift in Sources */,
 				B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */,
 				9B6DD14B2929CCD50038BFD7 /* ProfileTestLoadingViewController.swift in Sources */,
+				B58FF3852A0EC5C600EB4E38 /* RuleCollectionViewCell.swift in Sources */,
 				9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */,
 				B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */,
 				B541F39A29B8B40300F81DFE /* Coordinator.swift in Sources */,
@@ -2062,7 +2095,6 @@
 				B84EA6DF28DD81D400C92FCD /* PagingView.swift in Sources */,
 				B541F3A029B8BC1900F81DFE /* MainCoordinator.swift in Sources */,
 				9B6DD151292D40B40038BFD7 /* ProfileTestLoadingViewModel.swift in Sources */,
-				B5914856290968AD00618F26 /* OurRulesViewController.swift in Sources */,
 				9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */,
 				B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */,
 				9B4EE80829490709002F97C2 /* ProfileAlarmViewModel.swift in Sources */,
