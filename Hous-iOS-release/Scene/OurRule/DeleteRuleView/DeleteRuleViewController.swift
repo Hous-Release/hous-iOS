@@ -31,7 +31,7 @@ class DeleteRuleViewController: BaseViewController, LoadingPresentable {
   // MARK: - var & let
   private let viewModel: DeleteRuleViewModel
 
-  private let rules: [RuleWithIdViewModel]
+  private let rules: [HousRule]
 
   private let disposeBag = DisposeBag()
 
@@ -40,7 +40,7 @@ class DeleteRuleViewController: BaseViewController, LoadingPresentable {
   private var deleteButtonDidTapped = PublishSubject<[Int]>()
 
   // MARK: - Lifecycle
-  init(rules: [RuleWithIdViewModel], viewModel: DeleteRuleViewModel) {
+  init(rules: [HousRule], viewModel: DeleteRuleViewModel) {
     self.rules = rules
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)

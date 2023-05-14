@@ -38,17 +38,17 @@ final class EditRuleViewController: BaseViewController, LoadingPresentable {
 
   private let disposeBag = DisposeBag()
 
-  private let saveButtonDidTapped = PublishSubject<[RuleWithIdViewModel]>()
+  private let saveButtonDidTapped = PublishSubject<[HousRule]>()
 
   private let viewDidTapped = PublishSubject<Void>()
 
-  private var editViewRules: [RuleWithIdViewModel]
+  private var editViewRules: [HousRule]
 
   private let viewModel: EditRuleViewModel
 
   private var tabBarHeight: CGFloat = 83
 
-  init(editViewRules: [RuleWithIdViewModel], viewModel: EditRuleViewModel) {
+  init(editViewRules: [HousRule], viewModel: EditRuleViewModel) {
     self.editViewRules = editViewRules
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -199,7 +199,7 @@ final class EditRuleViewController: BaseViewController, LoadingPresentable {
             guard let self = self else { return }
             let changedName = str.map { $0 }
 
-            let ruleWithIdViewModel = RuleWithIdViewModel(id: viewModel.id, name: changedName ?? "")
+            let ruleWithIdViewModel = HousRule(id: viewModel.id, name: changedName ?? "")
 
             self.editViewRules[row] = ruleWithIdViewModel
 
