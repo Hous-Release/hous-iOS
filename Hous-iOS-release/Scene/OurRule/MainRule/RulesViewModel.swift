@@ -40,7 +40,6 @@ final class RulesViewModel: ViewModelType {
       }
       .disposed(by: disposeBag)
 
-    
     let housRules = housRulesSubject.asDriver(onErrorJustReturn: [])
     let popViewController = input.backButtonDidTapped.asDriver(onErrorJustReturn: ())
     let presentBottomSheet = input.moreButtonDidTapped.asDriver(onErrorJustReturn: ())
