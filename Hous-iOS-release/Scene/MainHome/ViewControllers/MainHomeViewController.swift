@@ -162,7 +162,7 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
       .asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in
         guard let self = self else { return }
-        let viewController = OurRulesViewController(viewModel: RulesViewModel())
+        let viewController = RulesViewController(viewModel: RulesViewModel(repositoryProvider: ServiceProvider()))
         viewController.view.backgroundColor = .white
         self.navigationController?.pushViewController(viewController, animated: true)
       })

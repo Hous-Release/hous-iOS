@@ -8,7 +8,8 @@
 import UIKit
 import RxSwift
 
-class RulesTableViewCell: UITableViewCell {
+// MARK: - 추후 삭제 가능성 농후
+final class RulesTableViewCell: UITableViewCell {
 
   private let dotView = UIView().then {
     $0.backgroundColor = Colors.g3.color
@@ -21,12 +22,17 @@ class RulesTableViewCell: UITableViewCell {
     $0.setImage(Images.icCheck2.image, for: .selected)
   }
 
-  private let todoLabel = UILabel().then {
-    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
-    $0.textColor = Colors.g7.color
+  private let todoLabel = HousLabel(text: nil, font: Fonts.SpoqaHanSansNeo.medium.font(size: 14), textColor: Colors.g7.color).then {
     $0.textAlignment = .left
     $0.numberOfLines = 1
   }
+
+  private let newLabel = HousLabel(
+    text: OurRule.MainView.new,
+    font: Fonts.Montserrat.medium.font(size: 12),
+    textColor: Colors.blue.color).then {
+      $0.isHidden = true
+    }
 
   var disposeBag = DisposeBag()
 
@@ -89,7 +95,6 @@ class RulesTableViewCell: UITableViewCell {
   }
 
   func setNormalRulesData(rule: String) {
-    todoLabel.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     todoLabel.text = rule
   }
 }
