@@ -20,12 +20,14 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
   // MARK: - UI Components
 
   private let navigationBar = NavBarWithBackButtonView(
-    title: "우리 집 Rules",
+    title: NavigationBar.Title.ruleMainTitle,
     rightButtonImage: Images.frame1.image)
 
   private let searchBar = HousSearchBar()
 
   private lazy var rulesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
+
+  private let floatingButton = PlusFloatingButton()
 
   // MARK: - Properties
 
@@ -52,14 +54,34 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setDelegate()
     setLayout()
     configureDataSource()
     bind()
   }
 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    searchBarEndEditing()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: true)
+  }
+
+  @objc
+  func handleTap(recognizer: UITapGestureRecognizer) {
+    searchBar.endEditing(true)
+  }
+
+  private func setDelegate() {
+    rulesCollectionView.delegate = self
+  }
+
   private func bind() {
     let viewWillAppear = rx.rxViewWillAppear
-      .asSignal()
+      .asObservable()
       .do(onNext: { [weak self] _ in self?.showLoading() })
 
         let backbuttonDidTap = navigationBar.backButton.rx.tap
@@ -109,7 +131,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
 private extension RulesViewController {
   func createLayout() -> UICollectionViewLayout {
-    let config = UICollectionLayoutListConfiguration(appearance: .plain)
+    let config = UICollectionLayoutListConfiguration(appearance: .sidebarPlain)
     return UICollectionViewCompositionalLayout.list(using: config)
   }
 
@@ -117,7 +139,8 @@ private extension RulesViewController {
     self.view.addSubViews([
       navigationBar,
       searchBar,
-      rulesCollectionView
+      rulesCollectionView,
+      floatingButton
     ])
 
     navigationBar.snp.makeConstraints { make in
@@ -129,7 +152,6 @@ private extension RulesViewController {
     searchBar.snp.makeConstraints { make in
       make.top.equalTo(navigationBar.snp.bottom)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.height.equalTo(46)
     }
 
     rulesCollectionView.snp.makeConstraints { make in
@@ -137,8 +159,22 @@ private extension RulesViewController {
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
+
+    floatingButton.snp.makeConstraints { make in
+      make.bottom.equalTo(view.safeAreaLayoutGuide).inset(40)
+      make.trailing.equalToSuperview().inset(36)
+    }
   }
+
 }
+
+// MARK: - Delegate
+ extension RulesViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    searchBarEndEditing()
+  }
+
+ }
 
 // MARK: - DataSource
 
@@ -174,7 +210,7 @@ extension RulesViewController {
   }
 }
 
-extension RulesViewController {
+private extension RulesViewController {
   func showBottomSheet() {
 
     let bottomSheetType = BottomSheetType.defaultType
@@ -199,6 +235,11 @@ extension RulesViewController {
       viewController.view.backgroundColor = .white
       self.navigationController?.pushViewController(viewController, animated: true)
     }
+  }
+
+  @objc
+  func searchBarEndEditing() {
+    searchBar.endEditing(true)
   }
 
 }

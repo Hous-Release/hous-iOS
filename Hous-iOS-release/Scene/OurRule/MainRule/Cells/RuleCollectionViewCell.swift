@@ -11,6 +11,15 @@ import RxSwift
 
 final class RuleCollectionViewCell: UICollectionViewCell {
 
+  private var isNew: Bool = false {
+    didSet {
+      if isNew {
+        dotView.backgroundColor = Colors.blueL1.color
+        newLabel.isHidden = false
+      }
+    }
+  }
+
   private let dotView = UIView().then {
     $0.backgroundColor = Colors.g3.color
   }
@@ -22,7 +31,10 @@ final class RuleCollectionViewCell: UICollectionViewCell {
     $0.setImage(Images.icCheck2.image, for: .selected)
   }
 
-  private let todoLabel = HousLabel(text: nil, font: Fonts.SpoqaHanSansNeo.medium.font(size: 14), textColor: Colors.g7.color).then {
+  private let todoLabel = HousLabel(text: nil,
+                                    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+                                    textColor: Colors.g7.color)
+    .then {
     $0.textAlignment = .left
     $0.numberOfLines = 1
   }
@@ -60,7 +72,7 @@ final class RuleCollectionViewCell: UICollectionViewCell {
 
     dotView.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(32)
+      make.leading.equalToSuperview().offset(30)
       make.size.equalTo(8)
     }
 
