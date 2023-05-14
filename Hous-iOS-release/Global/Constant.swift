@@ -24,3 +24,11 @@ enum OurRule {
     static let new = "new !"
   }
 }
+
+enum ButtonTitle {
+  enum Rule {
+    static let edit = "편집"
+    static let guide = "가이드 다시보기"
+  }
+
+}

@@ -25,6 +25,19 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   private let searchBar = HousSearchBar()
 
+  private let housMenu = HousMenu().then {
+    $0.addGuideButtonAction { _ in
+      print("guide !")
+    }
+
+    $0.addEditButtonAction { _ in
+      print("edit !")
+    }
+
+    $0.alpha = 0
+
+  }
+
   private lazy var rulesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
 
   private let floatingButton = PlusFloatingButton()
@@ -115,7 +128,10 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
     output.presentBottomSheet
       .drive { _ in
-        self.showBottomSheet()
+        let alpha: CGFloat = self.housMenu.alpha == 1 ? 0 : 1
+        UIView.animate(withDuration: 0.3) {
+          self.housMenu.alpha = alpha
+        }
       }
       .disposed(by: disposeBag)
 
@@ -142,7 +158,8 @@ private extension RulesViewController {
       navigationBar,
       searchBar,
       rulesCollectionView,
-      floatingButton
+      floatingButton,
+      housMenu
     ])
 
     navigationBar.snp.makeConstraints { make in
@@ -165,6 +182,13 @@ private extension RulesViewController {
     floatingButton.snp.makeConstraints { make in
       make.bottom.equalTo(view.safeAreaLayoutGuide).inset(40)
       make.trailing.equalToSuperview().inset(36)
+    }
+
+    housMenu.snp.makeConstraints { make in
+      make.top.equalTo(navigationBar.rightButton.snp.bottom).offset(7)
+      make.trailing.equalTo(navigationBar.rightButton.snp.trailing).offset(6)
+      make.width.equalTo(139)
+      make.height.equalTo(88)
     }
   }
 
@@ -242,6 +266,7 @@ private extension RulesViewController {
   @objc
   func searchBarEndEditing() {
     searchBar.endEditing(true)
+    housMenu.alpha = 0
   }
 
 }
