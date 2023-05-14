@@ -16,6 +16,7 @@ public protocol ServiceProviderType: AnyObject {
   var todoRepository: TodoRepository { get }
   var profileLeaveRepository: ProfileLeaveRepository { get }
   var userRepository: UserRepository { get }
+  var ruleRepository: RuleRepository { get }
 }
 
 public final class ServiceProvider: ServiceProviderType {
@@ -27,5 +28,6 @@ public final class ServiceProvider: ServiceProviderType {
   public lazy var todoRepository: TodoRepository = TodoRepositoryImp(provider: self)
   public lazy var profileLeaveRepository: ProfileLeaveRepository = ProfileLeaveRepositoryImp(provider: self)
   public lazy var userRepository: UserRepository = UserRepositoryImp(provider: self)
+  public lazy var ruleRepository: RuleRepository = RuleRepositoryImp(provider: self)
 
 }
