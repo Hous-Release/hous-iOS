@@ -175,6 +175,8 @@
 		B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */; };
 		B595FFF128D5992F00F6B2E4 /* EditHousNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */; };
 		B595FFFF28D5B05E00F6B2E4 /* EditHousNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */; };
+		B59857552A1071D10042373D /* PlusFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59857542A1071D10042373D /* PlusFloatingButton.swift */; };
+		B59857572A10723B0042373D /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59857562A10723B0042373D /* ScreenUtils.swift */; };
 		B59C0DF828DDEE4F006DF373 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6D228D621B300C92FCD /* UIView+Extension.swift */; };
 		B59C0DFE28DE2C9B006DF373 /* MainHomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */; };
 		B5BC4A7C29B8C5CC0078317D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */; };
@@ -490,6 +492,8 @@
 		B595FFDB28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeRulesCollectionViewCell.swift; sourceTree = "<group>"; };
 		B595FFF028D5992F00F6B2E4 /* EditHousNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewController.swift; sourceTree = "<group>"; };
 		B595FFFE28D5B05E00F6B2E4 /* EditHousNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameViewModel.swift; sourceTree = "<group>"; };
+		B59857542A1071D10042373D /* PlusFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusFloatingButton.swift; sourceTree = "<group>"; };
+		B59857562A10723B0042373D /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
 		B59C0DFD28DE2C9B006DF373 /* MainHomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeSection.swift; sourceTree = "<group>"; };
 		B5BC4A7B29B8C5CC0078317D /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomieFactory.swift; sourceTree = "<group>"; };
@@ -1304,6 +1308,7 @@
 			isa = PBXGroup;
 			children = (
 				B84EA6C928D61E4400C92FCD /* MockParser.swift */,
+				B59857562A10723B0042373D /* ScreenUtils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1471,6 +1476,7 @@
 				B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */,
 				B5F22DE42A0BAA1D006F5552 /* FilledHousTextField.swift */,
 				B5F22DE62A0BAA57006F5552 /* HousLabel.swift */,
+				B59857542A1071D10042373D /* PlusFloatingButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1919,6 +1925,7 @@
 				B880F5CD293C95B700E888BC /* ResignInputCollectionViewCell.swift in Sources */,
 				9BE0C27E29081CD70028F13A /* ProfileDetailRecommendCollectionViewCell.swift in Sources */,
 				B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */,
+				B59857552A1071D10042373D /* PlusFloatingButton.swift in Sources */,
 				B85C0B602941B5D600784FCB /* UnderlinedTextStackView.swift in Sources */,
 				B8555AA02917D22D00E943AE /* ByDayTodoViewController.swift in Sources */,
 				B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */,
@@ -2013,6 +2020,7 @@
 				770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
+				B59857572A10723B0042373D /* ScreenUtils.swift in Sources */,
 				77EB7214292541CF00032776 /* UpdateTodoReactor.swift in Sources */,
 				B84EA6B128D61B2000C92FCD /* TodoFooterCollectionReusableView.swift in Sources */,
 				B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */,
