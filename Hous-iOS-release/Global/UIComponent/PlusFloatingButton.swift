@@ -7,14 +7,28 @@
 
 import UIKit
 
-class PlusFloatingButton: UIButton {
+final class PlusFloatingButton: UIButton {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+  private enum Size {
+    static let floatingButtonSize = ScreenUtils.getWidth(60)
+  }
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setLayout()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+private extension PlusFloatingButton {
+  func setLayout() {
+    self.setImage(Images.btnAddFloating.image, for: .normal)
+    self.snp.makeConstraints { make in
+      make.size.equalTo(Size.floatingButtonSize)
     }
-    */
+  }
 
 }
