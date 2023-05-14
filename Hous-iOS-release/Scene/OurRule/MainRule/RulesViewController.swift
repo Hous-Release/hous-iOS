@@ -58,6 +58,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
     setLayout()
     configureDataSource()
     bind()
+    endEditWhenTouchedCollectionView()
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,13 +71,14 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
     setTabBarIsHidden(isHidden: true)
   }
 
-  @objc
-  func handleTap(recognizer: UITapGestureRecognizer) {
-    searchBar.endEditing(true)
-  }
-
   private func setDelegate() {
     rulesCollectionView.delegate = self
+  }
+
+  private func endEditWhenTouchedCollectionView() {
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(searchBarEndEditing))
+    self.rulesCollectionView.backgroundView = UIView(frame: self.rulesCollectionView.bounds)
+    rulesCollectionView.backgroundView?.addGestureRecognizer(gesture)
   }
 
   private func bind() {
