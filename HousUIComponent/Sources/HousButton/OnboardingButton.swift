@@ -22,37 +22,23 @@ public final class OnboardingButton: UIButton {
   private func configUI(_ type: Button.Onboarding) {
     configuration = .bordered()
 
-    var attrString = AttributedString(type.rawValue)
+    var attrString = AttributedString(type.title)
     attrString.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
-    attrString.foregroundColor = Colors.white.color
+    attrString.foregroundColor = type.activeTitleColor
     configuration?.attributedTitle = attrString
 
     configuration?.background.cornerRadius = 0
     configuration?.cornerStyle = .fixed
     configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
 
-    updateHandlerByType(type)
-  }
-
-  private func updateHandlerByType(_ type: Button.Onboarding) {
-
     configurationUpdateHandler = { btn in
+
       switch btn.state {
       case .normal:
-        switch type {
-        case .next, .createRoom:
-          btn.configuration?.baseBackgroundColor = Colors.blue.color
-        case .leaveProfile:
-          btn.configuration?.baseBackgroundColor = Colors.red.color
-        }
+        btn.configuration?.baseBackgroundColor = type.activeBackgroundColor
 
       case .disabled:
-        switch type {
-        case .next, .createRoom:
-          btn.configuration?.baseBackgroundColor = Colors.g4.color
-        case .leaveProfile:
-          btn.configuration?.baseBackgroundColor = Colors.redB1.color
-        }
+        btn.configuration?.baseBackgroundColor = type.disabledBackgroundColor
 
       default:
         break
