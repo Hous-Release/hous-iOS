@@ -5,20 +5,103 @@
 //  Created by 김지현 on 2023/05/21.
 //
 
-import Foundation
+import UIKit
+import AssetKit
+
+protocol ButtonCommonProtocol {
+    var activeBackgroundColor: UIColor { get }
+    var disabledBackgroundColor: UIColor? { get }
+    var activeTitleColor: UIColor { get }
+    var disabledTitleColor: UIColor? { get }
+    var title: String { get }
+}
 
 public enum Button {
 
-    public enum Onboarding: String {
-        case next = "다음으로"
-        case createRoom = "방 만들기"
-        case leaveProfile = "탈퇴하기"
+    public enum Onboarding: ButtonCommonProtocol {
+        case next, createRoom, leaveProfile
+
+        var activeBackgroundColor: UIColor {
+            switch self {
+            case .next, .createRoom:
+                return Colors.blue.color
+            case .leaveProfile:
+                return Colors.red.color
+            }
+        }
+
+        var disabledBackgroundColor: UIColor? {
+            switch self {
+            case .next, .createRoom:
+                return Colors.g4.color
+            case .leaveProfile:
+                return Colors.redB1.color
+            }
+        }
+
+        var activeTitleColor: UIColor {
+            return Colors.white.color
+        }
+
+        var disabledTitleColor: UIColor? { return nil }
+
+        var title: String {
+            switch self {
+            case .next:
+                return "다음으로"
+            case .createRoom:
+                return "방 만들기"
+            case .leaveProfile:
+                return "탈퇴하기"
+            }
+        }
     }
 
-    public enum Login {
-        static let kakao = "카카오톡으로 계속하기"
-        static let apple = "Apple로 계속하기"
-        static let save = "저장하기"
-        static let retry = "다시 검사해보기"
+}
+
+extension Button {
+
+    public enum Basic: ButtonCommonProtocol {
+        case kakao, apple, save, retry
+
+        var activeBackgroundColor: UIColor {
+            switch self {
+            case .kakao:
+                return Colors.kakaoYellow.color
+            case .apple:
+                return Colors.black.color
+            case .save:
+                return Colors.black.color
+            case .retry:
+                return Colors.blue.color
+            }
+        }
+
+        var disabledBackgroundColor: UIColor? { return nil }
+
+        var activeTitleColor: UIColor {
+            switch self {
+            case .kakao:
+                return Colors.kakaoBrown.color
+            case .apple, .save, .retry:
+                return Colors.white.color
+            }
+        }
+
+        var disabledTitleColor: UIColor? { return nil }
+
+        var title: String {
+            switch self {
+            case .kakao:
+                return "카카오톡으로 계속하기"
+            case .apple:
+                return "Apple로 계속하기"
+            case .save:
+                return "저장하기"
+            case .retry:
+                return "다시 검사하기"
+            }
+        }
     }
+
 }
