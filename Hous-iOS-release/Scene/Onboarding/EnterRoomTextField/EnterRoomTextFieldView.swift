@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import HousButton
+
 class EnterRoomTextFieldView: UIView {
 
   var navigationBar = NavBarWithBackButtonView(title: "")
@@ -37,9 +39,17 @@ class EnterRoomTextFieldView: UIView {
     $0.isHidden = true
   }
 
-  var enterRoomButton = NextButton("")
+  var enterRoomButton: OnboardingButton
 
   init(roomType: EnterRoomType) {
+
+    switch roomType {
+    case .new:
+      enterRoomButton = OnboardingButton(.createRoom)
+    case .exist:
+      enterRoomButton = OnboardingButton(.enterRoom)
+    }
+
     super.init(frame: .zero)
     render()
     setup(roomType)
@@ -94,7 +104,6 @@ class EnterRoomTextFieldView: UIView {
     subTitleLabel.text = roomType.textFieldSubTitleText
     textField.placeholder = roomType.textFieldPlaceholderText
     textField.returnKeyType = .done
-    enterRoomButton.setAttrTitle(roomType.textFieldViewButtonText)
   }
 
 }

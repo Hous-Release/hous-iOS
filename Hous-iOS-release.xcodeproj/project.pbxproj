@@ -194,6 +194,7 @@
 		B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA84290A534800E4916F /* MemberCollectionViewCellReactor.swift */; };
 		B80BBA87290AA55500E4916F /* TodoByMemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80BBA86290AA55500E4916F /* TodoByMemListCell.swift */; };
 		B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8249A5429116E69008005DE /* MemEmptyListCell.swift */; };
+		B84AC0292A1A5EA7003F1CA5 /* HousUIComponent in Frameworks */ = {isa = PBXBuildFile; productRef = B84AC0282A1A5EA7003F1CA5 /* HousUIComponent */; };
 		B84EA6A128D619FD00C92FCD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A028D619FD00C92FCD /* TodoViewController.swift */; };
 		B84EA6A328D61A2A00C92FCD /* TodoPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A228D61A2A00C92FCD /* TodoPopupViewController.swift */; };
 		B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84EA6A528D61A5400C92FCD /* TodoView.swift */; };
@@ -619,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				770B959F28F320C400C8C945 /* BottomSheetKit in Frameworks */,
+				B84AC0292A1A5EA7003F1CA5 /* HousUIComponent in Frameworks */,
 				7717A84D28BBB89700C449CC /* ThirdPartyLibraryManager in Frameworks */,
 				773F1E8F28D5944800AE7521 /* Network in Frameworks */,
 				777085AC29040D5C0018240B /* AssetKit in Frameworks */,
@@ -1688,6 +1690,7 @@
 				770B959228EB0EFF00C8C945 /* UserInformation */,
 				777085AB29040D5C0018240B /* AssetKit */,
 				770B959E28F320C400C8C945 /* BottomSheetKit */,
+				B84AC0282A1A5EA7003F1CA5 /* HousUIComponent */,
 			);
 			productName = "Hous-iOS-release";
 			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
@@ -3610,6 +3613,10 @@
 		777085AB29040D5C0018240B /* AssetKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AssetKit;
+		};
+		B84AC0282A1A5EA7003F1CA5 /* HousUIComponent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HousUIComponent;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
