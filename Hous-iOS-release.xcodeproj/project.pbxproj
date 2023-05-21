@@ -554,6 +554,7 @@
 		B856702628C9DF1200B49984 /* EnterInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoViewReactor.swift; sourceTree = "<group>"; };
 		B856702828CA087E00B49984 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		B856702E28CA93F600B49984 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B856CB5B2A1A146200A65B10 /* HousUIComponent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HousUIComponent; sourceTree = "<group>"; };
 		B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayBackgroundTextField.swift; sourceTree = "<group>"; };
 		B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextStackView.swift; sourceTree = "<group>"; };
 		B85C0B6329447E4A00784FCB /* ResignReasonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignReasonType.swift; sourceTree = "<group>"; };
@@ -722,6 +723,7 @@
 		777C665428A74A62000BECEA = {
 			isa = PBXGroup;
 			children = (
+				B856CB5B2A1A146200A65B10 /* HousUIComponent */,
 				B541F32B29A9C7A500F81DFE /* .swiftlint.yml */,
 				777085A82903F1980018240B /* AssetKit */,
 				770B959D28F2F65500C8C945 /* BottomSheetKit */,
