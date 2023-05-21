@@ -19,11 +19,11 @@ protocol ButtonCommonProtocol {
 public enum Button {
 
     public enum Onboarding: ButtonCommonProtocol {
-        case next, createRoom, leaveProfile
+        case next, createRoom, enterRoom, start, toStart, leaveProfile
 
         var activeBackgroundColor: UIColor {
             switch self {
-            case .next, .createRoom:
+            case .next, .createRoom, .enterRoom, .start, .toStart:
                 return Colors.blue.color
             case .leaveProfile:
                 return Colors.red.color
@@ -32,7 +32,7 @@ public enum Button {
 
         var disabledBackgroundColor: UIColor? {
             switch self {
-            case .next, .createRoom:
+            case .next, .createRoom, .enterRoom, .start, .toStart:
                 return Colors.g4.color
             case .leaveProfile:
                 return Colors.redB1.color
@@ -51,6 +51,12 @@ public enum Button {
                 return "다음으로"
             case .createRoom:
                 return "방 만들기"
+            case .enterRoom:
+                return "방 참여하기"
+            case .start:
+                return "시작하기"
+            case .toStart:
+                return "처음으로"
             case .leaveProfile:
                 return "탈퇴하기"
             }

@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 import Then
 
+//import HousUIComponent
+import HousButton
+
 final class PagingView: UIView {
 
   var navigationBar = NavBarWithBackButtonView(
@@ -41,7 +44,7 @@ final class PagingView: UIView {
     $0.pageIndicatorTintColor = Colors.g3.color
     $0.currentPageIndicatorTintColor = Colors.blue.color
   }
-  var nextButton = NextButton("다음으로").then {
+  var nextButton = OnboardingButton(.next).then {
     $0.isHidden = true
   }
 
