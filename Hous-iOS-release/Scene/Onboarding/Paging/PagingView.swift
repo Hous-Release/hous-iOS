@@ -10,8 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-//import HousUIComponent
-import HousButton
+import HousUIComponent
 
 final class PagingView: UIView {
 

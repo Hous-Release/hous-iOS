@@ -11,7 +11,11 @@ let package = Package(
   products: [
     .library(
       name: "HousUIComponent",
+      targets: ["HousUIComponent"]),
+    .library(
+      name: "HousButton",
       targets: ["HousButton"])
+    // write your new module below
   ],
   dependencies: [
     .package(
@@ -28,8 +32,14 @@ let package = Package(
           package: "AssetKit"
         )
       ]),
+    .target(
+      name: "HousUIComponent",
+      dependencies: [
+        "HousButton"
+        // write your new module below
+      ]),
     .testTarget(
       name: "HousUIComponentTests",
-      dependencies: ["HousButton"])
+      dependencies: ["HousUIComponent"])
   ]
 )
