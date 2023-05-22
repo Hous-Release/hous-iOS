@@ -61,26 +61,8 @@ final class ConfirmRemoveProfileViewController: UIViewController {
     $0.textAlignment = .center
   }
 
-  let confirmButton = UIButton(configuration: .plain()).then {
-
-    var attrString = AttributedString("탈퇴하겠습니다")
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
-    $0.configuration?.attributedTitle = attrString
-    $0.configuration?.baseBackgroundColor = Colors.white.color
-    $0.configuration?.imagePlacement = .leading
-    $0.configuration?.imagePadding = 4
-    $0.configurationUpdateHandler = { btn in
-      switch btn.state {
-      case .normal:
-        btn.configuration?.baseForegroundColor = Colors.redB1.color
-        btn.configuration?.image = Images.icCheckNotOnboardSetting.image
-      case .selected:
-        btn.configuration?.baseForegroundColor = Colors.red.color
-        btn.configuration?.image = Images.icCheckYesOnboardSetting.image
-      default:
-        break
-      }
-    }
+  let confirmButton = CheckButton(.confirmRemoveProfile).then {
+    $0.isSelected = false
   }
 
   var removeProfileButton = OnboardingButton(.leaveProfile).then {
