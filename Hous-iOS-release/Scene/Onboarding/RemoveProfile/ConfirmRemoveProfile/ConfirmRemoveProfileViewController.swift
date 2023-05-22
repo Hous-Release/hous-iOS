@@ -1,0 +1,130 @@
+//
+//  ConfirmRemoveProfileViewController.swift
+//  Hous-iOS-release
+//
+//  Created by 김지현 on 2023/05/22.
+//
+
+import UIKit
+import Then
+
+import HousUIComponent
+
+final class ConfirmRemoveProfileViewController: UIViewController {
+
+  enum Size {
+    static let navigationBarHeight = 64
+    static let guideLabel: Double = 13
+  }
+
+  let navigationBarView = NavBarWithBackButtonView(
+    title: "회원 탈퇴",
+    rightButtonText: "",
+    isSeparatorLineHidden: false)
+
+  let stackView = UIStackView().then {
+    $0.axis = .vertical
+    $0.alignment = .fill
+    $0.distribution = .fillProportionally
+    $0.spacing = 24
+  }
+
+  let titleLabel = UILabel().then {
+    $0.text = "정말 탈퇴하시겠어요?"
+    $0.textColor = Colors.g7.color
+    $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 18)
+    $0.textAlignment = .center
+  }
+
+  let imageView = UIImageView().then {
+    $0.image = Images.resign.image
+    $0.makeRounded(cornerRadius: 8)
+    $0.clipsToBounds = true
+  }
+
+  let guideLabel = UILabel().then {
+
+    let style = NSMutableParagraphStyle()
+    let lineheight = Size.guideLabel * 1.84
+    style.minimumLineHeight = lineheight
+    style.maximumLineHeight = lineheight
+
+    $0.attributedText = NSAttributedString(
+      string: "회원을 탈퇴하면 탈퇴 신청 즉시\n회원의 개인정보는 삭제되며 복구할 수 없습니다.",
+      attributes: [
+        .paragraphStyle: style,
+        .baselineOffset: (lineheight - Size.guideLabel) / 4
+      ])
+    $0.textColor = Colors.g4.color
+    $0.numberOfLines = 2
+    $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: Size.guideLabel)
+    $0.textAlignment = .center
+  }
+
+  let confirmButton = UIButton(configuration: .plain()).then {
+
+    var attrString = AttributedString("탈퇴하겠습니다")
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
+    $0.configuration?.attributedTitle = attrString
+    $0.configuration?.baseBackgroundColor = Colors.white.color
+    $0.configuration?.imagePlacement = .leading
+    $0.configuration?.imagePadding = 4
+    $0.configurationUpdateHandler = { btn in
+      switch btn.state {
+      case .normal:
+        btn.configuration?.baseForegroundColor = Colors.redB1.color
+        btn.configuration?.image = Images.icCheckNotOnboardSetting.image
+      case .selected:
+        btn.configuration?.baseForegroundColor = Colors.red.color
+        btn.configuration?.image = Images.icCheckYesOnboardSetting.image
+      default:
+        break
+      }
+    }
+  }
+
+  var removeProfileButton = OnboardingButton(.leaveProfile).then {
+    $0.isEnabled = false
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    configUI()
+  }
+
+  private func setup() {
+    self.view.backgroundColor = Colors.white.color
+    navigationController?.navigationBar.isHidden = true
+    navigationBarView.delegate = self
+  }
+
+  private func configUI() {
+
+    self.view.addSubViews([navigationBarView, stackView, removeProfileButton])
+    stackView.addArrangedSubviews(titleLabel, imageView, guideLabel, confirmButton)
+
+    navigationBarView.snp.makeConstraints { make in
+      make.top.equalTo(self.view.safeAreaLayoutGuide)
+      make.leading.trailing.equalToSuperview()
+      make.height.equalTo(Size.navigationBarHeight)
+    }
+
+    stackView.snp.makeConstraints { make in
+      make.trailing.leading.equalToSuperview().inset(28)
+      make.center.equalToSuperview()
+    }
+
+    removeProfileButton.snp.makeConstraints { make in
+      make.leading.trailing.bottom.equalToSuperview()
+      make.height.equalTo(86)
+    }
+  }
+}
+
+extension ConfirmRemoveProfileViewController: NavBarWithBackButtonViewDelegate {
+
+  func backButtonDidTapped() {
+    navigationController?.popViewController(animated: true)
+  }
+}

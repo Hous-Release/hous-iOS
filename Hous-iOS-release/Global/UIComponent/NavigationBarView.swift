@@ -33,6 +33,10 @@ class NavBarWithBackButtonView: UIView {
     $0.titleLabel?.textAlignment = .right
   }
 
+  private let grayLineView = UIView().then {
+    $0.backgroundColor = Colors.g1.color
+  }
+
   var title: String = "" {
     didSet {
       titleLabel.text = title
@@ -53,10 +57,11 @@ class NavBarWithBackButtonView: UIView {
 
   init(title: String = "",
        rightButtonText: String = "",
-       rightButtonImage: UIImage? = nil
+       rightButtonImage: UIImage? = nil,
+       isSeparatorLineHidden: Bool = true
   ) {
     super.init(frame: .zero)
-    configUI(title, rightButtonText, rightButtonImage)
+    configUI(title, rightButtonText, rightButtonImage, isSeparatorLineHidden)
     render()
 
   }
@@ -68,18 +73,20 @@ class NavBarWithBackButtonView: UIView {
   private func configUI(
     _ title: String,
     _ rightButtonText: String,
-    _ rightButtonImage: UIImage?
+    _ rightButtonImage: UIImage?,
+    _ isSeparatorLineHidden: Bool
   ) {
     titleLabel.text = title
     rightButton.setTitle(rightButtonText, for: .normal)
     rightButton.setImage(rightButtonImage, for: .normal)
+    isSeparatorLineHidden ? (grayLineView.isHidden = true) : (grayLineView.isHidden = false)
   }
 
   private func render() {
 
     backgroundColor = Colors.white.color
 
-    addSubViews([backButton, titleLabel, rightButton])
+    addSubViews([backButton, titleLabel, rightButton, grayLineView])
 
     backButton.snp.makeConstraints { make in
       make.size.equalTo(24)
@@ -95,6 +102,11 @@ class NavBarWithBackButtonView: UIView {
       make.size.greaterThanOrEqualTo(24)
       make.centerY.equalToSuperview()
       make.trailing.equalToSuperview().inset(24)
+    }
+
+    grayLineView.snp.makeConstraints { make in
+      make.leading.trailing.bottom.equalToSuperview()
+      make.height.equalTo(1)
     }
   }
 
