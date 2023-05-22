@@ -42,7 +42,42 @@ final class ConfirmRemoveProfileViewController: UIViewController, ReactorKit.Vie
 extension ConfirmRemoveProfileViewController {
 
   func bind(reactor: Reactor) {
-    // bindaction
+    bindAction(reactor)
+    bindState(reactor)
+  }
+
+  private func bindAction(_ reactor: Reactor) {
+    mainView.confirmButton.rx.tap
+      .map { Reactor.Action.didTapCheck }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+
+    mainView.removeProfileButton.rx.tap
+      .map { Reactor.Action.didTapRemoveProfile }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+  }
+
+  private func bindState(_ reactor: Reactor) {
+
+    reactor.pulse(\.$isCheckButtonSelected)
+      .asDriver(onErrorJustReturn: false)
+      .drive(mainView.confirmButton.rx.isSelected)
+      .disposed(by: disposeBag)
+
+    reactor.pulse(\.$isRemoveButtonEnabled)
+      .asDriver(onErrorJustReturn: false)
+      .drive(mainView.removeProfileButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+
+    reactor.pulse(\.$isRemoveButtonClicked)
+      .asDriver(onErrorJustReturn: false)
+      .drive(onNext: self.pushFeedbackView)
+      .disposed(by: disposeBag)
+  }
+
+  private func pushFeedbackView(_ success: Bool) {
+    print("Click")
   }
 }
 

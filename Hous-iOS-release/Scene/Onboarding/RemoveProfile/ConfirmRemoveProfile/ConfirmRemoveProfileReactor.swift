@@ -17,13 +17,15 @@ final class ConfirmRemoveProfileReactor: ReactorKit.Reactor {
 
   enum Mutation {
     case setIsCheckButtonSelected(Bool)
-    case setIsRemoveButtonActivated(Bool?)
+    case setIsRemoveButtonEnabled(Bool)
+    case setIsRemoveButtonClicked(Bool)
     case setError(String?)
   }
 
   struct State {
-    var isCheckButtonSelected: Bool = false
-    var isRemoveButtonActivated: Bool? = false
+    @Pulse var isCheckButtonSelected: Bool = false
+    @Pulse var isRemoveButtonEnabled: Bool = false
+    @Pulse var isRemoveButtonClicked: Bool = false
 
     var error: String? = nil
   }
@@ -34,9 +36,17 @@ final class ConfirmRemoveProfileReactor: ReactorKit.Reactor {
 
     switch action {
     case .didTapCheck:
-      return .empty()
+
+      let newCheckFlag = !currentState.isCheckButtonSelected
+      return .concat([
+        .just(Mutation.setIsCheckButtonSelected(newCheckFlag)),
+        .just(Mutation.setIsRemoveButtonEnabled(newCheckFlag))
+      ])
+
     case .didTapRemoveProfile:
-      return .empty()
+      return .just(Mutation.setIsRemoveButtonClicked(
+        !currentState.isRemoveButtonClicked
+      ))
     }
   }
 
@@ -47,10 +57,12 @@ final class ConfirmRemoveProfileReactor: ReactorKit.Reactor {
     switch mutation {
     case let .setIsCheckButtonSelected(flag):
       newState.isCheckButtonSelected = flag
-    case let .setIsRemoveButtonActivated(flag):
-      newState.isRemoveButtonActivated = flag
+    case let .setIsRemoveButtonEnabled(flag):
+      newState.isRemoveButtonEnabled = flag
     case let .setError(error):
       newState.error = error
+    case let .setIsRemoveButtonClicked(flag):
+      newState.isRemoveButtonClicked = flag
     }
 
     return newState
