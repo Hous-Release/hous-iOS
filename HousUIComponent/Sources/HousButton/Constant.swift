@@ -9,9 +9,9 @@ import UIKit
 import AssetKit
 
 protocol ButtonCommonProtocol {
-    var activeBackgroundColor: UIColor { get }
+    var activeBackgroundColor: UIColor? { get }
     var disabledBackgroundColor: UIColor? { get }
-    var activeTitleColor: UIColor { get }
+    var activeTitleColor: UIColor? { get }
     var disabledTitleColor: UIColor? { get }
     var title: String { get }
 }
@@ -21,7 +21,7 @@ public enum Button {
     public enum Onboarding: ButtonCommonProtocol {
         case next, createRoom, enterRoom, start, toStart, leaveProfile
 
-        var activeBackgroundColor: UIColor {
+        var activeBackgroundColor: UIColor? {
             switch self {
             case .next, .createRoom, .enterRoom, .start, .toStart:
                 return Colors.blue.color
@@ -39,7 +39,7 @@ public enum Button {
             }
         }
 
-        var activeTitleColor: UIColor {
+        var activeTitleColor: UIColor? {
             return Colors.white.color
         }
 
@@ -70,7 +70,7 @@ extension Button {
     public enum Basic: ButtonCommonProtocol {
         case kakao, apple, save, retry
 
-        var activeBackgroundColor: UIColor {
+        var activeBackgroundColor: UIColor? {
             switch self {
             case .kakao:
                 return Colors.kakaoYellow.color
@@ -85,7 +85,7 @@ extension Button {
 
         var disabledBackgroundColor: UIColor? { return nil }
 
-        var activeTitleColor: UIColor {
+        var activeTitleColor: UIColor? {
             switch self {
             case .kakao:
                 return Colors.kakaoBrown.color
@@ -110,4 +110,42 @@ extension Button {
         }
     }
 
+}
+
+extension Button {
+
+    public enum Check: ButtonCommonProtocol {
+        case confirmRemoveProfile, comfirmFeedback
+
+        var activeBackgroundColor: UIColor? { return nil }
+
+        var disabledBackgroundColor: UIColor? { return nil }
+
+        var activeTitleColor: UIColor? {
+            switch self {
+            case .confirmRemoveProfile:
+                return Colors.red.color
+            case .comfirmFeedback:
+                return Colors.blue.color
+            }
+        }
+
+        var disabledTitleColor: UIColor? {
+            switch self {
+            case .confirmRemoveProfile:
+                return Colors.redB1.color
+            case .comfirmFeedback:
+                return Colors.blueL1.color
+            }
+        }
+
+        var title: String {
+            switch self {
+            case .confirmRemoveProfile:
+                return "탈퇴하겠습니다"
+            case .comfirmFeedback:
+                return "동의합니다."
+            }
+        }
+    }
 }

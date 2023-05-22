@@ -10,7 +10,7 @@ import AssetKit
 
 public final class BasicButton: UIButton {
 
-  init(_ type: Button.Basic) {
+  public init(_ type: Button.Basic) {
     super.init(frame: .zero)
     configUI(type)
   }
