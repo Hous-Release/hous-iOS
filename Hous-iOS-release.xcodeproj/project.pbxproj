@@ -186,6 +186,7 @@
 		B5D06E4B2A19E3E500048C72 /* TitleDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D06E4A2A19E3E500048C72 /* TitleDetailCollectionViewCell.swift */; };
 		B5D06E4D2A19E41E00048C72 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D06E4C2A19E41E00048C72 /* PhotoCollectionViewCell.swift */; };
 		B5D06E4F2A19EF5600048C72 /* AddEditRuleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D06E4E2A19EF5600048C72 /* AddEditRuleDataSource.swift */; };
+		B5D06E512A1B75BF00048C72 /* HousTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D06E502A1B75BF00048C72 /* HousTextView.swift */; };
 		B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */; };
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
@@ -509,6 +510,7 @@
 		B5D06E4A2A19E3E500048C72 /* TitleDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5D06E4C2A19E41E00048C72 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5D06E4E2A19EF5600048C72 /* AddEditRuleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditRuleDataSource.swift; sourceTree = "<group>"; };
+		B5D06E502A1B75BF00048C72 /* HousTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTextView.swift; sourceTree = "<group>"; };
 		B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomieFactory.swift; sourceTree = "<group>"; };
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
@@ -1518,6 +1520,7 @@
 				B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */,
 				B59857542A1071D10042373D /* PlusFloatingButton.swift */,
 				B52EEE882A10C26A00518C8F /* HousMenu.swift */,
+				B5D06E502A1B75BF00048C72 /* HousTextView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -2179,6 +2182,7 @@
 				B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */,
 				B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
+				B5D06E512A1B75BF00048C72 /* HousTextView.swift in Sources */,
 				9B70663A2942FF34003539D7 /* ProfileAlarmSettingViewController.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,
 				B595FFCC28CC77F400F6B2E4 /* ViewModelType.swift in Sources */,
