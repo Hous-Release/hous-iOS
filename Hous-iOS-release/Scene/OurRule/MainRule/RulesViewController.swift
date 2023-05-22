@@ -20,7 +20,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
   // MARK: - UI Components
 
   private let navigationBar = NavBarWithBackButtonView(
-    title: NavigationBar.Title.ruleMainTitle,
+    title: StringLiterals.NavigationBar.Title.ruleMainTitle,
     rightButtonImage: Images.frame1.image)
 
   private let searchBar = HousSearchBar()

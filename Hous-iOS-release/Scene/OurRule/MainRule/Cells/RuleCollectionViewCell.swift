@@ -41,12 +41,11 @@ final class RuleCollectionViewCell: UICollectionViewCell {
   }
 
   private let newLabel = HousLabel(
-    text: OurRule.MainView.new,
+    text: StringLiterals.OurRule.MainView.new,
     font: .EN2,
     textColor: Colors.blue.color
   ).then {
     $0.isHidden = true
-
   }
 
   var disposeBag = DisposeBag()

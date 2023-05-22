@@ -7,28 +7,38 @@
 
 import Foundation
 
-enum NavigationBar {
-  enum Title {
-    static let ruleMainTitle = "우리 집 Rules"
+enum StringLiterals {
+  enum NavigationBar {
+    enum Title {
+      static let ruleMainTitle = "우리 집 Rules"
+      static let addEditTitle = "Rules 추가"
+    }
   }
-}
 
-enum SearchBar {
-  enum Rule {
-    static let placeholder = "검색하기"
+  enum SearchBar {
+    enum Rule {
+      static let placeholder = "검색하기"
+    }
   }
-}
 
-enum OurRule {
-  enum MainView {
-    static let new = "new !"
+  enum OurRule {
+    enum MainView {
+      static let new = "new !"
+    }
+    enum AddEditView {
+      static let titleText = "제목 *"
+      static let description = "설명"
+      static let photo = "사진"
+    }
   }
-}
 
-enum ButtonTitle {
-  enum Rule {
-    static let edit = "편집"
-    static let guide = "가이드 다시보기"
+  enum ButtonTitle {
+    enum Rule {
+      static let edit = "편집"
+      static let guide = "가이드 다시보기"
+      static let add = "추가"
+      static let addPhoto = "추가하기"
+    }
   }
 
 }

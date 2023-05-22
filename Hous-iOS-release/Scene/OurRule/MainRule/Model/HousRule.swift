@@ -34,7 +34,7 @@ public struct HousRule: Hashable {
     ]
   }
 
-  public static func ==(lhs: HousRule, rhs: HousRule) -> Bool {
+  public static func == (lhs: HousRule, rhs: HousRule) -> Bool {
     return lhs.identifier == rhs.identifier
   }
 

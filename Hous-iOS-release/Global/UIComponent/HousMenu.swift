@@ -11,12 +11,12 @@ final class HousMenu: UIView {
 
   private let editButton = UIButton().then {
     $0.setTitleColor(Colors.blue.color, for: .normal)
-    $0.setTitle(ButtonTitle.Rule.edit, for: .normal)
+    $0.setTitle(StringLiterals.ButtonTitle.Rule.edit, for: .normal)
     $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
 
   private let guideButton = UIButton().then {
-    $0.setTitle(ButtonTitle.Rule.guide, for: .normal)
+    $0.setTitle(StringLiterals.ButtonTitle.Rule.guide, for: .normal)
     $0.setTitleColor(Colors.g6.color, for: .normal)
     $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
