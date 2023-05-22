@@ -328,8 +328,8 @@ extension ProfileSettingViewController {
 
   private func presentResignViewController() {
     let provider = ServiceProvider()
-    // let reactor = ResignViewReactor(provider: provider)
-    let removeProfileVC = ConfirmRemoveProfileViewController()
+    let reactor = ConfirmRemoveProfileReactor()
+    let removeProfileVC = ConfirmRemoveProfileViewController(reactor)
     navigationController?.pushViewController(removeProfileVC, animated: true)
   }
 

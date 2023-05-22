@@ -6,13 +6,22 @@
 //
 
 import UIKit
-import Then
+import ReactorKit
 
-import HousUIComponent
+final class ConfirmRemoveProfileViewController: UIViewController, ReactorKit.View {
 
-final class ConfirmRemoveProfileViewController: UIViewController {
-
+  typealias Reactor = ConfirmRemoveProfileReactor
+  var disposeBag = DisposeBag()
   var mainView = ConfirmRemoveProfileView()
+
+  init(_ reactor: Reactor) {
+    super.init(nibName: nil, bundle: nil)
+    self.reactor = reactor
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func loadView() {
     self.view = mainView
@@ -27,6 +36,13 @@ final class ConfirmRemoveProfileViewController: UIViewController {
     self.view.backgroundColor = Colors.white.color
     navigationController?.navigationBar.isHidden = true
     mainView.navigationBarView.delegate = self
+  }
+}
+
+extension ConfirmRemoveProfileViewController {
+
+  func bind(reactor: Reactor) {
+    // bindaction
   }
 }
 
