@@ -8,6 +8,7 @@
 import UIKit
 
 import PhotosUI
+import RxSwift
 
 @available(iOS 16.0, *)
 final class AddEditRuleViewController: UIViewController {
@@ -18,6 +19,8 @@ final class AddEditRuleViewController: UIViewController {
     case photoInput
   }
 
+  // MARK: - UI Components
+
   private let navigationBar = NavBarWithBackButtonView(
     title: StringLiterals.NavigationBar.Title.addEditTitle,
     rightButtonText: "추가")
@@ -26,7 +29,16 @@ final class AddEditRuleViewController: UIViewController {
     $0.isScrollEnabled = false
   }
 
+  // MARK: - Properties
+
+  private let maxImageCount = 5
+
   private var dataSource: UICollectionViewDiffableDataSource<Section, RulePhoto>?
+
+  private let disposeBag = DisposeBag()
+
+  private let albumImageUploadedSubject = PublishSubject<Void>()
+  private let currPhotoCountSubject = PublishSubject<Int>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,6 +70,8 @@ final class AddEditRuleViewController: UIViewController {
   }
 
 }
+
+// MARK: - UI & Layout
 
 @available(iOS 16.0, *)
 extension AddEditRuleViewController {
@@ -91,16 +105,8 @@ extension AddEditRuleViewController {
   }
 
   func createPhotoInputSectionLayout(section: Section) -> NSCollectionLayoutSection {
-    let badgeAnchor = NSCollectionLayoutAnchor(edges: [.top, .trailing], fractionalOffset: CGPoint(x: 0.3, y: -0.3))
-    let badgeSize = NSCollectionLayoutSize(widthDimension: .absolute(24), heightDimension: .absolute(24))
-
-    let badge = NSCollectionLayoutSupplementaryItem(
-      layoutSize: badgeSize,
-      elementKind: DeletePhotoCollectionReusableView.className,
-      containerAnchor: badgeAnchor)
-
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-    let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [badge])
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
     item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 12)
 
     let groupSize = NSCollectionLayoutSize(
@@ -128,48 +134,55 @@ extension AddEditRuleViewController {
   func configureDataSource() {
     let titleCellRegistration = UICollectionView.CellRegistration<TitleDetailCollectionViewCell, Int> {_, _, _ in }
     let photoCellRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, RulePhoto> { cell, _, item in
+
+      cell.buttonTapSubject
+        .asDriver(onErrorJustReturn: ())
+        .drive(onNext: {
+          guard let dataSource = self.dataSource else {
+            return
+          }
+
+          var snapshot = dataSource.snapshot()
+
+          snapshot.deleteItems([item])
+          self.currPhotoCountSubject.onNext(snapshot.numberOfItems(inSection: .photoInput))
+          DispatchQueue.main.async {
+            self.dataSource?.apply(snapshot, animatingDifferences: true)
+          }
+        })
+        .disposed(by: cell.disposeBag)
+
       cell.configPhotoCell(image: item.image)
     }
 
     let supplementaryRegistration = UICollectionView.SupplementaryRegistration
     <HeaderCollectionReusableView>(elementKind: UICollectionView.elementKindSectionHeader) {
       (supplementaryView, _, _) in
-      supplementaryView.plusButtonClousre = {
-        guard let dataSource = self.dataSource else { return }
-        let currPhotoCount = dataSource.snapshot().itemIdentifiers(inSection: .photoInput).count
-        var configuration = PHPickerConfiguration()
 
-        configuration.selectionLimit = 5 - currPhotoCount
-        configuration.filter = .images
+      self.currPhotoCountSubject
+        .asDriver(onErrorJustReturn: 0)
+        .map { $0 < self.maxImageCount }
+        .drive(onNext: { flag in
+          supplementaryView.updateButtonState(isEnable: flag)
+        })
+        .disposed(by: self.disposeBag)
 
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        self.present(picker, animated: true)
-      }
-    }
+      supplementaryView.plusButtonTapSubject
+        .asDriver(onErrorJustReturn: ())
+        .drive(onNext: { _ in
+          guard let dataSource = self.dataSource else { return }
+          let currPhotoCount = dataSource.snapshot().itemIdentifiers(inSection: .photoInput).count
 
-    let badgeRegistration = UICollectionView.SupplementaryRegistration
-    <DeletePhotoCollectionReusableView>(elementKind: DeletePhotoCollectionReusableView.className) {
-      (badgeView, _, indexPath) in
+          var configuration = PHPickerConfiguration()
 
-      badgeView.buttonTappedClosure = {
-        guard let dataSource = self.dataSource else { return }
-        guard let itemIdentifier = dataSource.itemIdentifier(for: indexPath) else {
-          return
-        }
-        var snapshot = dataSource.snapshot()
+          configuration.selectionLimit = self.maxImageCount - currPhotoCount
+          configuration.filter = .images
 
-        print("snapshot remaining : ")
-        print(snapshot.itemIdentifiers(inSection: .photoInput))
-        print("=============indexPath=============")
-        print(indexPath)
-
-        snapshot.deleteItems([itemIdentifier])
-        DispatchQueue.main.async {
-          dataSource.apply(snapshot, animatingDifferences: true)
-        }
-      }
-
+          let picker = PHPickerViewController(configuration: configuration)
+          picker.delegate = self
+          self.present(picker, animated: true)
+        })
+        .disposed(by: self.disposeBag)
     }
 
     dataSource = UICollectionViewDiffableDataSource<Section, RulePhoto>(
@@ -189,16 +202,9 @@ extension AddEditRuleViewController {
         }
       })
 
-    dataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-
-      if kind == UICollectionView.elementKindSectionHeader {
-        return collectionView
-          .dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
-      } else if kind == DeletePhotoCollectionReusableView.className {
-
-        return collectionView.dequeueConfiguredReusableSupplementary(using: badgeRegistration, for: indexPath)
-      }
-      return nil
+    dataSource?.supplementaryViewProvider = { (collectionView, _, indexPath) -> UICollectionReusableView? in
+      return collectionView
+        .dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
     }
 
     var snapshot = NSDiffableDataSourceSnapshot<Section, RulePhoto>()
@@ -220,14 +226,20 @@ extension AddEditRuleViewController {
 @available(iOS 16.0, *)
 extension AddEditRuleViewController: PHPickerViewControllerDelegate {
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    guard let dataSource = self.dataSource else { return }
+    let snapshot = dataSource.snapshot()
+    let prev = snapshot.numberOfItems(inSection: .photoInput)
+    self.currPhotoCountSubject.onNext(prev + results.count)
 
+    var lastFlag = false
     results.forEach { result in
+      if result == results.last {
+        lastFlag = true
+      }
       result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+
         guard let image = reading as? UIImage,
-              error == nil else {
-          print("ddd")
-          return
-        }
+              error == nil else { return }
         guard let dataSource = self.dataSource else { return }
         var snapshot = dataSource.snapshot()
         snapshot.appendItems([RulePhoto(image: image)], toSection: .photoInput)
@@ -235,11 +247,18 @@ extension AddEditRuleViewController: PHPickerViewControllerDelegate {
         DispatchQueue.main.async {
           dataSource.apply(snapshot, animatingDifferences: true)
         }
+        if lastFlag {
+          self.albumImageUploadedSubject.onNext(())
+        }
       }
     }
 
-    picker.dismiss(animated: true)
-
+    albumImageUploadedSubject
+      .asDriver(onErrorJustReturn: ())
+      .drive(onNext: {
+        picker.dismiss(animated: true)
+      })
+      .disposed(by: disposeBag)
   }
 
 }
