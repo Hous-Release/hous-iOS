@@ -277,6 +277,7 @@
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
 		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
+		B8E393712A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */; };
 		B8FF4D8E290411A50087AD40 /* MemberTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */; };
 		B8FF4D9029050CF00087AD40 /* MemberTodoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */; };
 		B8FF4D92290515770087AD40 /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF4D91290515770087AD40 /* MemberRepository.swift */; };
@@ -591,6 +592,7 @@
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
+		B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileViewController.swift; sourceTree = "<group>"; };
 		B8FF4D8D290411A50087AD40 /* MemberTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoViewController.swift; sourceTree = "<group>"; };
 		B8FF4D8F29050CF00087AD40 /* MemberTodoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTodoViewReactor.swift; sourceTree = "<group>"; };
 		B8FF4D91290515770087AD40 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
@@ -1406,6 +1408,7 @@
 		B856701528C99FEC00B49984 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B8E3936E2A1B814D0045F978 /* RemoveProfile */,
 				B880F5C2293C902F00E888BC /* Resign */,
 				B84EA6D828DD7F1200C92FCD /* EnterInfo */,
 				B84EA6D928DD7F1B00C92FCD /* Paging */,
@@ -1610,6 +1613,22 @@
 				B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8E3936E2A1B814D0045F978 /* RemoveProfile */ = {
+			isa = PBXGroup;
+			children = (
+				B8E3936F2A1B81A10045F978 /* ConfirmRemoveProfile */,
+			);
+			path = RemoveProfile;
+			sourceTree = "<group>";
+		};
+		B8E3936F2A1B81A10045F978 /* ConfirmRemoveProfile */ = {
+			isa = PBXGroup;
+			children = (
+				B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */,
+			);
+			path = ConfirmRemoveProfile;
 			sourceTree = "<group>";
 		};
 		B8FF4D8C29040DDE0087AD40 /* ViewModel */ = {
@@ -1854,6 +1873,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B83200E2919408A001EBDFE /* ProfileEditNavtigationView.swift in Sources */,
+				B8E393712A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift in Sources */,
 				B8B56B9F28E2DEBF00FC99DA /* EnterRoomViewReactor.swift in Sources */,
 				9BF9AD6D291E0A58006A0BDE /* ProfileEditBackButton.swift in Sources */,
 				7706800E28E043A40082A7E7 /* SignInViewController.swift in Sources */,
