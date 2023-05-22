@@ -7,9 +7,13 @@
 
 import UIKit
 
+import RxSwift
+
 final class HeaderCollectionReusableView: UICollectionReusableView {
 
-  var plusButtonClousre: (() -> Void)?
+  let plusButtonTapSubject = PublishSubject<Void>()
+
+  private let disposeBag = DisposeBag()
 
   private let titleLabel = HousLabel(
     text: StringLiterals.OurRule.AddEditView.photo,
@@ -22,18 +26,18 @@ final class HeaderCollectionReusableView: UICollectionReusableView {
     var titleAttr = AttributedString(StringLiterals.ButtonTitle.Rule.addPhoto)
     titleAttr.font = Fonts.SpoqaHanSansNeo.bold.font(size: 13)
     config.attributedTitle = titleAttr
-    config.image = Images.addCircleOn.image
+    config.image = Images.addCircleOn.image.withRenderingMode(.alwaysTemplate)
     config.imagePlacement = .leading
     config.imagePadding = 8
     config.contentInsets = .zero
     let button = UIButton(configuration: config)
-    button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
     return button
   }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     setLayout()
+    bind()
   }
 
   required init?(coder: NSCoder) {
@@ -59,7 +63,16 @@ final class HeaderCollectionReusableView: UICollectionReusableView {
 }
 
 extension HeaderCollectionReusableView {
-  @objc func handleTap() {
-    plusButtonClousre?()
+  func bind() {
+    plusButton.rx.tap
+      .subscribe(onNext: { _ in
+        self.plusButtonTapSubject.onNext(())
+      })
+      .disposed(by: disposeBag)
+  }
+
+  func updateButtonState(isEnable: Bool) {
+    plusButton.isEnabled = isEnable
+    plusButton.tintColor = isEnable ? Colors.blue.color : Colors.g4.color
   }
 }

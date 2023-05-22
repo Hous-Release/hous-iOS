@@ -24,9 +24,7 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
     textColor: Colors.black.color
   )
 
-  private let textView = UITextView().then {
-    $0.backgroundColor = .brown
-  }
+  private let textView = HousTextView(maxCount: 50)
 
   override init(frame: CGRect) {
     super.init(frame: frame)
