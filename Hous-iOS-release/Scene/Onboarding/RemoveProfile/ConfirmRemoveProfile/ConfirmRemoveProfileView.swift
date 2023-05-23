@@ -11,7 +11,6 @@ import HousUIComponent
 final class ConfirmRemoveProfileView: UIView {
 
   enum Size {
-    static let navigationBarHeight = 64
     static let guideLabel: Double = 13
   }
 
@@ -84,7 +83,7 @@ final class ConfirmRemoveProfileView: UIView {
     navigationBarView.snp.makeConstraints { make in
       make.top.equalTo(safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
-      make.height.equalTo(Size.navigationBarHeight)
+      make.height.equalTo(NavigationBar.height)
     }
 
     stackView.snp.makeConstraints { make in
