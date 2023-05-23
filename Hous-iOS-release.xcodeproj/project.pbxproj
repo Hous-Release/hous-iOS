@@ -236,7 +236,6 @@
 		B8555AC7291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC6291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift */; };
 		B8555AC9291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */; };
 		B8555ACB291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8555ACA291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift */; };
-		B8566877294B3BFB00F74E95 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8566876294B3BFB00F74E95 /* NextButton.swift */; };
 		B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700628C88C6F00B49984 /* ProfileViewController.swift */; };
 		B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700828C88CAF00B49984 /* HousTabBarItemView.swift */; };
 		B856700B28C88D7800B49984 /* HousTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856700A28C88D7800B49984 /* HousTabBarItem.swift */; };
@@ -563,7 +562,6 @@
 		B8555AC6291D067A00E943AE /* ByDayHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByDayHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		B8555AC8291D2B1400E943AE /* CountTodoByDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodoByDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8555ACA291DEEBA00E943AE /* EmptyTodoByDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTodoByDayCollectionViewCell.swift; sourceTree = "<group>"; };
-		B8566876294B3BFB00F74E95 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		B856700228C88C6100B49984 /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewController.swift; sourceTree = "<group>"; };
 		B856700628C88C6F00B49984 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B856700828C88CAF00B49984 /* HousTabBarItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTabBarItemView.swift; sourceTree = "<group>"; };
@@ -1523,7 +1521,6 @@
 				9BF945FB290D4020008F2BFC /* NeumorphismBox.swift */,
 				B85C0B5D2940B11A00784FCB /* GrayBackgroundTextField.swift */,
 				B85C0B5F2941B5D600784FCB /* UnderlinedTextStackView.swift */,
-				B8566876294B3BFB00F74E95 /* NextButton.swift */,
 				77C67C4C299F85660011C837 /* LoadingView.swift */,
 				B5F22DDE2A0B9D31006F5552 /* HousSearchBar.swift */,
 				B59857542A1071D10042373D /* PlusFloatingButton.swift */,
@@ -2193,7 +2190,6 @@
 				B8D8A4AC2A1CA768005A8258 /* FilterTodoViewController.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
-				B8566877294B3BFB00F74E95 /* NextButton.swift in Sources */,
 				B85DAB3C290E4D3C00C79011 /* DayOfWeekHeaderListCell.swift in Sources */,
 				B85C0B7129472B4400784FCB /* ProfileLeaveGuideCollectionViewCell.swift in Sources */,
 				B8FF4D9629051E390087AD40 /* TodoByMemberDTO.swift in Sources */,
