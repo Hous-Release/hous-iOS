@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import HousUIComponent
+
 protocol EnterInfoViewDelegate {
   func deleteBirthDay()
 }
@@ -72,7 +74,7 @@ class EnterInfoView: UIView {
     return datePicker
   }()
 
-  var nextButton = NextButton("다음으로").then {
+  var nextButton = OnboardingButton(.next).then {
     $0.isEnabled = false
   }
 
