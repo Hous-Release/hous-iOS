@@ -282,6 +282,9 @@
 		B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */; };
 		B8D066E628FAA68B00A99907 /* FilteredTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */; };
 		B8D066E828FAA74600A99907 /* FilteredTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D066E728FAA74600A99907 /* FilteredTodoView.swift */; };
+		B8D8A4AC2A1CA768005A8258 /* FilterTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8A4AB2A1CA768005A8258 /* FilterTodoViewController.swift */; };
+		B8D8A4B22A1CAFA8005A8258 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8A4B12A1CAFA8005A8258 /* SearchBarViewController.swift */; };
+		B8D8A4B42A1CC754005A8258 /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8A4B32A1CC754005A8258 /* SearchBarViewModel.swift */; };
 		B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */; };
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
@@ -608,6 +611,9 @@
 		B8D066DD28FA95BB00A99907 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8D066E528FAA68B00A99907 /* FilteredTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoViewController.swift; sourceTree = "<group>"; };
 		B8D066E728FAA74600A99907 /* FilteredTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTodoView.swift; sourceTree = "<group>"; };
+		B8D8A4AB2A1CA768005A8258 /* FilterTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTodoViewController.swift; sourceTree = "<group>"; };
+		B8D8A4B12A1CAFA8005A8258 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
+		B8D8A4B32A1CC754005A8258 /* SearchBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
 		B8DA060128E541FC00C79B40 /* EnterRoomCodeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomCodeViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -878,6 +884,7 @@
 		77B1681C28ABC7DE00E1E512 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B8D8A4B02A1CAF8A005A8258 /* Serach */,
 				B59148542909688200618F26 /* OurRule */,
 				777085AD29040DC50018240B /* TestScene */,
 				7706800A28E0438D0082A7E7 /* SignIn */,
@@ -1444,6 +1451,7 @@
 		B856700128C88C4500B49984 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				B8D8A4A92A1CA744005A8258 /* FilterTodo */,
 				77EB720029253F6D00032776 /* Update */,
 				B8D066D828FA958800A99907 /* MemberTodo */,
 				B84EA69E28D619E400C92FCD /* Main */,
@@ -1684,6 +1692,31 @@
 				B8555A9F2917D22D00E943AE /* ByDayTodoViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8D8A4A92A1CA744005A8258 /* FilterTodo */ = {
+			isa = PBXGroup;
+			children = (
+				B8D8A4AA2A1CA75E005A8258 /* Controller */,
+			);
+			path = FilterTodo;
+			sourceTree = "<group>";
+		};
+		B8D8A4AA2A1CA75E005A8258 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B8D8A4AB2A1CA768005A8258 /* FilterTodoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8D8A4B02A1CAF8A005A8258 /* Serach */ = {
+			isa = PBXGroup;
+			children = (
+				B8D8A4B12A1CAFA8005A8258 /* SearchBarViewController.swift */,
+				B8D8A4B32A1CC754005A8258 /* SearchBarViewModel.swift */,
+			);
+			path = Serach;
 			sourceTree = "<group>";
 		};
 		B8E3936E2A1B814D0045F978 /* RemoveProfile */ = {
@@ -1979,6 +2012,7 @@
 				9B959B0428FF218D00EB3412 /* ProfileGraphBoxView.swift in Sources */,
 				9B959B0828FFD0C300EB3412 /* ProfileDescriptionCollectionViewCell.swift in Sources */,
 				B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */,
+				B8D8A4B42A1CC754005A8258 /* SearchBarViewModel.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
 				77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */,
 				9BE2D4762941C30E00C6D7F7 /* UIDevice+Extension.swift in Sources */,
@@ -2083,6 +2117,7 @@
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
 				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
+				B8D8A4B22A1CAFA8005A8258 /* SearchBarViewController.swift in Sources */,
 				770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */,
 				B595FFD228CC7D0F00F6B2E4 /* MainHomeModel.swift in Sources */,
 				777C666128A74A62000BECEA /* AppDelegate.swift in Sources */,
@@ -2155,6 +2190,7 @@
 				B541F39A29B8B40300F81DFE /* Coordinator.swift in Sources */,
 				B8555AC3291CCAA800E943AE /* ByDayRepository.swift in Sources */,
 				77EB7210292540D600032776 /* TodoHomieModel.swift in Sources */,
+				B8D8A4AC2A1CA768005A8258 /* FilterTodoViewController.swift in Sources */,
 				B595FFD628CDA51600F6B2E4 /* HomeHeaderCollectionReusableView.swift in Sources */,
 				B8B56BA728E3FFA100FC99DA /* EnterRoomTextFieldView.swift in Sources */,
 				B8566877294B3BFB00F74E95 /* NextButton.swift in Sources */,
