@@ -10,7 +10,7 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-final class AddEditRuleViewController: UIViewController {
+final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   @frozen
   enum Section: Int, CaseIterable {
@@ -45,6 +45,13 @@ final class AddEditRuleViewController: UIViewController {
     setLayout()
     configureDataSource()
     collectionView.dataSource = dataSource
+    bind()
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    view.endEditing(true)
+
   }
 
   private func setLayout() {
@@ -65,7 +72,15 @@ final class AddEditRuleViewController: UIViewController {
       make.bottom.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
     }
+  }
 
+  private func bind() {
+    collectionView.rx.tapGesture()
+      .asDriver()
+      .drive(onNext: { _ in
+        self.collectionView.endEditing(true)
+      })
+      .disposed(by: disposeBag)
   }
 
 }
