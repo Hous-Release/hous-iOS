@@ -10,7 +10,6 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-@available(iOS 16.0, *)
 final class AddEditRuleViewController: UIViewController {
 
   @frozen
@@ -73,9 +72,8 @@ final class AddEditRuleViewController: UIViewController {
 
 // MARK: - UI & Layout
 
-@available(iOS 16.0, *)
 extension AddEditRuleViewController {
-  @available(iOS 16.0, *)
+
   func createLayout() -> UICollectionViewCompositionalLayout {
     let layout = UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
 
@@ -92,13 +90,12 @@ extension AddEditRuleViewController {
     return layout
   }
 
-  @available(iOS 16.0, *)
   func createTitleSectionLayout(section: Section) -> NSCollectionLayoutSection {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
     let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 1)
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
     let section = NSCollectionLayoutSection(group: group)
     return section
@@ -129,7 +126,6 @@ extension AddEditRuleViewController {
   }
 }
 
-@available(iOS 16.0, *)
 extension AddEditRuleViewController {
   func configureDataSource() {
     let titleCellRegistration = UICollectionView.CellRegistration<TitleDetailCollectionViewCell, Int> {_, _, _ in }
@@ -179,7 +175,11 @@ extension AddEditRuleViewController {
           configuration.filter = .images
 
           let picker = PHPickerViewController(configuration: configuration)
-          picker.delegate = self
+          if #available(iOS 16.0, *) {
+            picker.delegate = self
+          } else {
+            // Fallback on earlier versions
+          }
           self.present(picker, animated: true)
         })
         .disposed(by: self.disposeBag)
