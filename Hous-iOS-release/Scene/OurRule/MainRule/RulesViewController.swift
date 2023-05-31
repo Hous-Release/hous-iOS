@@ -38,7 +38,9 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   }
 
-  private lazy var rulesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
+  private lazy var rulesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
+    $0.backgroundView = UIView(frame: $0.bounds)
+  }
 
   private let floatingButton = PlusFloatingButton()
 
@@ -67,31 +69,14 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    setDelegate()
     setLayout()
     configureDataSource()
     bind()
-    endEditWhenTouchedCollectionView()
-  }
-
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-    searchBarEndEditing()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setTabBarIsHidden(isHidden: true)
-  }
-
-  private func setDelegate() {
-    rulesCollectionView.delegate = self
-  }
-
-  private func endEditWhenTouchedCollectionView() {
-    let gesture = UITapGestureRecognizer(target: self, action: #selector(searchBarEndEditing))
-    self.rulesCollectionView.backgroundView = UIView(frame: self.rulesCollectionView.bounds)
-    rulesCollectionView.backgroundView?.addGestureRecognizer(gesture)
   }
 
   private func bind() {
@@ -142,7 +127,21 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
       }
       .disposed(by: disposeBag)
 
+    view.rx.tapGesture()
+      .asDriver()
+      .drive(onNext: { _ in
+        self.searchBarEndEditing()
+      })
+      .disposed(by: disposeBag)
+
+    rulesCollectionView.backgroundView?.rx.tapGesture()
+      .asDriver()
+      .drive(onNext: { _ in
+        self.searchBarEndEditing()
+      })
+      .disposed(by: disposeBag)
   }
+
 }
 
 // MARK: - UI & Layout
@@ -188,25 +187,24 @@ private extension RulesViewController {
       make.top.equalTo(navigationBar.rightButton.snp.bottom).offset(7)
       make.trailing.equalTo(navigationBar.rightButton.snp.trailing).offset(6)
       make.width.equalTo(139)
-      make.height.equalTo(88)
     }
   }
 
 }
-
-// MARK: - Delegate
- extension RulesViewController: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    searchBarEndEditing()
-  }
-
- }
 
 // MARK: - DataSource
 
 extension RulesViewController {
   func configureDataSource() {
       let cellRegistration = UICollectionView.CellRegistration<RuleCollectionViewCell, HousRule> { (cell, _, item) in
+        cell.rx.tapGesture()
+          .asDriver()
+          .drive(onNext: { [weak self] _ in
+            guard let self else { return }
+            // TODO: Present Bottomsheet
+//            self.showBottomSheet()
+          })
+          .disposed(by: cell.disposeBag)
         cell.configureCell(rule: item.name)
       }
 
@@ -237,9 +235,9 @@ extension RulesViewController {
 }
 
 private extension RulesViewController {
-  func showBottomSheet() {
+  func showBottomSheet(model: PhotoCellModel) {
 
-    let bottomSheetType = BottomSheetType.defaultType
+    let bottomSheetType = BottomSheetType.RuleType(model)
 
     let ruleList = self.rules.map { $0.name }
 
@@ -248,22 +246,19 @@ private extension RulesViewController {
       var viewController = UIViewController()
 
       switch actionType {
-      case .add:
-        viewController = AddRuleViewController(rules: ruleList, viewModel: AddRuleViewModel())
+      case .cancel, .add:
+        return
       case .modify:
+        // TODO: - 새로만든 AddEdit뷰컨으로 넘기기
         viewController = EditRuleViewController(editViewRules: self.rules, viewModel: EditRuleViewModel())
       case .delete:
-        viewController = DeleteRuleViewController(rules: self.rules, viewModel: DeleteRuleViewModel())
-      case .cancel:
+        // TODO: - 삭제 팝업 띄우기
         return
       }
-
-      viewController.view.backgroundColor = .white
       self.navigationController?.pushViewController(viewController, animated: true)
     }
   }
 
-  @objc
   func searchBarEndEditing() {
     searchBar.endEditing(true)
     housMenu.alpha = 0
