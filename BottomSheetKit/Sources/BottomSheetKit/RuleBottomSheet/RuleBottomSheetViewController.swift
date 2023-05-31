@@ -20,13 +20,14 @@ final class RuleBottomSheetViewController: UIViewController {
 
     private let bottomSheetView: RuleBottomSheetView
 
-    private let action: RuleBottomSheetAction
+    private let action: any BottomSheetAction
 
     private let disposeBag = DisposeBag()
 
-    init(action: RuleBottomSheetAction) {
+    init?(action: any BottomSheetAction) {
         self.action = action
-        self.bottomSheetView = action.view
+        guard let view = action.view as? RuleBottomSheetView else { return nil }
+        self.bottomSheetView = view
         super.init(nibName: nil, bundle: nil)
 
     }

@@ -9,7 +9,8 @@ import Foundation
 
 final class RuleBottomSheetAction: BottomSheetAction {
 
-    let view: RuleBottomSheetView
+    var view: RuleBottomSheetView
+
     var completeAction: CompleteBottomSheetAction?
 
     init(view: RuleBottomSheetView) { self.view = view }

@@ -10,7 +10,7 @@ import UIKit
 
 class DefaultBottomSheetAction: BottomSheetAction {
 
-  let view: DefaultBottomSheetView
+  var view: DefaultBottomSheetView
   var completeAction: CompleteBottomSheetAction?
 
   init(view: DefaultBottomSheetView) { self.view = view }
