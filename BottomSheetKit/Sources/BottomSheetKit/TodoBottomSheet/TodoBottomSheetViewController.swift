@@ -23,7 +23,7 @@ internal final class TodoBottomSheetViewController: UIViewController {
   }()
 
   private var bottomSheetView: TodoBottomSheetView
-  private var action: BottomSheetAction
+  private var action: any BottomSheetAction
   private let disposeBag = DisposeBag()
   private var initialFrame: CGRect?
 

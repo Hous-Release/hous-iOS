@@ -23,7 +23,7 @@ internal final class DefaultBottomSheetViewController: UIViewController {
   }()
 
   private var bottomSheetView: DefaultBottomSheetView
-  private var action: BottomSheetAction
+    private var action: any BottomSheetAction
   private let disposeBag = DisposeBag()
   private var initialFrame: CGRect?
 

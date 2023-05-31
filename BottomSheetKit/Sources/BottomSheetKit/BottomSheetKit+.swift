@@ -136,7 +136,7 @@ public extension UIViewController {
     case .RuleType(let model):
         let view = RuleBottomSheetView(model: model)
         let bottomSheetAction = RuleBottomSheetAction(view: view)
-        let viewController = RuleBottomSheetViewController(action: bottomSheetAction)
+        guard let viewController = RuleBottomSheetViewController(action: bottomSheetAction) else { return }
 
         bottomSheetAction.completeAction = { actionType in
             completion?(actionType)

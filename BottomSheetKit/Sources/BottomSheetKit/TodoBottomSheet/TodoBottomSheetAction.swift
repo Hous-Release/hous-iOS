@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 class TodoBottomSheetAction: BottomSheetAction {
-
-  let view: TodoBottomSheetView
+  var view: TodoBottomSheetView
   var completeAction: CompleteBottomSheetAction?
 
   init(view: TodoBottomSheetView) { self.view = view }
