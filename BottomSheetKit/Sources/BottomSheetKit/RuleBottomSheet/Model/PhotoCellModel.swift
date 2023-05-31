@@ -10,13 +10,13 @@ import Foundation
 
 public struct PhotoCellModel {
     let title: String
-    let description: String
+    let description: String?
     let lastmodifedDate: String
     let photos: [RulePhoto]?
 
     public init(
         title: String,
-        description: String,
+        description: String?,
         lastmodifedDate: String,
         photos: [RulePhoto]?) {
         self.title = title

@@ -129,8 +129,15 @@ private extension RuleBottomSheetView {
 
     func configViewLabel(_ model: PhotoCellModel) {
         self.lastModifiedDateLabel.text = model.lastmodifedDate
-        self.descriptionLabel.text = model.description
         self.ruleTitleLabel.text = model.title
+
+        if model.description == nil {
+            self.descriptionLabel.text = "설명 없음"
+            self.descriptionLabel.textColor = Colors.g4.color
+            return
+        }
+        self.descriptionLabel.text = model.description
+
     }
 
 
