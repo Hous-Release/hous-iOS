@@ -5,11 +5,12 @@
 //  Created by 김민재 on 2023/05/13.
 //
 
-import Foundation
+import UIKit
 
 public struct HousRule: Hashable {
   let id: Int
   let name: String
+  let photos: [UIImage]? = nil
   let identifier = UUID()
 
   public func hash(into hasher: inout Hasher) {
