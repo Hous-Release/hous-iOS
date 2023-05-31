@@ -74,6 +74,24 @@ final class TestViewController: UIViewController {
     return button
   }()
 
+  private lazy var ruleBottomSheetButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("RuleBottomSheetWithPhoto", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton8), for: .touchUpInside)
+    return button
+  }()
+
+  private lazy var ruleBottomSheetButton2: UIButton = {
+    let button = UIButton()
+    button.setTitle("RuleBottomSheetWithNoPhoto", for: .normal)
+    button.setTitleColor(UIColor.blue, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(didTapButton9), for: .touchUpInside)
+    return button
+  }()
+
   init() {
     super.init(nibName: nil, bundle: nil)
     setupViews()
@@ -91,6 +109,8 @@ final class TestViewController: UIViewController {
     view.addSubview(duplicateButton)
     view.addSubview(defaultBottomSheetButton)
     view.addSubview(todoBottomSheetButton)
+    view.addSubView(ruleBottomSheetButton)
+    view.addSubview(ruleBottomSheetButton2)
 
     defaultButton.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(10)
@@ -127,7 +147,18 @@ final class TestViewController: UIViewController {
       make.height.equalTo(51)
       make.width.equalTo(300)
     }
+    ruleBottomSheetButton.snp.makeConstraints { make in
+      make.top.equalTo(self.todoBottomSheetButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
+    ruleBottomSheetButton2.snp.makeConstraints { make in
+      make.top.equalTo(self.ruleBottomSheetButton.snp.bottom).offset(10)
+      make.height.equalTo(51)
+      make.width.equalTo(300)
+    }
   }
+
 }
 
 extension TestViewController {
@@ -280,6 +311,55 @@ extension TestViewController {
       }
     }
   }
+
+  @objc
+  private func didTapButton8() {
+
+    let model = PhotoCellModel(title: "바나나는 옷걸이에 걸어두기!",
+                               description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
+                               lastmodifedDate: "마지막 수정 2023.04.01",
+                               photos: [RulePhoto(image: UIImage(systemName: "star.fill")!), RulePhoto(image: UIImage(systemName: "star")!)])
+    let model2 = PhotoCellModel(title: "바나나는 옷걸이에 걸어두기!",
+                               description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
+                               lastmodifedDate: "마지막 수정 2023.04.01",
+                               photos: nil)
+    self.presentBottomSheet(.RuleType(model)) { actionType in
+      switch actionType {
+      case .add:
+        break
+      case .modify:
+        print("Modify")
+      case .delete:
+        print("Delete")
+      case .cancel:
+        print("Cancel")
+      }
+
+    }
+  }
+
+  @objc
+  private func didTapButton9() {
+
+    let model = PhotoCellModel(title: "바나나는 옷걸이에 걸어두기!",
+                               description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
+                               lastmodifedDate: "마지막 수정 2023.04.01",
+                               photos: nil)
+    self.presentBottomSheet(.RuleType(model)) { actionType in
+      switch actionType {
+      case .add:
+        break
+      case .modify:
+        print("Modify")
+      case .delete:
+        print("Delete")
+      case .cancel:
+        print("Cancel")
+      }
+
+    }
+  }
+
 }
 
 extension TestViewController {
