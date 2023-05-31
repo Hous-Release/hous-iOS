@@ -42,7 +42,9 @@ final class RuleBottomSheetView: UIView {
       return view
     }()
 
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
+        $0.isScrollEnabled = false
+    }
 
     private let ruleTitleLabel: UILabel = {
         let label = UILabel()
