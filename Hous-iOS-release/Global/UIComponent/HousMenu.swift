@@ -30,10 +30,12 @@ final class HousMenu: UIView {
     graySeperatorLine,
     guideButton
   ]).then {
-    $0.distribution = .equalSpacing
+    $0.distribution = .fill
     $0.alignment = .leading
     $0.axis = .vertical
-    $0.spacing = 8
+    $0.spacing = 5
+    $0.isLayoutMarginsRelativeArrangement = true
+    $0.layoutMargins = UIEdgeInsets(top: 14, left: 20, bottom: 14, right: 25)
   }
 
   override init(frame: CGRect) {
@@ -56,12 +58,13 @@ final class HousMenu: UIView {
 
   private func setLayout() {
     addSubview(stackView)
-    stackView.snp.makeConstraints { make in
-      make.edges.equalToSuperview().inset(14)
-    }
 
     graySeperatorLine.snp.makeConstraints { make in
       make.height.equalTo(1)
+    }
+
+    stackView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
     }
   }
 
