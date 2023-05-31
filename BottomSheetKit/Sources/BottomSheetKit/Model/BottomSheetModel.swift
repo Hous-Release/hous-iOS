@@ -19,4 +19,5 @@ public struct BottomSheetModel {
 public enum BottomSheetType {
   case defaultType
   case todoType(TodoModel)
+    case RuleType(PhotoCellModel)
 }
