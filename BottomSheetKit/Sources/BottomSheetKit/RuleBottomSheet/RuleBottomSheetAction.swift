@@ -15,7 +15,6 @@ final class RuleBottomSheetAction: BottomSheetAction {
     init(view: RuleBottomSheetView) { self.view = view }
 
     func sendAction(_ action: DidBottomSheetActionType) {
-        print(action)
         completeAction?(action)
     }
 
