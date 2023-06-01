@@ -47,6 +47,20 @@ protocol TodoAPIProtocol {
     todoID: Int,
     completion: @escaping (BaseResponseType<UpdateTodoDTO.ModifyTodo>?, Error?) -> Void
   )
+
+
+  // MARK: - 요일별 todo view
+  func getDaysOfWeekTodosData(
+    completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>?, Error?
+    ) -> Void
+  )
+
+  // MARK: - 멤버별 todo view
+  func getMemberTodosData(
+    completion: @escaping (
+      BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>?, Error?
+    ) -> Void
+  )
 }
 
 public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
@@ -132,8 +146,8 @@ public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
       responseData: BaseResponseType<FilteredTodoDTO.Response.OnlyMyTodosDTO>.self,
       isWithInterceptor: true
     ) { res, err in
-        completion(res, err)
-      }
+      completion(res, err)
+    }
   }
 
   public func getModifyingTodo(
@@ -146,4 +160,28 @@ public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
         completion(res,err)
       }
   }
+
+
+  // MARK: - 요일별
+  public func getDaysOfWeekTodosData(completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>?, Error?) -> Void) {
+    fetchData(target: .getDaysOfWeekTodos,
+              responseData: BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>.self,
+              isWithInterceptor: true) { res, err in
+      completion(res, err)
+    }
+  }
+
+  // MARK: - 멤버별
+  public func getMemberTodosData(
+      completion: @escaping (
+        BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>?, Error?) -> Void
+    ) {
+      fetchData(
+        target: .getMemberTodos,
+        responseData: BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>.self,
+        isWithInterceptor: true
+      ) { res, err in
+        completion(res, err)
+      }
+    }
 }

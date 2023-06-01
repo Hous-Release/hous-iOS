@@ -28,6 +28,12 @@ public enum TodoService {
     _ id: Int?,
     _ dto: UpdateTodoDTO.ModifyTodo
   )
+
+  // 추후 삭제
+  // MARK: 요일별
+  case getDaysOfWeekTodos
+  // MARK: 멤버별
+  case getMemberTodos
 }
 
 extension TodoService: TargetType {
@@ -60,6 +66,13 @@ extension TodoService: TargetType {
         return "/todo"
       }
       return "/todo/\(id)"
+
+      // MARK: 요일별
+    case .getDaysOfWeekTodos:
+      return "todos/day"
+      // MARK: 멤버별
+    case .getMemberTodos:
+      return "todos/member"
     }
   }
 
@@ -88,6 +101,10 @@ extension TodoService: TargetType {
         return .post
       }
       return .put
+
+      // MARK: 요일별 멤버별
+    case .getDaysOfWeekTodos, .getMemberTodos:
+      return .get
     }
   }
 
@@ -113,6 +130,10 @@ extension TodoService: TargetType {
       return .requestPlain
     case .updateTodo(_ ,let dto):
       return .body(dto)
+
+      // MARK: 요일별 멤버별
+    case .getDaysOfWeekTodos, .getMemberTodos:
+      return .requestPlain
     }
   }
 }

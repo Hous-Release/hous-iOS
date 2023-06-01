@@ -75,7 +75,7 @@ public final class ProfileLeaveRepositoryImp: BaseService, ProfileLeaveRepositor
 }
 
 extension ProfileLeaveRepositoryImp {
-  private func onNextEvents(data: ByDayTodoDTO.Response.OnlyMyTodoDTO) {
+  private func onNextEvents(data: FilteredTodoDTO.Response.OnlyMyTodosDTO) {
 
     let guideItem = OnlyMyTodoSection.Item.guide
     self.event.onNext(.guideSection(OnlyMyTodoSection.Model(
