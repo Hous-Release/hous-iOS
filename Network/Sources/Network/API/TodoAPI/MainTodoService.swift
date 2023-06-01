@@ -40,7 +40,7 @@ extension TodoService: TargetType {
     switch self {
     // MARK: main
     case .getTodos:
-      return "/todos"
+      return "/todos/main"
     case let .checkTodo(todoId, _):
       return "/todo/\(todoId)/check"
     case let .getTodoSummary(todoId):
