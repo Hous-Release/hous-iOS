@@ -43,19 +43,6 @@ protocol TodoAPIProtocol {
     ) -> Void
   )
 
-  // MARK: - 요일별 todo view
-  func getDaysOfWeekTodosData(
-    completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>?, Error?
-    ) -> Void
-  )
-
-  // MARK: - 멤버별 todo view
-  func getMemberTodosData(
-    completion: @escaping (
-      BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>?, Error?
-    ) -> Void
-  )
-
   func getModifyingTodo(
     todoID: Int,
     completion: @escaping (BaseResponseType<UpdateTodoDTO.ModifyTodo>?, Error?) -> Void
@@ -137,24 +124,18 @@ public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
     }
   }
 
-  // MARK: - 요일별
-  public func getDaysOfWeekTodosData(completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>?, Error?) -> Void) {
-      fetchData(target: .getDaysOfWeekTodos,
-                responseData: BaseResponseType<ByDayTodoDTO.Response.ByDayTodosResponseDTO>.self,
-                isWithInterceptor: true) { res, err in
-          completion(res, err)
+  public func getOnlyMyTodoData(
+    completion: @escaping (BaseResponseType<FilteredTodoDTO.Response.OnlyMyTodosDTO>?,Error?) -> Void
+  ) {
+    fetchData(
+      target: .getOnlyMyTodo,
+      responseData: BaseResponseType<FilteredTodoDTO.Response.OnlyMyTodosDTO>.self,
+      isWithInterceptor: true
+    ) { res, err in
+        completion(res, err)
       }
   }
 
-  public func getOnlyMyTodoData(completion: @escaping (BaseResponseType<ByDayTodoDTO.Response.OnlyMyTodoDTO>?, Error?) -> Void) {
-      fetchData(target: .getOnlyMyTodo,
-                responseData: BaseResponseType<ByDayTodoDTO.Response.OnlyMyTodoDTO>.self,
-                isWithInterceptor: true) { res, err in
-          completion(res, err)
-      }
-  }
-
-  // MARK: - 멤버별
   public func getModifyingTodo(
     todoID: Int,
     completion: @escaping (BaseResponseType<UpdateTodoDTO.ModifyTodo>?, Error?) -> Void
@@ -164,18 +145,5 @@ public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
       responseData: BaseResponseType<UpdateTodoDTO.ModifyTodo>.self) { res, err in
         completion(res,err)
       }
-  }
-
-  public func getMemberTodosData(
-    completion: @escaping (
-      BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>?, Error?) -> Void
-  ) {
-    fetchData(
-      target: .getMemberTodos,
-      responseData: BaseResponseType<MemberTodoDTO.Response.MemberTodosResponseDTO>.self,
-      isWithInterceptor: true
-    ) { res, err in
-      completion(res, err)
-    }
   }
 }
