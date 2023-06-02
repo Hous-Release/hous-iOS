@@ -60,7 +60,11 @@ final class FilledHousTextField: UITextField {
 private extension FilledHousTextField {
 
   func registerNotification() {
-    NotificationCenter.default.addObserver(self, selector: #selector(change), name: .change, object: self)
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(change),
+      name: .change, object: self
+    )
   }
 
   @objc

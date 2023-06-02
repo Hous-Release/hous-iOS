@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-import HousButton
+import HousUIComponent
 
 class EnterRoomTextFieldView: UIView {
 
