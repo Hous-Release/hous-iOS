@@ -25,7 +25,7 @@ final class RulesTableViewCell: UITableViewCell {
 
   private let todoLabel = HousLabel(
     text: nil,
-    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+    font: .B2,
     textColor: Colors.g7.color
   ).then {
     $0.textAlignment = .left
@@ -34,7 +34,7 @@ final class RulesTableViewCell: UITableViewCell {
 
   private let newLabel = HousLabel(
     text: OurRule.MainView.new,
-    font: Fonts.Montserrat.medium.font(size: 12),
+    font: .EN2,
     textColor: Colors.blue.color).then {
       $0.isHidden = true
     }

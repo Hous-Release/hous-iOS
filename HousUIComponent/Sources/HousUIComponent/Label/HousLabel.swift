@@ -4,7 +4,7 @@ import AssetKit
 
 public final class HousLabel: UILabel {
 
-  public init(text: String?, font: UIFont, textColor: UIColor) {
+  public init(text: String?, font: HousFont, textColor: UIColor) {
     super.init(frame: .zero)
     setStyle(text: text, font: font, textColor: textColor)
   }
@@ -14,10 +14,10 @@ public final class HousLabel: UILabel {
   }
 
   private func setStyle(text: String?,
-                        font: UIFont,
+                        font housFontEnum: HousFont,
                         textColor: UIColor) {
     self.text = text
-    self.font = font
+    self.font = housFontEnum.font
     self.textColor = textColor
   }
 }

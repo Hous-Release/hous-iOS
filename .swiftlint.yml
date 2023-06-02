@@ -48,4 +48,5 @@ excluded:
 - UserInformation
 - Network
 - ThirdPartyLibraryManager
+- HousUIComponent
 

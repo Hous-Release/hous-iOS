@@ -17,7 +17,7 @@ final class FilledHousTextField: UITextField {
 
   private let textCountLabel = HousLabel(
     text: "0/20",
-    font: Fonts.Montserrat.medium.font(size: 12),
+    font: .EN2,
     textColor: Colors.g5.color
   )
 

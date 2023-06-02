@@ -31,20 +31,23 @@ final class RuleCollectionViewCell: UICollectionViewCell {
     $0.setImage(Images.icCheck2.image, for: .selected)
   }
 
-  private let todoLabel = HousLabel(text: nil,
-                                    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
-                                    textColor: Colors.g7.color)
-    .then {
+  private let todoLabel = HousLabel(
+    text: nil,
+    font: .B2,
+    textColor: Colors.g7.color
+  ).then {
     $0.textAlignment = .left
     $0.numberOfLines = 1
   }
 
   private let newLabel = HousLabel(
     text: OurRule.MainView.new,
-    font: Fonts.Montserrat.medium.font(size: 12),
-    textColor: Colors.blue.color).then {
-      $0.isHidden = true
-    }
+    font: .EN2,
+    textColor: Colors.blue.color
+  ).then {
+    $0.isHidden = true
+
+  }
 
   var disposeBag = DisposeBag()
 
