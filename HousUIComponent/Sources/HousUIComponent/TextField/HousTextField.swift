@@ -8,7 +8,7 @@
 import AssetKit
 import UIKit
 
-final class HousTextField: UITextField {
+public final class HousTextField: UITextField {
 
   private let defaultUnderlineLayer = CALayer()
   private let selectedUnderlineLayer = CALayer()
@@ -33,7 +33,7 @@ final class HousTextField: UITextField {
   private let exceedString: String?
   public var isValidate: Bool
 
-  init(
+  public init(
     _ placeHolder: String? = nil,
     _ text: String? = nil,
     useMaxCount: Bool = false,
@@ -61,7 +61,7 @@ final class HousTextField: UITextField {
     fatalError("Not Implemented")
   }
 
-  override func layoutSubviews() {
+  public override func layoutSubviews() {
     super.layoutSubviews()
     setupPosition()
     setupLayerPosition()
@@ -232,5 +232,16 @@ extension HousTextField {
   func changeLayerColor(color: CGColor) {
     self.layer.addSublayer(selectedUnderlineLayer)
     selectedUnderlineLayer.backgroundColor = Colors.blue.color.cgColor
+  }
+}
+
+// 외부 노출
+public extension HousTextField {
+  func textFieldChange() {
+    self.change()
+  }
+
+  func textFieldChangeLayerColor(color: CGColor) {
+    self.changeLayerColor(color: color)
   }
 }

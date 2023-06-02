@@ -7,6 +7,7 @@
 
 import AssetKit
 import BottomSheetKit
+import HousUIComponent
 import ReactorKit
 import RxCocoa
 import RxSwift
@@ -249,7 +250,7 @@ extension UpdateTodoViewController {
 
   private func todo(_ todo: String?) {
     todoTextField.text = todo
-    todoTextField.change()
+    todoTextField.textFieldChange()
   }
 
   private func back(_ backFlag: Bool) {

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import HousUIComponent
 import RxSwift
 
 final class RuleCollectionViewCell: UICollectionViewCell {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HousUIComponent
 import RxSwift
 
 // MARK: - 추후 삭제 가능성 농후
@@ -22,7 +23,11 @@ final class RulesTableViewCell: UITableViewCell {
     $0.setImage(Images.icCheck2.image, for: .selected)
   }
 
-  private let todoLabel = HousLabel(text: nil, font: Fonts.SpoqaHanSansNeo.medium.font(size: 14), textColor: Colors.g7.color).then {
+  private let todoLabel = HousLabel(
+    text: nil,
+    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+    textColor: Colors.g7.color
+  ).then {
     $0.textAlignment = .left
     $0.numberOfLines = 1
   }

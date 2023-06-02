@@ -11,32 +11,21 @@ let package = Package(
   products: [
     .library(
       name: "HousUIComponent",
-      targets: ["HousUIComponent"]),
-    .library(
-      name: "HousButton",
-      targets: ["HousButton"])
-    // write your new module below
+      targets: [
+        "HousUIComponent"
+      ]
+    )
   ],
   dependencies: [
-    .package(
-      name: "AssetKit",
-      path: "../AssetKit"
-    )
+    .package(name: "AssetKit", path: "../AssetKit"),
+    .package(name: "ThirdPartyLibraryManager", path: "../ThirdPartyLibraryManager")
   ],
   targets: [
     .target(
-      name: "HousButton",
-      dependencies: [
-        .product(
-          name: "AssetKit",
-          package: "AssetKit"
-        )
-      ]),
-    .target(
       name: "HousUIComponent",
       dependencies: [
-        "HousButton"
-        // write your new module below
+        .product(name: "AssetKit", package: "AssetKit"),
+        .product(name: "ThirdPartyLibraryManager", package: "ThirdPartyLibraryManager")
       ]),
     .testTarget(
       name: "HousUIComponentTests",

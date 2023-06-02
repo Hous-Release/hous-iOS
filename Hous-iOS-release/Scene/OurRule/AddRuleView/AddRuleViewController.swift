@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import BottomSheetKit
+import HousUIComponent
+import Kingfisher
 import RxSwift
 import RxKeyboard
 import RxGesture
-import BottomSheetKit
-import Kingfisher
 
 final class AddRuleViewController: BaseViewController, LoadingPresentable {
 
@@ -313,11 +314,11 @@ extension AddRuleViewController {
             let newString = String(text[text.startIndex..<maxIndex])
             ruleTextField.text = newString
           } else {
-            ruleTextField.changeLayerColor(color: Colors.blue.color.cgColor)
+            ruleTextField.textFieldChangeLayerColor(color: Colors.blue.color.cgColor)
           }
 
         } else {
-          ruleTextField.changeLayerColor(color: Colors.g4.color.cgColor)
+          ruleTextField.textFieldChangeLayerColor(color: Colors.g4.color.cgColor)
         }
       default:
         return

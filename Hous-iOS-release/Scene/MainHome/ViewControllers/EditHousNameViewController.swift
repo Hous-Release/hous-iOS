@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
 import BottomSheetKit
+import HousUIComponent
+import RxSwift
 
 class EditHousNameViewController: BaseViewController, LoadingPresentable {
 
