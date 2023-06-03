@@ -14,12 +14,6 @@ enum StringLiterals {
       static let addEditTitle = "Rules 추가"
     }
   }
-<<<<<<< HEAD
-=======
-
-  static let height = 64
-}
->>>>>>> [#191] FEAT: SearchBarView - Rules, Todo 공통UI로 빼고 FilterTodo UI 작업
 
   enum SearchBar {
     enum Rule {

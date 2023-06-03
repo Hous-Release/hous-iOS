@@ -8,8 +8,8 @@
 import UIKit
 
 protocol SearchBarViewProtocol {
-  func addChildVC(_ vc: UIViewController, to view: UIView)
-  func removeChildVC(_ vc: UIViewController)
+  func addChildVC(_ viewController: UIViewController, to view: UIView)
+  func removeChildVC(_ viewController: UIViewController)
 }
 
 enum SearchBarViewType {
