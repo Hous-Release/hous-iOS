@@ -7,10 +7,12 @@
 
 import UIKit
 
-
 final class SearchBarViewController: UIViewController {
 
+  let searchBarView = UIView()
   let searchBar = HousSearchBar()
+
+  lazy var filterView = FilterView()
 
   lazy var collectionView = UICollectionView(
     frame: .zero,
@@ -20,6 +22,7 @@ final class SearchBarViewController: UIViewController {
 
   init(_ type: SearchBarViewType) {
     super.init(nibName: nil, bundle: nil)
+    configUI(type)
   }
 
   required init?(coder: NSCoder) {
@@ -28,7 +31,6 @@ final class SearchBarViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    configUI()
   }
 }
 
@@ -39,20 +41,41 @@ private extension SearchBarViewController {
     return UICollectionViewCompositionalLayout.list(using: config)
   }
 
-  func configUI() {
-    self.view.addSubViews([
-      searchBar,
+  func configUI(_ type: SearchBarViewType) {
+
+    var subViews: [UIView] = [
+      searchBarView,
       collectionView,
       floatingButton
-    ])
+    ]
+    if type == .todo { subViews.append(filterView) }
+    self.view.addSubViews(subViews)
+    searchBarView.addSubview(searchBar )
 
+    // 그 다음에는 필터뷰 커스텀하고, 컬렉션뷰 만들자
+
+    searchBarView.snp.makeConstraints { make in
+      make.top.leading.trailing.equalToSuperview()
+    }
     searchBar.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(8)
+      make.top.bottom.equalToSuperview().offset(8)
       make.leading.trailing.equalToSuperview().inset(24)
     }
 
+    if type == .todo {
+      filterView.snp.makeConstraints { make in
+        make.top.equalTo(searchBarView.snp.bottom)
+        make.leading.trailing.equalToSuperview()
+        make.height.equalTo(46)
+      }
+    }
+
     collectionView.snp.makeConstraints { make in
-      make.top.equalTo(searchBar.snp.bottom).offset(20)
+      if type == .todo {
+        make.top.equalTo(filterView.snp.bottom)
+      } else {
+        make.top.equalTo(searchBarView.snp.bottom).offset(8)
+      }
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }

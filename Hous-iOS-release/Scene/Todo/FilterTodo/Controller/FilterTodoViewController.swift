@@ -18,10 +18,20 @@ final class FilterTodoViewController: BaseViewController, LoadingPresentable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationBar.delegate = self
     configUI()
+
+    searchBarViewController.filterView.resultCnt = 8
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: true)
   }
 
   private func configUI() {
+
+    self.view.backgroundColor = Colors.white.color
 
     addChildVC(searchBarViewController, to: containerView)
 
@@ -43,18 +53,25 @@ final class FilterTodoViewController: BaseViewController, LoadingPresentable {
 
 extension FilterTodoViewController: SearchBarViewProtocol {
 
-  func addChildVC(_ vc: UIViewController, to view: UIView) {
-    addChild(vc)
-    view.addSubView(vc.view)
-    vc.view.snp.makeConstraints { make in
+  func addChildVC(_ viewController: UIViewController, to view: UIView) {
+    addChild(viewController)
+    view.addSubView(viewController.view)
+    viewController.view.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    vc.didMove(toParent: self)
+    viewController.didMove(toParent: self)
   }
 
-  func removeChildVC(_ vc: UIViewController) {
-    vc.willMove(toParent: nil)
-    vc.view.removeFromSuperview()
-    vc.removeFromParent()
+  func removeChildVC(_ viewController: UIViewController) {
+    viewController.willMove(toParent: nil)
+    viewController.view.removeFromSuperview()
+    viewController.removeFromParent()
+  }
+}
+
+extension FilterTodoViewController: NavBarWithBackButtonViewDelegate {
+
+  func backButtonDidTapped() {
+    navigationController?.popViewController(animated: true)
   }
 }

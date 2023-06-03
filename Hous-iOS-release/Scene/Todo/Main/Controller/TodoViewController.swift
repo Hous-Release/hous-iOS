@@ -109,7 +109,7 @@ extension TodoViewController {
 
 extension TodoViewController {
   private func transferViewAllTodo(_ flag: Bool) {
-    navigationController?.pushViewController(FilteredTodoViewController(), animated: true)
+    navigationController?.pushViewController(FilterTodoViewController(), animated: true)
     // self.reactor?.action.onNext(.initial)
   }
 }
