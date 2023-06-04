@@ -10,7 +10,7 @@ import AssetKit
 
 public final class FilterButton: UIButton {
 
-  public init(_ type: Button.Check) {
+  public init(_ type: Button.Filter = .def) {
     super.init(frame: .zero)
     configUI(type)
   }
@@ -19,11 +19,11 @@ public final class FilterButton: UIButton {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func configUI(_ type: Button.Check) {
+  private func configUI(_ type: Button.Filter) {
     configuration = .plain()
 
     var attrString = AttributedString(type.title)
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
+    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     configuration?.attributedTitle = attrString
 
     configuration?.image = Images.icFilter.image
