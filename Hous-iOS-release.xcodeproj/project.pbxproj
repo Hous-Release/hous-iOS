@@ -289,6 +289,7 @@
 		B8DA060428E543C800C79B40 /* CreateNewRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */; };
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
 		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
+		B8E06B432A2CD3C1003D7733 /* FilteredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E06B422A2CD3C1003D7733 /* FilteredButton.swift */; };
 		B8E393712A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */; };
 		B8E393732A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393722A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift */; };
 		B8E393752A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393742A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift */; };
@@ -618,6 +619,7 @@
 		B8DA060328E543C800C79B40 /* CreateNewRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRoomViewReactor.swift; sourceTree = "<group>"; };
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
+		B8E06B422A2CD3C1003D7733 /* FilteredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredButton.swift; sourceTree = "<group>"; };
 		B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileViewController.swift; sourceTree = "<group>"; };
 		B8E393722A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileView.swift; sourceTree = "<group>"; };
 		B8E393742A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileReactor.swift; sourceTree = "<group>"; };
@@ -1696,6 +1698,7 @@
 		B8D8A4A92A1CA744005A8258 /* FilterTodo */ = {
 			isa = PBXGroup;
 			children = (
+				B8E06B412A2CD3B3003D7733 /* View */,
 				B8D8A4AA2A1CA75E005A8258 /* Controller */,
 			);
 			path = FilterTodo;
@@ -1717,6 +1720,14 @@
 				B8D8A4B32A1CC754005A8258 /* SearchBarViewModel.swift */,
 			);
 			path = Serach;
+			sourceTree = "<group>";
+		};
+		B8E06B412A2CD3B3003D7733 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8E06B422A2CD3C1003D7733 /* FilteredButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B8E3936E2A1B814D0045F978 /* RemoveProfile */ = {
@@ -2060,6 +2071,7 @@
 				77EB720829253FDF00032776 /* IndividualCell.swift in Sources */,
 				B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */,
 				9BDBAD7429240C2B0096FE38 /* MateProfileViewController.swift in Sources */,
+				B8E06B432A2CD3C1003D7733 /* FilteredButton.swift in Sources */,
 				77CCB4FE295749B5002FC9CB /* Optional+Exntension.swift in Sources */,
 				9B959B0C28FFE95B00EB3412 /* ProfileRetryCollectionViewCell.swift in Sources */,
 				77C1281F29B85BF00033A7F3 /* ErrorHandler.swift in Sources */,

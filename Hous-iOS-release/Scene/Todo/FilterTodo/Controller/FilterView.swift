@@ -27,6 +27,7 @@ class FilterView: UIView {
   }
 
   let defaultFilterButton = FilterButton()
+  let filteredButton = FilteredButton()
 
   var filterButton = UIButton().then {
     $0.configuration = .plain()
@@ -56,13 +57,19 @@ extension FilterView {
 
     addSubViews([
       defaultFilterButton,
+      filteredButton,
       filterResultLabel
     ])
 
     defaultFilterButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.height.equalTo(Button.FilterDefault.height)
+      make.height.equalTo(Button.Filter.height)
       make.leading.equalToSuperview().offset(22)
+    }
+
+    filteredButton.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+      make.height.equalTo(Button.Filter.height)
     }
 
     filterResultLabel.snp.makeConstraints { make in
