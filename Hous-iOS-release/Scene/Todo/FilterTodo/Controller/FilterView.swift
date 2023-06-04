@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HousUIComponent
 
 class FilterView: UIView {
 
@@ -25,7 +26,7 @@ class FilterView: UIView {
     }
   }
 
-  // let defaultFilterButton: 
+  let defaultFilterButton = FilterButton()
 
   var filterButton = UIButton().then {
     $0.configuration = .plain()
