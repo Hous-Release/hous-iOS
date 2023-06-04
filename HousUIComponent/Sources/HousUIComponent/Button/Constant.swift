@@ -149,3 +149,20 @@ extension Button {
     }
   }
 }
+
+extension Button {
+
+  public enum Filter: ButtonCommonProtocol {
+    case def
+
+    var activeBackgroundColor: UIColor? { return Colors.blueL2.color }
+
+    var disabledBackgroundColor: UIColor? { return Colors.blue.color }
+
+    var activeTitleColor: UIColor? { return Colors.g6.color }
+
+    var disabledTitleColor: UIColor? { return Colors.white.color }
+
+    var title: String { return "필터" }
+  }
+}
