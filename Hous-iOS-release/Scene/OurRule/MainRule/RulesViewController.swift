@@ -237,7 +237,7 @@ extension RulesViewController {
 private extension RulesViewController {
   func showBottomSheet(model: PhotoCellModel) {
 
-    let bottomSheetType = BottomSheetType.RuleType(model)
+    let bottomSheetType = BottomSheetType.ruleType(model)
 
     let ruleList = self.rules.map { $0.name }
 

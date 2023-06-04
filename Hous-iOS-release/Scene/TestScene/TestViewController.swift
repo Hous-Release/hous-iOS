@@ -319,7 +319,7 @@ extension TestViewController {
                                description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
                                lastmodifedDate: "마지막 수정 2023.04.01",
                                photos: [RulePhoto(image: UIImage(systemName: "star.fill")!), RulePhoto(image: UIImage(systemName: "star")!)])
-    self.presentBottomSheet(.RuleType(model)) { actionType in
+    self.presentBottomSheet(.ruleType(model)) { actionType in
       switch actionType {
       case .add:
         break
@@ -341,7 +341,7 @@ extension TestViewController {
                                description: nil,
                                lastmodifedDate: "마지막 수정 2023.04.01",
                                photos: nil)
-    self.presentBottomSheet(.RuleType(model)) { actionType in
+    self.presentBottomSheet(.ruleType(model)) { actionType in
       switch actionType {
       case .add:
         break

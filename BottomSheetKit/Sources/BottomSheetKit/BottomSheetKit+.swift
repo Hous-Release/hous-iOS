@@ -133,7 +133,7 @@ public extension UIViewController {
       vc.modalTransitionStyle = .crossDissolve
       vc.modalPresentationStyle = .overFullScreen
       present(vc, animated: true)
-    case .RuleType(let model):
+    case .ruleType(let model):
         let view = RuleBottomSheetView(model: model)
         let bottomSheetAction = RuleBottomSheetAction(view: view)
         guard let viewController = RuleBottomSheetViewController(action: bottomSheetAction) else { return }
