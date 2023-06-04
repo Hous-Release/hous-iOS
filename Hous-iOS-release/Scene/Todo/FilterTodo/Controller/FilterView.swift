@@ -54,10 +54,19 @@ extension FilterView {
 
   private func configUI() {
 
-    addSubViews([filterResultLabel])
+    addSubViews([
+      defaultFilterButton,
+      filterResultLabel
+    ])
+
+    defaultFilterButton.snp.makeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.height.equalTo(Button.FilterDefault.height)
+      make.leading.equalToSuperview().offset(22)
+    }
 
     filterResultLabel.snp.makeConstraints { make in
-      make.top.bottom.equalToSuperview().inset(8)
+      make.top.bottom.equalToSuperview()
       make.trailing.equalToSuperview().inset(28)
     }
   }
