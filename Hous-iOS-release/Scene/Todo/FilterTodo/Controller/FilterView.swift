@@ -25,7 +25,7 @@ class FilterView: UIView {
     }
   }
 
-  //let defaultFilterButton: 
+  // let defaultFilterButton: 
 
   var filterButton = UIButton().then {
     $0.configuration = .plain()
