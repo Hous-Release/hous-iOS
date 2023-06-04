@@ -20,15 +20,17 @@ public final class FilterButton: UIButton {
   }
 
   private func configUI(_ type: Button.Filter) {
-    configuration = .plain()
+    configuration = .filled()
 
     var attrString = AttributedString(type.title)
     attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
     configuration?.attributedTitle = attrString
+    configuration?.titleAlignment = .leading
 
     configuration?.image = Images.icFilter.image
     configuration?.imagePlacement = .leading
-    configuration?.imagePadding = 6
+    configuration?.imagePadding = 4
+    configuration?.cornerStyle = .capsule
 
     configurationUpdateHandler = { btn in
       switch btn.state {

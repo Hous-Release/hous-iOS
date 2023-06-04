@@ -58,7 +58,7 @@ private extension SearchBarViewController {
       make.top.leading.trailing.equalToSuperview()
     }
     searchBar.snp.makeConstraints { make in
-      make.top.bottom.equalToSuperview().offset(8)
+      make.top.bottom.equalToSuperview().inset(8)
       make.leading.trailing.equalToSuperview().inset(24)
     }
 
@@ -66,7 +66,7 @@ private extension SearchBarViewController {
       filterView.snp.makeConstraints { make in
         make.top.equalTo(searchBarView.snp.bottom)
         make.leading.trailing.equalToSuperview()
-        make.height.equalTo(46)
+        make.height.equalTo(Button.FilterDefault.height)
       }
     }
 
