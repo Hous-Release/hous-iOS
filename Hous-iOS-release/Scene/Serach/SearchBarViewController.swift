@@ -7,17 +7,31 @@
 
 import UIKit
 
+import RxSwift
+
 final class SearchBarViewController: UIViewController {
+
+  @frozen
+  private enum Section: CaseIterable {
+    case main
+  }
+
+  // MARK: - Properties
+
+  private var items: [SearchModel] = []
+  private var dataSource: UICollectionViewDiffableDataSource<Section, SearchModel>?
+
+  private let disposeBag = DisposeBag()
+
+  // MARK: - UI Components
 
   let searchBarView = UIView()
   let searchBar = HousSearchBar()
-
   lazy var filterView = FilterView()
-
   lazy var collectionView = UICollectionView(
     frame: .zero,
-    collectionViewLayout: self.createLayout())
-
+    collectionViewLayout: self.createLayout()
+  )
   let floatingButton = PlusFloatingButton()
 
   init(_ type: SearchBarViewType) {
@@ -31,6 +45,38 @@ final class SearchBarViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setDelegate()
+    configurationDataSource()
+    // bind
+    endEditWhenTouchedCollectionView()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setTabBarIsHidden(isHidden: true)
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    searchBarEndEditing()
+  }
+
+  @objc
+  func searchBarEndEditing() {
+    searchBar.endEditing(true)
+  }
+}
+
+private extension SearchBarViewController {
+
+  func setDelegate() {
+    collectionView.delegate = self
+  }
+
+  private func endEditWhenTouchedCollectionView() {
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(searchBarEndEditing))
+    self.collectionView.backgroundView = UIView(frame: self.collectionView.bounds)
+    collectionView.backgroundView?.addGestureRecognizer(gesture)
   }
 }
 
@@ -50,9 +96,7 @@ private extension SearchBarViewController {
     ]
     if type == .todo { subViews.append(filterView) }
     self.view.addSubViews(subViews)
-    searchBarView.addSubview(searchBar )
-
-    // 그 다음에는 필터뷰 커스텀하고, 컬렉션뷰 만들자
+    searchBarView.addSubview(searchBar)
 
     searchBarView.snp.makeConstraints { make in
       make.top.leading.trailing.equalToSuperview()
@@ -86,4 +130,44 @@ private extension SearchBarViewController {
     }
   }
 
+}
+
+extension SearchBarViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    searchBarEndEditing()
+  }
+}
+
+extension SearchBarViewController {
+  func configurationDataSource() {
+    let cellRegistration = UICollectionView.CellRegistration<SearchBarViewCell, SearchModel> { (cell, _, item) in
+      cell.configureCell(name: item.name)
+    }
+
+    dataSource = UICollectionViewDiffableDataSource<Section, SearchModel>(
+      collectionView: collectionView,
+      cellProvider: { collectionView, indexPath, itemIdentifier -> UICollectionViewCell? in
+        return collectionView.dequeueConfiguredReusableCell(
+          using: cellRegistration,
+          for: indexPath,
+          item: itemIdentifier)
+      })
+  }
+
+  func filteredItems(with filter: String? = nil, limit: Int? = nil) -> [SearchModel] {
+      let filtered = items.filter { $0.contains(filter) }
+      if let limit {
+          return Array(filtered.prefix(through: limit))
+      }
+      return filtered
+  }
+
+  func performQuery(with filter: String?) {
+      let rules = filteredItems(with: filter)
+          .sorted { $0.name < $1.name }
+      var snapshot = NSDiffableDataSourceSnapshot<Section, SearchModel>()
+      snapshot.appendSections([.main])
+      snapshot.appendItems(rules)
+      dataSource?.apply(snapshot, animatingDifferences: true)
+  }
 }

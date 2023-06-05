@@ -68,8 +68,9 @@ extension FilterView {
     }
 
     filteredButton.snp.makeConstraints { make in
-      make.center.equalToSuperview()
+      make.centerY.equalToSuperview()
       make.height.equalTo(Button.Filter.height)
+      make.leading.equalToSuperview().offset(22)
     }
 
     filterResultLabel.snp.makeConstraints { make in
