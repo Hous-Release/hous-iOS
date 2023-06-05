@@ -290,6 +290,8 @@
 		B8DA060628E58B5A00C79B40 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */; };
 		B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */; };
 		B8E06B432A2CD3C1003D7733 /* FilteredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E06B422A2CD3C1003D7733 /* FilteredButton.swift */; };
+		B8E06B452A2DD87C003D7733 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E06B442A2DD87C003D7733 /* SearchModel.swift */; };
+		B8E06B472A2DDC8C003D7733 /* SearchBarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E06B462A2DDC8C003D7733 /* SearchBarViewCell.swift */; };
 		B8E393712A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */; };
 		B8E393732A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393722A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift */; };
 		B8E393752A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E393742A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift */; };
@@ -620,6 +622,8 @@
 		B8DA060528E58B5A00C79B40 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		B8DA060728E5A09300C79B40 /* ProgressBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBubbleView.swift; sourceTree = "<group>"; };
 		B8E06B422A2CD3C1003D7733 /* FilteredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredButton.swift; sourceTree = "<group>"; };
+		B8E06B442A2DD87C003D7733 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		B8E06B462A2DDC8C003D7733 /* SearchBarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewCell.swift; sourceTree = "<group>"; };
 		B8E393702A1B81B50045F978 /* ConfirmRemoveProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileViewController.swift; sourceTree = "<group>"; };
 		B8E393722A1BBCFE0045F978 /* ConfirmRemoveProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileView.swift; sourceTree = "<group>"; };
 		B8E393742A1BBD0E0045F978 /* ConfirmRemoveProfileReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRemoveProfileReactor.swift; sourceTree = "<group>"; };
@@ -1718,6 +1722,8 @@
 			children = (
 				B8D8A4B12A1CAFA8005A8258 /* SearchBarViewController.swift */,
 				B8D8A4B32A1CC754005A8258 /* SearchBarViewModel.swift */,
+				B8E06B442A2DD87C003D7733 /* SearchModel.swift */,
+				B8E06B462A2DDC8C003D7733 /* SearchBarViewCell.swift */,
 			);
 			path = Serach;
 			sourceTree = "<group>";
@@ -1997,6 +2003,7 @@
 				B54D3A062919810D00DA3A95 /* BadgeViewModel.swift in Sources */,
 				B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */,
 				B8555AA42917D24600E943AE /* ByDayTodoView.swift in Sources */,
+				B8E06B472A2DDC8C003D7733 /* SearchBarViewCell.swift in Sources */,
 				B84EA6C128D61DEA00C92FCD /* NSObject+Extension.swift in Sources */,
 				B84EA6BF28D61C3300C92FCD /* TodoMainSection.swift in Sources */,
 				9B4EE80A29490747002F97C2 /* ProfileAlarmModel.swift in Sources */,
@@ -2120,6 +2127,7 @@
 				7706801328E043C80082A7E7 /* AppleSignIn.swift in Sources */,
 				B8B8A89E28DF955B009FD784 /* EnterRoomButton.swift in Sources */,
 				B52EEE8B2A10CDE100518C8F /* UIControl+Extension.swift in Sources */,
+				B8E06B452A2DD87C003D7733 /* SearchModel.swift in Sources */,
 				B8D066DC28FA95A600A99907 /* MemberTodoView.swift in Sources */,
 				9B9E999F293CE67800537785 /* ProfileNavigationView.swift in Sources */,
 				B856700928C88CAF00B49984 /* HousTabBarItemView.swift in Sources */,
