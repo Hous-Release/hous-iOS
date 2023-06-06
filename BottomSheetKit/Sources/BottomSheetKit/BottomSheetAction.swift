@@ -17,3 +17,13 @@ protocol BottomSheetAction {
     var view: T { get set }
     
 }
+
+extension BottomSheetAction {
+    func sendAction(_ action: DidBottomSheetActionType) {
+        completeAction?(action)
+    }
+
+    func cancel() {
+        completeAction?(.cancel)
+    }
+}
