@@ -14,13 +14,4 @@ class DefaultBottomSheetAction: BottomSheetAction {
   var completeAction: CompleteBottomSheetAction?
 
   init(view: DefaultBottomSheetView) { self.view = view }
-
-  func sendAction(_ action: DidBottomSheetActionType) {
-    completeAction?(action)
-  }
-
-
-  func cancel() {
-    completeAction?(.cancel)
-  }
 }

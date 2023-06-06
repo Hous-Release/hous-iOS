@@ -13,12 +13,4 @@ class TodoBottomSheetAction: BottomSheetAction {
   var completeAction: CompleteBottomSheetAction?
 
   init(view: TodoBottomSheetView) { self.view = view }
-
-  func sendAction(_ action: DidBottomSheetActionType) {
-    completeAction?(action)
-  }
-
-  func cancel() {
-    completeAction?(.cancel)
-  }
 }
