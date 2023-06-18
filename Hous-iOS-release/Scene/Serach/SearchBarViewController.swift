@@ -11,12 +11,14 @@ import RxSwift
 
 final class SearchBarViewController: UIViewController {
 
+  // typealias Reactor =
   @frozen
   private enum Section: CaseIterable {
     case main
   }
 
   // MARK: - Properties
+  // Todo : combine one way 포스팅 마저 읽고, 컴파인으로 뷰모델 연결
 
   private var items: [SearchModel] = []
   private var dataSource: UICollectionViewDiffableDataSource<Section, SearchModel>?
@@ -47,6 +49,7 @@ final class SearchBarViewController: UIViewController {
     super.viewDidLoad()
     setDelegate()
     configurationDataSource()
+    // 필터뷰 버튼 히든처리 어케할지 생각하고, 필터 기능 구현
     // bind
     endEditWhenTouchedCollectionView()
   }
