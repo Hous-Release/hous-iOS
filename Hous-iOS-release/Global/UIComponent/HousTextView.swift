@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import HousUIComponent
 import RxSwift
 
 final class HousTextView: UIView {
@@ -14,7 +14,7 @@ final class HousTextView: UIView {
   private let textView = UITextView()
   private let textCountLabel = HousLabel(
     text: "0/50",
-    font: Fonts.Montserrat.medium.font(size: 12), textColor: Colors.g5.color)
+    font: .EN2, textColor: Colors.g5.color)
 
   private let maxCount: Int
   private let disposeBag = DisposeBag()

@@ -9,7 +9,7 @@ import UIKit
 
 import AssetKit
 
-final class FilledHousTextField: UITextField {
+public final class FilledHousTextField: UITextField {
 
   private let maxCount: Int
 
@@ -21,7 +21,7 @@ final class FilledHousTextField: UITextField {
     textColor: Colors.g5.color
   )
 
-  init(maxCount: Int) {
+  public init(maxCount: Int) {
     self.maxCount = maxCount
     super.init(frame: .zero)
     setLayout()

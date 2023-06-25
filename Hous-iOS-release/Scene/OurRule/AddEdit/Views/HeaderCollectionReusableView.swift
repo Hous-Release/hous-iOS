@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import HousUIComponent
 import RxSwift
 
 final class HeaderCollectionReusableView: UICollectionReusableView {
@@ -17,7 +17,7 @@ final class HeaderCollectionReusableView: UICollectionReusableView {
 
   private let titleLabel = HousLabel(
     text: StringLiterals.OurRule.AddEditView.photo,
-    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+    font: .B2,
     textColor: Colors.black.color)
 
   private lazy var plusButton: UIButton = {
