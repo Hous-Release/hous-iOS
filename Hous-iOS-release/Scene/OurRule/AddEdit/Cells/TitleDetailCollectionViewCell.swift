@@ -7,11 +7,13 @@
 
 import UIKit
 
+import HousUIComponent
+
 final class TitleDetailCollectionViewCell: UICollectionViewCell {
 
   private let titleLabel = HousLabel(
     text: StringLiterals.OurRule.AddEditView.titleText,
-    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+    font: .B2,
     textColor: Colors.black.color).then {
       $0.applyColor(to: "*", with: .red)
     }
@@ -20,7 +22,7 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
 
   private let descriptionLabel = HousLabel(
     text: StringLiterals.OurRule.AddEditView.description,
-    font: Fonts.SpoqaHanSansNeo.medium.font(size: 14),
+    font: .B2,
     textColor: Colors.black.color
   )
 
@@ -36,7 +38,7 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
   }
 
   private func setLayout() {
-    [titleLabel, textField, descriptionLabel, textView].forEach {
+    [titleLabel, descriptionLabel, textView].forEach {
       contentView.addSubview($0)
     }
     titleLabel.snp.makeConstraints { make in

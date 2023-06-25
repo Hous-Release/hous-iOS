@@ -79,7 +79,7 @@ final class TestViewController: UIViewController {
     button.setTitle("RuleBottomSheetWithPhoto", for: .normal)
     button.setTitleColor(UIColor.blue, for: .normal)
     button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-    button.addTarget(self, action: #selector(didTapButton8), for: .touchUpInside)
+//    button.addTarget(self, action: #selector(didTapButton8), for: .touchUpInside)
     return button
   }()
 
@@ -318,7 +318,10 @@ extension TestViewController {
     let model = PhotoCellModel(title: "바나나는 옷걸이에 걸어두기!",
                                description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
                                lastmodifedDate: "마지막 수정 2023.04.01",
-                               photos: [RulePhoto(image: UIImage(systemName: "star.fill")!), RulePhoto(image: UIImage(systemName: "star")!)])
+                               photos: [
+                                .init(image: UIImage(systemName: "star.fill")!),
+                                .init(image: UIImage(systemName: "star")!)
+                               ])
     self.presentBottomSheet(.ruleType(model)) { actionType in
       switch actionType {
       case .add:
