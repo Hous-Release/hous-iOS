@@ -79,7 +79,7 @@ final class TestViewController: UIViewController {
     button.setTitle("RuleBottomSheetWithPhoto", for: .normal)
     button.setTitleColor(UIColor.blue, for: .normal)
     button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-//    button.addTarget(self, action: #selector(didTapButton8), for: .touchUpInside)
+    button.addTarget(self, action: #selector(didTapButton8), for: .touchUpInside)
     return button
   }()
 
@@ -322,6 +322,7 @@ extension TestViewController {
                                 .init(image: UIImage(systemName: "star.fill")!),
                                 .init(image: UIImage(systemName: "star")!)
                                ])
+
     self.presentBottomSheet(.ruleType(model)) { actionType in
       switch actionType {
       case .add:
