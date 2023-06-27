@@ -292,7 +292,9 @@ extension SignInViewController {
 
   private func configureKakaoSignIn() {
 
-    kakaoLoginManager.configure(appKey: "23a6d7ad94f44f0e474ee41b4e6d9fab")
+    guard let key = Bundle.main.infoDictionary?["KAKAO_AUTH_KEY"] as? String else { return }
+
+    kakaoLoginManager.configure(appKey: key)
 
     kakaoLoginManager.onSuccess = { [weak self] identifyToken, _ in
       self?.signInRelay.accept((identifyToken, nil))

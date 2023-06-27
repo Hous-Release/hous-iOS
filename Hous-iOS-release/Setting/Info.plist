@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>KAKAO_AUTH_KEY</key>
+	<string>$(KAKAO_AUTH_KEY)</string>
 	<key>APP_BUNDLE_ID</key>
 	<string>$(APP_BUNDLE_ID)</string>
 	<key>MARKETING_VERSION</key>
@@ -17,7 +19,7 @@
 			<string>kakaosignin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakao23a6d7ad94f44f0e474ee41b4e6d9fab</string>
+				<string>kakao$(KAKAO_AUTH_KEY)</string>
 			</array>
 		</dict>
 	</array>

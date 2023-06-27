@@ -151,27 +151,11 @@ struct RoomBadgeViewModel {
   let isAcquired: Bool
   let isRepresenting: Bool
   var tapState: BadgeViewTapState
-
-  init(id: Int, imageURL: String, title: String, description: String,
-       isAcquired: Bool, isRepresenting: Bool, tapState: BadgeViewTapState) {
-    self.id = id
-    self.imageURL = imageURL
-    self.title = title
-    self.description = description
-    self.isAcquired = isAcquired
-    self.isRepresenting = isRepresenting
-    self.tapState = tapState
-  }
 }
 
 struct RepresentingBadgeViewModel {
   let imageURL: String
   var title: String
-
-  init(imageURL: String, title: String) {
-    self.imageURL = imageURL
-    self.title = title
-  }
 }
 
 enum BadgeViewTapState {

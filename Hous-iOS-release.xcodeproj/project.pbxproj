@@ -33,6 +33,7 @@
 		773F1E8F28D5944800AE7521 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 773F1E8E28D5944800AE7521 /* Network */; };
 		7757A3E228E734E20068B13C /* SplashReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E128E734E20068B13C /* SplashReactor.swift */; };
 		7757A3E428E737520068B13C /* HouseErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757A3E328E737520068B13C /* HouseErrorModel.swift */; };
+		7757F2A62A4AFFC700823F04 /* KakaoSecretKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7757F2A52A4AFFC700823F04 /* KakaoSecretKeyTest.swift */; };
 		777085AC29040D5C0018240B /* AssetKit in Frameworks */ = {isa = PBXBuildFile; productRef = 777085AB29040D5C0018240B /* AssetKit */; };
 		777085B029040DE00018240B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777085AF29040DE00018240B /* TestViewController.swift */; };
 		777C666128A74A62000BECEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C666028A74A62000BECEA /* AppDelegate.swift */; };
@@ -351,9 +352,10 @@
 		773BABC129D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hous_iOS_releaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7757A3E128E734E20068B13C /* SplashReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashReactor.swift; sourceTree = "<group>"; };
 		7757A3E328E737520068B13C /* HouseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseErrorModel.swift; sourceTree = "<group>"; };
+		7757F2A52A4AFFC700823F04 /* KakaoSecretKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSecretKeyTest.swift; sourceTree = "<group>"; };
 		777085A82903F1980018240B /* AssetKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AssetKit; sourceTree = "<group>"; };
 		777085AF29040DE00018240B /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		777C665D28A74A62000BECEA /* Hous-iOS-release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-iOS-release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		777C665D28A74A62000BECEA /* Hous-(Dev).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-(Dev).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777C666228A74A62000BECEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		777C666928A74A63000BECEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 		7725815729D2B24900E9FC0E /* Hous-iOS-releaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				7757F2A22A4AFF8C00823F04 /* SettingTests */,
 				7725815829D2B24900E9FC0E /* Hous_iOS_releaseTests.swift */,
 			);
 			path = "Hous-iOS-releaseTests";
@@ -737,6 +740,14 @@
 				773BABC129D17B4B00ABAACD /* Hous_iOS_releaseUITestsLaunchTests.swift */,
 			);
 			path = "Hous-iOS-releaseUITests";
+			sourceTree = "<group>";
+		};
+		7757F2A22A4AFF8C00823F04 /* SettingTests */ = {
+			isa = PBXGroup;
+			children = (
+				7757F2A52A4AFFC700823F04 /* KakaoSecretKeyTest.swift */,
+			);
+			path = SettingTests;
 			sourceTree = "<group>";
 		};
 		777085AD29040DC50018240B /* TestScene */ = {
@@ -771,7 +782,7 @@
 		777C665E28A74A62000BECEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				777C665D28A74A62000BECEA /* Hous-iOS-release.app */,
+				777C665D28A74A62000BECEA /* Hous-(Dev).app */,
 				773BABBD29D17B4B00ABAACD /* Hous-iOS-releaseUITests.xctest */,
 				7725815629D2B24900E9FC0E /* Hous-iOS-releaseTests.xctest */,
 			);
@@ -1785,7 +1796,7 @@
 				B84AC0282A1A5EA7003F1CA5 /* HousUIComponent */,
 			);
 			productName = "Hous-iOS-release";
-			productReference = 777C665D28A74A62000BECEA /* Hous-iOS-release.app */;
+			productReference = 777C665D28A74A62000BECEA /* Hous-(Dev).app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1929,6 +1940,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7725815929D2B24900E9FC0E /* Hous_iOS_releaseTests.swift in Sources */,
+				7757F2A62A4AFFC700823F04 /* KakaoSecretKeyTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
