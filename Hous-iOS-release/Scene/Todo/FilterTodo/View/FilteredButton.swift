@@ -88,7 +88,7 @@ class FilteredButton: UIControl {
       $0.image = $0.image!.withRenderingMode(.alwaysTemplate)
     }
     backgroundColor = Colors.blueL2.color
-    makeRounded(cornerRadius: CGFloat(Button.Filter.height) / 2)
+    makeRounded(cornerRadius: CGFloat(SizeLiterals.FilterButton.height) / 2)
   }
 
   private func configUI() {

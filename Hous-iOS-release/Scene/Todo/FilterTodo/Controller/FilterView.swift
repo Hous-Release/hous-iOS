@@ -63,13 +63,13 @@ extension FilterView {
 
     defaultFilterButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.height.equalTo(Button.Filter.height)
+      make.height.equalTo(SizeLiterals.FilterButton.height)
       make.leading.equalToSuperview().offset(22)
     }
 
     filteredButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.height.equalTo(Button.Filter.height)
+      make.height.equalTo(SizeLiterals.FilterButton.height)
       make.leading.equalToSuperview().offset(22)
     }
 
