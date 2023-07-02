@@ -48,7 +48,7 @@ public extension UIView {
       self.layer.cornerRadius = self.layer.frame.height / 2
     }
 
-    //      self.clipsToBounds = true
+    self.layer.cornerCurve = .continuous
     self.layer.masksToBounds = false
   }
 
