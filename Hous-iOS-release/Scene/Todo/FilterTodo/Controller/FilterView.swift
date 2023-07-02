@@ -32,18 +32,18 @@ class FilterView: UIView {
   var filterButton = UIButton().then {
     $0.configuration = .plain()
   }
+  
 
-  lazy var filterResultLabel: UILabel = {
-    let label = UILabel()
-    label.textAlignment = .right
-    label.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
-    label.textColor = Colors.g4.color
-    return label
-  }()
+  lazy var filterResultLabel = HousLabel(
+    text: "",
+    font: .description,
+    textColor: Colors.g4.color
+  )
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     configUI()
+    filterResultLabel.textAlignment = .right
   }
 
   required init?(coder: NSCoder) {
