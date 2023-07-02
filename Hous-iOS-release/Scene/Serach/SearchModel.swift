@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SearchModel: Hashable {
+struct SearchModel: Hashable {
   let isNew: Bool
   let id: Int
   let name: String
@@ -16,6 +16,21 @@ public struct SearchModel: Hashable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(identifier)
   }
+
+  static func == (lhs: SearchModel, rhs: SearchModel) -> Bool {
+    return lhs.identifier == rhs.identifier
+  }
+
+  func contains(_ filter: String?) -> Bool {
+    guard let filterText = filter else { return true }
+    if filterText.isEmpty { return true }
+    let lowercasedFilter = filterText.lowercased()
+
+    return name.lowercased().contains(lowercasedFilter)
+  }
+}
+
+extension SearchModel {
 
   static func dummy() -> [SearchModel] {
     return [
@@ -36,17 +51,5 @@ public struct SearchModel: Hashable {
       SearchModel(isNew: true, id: 15, name: "가나다"),
       SearchModel(isNew: true, id: 16, name: "ㄱ")
     ]
-  }
-
-  public static func == (lhs: SearchModel, rhs: SearchModel) -> Bool {
-    return lhs.identifier == rhs.identifier
-  }
-
-  func contains(_ filter: String?) -> Bool {
-    guard let filterText = filter else { return true }
-    if filterText.isEmpty { return true }
-    let lowercasedFilter = filterText.lowercased()
-
-    return name.lowercased().contains(lowercasedFilter)
   }
 }
