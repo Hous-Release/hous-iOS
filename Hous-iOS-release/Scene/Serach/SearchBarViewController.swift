@@ -50,7 +50,7 @@ final class SearchBarViewController: UIViewController {
     super.viewDidLoad()
     setDelegate()
     configurationDataSource()
-    // 필터뷰 버튼 히든처리 어케할지 생각하고, 필터 기능 구현
+    // 7/2 필터뷰 버튼 히든처리 어케할지 생각하고, 필터 기능 구현
     // bind
     endEditWhenTouchedCollectionView()
   }
