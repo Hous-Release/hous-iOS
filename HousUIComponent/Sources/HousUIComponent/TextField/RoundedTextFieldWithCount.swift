@@ -10,6 +10,11 @@ import UIKit
 
 public final class RoundedTextFieldWithCount: UITextField {
 
+  private struct Constants {
+    static let horizontal = 16
+
+  }
+
   private lazy var maxCountLabel: HousLabel = {
     let label = HousLabel(text: nil, font: .EN2, textColor: Colors.g5.color)
     return label
@@ -17,12 +22,19 @@ public final class RoundedTextFieldWithCount: UITextField {
 
   // MARK: - Variable & Properties
 
-  private let maxCount: Int
+  public override var text: String? {
+    didSet {
+      maxCountLabel.text = "\(self.text?.count ?? 0)/\(maxCount)"
+    }
+  }
+
   public var isValidate: Bool {
     get {
       (text?.count ?? 0) > 0 && (text?.count ?? 0) <= maxCount
     }
   }
+
+  private let maxCount: Int
 
   public init(
     maxCount: Int
@@ -31,111 +43,49 @@ public final class RoundedTextFieldWithCount: UITextField {
     super.init(frame: .zero)
     setupViews()
     setupStyles()
-//    registerForNotifications()
-  }
-
-  deinit {
-    NotificationCenter.default.removeObserver(self)
+    registerForNotifications()
   }
 
   required init?(coder: NSCoder) {
     fatalError("Not Implemented")
   }
 
-  public override func layoutSubviews() {
-    super.layoutSubviews()
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 
   private func setupStyles() {
     self.font = HousFont.B2.font
     self.textColor = Colors.black.color
+    self.makeRounded(cornerRadius: 8)
+    self.backgroundColor = Colors.blueL2.color
   }
 
   private func setupViews() {
+    self.addSubview(maxCountLabel)
+    self.addLeftPadding(CGFloat(Constants.horizontal))
+    maxCountLabel.text = "\(text?.count ?? 0)/\(maxCount)"
 
-//    if useMaxCount {
-//      self.addSubView(maxCountLabel)
-//      self.addSubView(exceedLabel)
-//    }
-//    guard
-//      let maxCount = maxCount
-//    else {
-//      return
-//    }
-//    if let text = self.text {
-//      if text.count > 0 {
-//        self.layer.addSublayer(selectedUnderlineLayer)
-//        maxCountLabel.text = "\(text.count)/\(maxCount)"
-//      }
-//    } else {
-//      maxCountLabel.text = "0/\(maxCount)"
-//    }
+    maxCountLabel.snp.makeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.trailing.equalToSuperview().inset(Constants.horizontal)
+    }
   }
 
-
-//  @objc
-//  func change() {
-//    guard
-//      let maxCount = maxCount,
-//      let text = self.text
-//    else {
-//      return
-//    }
-//
-//    maxCountLabel.text = "\(text.count)/\(maxCount)"
-//    isExceed(text.count)
-//    textFieldIsEmpty(text.count)
-//  }
-
-//  private func textFieldIsEmpty(_ count: Int) {
-//
-//    if count == 0 {
-//      isValidate = false
-//    } else {
-//      isValidate = true
-//    }
-//  }
-//
-//  private func isExceed(_ count: Int) {
-//    guard let maxCount = maxCount else {
-//      return
-//    }
-//    guard count != 0 else {
-//      return
-//    }
-//
-//    if count > maxCount {
-//      maxCountLabel.textColor = Colors.red.color
-//      isValidate = false
-//    } else {
-//      maxCountLabel.textColor = Colors.g5.color
-//      isValidate = true
-//    }
-//
-//  }
-
 }
+extension RoundedTextFieldWithCount {
+  @objc
+  func change() {
+    maxCountLabel.text = "\(self.text?.count ?? 0)/\(maxCount)"
+    maxCountLabel.textColor =  isValidate ?  Colors.g5.color : Colors.red.color
+  }
 
-//extension RoundedTextFieldWithCount {
-//  private func registerForNotifications() {
-//
-//    NotificationCenter.default.addObserver(
-//      self,
-//      selector: #selector(change),
-//      name: .change,
-//      object: self
-//    )
-//  }
-//
-//}
-//
-//extension RoundedTextFieldWithCount {
-//
-//}
-//
-//// 외부 노출
-//public extension RoundedTextFieldWithCount {
-//  func textFieldChange() {
-//    self.change()
-//  }
-//}
+  private func registerForNotifications() {
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(change),
+      name: .change,
+      object: self
+    )
+  }
+}
