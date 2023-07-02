@@ -12,6 +12,6 @@ protocol SearchBarViewProtocol {
   func removeChildVC(_ viewController: UIViewController)
 }
 
-enum SearchBarViewType {
+enum SearchType {
   case rules, todo
 }

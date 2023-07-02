@@ -83,7 +83,7 @@ final class ConfirmRemoveProfileView: UIView {
     navigationBarView.snp.makeConstraints { make in
       make.top.equalTo(safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
-      make.height.equalTo(NavigationBar.height)
+      make.height.equalTo(SizeLiterals.NavigationBar.height)
     }
 
     stackView.snp.makeConstraints { make in

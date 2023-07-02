@@ -41,7 +41,7 @@ final class SearchBarViewCell: UICollectionViewCell {
   }
 
   private let newLabel = HousLabel(
-    text: OurRule.MainView.new,
+    text: StringLiterals.OurRule.MainView.new,
     font: .EN2,
     textColor: Colors.blue.color
   ).then {

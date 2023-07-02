@@ -8,6 +8,7 @@
 import UIKit
 
 import RxSwift
+import HousUIComponent
 
 final class SearchBarViewController: UIViewController {
 
@@ -36,7 +37,7 @@ final class SearchBarViewController: UIViewController {
   )
   let floatingButton = PlusFloatingButton()
 
-  init(_ type: SearchBarViewType) {
+  init(_ type: SearchType) {
     super.init(nibName: nil, bundle: nil)
     configUI(type)
   }
@@ -90,7 +91,7 @@ private extension SearchBarViewController {
     return UICollectionViewCompositionalLayout.list(using: config)
   }
 
-  func configUI(_ type: SearchBarViewType) {
+  func configUI(_ type: SearchType) {
 
     var subViews: [UIView] = [
       searchBarView,
@@ -113,7 +114,7 @@ private extension SearchBarViewController {
       filterView.snp.makeConstraints { make in
         make.top.equalTo(searchBarView.snp.bottom)
         make.leading.trailing.equalToSuperview()
-        make.height.equalTo(Button.Filter.height)
+        make.height.equalTo(SizeLiterals.FilterButton.height)
       }
     }
 

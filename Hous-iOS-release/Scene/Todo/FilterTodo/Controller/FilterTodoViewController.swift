@@ -40,7 +40,7 @@ final class FilterTodoViewController: BaseViewController, LoadingPresentable {
     navigationBar.snp.makeConstraints { make in
       make.top.equalTo(self.view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
-      make.height.equalTo(NavigationBar.height)
+      make.height.equalTo(SizeLiterals.NavigationBar.height)
     }
 
     containerView.snp.makeConstraints { make in

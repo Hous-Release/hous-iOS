@@ -39,7 +39,7 @@ public final class FilledHousTextField: UITextField {
 
   private func setLayout() {
     self.snp.makeConstraints { make in
-      make.height.equalTo(ScreenUtils.getHeight(46))
+      make.height.equalTo(46)
     }
 
     baseRightView.addSubView(textCountLabel)

@@ -42,3 +42,13 @@ enum StringLiterals {
   }
 
 }
+
+enum SizeLiterals {
+  enum NavigationBar {
+    static let height = 64
+  }
+
+  enum FilterButton {
+    static let height = 32
+  }
+}
