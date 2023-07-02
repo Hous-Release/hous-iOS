@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 public class APIRequestLoader<T: TargetType> {
 
@@ -50,7 +51,7 @@ public class APIRequestLoader<T: TargetType> {
       .validate(statusCode: allStatusCode)
       .responseDecodable(of: M.self) { response in
 
-        switch response.result {
+      switch response.result {
 
         case .success(let data):
           completionHandler(data, nil)
@@ -60,5 +61,23 @@ public class APIRequestLoader<T: TargetType> {
         }
       }
   }
+
+    internal func fetchDataToPublisher<M: Decodable>(
+      target: T,
+      responseData: M.Type,
+      isWithInterceptor: Bool = true
+    ) -> AnyPublisher<M, AFError> {
+
+      var allStatusCode = Set(200..<503)
+      let session = isWithInterceptor ? self.sessionWithInterceptor : self.session
+      _ = isWithInterceptor ? allStatusCode.remove(401) : nil
+
+      return session.request(target)
+        .validate(statusCode: allStatusCode)
+        .publishDecodable(type: M.self)
+        .value()
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
 
 }
