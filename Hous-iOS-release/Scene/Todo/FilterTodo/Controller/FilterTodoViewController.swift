@@ -14,7 +14,9 @@ final class FilterTodoViewController: BaseViewController, LoadingPresentable {
   )
 
   private let containerView = UIView()
-  let searchBarViewController = SearchBarViewController(.rules)
+  private let provider = ServiceProvider()
+  private lazy var searchBarViewModel = SearchBarViewModel(provider: provider)
+  private lazy var searchBarViewController = SearchBarViewController(.todo, viewModel: self.searchBarViewModel)
 
   override func viewDidLoad() {
     super.viewDidLoad()
