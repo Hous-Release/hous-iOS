@@ -32,7 +32,6 @@ class FilterView: UIView {
   var filterButton = UIButton().then {
     $0.configuration = .plain()
   }
-  
 
   lazy var filterResultLabel = HousLabel(
     text: "",

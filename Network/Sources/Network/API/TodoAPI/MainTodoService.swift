@@ -11,9 +11,6 @@ import Alamofire
 public enum TodoService {
   // MARK: main
   case getTodos
-  case getTodosFiltered(
-    _ dto: FilteredTodoDTO.Request.getTodosFilteredRequestDTO
-  )
   case checkTodo(
     _ todoId: Int,
     _ status: MainTodoDTO.Request.updateTodoRequestDTO
@@ -46,8 +43,6 @@ extension TodoService: TargetType {
       // MARK: main
     case .getTodos:
       return "/todos/main"
-    case .getTodosFiltered:
-      return "/todos"
     case let .checkTodo(todoId, _):
       return "/todo/\(todoId)/check"
     case let .getTodoSummary(todoId):
@@ -81,8 +76,6 @@ extension TodoService: TargetType {
       // MARK: main
     case .getTodos:
       return .get
-    case .getTodosFiltered:
-      return .get
     case .checkTodo:
       return .post
     case .getTodoSummary:
@@ -113,8 +106,6 @@ extension TodoService: TargetType {
       // MARK: main
     case .getTodos:
       return .requestPlain
-    case let .getTodosFiltered(dto) :
-      return .body(dto)
     case let .checkTodo(_, status):
       return .body(status)
     case .getTodoSummary:

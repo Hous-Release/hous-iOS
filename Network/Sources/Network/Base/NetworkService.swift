@@ -15,6 +15,7 @@ final public class NetworkService {
   public let authRepository = AuthAPI(isLogging: true)
   public let mainHomeRepository = MainHomeAPI(isLogging: true)
   public let todoRepository = TodoAPI(isLogging: true)
+  public let newTodoRepository = NewTodoAPI(isLogging: true)
   public let roomRepository = RoomAPI(isLogging: true)
   public let ruleRepository = RuleAPI(isLogging: true)
   public let profileRepository = ProfileAPI(isLogging: true)
