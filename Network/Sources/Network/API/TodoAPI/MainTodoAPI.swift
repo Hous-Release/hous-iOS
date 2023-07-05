@@ -139,11 +139,11 @@ public final class TodoAPI: APIRequestLoader<TodoService>, TodoAPIProtocol {
   }
 
   public func getOnlyMyTodoData(
-    completion: @escaping (BaseResponseType<FilteredTodoDTO.Response.OnlyMyTodosDTO>?,Error?) -> Void
+    completion: @escaping (BaseResponseType<MainTodoDTO.Response.MyTodosResignDTO>?,Error?) -> Void
   ) {
     fetchData(
       target: .getOnlyMyTodo,
-      responseData: BaseResponseType<FilteredTodoDTO.Response.OnlyMyTodosDTO>.self,
+      responseData: BaseResponseType<MainTodoDTO.Response.MyTodosResignDTO>.self,
       isWithInterceptor: true
     ) { res, err in
       completion(res, err)
