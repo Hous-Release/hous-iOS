@@ -8,33 +8,96 @@
 import Foundation
 import Combine
 import Network
-import UIKit.UIImage
+import BottomSheetKit
 
-protocol SearchRepository {
+// MARK: - TODOSEARCH
 
-  associatedtype SearchItem
+public enum SearchRepositoryEvent {
 
-  /// Runs  search with a query string
-  func search(with name: String) -> AnyPublisher<Result<[SearchItem], Error>, Never>
-
-  /// Fetches details for searchResult with specified id
-  func getDetail(with id: Int) -> AnyPublisher<Result<SearchItem, Error>, Never>
+  case searchedList([SearchModel]?)
+  case filteredTodoCount(Int?)
+  case selectedTodo(TodoModel?)
+  // case selectedRule(RuleModel?)
+  case sendError(HouseErrorModel?)
 }
 
-//final class SearchRuleRepositoryImp: SearchRepository {
-//
-//  private let type: SearchType
-//  typealias SearchItem = HousRule
-//
-//  init(searchType: SearchType) {
-//      self.type = searchType
-//  }
-//// 6/30 todo : newtodoapi newtodosevice combine 리턴 형태로 리팩토링 한 다음 여기서부터 시작하기
-//  func search(with name: String) -> AnyPublisher<Result<[SearchItem], Error>, Never> {
-//
-//  }
-//
-//  func getDetail(with id: Int) -> AnyPublisher<Result<SearchItem, Error>, Never> {
-//
-//  }
-//}
+public protocol SearchRepository {
+
+  var event: PassthroughSubject<SearchRepositoryEvent, HouseErrorModel> { get }
+
+  /// Runs  search with filtering
+  func fetchFilteredTodo(
+    with ids: [Int]?,
+    of dayOfWeeks: [String]?
+  )
+
+  /// func fetchRule()
+
+  /// Fetches details for searchResult with specified id
+  func fetchTodoDetail(
+    with id: Int
+  )
+
+  /// func fetchRuleDetail()
+}
+
+public final class SearchRepositoryImp: BaseService, SearchRepository {
+
+  /// PassthroughSubject -> rxSwift 에서의 PublishSubject
+  /// AnyCancellable -> rxSwift 에서의 disposeBag 역할
+  public var event = PassthroughSubject<SearchRepositoryEvent, HouseErrorModel>()
+  private var subscriptions: Set<AnyCancellable> = []
+
+  public func fetchFilteredTodo(
+    with ids: [Int]?,
+    of dayOfWeeks: [String]?) {
+
+      let dto = MainTodoDTO.Request.getTodosFilteredRequestDTO(
+        dayOfWeeks: dayOfWeeks,
+        onboardingIds: ids)
+
+      NetworkService.shared.newTodoRepository.getTodoByFilter(dto: dto)
+        .sink { [weak self] completion in
+          guard let self = self else { return }
+
+          switch completion {
+          case .failure(let err):
+            let errorModel = HouseErrorModel(
+              success: false,
+              status: err.responseCode ?? -1,
+              message: err.localizedDescription
+            )
+            self.event.send(.sendError(errorModel))
+          case .finished:
+            break
+          }
+
+        } receiveValue: { [weak self] value in
+          guard let self = self else { return }
+          guard let searchResult = value.data else { return }
+
+          self.event.send(.filteredTodoCount(searchResult.todosCnt))
+
+          var filteredTodo: [SearchModel] = []
+          searchResult.todos.forEach { res in
+            filteredTodo.append(
+              SearchModel(isNew: res.isNew, id: res.todoId, name: res.todoName)
+            )
+          }
+          self.event.send(.searchedList(filteredTodo))
+        }
+        .store(in: &subscriptions)
+
+    }
+
+  public func fetchTodoDetail(with id: Int) {
+
+  }
+
+}
+
+// MARK: - RULE SEARCH
+
+final class SearchRuleRepositoryImp {
+  // 추후 rule search 뷰에서 search custom view를 넣는 방향으로 리팩토링 시
+}
