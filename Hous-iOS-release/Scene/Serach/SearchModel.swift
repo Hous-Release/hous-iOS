@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchModel: Hashable {
+public struct SearchModel: Hashable {
   let isNew: Bool
   let id: Int
   let name: String
@@ -17,7 +17,7 @@ struct SearchModel: Hashable {
     hasher.combine(identifier)
   }
 
-  static func == (lhs: SearchModel, rhs: SearchModel) -> Bool {
+  public static func == (lhs: SearchModel, rhs: SearchModel) -> Bool {
     return lhs.identifier == rhs.identifier
   }
 

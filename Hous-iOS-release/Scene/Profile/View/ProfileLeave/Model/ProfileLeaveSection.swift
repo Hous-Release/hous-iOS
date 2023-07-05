@@ -22,7 +22,7 @@ public struct OnlyMyTodoSection {
   public enum Item: Equatable {
     case guide
     case countTodo(num: Int)
-    case myTodo(todos: FilteredTodoDTO.Response.MyTodoDTO)
+    case myTodo(todos: MainTodoDTO.Response.MyTodoSummaryDTO)
     case myTodoEmpty
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
