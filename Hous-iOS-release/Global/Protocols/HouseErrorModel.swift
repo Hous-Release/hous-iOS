@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct HouseErrorModel {
+public struct HouseErrorModel: Error {
   public init(success: Bool?, status: Int?, message: String?) {
     self.success = success
     self.status = status
