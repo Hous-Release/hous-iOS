@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TodoModel {
+public struct TodoModel: Equatable {
 
   let homies: [HomieCellModel]
   let todoName: String
