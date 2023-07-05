@@ -3,6 +3,7 @@ disabled_rules: # 실행에서 제외할 규칙들
 - closure_parameter_position # closure 인자 한줄에 변수 때문에 길어져서 적용 불가능
 - function_body_length # 함수길이 40자 이상
 - file_length # Code line 400줄 이상
+- identifier_name
 
 
 excluded:
