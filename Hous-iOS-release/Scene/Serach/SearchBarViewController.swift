@@ -6,25 +6,26 @@
 //
 
 import UIKit
-
-import RxSwift
+import Combine
 import HousUIComponent
 
 final class SearchBarViewController: UIViewController {
 
-  // typealias Reactor =
   @frozen
   private enum Section: CaseIterable {
     case main
   }
 
   // MARK: - Properties
-  // Todo : combine one way 포스팅 마저 읽고, 컴파인으로 뷰모델 연결
+
+  var searchType: SearchType
+  var viewModel: SearchBarViewModel
+  private var subscriptions: Set<AnyCancellable> = []
 
   private var items: [SearchModel] = []
   private var dataSource: UICollectionViewDiffableDataSource<Section, SearchModel>?
 
-  private let disposeBag = DisposeBag()
+  private var viewWillAppear = PassthroughSubject<SearchType, Never>()
 
   // MARK: - UI Components
 
@@ -37,7 +38,9 @@ final class SearchBarViewController: UIViewController {
   )
   let floatingButton = PlusFloatingButton()
 
-  init(_ type: SearchType) {
+  init(_ type: SearchType, viewModel: SearchBarViewModel) {
+    self.searchType = type
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
     configUI(type)
   }
@@ -50,14 +53,14 @@ final class SearchBarViewController: UIViewController {
     super.viewDidLoad()
     setDelegate()
     configurationDataSource()
-    // 7/2 필터뷰 버튼 히든처리 어케할지 생각하고, 필터 기능 구현
-    // bind
+    bind()
     endEditWhenTouchedCollectionView()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setTabBarIsHidden(isHidden: true)
+    viewWillAppear.send(self.searchType)
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,6 +71,55 @@ final class SearchBarViewController: UIViewController {
   @objc
   func searchBarEndEditing() {
     searchBar.endEditing(true)
+  }
+}
+
+extension SearchBarViewController {
+
+  /// viewmodel binding
+  func bind() {
+    bindInput()
+    bindOutput()
+  }
+
+  private func bindInput() {
+
+    let searchBarPublisher = searchBar.publisher(for: .valueChanged)
+      .map { $0 as? UITextField }
+      .map { $0?.text }
+      .eraseToAnyPublisher()
+
+    let floatingButtonPublisher = floatingButton.publisher(for: .touchUpInside)
+      .map { [unowned self] _ in self.searchType }
+      .eraseToAnyPublisher()
+
+    let input = SearchBarViewModel.Input(
+      fetch: viewWillAppear.eraseToAnyPublisher(),
+      // didTapFilterTodo: ,
+      searchQuery: searchBarPublisher,
+      // didTapCell: ,
+      didTapFloatingBtn: floatingButtonPublisher
+    )
+
+    viewModel.transform(input: input)
+  }
+
+  private func bindOutput() {
+
+    viewModel.$searchedList
+      .compactMap { $0 }
+      .sink { [weak self] list in
+        guard let self = self else { return }
+        self.applySnapshot(with: list)
+      }
+      .store(in: &subscriptions)
+
+    viewModel.$floatingBtnTapped
+      .compactMap { $0 }
+      .sink { type in
+        print("\(type) 버튼눌림 버튼눌림 버튼눌림")
+      }
+      .store(in: &subscriptions)
   }
 }
 
@@ -158,20 +210,11 @@ extension SearchBarViewController {
       })
   }
 
-  func filteredItems(with filter: String? = nil, limit: Int? = nil) -> [SearchModel] {
-      let filtered = items.filter { $0.contains(filter) }
-      if let limit {
-          return Array(filtered.prefix(through: limit))
-      }
-      return filtered
-  }
-
-  func performQuery(with filter: String?) {
-      let rules = filteredItems(with: filter)
-          .sorted { $0.name < $1.name }
+  func applySnapshot(with list: [SearchModel]) {
+      let sortedList = list.sorted { $0.name < $1.name }
       var snapshot = NSDiffableDataSourceSnapshot<Section, SearchModel>()
       snapshot.appendSections([.main])
-      snapshot.appendItems(rules)
+      snapshot.appendItems(sortedList)
       dataSource?.apply(snapshot, animatingDifferences: true)
   }
 }
