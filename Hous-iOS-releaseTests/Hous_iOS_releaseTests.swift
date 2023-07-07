@@ -11,7 +11,8 @@ import RxTest
 import RxBlocking
 import XCTest
 
-@testable import Hous_iOS_release
+@testable import Hous_iOS_release_module
+
 import UserInformation
 
 final class Hous_iOS_releaseTests: XCTestCase {
