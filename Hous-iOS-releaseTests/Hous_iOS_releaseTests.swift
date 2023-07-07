@@ -61,7 +61,10 @@ final class Hous_iOS_releaseTests: XCTestCase {
   }
 
   func testAction_enterTodo() {
+
     let reactor = UpdateTodoReactor(provider: service, state: .init(todoHomies: todoHomies))
+
+    let vc = UpdateTodoViewController(reactor)
 
     let scheduler = TestScheduler(initialClock: 0)
     let disposeBag = DisposeBag()
@@ -89,6 +92,8 @@ final class Hous_iOS_releaseTests: XCTestCase {
       "쓰레기 버리기",
       ""
     ])
+
+    vc.view.asImage()
 
   }
 
