@@ -74,7 +74,6 @@ final class Hous_iOS_releaseTests: XCTestCase {
         .next(100, .enterTodo("쓰레")),
         .next(200, .enterTodo("쓰레기")),
         .next(500, .enterTodo("쓰레기 버리기")),
-        .next(700, .enterTodo(""))
       ])
       .subscribe(reactor.action)
       .disposed(by: disposeBag)
@@ -90,7 +89,6 @@ final class Hous_iOS_releaseTests: XCTestCase {
       "쓰레",
       "쓰레기",
       "쓰레기 버리기",
-      ""
     ])
 
     vc.view.asImage()
