@@ -35,6 +35,7 @@ final class UpdateTodoViewController: BaseViewController, View, LoadingPresentab
   private lazy var navigationBar = NavBarWithBackButtonView(title: "")
   private var collectionView: UICollectionView!
   private var todoTextField: RoundedTextFieldWithCount!
+  private var todoLabel: HousLabel!
 
   private var actionButton: UIButton!
 
@@ -99,7 +100,7 @@ extension UpdateTodoViewController {
     bindTapIndividualAction(reactor)
     bindTapDayAction(reactor)
     bindTapUpdateAction(reactor)
-    bindTapAlarmAction(reactor)
+//    bindTapAlarmAction(reactor)
     bindReturnKeyAction()
   }
 
@@ -129,18 +130,20 @@ extension UpdateTodoViewController {
       .disposed(by: disposeBag)
   }
   func bindTapUpdateAction(_ reactor: Reactor) {
-    actionButton.rx.tap
+    navigationBar.rightButton.rx.tap
       .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
       .asDriver(onErrorJustReturn: Void())
       .drive(onNext: self.tappedUpdate)
       .disposed(by: disposeBag)
   }
+
   func bindTapAlarmAction(_ reactor: Reactor) {
     navigationBar.rightButton.rx.tap
       .map { _ in Reactor.Action.didTapAlarm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
+
   func bindReturnKeyAction() {
     todoTextField.rx.controlEvent(.editingDidEndOnExit)
       .map { _ in true }
@@ -155,13 +158,13 @@ extension UpdateTodoViewController {
   // MARK: - State Bind
 extension UpdateTodoViewController {
   func bindState(_ reactor: Reactor) {
-    bindPushNotificationState(reactor)
+//    bindPushNotificationState(reactor)
     bindTodoState(reactor)
     bindHomiesState(reactor)
     bindDidTapIndividualState(reactor)
     bindDidTapDayState(reactor)
     bindBackState(reactor)
-    bindActionButtonState(reactor)
+    bindUpdateButtonState(reactor)
     bindErrorState(reactor)
   }
 
@@ -203,9 +206,9 @@ extension UpdateTodoViewController {
       .drive(onNext: self.back)
       .disposed(by: disposeBag)
   }
-  func bindActionButtonState(_ reactor: Reactor) {
+  func bindUpdateButtonState(_ reactor: Reactor) {
     reactor.pulse(\.$isTappableButton)
-      .bind(to: actionButton.rx.isEnabled)
+      .bind(to: navigationBar.rightButton.rx.isEnabled)
       .disposed(by: disposeBag)
   }
   func bindErrorState(_ reactor: Reactor) {
@@ -314,8 +317,8 @@ extension UpdateTodoViewController {
 
   private func setupLayout() {
     view.addSubView(navigationBar)
+    view.addSubview(todoLabel)
     view.addSubView(todoTextField)
-    view.addSubView(actionButton)
     view.addSubView(collectionView)
 
     navigationBar.snp.makeConstraints { make in
@@ -323,22 +326,22 @@ extension UpdateTodoViewController {
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
     }
+
+    todoLabel.snp.makeConstraints { make in
+      make.top.equalTo(navigationBar.snp.bottom).offset(Constants.verticalMargin)
+      make.leading.equalToSuperview().inset(26)
+    }
+
     todoTextField.snp.makeConstraints { make in
       make.height.equalTo(Constants.textfieldHeight)
       make.leading.trailing.equalToSuperview().inset(24)
-      make.top.equalTo(navigationBar.snp.bottom).offset(32)
-    }
-
-    actionButton.snp.makeConstraints { make in
-      make.height.equalTo(Constants.buttonHeight)
-      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.verticalMargin)
-      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin)
+      make.top.equalTo(todoLabel.snp.bottom).offset(4)
     }
 
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(todoTextField.snp.bottom).offset(46)
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(actionButton.snp.top).offset(-Constants.verticalMargin / 2)
+      make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
     }
   }
 
@@ -357,16 +360,18 @@ extension UpdateTodoViewController {
     "새로운 to-do 추가"
 
     let buttonTilte = reactor.initialState.isModifying ?
-    "저장하기"
+    "저장"
     :
-    "추가하기"
+    "추가"
+
+    navigationBar.rightButton.isEnabled = false
+    navigationBar.rightButton.setTitle(buttonTilte, for: .normal)
+    navigationBar.rightButton.setTitleColor(Colors.blue.color, for: .normal)
+    navigationBar.rightButton.setTitleColor(Colors.g4.color, for: .disabled)
+    navigationBar.rightButton.titleLabel?.font = HousFont.B1.font
     navigationController?.interactivePopGestureRecognizer?.delegate = self
-    navigationBar.rightButton.setImage(Images.icAlarmoff.image, for: .normal)
-    navigationBar.rightButton.setImage(Images.icAlarmon.image, for: .selected)
-    navigationBar.rightButton.backgroundColor = Colors.white.color
     navigationBar.delegate = self
     navigationBar.title = navTitle
-    actionButton.setTitle(buttonTilte, for: .normal)
   }
 
   private func setupView() {
@@ -376,17 +381,10 @@ extension UpdateTodoViewController {
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
 
+    todoLabel = HousLabel(text: "제목", font: .B2, textColor: Colors.black.color)
+
     todoTextField = RoundedTextFieldWithCount(maxCount: 20)
     todoTextField.returnKeyType = .done
-
-    actionButton = UIButton()
-    actionButton.isEnabled = false
-    actionButton.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    actionButton.setTitleColor(Colors.white.color, for: .normal)
-    actionButton.setBackgroundColor(Colors.blue.color, for: .normal)
-    actionButton.setBackgroundColor(Colors.g4.color, for: .disabled)
-    actionButton.layer.cornerRadius = 8
-    actionButton.clipsToBounds = true
   }
 
   /// - Tag: CreateFullLayout

@@ -121,6 +121,8 @@ public enum Images {
   public static let icYellowChosen = ImageAsset(name: "ic_yellow_chosen")
   public static let icYellowUnchosen = ImageAsset(name: "ic_yellow_unchosen")
   public static let icCheckMember = ImageAsset(name: "ic_check_member")
+  public static let icCheckOff = ImageAsset(name: "icCheckOff")
+  public static let icCheckOn = ImageAsset(name: "icCheckOn")
   public static let icAlarmoff = ImageAsset(name: "ic_alarmoff")
   public static let icAlarmon = ImageAsset(name: "ic_alarmon")
   public static let icBlueNo = ImageAsset(name: "ic_blue_no")
