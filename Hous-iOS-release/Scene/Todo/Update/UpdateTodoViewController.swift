@@ -29,11 +29,12 @@ final class UpdateTodoViewController: BaseViewController, View, LoadingPresentab
     static let verticalMargin: CGFloat = 16
     static let horizontalMargin: CGFloat = 24
     static let buttonHeight: CGFloat = 44
+    static let textfieldHeight: CGFloat = 46
   }
 
   private lazy var navigationBar = NavBarWithBackButtonView(title: "")
   private var collectionView: UICollectionView!
-  private var todoTextField: HousTextField!
+  private var todoTextField: RoundedTextFieldWithCount!
 
   private var actionButton: UIButton!
 
@@ -250,7 +251,6 @@ extension UpdateTodoViewController {
 
   private func todo(_ todo: String?) {
     todoTextField.text = todo
-    todoTextField.textFieldChange()
   }
 
   private func back(_ backFlag: Bool) {
@@ -324,7 +324,7 @@ extension UpdateTodoViewController {
       make.leading.trailing.equalToSuperview()
     }
     todoTextField.snp.makeConstraints { make in
-      make.height.equalTo(22)
+      make.height.equalTo(Constants.textfieldHeight)
       make.leading.trailing.equalToSuperview().inset(24)
       make.top.equalTo(navigationBar.snp.bottom).offset(32)
     }
@@ -376,12 +376,7 @@ extension UpdateTodoViewController {
     collectionView.backgroundColor = Colors.white.color
     collectionView.delegate = self
 
-    todoTextField = HousTextField(
-      "to-do 입력",
-      useMaxCount: true,
-      maxCount: 15,
-      exceedString: "to-do는 15글자 이내로 입력해주세요!"
-    )
+    todoTextField = RoundedTextFieldWithCount(maxCount: 20)
     todoTextField.returnKeyType = .done
 
     actionButton = UIButton()
