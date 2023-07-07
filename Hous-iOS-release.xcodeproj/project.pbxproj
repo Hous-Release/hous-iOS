@@ -364,7 +364,7 @@
 		7757F2A52A4AFFC700823F04 /* KakaoSecretKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSecretKeyTest.swift; sourceTree = "<group>"; };
 		777085A82903F1980018240B /* AssetKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AssetKit; sourceTree = "<group>"; };
 		777085AF29040DE00018240B /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		777C665D28A74A62000BECEA /* Hous-(Dev).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-(Dev).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		777C665D28A74A62000BECEA /* Hous-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hous-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		777C666028A74A62000BECEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777C666228A74A62000BECEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		777C666928A74A63000BECEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -801,7 +801,7 @@
 		777C665E28A74A62000BECEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				777C665D28A74A62000BECEA /* Hous-(Dev).app */,
+				777C665D28A74A62000BECEA /* Hous-Dev.app */,
 				773BABBD29D17B4B00ABAACD /* Hous-iOS-releaseUITests.xctest */,
 				7725815629D2B24900E9FC0E /* Hous-iOS-releaseTests.xctest */,
 			);
@@ -1863,7 +1863,7 @@
 				B84AC0282A1A5EA7003F1CA5 /* HousUIComponent */,
 			);
 			productName = "Hous-iOS-release";
-			productReference = 777C665D28A74A62000BECEA /* Hous-(Dev).app */;
+			productReference = 777C665D28A74A62000BECEA /* Hous-Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2382,7 +2382,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Debug(Development)";
 		};
@@ -2456,7 +2456,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Debug(Staging)";
 		};
@@ -2530,7 +2530,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Debug(Production)";
 		};
@@ -2597,7 +2597,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Release(Development)";
 		};
@@ -2664,7 +2664,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Release(Staging)";
 		};
@@ -2731,7 +2731,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-iOS-release.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-iOS-release";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hous-Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hous-Dev";
 			};
 			name = "Release(Production)";
 		};
@@ -3292,6 +3292,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hous.Hous-iOS-release.development";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.hous.Hous-iOS-release.development";
@@ -3327,6 +3328,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hous.Hous-iOS-release.development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -3425,6 +3427,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hous.Hous-iOS-release.staging";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -3524,6 +3527,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hous.Hous-iOS-release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -3616,6 +3620,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hous.Hous-iOS-release.staging";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hous.Hous-iOS-release.staging";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -3708,6 +3713,7 @@
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_MODULE_NAME_FIX:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hous.Hous-iOS-release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
