@@ -28,7 +28,7 @@ public enum HousFont {
   case DP_b
   case DP_s
 
-  var font: UIFont {
+  public var font: UIFont {
     switch self {
     case .H1:
       return Fonts.SpoqaHanSansNeo.bold.font(size: 28)
