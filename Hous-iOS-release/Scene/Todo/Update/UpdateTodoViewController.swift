@@ -26,16 +26,21 @@ final class UpdateTodoViewController: BaseViewController, View, LoadingPresentab
   private typealias SectionSnapShot = NSDiffableDataSourceSectionSnapshot<ITEM>
 
   private struct Constants {
-    static let verticalMargin: CGFloat = 16
-    static let horizontalMargin: CGFloat = 24
-    static let buttonHeight: CGFloat = 44
-    static let textfieldHeight: CGFloat = 46
+    static let navigationBarHeight64: CGFloat = 64
+    static let verticalMargin16: CGFloat = 16
+    static let horizontalMargin24: CGFloat = 24
+    static let buttonHeight24: CGFloat = 24
+    static let textfieldHeight46: CGFloat = 46
+    static let itemSpacing8: CGFloat = 8
   }
 
+  // MARK: UI
   private lazy var navigationBar = NavBarWithBackButtonView(title: "")
   private var collectionView: UICollectionView!
   private var todoTextField: RoundedTextFieldWithCount!
   private var todoLabel: HousLabel!
+  private var redStartLabel: HousLabel!
+  private var notificationButton: CheckButton!
 
   private var actionButton: UIButton!
 
@@ -316,30 +321,43 @@ extension UpdateTodoViewController {
   }
 
   private func setupLayout() {
-    view.addSubView(navigationBar)
+    view.addSubview(navigationBar)
     view.addSubview(todoLabel)
-    view.addSubView(todoTextField)
-    view.addSubView(collectionView)
+    view.addSubview(redStartLabel)
+    view.addSubview(todoTextField)
+    view.addSubview(notificationButton)
+    view.addSubview(collectionView)
 
     navigationBar.snp.makeConstraints { make in
-      make.height.equalTo(64)
+      make.height.equalTo(Constants.navigationBarHeight64)
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
     }
 
     todoLabel.snp.makeConstraints { make in
-      make.top.equalTo(navigationBar.snp.bottom).offset(Constants.verticalMargin)
-      make.leading.equalToSuperview().inset(26)
+      make.top.equalTo(navigationBar.snp.bottom).offset(Constants.itemSpacing8)
+      make.leading.equalToSuperview().inset(Constants.horizontalMargin24 + 2)
+    }
+
+    redStartLabel.snp.makeConstraints { make in
+      make.top.equalTo(navigationBar.snp.bottom).offset(Constants.itemSpacing8 / 2)
+      make.leading.equalTo(todoLabel.snp.trailing).offset(1)
     }
 
     todoTextField.snp.makeConstraints { make in
-      make.height.equalTo(Constants.textfieldHeight)
-      make.leading.trailing.equalToSuperview().inset(24)
-      make.top.equalTo(todoLabel.snp.bottom).offset(4)
+      make.height.equalTo(Constants.textfieldHeight46)
+      make.leading.trailing.equalToSuperview().inset(Constants.horizontalMargin24)
+      make.top.equalTo(todoLabel.snp.bottom).offset(Constants.itemSpacing8 / 2)
+    }
+
+    notificationButton.snp.makeConstraints { make in
+      make.top.equalTo(todoTextField.snp.bottom).offset(Constants.itemSpacing8)
+      make.leading.equalToSuperview().inset(Constants.horizontalMargin24 / 2)
+      make.height.equalTo(Constants.buttonHeight24)
     }
 
     collectionView.snp.makeConstraints { make in
-      make.top.equalTo(todoTextField.snp.bottom).offset(46)
+      make.top.equalTo(todoTextField.snp.bottom).offset(Constants.itemSpacing8 * 6)
       make.leading.trailing.equalToSuperview()
       make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
     }
@@ -382,6 +400,9 @@ extension UpdateTodoViewController {
     collectionView.delegate = self
 
     todoLabel = HousLabel(text: "제목", font: .B2, textColor: Colors.black.color)
+    redStartLabel = HousLabel(text: "*", font: .B3, textColor: Colors.red.color)
+
+    notificationButton = CheckButton(.enableNotification)
 
     todoTextField = RoundedTextFieldWithCount(maxCount: 20)
     todoTextField.returnKeyType = .done
@@ -466,9 +487,9 @@ extension UpdateTodoViewController {
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(
       top: 0,
-      leading: Constants.horizontalMargin,
-      bottom: Constants.verticalMargin / 2,
-      trailing: Constants.horizontalMargin
+      leading: Constants.horizontalMargin24,
+      bottom: Constants.verticalMargin16 / 2,
+      trailing: Constants.horizontalMargin24
     )
 
     let headerFooterSize = NSCollectionLayoutSize(
