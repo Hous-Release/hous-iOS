@@ -71,9 +71,9 @@ final class Hous_iOS_releaseTests: XCTestCase {
 
     scheduler
       .createHotObservable([
-        .next(100, .enterTodo("쓰레")),
-        .next(200, .enterTodo("쓰레기")),
-        .next(500, .enterTodo("쓰레기 버리기")),
+        .next(100, .enterTodo("쓰레", isValidate: true)),
+        .next(200, .enterTodo("쓰레기", isValidate: true)),
+        .next(500, .enterTodo("쓰레기 버리기", isValidate: true)),
       ])
       .subscribe(reactor.action)
       .disposed(by: disposeBag)
@@ -85,7 +85,7 @@ final class Hous_iOS_releaseTests: XCTestCase {
 
 
     XCTAssertEqual(todoResponse.events.compactMap(\.value.element), [
-      nil,
+      "",
       "쓰레",
       "쓰레기",
       "쓰레기 버리기",
@@ -156,8 +156,6 @@ final class Hous_iOS_releaseTests: XCTestCase {
 
     reactor.isStubEnabled = true
     reactor.action.onNext(.didTapUpdate)
-
-    XCTAssertEqual(reactor.stub.actions.last, .fetch)
     XCTAssertEqual(reactor.stub.actions.last, .didTapUpdate)
   }
 
@@ -253,9 +251,9 @@ final class Hous_iOS_releaseTests: XCTestCase {
       .createHotObservable([
         .next(300, .didTapDays([.mon, .fri], id: 0)),
         .next(350, .updateHomie(todoHomies)),
-        .next(500, .enterTodo("커피 그만 마시기")),
-        .next(600, .enterTodo("")),
-        .next(1000, .enterTodo("쓰레기 버리기"))
+        .next(500, .enterTodo("커피 그만 마시기", isValidate: true)),
+        .next(600, .enterTodo("", isValidate: false)),
+        .next(1000, .enterTodo("쓰레기 버리기", isValidate: true))
       ])
       .subscribe(reactor.action)
       .disposed(by: disposeBag)
