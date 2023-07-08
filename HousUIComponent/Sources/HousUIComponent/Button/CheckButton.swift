@@ -23,7 +23,7 @@ public final class CheckButton: UIButton {
     configuration = .plain()
 
     var attrString = AttributedString(type.title)
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
+    attrString.font = HousFont.B3.font
     configuration?.attributedTitle = attrString
 
     configuration?.baseBackgroundColor = Colors.white.color
@@ -34,10 +34,10 @@ public final class CheckButton: UIButton {
       switch btn.state {
       case .selected:
         btn.configuration?.baseForegroundColor = type.activeTitleColor
-        btn.configuration?.image = Images.icCheckYesOnboardSetting.image
+        btn.configuration?.image = type.selectedCheckImage
       case .normal:
         btn.configuration?.baseForegroundColor = type.disabledTitleColor
-        btn.configuration?.image = Images.icCheckNotOnboardSetting.image
+        btn.configuration?.image = type.unselectedCheckImage
       default:
         break
       }
