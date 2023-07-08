@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-@testable import Hous_iOS_release
+@testable import Hous_iOS_release_module
 
 final class KakaoSecretKeyTest: XCTestCase {
 
