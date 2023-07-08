@@ -28,11 +28,7 @@ public final class RoundedTextFieldWithCount: UITextField {
     }
   }
 
-  public var isValidate: Bool {
-    get {
-      (text?.count ?? 0) > 0 && (text?.count ?? 0) <= maxCount
-    }
-  }
+  public var isValidate: Bool { (text?.count ?? 0) > 0 && (text?.count ?? 0) <= maxCount }
 
   private let maxCount: Int
 
@@ -89,3 +85,18 @@ extension RoundedTextFieldWithCount {
     )
   }
 }
+
+#if canImport(ThirdPartyLibraryManager)
+import RxSwift
+import RxCocoa
+
+extension Reactive where Base: RoundedTextFieldWithCount {
+
+  public var isValidate: ControlEvent<Bool> {
+    let source = base.rx.text
+      .map { _ in base.isValidate }
+      .asObservable()
+    return ControlEvent(events: source)
+  }
+}
+#endif
