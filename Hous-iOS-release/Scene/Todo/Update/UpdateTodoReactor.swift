@@ -24,7 +24,7 @@ public final class UpdateTodoReactor: Reactor {
 
   public enum Action: Equatable {
     case fetch
-    case enterTodo(String?)
+    case enterTodo(String?, isValidate: Bool)
     case didTapHomie(IndexPath)
     case didTapDays([UpdateTodoHomieModel.Day], id: Int)
     case didTapUpdate
@@ -35,7 +35,7 @@ public final class UpdateTodoReactor: Reactor {
 
   public enum Mutation {
     case setNotification(Bool)
-    case setTodo(String?)
+    case setTodo(String?, isValidate: Bool)
     case setHomies([UpdateTodoHomieModel])
     case setIndividual(IndexPath)
     case setDay([UpdateTodoHomieModel.Day], Int)
@@ -48,6 +48,7 @@ public final class UpdateTodoReactor: Reactor {
     var isModifying: Bool = false
     var isPushNotification: Bool = true
     var todo: String?
+    var isTodoCountValidate: Bool = false
     var todoHomies: [UpdateTodoHomieModel]
     @Pulse
     var didTappedIndividual: IndexPath?
@@ -68,15 +69,15 @@ public final class UpdateTodoReactor: Reactor {
         provider.todoRepository.fetchModifyingTodo(initialState.id ?? -1)
       } else {
         return Observable.concat([
-          .just(.setTodo(initialState.todo)),
+          .just(.setTodo(initialState.todo, isValidate: false)),
           .just(.setHomies(initialState.todoHomies))
         ])
       }
 
       return .empty()
 
-    case .enterTodo(let string):
-      return .just(.setTodo(string))
+    case .enterTodo(let string, let isValidate):
+      return .just(.setTodo(string, isValidate: isValidate))
     case .didTapHomie(let indexPath):
       return .just(.setIndividual(indexPath))
     case .didTapDays(let days, let id):
@@ -104,32 +105,30 @@ public final class UpdateTodoReactor: Reactor {
   public func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
     switch mutation {
+
     case .setNotification(let notification):
       newState.isPushNotification = notification
 
-    case .setTodo(let todo):
+    case .setTodo(let todo, let isValidate):
       newState.todo = todo
+      newState.isTodoCountValidate = isValidate
+
       var isSelectedDays = false
       for homie in currentState.todoHomies where !homie.selectedDay.isEmpty {
-//        if !homie.selectedDay.isEmpty {
           isSelectedDays = true
           break
-//        }
-
       }
-      newState.isTappableButton = (isSelectedDays && todo != "" && todo != nil)
+      newState.isTappableButton = (isSelectedDays && todo != "" && todo != nil && isValidate)
 
     case .setHomies(let homies):
       newState.todoHomies = homies
       var isSelectedDays = false
       for homie in homies where !homie.selectedDay.isEmpty {
-//        if !homie.selectedDay.isEmpty {
           isSelectedDays = true
           break
-//        }
       }
       newState.isTappableButton = (isSelectedDays
-                                   && currentState.todo != ""
+                                   && currentState.isTodoCountValidate
                                    && currentState.todo != nil)
 
     case .setIndividual(let indexPath):
@@ -158,7 +157,7 @@ public extension UpdateTodoReactor {
 
         return Observable.concat([
           .just(.setNotification(state.isPushNotification)),
-          .just(.setTodo(state.todo)),
+          .just(.setTodo(state.todo, isValidate: true)),
           .just(.setHomies(state.todoHomies))
         ])
 

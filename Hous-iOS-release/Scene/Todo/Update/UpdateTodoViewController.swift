@@ -42,8 +42,6 @@ final class UpdateTodoViewController: BaseViewController, View, LoadingPresentab
   private var redStartLabel: HousLabel!
   private var notificationButton: CheckButton!
 
-  private var actionButton: UIButton!
-
   internal var disposeBag: DisposeBag = DisposeBag()
   private var dataSource: DataSource! = nil
   private var allSnapShot = SnapShot()
@@ -105,7 +103,7 @@ extension UpdateTodoViewController {
     bindTapIndividualAction(reactor)
     bindTapDayAction(reactor)
     bindTapUpdateAction(reactor)
-//    bindTapAlarmAction(reactor)
+    bindTapAlarmAction(reactor)
     bindReturnKeyAction()
   }
 
@@ -116,8 +114,8 @@ extension UpdateTodoViewController {
       .disposed(by: disposeBag)
   }
   func bindDidEnterTodoAciton(_ reactor: Reactor) {
-    todoTextField.rx.text
-      .map { Reactor.Action.enterTodo($0) }
+    Observable.zip(todoTextField.rx.text, todoTextField.rx.isValidate)
+      .map { Reactor.Action.enterTodo($0.0, isValidate: $0.1) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
   }
@@ -143,7 +141,7 @@ extension UpdateTodoViewController {
   }
 
   func bindTapAlarmAction(_ reactor: Reactor) {
-    navigationBar.rightButton.rx.tap
+    notificationButton.rx.tap
       .map { _ in Reactor.Action.didTapAlarm }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
@@ -163,7 +161,7 @@ extension UpdateTodoViewController {
   // MARK: - State Bind
 extension UpdateTodoViewController {
   func bindState(_ reactor: Reactor) {
-//    bindPushNotificationState(reactor)
+    bindPushNotificationState(reactor)
     bindTodoState(reactor)
     bindHomiesState(reactor)
     bindDidTapIndividualState(reactor)
@@ -176,7 +174,7 @@ extension UpdateTodoViewController {
   func bindPushNotificationState(_ reactor: Reactor) {
     reactor.state.map(\.isPushNotification)
       .distinctUntilChanged()
-      .bind(to: navigationBar.rightButton.rx.isSelected)
+      .bind(to: notificationButton.rx.isSelected)
       .disposed(by: disposeBag)
   }
   func bindTodoState(_ reactor: Reactor) {
