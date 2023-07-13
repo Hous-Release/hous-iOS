@@ -7,11 +7,12 @@
 
 import BottomSheetKit
 import Foundation
-import UIKit
+import HousUIComponent
 
 import ReactorKit
 import RxCocoa
 import RxSwift
+import UIKit
 
 final class SignInViewController: UIViewController, ReactorKit.View {
   typealias Reactor = SignInReactor
@@ -19,7 +20,9 @@ final class SignInViewController: UIViewController, ReactorKit.View {
   private struct Constant {
     static let horizontalMargin: CGFloat = 24
     static let buttonHegiht: CGFloat = 44
-    static let bottomMargin: CGFloat = 32
+    static let bottomMargin28: CGFloat = 28
+    static let itemSpacing12: CGFloat = 12
+    static let itemSpacing16: CGFloat = 16
   }
 
   private let backgroudImageView: UIImageView = {
@@ -53,6 +56,16 @@ final class SignInViewController: UIViewController, ReactorKit.View {
     return button
   }()
 
+  private let markPrivacyAgreeLabel: HousLabel = {
+    let label = HousLabel(
+      text: "로그인 시 이용약관 및 개인정보 처리 방침에 동의하게 됩니다.",
+      font: .description,
+      textColor: Colors.g5.color
+    )
+
+    return label
+  }()
+
   private let appleLoginManager = AppleOAuthManager()
   private let kakaoLoginManager = KakaoOAuthManager()
   private var signInRelay = PublishRelay<(String?, Error?)>()
@@ -77,24 +90,30 @@ final class SignInViewController: UIViewController, ReactorKit.View {
 
   private func setupViews() {
 
-    view.addSubView(backgroudImageView)
-    backgroudImageView.addSubView(appleLoginButton)
-    backgroudImageView.addSubView(kakaoLoginButton)
+    view.addSubview(backgroudImageView)
+    backgroudImageView.addSubview(appleLoginButton)
+    backgroudImageView.addSubview(kakaoLoginButton)
+    backgroudImageView.addSubview(markPrivacyAgreeLabel)
 
     backgroudImageView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
 
+    markPrivacyAgreeLabel.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(0)
+    }
+
     appleLoginButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
       make.height.equalTo(Constant.buttonHegiht)
-      make.bottom.equalToSuperview().inset(Constant.bottomMargin)
+      make.bottom.equalTo(markPrivacyAgreeLabel.snp.top).offset(-Constant.itemSpacing12)
     }
 
     kakaoLoginButton.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview().inset(Constant.horizontalMargin)
       make.height.equalTo(Constant.buttonHegiht)
-      make.bottom.equalTo(appleLoginButton.snp.top).offset(-Constant.horizontalMargin)
+      make.bottom.equalTo(appleLoginButton.snp.top).offset(-Constant.itemSpacing16)
     }
   }
 
