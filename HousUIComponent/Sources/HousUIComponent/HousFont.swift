@@ -9,6 +9,7 @@ import AssetKit
 import Foundation
 import UIKit
 
+/// Hous 폰트 디자인 시스템 - Figma와 제플린에 적혀있습니다.
 public enum HousFont {
   case H1
   case H2
