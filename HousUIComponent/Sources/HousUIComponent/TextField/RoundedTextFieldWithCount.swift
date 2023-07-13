@@ -8,6 +8,7 @@
 import AssetKit
 import UIKit
 
+/// 둥근 배경이 채워져있는 글자 제한이 있는 텍스트필드 클래스
 public final class RoundedTextFieldWithCount: UITextField {
 
   private struct Constants {
@@ -28,10 +29,12 @@ public final class RoundedTextFieldWithCount: UITextField {
     }
   }
 
+  /// Read - only prop
   public var isValidate: Bool { (text?.count ?? 0) > 0 && (text?.count ?? 0) <= maxCount }
 
   private let maxCount: Int
 
+  /// Set MaxCount
   public init(
     maxCount: Int
   ) {
@@ -92,6 +95,8 @@ import RxCocoa
 
 extension Reactive where Base: RoundedTextFieldWithCount {
 
+  /// Rx Extension - Control Event라서 Bind 할 수 없음. Bind도 하려면 ControlProperty로 수정해야하는데
+  /// 그럴만한 이유가 아직 없어서 ControlEvent로 설정
   public var isValidate: ControlEvent<Bool> {
     let source = base.rx.text
       .map { _ in base.isValidate }
