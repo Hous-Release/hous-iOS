@@ -12,6 +12,7 @@ import Then
 import MessageUI
 import SafariServices
 import BottomSheetKit
+import HousUIComponent
 
 final class ProfileSettingViewController: UIViewController {
 
@@ -32,9 +33,10 @@ final class ProfileSettingViewController: UIViewController {
 
   // MARK: UI Components
 
-  private let navigationBarView = ProfileNavigationBarView().then {
-    $0.titleName.text = "설정"
-  }
+  private let navigationBarView = NavBarWithBackButtonView(
+    title: "설정",
+    rightButtonText: ""
+  )
 
   private let settingListStackView = UIStackView().then {
     $0.alignment = .fill
@@ -42,7 +44,7 @@ final class ProfileSettingViewController: UIViewController {
     $0.axis = .vertical
   }
 
-  private let alarmSetting = ProfileSettingListView(image: Images.icAlarmSetting.image, text: "알람")
+  private let alarmSetting = ProfileSettingListView(image: Images.icAlarmSetting.image, text: "알림")
 
   private let agreementInfo = ProfileSettingListView(image: Images.icInfo.image, text: "개인정보 및 약관")
 
@@ -187,7 +189,7 @@ final class ProfileSettingViewController: UIViewController {
       })
       .disposed(by: disposeBag)
 
-    navigationBarView.navigationBackButton.rx.tap
+    navigationBarView.backButton.rx.tap
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { [weak self] in
         guard let self = self else { return }

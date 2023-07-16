@@ -17,8 +17,6 @@ final class ProfileSettingListView: UIView {
 
   private let disposeBag: DisposeBag = DisposeBag()
 
-  private let listImage = UIImageView()
-
   private let listTextLabel = UILabel().then {
     $0.textColor = Colors.black.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
@@ -40,7 +38,6 @@ final class ProfileSettingListView: UIView {
 
   convenience init(image: UIImage, text: String) {
     self.init(frame: .zero)
-    self.listImage.image = image
     self.listTextLabel.text = text
   }
 
@@ -49,16 +46,11 @@ final class ProfileSettingListView: UIView {
   }
 
   private func render() {
-    self.addSubViews([listImage, listTextLabel, forwardButtonImage])
-
-    listImage.snp.makeConstraints { make in
-      make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(24)
-    }
+    self.addSubViews([listTextLabel, forwardButtonImage])
 
     listTextLabel.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.leading.equalTo(listImage.snp.trailing).offset(12)
+      make.leading.equalToSuperview().offset(24)
     }
 
     forwardButtonImage.snp.makeConstraints { make in

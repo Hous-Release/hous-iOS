@@ -29,9 +29,10 @@ final class ProfileAlarmSettingViewController: BaseViewController, LoadingPresen
 
   // MARK: UI Components
 
-  private let navigationBarView = ProfileNavigationBarView().then {
-    $0.titleName.text = "설정"
-  }
+  private let navigationBarView = NavBarWithBackButtonView(
+    title: "알림",
+    rightButtonText: ""
+  )
 
   private let alarmSettingCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -81,7 +82,7 @@ final class ProfileAlarmSettingViewController: BaseViewController, LoadingPresen
 
     let actionDetected = PublishSubject<ProfileAlarmSettingActionControl>()
 
-    navigationBarView.navigationBackButton.rx.tap
+    navigationBarView.backButton.rx.tap
       .observe(on: MainScheduler.asyncInstance)
       .bind(onNext: { _ in
         actionDetected.onNext(.didTabBack)
