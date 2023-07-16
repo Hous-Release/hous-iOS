@@ -146,6 +146,7 @@ public enum Images {
   public static let icCheckYellow = ImageAsset(name: "ic_check_yellow")
   public static let icDetailProfile = ImageAsset(name: "ic_detail_profile")
   public static let icEditProfile = ImageAsset(name: "ic_edit_profile")
+  public static let icImageDownload = ImageAsset(name: "ic_image_download")
   public static let icSetting = ImageAsset(name: "ic_setting")
   public static let icSettingEmpty = ImageAsset(name: "ic_setting_empty")
   public static let icShow = ImageAsset(name: "ic_show")

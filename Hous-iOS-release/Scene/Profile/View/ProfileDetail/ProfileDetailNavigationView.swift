@@ -8,21 +8,16 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import HousUIComponent
 
-final class ProfileDetailNavigationBarView: UIView {
+final class ProfileDetailNavigationBarView: NavBarWithBackButtonView {
 
   private let disposeBag: DisposeBag = DisposeBag()
   let viewActionControlSubject = PublishSubject<ProfileDetailActionControl>()
   var isFromTypeTest: Bool = false
 
-  private lazy var navigationBackButton = UIButton().then {
-    $0.setImage(Images.icBack.image, for: .normal)
-  }
-
-  private lazy var testCompleteButton = UIButton().then {
-    $0.setTitle("완료", for: .normal)
-    $0.setTitleColor(Colors.blue.color, for: .normal)
-    $0.titleLabel?.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
+  private let imageDownloadButton = UIButton().then {
+    $0.setImage(Images.icImageDownload.image, for: .normal)
   }
 
   private let titleName = UILabel().then {
@@ -32,20 +27,23 @@ final class ProfileDetailNavigationBarView: UIView {
     $0.textAlignment = .center
   }
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  convenience init(isFromTypeTest: Bool) {
-    self.init(frame: .zero)
+  init(title: String = "",
+       rightButtonText: String = "",
+       rightButtonImage: UIImage? = nil,
+       isSeparatorLineHidden: Bool = true,
+       isFromTypeTest: Bool
+  ) {
+    super.init(title: title, rightButtonText: rightButtonText,
+               rightButtonImage: rightButtonImage,
+               isSeparatorLineHidden: isSeparatorLineHidden)
     self.isFromTypeTest = isFromTypeTest
     render()
     setup()
     transferToViewController()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   private func setup() {
@@ -53,39 +51,24 @@ final class ProfileDetailNavigationBarView: UIView {
   }
 
   private func render() {
-    self.addSubView(titleName)
 
-    titleName.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.centerY.equalToSuperview().offset(2)
-    }
+    self.addSubview(imageDownloadButton)
 
-    if self.isFromTypeTest {
-      self.addSubView(testCompleteButton)
-
-      testCompleteButton.snp.makeConstraints { make in
-        make.centerY.equalToSuperview()
-        make.trailing.equalToSuperview().inset(32)
-      }
-    } else {
-      self.addSubView(navigationBackButton)
-
-      navigationBackButton.snp.makeConstraints {make in
-        make.centerY.equalToSuperview()
-        make.leading.equalToSuperview().inset(24)
-      }
+    imageDownloadButton.snp.makeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.trailing.equalToSuperview().inset(24)
     }
   }
 
   private func transferToViewController() {
-    self.navigationBackButton.rx.tap
+    self.backButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
         self.viewActionControlSubject.onNext(.didTabBack)
       }
       .disposed(by: disposeBag)
 
-    self.testCompleteButton.rx.tap
+    self.imageDownloadButton.rx.tap
       .bind { [weak self] in
         guard let self = self else { return }
         self.viewActionControlSubject.onNext(.didTabBack)

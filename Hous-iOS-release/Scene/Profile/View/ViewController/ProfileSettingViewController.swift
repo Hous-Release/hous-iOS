@@ -35,8 +35,8 @@ final class ProfileSettingViewController: UIViewController {
 
   private let navigationBarView = NavBarWithBackButtonView(
     title: "설정",
-    rightButtonText: ""
-  )
+    rightButtonText: "",
+    isSeparatorLineHidden: false)
 
   private let settingListStackView = UIStackView().then {
     $0.alignment = .fill

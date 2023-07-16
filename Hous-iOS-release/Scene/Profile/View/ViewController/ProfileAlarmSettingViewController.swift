@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Then
+import HousUIComponent
 
 final class ProfileAlarmSettingViewController: BaseViewController, LoadingPresentable {
 
@@ -31,8 +32,13 @@ final class ProfileAlarmSettingViewController: BaseViewController, LoadingPresen
 
   private let navigationBarView = NavBarWithBackButtonView(
     title: "알림",
+<<<<<<< Updated upstream
     rightButtonText: ""
   )
+=======
+    rightButtonText: "",
+    isSeparatorLineHidden: false)
+>>>>>>> Stashed changes
 
   private let alarmSettingCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()

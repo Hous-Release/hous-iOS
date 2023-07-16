@@ -31,7 +31,11 @@ final class ProfileDetailViewController: BaseViewController, LoadingPresentable 
 
   // MARK: UI Components
 
-  private lazy var navigationBarView = ProfileDetailNavigationBarView(isFromTypeTest: self.isFromTypeTest)
+  private let navigationBarView = ProfileDetailNavigationBarView(
+    title: "성향 설명",
+    rightButtonText: "",
+    isFromTypeTest: true
+  )
 
   private let profileDetailCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
