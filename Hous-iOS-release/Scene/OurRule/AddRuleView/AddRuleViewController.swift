@@ -87,7 +87,7 @@ final class AddRuleViewController: BaseViewController, LoadingPresentable {
     configUI()
     setTableView()
     bind()
-    configButtonAction()
+//    configButtonAction()
     setNoti()
   }
 
@@ -214,74 +214,63 @@ final class AddRuleViewController: BaseViewController, LoadingPresentable {
       .setDelegate(self)
       .disposed(by: disposeBag)
 
-    let input = AddRuleViewModel.Input(
-      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
-      viewDidTapped: view.rx.tapGesture().asObservable(),
-      saveButtonDidTapped: newRulesSubject
-        .do(onNext: { [weak self] _ in self?.showLoading() }),
-      plusButtonDidTapped: plusButton.rx.tap.asObservable(),
-      textFieldEdit: ruleTextField.rx.text
-        .orEmpty
-        .distinctUntilChanged()
-        .asObservable()
-    )
+//    let input = AddRuleViewModel.Input(
+//      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
+//      viewDidTapped: view.rx.tapGesture().asObservable(),
+//      saveButtonDidTapped: newRulesSubject
+//        .do(onNext: { [weak self] _ in self?.showLoading() }),
+//      plusButtonDidTapped: plusButton.rx.tap.asObservable(),
+//      textFieldEdit: ruleTextField.rx.text
+//        .orEmpty
+//        .distinctUntilChanged()
+//        .asObservable()
+//    )
+//
+//    let output = viewModel.transform(input: input)
+//
+//    output.navBackButtonDidTapped
+//      .drive(onNext: { [weak self] _ in
+//        guard let self = self else { return }
+//
+//        if self.newRules.count != 0 || (self.ruleTextField.text?.count ?? 0) > 0 {
+//          self.showQuitPopUp()
+//          return
+//        }
+//
+//        self.navigationController?.popViewController(animated: true)
+//      })
+//      .disposed(by: disposeBag)
+//
+//    output.viewDidTapped
+//      .drive(onNext: { [weak self] _ in
+//        guard let self = self else { return }
+//        self.ruleTextField.endEditing(true)
+//      })
+//      .disposed(by: disposeBag)
+//
+//    output.plusButtonDidTapped
+//      .drive(onNext: { [weak self] _ in
+//        guard let self = self,
+//              let text = self.ruleTextField.text
+//        else { return }
+//
+//        if self.rules.count >= 30 {
+//          self.showExceedPopup()
+//        } else {
+//          self.rules.append(text)
+//          self.newRules.append(text)
+//          self.rulesSubject.onNext(self.rules)
+//
+//          self.ruleTextField.text = ""
+//          self.navigationBar.rightButton.isEnabled = true
+//          self.ruleTableView.reloadData()
+//        }
+//      })
+//      .disposed(by: disposeBag)
 
-    let output = viewModel.transform(input: input)
-
-    output.navBackButtonDidTapped
-      .drive(onNext: { [weak self] _ in
-        guard let self = self else { return }
-
-        if self.newRules.count != 0 || (self.ruleTextField.text?.count ?? 0) > 0 {
-          self.showQuitPopUp()
-          return
-        }
-
-        self.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
-
-    output.viewDidTapped
-      .drive(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        self.ruleTextField.endEditing(true)
-      })
-      .disposed(by: disposeBag)
-
-    output.plusButtonDidTapped
-      .drive(onNext: { [weak self] _ in
-        guard let self = self,
-              let text = self.ruleTextField.text
-        else { return }
-
-        if self.rules.count >= 30 {
-          self.showExceedPopup()
-        } else {
-          self.rules.append(text)
-          self.newRules.append(text)
-          self.rulesSubject.onNext(self.rules)
-
-          self.ruleTextField.text = ""
-          self.navigationBar.rightButton.isEnabled = true
-          self.ruleTableView.reloadData()
-        }
-      })
-      .disposed(by: disposeBag)
-
-    output.isEnableStatusOfSaveButton
-      .drive(plusButton.rx.isUserInteractionEnabled)
-      .disposed(by: disposeBag)
-
-    output.savedCompleted
-      .do(onNext: { [weak self] _ in self?.hideLoading() })
-      .drive(onNext: { [weak self] _ in
-        self?.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
-
-    output.textCountLabelText
-      .drive(textCountLabel.rx.text)
-      .disposed(by: disposeBag)
+//    output.isEnableStatusOfSaveButton
+//      .drive(plusButton.rx.isUserInteractionEnabled)
+//      .disposed(by: disposeBag)
     }
 
   private func configButtonAction() {

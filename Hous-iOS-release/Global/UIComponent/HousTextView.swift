@@ -11,7 +11,7 @@ import RxSwift
 
 final class HousTextView: UIView {
 
-  private let textView = UITextView()
+  public let textView = UITextView()
   private let textCountLabel = HousLabel(
     text: "0/50",
     font: .EN2, textColor: Colors.g5.color)

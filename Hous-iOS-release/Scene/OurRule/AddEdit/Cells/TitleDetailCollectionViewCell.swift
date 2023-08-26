@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import RxSwift
 import HousUIComponent
 
 final class TitleDetailCollectionViewCell: UICollectionViewCell {
@@ -18,7 +18,7 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
       $0.applyColor(to: "*", with: .red)
     }
 
-  private let textField = FilledHousTextField(maxCount: 20)
+  let textField = FilledHousTextField(maxCount: 20)
 
   private let descriptionLabel = HousLabel(
     text: StringLiterals.OurRule.AddEditView.description,
@@ -26,7 +26,14 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
     textColor: Colors.black.color
   )
 
-  private let textView = HousTextView(maxCount: 50)
+  let textView = HousTextView(maxCount: 50)
+
+  var disposeBag = DisposeBag()
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag()
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -38,7 +45,7 @@ final class TitleDetailCollectionViewCell: UICollectionViewCell {
   }
 
   private func setLayout() {
-    [titleLabel, descriptionLabel, textView].forEach {
+    [titleLabel, textField, descriptionLabel, textView].forEach {
       contentView.addSubview($0)
     }
     titleLabel.snp.makeConstraints { make in

@@ -90,10 +90,14 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
         let moreButtonDidTap = navigationBar.rightButton.rx.tap
         .asObservable()
 
+        let plusButtonDidTap = floatingButton.rx.tap.asObservable()
+
         let input = RulesViewModel.Input(
           viewWillAppear: viewWillAppear,
           backButtonDidTapped: backbuttonDidTap,
-          moreButtonDidTapped: moreButtonDidTap)
+          moreButtonDidTapped: moreButtonDidTap,
+          plusButtonDidTapped: plusButtonDidTap
+        )
 
         let output = viewModel.transform(input: input)
 
@@ -117,6 +121,14 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
         UIView.animate(withDuration: 0.3) {
           self.housMenu.alpha = alpha
         }
+      }
+      .disposed(by: disposeBag)
+
+    output.presentAddViewController
+      .drive { [weak self] _ in
+        guard let self else { return }
+        let viewController = AddEditRuleViewController(viewModel: AddEditViewModel())
+        self.navigationController?.pushViewController(viewController, animated: true)
       }
       .disposed(by: disposeBag)
 

@@ -139,6 +139,7 @@
 		9BF9AD71291EB377006A0BDE /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD70291EB377006A0BDE /* ProfileEditTextView.swift */; };
 		9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */; };
 		9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */; };
+		B50DD01F2A9394100054B357 /* AddEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50DD01E2A9394100054B357 /* AddEditViewModel.swift */; };
 		B51383152A15FD3B00167728 /* AddEditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51383142A15FD3B00167728 /* AddEditRuleViewController.swift */; };
 		B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D8C2A0EAF440097D147 /* Constant.swift */; };
 		B5265D912A0EB48C0097D147 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D902A0EB48C0097D147 /* RulesViewController.swift */; };
@@ -473,6 +474,7 @@
 		9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestModel.swift; sourceTree = "<group>"; };
 		9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoViewController.swift; sourceTree = "<group>"; };
+		B50DD01E2A9394100054B357 /* AddEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewModel.swift; sourceTree = "<group>"; };
 		B51383142A15FD3B00167728 /* AddEditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditRuleViewController.swift; sourceTree = "<group>"; };
 		B5265D8C2A0EAF440097D147 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B5265D902A0EB48C0097D147 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				B5D06E442A19E38900048C72 /* Views */,
 				B51383142A15FD3B00167728 /* AddEditRuleViewController.swift */,
 				B5D06E4E2A19EF5600048C72 /* AddEditRuleDataSource.swift */,
+				B50DD01E2A9394100054B357 /* AddEditViewModel.swift */,
 			);
 			path = AddEdit;
 			sourceTree = "<group>";
@@ -2135,6 +2138,7 @@
 				B856702328C9C76300B49984 /* UnderlinedTextField.swift in Sources */,
 				B8555ABF291CBB4E00E943AE /* DaysOfWeekCollectionViewCell.swift in Sources */,
 				9B9E999C293CE3C400537785 /* ProfileSettingModel.swift in Sources */,
+				B50DD01F2A9394100054B357 /* AddEditViewModel.swift in Sources */,
 				B856702F28CA93F600B49984 /* UILabel+Extension.swift in Sources */,
 				B84EA6E128DD914F00C92FCD /* PagingViewReactor.swift in Sources */,
 				B8B8A89828DF9196009FD784 /* EnterRoomViewController.swift in Sources */,

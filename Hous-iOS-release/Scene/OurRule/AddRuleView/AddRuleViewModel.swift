@@ -17,7 +17,7 @@ class AddRuleViewModel: ViewModelType {
   struct Input {
     let navBackButtonDidTapped: Observable<Void>
     let viewDidTapped: Observable<UITapGestureRecognizer>
-    let saveButtonDidTapped: Observable<[String]>
+//    let saveButtonDidTapped: Observable<[String]>
     let plusButtonDidTapped: Observable<Void>
     let textFieldEdit: Observable<String>
   }
@@ -25,7 +25,7 @@ class AddRuleViewModel: ViewModelType {
   struct Output {
     let navBackButtonDidTapped: Driver<Void>
     let viewDidTapped: Driver<UITapGestureRecognizer>
-    let savedCompleted: Driver<Int>
+//    let savedCompleted: Driver<Int>
     let plusButtonDidTapped: Driver<Void>
     let isEnableStatusOfSaveButton: Driver<Bool>
     let textCountLabelText: Driver<String>
@@ -33,13 +33,13 @@ class AddRuleViewModel: ViewModelType {
   }
 
   func transform(input: Input) -> Output {
-    let savedCompleted = input.saveButtonDidTapped
-      .flatMap { ruleNames -> Observable<Int> in
-        return NetworkService.shared.ruleRepository.createRules(
-          RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames)
-        )
-      }
-      .asDriver(onErrorJustReturn: 400)
+//    let savedCompleted = input.saveButtonDidTapped
+//      .flatMap { ruleNames -> Observable<Int> in
+//        return NetworkService.shared.ruleRepository.createRules(
+//          RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames)
+//        )
+//      }
+//      .asDriver(onErrorJustReturn: 400)
 
     let isEnableStatusOfSaveButton = input.textFieldEdit.map { string in
       return string.trimmingCharacters(in: .whitespaces).count != 0
@@ -63,7 +63,7 @@ class AddRuleViewModel: ViewModelType {
     return Output(
       navBackButtonDidTapped: input.navBackButtonDidTapped.asDriver(onErrorJustReturn: ()),
       viewDidTapped: input.viewDidTapped.asDriver(onErrorJustReturn: UITapGestureRecognizer()),
-      savedCompleted: savedCompleted,
+//      savedCompleted: savedCompleted,
       plusButtonDidTapped: input.plusButtonDidTapped.asDriver(onErrorJustReturn: ()),
       isEnableStatusOfSaveButton: isEnableStatusOfSaveButton,
       textCountLabelText: textCount,

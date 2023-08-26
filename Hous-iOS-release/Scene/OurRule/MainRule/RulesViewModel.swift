@@ -17,6 +17,7 @@ final class RulesViewModel: ViewModelType {
     let viewWillAppear: Observable<Void>
     let backButtonDidTapped: Observable<Void>
     let moreButtonDidTapped: Observable<Void>
+    let plusButtonDidTapped: Observable<Void>
   }
 
   // MARK: - Outputs
@@ -24,6 +25,7 @@ final class RulesViewModel: ViewModelType {
     var rules: Driver<[HousRule]>
     var popViewController: Driver<Void>
     var presentBottomSheet: Driver<Void>
+    var presentAddViewController: Driver<Void>
   }
 
   private let housRulesSubject = PublishSubject<[HousRule]>()
@@ -43,10 +45,13 @@ final class RulesViewModel: ViewModelType {
     let housRules = housRulesSubject.asDriver(onErrorJustReturn: [])
     let popViewController = input.backButtonDidTapped.asDriver(onErrorJustReturn: ())
     let presentBottomSheet = input.moreButtonDidTapped.asDriver(onErrorJustReturn: ())
+    let plusButtonDidTapped = input.plusButtonDidTapped
+      .asDriver(onErrorJustReturn: ())
 
     return Output(rules: housRules,
                   popViewController: popViewController,
-                  presentBottomSheet: presentBottomSheet)
+                  presentBottomSheet: presentBottomSheet,
+                  presentAddViewController: plusButtonDidTapped)
   }
 
   init(repositoryProvider: ServiceProviderType) {
