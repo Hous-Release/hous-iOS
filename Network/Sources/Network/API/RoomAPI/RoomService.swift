@@ -24,15 +24,15 @@ extension RoomService: TargetType {
   public var path: String {
     switch self {
     case .postNewRoom:
-      return "/room"
+      return "/v1/room"
     case let .postExistRoom(roomId):
-      return "/room/\(roomId)/join"
+      return "/v1/room/\(roomId)/join"
     case .getIsExistRoom:
-      return "/room/info"
+      return "/v1/room/info"
     case .updateRoomName:
-      return "/room/name"
+      return "/v1/room/name"
     case .leaveRoom:
-      return "/room/leave"
+      return "/v1/room/leave"
     }
   }
   

@@ -20,7 +20,7 @@ extension MainHomeService: TargetType {
   public var path: String {
     switch self {
     case .getHomeData:
-      return "/home"
+      return "/v1/home"
     }
   }
   

@@ -5,11 +5,11 @@
 //  Created by 김민재 on 2022/10/28.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 
 public enum RuleService {
-  case createRule(_ dto: RuleDTO.Request.createRuleRequestDTO)
+  case createRule(_ dto: RuleDTO.Request.createRuleRequestDTO, images: [UIImage])
   case updateRules(_ dto: RuleDTO.Request.updateRulesRequestDTO)
   case deleteRule(_ dto: RuleDTO.Request.deleteRulesRequestDTO)
   case getRuleData
@@ -22,11 +22,12 @@ extension RuleService: TargetType {
   
   public var path: String {
     switch self {
-    case .createRule,
-        .updateRules,
-        .deleteRule,
-        .getRuleData:
-      return "/rules"
+    case .deleteRule,
+            .createRule,
+            .updateRules:
+        return "/v2/rule"
+    case .getRuleData:
+      return "/v1/rules"
     }
   }
   
@@ -45,8 +46,8 @@ extension RuleService: TargetType {
   
   public var parameters: RequestParams {
     switch self {
-    case .createRule(let dto):
-      return .body(dto)
+    case .createRule(let dto, _):
+      return .query(dto)
       
     case .updateRules(let dto):
       return .body(dto)
@@ -59,4 +60,19 @@ extension RuleService: TargetType {
 
     }
   }
+
+  public var multipart: MultipartFormData {
+    switch self {
+    case .createRule(_, let images):
+      let multiPart = MultipartFormData()
+      for (index, image) in images.enumerated() {
+        if let pngData = image.pngData() {
+          multiPart.append(pngData, withName: "image", fileName: "image-\(index).png", mimeType: "image/png")
+        }
+      }
+      return multiPart
+    default: return MultipartFormData()
+    }
+  }
+
 }

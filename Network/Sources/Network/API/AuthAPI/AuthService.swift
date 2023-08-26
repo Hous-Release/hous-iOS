@@ -24,15 +24,15 @@ extension AuthService: TargetType {
   public var path: String {
     switch self {
     case .login:
-      return "auth/login"
+      return "/v1/auth/login"
     case .refresh:
-      return "auth/refresh"
+      return "/v1/auth/refresh"
     case .signup:
-      return "auth/signup"
+      return "/v1/auth/signup"
     case .forceLogin:
-      return "auth/login/force"
+      return "/v1/auth/login/force"
     case .logout:
-      return "auth/logout"
+      return "/v1/auth/logout"
     }
   }
 
