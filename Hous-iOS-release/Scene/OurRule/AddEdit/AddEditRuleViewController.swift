@@ -10,6 +10,12 @@ import UIKit
 import PhotosUI
 import RxSwift
 
+struct CreateRuleRequestDTO {
+  let name: String
+  let description: String
+  let images: [UIImage]
+}
+
 final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   @frozen
@@ -29,6 +35,8 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
   }
 
   // MARK: - Properties
+  private var ruleTitle: String = ""
+  private var ruleDescription: String = ""
 
   private let maxImageCount = 5
 
@@ -38,6 +46,18 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   private let albumImageUploadedSubject = PublishSubject<Void>()
   private let currPhotoCountSubject = PublishSubject<Int>()
+
+  private let toCreateRule = PublishSubject<CreateRuleRequestDTO>()
+  private let viewModel: AddEditViewModel
+
+  init(viewModel: AddEditViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,6 +101,43 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
         self.collectionView.endEditing(true)
       })
       .disposed(by: disposeBag)
+
+//    print(dataSource.snapshot(for: .photoInput).items)
+
+    navigationBar.rightButton.rx.tap
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        guard let images = dataSource?.snapshot(for: .photoInput).items.map({ model in
+          return model.image
+        })
+        else { return }
+
+        let model = CreateRuleRequestDTO(name: self.ruleTitle, description: self.ruleDescription, images: images)
+
+        self.toCreateRule.onNext(model)
+
+      })
+      .disposed(by: disposeBag)
+
+    let input = AddEditViewModel.Input(addButtonDidTap: toCreateRule)
+    let output = viewModel.transform(input)
+    output.createdRule
+      .drive(onNext: { _ in
+        self.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+
+//    let input = AddRuleViewModel.Input(
+    //      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
+    //      viewDidTapped: view.rx.tapGesture().asObservable(),
+    //      saveButtonDidTapped: newRulesSubject
+    //        .do(onNext: { [weak self] _ in self?.showLoading() }),
+    //      plusButtonDidTapped: plusButton.rx.tap.asObservable(),
+    //      textFieldEdit: ruleTextField.rx.text
+    //        .orEmpty
+    //        .distinctUntilChanged()
+    //        .asObservable()
+    //    )
   }
 
 }
@@ -143,7 +200,30 @@ extension AddEditRuleViewController {
 
 extension AddEditRuleViewController {
   func configureDataSource() {
-    let titleCellRegistration = UICollectionView.CellRegistration<TitleDetailCollectionViewCell, Int> {_, _, _ in }
+    let titleCellRegistration = UICollectionView.CellRegistration<TitleDetailCollectionViewCell, Int> {cell, _, _ in
+
+      cell.textField.rx.text
+        .orEmpty
+        .distinctUntilChanged()
+        .asDriver(onErrorJustReturn: "")
+        .drive(onNext: { [weak self] text in
+          guard let self else { return }
+          self.ruleTitle = text
+        })
+        .disposed(by: cell.disposeBag)
+
+      cell.textView.textView.rx.text
+        .orEmpty
+        .distinctUntilChanged()
+        .asDriver(onErrorJustReturn: "")
+        .drive(onNext: { [weak self] text in
+          guard let self else { return }
+          self.ruleDescription = text
+        })
+        .disposed(by: cell.disposeBag)
+
+    }
+
     let photoCellRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, RulePhoto> { cell, _, item in
 
       cell.buttonTapSubject
@@ -246,34 +326,28 @@ extension AddEditRuleViewController: PHPickerViewControllerDelegate {
     let prev = snapshot.numberOfItems(inSection: .photoInput)
     self.currPhotoCountSubject.onNext(prev + results.count)
 
-    var lastFlag = false
     results.forEach { result in
-      if result == results.last {
-        lastFlag = true
-      }
       result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
 
-        guard let image = reading as? UIImage,
-              error == nil else { return }
-        guard let dataSource = self.dataSource else { return }
-        var snapshot = dataSource.snapshot()
-        snapshot.appendItems([RulePhoto(image: image)], toSection: .photoInput)
-
         DispatchQueue.main.async {
+          guard let image = reading as? UIImage,
+                error == nil else { return }
+          guard let dataSource = self.dataSource else { return }
+          var snapshot = dataSource.snapshot()
+          snapshot.appendItems([RulePhoto(image: image)], toSection: .photoInput)
           dataSource.apply(snapshot, animatingDifferences: true)
-        }
-        if lastFlag {
-          self.albumImageUploadedSubject.onNext(())
         }
       }
     }
 
-    albumImageUploadedSubject
-      .asDriver(onErrorJustReturn: ())
-      .drive(onNext: {
-        picker.dismiss(animated: true)
-      })
-      .disposed(by: disposeBag)
+    picker.dismiss(animated: true)
+
+//    albumImageUploadedSubject
+//      .asDriver(onErrorJustReturn: ())
+//      .drive(onNext: {
+//        picker.dismiss(animated: true)
+//      })
+//      .disposed(by: disposeBag)
   }
 
 }
