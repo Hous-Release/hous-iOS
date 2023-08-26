@@ -14,6 +14,7 @@ public protocol TargetType: URLRequestConvertible {
   var method: HTTPMethod { get }
   var parameters: RequestParams { get }
   var contentType: ContentType { get }
+  var multipart: MultipartFormData { get }
 }
 
 public enum API {
@@ -33,12 +34,15 @@ enum HTTPHeaderField: String {
 public enum ContentType: String {
   case json = "Application/json"
   case image = "image/jpeg"
+  case multipart = "multipart/form-data"
 }
 
 public enum RequestParams {
   case requestPlain
   case query(_ parameter: Encodable?)
-  case body(_ parameter: Encodable?)}
+  case body(_ parameter: Encodable?)
+
+}
 
 extension TargetType {
 
@@ -69,7 +73,6 @@ extension TargetType {
       let params = request?.toDictionary() ?? [:]
       urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
 
-
     case .requestPlain:
       break
     }
@@ -81,5 +84,9 @@ extension TargetType {
 public extension TargetType {
   var contentType: ContentType {
     return .json
+  }
+
+  var multipart: MultipartFormData {
+    return MultipartFormData()
   }
 }

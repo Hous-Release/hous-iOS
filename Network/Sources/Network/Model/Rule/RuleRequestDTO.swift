@@ -9,10 +9,12 @@ import Foundation
 
 public extension RuleDTO.Request {
     struct createRuleRequestDTO: Encodable {
-        public let ruleNames: [String]
+        public let name: String
+        public let description: String
         
-        public init(ruleNames: [String]) {
-            self.ruleNames = ruleNames
+        public init(name: String, description: String) {
+            self.name = name
+            self.description = description
         }
     }
     
