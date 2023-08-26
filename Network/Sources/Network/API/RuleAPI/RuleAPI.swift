@@ -5,13 +5,13 @@
 //  Created by 김민재 on 2022/10/28.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
 protocol RuleAPIProtocol {
     func getRulesName() -> Observable<[RuleDTO.Response.Rule]>
     func updateRules(_ ruleRequestDTO: RuleDTO.Request.updateRulesRequestDTO) -> Observable<Void>
-    func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO) -> Observable<Int>
+    func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> Observable<Int>
     func deleteRules(_ ruleRequestDTO: RuleDTO.Request.deleteRulesRequestDTO) -> Observable<Void>
 }
 
@@ -37,11 +37,11 @@ public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
         }
     }
     
-    public func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO) -> RxSwift.Observable<Int> {
+    public func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> RxSwift.Observable<Int> {
         return Observable.create { [weak self] emitter in
             
             self?.fetchData(
-                target: .createRule(ruleRequestDTO),
+                target: .createRule(ruleRequestDTO, images: images),
                 responseData: BaseResponseType<RuleDTO.Response.updateRulesResponseDTO>.self
             ) { result, error in
                 if let error = error {
