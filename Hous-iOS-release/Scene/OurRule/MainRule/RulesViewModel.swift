@@ -18,6 +18,7 @@ final class RulesViewModel: ViewModelType {
     let backButtonDidTapped: Observable<Void>
     let moreButtonDidTapped: Observable<Void>
     let plusButtonDidTapped: Observable<Void>
+    let ruleCellDidTapped: Observable<Int>
   }
 
   // MARK: - Outputs
@@ -26,9 +27,12 @@ final class RulesViewModel: ViewModelType {
     var popViewController: Driver<Void>
     var presentBottomSheet: Driver<Void>
     var presentAddViewController: Driver<Void>
+    var ruleDetail: Driver<RuleDTO.Response.SingleRuleResponseDTO?>
   }
 
   private let housRulesSubject = PublishSubject<[HousRule]>()
+
+  private let ruleDetailSubject = PublishSubject<RuleDTO.Response.SingleRuleResponseDTO?>()
 
   private let disposeBag = DisposeBag()
 
@@ -47,11 +51,19 @@ final class RulesViewModel: ViewModelType {
     let presentBottomSheet = input.moreButtonDidTapped.asDriver(onErrorJustReturn: ())
     let plusButtonDidTapped = input.plusButtonDidTapped
       .asDriver(onErrorJustReturn: ())
+    let ruleDetail = ruleDetailSubject.asDriver(onErrorJustReturn: nil)
+
+    input.ruleCellDidTapped
+      .subscribe { ruleId in
+        self.repositoryProvider.ruleRepository.getRuleDetail(ruleId: ruleId)
+      }
+      .disposed(by: disposeBag)
 
     return Output(rules: housRules,
                   popViewController: popViewController,
                   presentBottomSheet: presentBottomSheet,
-                  presentAddViewController: plusButtonDidTapped)
+                  presentAddViewController: plusButtonDidTapped,
+                  ruleDetail: ruleDetail)
   }
 
   init(repositoryProvider: ServiceProviderType) {
@@ -72,6 +84,8 @@ extension RulesViewModel {
           print(error?.message ?? "")
         case .none:
           return
+        case .getRuleDetail(let dto):
+          self.ruleDetailSubject.onNext(dto)
         }
       }.disposed(by: disposeBag)
   }

@@ -56,6 +56,8 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   private let viewModel: RulesViewModel
 
+  private let ruleIdSubject = PublishSubject<Int>()
+
   // MARK: - View Life Cycle
 
   init(viewModel: RulesViewModel) {
@@ -96,7 +98,8 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
           viewWillAppear: viewWillAppear,
           backButtonDidTapped: backbuttonDidTap,
           moreButtonDidTapped: moreButtonDidTap,
-          plusButtonDidTapped: plusButtonDidTap
+          plusButtonDidTapped: plusButtonDidTap,
+          ruleCellDidTapped: ruleIdSubject
         )
 
         let output = viewModel.transform(input: input)
@@ -130,6 +133,25 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
         let viewController = AddEditRuleViewController(viewModel: AddEditViewModel())
         self.navigationController?.pushViewController(viewController, animated: true)
       }
+      .disposed(by: disposeBag)
+
+    output.ruleDetail
+      .drive(onNext: { [weak self] dto in
+        guard let self,
+              let dto
+        else { return }
+
+        let photos = dto.images.map {
+          return BottomSheetKit.RulePhoto(image: $0)
+        }
+
+        let cellModel = PhotoCellModel(title: dto.name,
+                                       description: dto.description,
+                                       lastmodifedDate: dto.updatedAt,
+                                       photos: photos.isEmpty ? nil : photos)
+
+        self.showBottomSheet(model: cellModel)
+      })
       .disposed(by: disposeBag)
 
     searchBar.rx.text
@@ -210,11 +232,12 @@ extension RulesViewController {
   func configureDataSource() {
       let cellRegistration = UICollectionView.CellRegistration<RuleCollectionViewCell, HousRule> { (cell, _, item) in
         cell.rx.tapGesture()
-          .asDriver()
+          .when(.recognized)
+          .asDriver(onErrorJustReturn: UITapGestureRecognizer())
           .drive(onNext: { [weak self] _ in
             guard let self else { return }
-            // TODO: Present Bottomsheet
-//            self.showBottomSheet()
+            self.ruleIdSubject.onNext(item.id)
+
           })
           .disposed(by: cell.disposeBag)
         cell.configureCell(rule: item.name)
