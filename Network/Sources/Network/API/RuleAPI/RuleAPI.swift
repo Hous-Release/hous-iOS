@@ -13,9 +13,31 @@ protocol RuleAPIProtocol {
     func updateRules(_ ruleRequestDTO: RuleDTO.Request.updateRulesRequestDTO) -> Observable<Void>
     func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> Observable<Int>
     func deleteRules(_ ruleRequestDTO: RuleDTO.Request.deleteRulesRequestDTO) -> Observable<Void>
+    func getRuleDetail(ruleId: Int) -> Observable<RuleDTO.Response.SingleRuleResponseDTO?>
 }
 
 public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
+    public func getRuleDetail(ruleId: Int) -> RxSwift.Observable<RuleDTO.Response.SingleRuleResponseDTO?> {
+        return Observable.create { [weak self] emitter in
+
+            self?.fetchData(
+                target: .getRuleDetail(ruleId: ruleId),
+                responseData: BaseResponseType<RuleDTO.Response.SingleRuleResponseDTO>.self
+            ) { result, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+
+                if result != nil {
+                    emitter.onNext(result?.data)
+                    emitter.onCompleted()
+                }
+            }
+
+            return Disposables.create()
+        }
+    }
+
     public func deleteRules(_ ruleRequestDTO: RuleDTO.Request.deleteRulesRequestDTO) -> RxSwift.Observable<Void> {
         return Observable.create { [weak self] emitter in
             
@@ -40,7 +62,7 @@ public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
     public func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> RxSwift.Observable<Int> {
         return Observable.create { [weak self] emitter in
             
-            self?.fetchData(
+            self?.fetchDataMultiPart(
                 target: .createRule(ruleRequestDTO, images: images),
                 responseData: BaseResponseType<RuleDTO.Response.updateRulesResponseDTO>.self
             ) { result, error in

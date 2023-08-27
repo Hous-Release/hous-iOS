@@ -20,7 +20,7 @@ extension RuleService: TargetType {
   public var baseURL: String {
     return API.apiBaseURL
   }
-  
+
   public var path: String {
     switch self {
     case .deleteRule,
@@ -68,7 +68,6 @@ extension RuleService: TargetType {
 
       for (index, image) in images.enumerated() {
           if  let jpegData = image.jpegData(compressionQuality: 0.2) {
-              print(jpegData)
             multiPart.append(jpegData, withName: "images", fileName: "image-\(index).jpeg", mimeType: "image/jpeg")
         }
       }
