@@ -8,9 +8,9 @@
 import UIKit
 
 public struct RulePhoto: Hashable {
-    let image: UIImage
+    let image: String
 
-    public init(image: UIImage) {
+    public init(image: String) {
         self.image = image
     }
 }

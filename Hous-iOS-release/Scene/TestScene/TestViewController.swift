@@ -319,8 +319,8 @@ extension TestViewController {
                                description: "옷걸이에 걸어두면 바나나는 자기가 아직도 나무에 걸려있다고 착각하고 싱싱한 상태를 유지한대..귀여워서 기절",
                                lastmodifedDate: "마지막 수정 2023.04.01",
                                photos: [
-                                .init(image: UIImage(systemName: "star.fill")!),
-                                .init(image: UIImage(systemName: "star")!)
+                                .init(image: "https://team-hous.s3.ap-northeast-2.amazonaws.com/rule-image/data/v1-51215f53-2126-4f80-80b5-2f2d8106103e.jpeg"),
+                                .init(image: "https://team-hous.s3.ap-northeast-2.amazonaws.com/rule-image/data/v1-a67b1515-c682-475b-ad22-f80a29c30494.jpeg")
                                ])
 
     self.presentBottomSheet(.ruleType(model)) { actionType in

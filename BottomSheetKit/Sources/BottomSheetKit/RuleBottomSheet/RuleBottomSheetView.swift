@@ -128,7 +128,15 @@ final class RuleBottomSheetView: UIView {
 private extension RuleBottomSheetView {
 
     func configViewLabel(_ model: PhotoCellModel) {
-        self.lastModifiedDateLabel.text = model.lastmodifedDate
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        if let date = inputDateFormatter.date(from: model.lastmodifedDate) {
+            let myFormatter = DateFormatter()
+            myFormatter.dateFormat = "yyyy.MM.dd"
+            let str = myFormatter.string(from: date)
+            self.lastModifiedDateLabel.text = "마지막 수정 \(str)"
+        }
+
         self.ruleTitleLabel.text = model.title
 
         if model.description == nil {
@@ -261,7 +269,7 @@ private extension RuleBottomSheetView {
             widthDimension: .fractionalWidth(226 / 375),
             heightDimension: .fractionalWidth(226 / 375))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(14)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 14)
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
