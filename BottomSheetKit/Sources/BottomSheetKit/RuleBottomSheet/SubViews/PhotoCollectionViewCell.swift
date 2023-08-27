@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 final class PhotoCollectionViewCell: UICollectionViewCell {
 
@@ -34,7 +35,8 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     }
 
     func configurePhotoCell(_ model: RulePhoto) {
-        self.imageView.image = model.image
+        guard let url = URL(string: model.image) else { return }
+        self.imageView.kf.setImage(with: url)
     }
     
 }
