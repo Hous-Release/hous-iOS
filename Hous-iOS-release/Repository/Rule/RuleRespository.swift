@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 
 public enum RuleRepositoryEvent {
+  case getRuleDetail(RuleDTO.Response.SingleRuleResponseDTO)
   case getRules([HousRule])
   case sendError(HouseErrorModel?)
 }
@@ -21,6 +22,7 @@ public protocol RuleRepository {
   var event: PublishSubject<RuleRepositoryEvent> { get }
 
   func getRules()
+  func getRuleDetail(ruleId: Int)
 }
 
 public final class RuleRepositoryImp: BaseService, RuleRepository {
@@ -36,6 +38,18 @@ public final class RuleRepositoryImp: BaseService, RuleRepository {
           return HousRule(id: $0.id, name: $0.name)
         }
         self.event.onNext(.getRules(housRules))
+      }
+      .disposed(by: disposeBag)
+  }
+
+  public func getRuleDetail(ruleId: Int) {
+    NetworkService.shared.ruleRepository.getRuleDetail(ruleId: ruleId)
+      .subscribe { ruleDetailDTO in
+        guard let dto = ruleDetailDTO.element,
+              let model = dto
+        else { return }
+
+        self.event.onNext(.getRuleDetail(model))
       }
       .disposed(by: disposeBag)
   }
