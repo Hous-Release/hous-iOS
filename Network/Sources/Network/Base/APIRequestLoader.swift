@@ -62,6 +62,32 @@ public class APIRequestLoader<T: TargetType> {
       }
   }
 
+    internal func fetchDataMultiPart<M: Decodable>(
+      target: T,
+      responseData: M.Type,
+      isWithInterceptor: Bool = true,
+      completionHandler: @escaping (M?, Error?) -> Void
+    ) {
+
+      var allStatusCode = Set(200..<503)
+      let session = isWithInterceptor ? self.sessionWithInterceptor : self.session
+      _ = isWithInterceptor ? allStatusCode.remove(401) : nil
+
+        session.upload(multipartFormData: target.multipart, with: target)
+            .validate(statusCode: allStatusCode)
+            .responseDecodable(of: M.self) { response in
+
+        switch response.result {
+          case .success(let data):
+            completionHandler(data, nil)
+
+          case .failure(let error):
+            print(String(describing: error))
+            completionHandler(nil, error)
+          }
+        }
+    }
+
     internal func fetchDataToPublisher<M: Decodable>(
       target: T,
       responseData: M.Type,
