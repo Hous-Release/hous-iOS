@@ -13,6 +13,7 @@ public enum RuleService {
   case updateRules(_ dto: RuleDTO.Request.updateRulesRequestDTO)
   case deleteRule(_ dto: RuleDTO.Request.deleteRulesRequestDTO)
   case getRuleData
+    case getRuleDetail(ruleId: Int)
 }
 
 extension RuleService: TargetType {
@@ -28,6 +29,8 @@ extension RuleService: TargetType {
         return "/v2/rule"
     case .getRuleData:
       return "/v1/rules"
+    case .getRuleDetail(let ruleId):
+        return "/v2/rule/\(ruleId)"
     }
   }
   
@@ -39,23 +42,20 @@ extension RuleService: TargetType {
       return .put
     case .deleteRule:
       return .delete
-    case .getRuleData:
+    case .getRuleData, .getRuleDetail:
       return .get
     }
   }
   
   public var parameters: RequestParams {
-    switch self {
-    case .createRule(let dto, _):
-      return .query(dto)
-      
+    switch self {      
     case .updateRules(let dto):
       return .body(dto)
       
     case .deleteRule(let dto):
       return .body(dto)
 
-    case .getRuleData:
+    case .getRuleData, .getRuleDetail, .createRule:
       return .requestPlain
 
     }
@@ -63,13 +63,17 @@ extension RuleService: TargetType {
 
   public var multipart: MultipartFormData {
     switch self {
-    case .createRule(_, let images):
+    case .createRule(let dto, let images):
       let multiPart = MultipartFormData()
+
       for (index, image) in images.enumerated() {
-        if let pngData = image.pngData() {
-          multiPart.append(pngData, withName: "image", fileName: "image-\(index).png", mimeType: "image/png")
+          if  let jpegData = image.jpegData(compressionQuality: 0.2) {
+              print(jpegData)
+            multiPart.append(jpegData, withName: "images", fileName: "image-\(index).jpeg", mimeType: "image/jpeg")
         }
       }
+        multiPart.append(Data(dto.name.utf8), withName: "name")
+        multiPart.append(Data(dto.description.utf8), withName: "description")
       return multiPart
     default: return MultipartFormData()
     }
