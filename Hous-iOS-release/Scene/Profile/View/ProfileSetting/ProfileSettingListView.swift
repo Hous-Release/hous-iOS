@@ -36,12 +36,16 @@ final class ProfileSettingListView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  convenience init(image: UIImage, text: String) {
+  convenience init(color: UIColor, text: String) {
     self.init(frame: .zero)
     self.listTextLabel.text = text
+    self.listTextLabel.textColor = color
   }
 
   private func setup() {
+    self.snp.makeConstraints { make in
+      make.height.equalTo(60)
+    }
     self.backgroundColor = .white
   }
 

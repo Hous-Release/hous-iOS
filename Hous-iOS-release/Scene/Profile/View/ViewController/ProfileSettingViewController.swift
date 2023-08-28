@@ -40,74 +40,29 @@ final class ProfileSettingViewController: UIViewController {
 
   private let settingListStackView = UIStackView().then {
     $0.alignment = .fill
-    $0.distribution = .fillEqually
+    $0.distribution = .fill
     $0.axis = .vertical
   }
 
-  private let alarmSetting = ProfileSettingListView(image: Images.icAlarmSetting.image, text: "알림")
+  private let alarmSetting = ProfileSettingListView(color: Colors.black.color, text: "알림")
 
-  private let agreementInfo = ProfileSettingListView(image: Images.icInfo.image, text: "개인정보 및 약관")
+  private let agreementInfo = ProfileSettingListView(color: Colors.black.color, text: "개인정보 및 약관")
 
-  private let licenseInfo = ProfileSettingListView(image: Images.icFolder.image, text: "오픈소스 라이브러리")
+  private let licenseInfo = ProfileSettingListView(color: Colors.black.color, text: "오픈소스 라이브러리")
 
-  private let feedback = ProfileSettingListView(image: Images.icFeedback.image, text: "호미나라 피드백 보내기")
+  private let feedback = ProfileSettingListView(color: Colors.black.color, text: "호미나라 피드백 보내기")
 
-  private var grayLineView = UIView().then {
-    $0.backgroundColor = Colors.g2.color
-  }
+  private let logoutButton = ProfileSettingListView(color: Colors.black.color, text: "로그아웃")
 
-  private let labelButtonStackView = UIStackView().then {
-    $0.alignment = .leading
-    $0.distribution = .equalSpacing
-    $0.axis = .vertical
-    $0.spacing = 6
-  }
+  private lazy var leavingRoomButton = ProfileSettingListView(color: Colors.red.color, text: "방 퇴사하기")
 
-  private let logoutButton = UIButton(configuration: .plain()).then {
-    var attrString = AttributedString("로그아웃")
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    attrString.foregroundColor = Colors.black.color
-
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.alignment = NSTextAlignment.left
-    attrString.paragraphStyle = paragraphStyle
-
-    $0.configuration?.attributedTitle = attrString
-    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 0)
-  }
-
-  private lazy var leavingRoomButton = UIButton(configuration: .plain()).then {
-    var attrString = AttributedString("방 퇴사하기")
-    attrString.font = Fonts.SpoqaHanSansNeo.medium.font(size: 16)
-    attrString.foregroundColor = Colors.red.color
-
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.alignment = NSTextAlignment.left
-    attrString.paragraphStyle = paragraphStyle
-
-    $0.configuration?.attributedTitle = attrString
-    $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 0)
-  }
+  private lazy var withdrawButton = ProfileSettingListView(color: Colors.red.color, text: "회원탈퇴")
 
   private lazy var withdrawInfoLabel = UILabel().then {
     $0.text = "회원 탈퇴는 방 퇴사 이후 '방 만들기 화면'에서 할 수 있어요!"
     $0.textColor = Colors.g4.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 13)
   }
-
-  private lazy var withdrawButton: UIButton = {
-    let button = UIButton()
-    let attributedString = NSAttributedString(string:
-                                                NSLocalizedString("회원 탈퇴", comment: ""), attributes: [
-                                                  NSAttributedString.Key.font:
-                                                    Fonts.SpoqaHanSansNeo.medium.font(size: 13),
-                                                  NSAttributedString.Key.foregroundColor: Colors.g4.color,
-                                                  NSAttributedString.Key.underlineStyle: 1.0,
-                                                  NSAttributedString.Key.underlineColor: Colors.g4.color
-                                                ])
-    button.setAttributedTitle(attributedString, for: .normal)
-    return button
-  }()
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -165,25 +120,22 @@ final class ProfileSettingViewController: UIViewController {
       })
       .disposed(by: disposeBag)
 
-    logoutButton.rx.tap
-      .observe(on: MainScheduler.asyncInstance)
-      .bind(onNext: { [weak self] in
+    logoutButton.rx.tapGesture()
+      .bind(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.actionDetected.onNext(.didTabLogout)
       })
       .disposed(by: disposeBag)
 
-    withdrawButton.rx.tap
-      .observe(on: MainScheduler.asyncInstance)
-      .bind(onNext: { [weak self] in
+    withdrawButton.rx.tapGesture()
+      .bind(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.actionDetected.onNext(.didTabWithdraw)
       })
       .disposed(by: disposeBag)
 
-    leavingRoomButton.rx.tap
-      .observe(on: MainScheduler.asyncInstance)
-      .bind(onNext: { [weak self] in
+    leavingRoomButton.rx.tapGesture()
+      .bind(onNext: { [weak self] _ in
         guard let self = self else { return }
         self.actionDetected.onNext(.didTabLeavingRoom)
       })
@@ -239,13 +191,11 @@ final class ProfileSettingViewController: UIViewController {
   }
 
   private func render() {
-    [alarmSetting, agreementInfo, licenseInfo, feedback].forEach {
+    [alarmSetting, agreementInfo, licenseInfo, feedback, logoutButton].forEach {
       settingListStackView.addArrangedSubview($0)
     }
 
-    labelButtonStackView.addArrangedSubview(logoutButton)
-
-    view.addSubViews([navigationBarView, settingListStackView, grayLineView, labelButtonStackView])
+    view.addSubViews([navigationBarView, settingListStackView])
 
     navigationBarView.snp.makeConstraints { make in
       make.leading.trailing.equalToSuperview()
@@ -256,34 +206,18 @@ final class ProfileSettingViewController: UIViewController {
     settingListStackView.snp.makeConstraints { make in
       make.top.equalTo(navigationBarView.snp.bottom).offset(7)
       make.leading.trailing.equalToSuperview()
-      make.height.equalTo(200)
-    }
-
-    grayLineView.snp.makeConstraints { make in
-      make.top.equalTo(settingListStackView.snp.bottom).offset(20)
-      make.leading.trailing.equalToSuperview().inset(24)
-      make.height.equalTo(1)
-    }
-
-    labelButtonStackView.snp.makeConstraints { make in
-      make.top.equalTo(grayLineView.snp.bottom).offset(19)
-      make.leading.trailing.equalToSuperview().inset(24)
     }
 
     if isInRoom {
-      labelButtonStackView.addArrangedSubview(leavingRoomButton)
+      settingListStackView.addArrangedSubview(leavingRoomButton)
       view.addSubview(withdrawInfoLabel)
 
       withdrawInfoLabel.snp.makeConstraints { make in
-        make.top.equalTo(labelButtonStackView.snp.bottom).offset(20)
+        make.top.equalTo(settingListStackView.snp.bottom).offset(20)
         make.leading.trailing.equalToSuperview().inset(24)
       }
     } else {
-      view.addSubview(withdrawButton)
-      withdrawButton.snp.makeConstraints { make in
-        make.top.equalTo(labelButtonStackView.snp.bottom).offset(12)
-        make.leading.equalToSuperview().offset(24)
-      }
+      settingListStackView.addArrangedSubview(withdrawButton)
     }
   }
 }
