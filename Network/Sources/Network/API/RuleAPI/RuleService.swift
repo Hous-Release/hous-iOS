@@ -10,7 +10,7 @@ import Alamofire
 
 public enum RuleService {
   case createRule(_ dto: RuleDTO.Request.createRuleRequestDTO, images: [UIImage])
-  case updateRules(_ dto: RuleDTO.Request.updateRulesRequestDTO)
+    case updateRule(_ dto: RuleDTO.Request.createRuleRequestDTO, ruleId: Int, images: [UIImage])
   case deleteRule(ruleId: Int)
   case getRuleData
     case getRuleDetail(ruleId: Int)
@@ -23,9 +23,10 @@ extension RuleService: TargetType {
 
   public var path: String {
     switch self {
-    case .createRule,
-            .updateRules:
+    case .createRule:
         return "/v2/rule"
+    case let .updateRule(_, ruleId, _):
+        return "/v2/rule/\(ruleId)"
     case .getRuleData:
       return "/v1/rules"
     case .getRuleDetail(let ruleId):
@@ -39,7 +40,7 @@ extension RuleService: TargetType {
     switch self {
     case .createRule:
       return .post
-    case .updateRules:
+    case .updateRule:
       return .put
     case .deleteRule:
       return .delete
@@ -49,18 +50,15 @@ extension RuleService: TargetType {
   }
   
   public var parameters: RequestParams {
-    switch self {      
-    case .updateRules(let dto):
-      return .body(dto)
-
-    case .getRuleData, .getRuleDetail, .createRule, .deleteRule:
+    switch self {
+    case .getRuleData, .getRuleDetail, .createRule, .deleteRule, .updateRule:
       return .requestPlain
     }
   }
 
   public var multipart: MultipartFormData {
     switch self {
-    case .createRule(let dto, let images):
+    case .createRule(let dto, let images), .updateRule(let dto, _, let images):
       let multiPart = MultipartFormData()
 
       for (index, image) in images.enumerated() {
