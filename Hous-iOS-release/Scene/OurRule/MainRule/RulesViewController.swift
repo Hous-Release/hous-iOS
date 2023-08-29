@@ -159,7 +159,30 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
                                        lastmodifedDate: dto.updatedAt,
                                        photos: photos.isEmpty ? nil : photos)
 
-        self.showBottomSheet(model: cellModel)
+        self.showBottomSheet(model: cellModel, ruleId: dto.id)
+      })
+      .disposed(by: disposeBag)
+
+    output.deleteRuleComplete
+      .drive(onNext: { [weak self] ruleId in
+        guard let self else { return }
+        guard let dataSource = self.dataSource else {
+          return
+        }
+
+        var snapshot = dataSource.snapshot()
+
+        let item = snapshot.itemIdentifiers(inSection: .main).filter { rule in
+          return rule.id == ruleId
+        }
+
+        snapshot.deleteItems(item)
+
+        DispatchQueue.main.async {
+          self.dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+        self.dismiss(animated: true)
+
       })
       .disposed(by: disposeBag)
 
@@ -314,7 +337,7 @@ extension RulesViewController {
 // MARK: - PopUp
 
 private extension RulesViewController {
-  func showBottomSheet(model: PhotoCellModel) {
+  func showBottomSheet(model: PhotoCellModel, ruleId: Int) {
 
     let bottomSheetType = BottomSheetType.ruleType(model)
 
