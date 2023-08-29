@@ -18,7 +18,7 @@ final class EditRuleViewModel: ViewModelType {
   }
 
   struct Output {
-    let saveCompleted: Driver<Void>
+//    let saveCompleted: Driver<Void>
     let moveToRuleMainView: Driver<Void>
   }
 
@@ -35,18 +35,18 @@ final class EditRuleViewModel: ViewModelType {
         return ruleDTO
       }
 
-    let ruleDriver = ruleDTO.flatMap { dto in
-      NetworkService.shared.ruleRepository.updateRules(
-        RuleDTO.Request.updateRulesRequestDTO(rules: dto)
-      )
-    }
-      .asDriver(onErrorJustReturn: ())
+//    let ruleDriver = ruleDTO.flatMap { dto in
+//      NetworkService.shared.ruleRepository.updateRules(
+//        RuleDTO.Request.updateRulesRequestDTO(rules: dto)
+//      )
+//    }
+//      .asDriver(onErrorJustReturn: ())
 
     let moveToRuleMainView = input.backButtonDidTap
       .asDriver(onErrorJustReturn: ())
 
     return Output(
-      saveCompleted: ruleDriver,
+//      saveCompleted: ruleDriver,
       moveToRuleMainView: moveToRuleMainView
     )
 

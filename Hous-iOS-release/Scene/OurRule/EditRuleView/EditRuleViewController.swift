@@ -260,14 +260,14 @@ final class EditRuleViewController: BaseViewController, LoadingPresentable {
 
     let output = viewModel.transform(input: input)
 
-    output.saveCompleted
-      .do(onNext: { [weak self] _ in
-        self?.hideLoading()
-      })
-      .drive(onNext: { [weak self] _ in
-        self?.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
+//    output.saveCompleted
+//      .do(onNext: { [weak self] _ in
+//        self?.hideLoading()
+//      })
+//      .drive(onNext: { [weak self] _ in
+//        self?.navigationController?.popViewController(animated: true)
+//      })
+//      .disposed(by: disposeBag)
 
     output.moveToRuleMainView
       .drive(onNext: { [weak self] _ in
