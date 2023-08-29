@@ -136,7 +136,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
     output.presentAddViewController
       .drive { [weak self] _ in
         guard let self else { return }
-        let viewController = AddEditRuleViewController(viewModel: AddEditViewModel())
+        let viewController = AddEditRuleViewController(viewModel: AddEditViewModel(), type: .addRule)
         self.navigationController?.pushViewController(viewController, animated: true)
       }
       .disposed(by: disposeBag)
@@ -151,12 +151,13 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
           return BottomSheetKit.RulePhoto(image: $0)
         }
 
-        let cellModel = PhotoCellModel(title: dto.name,
+        let cellModel = PhotoCellModel(ruleId: dto.id,
+                                       title: dto.name,
                                        description: dto.description,
                                        lastmodifedDate: dto.updatedAt,
                                        photos: photos.isEmpty ? nil : photos)
 
-        self.showBottomSheet(model: cellModel, ruleId: dto.id)
+        self.showBottomSheet(model: cellModel)
       })
       .disposed(by: disposeBag)
 
@@ -299,11 +300,9 @@ extension RulesViewController {
 }
 
 private extension RulesViewController {
-  func showBottomSheet(model: PhotoCellModel, ruleId: Int) {
+  func showBottomSheet(model: PhotoCellModel) {
 
     let bottomSheetType = BottomSheetType.ruleType(model)
-
-    let ruleList = self.rules.map { $0.name }
 
     self.presentBottomSheet(bottomSheetType) { actionType in
 
@@ -314,9 +313,9 @@ private extension RulesViewController {
         return
       case .modify:
         // TODO: - 새로만든 AddEdit뷰컨으로 넘기기
-        viewController = EditRuleViewController(editViewRules: self.rules, viewModel: EditRuleViewModel())
+        viewController = AddEditRuleViewController(viewModel: AddEditViewModel(), type: .updateRule, model: model)
       case .delete:
-        // TODO: - 삭제 팝업 띄우기
+        guard let ruleId = model.ruleId else { return }
         self.dismiss(animated: false) {
           self.showDeletePopUp(ruleId: ruleId)
         }
@@ -339,7 +338,6 @@ private extension RulesViewController {
       guard let self = self else { return }
       switch actionType {
       case .action:
-        // TODO: 규칙 삭제 API
         /*
          ruleId를 위에 선언한 subject로 넘기고 <- 여기서 할일 : done
          viewModel에서 해당 subject Input으로 받고
