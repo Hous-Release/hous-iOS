@@ -11,6 +11,12 @@ import AssetKit
 
 public final class FilledHousTextField: UITextField {
 
+    public override var text: String? {
+        didSet {
+            textCountLabel.text = "\(text?.count ?? 0)/\(maxCount)"
+        }
+    }
+
   private let maxCount: Int
 
   private let baseRightView = UIView()
