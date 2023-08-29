@@ -9,10 +9,10 @@ import Foundation
 
 
 public struct PhotoCellModel {
-    let title: String
-    let description: String?
-    let lastmodifedDate: String
-    let photos: [RulePhoto]?
+    public let title: String
+    public let description: String?
+    public let lastmodifedDate: String
+    public let photos: [RulePhoto]?
 
     public init(
         title: String,
