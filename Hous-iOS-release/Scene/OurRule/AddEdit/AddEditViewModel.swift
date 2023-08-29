@@ -24,7 +24,13 @@ final class AddEditViewModel {
   func transform(_ input: Input) -> Output {
     let savedCompleted = input.addButtonDidTap
       .flatMap { dto in
-        return NetworkService.shared.ruleRepository.createRules(.init(name: dto.name, description: dto.description), images: dto.images)
+        if let ruleId = dto.ruleId {
+          return NetworkService.shared.ruleRepository
+            .updateRule(.init(name: dto.name, description: dto.description), ruleId: ruleId, images: dto.images)
+        }
+
+        return NetworkService.shared.ruleRepository
+          .createRules(.init(name: dto.name, description: dto.description), images: dto.images)
       }
       .asDriver(onErrorJustReturn: 400)
     //      .flatMap { ruleNames -> Observable<Int> in
