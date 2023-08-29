@@ -159,7 +159,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
                                        lastmodifedDate: dto.updatedAt,
                                        photos: photos.isEmpty ? nil : photos)
 
-        self.showBottomSheet(model: cellModel, ruleId: dto.id)
+        self.showBottomSheet(model: cellModel)
       })
       .disposed(by: disposeBag)
 
@@ -337,7 +337,7 @@ extension RulesViewController {
 // MARK: - PopUp
 
 private extension RulesViewController {
-  func showBottomSheet(model: PhotoCellModel, ruleId: Int) {
+  func showBottomSheet(model: PhotoCellModel) {
 
     let bottomSheetType = BottomSheetType.ruleType(model)
 
