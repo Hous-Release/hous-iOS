@@ -38,7 +38,9 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   }
 
-  private lazy var rulesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
+  private lazy var rulesCollectionView = UICollectionView(
+    frame: .zero,
+    collectionViewLayout: self.createLayout()).then {
     $0.backgroundView = UIView(frame: $0.bounds)
   }
 
@@ -56,7 +58,10 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
   private let viewModel: RulesViewModel
 
-  private let ruleIdSubject = PublishSubject<Int>()
+  private let ruleIdSubject = PublishSubject<Int>() // 규칙 조회 API
+
+  private var selectedRuleId: Int?
+  private let toDeleteRuleIdSubject = PublishSubject<Int>() // 규칙 삭제 API
 
   // MARK: - View Life Cycle
 
@@ -99,7 +104,8 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
           backButtonDidTapped: backbuttonDidTap,
           moreButtonDidTapped: moreButtonDidTap,
           plusButtonDidTapped: plusButtonDidTap,
-          ruleCellDidTapped: ruleIdSubject
+          ruleCellDidTapped: ruleIdSubject,
+          deleteRuleDidTapped: toDeleteRuleIdSubject
         )
 
         let output = viewModel.transform(input: input)
@@ -150,7 +156,30 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
                                        lastmodifedDate: dto.updatedAt,
                                        photos: photos.isEmpty ? nil : photos)
 
-        self.showBottomSheet(model: cellModel)
+        self.showBottomSheet(model: cellModel, ruleId: dto.id)
+      })
+      .disposed(by: disposeBag)
+
+    output.deleteRuleComplete
+      .drive(onNext: { [weak self] ruleId in
+        guard let self else { return }
+        guard let dataSource = self.dataSource else {
+          return
+        }
+
+        var snapshot = dataSource.snapshot()
+
+        let item = snapshot.itemIdentifiers(inSection: .main).filter { rule in
+          return rule.id == ruleId
+        }
+
+        snapshot.deleteItems(item)
+
+        DispatchQueue.main.async {
+          self.dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+        self.dismiss(animated: true)
+
       })
       .disposed(by: disposeBag)
 
@@ -237,7 +266,7 @@ extension RulesViewController {
           .drive(onNext: { [weak self] _ in
             guard let self else { return }
             self.ruleIdSubject.onNext(item.id)
-
+            self.selectedRuleId = item.id
           })
           .disposed(by: cell.disposeBag)
         cell.configureCell(rule: item.name)
@@ -270,7 +299,7 @@ extension RulesViewController {
 }
 
 private extension RulesViewController {
-  func showBottomSheet(model: PhotoCellModel) {
+  func showBottomSheet(model: PhotoCellModel, ruleId: Int) {
 
     let bottomSheetType = BottomSheetType.ruleType(model)
 
@@ -288,9 +317,42 @@ private extension RulesViewController {
         viewController = EditRuleViewController(editViewRules: self.rules, viewModel: EditRuleViewModel())
       case .delete:
         // TODO: - 삭제 팝업 띄우기
+        self.dismiss(animated: false) {
+          self.showDeletePopUp(ruleId: ruleId)
+        }
         return
       }
       self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+
+  func showDeletePopUp(ruleId: Int) {
+    let defaultPopUpModel = DefaultPopUpModel(
+      cancelText: "취소하기",
+      actionText: "삭제하기",
+      title: "안녕, Rules...",
+      subtitle: "Rules는 한 번 삭제하면 복구되지 않아요."
+    )
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+    presentPopUp(popUpType) { [weak self] actionType in
+      guard let self = self else { return }
+      switch actionType {
+      case .action:
+        // TODO: 규칙 삭제 API
+        /*
+         ruleId를 위에 선언한 subject로 넘기고 <- 여기서 할일 : done
+         viewModel에서 해당 subject Input으로 받고
+         규칙 삭제 API 호출하고
+         해당 결과 받으면 popUp dismiss <- bind
+         그리고 collectionview에 바로 결과 반영시켜줘야한다.
+
+         */
+        guard let selectedRuleId else { return }
+        self.toDeleteRuleIdSubject.onNext(selectedRuleId)
+      case .cancel:
+        break
+      }
     }
   }
 
