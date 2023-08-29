@@ -19,20 +19,24 @@ final class RulesViewModel: ViewModelType {
     let moreButtonDidTapped: Observable<Void>
     let plusButtonDidTapped: Observable<Void>
     let ruleCellDidTapped: Observable<Int>
+    let deleteRuleDidTapped: Observable<Int>
   }
 
   // MARK: - Outputs
   struct Output {
-    var rules: Driver<[HousRule]>
-    var popViewController: Driver<Void>
-    var presentBottomSheet: Driver<Void>
-    var presentAddViewController: Driver<Void>
-    var ruleDetail: Driver<RuleDTO.Response.SingleRuleResponseDTO?>
+    let rules: Driver<[HousRule]>
+    let popViewController: Driver<Void>
+    let presentBottomSheet: Driver<Void>
+    let presentAddViewController: Driver<Void>
+    let ruleDetail: Driver<RuleDTO.Response.SingleRuleResponseDTO?>
+    let deleteRuleComplete: Driver<Int?>
   }
 
   private let housRulesSubject = PublishSubject<[HousRule]>()
 
   private let ruleDetailSubject = PublishSubject<RuleDTO.Response.SingleRuleResponseDTO?>()
+
+  private let deleteRuleSubject = PublishSubject<Int?>()
 
   private let disposeBag = DisposeBag()
 
@@ -52,6 +56,7 @@ final class RulesViewModel: ViewModelType {
     let plusButtonDidTapped = input.plusButtonDidTapped
       .asDriver(onErrorJustReturn: ())
     let ruleDetail = ruleDetailSubject.asDriver(onErrorJustReturn: nil)
+    let deleteRuleComplete = deleteRuleSubject.asDriver(onErrorJustReturn: nil)
 
     input.ruleCellDidTapped
       .subscribe { ruleId in
@@ -59,11 +64,18 @@ final class RulesViewModel: ViewModelType {
       }
       .disposed(by: disposeBag)
 
+    input.deleteRuleDidTapped
+      .subscribe { ruleId in
+        self.repositoryProvider.ruleRepository.deleteRule(ruleId: ruleId)
+      }
+      .disposed(by: disposeBag)
+
     return Output(rules: housRules,
                   popViewController: popViewController,
                   presentBottomSheet: presentBottomSheet,
                   presentAddViewController: plusButtonDidTapped,
-                  ruleDetail: ruleDetail)
+                  ruleDetail: ruleDetail,
+                  deleteRuleComplete: deleteRuleComplete)
   }
 
   init(repositoryProvider: ServiceProviderType) {
@@ -78,6 +90,8 @@ extension RulesViewModel {
     repositoryProvider.ruleRepository.event
       .subscribe { event in
         switch event.element {
+        case .deleteRule(let ruleId):
+          self.deleteRuleSubject.onNext(ruleId)
         case .getRules(let rules):
           self.housRulesSubject.onNext(rules)
         case .sendError(let error):
