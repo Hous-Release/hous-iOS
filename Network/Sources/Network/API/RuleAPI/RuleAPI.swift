@@ -10,7 +10,7 @@ import RxSwift
 
 protocol RuleAPIProtocol {
     func getRulesName() -> Observable<[RuleDTO.Response.Rule]>
-    func updateRules(_ ruleRequestDTO: RuleDTO.Request.updateRulesRequestDTO) -> Observable<Void>
+    func updateRule(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, ruleId: Int, images: [UIImage]) -> Observable<Int>
     func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> Observable<Int>
     func deleteRule(ruleId: Int) -> Observable<Int>
     func getRuleDetail(ruleId: Int) -> Observable<RuleDTO.Response.SingleRuleResponseDTO?>
@@ -82,22 +82,23 @@ public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
         }
     }
     
-    public func updateRules(_ ruleRequestDTO: RuleDTO.Request.updateRulesRequestDTO) -> Observable<Void> {
+    public func updateRule(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, ruleId: Int, images: [UIImage]) -> Observable<Int> {
         
         return Observable.create { [weak self] emitter in
             
-            self?.fetchData(
-                target: .updateRules(ruleRequestDTO),
+            self?.fetchDataMultiPart(
+                target: .updateRule(ruleRequestDTO, ruleId: ruleId, images: images),
                 responseData: BaseResponseType<RuleDTO.Response.updateRulesResponseDTO>.self
             ) { result, error in
                 if let error = error {
                     emitter.onError(error)
                 }
                 
-                if result != nil {
-                    emitter.onNext(())
-                    emitter.onCompleted()
+                guard let result else {
+                    return
                 }
+                emitter.onNext(result.status)
+                emitter.onCompleted()
             }
             
             return Disposables.create()
