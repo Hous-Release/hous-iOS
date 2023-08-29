@@ -29,7 +29,7 @@ class DeleteRuleViewController: BaseViewController, LoadingPresentable {
   }
 
   // MARK: - var & let
-  private let viewModel: DeleteRuleViewModel
+//  private let viewModel: DeleteRuleViewModel
 
   private let rules: [HousRule]
 
@@ -40,9 +40,13 @@ class DeleteRuleViewController: BaseViewController, LoadingPresentable {
   private var deleteButtonDidTapped = PublishSubject<[Int]>()
 
   // MARK: - Lifecycle
-  init(rules: [HousRule], viewModel: DeleteRuleViewModel) {
+//  init(rules: [HousRule], viewModel: DeleteRuleViewModel) {
+//    self.rules = rules
+//    self.viewModel = viewModel
+//    super.init(nibName: nil, bundle: nil)
+//  }
+  init(rules: [HousRule]) {
     self.rules = rules
-    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -189,26 +193,26 @@ class DeleteRuleViewController: BaseViewController, LoadingPresentable {
     bindTableView()
     configButtonAction()
 
-    let input = DeleteRuleViewModel.Input(
-      deleteButtonDidTapped: deleteButtonDidTapped
-        .do(onNext: { [weak self] _ in self?.showLoading() }),
-      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable())
-
-    let output = viewModel.transform(input: input)
-
-    output.moveToMainRuleView
-      .drive(onNext: { [weak self] _ in
-        guard let self = self else { return }
-        self.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
-
-    output.deletedCompleted
-      .do(onNext: { [weak self] _ in self?.hideLoading() })
-      .drive(onNext: {
-        self.navigationController?.popViewController(animated: true)
-      })
-      .disposed(by: disposeBag)
+//    let input = DeleteRuleViewModel.Input(
+//      deleteButtonDidTapped: deleteButtonDidTapped
+//        .do(onNext: { [weak self] _ in self?.showLoading() }),
+//      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable())
+//
+//    let output = viewModel.transform(input: input)
+//
+//    output.moveToMainRuleView
+//      .drive(onNext: { [weak self] _ in
+//        guard let self = self else { return }
+//        self.navigationController?.popViewController(animated: true)
+//      })
+//      .disposed(by: disposeBag)
+//
+//    output.deletedCompleted
+//      .do(onNext: { [weak self] _ in self?.hideLoading() })
+//      .drive(onNext: {
+//        self.navigationController?.popViewController(animated: true)
+//      })
+//      .disposed(by: disposeBag)
 
   }
 

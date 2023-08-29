@@ -155,7 +155,6 @@
 		B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F52914197700DA3A95 /* AddRuleViewController.swift */; };
 		B54D39F829141DC200DA3A95 /* AddRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39F729141DC200DA3A95 /* AddRuleViewModel.swift */; };
 		B54D39FC29153C6E00DA3A95 /* DeleteRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FB29153C6E00DA3A95 /* DeleteRuleViewController.swift */; };
-		B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */; };
 		B54D3A002919634A00DA3A95 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FF2919634A00DA3A95 /* BadgeViewController.swift */; };
 		B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */; };
 		B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */; };
@@ -167,6 +166,7 @@
 		B591485C290AB69300618F26 /* RulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591485B290AB69300618F26 /* RulesTableViewCell.swift */; };
 		B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914884290BC2D200618F26 /* RulesViewModel.swift */; };
 		B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591488B290D21A700618F26 /* UIViewController+Rx.swift */; };
+		B59480F62A9DE804007971A8 /* DeleteRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -2171,7 +2171,6 @@
 				B595FFDC28CDBEEF00F6B2E4 /* MainHomeRulesCollectionViewCell.swift in Sources */,
 				B8DA060228E541FC00C79B40 /* EnterRoomCodeViewReactor.swift in Sources */,
 				B8D066DE28FA95BB00A99907 /* MemberCollectionViewCell.swift in Sources */,
-				B54D39FE29153C7700DA3A95 /* DeleteRuleViewModel.swift in Sources */,
 				9BDBAD7629240C3C0096FE38 /* MateProfileViewModel.swift in Sources */,
 				B8D8A4B22A1CAFA8005A8258 /* SearchBarViewController.swift in Sources */,
 				770D770429B86B05002E60A2 /* ProfileTestInfoViewController.swift in Sources */,
@@ -2210,6 +2209,7 @@
 				770B959B28F15E5200C8C945 /* AlertService.swift in Sources */,
 				B8DA060828E5A09300C79B40 /* ProgressBubbleView.swift in Sources */,
 				B856701428C8E56600B49984 /* CALayer+Extension.swift in Sources */,
+				B59480F62A9DE804007971A8 /* DeleteRuleViewModel.swift in Sources */,
 				B856702128C9AA3600B49984 /* EnterInfoView.swift in Sources */,
 				B8B56BA328E2E76800FC99DA /* EnterRoomCodeViewController.swift in Sources */,
 				B53F0FBE29102886004F1872 /* EditRuleTableViewCell.swift in Sources */,
