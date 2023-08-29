@@ -6,14 +6,42 @@
 //
 
 import UIKit
-
+import BottomSheetKit
 import PhotosUI
 import RxSwift
 
 struct CreateRuleRequestDTO {
+  var ruleId: Int?
   let name: String
   let description: String
   let images: [UIImage]
+
+  init(ruleId: Int? = nil, name: String, description: String, images: [UIImage]) {
+    self.ruleId = ruleId
+    self.name = name
+    self.description = description
+    self.images = images
+  }
+}
+
+@frozen
+enum AddEditType {
+  case addRule
+  case updateRule
+
+  var titleText: String {
+    switch self {
+    case .addRule: return "Rule 추가"
+    case .updateRule: return "Rule 수정"
+    }
+  }
+
+  var rightButtonText: String {
+    switch self {
+    case .addRule: return "추가"
+    case .updateRule: return "저장"
+    }
+  }
 }
 
 final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
@@ -26,9 +54,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   // MARK: - UI Components
 
-  private let navigationBar = NavBarWithBackButtonView(
-    title: StringLiterals.NavigationBar.Title.addEditTitle,
-    rightButtonText: "추가")
+  private let navigationBar = NavBarWithBackButtonView()
 
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
     $0.isScrollEnabled = false
@@ -48,10 +74,15 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
   private let currPhotoCountSubject = PublishSubject<Int>()
 
   private let toCreateRule = PublishSubject<CreateRuleRequestDTO>()
+  private let toUpdateRule = PublishSubject<CreateRuleRequestDTO>()
   private let viewModel: AddEditViewModel
+  private let type: AddEditType
+  private let photoCellModel: PhotoCellModel?
 
-  init(viewModel: AddEditViewModel) {
+  init(viewModel: AddEditViewModel, type: AddEditType, model: PhotoCellModel? = nil) {
+    self.type = type
     self.viewModel = viewModel
+    self.photoCellModel = model
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -66,6 +97,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
     configureDataSource()
     collectionView.dataSource = dataSource
     bind()
+    configUI()
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,6 +124,13 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
       make.bottom.equalTo(view.safeAreaLayoutGuide)
       make.leading.trailing.equalToSuperview()
     }
+
+  }
+
+  private func configUI() {
+    navigationBar.rightButtonText = type.rightButtonText
+    navigationBar.title = type.titleText
+
   }
 
   private func bind() {
@@ -112,10 +151,21 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
         })
         else { return }
 
-        let model = CreateRuleRequestDTO(name: self.ruleTitle, description: self.ruleDescription, images: images)
+        // TODO: - 규칙 수정 API
+        /*
+         1. ruleId와 PhotoCellModel를 이쪽 VC로 넘어올 때 받아온다. <- 메서드? 변수에 넣어주기?
+         2. PhotoCellModel에서 받아온 정보로 View에 데이터 넣어주기 <- 이건 이 VC present해주는 RulesViewController쪽에서 메서드 호출.
+         3. 그리고 뷰가 보여지고 수정할 거 하고 '저장' 버튼을 누르면 담고 있던 RuleId과 model을 viewModel로 넘긴다.
+         4. viewModel에서 넘겨받은 ruleId와 이미지 등등을 이용해서 규칙 수정 API 호출하기
+         5. API 호출 후 성공이면 pop
+         */
+
+        var model = CreateRuleRequestDTO(name: self.ruleTitle, description: self.ruleDescription, images: images)
+        if type == .updateRule {
+          model.ruleId = photoCellModel?.ruleId
+        }
 
         self.toCreateRule.onNext(model)
-
       })
       .disposed(by: disposeBag)
 
@@ -201,6 +251,11 @@ extension AddEditRuleViewController {
 extension AddEditRuleViewController {
   func configureDataSource() {
     let titleCellRegistration = UICollectionView.CellRegistration<TitleDetailCollectionViewCell, Int> {cell, _, _ in
+
+      if let model = self.photoCellModel {
+        cell.textField.text = model.title
+        cell.textView.textView.text = model.description
+      }
 
       cell.textField.rx.text
         .orEmpty
@@ -314,8 +369,32 @@ extension AddEditRuleViewController {
 
     }
 
-    dataSource?.apply(snapshot, animatingDifferences: true)
+    // MARK: - '수정하기' 선택 시 초기 이미지들 적용
+
+    if let images = photoCellModel?.photos {
+      images.forEach { rulePhoto in
+        print(rulePhoto.image)
+        DispatchQueue.global().async { [weak self] in
+          guard let url = URL(string: rulePhoto.image) else {
+            return
+
+          }
+          if let data = try? Data(contentsOf: url) {
+              if let image = UIImage(data: data) {
+                  DispatchQueue.main.async {
+                    snapshot.appendItems([RulePhoto(image: image)], toSection: .photoInput)
+                    self?.dataSource?.apply(snapshot, animatingDifferences: true)
+                  }
+              }
+          }
+        }
+      }
+    } else {
+      dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+
   }
+
 }
 
 @available(iOS 16.0, *)
