@@ -15,6 +15,7 @@ import RxCocoa
 public enum RuleRepositoryEvent {
   case getRuleDetail(RuleDTO.Response.SingleRuleResponseDTO)
   case getRules([HousRule])
+  case deleteRule(Int?)
   case sendError(HouseErrorModel?)
 }
 
@@ -23,12 +24,23 @@ public protocol RuleRepository {
 
   func getRules()
   func getRuleDetail(ruleId: Int)
+  func deleteRule(ruleId: Int)
 }
 
 public final class RuleRepositoryImp: BaseService, RuleRepository {
+
   public var event = PublishSubject<RuleRepositoryEvent>()
 
   private let disposeBag = DisposeBag()
+
+  public func deleteRule(ruleId: Int) {
+    NetworkService.shared.ruleRepository.deleteRule(ruleId: ruleId)
+      .subscribe(onNext: { [weak self] ruleId in
+        guard let self else { return }
+        self.event.onNext(.deleteRule(ruleId))
+      })
+      .disposed(by: disposeBag)
+  }
 
   public func getRules() {
     NetworkService.shared.ruleRepository.getRulesName()
