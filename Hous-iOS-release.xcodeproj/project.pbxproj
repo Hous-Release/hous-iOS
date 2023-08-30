@@ -167,6 +167,7 @@
 		B5914885290BC2D200618F26 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5914884290BC2D200618F26 /* RulesViewModel.swift */; };
 		B591488C290D21A700618F26 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591488B290D21A700618F26 /* UIViewController+Rx.swift */; };
 		B59480F62A9DE804007971A8 /* DeleteRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D39FD29153C7700DA3A95 /* DeleteRuleViewModel.swift */; };
+		B59481022A9F8C61007971A8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59481012A9F8C61007971A8 /* UIImage+Extension.swift */; };
 		B595000528D5B74700F6B2E4 /* EditHousNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */; };
 		B595000928D6629700F6B2E4 /* QuitPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */; };
 		B595FFB428C9B2CA00F6B2E4 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */; };
@@ -502,6 +503,7 @@
 		B591485B290AB69300618F26 /* RulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTableViewCell.swift; sourceTree = "<group>"; };
 		B5914884290BC2D200618F26 /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
 		B591488B290D21A700618F26 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		B59481012A9F8C61007971A8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B595000428D5B74700F6B2E4 /* EditHousNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHousNameDTO.swift; sourceTree = "<group>"; };
 		B595000828D6629700F6B2E4 /* QuitPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitPopUpViewController.swift; sourceTree = "<group>"; };
 		B595FFB328C9B2CA00F6B2E4 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -1507,6 +1509,7 @@
 				77CCB4FD295749B5002FC9CB /* Optional+Exntension.swift */,
 				B52EEE8A2A10CDE100518C8F /* UIControl+Extension.swift */,
 				B83D6D1C2A53D28F00E8DB11 /* UIControl+Combine.swift */,
+				B59481012A9F8C61007971A8 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2274,6 +2277,7 @@
 				B54D3A022919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift in Sources */,
 				B54D39F62914197700DA3A95 /* AddRuleViewController.swift in Sources */,
 				B84EA6AD28D61AE700C92FCD /* MyTodoCollectionViewCell.swift in Sources */,
+				B59481022A9F8C61007971A8 /* UIImage+Extension.swift in Sources */,
 				B5D06E512A1B75BF00048C72 /* HousTextView.swift in Sources */,
 				9B70663A2942FF34003539D7 /* ProfileAlarmSettingViewController.swift in Sources */,
 				9BE0C28729082BFD0028F13A /* ProfileDetailNavigationView.swift in Sources */,
