@@ -151,15 +151,6 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
         })
         else { return }
 
-        // TODO: - 규칙 수정 API
-        /*
-         1. ruleId와 PhotoCellModel를 이쪽 VC로 넘어올 때 받아온다. <- 메서드? 변수에 넣어주기?
-         2. PhotoCellModel에서 받아온 정보로 View에 데이터 넣어주기 <- 이건 이 VC present해주는 RulesViewController쪽에서 메서드 호출.
-         3. 그리고 뷰가 보여지고 수정할 거 하고 '저장' 버튼을 누르면 담고 있던 RuleId과 model을 viewModel로 넘긴다.
-         4. viewModel에서 넘겨받은 ruleId와 이미지 등등을 이용해서 규칙 수정 API 호출하기
-         5. API 호출 후 성공이면 pop
-         */
-
         var model = CreateRuleRequestDTO(name: self.ruleTitle, description: self.ruleDescription, images: images)
         if type == .updateRule {
           model.ruleId = photoCellModel?.ruleId
@@ -176,18 +167,6 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
         self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
-
-//    let input = AddRuleViewModel.Input(
-    //      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
-    //      viewDidTapped: view.rx.tapGesture().asObservable(),
-    //      saveButtonDidTapped: newRulesSubject
-    //        .do(onNext: { [weak self] _ in self?.showLoading() }),
-    //      plusButtonDidTapped: plusButton.rx.tap.asObservable(),
-    //      textFieldEdit: ruleTextField.rx.text
-    //        .orEmpty
-    //        .distinctUntilChanged()
-    //        .asObservable()
-    //    )
   }
 
 }
@@ -420,13 +399,6 @@ extension AddEditRuleViewController: PHPickerViewControllerDelegate {
     }
 
     picker.dismiss(animated: true)
-
-//    albumImageUploadedSubject
-//      .asDriver(onErrorJustReturn: ())
-//      .drive(onNext: {
-//        picker.dismiss(animated: true)
-//      })
-//      .disposed(by: disposeBag)
   }
 
 }

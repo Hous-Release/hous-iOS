@@ -33,12 +33,7 @@ final class AddEditViewModel {
           .createRules(.init(name: dto.name, description: dto.description), images: dto.images)
       }
       .asDriver(onErrorJustReturn: 400)
-    //      .flatMap { ruleNames -> Observable<Int> in
-    //        return NetworkService.shared.ruleRepository.createRules(
-    //          RuleDTO.Request.createRuleRequestDTO(ruleNames: ruleNames)
-    //        )
-    //      }
-    //      .asDriver(onErrorJustReturn: 400)
+    
     return Output(createdRule: savedCompleted)
   }
 
