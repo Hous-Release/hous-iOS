@@ -136,6 +136,12 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
     output.presentAddViewController
       .drive { [weak self] _ in
         guard let self else { return }
+
+        guard let rulesCount = dataSource?.snapshot(for: .main).items.count else { return }
+        if rulesCount >= 30 {
+          self.showExceedPopup()
+          return
+        }
         let viewController = AddEditRuleViewController(viewModel: AddEditViewModel(), type: .addRule)
         self.navigationController?.pushViewController(viewController, animated: true)
       }
@@ -299,6 +305,8 @@ extension RulesViewController {
   }
 }
 
+// MARK: - PopUp
+
 private extension RulesViewController {
   func showBottomSheet(model: PhotoCellModel) {
 
@@ -312,7 +320,10 @@ private extension RulesViewController {
       case .cancel, .add:
         return
       case .modify:
-        viewController = AddEditRuleViewController(viewModel: AddEditViewModel(), type: .updateRule, model: model)
+        viewController = AddEditRuleViewController(
+          viewModel: AddEditViewModel(),
+          type: .updateRule,
+          model: model)
       case .delete:
         guard let ruleId = model.ruleId else { return }
         self.dismiss(animated: false) {
@@ -321,6 +332,26 @@ private extension RulesViewController {
         return
       }
       self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+
+  func showExceedPopup() {
+    let popModel = ImagePopUpModel(
+      image: .exceed,
+      actionText: "알겠어요!",
+      text: "우리 집 Rules가 너무 많아요!\n필요하지 않은 Rule은 삭제하고\n다시 시도해주세요~",
+      titleText: "Rules 개수 초과"
+    )
+
+    let popUpType = PopUpType.exceed(exceedModel: popModel)
+
+    self.presentPopUp(popUpType) { actionType in
+      switch actionType {
+      case .action:
+        break
+      case .cancel:
+        break
+      }
     }
   }
 
