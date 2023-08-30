@@ -303,6 +303,7 @@ extension AddEditRuleViewController {
           guard let self else { return }
           self.isEdited = !(cell.textField.text == self.ruleTitle)
           self.ruleTitle = text
+          self.isEdited = true
         })
         .disposed(by: cell.disposeBag)
 
