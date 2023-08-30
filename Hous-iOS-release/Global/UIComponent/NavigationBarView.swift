@@ -19,6 +19,8 @@ class NavBarWithBackButtonView: UIView {
     $0.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
   }
 
+  weak var viewController: UIViewController?
+
   weak var delegate: NavBarWithBackButtonViewDelegate?
 
   private var titleLabel = UILabel().then {
@@ -58,8 +60,10 @@ class NavBarWithBackButtonView: UIView {
   init(title: String = "",
        rightButtonText: String = "",
        rightButtonImage: UIImage? = nil,
-       isSeparatorLineHidden: Bool = true
+       isSeparatorLineHidden: Bool = true,
+       viewController: UIViewController? = nil
   ) {
+    self.viewController = viewController
     super.init(frame: .zero)
     configUI(title, rightButtonText, rightButtonImage, isSeparatorLineHidden)
     render()
@@ -125,6 +129,10 @@ class NavBarWithBackButtonView: UIView {
 
 extension NavBarWithBackButtonView {
   @objc private func backButtonDidTapped() {
+    if let viewController = viewController {
+      viewController.navigationController?.popViewController(animated: true)
+      return
+    }
     self.delegate?.backButtonDidTapped()
   }
 }
