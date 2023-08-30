@@ -54,7 +54,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   // MARK: - UI Components
 
-  private let navigationBar = NavBarWithBackButtonView()
+  private lazy var navigationBar = NavBarWithBackButtonView(viewController: self)
 
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
     $0.isScrollEnabled = false
@@ -63,6 +63,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
   // MARK: - Properties
   private var ruleTitle: String = ""
   private var ruleDescription: String = ""
+  private var isEdited = false
 
   private let maxImageCount = 5
 
@@ -140,8 +141,6 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
         self.collectionView.endEditing(true)
       })
       .disposed(by: disposeBag)
-
-//    print(dataSource.snapshot(for: .photoInput).items)
 
     navigationBar.rightButton.rx.tap
       .subscribe(onNext: { [weak self] _ in
@@ -243,6 +242,7 @@ extension AddEditRuleViewController {
         .drive(onNext: { [weak self] text in
           guard let self else { return }
           self.ruleTitle = text
+          self.isEdited = true
         })
         .disposed(by: cell.disposeBag)
 
@@ -252,6 +252,7 @@ extension AddEditRuleViewController {
         .asDriver(onErrorJustReturn: "")
         .drive(onNext: { [weak self] text in
           guard let self else { return }
+          self.isEdited = true
           self.ruleDescription = text
         })
         .disposed(by: cell.disposeBag)
