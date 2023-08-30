@@ -312,7 +312,6 @@ private extension RulesViewController {
       case .cancel, .add:
         return
       case .modify:
-        // TODO: - 새로만든 AddEdit뷰컨으로 넘기기
         viewController = AddEditRuleViewController(viewModel: AddEditViewModel(), type: .updateRule, model: model)
       case .delete:
         guard let ruleId = model.ruleId else { return }
@@ -338,14 +337,6 @@ private extension RulesViewController {
       guard let self = self else { return }
       switch actionType {
       case .action:
-        /*
-         ruleId를 위에 선언한 subject로 넘기고 <- 여기서 할일 : done
-         viewModel에서 해당 subject Input으로 받고
-         규칙 삭제 API 호출하고
-         해당 결과 받으면 popUp dismiss <- bind
-         그리고 collectionview에 바로 결과 반영시켜줘야한다.
-
-         */
         guard let selectedRuleId else { return }
         self.toDeleteRuleIdSubject.onNext(selectedRuleId)
       case .cancel:
