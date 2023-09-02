@@ -42,6 +42,20 @@ enum AddEditType {
     case .updateRule: return "저장"
     }
   }
+
+  var popUpTitle: String {
+    switch self {
+    case .addRule: return "앗, 잠깐! 이대로 나가면\nRules가 추가되지 않아요!"
+    case .updateRule: return "수정사항이 저장되지 않았어요!"
+    }
+  }
+
+  var popUpActionCancel: String {
+    switch self {
+    case .addRule: return "계속 작성하기"
+    case .updateRule: return "계속 작성하기"
+    }
+  }
 }
 
 final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
@@ -54,7 +68,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
 
   // MARK: - UI Components
 
-  private lazy var navigationBar = NavBarWithBackButtonView(viewController: self)
+  private lazy var navigationBar = NavBarWithBackButtonView()
 
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
     $0.isScrollEnabled = false
@@ -99,6 +113,16 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
     collectionView.dataSource = dataSource
     bind()
     configUI()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -159,10 +183,25 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
       })
       .disposed(by: disposeBag)
 
-    let input = AddEditViewModel.Input(addButtonDidTap: toCreateRule)
+    let input = AddEditViewModel.Input(
+      navBackButtonDidTapped: navigationBar.backButton.rx.tap.asObservable(),
+      addButtonDidTap: toCreateRule
+    )
+
     let output = viewModel.transform(input)
     output.createdRule
       .drive(onNext: { _ in
+        self.navigationController?.popViewController(animated: true)
+      })
+      .disposed(by: disposeBag)
+
+    output.navBackButtonDidTapped
+      .drive(onNext: { [weak self] _ in
+        guard let self else { return }
+        if isEdited {
+          self.showQuitPopUp()
+          return
+        }
         self.navigationController?.popViewController(animated: true)
       })
       .disposed(by: disposeBag)
@@ -234,6 +273,26 @@ extension AddEditRuleViewController {
         cell.textField.text = model.title
         cell.textView.textView.text = model.description
       }
+
+      cell.textView.textView.rx.tapGesture()
+        .asDriver()
+        .drive(onNext: { _ in
+          cell.textField.backgroundColor = Colors.g1.color
+          cell.textView.backgroundColor = Colors.blueL2.color
+          cell.textView.textView.backgroundColor = Colors.blueL2.color
+        })
+        .disposed(by: cell.disposeBag)
+
+      cell.textField.rx.tapGesture()
+        .asDriver()
+        .drive(onNext: { _ in
+          cell.textField.backgroundColor = Colors.blueL2.color
+          cell.textView.backgroundColor = Colors.g1.color
+          cell.textView.textView.backgroundColor = Colors.g1.color
+        })
+        .disposed(by: cell.disposeBag)
+
+
 
       cell.textField.rx.text
         .orEmpty
@@ -402,4 +461,36 @@ extension AddEditRuleViewController: PHPickerViewControllerDelegate {
     picker.dismiss(animated: true)
   }
 
+}
+
+extension AddEditRuleViewController {
+  private func showQuitPopUp() {
+    let defaultPopUpModel = DefaultPopUpModel(
+      cancelText: type.popUpActionCancel,
+      actionText: "나가기",
+      title: type.popUpTitle,
+      subtitle: "정말 취소하려면 나가기 버튼을 눌러주세요."
+    )
+    let popUpType = PopUpType.defaultPopUp(defaultPopUpModel: defaultPopUpModel)
+
+    self.presentPopUp(popUpType) { [weak self] actionType in
+      switch actionType {
+      case .action:
+        self?.navigationController?.popViewController(animated: true)
+      case .cancel:
+        break
+      }
+    }
+  }
+}
+
+extension AddEditRuleViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    if isEdited {
+      showQuitPopUp()
+      return false
+    }
+    return true
+  }
 }

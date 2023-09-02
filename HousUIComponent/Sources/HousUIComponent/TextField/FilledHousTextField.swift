@@ -60,7 +60,7 @@ public final class FilledHousTextField: UITextField {
     self.addLeftPadding(16)
     self.rightViewMode = .always
     self.rightView = baseRightView
-    self.backgroundColor = Colors.blueL2.color
+    self.backgroundColor = Colors.g1.color
     self.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
     self.layer.cornerRadius = 8
     self.layer.masksToBounds = true
