@@ -14,10 +14,12 @@ final class AddEditViewModel {
 
   // MARK: - Inputs
   struct Input {
+    let navBackButtonDidTapped: Observable<Void>
     let addButtonDidTap: Observable<CreateRuleRequestDTO>
   }
 
   struct Output {
+    let navBackButtonDidTapped: Driver<Void>
     let createdRule: Driver<Int>
   }
 
@@ -34,8 +36,11 @@ final class AddEditViewModel {
           .createRules(.init(name: dto.name, description: dto.description), images: images)
       }
       .asDriver(onErrorJustReturn: 400)
-    
-    return Output(createdRule: savedCompleted)
+
+    let backButtonTapped = input.navBackButtonDidTapped.asDriver(onErrorJustReturn: ())
+
+    return Output(navBackButtonDidTapped: backButtonTapped,
+                  createdRule: savedCompleted)
   }
 
 }
