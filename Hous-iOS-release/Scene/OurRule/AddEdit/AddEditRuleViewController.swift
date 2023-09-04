@@ -77,7 +77,7 @@ final class AddEditRuleViewController: BaseViewController, LoadingPresentable {
   // MARK: - Properties
   private var ruleTitle: String = ""
   private var ruleDescription: String = ""
-  private var isEdited = false
+  private var isEdited = true
 
   private let maxImageCount = 5
 
@@ -272,6 +272,9 @@ extension AddEditRuleViewController {
       if let model = self.photoCellModel {
         cell.textField.text = model.title
         cell.textView.textView.text = model.description
+
+        self.ruleTitle = model.title
+        self.ruleDescription = model.description ?? ""
       }
 
       cell.textView.textView.rx.tapGesture()
@@ -292,16 +295,14 @@ extension AddEditRuleViewController {
         })
         .disposed(by: cell.disposeBag)
 
-
-
       cell.textField.rx.text
         .orEmpty
         .distinctUntilChanged()
         .asDriver(onErrorJustReturn: "")
         .drive(onNext: { [weak self] text in
           guard let self else { return }
+          self.isEdited = !(cell.textField.text == self.ruleTitle)
           self.ruleTitle = text
-          self.isEdited = true
         })
         .disposed(by: cell.disposeBag)
 
@@ -311,7 +312,7 @@ extension AddEditRuleViewController {
         .asDriver(onErrorJustReturn: "")
         .drive(onNext: { [weak self] text in
           guard let self else { return }
-          self.isEdited = true
+          self.isEdited = !(cell.textView.textView.text == self.ruleDescription)
           self.ruleDescription = text
         })
         .disposed(by: cell.disposeBag)
