@@ -84,10 +84,6 @@ final class SignInViewController: UIViewController, ReactorKit.View {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
   private func setupViews() {
 
     view.addSubview(backgroudImageView)

@@ -39,10 +39,6 @@ final class MemberTodoViewController: BaseViewController, ReactorKit.View, Loadi
   override func loadView() {
     view = mainView
   }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
 }
 
 extension MemberTodoViewController {

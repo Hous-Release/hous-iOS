@@ -150,10 +150,6 @@ class ProfileEditTextView: UITextView {
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 12)
   }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
-  }
-
   override init(frame: CGRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
     self.textContainerInset = UIEdgeInsets(top: 0, left: -2, bottom: 10, right: 0)
