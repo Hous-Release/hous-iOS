@@ -106,10 +106,6 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
     disposeBag = DisposeBag()
   }
 
-  override func draw(_ rect: CGRect) {
-    super.draw(rect)
-  }
-
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

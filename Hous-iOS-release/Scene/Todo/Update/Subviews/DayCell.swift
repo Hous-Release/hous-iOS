@@ -45,9 +45,6 @@ final class DayCell: UICollectionViewCell {
   required init?(coder: NSCoder) {
     fatalError("Not Implemnted")
   }
-  override func layoutSubviews() {
-    super.layoutSubviews()
-  }
 
   func configure(_ model: UpdateTodoHomieModel) {
     self.onboardingID = model.onboardingID

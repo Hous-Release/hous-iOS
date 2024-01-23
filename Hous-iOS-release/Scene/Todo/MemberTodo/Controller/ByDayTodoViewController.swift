@@ -37,10 +37,6 @@ class ByDayTodoViewController: BaseViewController, ReactorKit.View, LoadingPrese
     super.loadView()
     view = mainView
   }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
 }
 
 extension ByDayTodoViewController {

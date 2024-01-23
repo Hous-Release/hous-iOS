@@ -60,11 +60,6 @@ final class RulesTableViewCell: UITableViewCell {
     dotView.layer.masksToBounds = true
   }
 
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-
-  }
-
   private func configUI() {
     contentView.addSubViews([dotView, selectButton, todoLabel])
 

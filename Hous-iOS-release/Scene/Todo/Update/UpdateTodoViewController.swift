@@ -71,10 +71,6 @@ final class UpdateTodoViewController: BaseViewController, View, LoadingPresentab
     fatalError("Not Implemented")
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupNavigationBar()
