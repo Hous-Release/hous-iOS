@@ -20,4 +20,5 @@ public enum BottomSheetType {
   case defaultType
   case todoType(TodoModel)
   case ruleType(PhotoCellModel)
+    case ruleGuideType
 }
