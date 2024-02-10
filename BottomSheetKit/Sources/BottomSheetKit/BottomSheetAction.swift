@@ -10,12 +10,10 @@ import UIKit
 public typealias CompleteBottomSheetAction = ((DidBottomSheetActionType) -> Void)
 
 protocol BottomSheetAction {
-    associatedtype T: UIView
     func sendAction(_ action: DidBottomSheetActionType)
     func cancel()
     var completeAction: CompleteBottomSheetAction? { get }
-    var view: T { get set }
-    
+//    var view: T { get set }
 }
 
 extension BottomSheetAction {

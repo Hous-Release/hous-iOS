@@ -20,14 +20,13 @@ final class RuleBottomSheetViewController: UIViewController {
 
     private let bottomSheetView: RuleBottomSheetView
 
-    private let action: any BottomSheetAction
+    private let action: BottomSheetAction
 
     private let disposeBag = DisposeBag()
 
-    init?(action: any BottomSheetAction) {
+    init?(action: RuleBottomSheetAction) {
         self.action = action
-        guard let view = action.view as? RuleBottomSheetView else { return nil }
-        self.bottomSheetView = view
+        self.bottomSheetView = action.view
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -139,7 +138,7 @@ extension RuleBottomSheetViewController {
         }
     }
 
-    func updateBottomSheetTop(_ top: CGFloat) {
+    private func updateBottomSheetTop(_ top: CGFloat) {
         bottomSheetView.snp.updateConstraints { make in
             make.top.equalTo(backgroundView.snp.bottom).inset(top)
         }
