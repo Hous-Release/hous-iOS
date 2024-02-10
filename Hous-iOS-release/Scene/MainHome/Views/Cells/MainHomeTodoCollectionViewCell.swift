@@ -29,7 +29,7 @@ class MainHomeTodoCollectionViewCell: UICollectionViewCell {
   }
 
   let copyButton = UIButton().then {
-    $0.setImage(Images.icCopy.image, for: .normal)
+    $0.setImage(Images.icCopyShare.image, for: .normal)
   }
 
   private lazy var topButtonStack = UIStackView(arrangedSubviews: [editButton, copyButton]).then {

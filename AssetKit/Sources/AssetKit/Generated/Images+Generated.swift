@@ -49,6 +49,7 @@ public enum Images {
   public static let icClose = ImageAsset(name: "ic_close")
   public static let bg = ImageAsset(name: "bg")
   public static let icCopy = ImageAsset(name: "ic_copy")
+  public static let icCopyShare = ImageAsset(name: "ic_copy_share")
   public static let icEditHous = ImageAsset(name: "ic_edit_hous")
   public static let icMoreOurRules = ImageAsset(name: "ic_more_our_rules")
   public static let icStildot = ImageAsset(name: "ic_stildot")
