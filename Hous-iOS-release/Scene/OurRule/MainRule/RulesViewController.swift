@@ -26,16 +26,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
   private let searchBar = HousSearchBar()
 
   private let housMenu = HousMenu().then {
-    $0.addGuideButtonAction { _ in
-      print("guide !")
-    }
-
-    $0.addEditButtonAction { _ in
-      print("edit !")
-    }
-
     $0.alpha = 0
-
   }
 
   private lazy var rulesCollectionView = UICollectionView(
@@ -99,13 +90,18 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
 
         let plusButtonDidTap = floatingButton.rx.tap.asObservable()
 
+    let editButtonDidTap = housMenu.editButton.rx.tap.asObservable()
+    let guideButtonDidTap = housMenu.guideButton.rx.tap.asObservable()
+
         let input = RulesViewModel.Input(
           viewWillAppear: viewWillAppear,
           backButtonDidTapped: backbuttonDidTap,
           moreButtonDidTapped: moreButtonDidTap,
           plusButtonDidTapped: plusButtonDidTap,
           ruleCellDidTapped: ruleIdSubject,
-          deleteRuleDidTapped: toDeleteRuleIdSubject
+          deleteRuleDidTapped: toDeleteRuleIdSubject,
+          editMenuButtonDidTapped: editButtonDidTap,
+          guideMenuButtonDidTapped: guideButtonDidTap
         )
 
         let output = viewModel.transform(input: input)
@@ -124,7 +120,7 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
       }
       .disposed(by: disposeBag)
 
-    output.presentBottomSheet
+    output.housMenuAppear
       .drive { _ in
         let alpha: CGFloat = self.housMenu.alpha == 1 ? 0 : 1
         UIView.animate(withDuration: 0.3) {
@@ -187,6 +183,16 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
         }
         self.dismiss(animated: true)
 
+      })
+      .disposed(by: disposeBag)
+
+    output.pushRepresentRulesViewController
+      .drive(onNext: { [weak self] _ in
+        guard let self else { return }
+//        let editViewController = EditRuleViewController(editViewRules: self.rules, viewModel: EditRuleViewModel())
+        self.housMenu.alpha = 0
+        let editViewController = EditRepresentRulesViewController(rules: self.rules, viewModel: EditRepresentRulesViewModel())
+        self.navigationController?.pushViewController(editViewController, animated: true)
       })
       .disposed(by: disposeBag)
 
