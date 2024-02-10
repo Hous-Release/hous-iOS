@@ -13,10 +13,36 @@ protocol RuleAPIProtocol {
     func updateRule(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, ruleId: Int, images: [UIImage]) -> Observable<Int>
     func createRules(_ ruleRequestDTO: RuleDTO.Request.createRuleRequestDTO, images: [UIImage]) -> Observable<Int>
     func deleteRule(ruleId: Int) -> Observable<Int>
+    func updateRepresentRules(_ requestDTO: RuleDTO.Request.RepresentRulesRequestDTO) -> Observable<Void>
     func getRuleDetail(ruleId: Int) -> Observable<RuleDTO.Response.SingleRuleResponseDTO?>
 }
 
 public final class RuleAPI: APIRequestLoader<RuleService>, RuleAPIProtocol {
+    public func updateRepresentRules(_ requestDTO: RuleDTO.Request.RepresentRulesRequestDTO) -> RxSwift.Observable<Void> {
+        return Observable.create { [weak self] emitter in
+
+            self?.fetchData(
+                target: .updateRepresentRules(requestDTO),
+                responseData: BaseResponseType<String>.self
+            ) { result, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+
+                if result != nil {
+                    emitter.onNext(())
+                    emitter.onCompleted()
+//                    if let status = result?.status {
+//                        emitter.onNext(())
+//                        emitter.onCompleted()
+//                    }
+                }
+            }
+
+            return Disposables.create()
+        }
+    }
+    
     public func getRuleDetail(ruleId: Int) -> RxSwift.Observable<RuleDTO.Response.SingleRuleResponseDTO?> {
         return Observable.create { [weak self] emitter in
 

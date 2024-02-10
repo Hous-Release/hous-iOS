@@ -45,4 +45,12 @@ public extension RuleDTO.Request {
         }
     }
     
+    struct RepresentRulesRequestDTO: Encodable {
+        public let rules: [Int]
+        
+        public init(rules: [Int]) {
+            self.rules = rules
+        }
+    }
+    
 }

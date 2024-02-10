@@ -14,6 +14,7 @@ public enum RuleService {
   case deleteRule(ruleId: Int)
   case getRuleData
     case getRuleDetail(ruleId: Int)
+    case updateRepresentRules(_ dto: RuleDTO.Request.RepresentRulesRequestDTO)
 }
 
 extension RuleService: TargetType {
@@ -33,6 +34,8 @@ extension RuleService: TargetType {
         return "/v2/rule/\(ruleId)"
     case .deleteRule(let ruleId):
         return "/v2/rule/\(ruleId)"
+    case .updateRepresentRules:
+        return "/v1/rules/represent"
     }
   }
   
@@ -46,6 +49,8 @@ extension RuleService: TargetType {
       return .delete
     case .getRuleData, .getRuleDetail:
       return .get
+    case .updateRepresentRules:
+        return .put
     }
   }
   
@@ -53,6 +58,8 @@ extension RuleService: TargetType {
     switch self {
     case .getRuleData, .getRuleDetail, .createRule, .deleteRule, .updateRule:
       return .requestPlain
+    case .updateRepresentRules(let dto):
+        return .body(dto)
     }
   }
 
