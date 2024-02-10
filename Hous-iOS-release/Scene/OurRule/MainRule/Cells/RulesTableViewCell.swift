@@ -9,7 +9,6 @@ import UIKit
 import HousUIComponent
 import RxSwift
 
-// MARK: - 추후 삭제 가능성 농후
 final class RulesTableViewCell: UITableViewCell {
 
   private let dotView = UIView().then {
@@ -19,8 +18,8 @@ final class RulesTableViewCell: UITableViewCell {
   let selectButton = UIButton().then {
     $0.isUserInteractionEnabled = false
     $0.isHidden = true
-    $0.setImage(Images.icDot4.image, for: .normal)
-    $0.setImage(Images.icCheck2.image, for: .selected)
+    $0.setImage(Images.icSelNo.image, for: .normal)
+    $0.setImage(Images.icSelYes.image, for: .selected)
   }
 
   private let todoLabel = HousLabel(
@@ -71,7 +70,7 @@ final class RulesTableViewCell: UITableViewCell {
 
     selectButton.snp.makeConstraints { make in
       make.centerY.equalToSuperview()
-      make.leading.equalToSuperview().offset(4)
+      make.leading.equalToSuperview().offset(16)
       make.size.equalTo(44)
     }
 
