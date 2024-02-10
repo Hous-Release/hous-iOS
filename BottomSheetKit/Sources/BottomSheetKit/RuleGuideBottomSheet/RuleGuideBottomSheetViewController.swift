@@ -1,5 +1,5 @@
 //
-//  RuleGuideBottomSheetViewController:.swift
+//  RuleGuideBottomSheetViewController
 //  
 //
 //  Created by 김민재 on 2/11/24.
@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class RuleGuideBottomSheetViewController: UIViewController {
+final class RuleGuideBottomSheetViewController: UIViewController {
 
     private let backgroundView: UIView = {
       let view = UIView()
@@ -18,13 +18,13 @@ final class RuleGuideBottomSheetViewController: UIViewController {
       return view
     }()
 
-    private let bottomSheetView: RuleBottomSheetView
+    private let bottomSheetView: RuleGuideBottomSheetView
 
     private let action: BottomSheetAction
 
     private let disposeBag = DisposeBag()
 
-    init?(action: RuleBottomSheetAction) {
+    init?(action: RuleGuideBottomSheetAction) {
         self.action = action
         self.bottomSheetView = action.view
         super.init(nibName: nil, bundle: nil)
@@ -40,14 +40,13 @@ final class RuleGuideBottomSheetViewController: UIViewController {
         setLayout()
         setTapGesture()
         setPanGesture()
-        bind()
     }
 
 }
 
 // MARK: Gesture Animation Helper
 
-extension RuleBottomSheetViewController {
+extension RuleGuideBottomSheetViewController {
     private func setTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         backgroundView.addGestureRecognizer(tapGesture)
@@ -87,6 +86,8 @@ extension RuleBottomSheetViewController {
 
     func showBottomSheetWithAnimation() {
         self.updateBottomSheetTop(self.bottomSheetView.frame.height)
+        print("guide")
+        print(self.bottomSheetView.frame.height)
         UIView.animate(withDuration: 0.5) {
             self.backgroundView.alpha = 1
             self.view.layoutIfNeeded()
@@ -123,7 +124,7 @@ extension RuleBottomSheetViewController {
 
 // MARK: Layout
 
-extension RuleBottomSheetViewController {
+extension RuleGuideBottomSheetViewController {
     private func setLayout() {
         view.addSubview(backgroundView)
         backgroundView.addSubview(bottomSheetView)
@@ -142,23 +143,6 @@ extension RuleBottomSheetViewController {
         bottomSheetView.snp.updateConstraints { make in
             make.top.equalTo(backgroundView.snp.bottom).inset(top)
         }
-    }
-
-}
-
-extension RuleBottomSheetViewController {
-    private func bind() {
-        bottomSheetView.modifyButton.rx.tap
-          .asDriver(onErrorJustReturn: ())
-          .map { DidBottomSheetActionType.modify }
-          .drive(onNext: self.sendDismissAction)
-          .disposed(by: disposeBag)
-
-        bottomSheetView.deleteButton.rx.tap
-          .asDriver(onErrorJustReturn: ())
-          .map { DidBottomSheetActionType.delete }
-          .drive(onNext: self.sendDismissAction)
-          .disposed(by: disposeBag)
     }
 
 }
