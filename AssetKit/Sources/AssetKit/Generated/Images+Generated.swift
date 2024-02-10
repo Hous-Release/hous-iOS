@@ -72,6 +72,8 @@ public enum Images {
   public static let icDot4 = ImageAsset(name: "icDot4")
   public static let icCheck2 = ImageAsset(name: "ic_check2")
   public static let icMove1 = ImageAsset(name: "ic_move_1")
+  public static let icSelNo = ImageAsset(name: "ic_sel_no")
+  public static let icSelYes = ImageAsset(name: "ic_sel_yes")
   public static let frame1 = ImageAsset(name: "Frame 1")
   public static let icBack1 = ImageAsset(name: "ic_back1")
   public static let icBackNew = ImageAsset(name: "ic_back_new")
