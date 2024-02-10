@@ -21,7 +21,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
   private let imageView = UIImageView().then {
     $0.layer.cornerRadius = 8
     $0.clipsToBounds = true
-    $0.contentMode = .scaleToFill
+    $0.contentMode = .scaleAspectFill
   }
 
   override init(frame: CGRect) {
