@@ -219,6 +219,13 @@ final class RulesViewController: BaseViewController, LoadingPresentable {
       })
       .disposed(by: disposeBag)
 
+    output.presentGuideBottomSheet
+      .drive(onNext: { [weak self] _ in
+        guard let self else { return }
+        self.presentBottomSheet(.ruleGuideType)
+      })
+      .disposed(by: disposeBag)
+
     searchBar.rx.text
       .asDriver()
       .drive { str in
