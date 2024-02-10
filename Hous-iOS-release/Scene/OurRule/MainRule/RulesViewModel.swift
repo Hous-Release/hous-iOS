@@ -20,16 +20,20 @@ final class RulesViewModel: ViewModelType {
     let plusButtonDidTapped: Observable<Void>
     let ruleCellDidTapped: Observable<Int>
     let deleteRuleDidTapped: Observable<Int>
+    let editMenuButtonDidTapped: Observable<Void>
+    let guideMenuButtonDidTapped: Observable<Void>
   }
 
   // MARK: - Outputs
   struct Output {
     let rules: Driver<[HousRule]>
     let popViewController: Driver<Void>
-    let presentBottomSheet: Driver<Void>
+    let housMenuAppear: Driver<Void>
     let presentAddViewController: Driver<Void>
     let ruleDetail: Driver<RuleDTO.Response.SingleRuleResponseDTO?>
     let deleteRuleComplete: Driver<Int?>
+    let pushRepresentRulesViewController: Driver<Void>
+    let presentGuideBottomSheet: Driver<Void>
   }
 
   private let housRulesSubject = PublishSubject<[HousRule]>()
@@ -52,7 +56,7 @@ final class RulesViewModel: ViewModelType {
 
     let housRules = housRulesSubject.asDriver(onErrorJustReturn: [])
     let popViewController = input.backButtonDidTapped.asDriver(onErrorJustReturn: ())
-    let presentBottomSheet = input.moreButtonDidTapped.asDriver(onErrorJustReturn: ())
+    let moreButtonDidTapped = input.moreButtonDidTapped.asDriver(onErrorJustReturn: ())
     let plusButtonDidTapped = input.plusButtonDidTapped
       .asDriver(onErrorJustReturn: ())
     let ruleDetail = ruleDetailSubject.asDriver(onErrorJustReturn: nil)
@@ -72,10 +76,12 @@ final class RulesViewModel: ViewModelType {
 
     return Output(rules: housRules,
                   popViewController: popViewController,
-                  presentBottomSheet: presentBottomSheet,
+                  housMenuAppear: moreButtonDidTapped,
                   presentAddViewController: plusButtonDidTapped,
                   ruleDetail: ruleDetail,
-                  deleteRuleComplete: deleteRuleComplete)
+                  deleteRuleComplete: deleteRuleComplete,
+                  pushRepresentRulesViewController: input.editMenuButtonDidTapped.asDriver(onErrorJustReturn: ()),
+                  presentGuideBottomSheet: input.guideMenuButtonDidTapped.asDriver(onErrorJustReturn: ()))
   }
 
   init(repositoryProvider: ServiceProviderType) {
