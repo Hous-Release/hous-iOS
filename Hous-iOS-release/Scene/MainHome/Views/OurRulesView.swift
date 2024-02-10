@@ -7,12 +7,11 @@
 
 import UIKit
 
-class OurRulesView: UIView {
+final class OurRulesView: UIView {
 
-  private let numberLabel = UILabel().then {
-    $0.textAlignment = .center
-    $0.font = Fonts.Montserrat.semiBold.font(size: 16)
-    $0.textColor = Colors.blue.color
+  private let dotImageView = UIImageView().then {
+    $0.image = Images.icStildot.image
+    $0.contentMode = .scaleAspectFit
   }
 
   private let ruleTextLabel = UILabel().then {
@@ -32,28 +31,26 @@ class OurRulesView: UIView {
 
   private func configUI() {
     backgroundColor = Colors.blueL2.color
-    addSubViews([numberLabel, ruleTextLabel])
+    addSubViews([dotImageView, ruleTextLabel])
 
-    numberLabel.snp.makeConstraints { make in
+    dotImageView.snp.makeConstraints { make in
       make.top.leading.equalToSuperview()
       make.centerY.equalToSuperview()
     }
 
     ruleTextLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().inset(24)
-      make.centerY.equalTo(numberLabel)
+      make.centerY.equalTo(dotImageView)
       make.bottom.equalToSuperview()
     }
   }
 
   func setRulesCell(number: Int, ruleText: String) {
-    numberLabel.text = "\(number)."
     ruleTextLabel.textColor = Colors.black.color
     ruleTextLabel.text = ruleText
   }
 
   func setEmptyRule(number: Int) {
-    numberLabel.text = "\(number)."
     ruleTextLabel.textColor = Colors.g4.color
   }
 
