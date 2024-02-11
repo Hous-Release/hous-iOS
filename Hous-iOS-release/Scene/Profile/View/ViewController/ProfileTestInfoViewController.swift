@@ -77,6 +77,7 @@ class ProfileTestInfoViewController: UIViewController {
   }
 
   private func render() {
+    self.view.backgroundColor = Colors.white.color
     self.view.addSubViews([testNavigationBar, testStartImageView, testStartLabel, testDescriptionLabel, startButton])
 
     testNavigationBar.snp.makeConstraints { make in
