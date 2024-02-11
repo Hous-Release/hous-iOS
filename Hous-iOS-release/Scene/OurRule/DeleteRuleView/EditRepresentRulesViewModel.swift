@@ -27,7 +27,7 @@ import Network
 
    private let rules: [HousRule] = []
 
-   private var selectedRulesId: [Int] = []
+   var selectedRulesId: [Int] = []
 
    private var disposeBag = DisposeBag()
 
@@ -39,7 +39,8 @@ import Network
       .subscribe(onNext: { [weak self] ruleId in
         guard let self else { return }
         if self.selectedRulesId.contains(ruleId) {
-          self.selectedRulesId.removeFirst(ruleId)
+          guard let index = self.selectedRulesId.firstIndex(of: ruleId) else { return }
+          self.selectedRulesId.remove(at: index)
           return
         }
         self.selectedRulesId.append(ruleId)

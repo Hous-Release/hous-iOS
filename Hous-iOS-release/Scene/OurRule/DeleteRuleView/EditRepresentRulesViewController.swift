@@ -59,6 +59,16 @@ final class EditRepresentRulesViewController: BaseViewController, LoadingPresent
     bind()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.interactivePopGestureRecognizer?.delegate = nil
+  }
+
   // MARK: - Custom Methods
   private func setTableView() {
     rulesTableView.register(RulesTableViewCell.self, forCellReuseIdentifier: RulesTableViewCell.className)
@@ -272,4 +282,15 @@ extension EditRepresentRulesViewController: UITableViewDelegate {
 struct RuleState {
   let id: Int
   var isSelected: Bool
+}
+
+extension EditRepresentRulesViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    if !viewModel.selectedRulesId.isEmpty {
+      popWithPopUp()
+      return false
+    }
+
+    return true
+  }
 }
