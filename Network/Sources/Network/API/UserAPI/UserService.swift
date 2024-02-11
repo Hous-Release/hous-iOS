@@ -20,7 +20,7 @@ extension UserService: TargetType {
     public var path: String {
         switch self {
         case .deleteUser:
-            return "/user"
+            return "/v1/user"
         }
     }
 
