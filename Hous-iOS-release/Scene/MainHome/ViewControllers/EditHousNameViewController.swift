@@ -22,11 +22,17 @@ class EditHousNameViewController: BaseViewController, LoadingPresentable {
 
   // MARK: UI Components
   private let navigationBar = NavBarWithBackButtonView(
-    title: "우리 집 별명 수정",
+    title: "",
     rightButtonText: "저장")
 
+  private let titleLabel = UILabel().then {
+    $0.text = "우리 집 별명 바꾸기"
+    $0.textColor = Colors.black.color
+    $0.font = Fonts.SpoqaHanSansNeo.bold.font(size: 20)
+  }
+
   private let descriptionLabel = UILabel().then {
-    $0.text = "함께 사는 우리 집을 위한 별명을 지어주세요."
+    $0.text = "멤버들이 확인할 수 있도록 방 이름을 설정해주세요."
     $0.textColor = Colors.g5.color
     $0.font = Fonts.SpoqaHanSansNeo.medium.font(size: 14)
   }
@@ -36,7 +42,7 @@ class EditHousNameViewController: BaseViewController, LoadingPresentable {
                                              maxCount: 8,
                                              exceedString: "방 이름은 8자 이내로 입력해주세요!").then {
     $0.placeholder = "우리 집 별명"
-    $0.textAlignment = .center
+    $0.textAlignment = .left
   }
 
   // MARK: Life Cycles
@@ -90,6 +96,7 @@ class EditHousNameViewController: BaseViewController, LoadingPresentable {
 
     view.addSubViews([
       navigationBar,
+      titleLabel,
       descriptionLabel,
       textField
     ])
@@ -100,15 +107,20 @@ class EditHousNameViewController: BaseViewController, LoadingPresentable {
       make.height.equalTo(60)
     }
 
+    titleLabel.snp.makeConstraints { make in
+      make.leading.equalToSuperview().inset(24)
+      make.top.equalTo(navigationBar.snp.bottom).offset(170)
+    }
+
     descriptionLabel.snp.makeConstraints { make in
-      make.top.equalTo(navigationBar.snp.bottom).offset(80)
-      make.centerX.equalToSuperview()
+      make.top.equalTo(titleLabel.snp.bottom).offset(12)
+      make.leading.equalTo(titleLabel)
     }
 
     textField.snp.makeConstraints { make in
       make.top.equalTo(descriptionLabel.snp.bottom).offset(32)
-      make.centerX.equalTo(descriptionLabel)
-      make.leading.trailing.equalToSuperview().inset(95)
+      make.leading.equalTo(descriptionLabel)
+      make.trailing.equalToSuperview().inset(26)
     }
   }
 
