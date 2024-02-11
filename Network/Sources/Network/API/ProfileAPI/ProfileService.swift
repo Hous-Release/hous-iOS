@@ -31,31 +31,31 @@ extension ProfileService: TargetType {
   public var path: String {
     switch self {
     case .getProfileTest:
-      return "/user/personality/test"
+      return "/v1/user/personality/test"
     case .getProfile:
-      return "/user"
+      return "/v1/user"
     case .getHomieProfile(let id):
-      return "/user/\(id)"
+      return "/v1/user/\(id)"
     case .getProfileTestResult:
-      return "/user/personality"
+      return "/v1/user/personality"
     case .getBadges:
-      return "/user/badges"
+      return "/v1/user/badges"
     case .getAlarmSettingInfo:
-      return "/user/push"
+      return "/v1/user/push"
     case .getAlarmInfo:
-      return "/user/notifications"
+      return "/v1/user/notifications"
       
     case .updateRepresentBadge(let id):
-      return "/user/badge/\(id)/represent"
+      return "/v1/user/badge/\(id)/represent"
     case .putProfileTest:
-      return "/user/personality"
+      return "/v1/user/personality"
     case .putProfileEdit:
-      return "/user"
+      return "/v1/user"
     case .patchAlarmSetting:
-      return "/user/push"
+      return "/v1/user/push"
       
     case .postFeedback:
-      return "/user/feedback"
+      return "/v1/user/feedback"
     }
     
   }
