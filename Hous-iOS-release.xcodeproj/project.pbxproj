@@ -192,6 +192,7 @@
 		B5D06E512A1B75BF00048C72 /* HousTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D06E502A1B75BF00048C72 /* HousTextView.swift */; };
 		B5D40C5F2B77F158009684CF /* guide_second.json in Resources */ = {isa = PBXBuildFile; fileRef = B5D40C5D2B77F158009684CF /* guide_second.json */; };
 		B5D40C602B77F158009684CF /* guide_third.json in Resources */ = {isa = PBXBuildFile; fileRef = B5D40C5E2B77F158009684CF /* guide_third.json */; };
+		B5D40C622B786660009684CF /* MainHomeYetTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D40C612B786660009684CF /* MainHomeYetTestCollectionViewCell.swift */; };
 		B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */; };
 		B5DCEBD128EF1C39009B065B /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DCEBD028EF1C39009B065B /* ToastMessage.swift */; };
 		B5F1BBA328DF1C4900DB915D /* MyTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */; };
@@ -530,6 +531,7 @@
 		B5D06E502A1B75BF00048C72 /* HousTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousTextView.swift; sourceTree = "<group>"; };
 		B5D40C5D2B77F158009684CF /* guide_second.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_second.json; sourceTree = "<group>"; };
 		B5D40C5E2B77F158009684CF /* guide_third.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = guide_third.json; sourceTree = "<group>"; };
+		B5D40C612B786660009684CF /* MainHomeYetTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeYetTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5DCEBCE28EF02C0009B065B /* HomieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomieFactory.swift; sourceTree = "<group>"; };
 		B5DCEBD028EF1C39009B065B /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		B5F1BBA228DF1C4900DB915D /* MyTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTodoView.swift; sourceTree = "<group>"; };
@@ -1291,6 +1293,7 @@
 				9BDBAD7D29241E370096FE38 /* MateProfileGraphCollectionViewCell.swift */,
 				9BDBAD7F29241E4E0096FE38 /* MateProfileDescriptionCollectionViewCell.swift */,
 				9BDBAD8129241E640096FE38 /* MateProfileDescInnerCollectionViewCell.swift */,
+				B5D40C612B786660009684CF /* MainHomeYetTestCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2076,6 +2079,7 @@
 				B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */,
 				B8D8A4B42A1CC754005A8258 /* SearchBarViewModel.swift in Sources */,
 				B5DCEBCF28EF02C0009B065B /* HomieFactory.swift in Sources */,
+				B5D40C622B786660009684CF /* MainHomeYetTestCollectionViewCell.swift in Sources */,
 				77EB721A292A1AE200032776 /* FilteredTodoReactor.swift in Sources */,
 				9BE2D4762941C30E00C6D7F7 /* UIDevice+Extension.swift in Sources */,
 				B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */,

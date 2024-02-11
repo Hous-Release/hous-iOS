@@ -48,6 +48,7 @@ public enum Images {
   public static let illGo = ImageAsset(name: "ill_go")
   public static let icClose = ImageAsset(name: "ic_close")
   public static let bg = ImageAsset(name: "bg")
+  public static let blurProfileBackground = ImageAsset(name: "blur_profile_background")
   public static let icCopy = ImageAsset(name: "ic_copy")
   public static let icCopyShare = ImageAsset(name: "ic_copy_share")
   public static let icEditHous = ImageAsset(name: "ic_edit_hous")
