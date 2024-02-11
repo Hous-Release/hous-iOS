@@ -11,6 +11,7 @@ import RxSwift
 final class MainHomeYetTestCollectionViewCell: UICollectionViewCell {
   private let backgroundImageView = UIImageView().then {
     $0.image = Images.blurProfileBackground.image
+    $0.isUserInteractionEnabled = true
     $0.contentMode = .scaleAspectFill
   }
 

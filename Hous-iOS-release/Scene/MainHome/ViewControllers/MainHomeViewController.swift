@@ -19,7 +19,7 @@ protocol MainHomeViewControllerDelegate: AnyObject {
   func editHousName(initname: String)
 }
 
-class MainHomeViewController: BaseViewController, LoadingPresentable {
+final class MainHomeViewController: BaseViewController, LoadingPresentable {
 
   private enum MainHomeSection: Int {
     case todos
@@ -155,8 +155,8 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
           .asDriver()
           .drive(onNext: { [weak self] _ in
             guard let self else { return }
-            let testViewController = TestViewController()
-            self.navigationController?.pushViewController(testViewController, animated: true)
+            let profileTestVC = ProfileTestInfoViewController()
+            self.navigationController?.pushViewController(profileTestVC, animated: true)
           })
           .disposed(by: cell.disposeBag)
 
@@ -360,13 +360,6 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
 
 extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
 
-  func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-    if viewModel.isYetTested {
-      return false
-    }
-    return true
-  }
-
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -420,13 +413,11 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     case MainHomeSection.homiesProfiles.rawValue:
       if viewModel.isYetTested {
         return CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.height * (228/875))
-      } else {
-        let width = UIScreen.main.bounds.width / 2 - 35
-        let height = width * (100/155)
-
-        return CGSize(width: width, height: height)
       }
+      let width = UIScreen.main.bounds.width / 2 - 35
+      let height = width * (100/155)
 
+      return CGSize(width: width, height: height)
     default:
       return .zero
     }
@@ -456,7 +447,9 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAt section: Int
   ) -> UIEdgeInsets {
-    if section == MainHomeSection.homiesProfiles.rawValue {
+    if section == MainHomeSection.todos.rawValue {
+      return UIEdgeInsets(top: 0, left: 24, bottom: 24, right: 24)
+    } else if section == MainHomeSection.homiesProfiles.rawValue {
       return UIEdgeInsets(top: 16, left: 24, bottom: 24, right: 24)
     }
     return UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
