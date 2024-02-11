@@ -91,6 +91,9 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
 
         switch model {
         case .homieProfiles(profiles: let dto):
+          if self.viewModel.isYetTested {
+            return
+          }
           if dto.color == "GRAY" {
             Toast.show(message: "아직 성향 테스트를 하지 않은 호미예요!", controller: self)
             break
@@ -115,6 +118,10 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
       MainHomeProfileCollectionViewCell.self,
       forCellWithReuseIdentifier: MainHomeProfileCollectionViewCell.className
     )
+    collectionView.register(
+      MainHomeYetTestCollectionViewCell.self,
+      forCellWithReuseIdentifier: MainHomeYetTestCollectionViewCell.className
+    )
 
     // Header & Footer
     collectionView.register(
@@ -137,6 +144,24 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
     switch item {
 
     case .homieProfiles(profiles: let profiles):
+      if viewModel.isYetTested {
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MainHomeYetTestCollectionViewCell.className,
+          for: indexPath) as? MainHomeYetTestCollectionViewCell else {
+          return UICollectionViewCell()
+        }
+
+        cell.testButton.rx.tap
+          .asDriver()
+          .drive(onNext: { [weak self] _ in
+            guard let self else { return }
+            let testViewController = TestViewController()
+            self.navigationController?.pushViewController(testViewController, animated: true)
+          })
+          .disposed(by: cell.disposeBag)
+
+        return cell
+      }
       guard let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: MainHomeProfileCollectionViewCell.className,
         for: indexPath) as? MainHomeProfileCollectionViewCell else {
@@ -335,6 +360,13 @@ class MainHomeViewController: BaseViewController, LoadingPresentable {
 
 extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
 
+  func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    if viewModel.isYetTested {
+      return false
+    }
+    return true
+  }
+
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -386,10 +418,15 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     case MainHomeSection.ourRules.rawValue:
       return CGSize(width: UIScreen.main.bounds.width, height: 200)
     case MainHomeSection.homiesProfiles.rawValue:
-      let width = UIScreen.main.bounds.width / 2 - 35
-      let height = width * (100/155)
+      if viewModel.isYetTested {
+        return CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.height * (228/875))
+      } else {
+        let width = UIScreen.main.bounds.width / 2 - 35
+        let height = width * (100/155)
 
-      return CGSize(width: width, height: height)
+        return CGSize(width: width, height: height)
+      }
+
     default:
       return .zero
     }
