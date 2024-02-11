@@ -34,6 +34,8 @@ final class MainHomeViewModel: ViewModelType {
   private var roomCodeRelay = PublishRelay<String>()
   private var roomCode = ""
 
+  var isYetTested: Bool = false
+
   func transform(input: Input) -> Output {
 
     input.viewWillAppear
@@ -50,8 +52,27 @@ final class MainHomeViewModel: ViewModelType {
 
           let myTodoItems = HomeItem.myTodos(todos: model)
           let ourRulesItems = HomeItem.ourTodos(todos: model)
-          let profileItems = model.homies.map {
-            HomeItem.homieProfiles(profiles: $0)
+
+          var user: MainHomeDTO.Response.HomieDTO = .init(color: "", homieID: 0, userNickname: "")
+          for homie in model.homies {
+            if homie.userNickname == model.userNickname {
+              self.isYetTested = homie.color == "GRAY"
+              user = homie
+              break
+            }
+          }
+
+          var profileItems: [MainHomeSectionModel.Item] = []
+          if self.isYetTested {
+            profileItems = [MainHomeSectionModel.Item.homieProfiles(profiles: user)]
+          } else {
+            profileItems = model.homies.map {
+              if model.userNickname == $0.userNickname {
+                self.isYetTested = $0.color == "GRAY"
+              }
+              return HomeItem.homieProfiles(profiles: $0)
+            }
+
           }
 
           let myTodoSectionModel = HomeModel(

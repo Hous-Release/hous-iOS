@@ -22,6 +22,12 @@ public extension MainHomeDTO.Response {
     public let color: String
     public let homieID: Int
     public let userNickname: String
+      
+      public init(color: String, homieID: Int, userNickname: String) {
+          self.color = color
+          self.homieID = homieID
+          self.userNickname = userNickname
+      }
     
     enum CodingKeys: String, CodingKey {
       case color
