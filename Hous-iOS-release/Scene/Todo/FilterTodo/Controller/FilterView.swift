@@ -8,7 +8,7 @@
 import UIKit
 import HousUIComponent
 
-class FilterView: UIView {
+final class FilterView: UIView {
 
   var resultCnt: Int = 0 {
     didSet {
