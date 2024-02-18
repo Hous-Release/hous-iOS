@@ -140,6 +140,7 @@
 		9BF9AD74291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD73291FBA62006A0BDE /* ProfileTestCollectionViewCell.swift */; };
 		9BF9AD76291FC804006A0BDE /* ProfileTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */; };
 		B50DD01F2A9394100054B357 /* AddEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50DD01E2A9394100054B357 /* AddEditViewModel.swift */; };
+		B50E96E92B82654100312823 /* UIView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50E96E82B82654100312823 /* UIView+Combine.swift */; };
 		B51383152A15FD3B00167728 /* AddEditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51383142A15FD3B00167728 /* AddEditRuleViewController.swift */; };
 		B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D8C2A0EAF440097D147 /* Constant.swift */; };
 		B5265D912A0EB48C0097D147 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D902A0EB48C0097D147 /* RulesViewController.swift */; };
@@ -479,6 +480,7 @@
 		9BF9AD75291FC804006A0BDE /* ProfileTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestModel.swift; sourceTree = "<group>"; };
 		9BF9AD7729201812006A0BDE /* ProfileTestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTestInfoViewController.swift; sourceTree = "<group>"; };
 		B50DD01E2A9394100054B357 /* AddEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewModel.swift; sourceTree = "<group>"; };
+		B50E96E82B82654100312823 /* UIView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Combine.swift"; sourceTree = "<group>"; };
 		B51383142A15FD3B00167728 /* AddEditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditRuleViewController.swift; sourceTree = "<group>"; };
 		B5265D8C2A0EAF440097D147 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B5265D902A0EB48C0097D147 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
@@ -1519,6 +1521,7 @@
 				B52EEE8A2A10CDE100518C8F /* UIControl+Extension.swift */,
 				B83D6D1C2A53D28F00E8DB11 /* UIControl+Combine.swift */,
 				B59481012A9F8C61007971A8 /* UIImage+Extension.swift */,
+				B50E96E82B82654100312823 /* UIView+Combine.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2071,6 +2074,7 @@
 				B85C0B5E2940B11A00784FCB /* GrayBackgroundTextField.swift in Sources */,
 				B8249A5529116E69008005DE /* MemEmptyListCell.swift in Sources */,
 				9B4EE80F294CED49002F97C2 /* UITableView+Extension.swift in Sources */,
+				B50E96E92B82654100312823 /* UIView+Combine.swift in Sources */,
 				77EB720629253FBE00032776 /* AssigneeCell.swift in Sources */,
 				B80BBA85290A534800E4916F /* MemberCollectionViewCellReactor.swift in Sources */,
 				B856700728C88C6F00B49984 /* ProfileViewController.swift in Sources */,
