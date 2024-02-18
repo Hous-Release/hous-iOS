@@ -36,7 +36,9 @@ final class SearchBarViewModel {
   @Published private(set) var selectedTodo: TodoModel?
   // @Published private(set) var selectedRule: RuleModel?
 
-  @Published private(set) var floatingBtnTapped: SearchType?
+  @Published private(set) var floatingBtnTapped: [UpdateTodoHomieModel]?
+
+  private var homies: [UpdateTodoHomieModel]?
 
   // MARK: - Input -> Output
   func transform(input: Input) {
@@ -44,6 +46,7 @@ final class SearchBarViewModel {
       .sink { [unowned self] type in
         if type == .todo {
           self.provider.searchRepository.fetchFilteredTodo(with: nil, of: nil)
+          self.provider.todoRepository.fetchHomie()
         }
       }
       .store(in: &subscriptions)
@@ -59,8 +62,8 @@ final class SearchBarViewModel {
       .store(in: &subscriptions)
 
     input.didTapFloatingBtn
-      .sink { [unowned self] type in
-        self.floatingBtnTapped = type
+      .sink { [unowned self] _ in
+        self.floatingBtnTapped = self.homies
       }
       .store(in: &subscriptions)
   }
@@ -83,6 +86,18 @@ extension SearchBarViewModel {
           self.selectedTodo = detail
         case let .sendError(err):
           print(err?.message ?? "")
+        }
+      }
+      .store(in: &subscriptions)
+
+    provider.todoRepository.subjectEvent
+      .sink { [weak self] value in
+        guard let self else { return }
+        switch value {
+        case .getAssignees(let homies):
+          self.homies = homies
+        default:
+          break
         }
       }
       .store(in: &subscriptions)

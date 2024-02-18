@@ -106,18 +106,37 @@ extension SearchBarViewController {
 
   private func bindOutput() {
 
+    filterView.tapPublisher
+      .sink { _ in
+        // TODO: 필터 바텀시트 띄우기.
+        print("filter button tapped!")
+      }
+      .store(in: &subscriptions)
+
     viewModel.$searchedList
       .compactMap { $0 }
       .sink { [weak self] list in
         guard let self = self else { return }
         self.applySnapshot(with: list)
+        self.filterView.resultCnt = list.count
       }
       .store(in: &subscriptions)
 
     viewModel.$floatingBtnTapped
-      .compactMap { $0 }
-      .sink { type in
-        print("\(type) 버튼눌림 버튼눌림 버튼눌림")
+      .sink { [weak self] homies in
+        guard let self else { return }
+
+        let state = UpdateTodoReactor.State(
+          todoHomies: homies ?? []
+        )
+        let provider = ServiceProvider()
+        let reactor = UpdateTodoReactor(
+          provider: provider,
+          state: state
+        )
+
+        let viewController = UpdateTodoViewController(reactor)
+        self.navigationController?.pushViewController(viewController, animated: true)
       }
       .store(in: &subscriptions)
   }
