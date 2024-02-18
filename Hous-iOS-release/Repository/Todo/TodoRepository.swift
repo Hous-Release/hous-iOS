@@ -10,6 +10,7 @@ import Network
 import RxSwift
 import RxCocoa
 import BottomSheetKit
+import Combine
 
 public enum TodoRepositoryEvent {
   case date(String)
@@ -35,6 +36,7 @@ public enum TodoRepositoryEvent {
 }
 
 public protocol TodoRepository {
+  var subjectEvent: PassthroughSubject<TodoRepositoryEvent, Never> { get }
   var event: PublishSubject<TodoRepositoryEvent> { get }
   func fetchTodo()
   func fetchModifyingTodo(_ id: Int)
@@ -51,6 +53,7 @@ public protocol TodoRepository {
 }
 
 public final class TodoRepositoryImp: BaseService, TodoRepository {
+  public var subjectEvent = PassthroughSubject<TodoRepositoryEvent, Never>()
   public var event = PublishSubject<TodoRepositoryEvent>()
 
   public func fetchTodo() {
@@ -148,6 +151,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           status: res?.status,
           message: res?.message
         )
+        self.subjectEvent.send(.sendError(errorModel))
         self.event.onNext(.sendError(errorModel))
         return
       }
@@ -160,7 +164,7 @@ public final class TodoRepositoryImp: BaseService, TodoRepository {
           isExpanded: false
         )
       }
-
+      self.subjectEvent.send(.getAssignees(homies))
       self.event.onNext(.getAssignees(homies))
     }
   }
