@@ -42,32 +42,32 @@ extension TodoService: TargetType {
     switch self {
       // MARK: main
     case .getTodos:
-      return "/todos/main"
+      return "/v1/todos/main"
     case let .checkTodo(todoId, _):
-      return "/todo/\(todoId)/check"
+      return "/v1/todo/\(todoId)/check"
     case let .getTodoSummary(todoId):
-      return "/todo/\(todoId)/summary"
+      return "/v1/todo/\(todoId)/summary"
     case let .deleteTodo(todoId):
-      return "/todo/\(todoId)"
+      return "/v1/todo/\(todoId)"
     case .getOnlyMyTodo:
       return "todos/me"
       // MARK: 추가 / 수정
     case .getAssignees:
-      return "/todo"
+      return "/v1/todo"
     case .getModifyTodoID(let id):
-      return "todo/\(id)"
+      return "/v1todo/\(id)"
     case .updateTodo(let id, _):
       guard let id = id else {
-        return "/todo"
+        return "/v1/todo"
       }
-      return "/todo/\(id)"
+      return "/v1/todo/\(id)"
 
       // MARK: 요일별
     case .getDaysOfWeekTodos:
-      return "todos/day"
+      return "/v1/todos/day"
       // MARK: 멤버별
     case .getMemberTodos:
-      return "todos/member"
+      return "/v1/todos/member"
     }
   }
 
