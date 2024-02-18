@@ -27,9 +27,9 @@ extension NewTodoService: TargetType {
   public var path: String {
     switch self {
     case .getTodoByFilter:
-      return "/todos"
+      return "/v1/todos"
     case .getTodoDetail(let todoId):
-        return "/todo/\(todoId)/summary"
+        return "/v1/todo/\(todoId)/summary"
     }
   }
 
