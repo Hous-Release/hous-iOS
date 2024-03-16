@@ -13,17 +13,17 @@ final class EnterRoomViewReactor: Reactor {
 
   enum Action {
     case didTapNewRoomButton
-    case didTapExistRoomButton
+    case didTapExistRoomButton(code: String?)
   }
 
   enum Mutation {
     case setNewRoomTransition
-    case setExistRoomTransition
+    case setExistRoomTransition(code: String?)
   }
 
   struct State {
     var newRoomTransition: Bool = false
-    var existRoomTransition: Bool = false
+    var existRoomTransition: (Bool, String?) = (false, nil)
   }
 
   let initialState = State()
@@ -32,8 +32,11 @@ final class EnterRoomViewReactor: Reactor {
     switch action {
     case .didTapNewRoomButton:
       return .just(Mutation.setNewRoomTransition)
-    case .didTapExistRoomButton:
-      return .just(Mutation.setExistRoomTransition)
+    case .didTapExistRoomButton(let code):
+      if let code {
+        return .just(Mutation.setExistRoomTransition(code: code))
+      }
+      return .just(Mutation.setExistRoomTransition(code: nil))
     }
   }
 
@@ -41,12 +44,18 @@ final class EnterRoomViewReactor: Reactor {
 
     var newState = state
     newState.newRoomTransition = false
-    newState.existRoomTransition = false
+    newState.existRoomTransition = (false, nil)
     switch mutation {
     case .setNewRoomTransition:
       newState.newRoomTransition = !currentState.newRoomTransition
-    case .setExistRoomTransition:
-      newState.existRoomTransition = !currentState.existRoomTransition
+    case .setExistRoomTransition(let code):
+      if let code {
+        newState.existRoomTransition = (!currentState.existRoomTransition.0, code)
+      } else {
+        newState.existRoomTransition = (!currentState.existRoomTransition.0, nil)
+      }
+      
+      
     }
     return newState
   }

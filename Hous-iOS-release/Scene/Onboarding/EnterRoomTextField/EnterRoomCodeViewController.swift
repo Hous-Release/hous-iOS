@@ -69,6 +69,10 @@ extension EnterRoomCodeViewController {
   }
 
   private func bindState(_ reactor: Reactor) {
+    
+    reactor.state.map { $0.roomCode }
+      .bind(to: mainView.textField.rx.text)
+      .disposed(by: disposeBag)
 
     reactor.state.map { $0.isButtonEnable }
       .bind(to: mainView.enterRoomButton.rx.isEnabled)
