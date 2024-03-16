@@ -9,11 +9,14 @@ import UIKit
 import RxCocoa
 import RxGesture
 import ReactorKit
+import GroupActivities
 
 class EnterRoomViewController: UIViewController, View {
 
   var mainView = EnterRoomView()
   var disposeBag = DisposeBag()
+  
+  let sharePlayService = SharePlayService.shared
 
   override func loadView() {
     super.loadView()
@@ -24,6 +27,7 @@ class EnterRoomViewController: UIViewController, View {
     super.viewDidLoad()
     reactor = EnterRoomViewReactor()
     configUI()
+    sharePlayService.setSharePlay()
   }
 
   private func configUI() {
@@ -38,6 +42,12 @@ class EnterRoomViewController: UIViewController, View {
 
 extension EnterRoomViewController {
   private func bindAction(_ reactor: EnterRoomViewReactor) {
+    sharePlayService.codeSubject
+      .observe(on: MainScheduler.instance)
+      .map { Reactor.Action.didTapExistRoomButton(code: $0) }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
     mainView.newRoomView.rx.tapGesture()
       .when(.recognized)
       .map { _ in Reactor.Action.didTapNewRoomButton }
@@ -46,7 +56,7 @@ extension EnterRoomViewController {
 
     mainView.existRoomView.rx.tapGesture()
       .when(.recognized)
-      .map { _ in Reactor.Action.didTapExistRoomButton }
+      .map { _ in Reactor.Action.didTapExistRoomButton(code: nil) }
       .bind(to: reactor.action)
       .disposed(by: disposeBag)
 
@@ -73,10 +83,10 @@ extension EnterRoomViewController {
 
     reactor.state.map { $0.existRoomTransition }
       .withUnretained(self)
-      .subscribe (onNext: { owner, isTapped in
-        if isTapped {
+      .subscribe (onNext: { owner, tran in
+        if tran.0 {
           let serviceProvider = ServiceProvider()
-          let reactor = EnterRoomCodeViewReactor(provider: serviceProvider)
+          let reactor = EnterRoomCodeViewReactor(provider: serviceProvider, code: tran.1)
           let vc = EnterRoomCodeViewController(reactor)
           owner.mainView.existRoomView.animateClick {
             owner.navigationController?.pushViewController(vc, animated: true)

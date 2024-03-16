@@ -145,6 +145,7 @@
 		B5265D8D2A0EAF440097D147 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D8C2A0EAF440097D147 /* Constant.swift */; };
 		B5265D912A0EB48C0097D147 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D902A0EB48C0097D147 /* RulesViewController.swift */; };
 		B5265D942A0EB7FA0097D147 /* HousRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5265D932A0EB7FA0097D147 /* HousRule.swift */; };
+		B528538F2B9B602D00D96B0D /* SharePlayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528538E2B9B602D00D96B0D /* SharePlayService.swift */; };
 		B52EEE892A10C26A00518C8F /* HousMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EEE882A10C26A00518C8F /* HousMenu.swift */; };
 		B52EEE8B2A10CDE100518C8F /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EEE8A2A10CDE100518C8F /* UIControl+Extension.swift */; };
 		B53F0FBC2910263A004F1872 /* EditRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */; };
@@ -485,6 +486,7 @@
 		B5265D8C2A0EAF440097D147 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B5265D902A0EB48C0097D147 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		B5265D932A0EB7FA0097D147 /* HousRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousRule.swift; sourceTree = "<group>"; };
+		B528538E2B9B602D00D96B0D /* SharePlayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePlayService.swift; sourceTree = "<group>"; };
 		B52EEE882A10C26A00518C8F /* HousMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousMenu.swift; sourceTree = "<group>"; };
 		B52EEE8A2A10CDE100518C8F /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		B53F0FBB2910263A004F1872 /* EditRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRuleViewController.swift; sourceTree = "<group>"; };
@@ -501,6 +503,9 @@
 		B54D3A012919707100DA3A95 /* RepresentingBadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentingBadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A032919708400DA3A95 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		B54D3A052919810D00DA3A95 /* BadgeViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B5684A662B988ED0007739C7 /* Hous-iOS-releaseDebug(Staging).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-releaseDebug(Staging).entitlements"; sourceTree = "<group>"; };
+		B5684A672B989BBA007739C7 /* Hous-iOS-releaseDebug(Development).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-releaseDebug(Development).entitlements"; sourceTree = "<group>"; };
+		B5684A682B98AD9C007739C7 /* Hous-iOS-releaseRelease(Development).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hous-iOS-releaseRelease(Development).entitlements"; sourceTree = "<group>"; };
 		B5689CBA294F3F48006D20F5 /* monday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = monday.json; sourceTree = "<group>"; };
 		B58FF3842A0EC5C600EB4E38 /* RuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		B58FF3872A0ECCA700EB4E38 /* RuleRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleRespository.swift; sourceTree = "<group>"; };
@@ -823,6 +828,9 @@
 		777C665F28A74A62000BECEA /* Hous-iOS-release */ = {
 			isa = PBXGroup;
 			children = (
+				B5684A682B98AD9C007739C7 /* Hous-iOS-releaseRelease(Development).entitlements */,
+				B5684A672B989BBA007739C7 /* Hous-iOS-releaseDebug(Development).entitlements */,
+				B5684A662B988ED0007739C7 /* Hous-iOS-releaseDebug(Staging).entitlements */,
 				773BABB629D1753700ABAACD /* Test */,
 				770B959428F159CE00C8C945 /* Services */,
 				77067FFC28DDE65B0082A7E7 /* Hous-iOS-release.entitlements */,
@@ -932,6 +940,7 @@
 				B856700028C88C3F00B49984 /* Profile */,
 				B8566FFE28C88C3200B49984 /* TabBar */,
 				77B1681D28ABC7EA00E1E512 /* Splash */,
+				B528538E2B9B602D00D96B0D /* SharePlayService.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -2104,6 +2113,7 @@
 				9BDBAD7A29241E1A0096FE38 /* MateProfileMainImageCollectionViewCell.swift in Sources */,
 				B856701928C9A03500B49984 /* EnterInfoViewController.swift in Sources */,
 				77C67C4D299F85660011C837 /* LoadingView.swift in Sources */,
+				B528538F2B9B602D00D96B0D /* SharePlayService.swift in Sources */,
 				B84EA6A628D61A5400C92FCD /* TodoView.swift in Sources */,
 				B54D3A042919708400DA3A95 /* BadgeCollectionViewCell.swift in Sources */,
 				9B2F46952923A918002D9BD2 /* ProfileEditViewModel.swift in Sources */,
@@ -3295,7 +3305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-releaseDebug(Development).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
@@ -3332,7 +3342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-releaseRelease(Development).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3434,7 +3444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-release.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Hous-iOS-release/Hous-iOS-releaseDebug(Staging).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;

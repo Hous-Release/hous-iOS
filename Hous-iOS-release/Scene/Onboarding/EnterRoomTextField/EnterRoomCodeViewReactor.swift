@@ -21,9 +21,15 @@ final class EnterRoomCodeViewReactor: Reactor {
    */
 
   private let provider: ServiceProviderType
+  var initialState: State
 
-  init(provider: ServiceProviderType) {
+  init(provider: ServiceProviderType, code: String? = nil) {
     self.provider = provider
+    if let code {
+      initialState = State(roomCode: code)
+    } else {
+      initialState = State()
+    }
   }
 
   enum Action {
@@ -55,9 +61,13 @@ final class EnterRoomCodeViewReactor: Reactor {
     @Pulse var presentPopupFlag: Bool?
     @Pulse var enterRoomFlag: Bool?
     var error: Int? = nil
+    
+    init(roomCode: String? = nil) {
+      self.roomCode = roomCode
+    }
   }
 
-  let initialState = State()
+  
 
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {

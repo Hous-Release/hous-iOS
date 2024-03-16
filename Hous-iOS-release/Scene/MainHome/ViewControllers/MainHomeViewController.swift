@@ -15,6 +15,23 @@ import Network
 import RxGesture
 import BottomSheetKit
 
+import GroupActivities
+
+struct CodeModel: Codable {
+  let code: String
+}
+
+struct ShareCodeActivity: GroupActivity {
+  static let activityIdentifier: String = "com.hous-ios"
+  var metadata: GroupActivityMetadata {
+    var metadata = GroupActivityMetadata()
+    metadata.title = "초대 코드를 받으세요"
+    metadata.subtitle = "초대 코드"
+    metadata.type = GroupActivityMetadata.ActivityType.generic
+    return metadata
+  }
+}
+
 protocol MainHomeViewControllerDelegate: AnyObject {
   func editHousName(initname: String)
 }
@@ -28,6 +45,8 @@ final class MainHomeViewController: BaseViewController, LoadingPresentable {
   }
 
   // MARK: - Vars & Lets
+  private let sharePlayService = SharePlayService.shared
+
   private let viewModel: MainHomeViewModel
   private let disposeBag = DisposeBag()
   var delegate: MainHomeViewControllerDelegate?
@@ -59,6 +78,7 @@ final class MainHomeViewController: BaseViewController, LoadingPresentable {
     configUI()
     configCollectionView()
     bind()
+    sharePlayService.setSharePlay()
   }
 
   init(viewModel: MainHomeViewModel) {
@@ -214,6 +234,7 @@ final class MainHomeViewController: BaseViewController, LoadingPresentable {
 
       cell.editButton.rx.tap.asDriver()
         .drive(onNext: { [weak self] in
+          self?.sharePlayService.activate()
 //          self?.delegate?.editHousName(initname: todos.roomName)
            self?.navigationController?.pushViewController(
                      EditHousNameViewController(roomName: todos.roomName),
@@ -306,8 +327,9 @@ final class MainHomeViewController: BaseViewController, LoadingPresentable {
 
     output.roomCode
       .drive(onNext: { str in
-        UIPasteboard.general.string = str
-        Toast.show(message: "초대코드가 복사되었습니다", controller: self)
+        self.sharePlayService.send(code: str)
+//        UIPasteboard.general.string = str
+//        Toast.show(message: "초대코드가 복사되었습니다", controller: self)
       })
       .disposed(by: disposeBag)
 

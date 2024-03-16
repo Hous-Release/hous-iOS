@@ -159,6 +159,20 @@ public extension UIViewController {
         present(viewController, animated: false) {
             viewController.showBottomSheetWithAnimation()
         }
+    case .todoFilterType:
+        break
+//        let view = TodoFilterSheetView(<#TodoModel#>)
+//        let bottomSheetAction = RuleGuideBottomSheetAction(view: view)
+//        guard let viewController = RuleGuideBottomSheetViewController(action: bottomSheetAction) else { return }
+//
+//        bottomSheetAction.completeAction = { actionType in
+//            completion?(actionType)
+//        }
+//
+//        viewController.modalPresentationStyle = .overFullScreen
+//        present(viewController, animated: false) {
+//            viewController.showBottomSheetWithAnimation()
+//        }
     }
 
   }
