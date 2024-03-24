@@ -37,6 +37,7 @@ final class SharePlayService {
 
       // receiving
       for await (code, _) in messenger.messages(of: CodeModel.self) {
+        print(code.code)
         self.codeSubject.onNext(code.code)
       }
     }
