@@ -48,8 +48,8 @@ final class EnterRoomCodeViewController: UIViewController, View {
   }
 
   func bind(reactor: EnterRoomCodeViewReactor) {
-    bindAction(reactor)
     bindState(reactor)
+    bindAction(reactor)
   }
 }
 

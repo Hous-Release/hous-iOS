@@ -44,8 +44,15 @@ extension EnterRoomViewController {
   private func bindAction(_ reactor: EnterRoomViewReactor) {
     sharePlayService.codeSubject
       .observe(on: MainScheduler.instance)
-      .map { Reactor.Action.didTapExistRoomButton(code: $0) }
-      .bind(to: reactor.action)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, code in
+        let serviceProvider = ServiceProvider()
+        let reactor = EnterRoomCodeViewReactor(provider: serviceProvider, code: code)
+        let vc = EnterRoomCodeViewController(reactor)
+        owner.mainView.existRoomView.animateClick {
+          owner.navigationController?.pushViewController(vc, animated: true)
+        }
+      })
       .disposed(by: disposeBag)
     
     mainView.newRoomView.rx.tapGesture()

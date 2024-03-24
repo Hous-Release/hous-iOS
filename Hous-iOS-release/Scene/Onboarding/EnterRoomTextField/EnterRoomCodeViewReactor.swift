@@ -35,7 +35,7 @@ final class EnterRoomCodeViewReactor: Reactor {
   enum Action {
     case enterRoomCode(String?)
     case tapEnterRoom(String?)
-    case initial
+    case initial(String?)
   }
 
   enum Mutation {
@@ -48,7 +48,7 @@ final class EnterRoomCodeViewReactor: Reactor {
     case setPresentPopupFlag(Bool?)
     case setEnterRoomFlag(Bool?) 
     case setError(Int?)
-    case setInitial
+    case setInitial(String?)
   }
 
   struct State {
@@ -81,8 +81,8 @@ final class EnterRoomCodeViewReactor: Reactor {
       provider.enterRoomRepository.checkExistRoom(code)
       return .empty()
 
-    case .initial:
-      return .just(.setInitial)
+    case .initial(let code):
+      return .just(.setInitial(code))
     }
   }
 
